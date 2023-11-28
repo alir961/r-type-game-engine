@@ -21,3 +21,4 @@ vgcore.*
 *.gcov
 
 cmake-build-debug/
+vcpkg_installed/
