@@ -1,5 +1,5 @@
-#include <iostream>
+#include <engine/Logger.hpp>
 
-int main(void) {
-  std::cout << "Hello, World for client!" << std::endl;
+int main() {
+    logInformation("Hello, World for client!");
 }

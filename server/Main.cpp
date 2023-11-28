@@ -1,5 +1,5 @@
 #include <engine/Logger.hpp>
 
-int main(void) {
+int main() {
   logInformation("Hello, World for server!");
 }
