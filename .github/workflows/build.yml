@@ -15,7 +15,11 @@ jobs:
         uses: actions/checkout@v4.1.1
       - name: Configure Project
         uses: threeal/cmake-action@v1.3.0
+      - name: Run vcpkg
+        uses: lukka/run-vcpkg@v4
+        with:
+          vcpkgArguments: 'install'
       - name: Generate Project Makefile
-        runs: cmake -B build/out -S .
+        run: cmake -B build/out -S .
       - name: Build Project
-        runs: make -C build/out
+        run: make -C build/out
