@@ -2,6 +2,8 @@ set(SOURCE_FILES
       Main.cpp
       src/GameView.cpp)
 
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME}_client ${SOURCE_FILES})

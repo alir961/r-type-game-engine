@@ -1,0 +1,6 @@
+---
+Checks:          '*,-readability-braces-around-statements,-readability-named-parameter,-llvmlibc-*,-modernize-use-trailing-return-type'
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false
+UseColor: true
+...
