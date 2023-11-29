@@ -1,6 +1,5 @@
 ---
-Checks:          '*,-readability-braces-around-statements,-readability-named-parameter,-llvmlibc-*,-modernize-use-trailing-return-type'
-HeaderFilterRegex: ''
-AnalyzeTemporaryDtors: false
+Checks: '*,-readability-braces-around-statements,-readability-named-parameter,-llvmlibc-*,-modernize-use-trailing-return-type,-fuchsia-default-arguments-calls,-misc-use-anonymous-namespace,-llvm-header-guard,-llvm-namespace-comment,-google-readability-namespace-comments,-altera-unroll-loops,-google-readability-braces-around-statements,-hicpp-braces-around-statements'
 UseColor: true
+HeaderFilterRegex: '.*'
 ...
