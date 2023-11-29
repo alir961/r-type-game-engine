@@ -1,5 +1,5 @@
-#include <engine/Logger.hpp>
 #include "include/GameView.hpp"
+#include <engine/Logger.hpp>
 
 int main() {
     RType::GameView view;

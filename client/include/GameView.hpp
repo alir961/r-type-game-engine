@@ -11,6 +11,9 @@
 
 namespace RType {
 
+    constexpr uint32_t WINDOW_WIDTH = 1920;
+    constexpr uint32_t WINDOW_HEIGHT = 1920;
+
     enum class ViewState {
         MENU = 0,
         OPTIONS = 1,
@@ -21,7 +24,7 @@ namespace RType {
 
     class GameView {
     private:
-        sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(1920, 1080), "R-Type");
+        sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
         ViewState _viewState = ViewState::MENU;
 
     protected:
