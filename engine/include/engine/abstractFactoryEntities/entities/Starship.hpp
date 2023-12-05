@@ -8,8 +8,9 @@
 #pragma once
 
 #include <map>
+#include "../IEntity.hpp"
 
-class Starship : public Entity {
+class Starship : public IEntity {
 public:
     Starship() : health(100), speed(10) {
 
