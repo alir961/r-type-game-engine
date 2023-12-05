@@ -15,13 +15,27 @@
 git clone git@github.com:EpitechPromo2026/B-CPP-500-LYN-5-2-rtype-timothe.medico.git
 ```
 
-2. Préparez la compilation du projet avec CMake
+2. Installation de VCPKG
+
+```shell
+paru -S vcpkg
+```
+
+> En cas de problèmes de permission: `sudo chown -R $USER:vcpkg /opt/vcpkg`
+
+3. Installation des dépendances
+
+```shell
+vcpkg install
+```
+
+4. Préparez la compilation du projet avec CMake
 
 ```shell
 cmake -S . -B build/out -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
 
-3. Compiler le projet via Makefile
+5. Compiler le projet via Makefile
 
 ```shell
 make -C build/out
