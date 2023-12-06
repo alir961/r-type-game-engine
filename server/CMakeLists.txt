@@ -1,10 +1,20 @@
 set(HEADER_FILES
         include/Arguments.hpp
-        include/UDPServer.hpp)
+        include/UDPServer.hpp
+        include/BinaryEncoder.hpp
+        include/DataCompressor.hpp
+        include/compression/HuffmanAlgorithm.hpp
+        include/compression/LZ4Algorithm.hpp
+        include/compression/RLEAlgorithm.hpp
+        include/compression/IDataCompression.hpp)
 
 set(SOURCE_FILES
         Main.cpp
-        src/UDPServer.cpp)
+        src/UDPServer.cpp
+        src/compression/LZ4Algorithm.cpp
+        src/compression/RLEAlgorithm.cpp
+        src/compression/HuffmanAlgorithm.cpp
+        src/BinaryEncoder.cpp)
 
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 
