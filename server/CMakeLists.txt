@@ -1,6 +1,10 @@
+set(HEADER_FILES
+        include/Arguments.hpp
+        include/UDPServer.hpp)
+
 set(SOURCE_FILES
         Main.cpp
-        include/Arguments.hpp)
+        src/UDPServer.cpp)
 
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 
