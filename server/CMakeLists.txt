@@ -1,6 +1,7 @@
 set(HEADER_FILES
         include/Arguments.hpp
         include/UDPServer.hpp
+        include/UDPAdapter.hpp
         include/BinaryEncoder.hpp
         include/DataCompressor.hpp
         include/compression/HuffmanAlgorithm.hpp
@@ -11,6 +12,7 @@ set(HEADER_FILES
 set(SOURCE_FILES
         Main.cpp
         src/UDPServer.cpp
+        src/UDPAdapter.cpp
         src/compression/LZ4Algorithm.cpp
         src/compression/RLEAlgorithm.cpp
         src/compression/HuffmanAlgorithm.cpp

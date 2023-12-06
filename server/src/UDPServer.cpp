@@ -22,16 +22,26 @@ void RType::UDPServer::startReceive() {
 
 void RType::UDPServer::handleReceive(std::size_t bytes_received) {
     const auto &buffer = boost::asio::buffer(_receiveBuffer.data(), bytes_received);
-    auto errorFunction = [](const boost::system::error_code &error, std::size_t /*bytes_sent*/) {
-        if (error)
-            std::cerr << "Error sending echo message: " << error.message() << "\n";
-    };
+    auto data = std::string(_receiveBuffer.data(), bytes_received);
 
-    std::cout << "Received message: " << std::string(_receiveBuffer.data(), bytes_received) << "\n";
-    _socket.async_send_to(buffer, _remoteEndpoint, errorFunction);
+    std::cout << "Received message: '" << data << "'\n";
+    if (data.starts_with("connect")) {
+        const std::string sessionId = "id";
+
+        _adapter.sendData("connect " + sessionId + " ok");
+    } else _adapter.sendData(buffer);
 }
 
 RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint) :
-        _socket(io_context, endpoint) {
+        _socket(io_context, endpoint),
+        _adapter(_socket) {
     startReceive();
+}
+
+RType::UDPServer::~UDPServer() {
+    try {
+        _socket.close();
+    } catch (std::exception &exception) {
+        std::cerr << "Unable to close server socket: " << exception.what() << "\n";
+    }
 }

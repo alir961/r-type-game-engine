@@ -9,10 +9,7 @@
 
 #include <boost/asio.hpp>
 #include <iostream>
-
-namespace asio = boost::asio;
-
-using UDP = asio::ip::udp;
+#include "UDPAdapter.hpp"
 
 namespace RType {
 
@@ -22,6 +19,8 @@ namespace RType {
     public:
         UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint);
 
+        ~UDPServer();
+
     private:
         void startReceive();
 
@@ -29,6 +28,7 @@ namespace RType {
 
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
+        UDPAdapter _adapter;
         std::array<char, BUFFER_SIZE> _receiveBuffer{};
     };
 
