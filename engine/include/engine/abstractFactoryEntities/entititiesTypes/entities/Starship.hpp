@@ -7,15 +7,11 @@
 
 #pragma once
 
-#include <map>
-#include "../IEntity.hpp"
+#include "../ADamageable.hpp"
 
-class Starship : public IEntity {
+class Starship : public ADamageable {
 public:
     Starship() : health(100), speed(10) {
 
-    }
-    void setPositions(std::map<int, int> pos) {
-        position = pos;
     }
 };

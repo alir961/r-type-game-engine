@@ -7,15 +7,11 @@
 
 #pragma once
 
-#include <map>
-#include "../IEntity.hpp"
+#include "../AWeapon.hpp"
 
-class Bullet : public IEntity {
+class Bullet : public AWeapon {
 public:
     Bullet() : damage(25), speed(20) {
 
-    }
-    void setPositions(std::map<int, int> pos) {
-        position = pos;
     }
 };
