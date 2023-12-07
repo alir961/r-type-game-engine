@@ -14,7 +14,7 @@ public:
     void setPositions(std::map<int, int> position) {
         _position = position;
     }
-    int setSpeed(int speed) {
+    void setSpeed(int speed) {
         _speed = speed;
     }
     std::map<int, int> getPositions() {
