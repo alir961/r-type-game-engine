@@ -14,7 +14,7 @@ public:
     void setDamage(int damage) {
         _damage = damage;
     }
-    void getDamage() {
+    int getDamage() {
         return _damage;
     }
 private:

@@ -14,13 +14,13 @@ public:
     void setPositions(std::map<int, int> position) {
         _position = position;
     }
-    void setSpeed(int speed) {
+    int setSpeed(int speed) {
         _speed = speed;
     }
-    void getPositions() {
+    std::map<int, int> getPositions() {
         return _position;
     }
-    void getSpeed() {
+    int getSpeed() {
         return _speed;
     }
 private:
