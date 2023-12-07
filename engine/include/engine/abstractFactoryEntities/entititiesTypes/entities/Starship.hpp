@@ -11,7 +11,7 @@
 
 class Starship : public ADamageable {
 public:
-    Starship() : health(100), speed(10) {
+    Starship(bool isPlayer) : _health(100), _speed(10), _isPlayer(isPlayer) {
 
     }
 };

@@ -17,6 +17,10 @@ public:
     void getHealth() {
         return _health;
     }
+    void getIsPlayer() {
+        return _isPlayer;
+    }
 private:
     int _health;
+    bool _isPlayer;
 };

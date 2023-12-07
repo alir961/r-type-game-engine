@@ -11,7 +11,7 @@
 
 class Bullet : public AWeapon {
 public:
-    Bullet() : damage(25), speed(20) {
+    Bullet() : _damage(25), _speed(20) {
 
     }
 };
