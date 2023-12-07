@@ -14,10 +14,10 @@ public:
     void setHealth(int health) {
         _health = health;
     }
-    void getHealth() {
+    int getHealth() {
         return _health;
     }
-    void getIsPlayer() {
+    bool getIsPlayer() {
         return _isPlayer;
     }
 private:

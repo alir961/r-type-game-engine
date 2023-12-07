@@ -17,10 +17,10 @@ public:
     void setSpeed(int speed) {
         _speed = speed;
     }
-    void getPositions() {
+    std::map<int, int> getPositions() {
         return _position;
     }
-    void getSpeed() {
+    int getSpeed() {
         return _speed;
     }
 private:

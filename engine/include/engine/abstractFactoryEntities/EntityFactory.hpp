@@ -24,7 +24,7 @@ public:
         return std::make_shared<Starship>(false);
     }
 
-    static std::shared_ptr<AWeapon> createMonster() {
+    static std::shared_ptr<Monster> createMonster() {
         return std::make_shared<Monster>();
     }
 
