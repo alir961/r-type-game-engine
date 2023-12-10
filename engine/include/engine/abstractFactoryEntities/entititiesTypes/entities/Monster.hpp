@@ -11,7 +11,5 @@
 
 class Monster : public ADamageable {
 public:
-    Monster() : _health(200), _speed(10) {
-
-    }
+    Monster() : _health(200), _speed(10) {}
 };

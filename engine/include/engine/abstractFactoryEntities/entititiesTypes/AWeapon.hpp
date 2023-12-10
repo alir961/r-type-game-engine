@@ -17,6 +17,6 @@ public:
     int getDamage() {
         return _damage;
     }
-private:
+protected:
     int _damage;
 };
