@@ -20,7 +20,7 @@ public:
     bool getIsPlayer() {
         return _isPlayer;
     }
-private:
+protected:
     int _health;
     bool _isPlayer;
 };
