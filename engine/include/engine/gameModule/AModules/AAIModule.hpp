@@ -8,7 +8,7 @@
 #pragma once
 #include "IGameModule.hpp"
 
-class AIModule : public IGameModule {
+class AAIModule : public IGameModule {
 public:
     virtual void AssignAI() = 0;
 };

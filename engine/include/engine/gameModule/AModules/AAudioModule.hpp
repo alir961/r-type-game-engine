@@ -9,7 +9,7 @@
 #include "IGameModule.hpp"
 #include <string>
 
-class AudioModule : public IGameModule {
+class AAudioModule : public IGameModule {
 public:
     virtual void PlayAudio(const std::string& name) = 0;
     virtual void StopAudio() = 0;

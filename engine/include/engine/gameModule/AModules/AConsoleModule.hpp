@@ -9,7 +9,7 @@
 #include "IGameModule.hpp"
 #include <string>
 
-class ConsoleModule : public IGameModule {
+class AConsoleModule : public IGameModule {
 public:
     virtual void PrintConsole(const std::string& message) = 0;
 };

@@ -2,14 +2,14 @@
 ** EPITECH PROJECT, 2023
 ** B-CPP-500-LYN-5-2-rtype-timothe.medico
 ** File description:
-** MetricsModules
+** CinematicModule
 */
 
 #pragma once
 #include "IGameModule.hpp"
 #include <string>
 
-class MetricsModule : public IGameModule {
+class ACinematicModule : public IGameModule {
 public:
-    virtual int GetFPS() const = 0;
+    virtual void PlayCinematic(const std::string& name) = 0;
 };
