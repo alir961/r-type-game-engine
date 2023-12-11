@@ -9,7 +9,14 @@
 #include "IGameModule.hpp"
 #include <string>
 
+/**
+ * @brief CinematicModule abstarct class to implement Cinematic
+ */
 class ACinematicModule : public IGameModule {
 public:
+    /**
+     * @brief PlayCinematic play video cinematic
+     * @param name of cinematic
+     */
     virtual void PlayCinematic(const std::string& name) = 0;
 };

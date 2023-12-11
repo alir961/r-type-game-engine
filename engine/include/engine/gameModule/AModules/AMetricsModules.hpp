@@ -9,7 +9,14 @@
 #include "IGameModule.hpp"
 #include <string>
 
+/**
+ * @brief MetricsModule abstarct class to implement Metrics
+ */
 class AMetricsModule : public IGameModule {
 public:
+    /**
+     * @brief GetFPS get FPS of game
+     * @return FPS
+     */
     virtual int GetFPS() const = 0;
 };
