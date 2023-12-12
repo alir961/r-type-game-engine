@@ -13,7 +13,7 @@
 class DamageComponent {
 public:
     /**
-     * @brief Constructor for a Weapon.
+     * @brief Base constructor for damager component.
      * @param damage The damage of the entity.
      */
     DamageComponent(int damage) : _damage(damage) {}

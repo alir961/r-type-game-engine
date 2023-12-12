@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['setcolliding_0',['setColliding',['../classCollisionComponent.html#a544c3a603f7dfe0df2794633ec32ea40',1,'CollisionComponent']]],
+  ['setcollision_0',['setCollision',['../classCollisionComponent.html#aad6d9fc884e0f022ff52dac6f8f031a8',1,'CollisionComponent']]],
   ['setdamage_1',['setDamage',['../classDamageComponent.html#ae46140f979eb86d408dca62a1ad9fd88',1,'DamageComponent']]],
   ['sethealth_2',['setHealth',['../classHealthComponent.html#af5a94017d6bf4dc92b25f52d4371eb48',1,'HealthComponent']]],
   ['setpositions_3',['setPositions',['../classPositionComponent.html#a4025e04b02fe0284f458c646b4e27d9d',1,'PositionComponent']]],
