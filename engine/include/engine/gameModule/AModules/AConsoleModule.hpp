@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "IGameModule.hpp"
+#include "../IGameModule.hpp"
 #include <string>
 
 /**

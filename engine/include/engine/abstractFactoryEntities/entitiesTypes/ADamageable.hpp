@@ -15,6 +15,12 @@
 class ADamageable : public AEntity {
 public:
     /**
+     * @brief Constructor for Damageable entity.
+     */
+    ADamageable(int health, bool isPlayer, int speed) : _health(health), _isPlayer(isPlayer) {
+        setSpeed(speed);
+    }
+    /**
      * @brief Set the health of the damageable entity.
      * @param health The health of the damageable entity.
      */
@@ -38,7 +44,7 @@ public:
         return _isPlayer;
     }
 
-protected:
+private:
     int _health; /**< Health of the damageable entity. */
     bool _isPlayer; /**< Flag indicating if the entity is controlled by a player. */
 };

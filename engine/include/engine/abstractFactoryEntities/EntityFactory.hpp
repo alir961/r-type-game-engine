@@ -7,11 +7,11 @@
 
 #pragma once
 
-#include "./entititiesTypes/ADamageable.hpp"
-#include "./entititiesTypes/AWeapon.hpp"
-#include "./entititiesTypes/entities/Bullet.hpp"
-#include "./entititiesTypes/entities/Starship.hpp"
-#include "./entititiesTypes/entities/Monster.hpp"
+#include "./entitiesTypes/ADamageable.hpp"
+#include "./entitiesTypes/AWeapon.hpp"
+#include "./entitiesTypes/entities/Bullet.hpp"
+#include "./entitiesTypes/entities/Starship.hpp"
+#include "./entitiesTypes/entities/Monster.hpp"
 #include <memory>
 
 /**

@@ -15,6 +15,12 @@
 class AWeapon : public AEntity {
 public:
     /**
+     * @brief Constructor for a Weapon.
+     */
+    AWeapon(int damage, int speed) : _damage(damage) {
+        setSpeed(speed);
+    }
+    /**
      * @brief Set the damage inflicted by the weapon.
      * @param damage The damage inflicted by the weapon.
      */
@@ -30,6 +36,6 @@ public:
         return _damage;
     }
 
-protected:
+private:
     int _damage; /**< Damage inflicted by the weapon. */
 };

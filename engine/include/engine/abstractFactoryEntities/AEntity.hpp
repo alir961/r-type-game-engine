@@ -62,7 +62,7 @@ public:
         return _isColliding;
     }
 
-protected:
+private:
     int _speed; /**< Speed of the entity. */
     std::map<int, int> _position; /**< Position of the entity. */
     bool _isColliding; /**< Colliding status of the entity. */
