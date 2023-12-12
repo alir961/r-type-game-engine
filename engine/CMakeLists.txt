@@ -2,7 +2,7 @@ set(HEADER_FILES
         include/engine/exception/ConfigurationException.hpp
         include/engine/tools/NumberUtilities.hpp
         include/engine/entitiesFactory/EntityFactory.hpp
-        include/engine/entitiesFactory/components/CollidingComponent.hpp
+        include/engine/entitiesFactory/components/CollisionComponent.hpp
         include/engine/entitiesFactory/components/DamageComponent.hpp
         include/engine/entitiesFactory/components/HealthComponent.hpp
         include/engine/entitiesFactory/components/PlayerComponent.hpp

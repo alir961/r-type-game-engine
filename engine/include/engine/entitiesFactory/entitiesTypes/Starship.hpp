@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../components/CollidingComponent.hpp"
+#include "../components/CollisionComponent.hpp"
 #include "../components/HealthComponent.hpp"
 #include "../components/PlayerComponent.hpp"
 #include "../components/PositionComponent.hpp"
@@ -22,7 +22,7 @@ public:
      * @brief Constructor for Starship.
      * @param isPlayer True if the starship is controlled by a player, false otherwise.
      */
-    Starship(bool isPlayer) : healthComponent(100), playerComponent(isPlayer), speedComponent(10), positionComponent({0,0}), collidingComponent(false) {}
+    Starship(bool isPlayer) : healthComponent(100), playerComponent(isPlayer), speedComponent(10), positionComponent({0,0}), collisionComponent(true) {}
 private:
     /**
      * @brief Health component of the Starship.
@@ -47,5 +47,5 @@ private:
     /**
      * @brief Colliding component of the Starship.
      */
-    CollidingComponent collidingComponent;
+    CollisionComponent collisionComponent;
 };

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../components/CollidingComponent.hpp"
+#include "../components/CollisionComponent.hpp"
 #include "../components/DamageComponent.hpp"
 #include "../components/PositionComponent.hpp"
 #include "../components/SpeedComponent.hpp"
@@ -20,7 +20,7 @@ public:
     /**
      * @brief Constructor for Bullet.
      */
-    Bullet() : damageComponent(25), speedComponent(20), positionComponent({0,0}), collidingComponent(false) {}
+    Bullet() : damageComponent(25), speedComponent(20), positionComponent({0,0}), collisionComponent(true) {}
 private:
     /**
      * @brief Damage component of the Bullet.
@@ -40,5 +40,5 @@ private:
     /**
      * @brief Colliding component of the Bullet.
      */
-    CollidingComponent collidingComponent;
+    CollisionComponent collisionComponent;
 };
