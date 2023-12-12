@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['monster_0',['Monster',['../classMonster.html#a3dfc253fbec8331d42ac13c20bf9425f',1,'Monster']]]
+  ['healthcomponent_0',['HealthComponent',['../classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1',1,'HealthComponent']]]
 ];
