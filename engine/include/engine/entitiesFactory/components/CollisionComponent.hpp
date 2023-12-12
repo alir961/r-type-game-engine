@@ -8,7 +8,7 @@
 #pragma once
 
 /**
- * @brief Base class for colliding component.
+ * @brief Base class for collision component.
  */
 class CollisionComponent {
 public:
@@ -22,7 +22,7 @@ public:
      * @brief Set the collision status of the entity.
      * @param isCollidable True if the entity is collidable, false otherwise.
      */
-    void setColliding(bool isCollidable) {
+    void setCollision(bool isCollidable) {
         _isCollidable = isCollidable;
     }
 
@@ -30,7 +30,7 @@ public:
      * @brief Get the collision status of the entity.
      * @return True if the entity is collidable, false otherwise.
      */
-    bool getColliding() {
+    bool getCollisionStatus() {
         return _isCollidable;
     }
 

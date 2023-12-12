@@ -13,13 +13,13 @@
 class PlayerComponent {
 public:
     /**
-     * @brief Constructor for player component.
+     * @brief Base constructor for player component.
      * @param isPlayer The status of the entity (player or not).
      */
     PlayerComponent(bool isPlayer) : _isPlayer(isPlayer) {}
 
     /**
-     * @brief Check if the damageable entity is controlled by a player.
+     * @brief Check if the entity is controlled by a player.
      * @return True if the entity is controlled by a player, false otherwise.
      */
     bool getIsPlayer() {

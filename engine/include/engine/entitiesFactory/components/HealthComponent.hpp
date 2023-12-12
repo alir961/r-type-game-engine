@@ -13,7 +13,7 @@
 class HealthComponent {
 public:
     /**
-     * @brief Constructor for health component.
+     * @brief Base constructor for healthed component.
      * @param health The health of the entity.
      */
     HealthComponent(int health) : _health(health) {}
