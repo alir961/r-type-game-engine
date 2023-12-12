@@ -9,9 +9,13 @@
 
 #include "../ADamageable.hpp"
 
+/**
+ * @brief Class representing a monster entity.
+ */
 class Monster : public ADamageable {
 public:
-    Monster() : _health(200), _speed(10) {
-
-    }
+    /**
+     * @brief Constructor for Monster.
+     */
+    Monster() : _health(200), _speed(10) {}
 };

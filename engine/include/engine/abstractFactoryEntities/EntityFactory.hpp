@@ -14,12 +14,23 @@
 #include "./entititiesTypes/entities/Monster.hpp"
 #include <memory>
 
+/**
+ * @brief Abstract Factory for creating game entities.
+ */
 class EntityFactory {
 public:
+    /**
+     * @brief Create a player-controlled starship.
+     * @return A shared pointer to the created ADamageable object.
+     */
     static std::shared_ptr<ADamageable> createPlayerStarship() {
         return std::make_shared<Starship>(true);
     }
 
+    /**
+     * @brief Create an enemy-controlled starship.
+     * @return A shared pointer to the created ADamageable object.
+     */
     static std::shared_ptr<ADamageable> createEnemyStarship() {
         return std::make_shared<Starship>(false);
     }
@@ -28,6 +39,10 @@ public:
         return std::make_shared<Monster>();
     }
 
+    /**
+     * @brief Create a bullet entity.
+     * @return A shared pointer to the created AWeapon object.
+     */
     static std::shared_ptr<AWeapon> createBullet() {
         return std::make_shared<Bullet>();
     }
