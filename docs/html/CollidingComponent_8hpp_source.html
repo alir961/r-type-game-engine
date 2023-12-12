@@ -93,28 +93,29 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classCollidingComponent.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="classCollidingComponent.html">CollidingComponent</a> {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classCollidingComponent.html#aa20e05dfa7ca34e1c64006d9e36af106">   19</a></span>    <a class="code hl_function" href="classCollidingComponent.html#aa20e05dfa7ca34e1c64006d9e36af106">CollidingComponent</a>(<span class="keywordtype">bool</span> isColliding) : _isColliding(isColliding) {}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classCollidingComponent.html#aa20e05dfa7ca34e1c64006d9e36af106">   19</a></span>    <a class="code hl_function" href="classCollidingComponent.html#aa20e05dfa7ca34e1c64006d9e36af106">CollidingComponent</a>(<span class="keywordtype">bool</span> isColliding) : <a class="code hl_variable" href="classCollidingComponent.html#aab4fdd8729ee2ca416de302e8eb58b55">_isColliding</a>(isColliding) {}</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classCollidingComponent.html#a719d5d46b13a318f4b59c24fc12a7942">   25</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollidingComponent.html#a719d5d46b13a318f4b59c24fc12a7942">setColliding</a>(<span class="keywordtype">bool</span> isColliding) {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        _isColliding = isColliding;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_variable" href="classCollidingComponent.html#aab4fdd8729ee2ca416de302e8eb58b55">_isColliding</a> = isColliding;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
 </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classCollidingComponent.html#aa59631c5fd1c7064c830a31cf045f412">   33</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classCollidingComponent.html#aa59631c5fd1c7064c830a31cf045f412">getColliding</a>() {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">return</span> _isColliding;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classCollidingComponent.html#aab4fdd8729ee2ca416de302e8eb58b55">_isColliding</a>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
 </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> _isColliding; </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classCollidingComponent.html#aab4fdd8729ee2ca416de302e8eb58b55">   38</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classCollidingComponent.html#aab4fdd8729ee2ca416de302e8eb58b55">_isColliding</a>; </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
 </div>
 <div class="ttc" id="aclassCollidingComponent_html"><div class="ttname"><a href="classCollidingComponent.html">CollidingComponent</a></div><div class="ttdoc">Base class for colliding component.</div><div class="ttdef"><b>Definition</b> CollidingComponent.hpp:13</div></div>
 <div class="ttc" id="aclassCollidingComponent_html_a719d5d46b13a318f4b59c24fc12a7942"><div class="ttname"><a href="classCollidingComponent.html#a719d5d46b13a318f4b59c24fc12a7942">CollidingComponent::setColliding</a></div><div class="ttdeci">void setColliding(bool isColliding)</div><div class="ttdoc">Set the colliding status of the entity.</div><div class="ttdef"><b>Definition</b> CollidingComponent.hpp:25</div></div>
 <div class="ttc" id="aclassCollidingComponent_html_aa20e05dfa7ca34e1c64006d9e36af106"><div class="ttname"><a href="classCollidingComponent.html#aa20e05dfa7ca34e1c64006d9e36af106">CollidingComponent::CollidingComponent</a></div><div class="ttdeci">CollidingComponent(bool isColliding)</div><div class="ttdoc">Base constructor for colliding component.</div><div class="ttdef"><b>Definition</b> CollidingComponent.hpp:19</div></div>
 <div class="ttc" id="aclassCollidingComponent_html_aa59631c5fd1c7064c830a31cf045f412"><div class="ttname"><a href="classCollidingComponent.html#aa59631c5fd1c7064c830a31cf045f412">CollidingComponent::getColliding</a></div><div class="ttdeci">bool getColliding()</div><div class="ttdoc">Get the colliding status of the entity.</div><div class="ttdef"><b>Definition</b> CollidingComponent.hpp:33</div></div>
+<div class="ttc" id="aclassCollidingComponent_html_aab4fdd8729ee2ca416de302e8eb58b55"><div class="ttname"><a href="classCollidingComponent.html#aab4fdd8729ee2ca416de302e8eb58b55">CollidingComponent::_isColliding</a></div><div class="ttdeci">bool _isColliding</div><div class="ttdef"><b>Definition</b> CollidingComponent.hpp:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
