@@ -10,13 +10,15 @@
 #include <string>
 
 /**
- * @brief CinematicModule abstarct class to implement Cinematic
+ * @class ACinematicModule
+ * @brief Abstract class representing a cinematic module for the game.
  */
 class ACinematicModule : public IGameModule {
 public:
+
     /**
-     * @brief PlayCinematic play video cinematic
-     * @param name of cinematic
+     * @brief Pure virtual function to play a cinematic with a given name.
+     * @param name The name of the cinematic to play.
      */
     virtual void PlayCinematic(const std::string& name) = 0;
 };

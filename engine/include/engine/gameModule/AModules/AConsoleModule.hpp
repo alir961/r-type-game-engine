@@ -10,13 +10,15 @@
 #include <string>
 
 /**
- * @brief ConsoleModule abstarct class to implement Console
+ * @class AConsoleModule
+ * @brief Abstract class representing a console module for the game.
  */
 class AConsoleModule : public IGameModule {
 public:
+
     /**
-     * @brief PrintConsole print message in console for debug
-     * @param message to print
+     * @brief Pure virtual function to print a message to the game console.
+     * @param message The message to be printed.
      */
     virtual void PrintConsole(const std::string& message) = 0;
 };

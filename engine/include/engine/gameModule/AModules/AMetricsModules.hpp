@@ -10,13 +10,15 @@
 #include <string>
 
 /**
- * @brief MetricsModule abstarct class to implement Metrics
+ * @class AMetricsModule
+ * @brief Abstract class representing a metrics module for the game.
  */
 class AMetricsModule : public IGameModule {
 public:
+
     /**
-     * @brief GetFPS get FPS of game
-     * @return FPS
+     * @brief Pure virtual function to get the frames per second (FPS) of the game.
+     * @return The current FPS of the game.
      */
     virtual int GetFPS() const = 0;
 };

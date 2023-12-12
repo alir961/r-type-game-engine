@@ -10,24 +10,26 @@
 #include <string>
 
 /**
- * @brief AudioModule abstarct class to implement Audio
+ * @class AAudioModule
+ * @brief Abstract class representing an audio module for the game.
  */
 class AAudioModule : public IGameModule {
 public:
-    /**
-     * @brief PlayAudio play audio
-     * @param name of audio
-     */
+
+   /**
+     * @brief Pure virtual function to play audio with a given name.
+     * @param name The name of the audio file to play.
+    */
     virtual void PlayAudio(const std::string& name) = 0;
 
-    /**
-     * @brief StopAudio stop audio
-     */
+   /**
+     * @brief Pure virtual function to stop the currently playing audio.
+    */
     virtual void StopAudio() = 0;
 
     /**
-     * @brief StopAllAudio stop list of audio
-     */
+     * @brief Pure virtual function to stop all audio playback.
+    */
     virtual void StopAllAudio() = 0;
 };
 
