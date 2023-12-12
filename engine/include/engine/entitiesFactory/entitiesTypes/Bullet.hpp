@@ -20,7 +20,7 @@ public:
     /**
      * @brief Constructor for Bullet.
      */
-    Bullet() : damageComponent(25), speedComponent(20), positionComponent({0,0}), collidingComponent(true) {}
+    Bullet() : damageComponent(25), speedComponent(20), positionComponent({0,0}), collisionComponent(true) {}
 private:
     /**
      * @brief Damage component of the Bullet.
@@ -40,5 +40,5 @@ private:
     /**
      * @brief Colliding component of the Bullet.
      */
-    CollisionComponent collidingComponent;
+    CollisionComponent collisionComponent;
 };

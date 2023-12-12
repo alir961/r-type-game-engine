@@ -21,7 +21,7 @@ public:
     /**
      * @brief Constructor for Monster.
      */
-    Monster() : healthComponent(200), speedComponent(10), positionComponent({0,0}), collidingComponent(true) {}
+    Monster() : healthComponent(200), speedComponent(10), positionComponent({0,0}), collisionComponent(true) {}
 private:
     /**
      * @brief Health component of the Monster.
@@ -41,5 +41,5 @@ private:
     /**
      * @brief Colliding component of the Monster.
      */
-    CollisionComponent collidingComponent;
+    CollisionComponent collisionComponent;
 };
