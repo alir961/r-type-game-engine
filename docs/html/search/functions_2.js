@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['collidingcomponent_0',['CollidingComponent',['../classCollidingComponent.html#aa20e05dfa7ca34e1c64006d9e36af106',1,'CollidingComponent']]],
+  ['collisioncomponent_0',['CollisionComponent',['../classCollisionComponent.html#a2e20e72f4eb81629961dafdd8d4c64b0',1,'CollisionComponent']]],
   ['createbullet_1',['createBullet',['../classEntityFactory.html#ac6233c70768209ccd6b8c536a42424e3',1,'EntityFactory']]],
   ['createenemystarship_2',['createEnemyStarship',['../classEntityFactory.html#a252a3234c8fdb7a690e0d40c4000b4c6',1,'EntityFactory']]],
   ['createmonster_3',['createMonster',['../classEntityFactory.html#a9ab605fe12bcf80c79e08593e4e84025',1,'EntityFactory']]],

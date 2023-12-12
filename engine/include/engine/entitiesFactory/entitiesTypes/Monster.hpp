@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../components/CollidingComponent.hpp"
+#include "../components/CollisionComponent.hpp"
 #include "../components/HealthComponent.hpp"
 #include "../components/PlayerComponent.hpp"
 #include "../components/PositionComponent.hpp"
@@ -21,7 +21,7 @@ public:
     /**
      * @brief Constructor for Monster.
      */
-    Monster() : healthComponent(200), speedComponent(10), positionComponent({0,0}), collidingComponent(false) {}
+    Monster() : healthComponent(200), speedComponent(10), positionComponent({0,0}), collidingComponent(true) {}
 private:
     /**
      * @brief Health component of the Monster.
@@ -41,5 +41,5 @@ private:
     /**
      * @brief Colliding component of the Monster.
      */
-    CollidingComponent collidingComponent;
+    CollisionComponent collidingComponent;
 };

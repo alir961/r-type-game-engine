@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['collidingcomponent_0',['CollidingComponent',['../classCollidingComponent.html',1,'']]]
+  ['collisioncomponent_0',['CollisionComponent',['../classCollisionComponent.html',1,'']]]
 ];
