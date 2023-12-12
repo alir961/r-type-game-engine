@@ -1,6 +1,22 @@
 set(HEADER_FILES
         include/engine/exception/ConfigurationException.hpp
-        include/engine/tools/NumberUtilities.hpp)
+        include/engine/tools/NumberUtilities.hpp
+        include/engine/entitiesFactory/EntityFactory.hpp
+        include/engine/entitiesFactory/components/CollidingComponent.hpp
+        include/engine/entitiesFactory/components/DamageComponent.hpp
+        include/engine/entitiesFactory/components/HealthComponent.hpp
+        include/engine/entitiesFactory/components/PlayerComponent.hpp
+        include/engine/entitiesFactory/components/PositionComponent.hpp
+        include/engine/entitiesFactory/components/SpeedComponent.hpp
+        include/engine/entitiesFactory/entitiesTypes/Bullet.hpp
+        include/engine/entitiesFactory/entitiesTypes/Monster.hpp
+        include/engine/entitiesFactory/entitiesTypes/Starship.hpp
+        include/engine/gameModule/IGameModule.hpp
+        include/engine/gameModule/AModules/AAIModule.hpp
+        include/engine/gameModule/AModules/AAudioModule.hpp
+        include/engine/gameModule/AModules/ACinematicModule.hpp
+        include/engine/gameModule/AModules/AMetricsModules.hpp
+        include/engine/gameModule/AModules/AConsoleModule.hpp)
 
 set(SOURCE_FILES
         src/Logger.cpp

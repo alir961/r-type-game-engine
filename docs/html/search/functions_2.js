@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['createbullet_0',['createBullet',['../classEntityFactory.html#acfd2e3641199be06b0f69c6419ced821',1,'EntityFactory']]],
-  ['createenemystarship_1',['createEnemyStarship',['../classEntityFactory.html#aa449bf883113e67970e23e9c32aaed53',1,'EntityFactory']]],
-  ['createplayerstarship_2',['createPlayerStarship',['../classEntityFactory.html#a5632c858813049d5a836ce37e0f0b748',1,'EntityFactory']]]
+  ['collidingcomponent_0',['CollidingComponent',['../classCollidingComponent.html#aa20e05dfa7ca34e1c64006d9e36af106',1,'CollidingComponent']]],
+  ['createbullet_1',['createBullet',['../classEntityFactory.html#ac6233c70768209ccd6b8c536a42424e3',1,'EntityFactory']]],
+  ['createenemystarship_2',['createEnemyStarship',['../classEntityFactory.html#a252a3234c8fdb7a690e0d40c4000b4c6',1,'EntityFactory']]],
+  ['createmonster_3',['createMonster',['../classEntityFactory.html#a9ab605fe12bcf80c79e08593e4e84025',1,'EntityFactory']]],
+  ['createplayerstarship_4',['createPlayerStarship',['../classEntityFactory.html#a68c37e0ba3bfa60da97d4918c9dad1e3',1,'EntityFactory']]]
 ];

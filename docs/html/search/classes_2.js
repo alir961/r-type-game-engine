@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entityfactory_0',['EntityFactory',['../classEntityFactory.html',1,'']]]
+  ['collidingcomponent_0',['CollidingComponent',['../classCollidingComponent.html',1,'']]]
 ];

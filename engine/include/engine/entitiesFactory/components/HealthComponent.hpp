@@ -7,19 +7,17 @@
 
 #pragma once
 
-#include "../AEntity.hpp"
-
 /**
- * @brief Base class for damageable game entities.
+ * @brief Base class for health component.
  */
-class ADamageable : public AEntity {
+class HealthComponent {
 public:
     /**
-     * @brief Constructor for Damageable entity.
+     * @brief Constructor for health component.
+     * @param health The health of the entity.
      */
-    ADamageable(int health, bool isPlayer, int speed) : _health(health), _isPlayer(isPlayer) {
-        setSpeed(speed);
-    }
+    HealthComponent(int health) : _health(health) {}
+
     /**
      * @brief Set the health of the damageable entity.
      * @param health The health of the damageable entity.
@@ -36,15 +34,6 @@ public:
         return _health;
     }
 
-    /**
-     * @brief Check if the damageable entity is controlled by a player.
-     * @return True if the entity is controlled by a player, false otherwise.
-     */
-    bool getIsPlayer() {
-        return _isPlayer;
-    }
-
 private:
     int _health; /**< Health of the damageable entity. */
-    bool _isPlayer; /**< Flag indicating if the entity is controlled by a player. */
 };

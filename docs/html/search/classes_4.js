@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['monster_0',['Monster',['../classMonster.html',1,'']]]
+  ['entityfactory_0',['EntityFactory',['../classEntityFactory.html',1,'']]]
 ];

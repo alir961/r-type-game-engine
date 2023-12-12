@@ -7,19 +7,17 @@
 
 #pragma once
 
-#include "../AEntity.hpp"
-
 /**
- * @brief Base class for game weapons.
+ * @brief Base class for damage component.
  */
-class AWeapon : public AEntity {
+class DamageComponent {
 public:
     /**
      * @brief Constructor for a Weapon.
+     * @param damage The damage of the entity.
      */
-    AWeapon(int damage, int speed) : _damage(damage) {
-        setSpeed(speed);
-    }
+    DamageComponent(int damage) : _damage(damage) {}
+
     /**
      * @brief Set the damage inflicted by the weapon.
      * @param damage The damage inflicted by the weapon.
