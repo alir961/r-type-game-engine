@@ -17,5 +17,5 @@ public:
     /**
      * @brief Constructor for Bullet.
      */
-    Bullet() : _damage(25), _speed(20) {}
+    Bullet() : AWeapon(25, 20) {}
 };

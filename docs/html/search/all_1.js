@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['adamageable_0',['ADamageable',['../classADamageable.html',1,'']]],
-  ['aentity_1',['AEntity',['../classAEntity.html',1,'']]],
-  ['aweapon_2',['AWeapon',['../classAWeapon.html',1,'']]]
+  ['bullet_0',['bullet',['../classBullet.html',1,'Bullet'],['../classBullet.html#acd7befc0bc18907cc1d871d37bbdddeb',1,'Bullet::Bullet()']]]
 ];

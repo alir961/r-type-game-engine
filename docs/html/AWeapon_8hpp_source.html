@@ -95,27 +95,33 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classAWeapon.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classAWeapon.html">AWeapon</a> : <span class="keyword">public</span> <a class="code hl_class" href="classAEntity.html">AEntity</a> {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classAWeapon.html#a2ab30139bb72c7f4facfa5d9a0d7a014">   21</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classAWeapon.html#a2ab30139bb72c7f4facfa5d9a0d7a014">setDamage</a>(<span class="keywordtype">int</span> damage) {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <a class="code hl_variable" href="classAWeapon.html#a80afb4751d40497638eb6f23d4ce4ecb">_damage</a> = damage;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    }</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classAWeapon.html#a34540a6b4c5476ff56f34a8da5e679fb">   20</a></span>    <a class="code hl_function" href="classAWeapon.html#a34540a6b4c5476ff56f34a8da5e679fb">AWeapon</a>(<span class="keywordtype">int</span> damage, <span class="keywordtype">int</span> speed) : _damage(damage) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <a class="code hl_function" href="classAEntity.html#a45f852fa5b122b3dd7e4b1510c3ed6df">setSpeed</a>(speed);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
 </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classAWeapon.html#a66f0a93d0a91b744b5b562d8d3111a33">   29</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classAWeapon.html#a66f0a93d0a91b744b5b562d8d3111a33">getDamage</a>() {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classAWeapon.html#a80afb4751d40497638eb6f23d4ce4ecb">_damage</a>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classAWeapon.html#a2ab30139bb72c7f4facfa5d9a0d7a014">   27</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classAWeapon.html#a2ab30139bb72c7f4facfa5d9a0d7a014">setDamage</a>(<span class="keywordtype">int</span> damage) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        _damage = damage;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
 </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classAWeapon.html#a80afb4751d40497638eb6f23d4ce4ecb">   34</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classAWeapon.html#a80afb4751d40497638eb6f23d4ce4ecb">_damage</a>; </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classAWeapon.html#a66f0a93d0a91b744b5b562d8d3111a33">   35</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classAWeapon.html#a66f0a93d0a91b744b5b562d8d3111a33">getDamage</a>() {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> _damage;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">int</span> _damage; </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>};</div>
 </div>
 <div class="ttc" id="aclassAEntity_html"><div class="ttname"><a href="classAEntity.html">AEntity</a></div><div class="ttdoc">Base class for game entities.</div><div class="ttdef"><b>Definition</b> AEntity.hpp:15</div></div>
+<div class="ttc" id="aclassAEntity_html_a45f852fa5b122b3dd7e4b1510c3ed6df"><div class="ttname"><a href="classAEntity.html#a45f852fa5b122b3dd7e4b1510c3ed6df">AEntity::setSpeed</a></div><div class="ttdeci">void setSpeed(int speed)</div><div class="ttdoc">Set the speed of the entity.</div><div class="ttdef"><b>Definition</b> AEntity.hpp:29</div></div>
 <div class="ttc" id="aclassAWeapon_html"><div class="ttname"><a href="classAWeapon.html">AWeapon</a></div><div class="ttdoc">Base class for game weapons.</div><div class="ttdef"><b>Definition</b> AWeapon.hpp:15</div></div>
-<div class="ttc" id="aclassAWeapon_html_a2ab30139bb72c7f4facfa5d9a0d7a014"><div class="ttname"><a href="classAWeapon.html#a2ab30139bb72c7f4facfa5d9a0d7a014">AWeapon::setDamage</a></div><div class="ttdeci">void setDamage(int damage)</div><div class="ttdoc">Set the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> AWeapon.hpp:21</div></div>
-<div class="ttc" id="aclassAWeapon_html_a66f0a93d0a91b744b5b562d8d3111a33"><div class="ttname"><a href="classAWeapon.html#a66f0a93d0a91b744b5b562d8d3111a33">AWeapon::getDamage</a></div><div class="ttdeci">int getDamage()</div><div class="ttdoc">Get the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> AWeapon.hpp:29</div></div>
-<div class="ttc" id="aclassAWeapon_html_a80afb4751d40497638eb6f23d4ce4ecb"><div class="ttname"><a href="classAWeapon.html#a80afb4751d40497638eb6f23d4ce4ecb">AWeapon::_damage</a></div><div class="ttdeci">int _damage</div><div class="ttdef"><b>Definition</b> AWeapon.hpp:34</div></div>
+<div class="ttc" id="aclassAWeapon_html_a2ab30139bb72c7f4facfa5d9a0d7a014"><div class="ttname"><a href="classAWeapon.html#a2ab30139bb72c7f4facfa5d9a0d7a014">AWeapon::setDamage</a></div><div class="ttdeci">void setDamage(int damage)</div><div class="ttdoc">Set the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> AWeapon.hpp:27</div></div>
+<div class="ttc" id="aclassAWeapon_html_a34540a6b4c5476ff56f34a8da5e679fb"><div class="ttname"><a href="classAWeapon.html#a34540a6b4c5476ff56f34a8da5e679fb">AWeapon::AWeapon</a></div><div class="ttdeci">AWeapon(int damage, int speed)</div><div class="ttdoc">Constructor for a Weapon.</div><div class="ttdef"><b>Definition</b> AWeapon.hpp:20</div></div>
+<div class="ttc" id="aclassAWeapon_html_a66f0a93d0a91b744b5b562d8d3111a33"><div class="ttname"><a href="classAWeapon.html#a66f0a93d0a91b744b5b562d8d3111a33">AWeapon::getDamage</a></div><div class="ttdeci">int getDamage()</div><div class="ttdoc">Get the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> AWeapon.hpp:35</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

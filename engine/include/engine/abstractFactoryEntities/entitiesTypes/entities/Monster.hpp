@@ -17,5 +17,5 @@ public:
     /**
      * @brief Constructor for Monster.
      */
-    Monster() : _health(200), _speed(10) {}
+    Monster() : ADamageable(200, false, 10) {}
 };
