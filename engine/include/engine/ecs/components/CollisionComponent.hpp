@@ -6,11 +6,12 @@
 */
 
 #pragma once
+#include "./AComponent.hpp"
 
 /**
  * @brief Base class for collision component.
  */
-class CollisionComponent {
+class CollisionComponent : public AComponent {
 public:
     /**
      * @brief Base constructor for collidable component.

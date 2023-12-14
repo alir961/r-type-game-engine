@@ -6,11 +6,12 @@
 */
 
 #pragma once
+#include "./AComponent.hpp"
 
 /**
  * @brief Base class for player component.
  */
-class PlayerComponent {
+class PlayerComponent : public AComponent {
 public:
     /**
      * @brief Base constructor for player component.

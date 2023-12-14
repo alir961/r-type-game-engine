@@ -81,6 +81,16 @@ $(function() {
  <a href="classPlayerComponent.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="PlayerComponent_8hpp_source.html">PlayerComponent.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for PlayerComponent:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classPlayerComponent.png" usemap="#PlayerComponent_map" alt=""/>
+  <map id="PlayerComponent_map" name="PlayerComponent_map">
+<area href="classAComponent.html" title="Base abstract for component." alt="AComponent" shape="rect" coords="0,56,112,80"/>
+<area href="classIComponent.html" title="Base interface for component." alt="IComponent" shape="rect" coords="0,0,112,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -90,6 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3bcb815926a4585ebc8a4b3c10aa98bc" id="r_a3bcb815926a4585ebc8a4b3c10aa98bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerComponent.html#a3bcb815926a4585ebc8a4b3c10aa98bc">getIsPlayer</a> ()</td></tr>
 <tr class="memdesc:a3bcb815926a4585ebc8a4b3c10aa98bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the entity is controlled by a player.  <br /></td></tr>
 <tr class="separator:a3bcb815926a4585ebc8a4b3c10aa98bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed6e022ff7b1df67afb5af57f2d9936" id="r_aeed6e022ff7b1df67afb5af57f2d9936"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAComponent.html#aeed6e022ff7b1df67afb5af57f2d9936">update</a> () override</td></tr>
+<tr class="memdesc:aeed6e022ff7b1df67afb5af57f2d9936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base update function.  <br /></td></tr>
+<tr class="separator:aeed6e022ff7b1df67afb5af57f2d9936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -162,6 +175,35 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aeed6e022ff7b1df67afb5af57f2d9936" name="aeed6e022ff7b1df67afb5af57f2d9936"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed6e022ff7b1df67afb5af57f2d9936">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AComponent::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Base update function. </p>
+
+<p>Implements <a class="el" href="classIComponent.html#a0bfcfb242781520bfa07cc3bf56fe0b9">IComponent</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a546191446434c05817cc747f6cd92d2c" name="a546191446434c05817cc747f6cd92d2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a546191446434c05817cc747f6cd92d2c">&#9670;&#160;</a></span>_isPlayer</h2>
@@ -187,7 +229,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>engine/include/engine/entitiesFactory/components/<a class="el" href="PlayerComponent_8hpp_source.html">PlayerComponent.hpp</a></li>
+<li>engine/include/engine/ecs/components/<a class="el" href="PlayerComponent_8hpp_source.html">PlayerComponent.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

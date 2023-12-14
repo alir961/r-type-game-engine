@@ -6,11 +6,12 @@
 */
 
 #pragma once
+#include "./AComponent.hpp"
 
 /**
  * @brief Base class for speed component.
  */
-class SpeedComponent {
+class SpeedComponent : public AComponent {
 public:
     /**
      * @brief Base constructor for speed component.

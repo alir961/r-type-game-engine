@@ -8,11 +8,12 @@
 #pragma once
 
 #include <map>
+#include "./AComponent.hpp"
 
 /**
  * @brief Base class for position component.
  */
-class PositionComponent {
+class PositionComponent : public AComponent {
 public:
     /**
      * @brief Base constructor for position component.

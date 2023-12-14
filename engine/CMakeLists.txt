@@ -1,16 +1,16 @@
 set(HEADER_FILES
         include/engine/exception/ConfigurationException.hpp
         include/engine/tools/NumberUtilities.hpp
-        include/engine/entitiesFactory/EntityFactory.hpp
-        include/engine/entitiesFactory/components/CollisionComponent.hpp
-        include/engine/entitiesFactory/components/DamageComponent.hpp
-        include/engine/entitiesFactory/components/HealthComponent.hpp
-        include/engine/entitiesFactory/components/PlayerComponent.hpp
-        include/engine/entitiesFactory/components/PositionComponent.hpp
-        include/engine/entitiesFactory/components/SpeedComponent.hpp
-        include/engine/entitiesFactory/entitiesTypes/Bullet.hpp
-        include/engine/entitiesFactory/entitiesTypes/Monster.hpp
-        include/engine/entitiesFactory/entitiesTypes/Starship.hpp
+        include/engine/ecs/EntityFactory.hpp
+        include/engine/ecs/components/CollisionComponent.hpp
+        include/engine/ecs/components/DamageComponent.hpp
+        include/engine/ecs/components/HealthComponent.hpp
+        include/engine/ecs/components/PlayerComponent.hpp
+        include/engine/ecs/components/PositionComponent.hpp
+        include/engine/ecs/components/SpeedComponent.hpp
+        include/engine/ecs/entitiesTypes/Bullet.hpp
+        include/engine/ecs/entitiesTypes/Monster.hpp
+        include/engine/ecs/entitiesTypes/Starship.hpp
         include/engine/gameModule/IGameModule.hpp
         include/engine/gameModule/AModules/AAIModule.hpp
         include/engine/gameModule/AModules/AAudioModule.hpp

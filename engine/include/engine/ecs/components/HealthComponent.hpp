@@ -6,11 +6,12 @@
 */
 
 #pragma once
+#include "./AComponent.hpp"
 
 /**
  * @brief Base class for health component.
  */
-class HealthComponent {
+class HealthComponent : public AComponent {
 public:
     /**
      * @brief Base constructor for healthed component.

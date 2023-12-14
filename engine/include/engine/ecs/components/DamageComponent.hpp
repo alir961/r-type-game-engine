@@ -6,11 +6,12 @@
 */
 
 #pragma once
+#include "./AComponent.hpp"
 
 /**
  * @brief Base class for damage component.
  */
-class DamageComponent {
+class DamageComponent : public AComponent {
 public:
     /**
      * @brief Base constructor for damager component.
