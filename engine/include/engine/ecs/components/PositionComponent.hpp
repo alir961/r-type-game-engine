@@ -37,6 +37,13 @@ public:
         return _position;
     }
 
+    /**
+     * @brief Update the component.
+     */
+    void update() override {
+        std::cout << "Component update\n";
+    }
+
 private:
     std::pair<int, int> _position; /**< Position of the entity. */
 };

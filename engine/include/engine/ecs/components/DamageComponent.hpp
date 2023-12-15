@@ -35,6 +35,13 @@ public:
         return _damage;
     }
 
+    /**
+     * @brief Update the component.
+     */
+    void update() override {
+        std::cout << "Component update\n";
+    }
+
 private:
     int _damage; /**< Damage inflicted by the weapon. */
 };

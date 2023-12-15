@@ -18,8 +18,7 @@ public:
     /**
     * @brief Base update function.
     */
-    void update() override {
-        std::cout << "Component update\n";
-    }
+    virtual void update() = 0;
+    
     virtual ~AComponent() = default;
 };

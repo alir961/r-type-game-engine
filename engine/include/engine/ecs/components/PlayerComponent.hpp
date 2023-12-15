@@ -27,6 +27,13 @@ public:
         return _isPlayer;
     }
 
+    /**
+     * @brief Update the component.
+     */
+    void update() override {
+        std::cout << "Component update\n";
+    }
+
 private:
     bool _isPlayer; /**< Flag indicating if the entity is controlled by a player. */
 };

@@ -35,6 +35,13 @@ public:
         return _health;
     }
 
+    /**
+     * @brief Update the component.
+     */
+    void update() override {
+        std::cout << "Component update\n";
+    }
+
 private:
     int _health; /**< Health of the damageable entity. */
 };

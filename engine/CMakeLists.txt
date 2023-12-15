@@ -8,9 +8,12 @@ set(HEADER_FILES
         include/engine/ecs/components/PlayerComponent.hpp
         include/engine/ecs/components/PositionComponent.hpp
         include/engine/ecs/components/SpeedComponent.hpp
+        include/engine/ecs/components/ComponentType.hpp
         include/engine/ecs/entitiesTypes/Bullet.hpp
         include/engine/ecs/entitiesTypes/Monster.hpp
         include/engine/ecs/entitiesTypes/Starship.hpp
+        include/engine/ecs/Entity.hpp
+        include/engine/ecs/EntityManager.hpp
         include/engine/gameModule/IGameModule.hpp
         include/engine/gameModule/AModules/AAIModule.hpp
         include/engine/gameModule/AModules/AAudioModule.hpp

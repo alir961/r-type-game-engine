@@ -35,6 +35,13 @@ public:
         return _isCollidable;
     }
 
+    /**
+     * @brief Update the component.
+     */
+    void update() override {
+        std::cout << "Component update\n";
+    }
+
 private:
     bool _isCollidable; /**< Collision status of the entity. */
 };

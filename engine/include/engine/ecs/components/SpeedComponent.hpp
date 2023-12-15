@@ -35,6 +35,13 @@ public:
         return _speed;
     }
 
+    /**
+     * @brief Update the component.
+     */
+    void update() override {
+        std::cout << "Component update\n";
+    }
+
 private:
     int _speed; /**< Speed of the entity. */
 };
