@@ -101,6 +101,11 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>updateComponents</b> ()</td></tr>
 <tr class="memdesc:a5e1817426e670c73110ad40c3e77446a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update all components associated with the entity. <br /></td></tr>
 <tr class="separator:a5e1817426e670c73110ad40c3e77446a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42785721cb226a1bea8025aeb1d9e8d" id="r_ad42785721cb226a1bea8025aeb1d9e8d"><td class="memTemplParams" colspan="2"><a id="ad42785721cb226a1bea8025aeb1d9e8d" name="ad42785721cb226a1bea8025aeb1d9e8d"></a>
+template&lt;<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">typename</a> <a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">T</a> &gt; </td></tr>
+<tr class="memitem:ad42785721cb226a1bea8025aeb1d9e8d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>hasComponent</b> ()</td></tr>
+<tr class="memdesc:ad42785721cb226a1bea8025aeb1d9e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the entity has components, false otherwise. <br /></td></tr>
+<tr class="separator:ad42785721cb226a1bea8025aeb1d9e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6ecb9c57b29b60cc49fe44ad4088ecf" id="r_aa6ecb9c57b29b60cc49fe44ad4088ecf"><td class="memItemLeft" align="right" valign="top"><a id="aa6ecb9c57b29b60cc49fe44ad4088ecf" name="aa6ecb9c57b29b60cc49fe44ad4088ecf"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Entity</b> ()=<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">default</a></td></tr>
 <tr class="memdesc:aa6ecb9c57b29b60cc49fe44ad4088ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the entity, cleaning up all associated components. <br /></td></tr>
@@ -115,8 +120,8 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a7f1610ed8ecce9224104942131695cff" id="r_a7f1610ed8ecce9224104942131695cff"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; ComponentType, std::shared_ptr&lt; <a class="el" href="classAComponent.html">AComponent</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a7f1610ed8ecce9224104942131695cff">components</a></td></tr>
-<tr class="separator:a7f1610ed8ecce9224104942131695cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51173c7a7db59ea3c2f87db08918c67b" id="r_a51173c7a7db59ea3c2f87db08918c67b"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; ComponentType, std::shared_ptr&lt; <a class="el" href="classAComponent.html">AComponent</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEntity.html#a51173c7a7db59ea3c2f87db08918c67b">_components</a></td></tr>
+<tr class="separator:a51173c7a7db59ea3c2f87db08918c67b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classEntity.html" title="Entity class representing an object in the system.">Entity</a> class representing an object in the system. </p>
@@ -273,8 +278,8 @@ template&lt;<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b34240
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a7f1610ed8ecce9224104942131695cff" name="a7f1610ed8ecce9224104942131695cff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f1610ed8ecce9224104942131695cff">&#9670;&#160;</a></span>components</h2>
+<a id="a51173c7a7db59ea3c2f87db08918c67b" name="a51173c7a7db59ea3c2f87db08918c67b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51173c7a7db59ea3c2f87db08918c67b">&#9670;&#160;</a></span>_components</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +288,7 @@ template&lt;<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b34240
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;ComponentType, std::shared_ptr&lt;<a class="el" href="classAComponent.html">AComponent</a>&gt; &gt; Entity::components</td>
+          <td class="memname">std::unordered_map&lt;ComponentType, std::shared_ptr&lt;<a class="el" href="classAComponent.html">AComponent</a>&gt; &gt; Entity::_components</td>
         </tr>
       </table>
   </td>

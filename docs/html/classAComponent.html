@@ -72,7 +72,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classAComponent-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">AComponent Class Reference</div></div>
+  <div class="headertitle"><div class="title">AComponent Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,15 +98,15 @@ Inheritance diagram for AComponent:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aeed6e022ff7b1df67afb5af57f2d9936" id="r_aeed6e022ff7b1df67afb5af57f2d9936"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAComponent.html#aeed6e022ff7b1df67afb5af57f2d9936">update</a> () override</td></tr>
-<tr class="memdesc:aeed6e022ff7b1df67afb5af57f2d9936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base update function.  <br /></td></tr>
-<tr class="separator:aeed6e022ff7b1df67afb5af57f2d9936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f584b7d24c30fad8de8f5dac8ff75e" id="r_a92f584b7d24c30fad8de8f5dac8ff75e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAComponent.html#a92f584b7d24c30fad8de8f5dac8ff75e">update</a> ()=0</td></tr>
+<tr class="memdesc:a92f584b7d24c30fad8de8f5dac8ff75e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base update function.  <br /></td></tr>
+<tr class="separator:a92f584b7d24c30fad8de8f5dac8ff75e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base abstract for component. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aeed6e022ff7b1df67afb5af57f2d9936" name="aeed6e022ff7b1df67afb5af57f2d9936"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeed6e022ff7b1df67afb5af57f2d9936">&#9670;&#160;</a></span>update()</h2>
+<a id="a92f584b7d24c30fad8de8f5dac8ff75e" name="a92f584b7d24c30fad8de8f5dac8ff75e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92f584b7d24c30fad8de8f5dac8ff75e">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,7 +115,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void AComponent::update </td>
+          <td class="memname">virtual void AComponent::update </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -123,7 +123,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -131,6 +131,8 @@ Public Member Functions</h2></td></tr>
 <p>Base update function. </p>
 
 <p>Implements <a class="el" href="classIComponent.html#a0bfcfb242781520bfa07cc3bf56fe0b9">IComponent</a>.</p>
+
+<p>Implemented in <a class="el" href="classCollisionComponent.html#a68ce5696227946aad1af25514f951ecd">CollisionComponent</a>, <a class="el" href="classDamageComponent.html#a3be8aaef8a113106c9bdc4630d44239c">DamageComponent</a>, <a class="el" href="classHealthComponent.html#adb4b815cc27a7b76c78220ab4adb47ea">HealthComponent</a>, <a class="el" href="classPlayerComponent.html#a7ea1b14f2e101e722fd0a1f10e4be530">PlayerComponent</a>, <a class="el" href="classPositionComponent.html#af66901f5b75d3a5d438f82c3e3e61e32">PositionComponent</a>, and <a class="el" href="classSpeedComponent.html#a83f9cf3e29f43e93573a3dc7114daf22">SpeedComponent</a>.</p>
 
 </div>
 </div>

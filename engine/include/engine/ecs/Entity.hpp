@@ -23,9 +23,9 @@ public:
      */
     template <typename T>
     std::shared_ptr<T> getComponent() const {
-        auto it = components.find(getComponentType<T>());
-        if (it != components.end()) {
-            return std::dynamic_pointer_cast<T>(it->second);
+        auto component = _components.find(getComponentType<T>());
+        if (component != _components.end()) {
+            return std::dynamic_pointer_cast<T>(component->second);
         }
         return nullptr;
     }
@@ -41,7 +41,7 @@ public:
     std::shared_ptr<T> addComponent(Args&&... args) {
         if (getComponent<T>() == nullptr) {
             std::shared_ptr<T> component = std::make_shared<T>(std::forward<Args>(args)...);
-            components[getComponentType<T>()] = component;
+            _components[getComponentType<T>()] = component;
             return component;
         }
         return nullptr;
@@ -53,9 +53,9 @@ public:
      */
     template <typename T>
     void removeComponent() {
-        auto it = components.find(getComponentType<T>());
-        if (it != components.end()) {
-            components.erase(it);
+        auto component = _components.find(getComponentType<T>());
+        if (component != _components.end()) {
+            _components.erase(component);
         }
     }
 
@@ -63,9 +63,20 @@ public:
      * @brief Update all components associated with the entity.
      */
     void updateComponents() {
-        for (auto &pair : components) {
+        for (auto &pair : _components) {
             pair.second->update();
         }
+    }
+
+    /**
+     * @brief Return true if the entity has components, false otherwise.
+     */
+    template <typename T>
+    bool hasComponent() {
+        if (_components.find(getComponent<T>()) == nullptr) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -74,7 +85,7 @@ public:
     ~Entity() = default;
 
 private:
-    std::unordered_map<ComponentType, std::shared_ptr<AComponent>> components; /**< Map to store components associated with the entity. */
+    std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store components associated with the entity. */
 
     /**
      * @brief Get the component type enum value for a specific component type.

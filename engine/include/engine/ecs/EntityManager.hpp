@@ -24,7 +24,7 @@ public:
      */
     std::shared_ptr<Entity> createEntity() {
         std::shared_ptr<Entity> entity = std::make_shared<Entity>();
-        entities.push_back(entity);
+        _entities.push_back(entity);
         return entity;
     }
 
@@ -33,9 +33,9 @@ public:
      * @param entity Shared pointer to the entity to destroy.
      */
     void destroyEntity(std::shared_ptr<Entity> entity) {
-        auto it = std::find(entities.begin(), entities.end(), entity);
-        if (it != entities.end()) {
-            entities.erase(it);
+        auto it = std::find(_entities.begin(), _entities.end(), entity);
+        if (it != _entities.end()) {
+            _entities.erase(it);
         }
     }
 
@@ -43,7 +43,7 @@ public:
      * @brief Update all entities in the EntityManager.
      */
     void updateEntities() {
-        for (const auto &entity : entities) {
+        for (const auto &entity : _entities) {
             entity->updateComponents();
         }
     }
@@ -54,5 +54,5 @@ public:
     ~EntityManager() {}
 
 private:
-    std::vector<std::shared_ptr<Entity>> entities; /**< Vector to store entities managed by the EntityManager. */
+    std::vector<std::shared_ptr<Entity>> _entities; /**< Vector to store entities managed by the EntityManager. */
 };
