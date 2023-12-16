@@ -70,6 +70,7 @@ public:
 
     /**
      * @brief Return true if the entity has components, false otherwise.
+     * @tparam T Type of the component to remove.
      */
     template <typename T>
     bool hasComponent() {
