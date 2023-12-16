@@ -1,49 +1,52 @@
 # R-Type
 
-## Prérequis
+## Dependencies
 
-- C++20 ou version ultérieure
+- C++20 or later
 - GNU Make
 - CMake
-- VCPKG
 
 ## Installation
 
-1. Clonez ce dépôt de code sur votre machine:
+1. Clone repository
 
 ```shell
 git clone git@github.com:EpitechPromo2026/B-CPP-500-LYN-5-2-rtype-timothe.medico.git
 ```
 
-2. Installation de VCPKG
+2. Install vcpkg (for Archlinux)
 
 ```shell
 paru -S vcpkg
 ```
 
-> En cas de problèmes de permission: `sudo chown -R $USER:vcpkg /opt/vcpkg`
+```shell
+sudo gpasswd -a $USER vcpkg
+```
 
-3. Installation des dépendances
+3. Install dependencies
 
 ```shell
 vcpkg install
 ```
 
-4. Préparez la compilation du projet avec CMake
+> In case of permission issues: `sudo chown -R $USER:vcpkg /opt/vcpkg`
+
+4. Prepare project compilation with cmake
 
 ```shell
 cmake -S . -B build/out -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
 
-5. Compiler le projet via Makefile
+5. Compile project with make
 
 ```shell
 make -C build/out
 ```
 
-> Les binaires sont accessibles dans chemins suivants:  
-> `build/out/client/r-type_client`
-> `build/out/server/r-type_server`
+> Binary paths:    
+> `build/out/client/r-type_client`  
+> `build/out/server/r-type_server`  
 
 ## Auteurs
 
