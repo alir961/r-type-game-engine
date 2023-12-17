@@ -14,15 +14,11 @@ set(SOURCE_FILES
 )
 
 include_directories(include)
-include_directories(../engine/include)
-include_directories(../engine/include/ecs)
-include_directories(../engine/include/ecs/components)
+#include_directories(../engine/include) <- NOTE : for the moment that is useless bcz we only use the entities from the ecs
+include_directories(../engine/include/engine/ecs)
 
-add_executable(r-type_client ${SOURCE_FILES})
+find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
+add_executable(${PROJECT_NAME}_client ${SOURCE_FILES})
 
-target_link_libraries(r-type_client engine)
-target_link_libraries(r-type_client ${CONAN_LIBS})
-
-add_custom_command(TARGET r-type_client POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:r-type_client>/assets)
+target_link_libraries(${PROJECT_NAME}_client LINK_PRIVATE engine)
+target_link_libraries(${PROJECT_NAME}_client LINK_PRIVATE sfml-system sfml-network sfml-graphics sfml-window)
