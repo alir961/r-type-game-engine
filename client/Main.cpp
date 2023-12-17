@@ -1,9 +1,35 @@
-#include "include/GameView.hpp"
+#include "GameView.hpp"
+#include "include/entities/GraphicEntityFactory.hpp"
 #include <engine/Logger.hpp>
+#include <engine/ecs/Entity.hpp>
+#include <engine/ecs/EntityManager.hpp>
+
+using namespace RType;
 
 int main() {
-    RType::GameView view;
+    try {
+        GameView gameView;
+        EntityManager entityManager;
 
-    logInformation("Hello, World for client!");
-    view.start();
+        //        auto bulletEntity = entityManager.createEntity();
+        //        auto monsterEntity = entityManager.createEntity();
+        auto starshipEntity = entityManager.createEntity();
+
+        //        auto graphicBullet = GraphicEntityFactory::createGraphicBullet(bulletEntity);
+        //        auto graphicMonster = GraphicEntityFactory::createGraphicMonster(monsterEntity);
+        auto graphicStarship = GraphicEntityFactory::createGraphicStarship(starshipEntity);
+
+        //        gameView.addGraphicEntity(graphicBullet);
+        //        gameView.addGraphicEntity(graphicMonster);
+        gameView.addGraphicEntity(graphicStarship);
+
+        logInformation("Starting game view...");
+        gameView.start();
+
+    } catch (const std::exception &e) {
+        logError("Exception caught in main: " + std::string(e.what()));
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }

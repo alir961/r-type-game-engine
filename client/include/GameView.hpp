@@ -2,12 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** No file there , just an epitech header example
+** GameView.hpp
 */
 
 #pragma once
 
+#include "entities/GraphicBullet.hpp"
+#include "entities/GraphicMonster.hpp"
+#include "entities/GraphicStarship.hpp"
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
+#include <memory>
+#include <vector>
 
 namespace RType {
 
@@ -24,28 +30,20 @@ namespace RType {
 
     class GameView {
     private:
-        sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
-        ViewState _viewState = ViewState::MENU;
+        sf::RenderWindow _window;
+        ViewState _viewState;
+        sf::Clock animationClock;
+        std::vector<std::shared_ptr<IGraphicEntity>> graphicEntities;
 
-    protected:
         void draw();
+        void updateEntities(float deltaTime);
 
     public:
-        explicit GameView() = default;
-
+        explicit GameView();
         ~GameView() = default;
 
-        /**
-         * Launch the GUI and wait until close
-         */
         void start();
-
-        /**
-         * Update current view
-         *
-         * @param state view to display
-         */
         void setView(ViewState state);
+        void addGraphicEntity(std::shared_ptr<IGraphicEntity> entity);
     };
-
-}
+}// namespace RType
