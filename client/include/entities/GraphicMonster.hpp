@@ -14,13 +14,13 @@ namespace RType {
 
     class GraphicMonster : public IGraphicEntity {
     public:
-        explicit GraphicMonster(engine::ecs::Entity &entity);
+        explicit GraphicMonster(Entity &entity);
 
         void update(float deltaTime) override;
         void draw(sf::RenderWindow &window) override;
 
     private:
-        engine::ecs::Entity &entity;
+        Entity &entity;
         sf::Sprite sprite;
         sf::IntRect currentFrame;
         float animationTime;

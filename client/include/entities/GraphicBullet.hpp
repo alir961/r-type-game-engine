@@ -19,7 +19,7 @@ namespace RType {
          *
          * @param entity Reference to the ECS entity associated with this graphic entity
          */
-        explicit GraphicBullet(engine::ecs::Entity &entity);
+        explicit GraphicBullet(Entity &entity);
 
         /**
          * @brief Update the graphic entity based on the state of the ECS entity
@@ -36,7 +36,7 @@ namespace RType {
         void draw(sf::RenderWindow &window) override;
 
     private:
-        engine::ecs::Entity &entity;
+        Entity &entity;
         sf::Sprite sprite;
         sf::IntRect currentFrame;
         float animationTime;

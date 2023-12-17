@@ -8,8 +8,8 @@ namespace RType {
 
     class GraphicEntityFactory {
     public:
-        static std::shared_ptr<GraphicBullet> createGraphicBullet(engine::ecs::Entity &entity);
-        static std::shared_ptr<GraphicMonster> createGraphicMonster(engine::ecs::Entity &entity);
-        static std::shared_ptr<GraphicStarship> createGraphicStarship(engine::ecs::Entity &entity);
+        static std::shared_ptr<GraphicBullet> createGraphicBullet(Entity &entity);
+        static std::shared_ptr<GraphicMonster> createGraphicMonster(Entity &entity);
+        static std::shared_ptr<GraphicStarship> createGraphicStarship(Entity &entity);
     };
 };// namespace RType

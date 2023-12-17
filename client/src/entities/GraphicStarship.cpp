@@ -11,7 +11,7 @@
 
 using namespace RType;
 
-GraphicStarship::GraphicStarship(engine::ecs::Entity &entity) : entity(entity), animationTime(0.0f) {
+GraphicStarship::GraphicStarship(Entity &entity) : entity(entity), animationTime(0.0f) {
     sf::Texture texture;
     texture.loadFromFile("../../assets/r-typesheet42.gif");
     sprite.setTexture(texture);

@@ -11,7 +11,7 @@
 
 using namespace RType;
 
-GraphicBullet::GraphicBullet(engine::ecs::Entity &entity) : entity(entity), animationTime(0.0f) {
+GraphicBullet::GraphicBullet(Entity &entity) : entity(entity), animationTime(0.0f) {
     // WARN : pour que ça fonctionne ajuste les textures ainsi que le int rect selon le sprite puis les décommente dans main.cpp
     sf::Texture texture;
     texture.loadFromFile("../../assets/r-typesheet42.gif");

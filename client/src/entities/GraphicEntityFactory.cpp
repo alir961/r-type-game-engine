@@ -9,14 +9,14 @@
 
 using namespace RType;
 
-std::shared_ptr<GraphicBullet> GraphicEntityFactory::createGraphicBullet(engine::ecs::Entity &entity) {
+std::shared_ptr<GraphicBullet> GraphicEntityFactory::createGraphicBullet(Entity &entity) {
     return std::make_shared<GraphicBullet>(entity);
 }
 
-std::shared_ptr<GraphicMonster> GraphicEntityFactory::createGraphicMonster(engine::ecs::Entity &entity) {
+std::shared_ptr<GraphicMonster> GraphicEntityFactory::createGraphicMonster(Entity &entity) {
     return std::make_shared<GraphicMonster>(entity);
 }
 
-std::shared_ptr<GraphicStarship> GraphicEntityFactory::createGraphicStarship(engine::ecs::Entity &entity) {
+std::shared_ptr<GraphicStarship> GraphicEntityFactory::createGraphicStarship(Entity &entity) {
     return std::make_shared<GraphicStarship>(entity);
 }
