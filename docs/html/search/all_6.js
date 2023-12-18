@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hascomponent_0',['hasComponent',['../classEntity.html#ad42785721cb226a1bea8025aeb1d9e8d',1,'Entity']]]
+  ['hascomponent_0',['hasComponent',['../classEntity.html#ad42785721cb226a1bea8025aeb1d9e8d',1,'Entity']]],
+  ['healthcomponent_1',['healthcomponent',['../classHealthComponent.html',1,'HealthComponent'],['../classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1',1,'HealthComponent::HealthComponent()']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['igamemodule_0',['IGameModule',['../classIGameModule.html',1,'']]]
+  ['damagecomponent_0',['DamageComponent',['../classDamageComponent.html',1,'']]]
 ];
