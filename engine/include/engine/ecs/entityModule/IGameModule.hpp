@@ -9,7 +9,7 @@
 
 /**
  * @class IGameModule
- * @brief Interface class for game modules.
+ * @brief Interface class for game module.
  */
 class IGameModule {
 public:

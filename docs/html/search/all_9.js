@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['monster_0',['monster',['../classMonster.html',1,'Monster'],['../classMonster.html#a3dfc253fbec8331d42ac13c20bf9425f',1,'Monster::Monster()']]]
+  ['removecomponent_0',['removeComponent',['../classEntity.html#a590ddbda675cf9b188977d553e396a0f',1,'Entity']]]
 ];

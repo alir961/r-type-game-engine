@@ -15,7 +15,7 @@
 #include "SpeedComponent.hpp"
 
 /**
- * @brief Enum to represent different types of components.
+ * @brief Enum to represent different types of component.
  */
 enum class ComponentType {
     Collision,  /**< Component type for collision. */

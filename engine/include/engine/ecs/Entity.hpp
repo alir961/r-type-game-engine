@@ -60,7 +60,7 @@ public:
     }
 
     /**
-     * @brief Update all components associated with the entity.
+     * @brief Update all component associated with the entity.
      */
     void updateComponents() {
         for (auto &pair : _components) {
@@ -69,7 +69,7 @@ public:
     }
 
     /**
-     * @brief Return true if the entity has components, false otherwise.
+     * @brief Return true if the entity has component, false otherwise.
      * @tparam T Type of the component to remove.
      */
     template <typename T>
@@ -81,12 +81,12 @@ public:
     }
 
     /**
-     * @brief Destructor for the entity, cleaning up all associated components.
+     * @brief Destructor for the entity, cleaning up all associated component.
      */
     ~Entity() = default;
 
 private:
-    std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store components associated with the entity. */
+    std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the entity. */
 
     /**
      * @brief Get the component type enum value for a specific component type.

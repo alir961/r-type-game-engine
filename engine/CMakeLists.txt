@@ -1,25 +1,24 @@
 set(HEADER_FILES
         include/engine/exception/ConfigurationException.hpp
         include/engine/tools/NumberUtilities.hpp
-        include/engine/ecs/EntityFactory.hpp
-        include/engine/ecs/components/CollisionComponent.hpp
-        include/engine/ecs/components/DamageComponent.hpp
-        include/engine/ecs/components/HealthComponent.hpp
-        include/engine/ecs/components/PlayerComponent.hpp
-        include/engine/ecs/components/PositionComponent.hpp
-        include/engine/ecs/components/SpeedComponent.hpp
-        include/engine/ecs/components/ComponentType.hpp
+        include/engine/ecs/component/CollisionComponent.hpp
+        include/engine/ecs/component/DamageComponent.hpp
+        include/engine/ecs/component/HealthComponent.hpp
+        include/engine/ecs/component/PlayerComponent.hpp
+        include/engine/ecs/component/PositionComponent.hpp
+        include/engine/ecs/component/SpeedComponent.hpp
+        include/engine/ecs/component/ComponentType.hpp
         include/engine/ecs/entitiesTypes/Bullet.hpp
         include/engine/ecs/entitiesTypes/Monster.hpp
         include/engine/ecs/entitiesTypes/Starship.hpp
         include/engine/ecs/Entity.hpp
         include/engine/ecs/EntityManager.hpp
-        include/engine/gameModule/IGameModule.hpp
-        include/engine/gameModule/AModules/AAIModule.hpp
-        include/engine/gameModule/AModules/AAudioModule.hpp
-        include/engine/gameModule/AModules/ACinematicModule.hpp
-        include/engine/gameModule/AModules/AMetricsModules.hpp
-        include/engine/gameModule/AModules/AConsoleModule.hpp)
+        include/engine/ecs/entityModule/IGameModule.hpp
+        include/engine/ecs/entityModule/module/AAIModule.hpp
+        include/engine/ecs/entityModule/module/AAudioModule.hpp
+        include/engine/ecs/entityModule/module/ACinematicModule.hpp
+        include/engine/ecs/entityModule/module/AMetricsModules.hpp
+        include/engine/ecs/entityModule/module/AConsoleModule.hpp)
 
 set(SOURCE_FILES
         src/Logger.cpp
