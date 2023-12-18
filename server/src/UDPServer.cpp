@@ -34,7 +34,7 @@ void RType::UDPServer::handleReceive(std::size_t bytes_received) {
 
 RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint) :
         _socket(io_context, endpoint),
-        _adapter(_socket) {
+        _adapter(_socket, _remoteEndpoint) {
     startReceive();
 }
 

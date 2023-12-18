@@ -18,14 +18,14 @@ namespace RType {
     class UDPAdapter {
     private:
         UDP::socket &_socket;
-        UDP::endpoint _remoteEndpoint;
+        UDP::endpoint &_remoteEndpoint;
 
     protected:
         static void errorFunction(const boost::system::error_code &error, std::size_t);
 
     public:
-        explicit UDPAdapter(UDP::socket &socket) :
-                _socket(socket) {}
+        explicit UDPAdapter(UDP::socket &socket, UDP::endpoint &endpoint) :
+                _socket(socket), _remoteEndpoint(endpoint) {}
 
         void sendData(const std::string &data);
         void sendData(const asio::const_buffer &data);
