@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['healthcomponent_0',['HealthComponent',['../classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1',1,'HealthComponent']]]
+  ['initialize_0',['Initialize',['../classIGameModule.html#a5d0ebe10c8a3cf9da8a05d40b26f6938',1,'IGameModule']]]
 ];

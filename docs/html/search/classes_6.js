@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['igamemodule_0',['IGameModule',['../classIGameModule.html',1,'']]]
+  ['icomponent_0',['IComponent',['../classIComponent.html',1,'']]],
+  ['igamemodule_1',['IGameModule',['../classIGameModule.html',1,'']]]
 ];

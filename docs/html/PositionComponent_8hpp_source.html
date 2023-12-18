@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-Type Project: engine/include/engine/entitiesFactory/components/PositionComponent.hpp Source File</title>
+<title>R-Type Project: engine/include/engine/ecs/components/PositionComponent.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_b166f286d1e560dbaaaaf478c7d4daf6.html">engine</a></li><li class="navelem"><a class="el" href="dir_e39629ad88c1ff3ddf95ec1b068728e3.html">entitiesFactory</a></li><li class="navelem"><a class="el" href="dir_31c6f65a587c39d39e910cfcca8de788.html">components</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_b166f286d1e560dbaaaaf478c7d4daf6.html">engine</a></li><li class="navelem"><a class="el" href="dir_42ef70011e435b900d21e7d7dcbc9784.html">ecs</a></li><li class="navelem"><a class="el" href="dir_31713dac895875234b780e434f22f6d1.html">components</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -91,33 +91,42 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classPositionComponent.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classPositionComponent.html">PositionComponent</a> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classPositionComponent.html#a5b3a5434e20923d0da0ffef93be12e1b">   21</a></span>    <a class="code hl_function" href="classPositionComponent.html#a5b3a5434e20923d0da0ffef93be12e1b">PositionComponent</a>(std::pair&lt;int, int&gt; position) : <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a>(position) {}</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classPositionComponent.html#a4025e04b02fe0284f458c646b4e27d9d">   27</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPositionComponent.html#a4025e04b02fe0284f458c646b4e27d9d">setPositions</a>(std::pair&lt;int, int&gt; position) {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a> = position;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;./AComponent.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classPositionComponent.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="classPositionComponent.html">PositionComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classAComponent.html">AComponent</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classPositionComponent.html#a5b3a5434e20923d0da0ffef93be12e1b">   22</a></span>    <a class="code hl_function" href="classPositionComponent.html#a5b3a5434e20923d0da0ffef93be12e1b">PositionComponent</a>(std::pair&lt;int, int&gt; position) : <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a>(position) {}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classPositionComponent.html#a4025e04b02fe0284f458c646b4e27d9d">   28</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPositionComponent.html#a4025e04b02fe0284f458c646b4e27d9d">setPositions</a>(std::pair&lt;int, int&gt; position) {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a> = position;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
 </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classPositionComponent.html#a7f88abb0bba81a130bbeca95d9ccdc5f">   35</a></span>    std::pair&lt;int, int&gt; <a class="code hl_function" href="classPositionComponent.html#a7f88abb0bba81a130bbeca95d9ccdc5f">getPositions</a>() {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classPositionComponent.html#a7f88abb0bba81a130bbeca95d9ccdc5f">   36</a></span>    std::pair&lt;int, int&gt; <a class="code hl_function" href="classPositionComponent.html#a7f88abb0bba81a130bbeca95d9ccdc5f">getPositions</a>() {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">   40</a></span>    std::pair&lt;int, int&gt; <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a>; </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classPositionComponent.html#af66901f5b75d3a5d438f82c3e3e61e32">   43</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPositionComponent.html#af66901f5b75d3a5d438f82c3e3e61e32">update</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 </div>
-<div class="ttc" id="aclassPositionComponent_html"><div class="ttname"><a href="classPositionComponent.html">PositionComponent</a></div><div class="ttdoc">Base class for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:15</div></div>
-<div class="ttc" id="aclassPositionComponent_html_a4025e04b02fe0284f458c646b4e27d9d"><div class="ttname"><a href="classPositionComponent.html#a4025e04b02fe0284f458c646b4e27d9d">PositionComponent::setPositions</a></div><div class="ttdeci">void setPositions(std::pair&lt; int, int &gt; position)</div><div class="ttdoc">Set the position of the entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:27</div></div>
-<div class="ttc" id="aclassPositionComponent_html_a5b3a5434e20923d0da0ffef93be12e1b"><div class="ttname"><a href="classPositionComponent.html#a5b3a5434e20923d0da0ffef93be12e1b">PositionComponent::PositionComponent</a></div><div class="ttdeci">PositionComponent(std::pair&lt; int, int &gt; position)</div><div class="ttdoc">Base constructor for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:21</div></div>
-<div class="ttc" id="aclassPositionComponent_html_a7f88abb0bba81a130bbeca95d9ccdc5f"><div class="ttname"><a href="classPositionComponent.html#a7f88abb0bba81a130bbeca95d9ccdc5f">PositionComponent::getPositions</a></div><div class="ttdeci">std::pair&lt; int, int &gt; getPositions()</div><div class="ttdoc">Get the position of the entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:35</div></div>
-<div class="ttc" id="aclassPositionComponent_html_af26c832ed6a5cfe1ec6a6e39b625110d"><div class="ttname"><a href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">PositionComponent::_position</a></div><div class="ttdeci">std::pair&lt; int, int &gt; _position</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:40</div></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">   48</a></span>    std::pair&lt;int, int&gt; <a class="code hl_variable" href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">_position</a>; </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>};</div>
+</div>
+<div class="ttc" id="aclassAComponent_html"><div class="ttname"><a href="classAComponent.html">AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
+<div class="ttc" id="aclassPositionComponent_html"><div class="ttname"><a href="classPositionComponent.html">PositionComponent</a></div><div class="ttdoc">Base class for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:16</div></div>
+<div class="ttc" id="aclassPositionComponent_html_a4025e04b02fe0284f458c646b4e27d9d"><div class="ttname"><a href="classPositionComponent.html#a4025e04b02fe0284f458c646b4e27d9d">PositionComponent::setPositions</a></div><div class="ttdeci">void setPositions(std::pair&lt; int, int &gt; position)</div><div class="ttdoc">Set the position of the entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:28</div></div>
+<div class="ttc" id="aclassPositionComponent_html_a5b3a5434e20923d0da0ffef93be12e1b"><div class="ttname"><a href="classPositionComponent.html#a5b3a5434e20923d0da0ffef93be12e1b">PositionComponent::PositionComponent</a></div><div class="ttdeci">PositionComponent(std::pair&lt; int, int &gt; position)</div><div class="ttdoc">Base constructor for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:22</div></div>
+<div class="ttc" id="aclassPositionComponent_html_a7f88abb0bba81a130bbeca95d9ccdc5f"><div class="ttname"><a href="classPositionComponent.html#a7f88abb0bba81a130bbeca95d9ccdc5f">PositionComponent::getPositions</a></div><div class="ttdeci">std::pair&lt; int, int &gt; getPositions()</div><div class="ttdoc">Get the position of the entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:36</div></div>
+<div class="ttc" id="aclassPositionComponent_html_af26c832ed6a5cfe1ec6a6e39b625110d"><div class="ttname"><a href="classPositionComponent.html#af26c832ed6a5cfe1ec6a6e39b625110d">PositionComponent::_position</a></div><div class="ttdeci">std::pair&lt; int, int &gt; _position</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:48</div></div>
+<div class="ttc" id="aclassPositionComponent_html_af66901f5b75d3a5d438f82c3e3e61e32"><div class="ttname"><a href="classPositionComponent.html#af66901f5b75d3a5d438f82c3e3e61e32">PositionComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:43</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
