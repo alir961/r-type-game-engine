@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "./components/ComponentType.hpp"
+#include "./component/ComponentType.hpp"
 #include <iostream>
 #include <unordered_map>
 #include <memory>

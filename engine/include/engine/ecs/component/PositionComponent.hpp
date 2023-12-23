@@ -19,7 +19,7 @@ public:
      * @brief Base constructor for position component.
      * @param position The position of the entity.
      */
-    PositionComponent(std::pair<int, int> position) : _position(position) {}
+    explicit PositionComponent(std::pair<int, int> position) : _position(std::move(position)) {}
 
     /**
      * @brief Set the position of the entity.
@@ -33,7 +33,7 @@ public:
      * @brief Get the position of the entity.
      * @return A map representing the position coordinates.
      */
-    std::pair<int, int> getPositions() {
+    [[nodiscard]] std::pair<int, int> getPositions() const {
         return _position;
     }
 

@@ -17,7 +17,7 @@ public:
      * @brief Base constructor for speed component.
      * @param speed The speed of the entity.
      */
-    SpeedComponent(int speed) : _speed(speed) {}
+    explicit SpeedComponent(int speed) : _speed(speed) {}
 
     /**
      * @brief Set the speed of the entity.
@@ -31,7 +31,7 @@ public:
      * @brief Get the speed of the entity.
      * @return The speed of the entity.
      */
-    int getSpeed() {
+    [[nodiscard]] int getSpeed() const {
         return _speed;
     }
 

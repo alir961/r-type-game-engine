@@ -17,13 +17,13 @@ public:
      * @brief Base constructor for player component.
      * @param isPlayer The status of the entity (player or not).
      */
-    PlayerComponent(bool isPlayer) : _isPlayer(isPlayer) {}
+    explicit PlayerComponent(bool isPlayer) : _isPlayer(isPlayer) {}
 
     /**
      * @brief Check if the entity is controlled by a player.
      * @return True if the entity is controlled by a player, false otherwise.
      */
-    bool getIsPlayer() {
+    [[nodiscard]] bool getIsPlayer() const {
         return _isPlayer;
     }
 

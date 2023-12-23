@@ -2,31 +2,50 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** No file there , just an epitech header example
+** GameView.cpp
 */
 
-#include "../include/GameView.hpp"
+#include "GameView.hpp"
 
-void RType::GameView::draw() {
-    _window.clear();
+using namespace RType;
+
+GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::MENU) {
+    _window.setFramerateLimit(60);
 }
 
-void RType::GameView::start() {
-    draw();
-
+void GameView::start() {
     while (_window.isOpen()) {
         sf::Event event{};
-
         while (_window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 _window.close();
                 return;
             }
         }
+        float deltaTime = animationClock.restart().asSeconds();
+        updateEntities(deltaTime);
         draw();
     }
 }
 
-void RType::GameView::setView(RType::ViewState state) {
+void GameView::setView(ViewState state) {
     _viewState = state;
+}
+
+void GameView::addGraphicEntity(std::shared_ptr<IGraphicEntity> entity) {
+    graphicEntities.push_back(entity);
+}
+
+void GameView::updateEntities(float deltaTime) {
+    for (auto &entity: graphicEntities) {
+        entity->update(deltaTime);
+    }
+}
+
+void GameView::draw() {
+    _window.clear();
+    for (auto &entity: graphicEntities) {
+        entity->draw(_window);
+    }
+    _window.display();
 }

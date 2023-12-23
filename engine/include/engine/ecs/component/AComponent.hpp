@@ -19,6 +19,7 @@ public:
     * @brief Base update function.
     */
     virtual void update() = 0;
-    
-    virtual ~AComponent() = default;
+
+    AComponent() = default;
+    ~AComponent() = default;
 };
