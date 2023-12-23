@@ -17,7 +17,7 @@ public:
      * @brief Base constructor for damager component.
      * @param damage The damage of the entity.
      */
-    DamageComponent(int damage) : _damage(damage) {}
+    explicit DamageComponent(int damage) : _damage(damage) {}
 
     /**
      * @brief Set the damage inflicted by the weapon.
@@ -31,7 +31,7 @@ public:
      * @brief Get the damage inflicted by the weapon.
      * @return The damage inflicted by the weapon.
      */
-    int getDamage() {
+    [[nodiscard]] int getDamage() const {
         return _damage;
     }
 

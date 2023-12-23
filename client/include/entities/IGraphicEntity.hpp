@@ -8,24 +8,21 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-namespace RType {
+class IGraphicEntity {
+public:
+    virtual ~IGraphicEntity() = default;
 
-    class IGraphicEntity {
-    public:
-        virtual ~IGraphicEntity() = default;
-
-        /**
+    /**
          * @brief Update the graphic entity based on the game state
          *
          * @param deltaTime Time since last update
          */
-        virtual void update(float deltaTime) = 0;
+    virtual void update(float deltaTime) = 0;
 
-        /**
+    /**
          * @brief Draw the graphic entity to the provided window
          *
          * @param window The window to draw the entity on
          */
-        virtual void draw(sf::RenderWindow &window) = 0;
-    };
-}// namespace RType
+    virtual void draw(sf::RenderWindow &window) = 0;
+};

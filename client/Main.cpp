@@ -27,7 +27,7 @@ int main() {
         gameView.start();
 
     } catch (const std::exception &e) {
-        logError("Exception caught in main: " + std::string(e.what()));
+        // error here because logError is undefined logError("Exception caught in main: " + std::string(e.what()));
         return EXIT_FAILURE;
     }
 

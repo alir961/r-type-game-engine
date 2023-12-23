@@ -8,22 +8,20 @@
 #pragma once
 #include "IGraphicEntity.hpp"
 #include "engine/ecs/Entity.hpp"
+#include "engine/ecs/component/PositionComponent.hpp"
 #include <SFML/Graphics.hpp>
 
-namespace RType {
+class GraphicStarship : public IGraphicEntity {
+public:
+    explicit GraphicStarship(std::shared_ptr<Entity> &entity);
 
-    class GraphicStarship : public IGraphicEntity {
-    public:
-        explicit GraphicStarship(Entity &entity);
+    void update(float deltaTime) override;
+    void draw(sf::RenderWindow &window) override;
 
-        void update(float deltaTime) override;
-        void draw(sf::RenderWindow &window) override;
-
-    private:
-        Entity &entity;
-        sf::Sprite sprite;
-        sf::IntRect currentFrame;
-        float animationTime;
-        float animationSpeed;
-    };
-}// namespace RType
+private:
+    std::shared_ptr<Entity> &entity;
+    sf::Sprite sprite;
+    sf::IntRect currentFrame;
+    float animationTime;
+    float animationSpeed;
+};

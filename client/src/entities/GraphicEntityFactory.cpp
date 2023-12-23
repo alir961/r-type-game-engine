@@ -7,16 +7,14 @@
 
 #include "../../include/entities/GraphicEntityFactory.hpp"
 
-using namespace RType;
-
-std::shared_ptr<GraphicBullet> GraphicEntityFactory::createGraphicBullet(Entity &entity) {
+std::shared_ptr<GraphicBullet> GraphicEntityFactory::createGraphicBullet(std::shared_ptr<Entity> &entity) {
     return std::make_shared<GraphicBullet>(entity);
 }
 
-std::shared_ptr<GraphicMonster> GraphicEntityFactory::createGraphicMonster(Entity &entity) {
+std::shared_ptr<GraphicMonster> GraphicEntityFactory::createGraphicMonster(std::shared_ptr<Entity> &entity) {
     return std::make_shared<GraphicMonster>(entity);
 }
 
-std::shared_ptr<GraphicStarship> GraphicEntityFactory::createGraphicStarship(Entity &entity) {
+std::shared_ptr<GraphicStarship> GraphicEntityFactory::createGraphicStarship(std::shared_ptr<Entity> &entity) {
     return std::make_shared<GraphicStarship>(entity);
 }

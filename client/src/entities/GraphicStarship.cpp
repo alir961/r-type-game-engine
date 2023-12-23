@@ -6,16 +6,13 @@
 */
 
 #include "../../include/entities/GraphicStarship.hpp"
-#include "engine/ecs/components/PositionComponent.hpp"
 #include <SFML/Graphics.hpp>
 
-using namespace RType;
-
-GraphicStarship::GraphicStarship(Entity &entity) : entity(entity), animationTime(0.0f) {
+GraphicStarship::GraphicStarship(std::shared_ptr<Entity> &entity) : entity(entity), animationTime(0.0f) {
     sf::Texture texture;
     texture.loadFromFile("../../assets/r-typesheet42.gif");
     sprite.setTexture(texture);
-    currentFrame = sf::IntRect(starship_height + starship_number, 0, 33.2, 17.2);
+    currentFrame = sf::IntRect(100 + 1, 0, 33.2, 17.2); // NEED refact when we use it
     sprite.setTextureRect(currentFrame);
 }
 

@@ -6,12 +6,9 @@
 */
 
 #include "../../include/entities/GraphicMonster.hpp"
-#include "engine/ecs/components/PositionComponent.hpp"
 #include <SFML/Graphics.hpp>
 
-using namespace RType;
-
-GraphicMonster::GraphicMonster(Entity &entity) : entity(entity), animationTime(0.0f) {
+GraphicMonster::GraphicMonster(std::shared_ptr<Entity> &entity) : entity(entity), animationTime(0.0f) {
     // WARN : pour que ça fonctionne ajuste les textures ainsi que le int rect selon le sprite puis les décommente dans main.cpp
     sf::Texture texture;
     texture.loadFromFile("../../assets/r-typesheet42.gif");
@@ -31,9 +28,9 @@ void GraphicMonster::update(float deltaTime) {
         animationTime = 0.0f;
     }
 
-    auto *position = entity.getComponent<PositionComponent>();
+    std::shared_ptr position = entity->getComponent<PositionComponent>();
     if (position) {
-        sprite.setPosition(position->x, position->y);
+        sprite.setPosition(position->getPositions().first, position->getPositions().second);
     }
 }
 

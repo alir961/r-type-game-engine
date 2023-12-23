@@ -8,38 +8,36 @@
 #pragma once
 #include "IGraphicEntity.hpp"
 #include "engine/ecs/Entity.hpp"
+#include "engine/ecs/component/PositionComponent.hpp"
 #include <SFML/Graphics.hpp>
 
-namespace RType {
-
-    class GraphicBullet : public IGraphicEntity {
-    public:
-        /**
+class GraphicBullet : public IGraphicEntity {
+public:
+    /**
          * @brief Construct a new Graphic Bullet object
          *
          * @param entity Reference to the ECS entity associated with this graphic entity
          */
-        explicit GraphicBullet(Entity &entity);
+    explicit GraphicBullet(std::shared_ptr<Entity> &entity);
 
-        /**
+    /**
          * @brief Update the graphic entity based on the state of the ECS entity
          *
          * @param deltaTime Time since last update
          */
-        void update(float deltaTime) override;
+    void update(float deltaTime) override;
 
-        /**
+    /**
          * @brief Draw the graphic entity to the provided window
          *
          * @param window The window to draw the entity on
          */
-        void draw(sf::RenderWindow &window) override;
+    void draw(sf::RenderWindow &window) override;
 
-    private:
-        Entity &entity;
-        sf::Sprite sprite;
-        sf::IntRect currentFrame;
-        float animationTime;
-        float animationSpeed;
-    };
-}// namespace RType
+private:
+    std::shared_ptr<Entity> &entity;
+    sf::Sprite sprite;
+    sf::IntRect currentFrame;
+    float animationTime;
+    float animationSpeed;
+};
