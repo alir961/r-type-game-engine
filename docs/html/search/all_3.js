@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['damagecomponent_0',['damagecomponent',['../classDamageComponent.html',1,'DamageComponent'],['../classDamageComponent.html#a238f8b4a6308ae8c61d14da39ee0301d',1,'DamageComponent::DamageComponent()']]],
-  ['destroyentity_1',['destroyEntity',['../classEntityManager.html#a7935a857e31055f946a2731ce60ca5a7',1,'EntityManager']]]
+  ['collisioncomponent_0',['collisioncomponent',['../classCollisionComponent.html',1,'CollisionComponent'],['../classCollisionComponent.html#a2e20e72f4eb81629961dafdd8d4c64b0',1,'CollisionComponent::CollisionComponent()']]],
+  ['configurationexception_1',['configurationexception',['../classRType_1_1ConfigurationException.html',1,'RType::ConfigurationException'],['../classRType_1_1ConfigurationException.html#ab133e78880cf883e94d59cfd016383bf',1,'RType::ConfigurationException::ConfigurationException()']]],
+  ['createentity_2',['createEntity',['../classEntityManager.html#aee839c1f99384a725212f9f08fb44e68',1,'EntityManager']]]
 ];

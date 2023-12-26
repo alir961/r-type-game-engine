@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['collisioncomponent_0',['CollisionComponent',['../classCollisionComponent.html',1,'']]]
+  ['binaryencoder_0',['BinaryEncoder',['../classRType_1_1BinaryEncoder.html',1,'RType']]]
 ];

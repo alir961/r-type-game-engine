@@ -1,0 +1,47 @@
+# Doxyfile for R-Type Project
+
+# Set the project name
+PROJECT_NAME           = "R-Type"
+
+# Set the project version
+PROJECT_NUMBER         = "1.0"
+
+# The input source code directory
+INPUT = client engine server
+
+# The output directory for the generated documentation
+OUTPUT_DIRECTORY       = ./docs
+
+# Set to NO if you want to disable the build of the LaTeX-based PDF file
+GENERATE_LATEX         = NO
+
+# Set to YES if you want to generate HTML documentation
+GENERATE_HTML          = YES
+
+# Set to YES if you want to generate RTF documentation
+GENERATE_RTF           = NO
+
+# Set to YES if you want to generate XML documentation
+GENERATE_XML           = NO
+
+# Specify the files to be processed by doxygen
+FILE_PATTERNS          = *.hpp *.cpp
+
+# Recurse through subdirectories
+RECURSIVE              = YES
+
+# Exclude the build directory
+EXCLUDE_PATTERNS       = build/*
+
+# Example configuration for showing the members of nested classes
+INLINE_INHERITED_MEMB  = YES
+
+# Example configuration for including/excluding specific entities
+# EXTRACT_ALL           = YES
+ EXTRACT_PRIVATE       = YES
+# EXTRACT_STATIC        = YES
+# HIDE_UNDOC_MEMBERS    = YES
+
+# Example configuration for specifying the order of classes in the documentation
+# You can customize this based on your desired order
+# USE_CLASS_DIAGRAMS    = YES

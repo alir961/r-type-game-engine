@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['collisioncomponent_0',['collisioncomponent',['../classCollisionComponent.html',1,'CollisionComponent'],['../classCollisionComponent.html#a2e20e72f4eb81629961dafdd8d4c64b0',1,'CollisionComponent::CollisionComponent()']]],
-  ['createentity_1',['createEntity',['../classEntityManager.html#aee839c1f99384a725212f9f08fb44e68',1,'EntityManager']]]
+  ['binaryencoder_0',['BinaryEncoder',['../classRType_1_1BinaryEncoder.html',1,'RType']]],
+  ['build_1',['build',['../classRType_1_1NetworkMessageBuilder.html#a33025e20da58dce3ae7b9a7a7d7a1bc7',1,'RType::NetworkMessageBuilder']]]
 ];

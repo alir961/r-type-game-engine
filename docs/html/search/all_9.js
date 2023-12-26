@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['removecomponent_0',['removeComponent',['../classEntity.html#a590ddbda675cf9b188977d553e396a0f',1,'Entity']]]
+  ['lz4algorithm_0',['LZ4Algorithm',['../classRType_1_1LZ4Algorithm.html',1,'RType']]]
 ];
