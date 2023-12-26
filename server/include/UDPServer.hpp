@@ -9,6 +9,7 @@
 
 #include <engine/network/UDPAdapter.hpp>
 #include <iostream>
+#include "Sessions.hpp"
 
 namespace RType {
 
@@ -26,6 +27,7 @@ namespace RType {
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
+        Sessions _sessions;
     };
 
 }
