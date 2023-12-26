@@ -6,53 +6,55 @@
 */
 
 #pragma once
-
 #include "Entity.hpp"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <memory>
 
-/**
- * @brief EntityManager class responsible for managing entities in the system.
- */
-class EntityManager {
-public:
-    /**
-     * @brief Create a new entity and add it to the EntityManager.
-     * @return Shared pointer to the created entity.
-     */
-    std::shared_ptr<Entity> createEntity() {
-        std::shared_ptr<Entity> entity = std::make_shared<Entity>();
-        _entities.push_back(entity);
-        return entity;
-    }
+namespace RType {
 
     /**
-     * @brief Destroy an entity and remove it from the EntityManager.
-     * @param entity Shared pointer to the entity to destroy.
-     */
-    void destroyEntity(std::shared_ptr<Entity> entity) {
-        auto it = std::find(_entities.begin(), _entities.end(), entity);
-        if (it != _entities.end()) {
-            _entities.erase(it);
+    * @brief EntityManager class responsible for managing entities in the system.
+    */
+    class EntityManager {
+    public:
+        /**
+        * @brief Create a new entity and add it to the EntityManager.
+        * @return Shared pointer to the created entity.
+        */
+        std::shared_ptr<Entity> createEntity() {
+            std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+            _entities.push_back(entity);
+            return entity;
         }
-    }
 
-    /**
-     * @brief Update all entities in the EntityManager.
-     */
-    void updateEntities() {
-        for (const auto &entity : _entities) {
-            entity->updateComponents();
+        /**
+        * @brief Destroy an entity and remove it from the EntityManager.
+        * @param entity Shared pointer to the entity to destroy.
+        */
+        void destroyEntity(std::shared_ptr<Entity> entity) {
+            auto it = std::find(_entities.begin(), _entities.end(), entity);
+            if (it != _entities.end()) {
+                _entities.erase(it);
+            }
         }
-    }
 
-    /**
-     * @brief Destructor for the EntityManager, cleaning up all associated entities.
-     */
-    ~EntityManager() = default;
+        /**
+        * @brief Update all entities in the EntityManager.
+        */
+        void updateEntities() {
+            for (const auto &entity: _entities) {
+                entity->updateComponents();
+            }
+        }
 
-private:
-    std::vector<std::shared_ptr<Entity>> _entities; /**< Vector to store entities managed by the EntityManager. */
-};
+        /**
+        * @brief Destructor for the EntityManager, cleaning up all associated entities.
+        */
+        ~EntityManager() = default;
+
+    private:
+        std::vector<std::shared_ptr<Entity>> _entities; /**< Vector to store entities managed by the EntityManager. */
+    };
+}

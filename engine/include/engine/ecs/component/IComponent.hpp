@@ -7,15 +7,17 @@
 
 #pragma once
 
-/**
- * @brief Base interface for component.
- */
-class IComponent {
-public:
+namespace RType {
     /**
-    * @brief Base update function.
+    * @brief Base interface for component.
     */
-    virtual void update() = 0;
+    class IComponent {
+    public:
+        /**
+        * @brief Base update function.
+        */
+        virtual void update() = 0;
 
-    virtual ~IComponent() = default;
-};
+        virtual ~IComponent() = default;
+    };
+}

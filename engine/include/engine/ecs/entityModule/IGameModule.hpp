@@ -7,30 +7,32 @@
 
 #pragma once
 
-/**
- * @class IGameModule
- * @brief Interface class for game module.
- */
-class IGameModule {
-public:
+namespace RType {
     /**
-     * @brief Pure virtual function to initialize the game module.
-     * @return True if initialization is successful, false otherwise.
-     */
-    virtual bool Initialize() = 0;
+    * @class IGameModule
+    * @brief Interface class for game module.
+    */
+    class IGameModule {
+    public:
+        /**
+        * @brief Pure virtual function to initialize the game module.
+        * @return True if initialization is successful, false otherwise.
+        */
+        virtual bool Initialize() = 0;
 
-    /**
-     * @brief Pure virtual function to update the game module.
-     */
-    virtual void Update() = 0;
+        /**
+        * @brief Pure virtual function to update the game module.
+        */
+        virtual void Update() = 0;
 
-    /**
-     * @brief Pure virtual function to shut down the game module.
-     */
-    virtual void Shutdown() = 0;
+        /**
+        * @brief Pure virtual function to shut down the game module.
+        */
+        virtual void Shutdown() = 0;
 
-    /**
-     * @brief Virtual destructor for the game module interface.
-     */
-    virtual ~IGameModule() = default;
-};
+        /**
+        * @brief Virtual destructor for the game module interface.
+        */
+        virtual ~IGameModule() = default;
+    };
+}

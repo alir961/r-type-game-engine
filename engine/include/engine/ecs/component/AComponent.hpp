@@ -6,20 +6,21 @@
 */
 
 #pragma once
-
 #include "./IComponent.hpp"
 #include <iostream>
 
-/**
- * @brief Base abstract for component.
- */
-class AComponent : public IComponent {
-public:
+namespace RType {
     /**
+    * @brief Base abstract for component.
+    */
+    class AComponent : public IComponent {
+    public:
+        /**
     * @brief Base update function.
     */
-    virtual void update() = 0;
+        virtual void update() = 0;
 
-    AComponent() = default;
-    ~AComponent() = default;
-};
+        AComponent() = default;
+        ~AComponent() = default;
+    };
+}

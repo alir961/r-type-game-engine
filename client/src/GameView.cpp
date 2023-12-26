@@ -7,11 +7,11 @@
 
 #include "GameView.hpp"
 
-GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::MENU) {
+RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::MENU) {
     _window.setFramerateLimit(60);
 }
 
-void GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
+void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
     sf::Sprite sprite = entity->getSprite();
     std::shared_ptr<Entity> gameEntity = entity->getEntity();
 
@@ -32,7 +32,7 @@ void GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
     }
 }
 
-void GameView::start(std::shared_ptr<AGraphicEntity> graphicEntities) {
+void RType::GameView::start(std::shared_ptr<AGraphicEntity> graphicEntities) {
     while (_window.isOpen()) {
         sf::Event event{};
         while (_window.pollEvent(event)) {
@@ -48,21 +48,21 @@ void GameView::start(std::shared_ptr<AGraphicEntity> graphicEntities) {
     }
 }
 
-void GameView::setView(ViewState state) {
+void RType::GameView::setView(ViewState state) {
     _viewState = state;
 }
 
-void GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
+void RType::GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
     graphicEntities.push_back(entity);
 }
 
-void GameView::updateEntities(float deltaTime) {
+void RType::GameView::updateEntities(float deltaTime) {
     for (auto &entity: graphicEntities) {
         entity->update(deltaTime);
     }
 }
 
-void GameView::draw() {
+void RType::GameView::draw() {
     _window.clear();
     for (auto &entity: graphicEntities) {
         entity->draw(_window);

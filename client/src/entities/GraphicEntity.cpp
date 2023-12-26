@@ -8,7 +8,7 @@
 #include "../../include/entities/GraphicEntity.hpp"
 #include <SFML/Graphics.hpp>
 
-GraphicEntity::GraphicEntity(std::shared_ptr<Entity> &entity) : entity(entity), animationTime(0.0f) {
+RType::GraphicEntity::GraphicEntity(std::shared_ptr<Entity> &entity) : entity(entity), animationTime(0.0f) {
     sf::Texture texture;
     texture.loadFromFile("../../assets/r-typesheet42.gif");
     sprite.setTexture(texture);
@@ -16,7 +16,7 @@ GraphicEntity::GraphicEntity(std::shared_ptr<Entity> &entity) : entity(entity), 
     sprite.setTextureRect(currentFrame);
 }
 
-void GraphicEntity::update(float deltaTime) {
+void RType::GraphicEntity::update(float deltaTime) {
     animationTime += deltaTime;
     if (animationTime >= 0.1f) {
         currentFrame.left += 32;
@@ -33,6 +33,6 @@ void GraphicEntity::update(float deltaTime) {
     }
 }
 
-void GraphicEntity::draw(sf::RenderWindow &window) {
+void RType::GraphicEntity::draw(sf::RenderWindow &window) {
     window.draw(sprite);
 }
