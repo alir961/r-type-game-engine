@@ -9,20 +9,22 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 #include <engine/network/UDPAdapter.hpp>
+#include "Client.hpp"
 
 namespace RType {
 
     class Sessions {
     private:
-        std::map<int, UDP::endpoint> _sessionMap;
+        std::map<int, std::shared_ptr<Client>> _sessionMap;
         int _lastSessionID = 0;
     public:
         Sessions() = default;
 
         void setLastSessionID(int sessionID) {_lastSessionID = sessionID;};
-        int setNewSession(const UDP::endpoint &udpEndpoint);
+        int setNewSession();
 
-        UDP::endpoint getClientEndpoint(int sessionId);
+        std::shared_ptr<Client> getClientEndpoint(int sessionId);
     };
 }
