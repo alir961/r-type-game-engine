@@ -26,6 +26,11 @@ void GraphicStarship::update(float deltaTime) {
         sprite.setTextureRect(currentFrame);
         animationTime = 0.0f;
     }
+
+    std::shared_ptr position = entity->getComponent<PositionComponent>();
+    if (position) {
+        sprite.setPosition(position->getPositions().first, position->getPositions().second);
+    }
 }
 
 void GraphicStarship::draw(sf::RenderWindow &window) {

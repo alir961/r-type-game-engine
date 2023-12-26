@@ -31,16 +31,17 @@ private:
     sf::RenderWindow _window;
     ViewState _viewState;
     sf::Clock animationClock;
-    std::vector<std::shared_ptr<IGraphicEntity>> graphicEntities;
+    std::vector<std::shared_ptr<AGraphicEntity>> graphicEntities;
 
     void draw();
     void updateEntities(float deltaTime);
+    void handleInput(std::shared_ptr<AGraphicEntity> &entity);
 
 public:
     explicit GameView();
     ~GameView() = default;
 
-    void start();
+    void start(std::shared_ptr<AGraphicEntity> entity); // put graphical entity by parameters to test entity move with keyboard input : function is handleInput
     void setView(ViewState state);
-    void addGraphicEntity(std::shared_ptr<IGraphicEntity> entity);
+    void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
 };

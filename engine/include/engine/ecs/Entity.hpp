@@ -69,7 +69,7 @@ public:
     }
 
     /**
-     * @brief Return true if the entity has component, false otherwise.
+     * @brief Return true if the entity has a @tparam T component, false otherwise.
      * @tparam T Type of the component to remove.
      */
     template <typename T>
@@ -78,6 +78,13 @@ public:
             return false;
         }
         return true;
+    }
+
+    /**
+     * @brief Return true if the entity has components, false otherwise.
+     */
+    bool hasComponents() const {
+        return !_components.empty();
     }
 
     /**

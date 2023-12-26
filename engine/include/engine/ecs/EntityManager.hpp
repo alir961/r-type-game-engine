@@ -51,7 +51,7 @@ public:
     /**
      * @brief Destructor for the EntityManager, cleaning up all associated entities.
      */
-    ~EntityManager() {}
+    ~EntityManager() = default;
 
 private:
     std::vector<std::shared_ptr<Entity>> _entities; /**< Vector to store entities managed by the EntityManager. */

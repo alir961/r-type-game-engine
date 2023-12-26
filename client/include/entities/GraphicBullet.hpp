@@ -6,33 +6,36 @@
 */
 
 #pragma once
-#include "IGraphicEntity.hpp"
-#include "engine/ecs/Entity.hpp"
-#include "engine/ecs/component/PositionComponent.hpp"
+#include "AGraphicEntity.hpp"
 #include <SFML/Graphics.hpp>
 
-class GraphicBullet : public IGraphicEntity {
+class GraphicBullet : public AGraphicEntity {
 public:
     /**
-         * @brief Construct a new Graphic Bullet object
-         *
-         * @param entity Reference to the ECS entity associated with this graphic entity
-         */
+    * @brief Construct a new Graphic Bullet object
+    * @param entity Reference to the ECS entity associated with this graphic entity
+    */
     explicit GraphicBullet(std::shared_ptr<Entity> &entity);
 
     /**
-         * @brief Update the graphic entity based on the state of the ECS entity
-         *
-         * @param deltaTime Time since last update
-         */
+    * @brief Update the graphic entity based on the state of the ECS entity
+    * @param deltaTime Time since last update
+    */
     void update(float deltaTime) override;
 
     /**
-         * @brief Draw the graphic entity to the provided window
-         *
-         * @param window The window to draw the entity on
-         */
+    * @brief Draw the graphic entity to the provided window
+    * @param window The window to draw the entity on
+    */
     void draw(sf::RenderWindow &window) override;
+
+    std::shared_ptr<Entity> getEntity() override {
+        return entity;
+    }
+
+    sf::Sprite getSprite() override {
+        return sprite;
+    }
 
 private:
     std::shared_ptr<Entity> &entity;

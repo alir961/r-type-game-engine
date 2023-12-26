@@ -11,7 +11,28 @@ GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Ty
     _window.setFramerateLimit(60);
 }
 
-void GameView::start() {
+void GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
+    sf::Sprite sprite = entity->getSprite();
+    std::shared_ptr<Entity> gameEntity = entity->getEntity();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        entity->moveRight(sprite, gameEntity);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        entity->moveLeft(sprite, gameEntity);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        entity->moveUp(sprite, gameEntity);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        entity->moveDown(sprite, gameEntity);
+    }
+}
+
+void GameView::start(std::shared_ptr<AGraphicEntity> graphicEntities) {
     while (_window.isOpen()) {
         sf::Event event{};
         while (_window.pollEvent(event)) {
@@ -20,6 +41,7 @@ void GameView::start() {
                 return;
             }
         }
+        handleInput(graphicEntities);
         float deltaTime = animationClock.restart().asSeconds();
         updateEntities(deltaTime);
         draw();
@@ -30,7 +52,7 @@ void GameView::setView(ViewState state) {
     _viewState = state;
 }
 
-void GameView::addGraphicEntity(std::shared_ptr<IGraphicEntity> entity) {
+void GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
     graphicEntities.push_back(entity);
 }
 
