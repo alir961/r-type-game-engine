@@ -1,10 +1,7 @@
 set(SOURCE_FILES
         Main.cpp
         src/GameView.cpp
-        src/entities/GraphicBullet.cpp
-        src/entities/GraphicEntityFactory.cpp
-        src/entities/GraphicMonster.cpp
-        src/entities/GraphicStarship.cpp
+        src/entities/GraphicEntity.cpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

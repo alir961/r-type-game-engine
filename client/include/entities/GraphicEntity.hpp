@@ -2,20 +2,23 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** GraphicBullet.hpp
+** IGraphicEntity.hpp
 */
 
 #pragma once
 #include "AGraphicEntity.hpp"
 #include <SFML/Graphics.hpp>
 
-class GraphicBullet : public AGraphicEntity {
+/**
+ * @brief Graphic Entity class from the abstract AGraphicEntity.
+ */
+class GraphicEntity : public AGraphicEntity {
 public:
     /**
     * @brief Construct a new Graphic Bullet object
     * @param entity Reference to the ECS entity associated with this graphic entity
     */
-    explicit GraphicBullet(std::shared_ptr<Entity> &entity);
+    explicit GraphicEntity(std::shared_ptr<Entity> &entity);
 
     /**
     * @brief Update the graphic entity based on the state of the ECS entity

@@ -7,9 +7,7 @@
 
 #pragma once
 
-#include "entities/GraphicBullet.hpp"
-#include "entities/GraphicMonster.hpp"
-#include "entities/GraphicStarship.hpp"
+#include "entities/GraphicEntity.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <memory>

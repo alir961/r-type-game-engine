@@ -35,18 +35,21 @@ public:
     * @param entity The entity to move
     */
     virtual void moveLeft(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) = 0;
+
     /**
     * @brief Draw the graphic entity to the provided window
     * @param sprite The sprite to move
     * @param entity The entity to move
     */
     virtual void moveRight(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) = 0;
+
     /**
     * @brief Draw the graphic entity to the provided window
     * @param sprite The sprite to move
     * @param entity The entity to move
     */
     virtual void moveUp(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) = 0;
+
     /**
     * @brief Draw the graphic entity to the provided window
     * @param sprite The sprite to move
