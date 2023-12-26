@@ -103,8 +103,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5e1817426e670c73110ad40c3e77446a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad42785721cb226a1bea8025aeb1d9e8d" id="r_ad42785721cb226a1bea8025aeb1d9e8d"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">typename</a> <a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">T</a> &gt; </td></tr>
 <tr class="memitem:ad42785721cb226a1bea8025aeb1d9e8d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classEntity.html#ad42785721cb226a1bea8025aeb1d9e8d">hasComponent</a> ()</td></tr>
-<tr class="memdesc:ad42785721cb226a1bea8025aeb1d9e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the entity has component, false otherwise.  <br /></td></tr>
+<tr class="memdesc:ad42785721cb226a1bea8025aeb1d9e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the entity has a.  <br /></td></tr>
 <tr class="separator:ad42785721cb226a1bea8025aeb1d9e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1d7775783a5d63c38dcec7fd92199a0" id="r_ad1d7775783a5d63c38dcec7fd92199a0"><td class="memItemLeft" align="right" valign="top"><a id="ad1d7775783a5d63c38dcec7fd92199a0" name="ad1d7775783a5d63c38dcec7fd92199a0"></a>
+<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hasComponents</b> () <a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">const</a></td></tr>
+<tr class="memdesc:ad1d7775783a5d63c38dcec7fd92199a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the entity has components, false otherwise. <br /></td></tr>
+<tr class="separator:ad1d7775783a5d63c38dcec7fd92199a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6ecb9c57b29b60cc49fe44ad4088ecf" id="r_aa6ecb9c57b29b60cc49fe44ad4088ecf"><td class="memItemLeft" align="right" valign="top"><a id="aa6ecb9c57b29b60cc49fe44ad4088ecf" name="aa6ecb9c57b29b60cc49fe44ad4088ecf"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Entity</b> ()=<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b3424099">default</a></td></tr>
 <tr class="memdesc:aa6ecb9c57b29b60cc49fe44ad4088ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the entity, cleaning up all associated component. <br /></td></tr>
@@ -266,9 +270,10 @@ template&lt;<a class="el" href="classEntity.html#a3c7a36815defaef3beda1277b34240
 </table>
 </div><div class="memdoc">
 
-<p>Return true if the entity has component, false otherwise. </p>
+<p>Return true if the entity has a. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
+    <tr><td class="paramname">T</td><td>component, false otherwise. </td></tr>
     <tr><td class="paramname">T</td><td>Type of the component to remove. </td></tr>
   </table>
   </dd>
