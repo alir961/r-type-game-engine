@@ -70,7 +70,7 @@ void RType::GameView::draw() {
     _window.display();
 }
 
-int RType::GameView::Start() {
+int RType::GameView::start() {
     try {
         RType::GameView gameView;
         RType::EntityManager entityManager;

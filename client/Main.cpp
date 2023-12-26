@@ -18,5 +18,5 @@ int main() {
             .build();
 
     adapter.sendData(message);
-    view.Start();
+    view.start();
 }

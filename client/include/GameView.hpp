@@ -45,7 +45,7 @@ namespace RType {
         explicit GameView();
         ~GameView() = default;
 
-        int Start();
+        int start();
         void setView(ViewState state);
         void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
     };
