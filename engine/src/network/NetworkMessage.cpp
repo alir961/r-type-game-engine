@@ -22,6 +22,14 @@ namespace RType {
         return msg;
     }
 
+    std::string Message::toString() const {
+        std::string result;
+
+        for (const auto &item: data)
+            result += item;
+        return result;
+    }
+
     NetworkMessageBuilder &NetworkMessageBuilder::setType(MessageType type) {
         _type = type;
 

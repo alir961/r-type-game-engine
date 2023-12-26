@@ -30,6 +30,7 @@ namespace RType {
         std::array<char, DATA_SIZE> data = std::array<char, DATA_SIZE>();
 
         [[nodiscard]] std::vector<std::byte> serialize() const;
+        [[nodiscard]] std::string toString() const;
 
         static Message deserialize(const std::vector<std::byte> &data);
     } __attribute__((aligned(ALIGN_SIZE)));

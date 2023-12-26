@@ -1,7 +1,6 @@
 set(HEADER_FILES
         include/Arguments.hpp
         include/UDPServer.hpp
-        include/UDPAdapter.hpp
         include/BinaryEncoder.hpp
         include/DataCompressor.hpp
         include/compression/HuffmanAlgorithm.hpp
@@ -12,13 +11,12 @@ set(HEADER_FILES
 set(SOURCE_FILES
         Main.cpp
         src/UDPServer.cpp
-        src/UDPAdapter.cpp
         src/compression/LZ4Algorithm.cpp
         src/compression/RLEAlgorithm.cpp
         src/compression/HuffmanAlgorithm.cpp
         src/BinaryEncoder.cpp)
 
-set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+#set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 
 add_executable(${PROJECT_NAME}_server ${SOURCE_FILES})
 
