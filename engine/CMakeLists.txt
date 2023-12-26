@@ -18,13 +18,17 @@ set(HEADER_FILES
         include/engine/ecs/entityModule/module/AAudioModule.hpp
         include/engine/ecs/entityModule/module/ACinematicModule.hpp
         include/engine/ecs/entityModule/module/AMetricsModules.hpp
-        include/engine/ecs/entityModule/module/AConsoleModule.hpp)
+        include/engine/ecs/entityModule/module/AConsoleModule.hpp
+        include/engine/network/NetworkMessage.hpp
+        include/engine/network/UDPAdapter.hpp)
 
 set(SOURCE_FILES
         src/Logger.cpp
-        src/tools/NumberUtilities.cpp)
+        src/tools/NumberUtilities.cpp
+        src/network/NetworkMessage.cpp
+        src/network/UDPAdapter.cpp)
 
-set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+#set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 
 add_library(engine STATIC ${SOURCE_FILES})
 

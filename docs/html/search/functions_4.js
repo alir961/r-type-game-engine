@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['hascomponent_0',['hasComponent',['../classEntity.html#ad42785721cb226a1bea8025aeb1d9e8d',1,'Entity']]],
-  ['healthcomponent_1',['HealthComponent',['../classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1',1,'HealthComponent']]]
+  ['errorfunction_0',['errorFunction',['../classRType_1_1UDPAdapter.html#acdfc99006d7433a8964cfb36b3493006',1,'RType::UDPAdapter']]]
 ];

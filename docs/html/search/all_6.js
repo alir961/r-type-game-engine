@@ -1,5 +1,19 @@
 var searchData=
 [
-  ['hascomponent_0',['hasComponent',['../classEntity.html#ad42785721cb226a1bea8025aeb1d9e8d',1,'Entity']]],
-  ['healthcomponent_1',['healthcomponent',['../classHealthComponent.html',1,'HealthComponent'],['../classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1',1,'HealthComponent::HealthComponent()']]]
+  ['gameview_0',['GameView',['../classRType_1_1GameView.html',1,'RType']]],
+  ['getcollisionstatus_1',['getCollisionStatus',['../classCollisionComponent.html#a306699f8586a38fc3a5a979ee3b17f5c',1,'CollisionComponent']]],
+  ['getcomponent_2',['getComponent',['../classEntity.html#a2420cb92474c95e5f4696e298f51f2e9',1,'Entity']]],
+  ['getcomponenttype_3',['getComponentType',['../classEntity.html#a3c7a36815defaef3beda1277b3424099',1,'Entity']]],
+  ['getdamage_4',['getDamage',['../classDamageComponent.html#a2801abfa1922b1a2a3d98ec5ca5622c4',1,'DamageComponent']]],
+  ['getdatabuffer_5',['getDataBuffer',['../classRType_1_1UDPAdapter.html#aadedbf91393829ac83b0e264ff5f9a82',1,'RType::UDPAdapter']]],
+  ['getfps_6',['GetFPS',['../classAMetricsModule.html#a52d5af99e04a6a531f112fd2567324d2',1,'AMetricsModule']]],
+  ['gethealth_7',['getHealth',['../classHealthComponent.html#a86a01197045074c044a77562ba5765cd',1,'HealthComponent']]],
+  ['getisplayer_8',['getIsPlayer',['../classPlayerComponent.html#a4cfa30dcb8f9ec27c4f4df46f9acdea7',1,'PlayerComponent']]],
+  ['getmessagebuffer_9',['getMessageBuffer',['../classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed',1,'RType::UDPAdapter']]],
+  ['getpositions_10',['getPositions',['../classPositionComponent.html#aa647c1f79f0ad8f23f55d15114ea4942',1,'PositionComponent']]],
+  ['getspeed_11',['getSpeed',['../classSpeedComponent.html#a7342a603f8839529ecf45bdc5ab76a45',1,'SpeedComponent']]],
+  ['graphicbullet_12',['graphicbullet',['../classGraphicBullet.html#a985e9303c47380ba40ea7ff790d456e4',1,'GraphicBullet::GraphicBullet()'],['../classGraphicBullet.html',1,'GraphicBullet']]],
+  ['graphicentityfactory_13',['GraphicEntityFactory',['../classGraphicEntityFactory.html',1,'']]],
+  ['graphicmonster_14',['GraphicMonster',['../classGraphicMonster.html',1,'']]],
+  ['graphicstarship_15',['GraphicStarship',['../classGraphicStarship.html',1,'']]]
 ];

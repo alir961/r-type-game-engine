@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['entity_0',['Entity',['../classEntity.html',1,'']]],
-  ['entitymanager_1',['EntityManager',['../classEntityManager.html',1,'']]]
+  ['damagecomponent_0',['DamageComponent',['../classDamageComponent.html',1,'']]],
+  ['datacompressor_1',['DataCompressor',['../classRType_1_1DataCompressor.html',1,'RType']]]
 ];

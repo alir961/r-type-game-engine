@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['speedcomponent_0',['SpeedComponent',['../classSpeedComponent.html',1,'']]],
-  ['starship_1',['Starship',['../classStarship.html',1,'']]]
+  ['message_0',['Message',['../structRType_1_1Message.html',1,'RType']]]
 ];

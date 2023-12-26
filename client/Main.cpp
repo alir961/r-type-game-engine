@@ -1,35 +1,22 @@
-#include "GameView.hpp"
-#include "include/entities/GraphicEntityFactory.hpp"
 #include <engine/Logger.hpp>
-#include <engine/ecs/Entity.hpp>
-#include <engine/ecs/EntityManager.hpp>
-
-using namespace RType;
+#include <engine/network/UDPAdapter.hpp>
+#include "include/GameView.hpp"
+#include "engine/network/NetworkMessage.hpp"
 
 int main() {
-    try {
-        GameView gameView;
-        EntityManager entityManager;
+    RType::GameView view;
 
-        //        auto bulletEntity = entityManager.createEntity();
-        //        auto monsterEntity = entityManager.createEntity();
-        auto starshipEntity = entityManager.createEntity();
+    logInformation("Hello, World for client!");
 
-        //        auto graphicBullet = GraphicEntityFactory::createGraphicBullet(bulletEntity);
-        //        auto graphicMonster = GraphicEntityFactory::createGraphicMonster(monsterEntity);
-        auto graphicStarship = GraphicEntityFactory::createGraphicStarship(starshipEntity);
+    asio::io_context ioContext;
+    UDP::socket socket(ioContext, UDP::endpoint(UDP::v4(), 0));
+    UDP::endpoint serverEndpoint(asio::ip::address::from_string("127.0.0.1"), 9002);
+    RType::UDPAdapter adapter(socket, serverEndpoint);
 
-        //        gameView.addGraphicEntity(graphicBullet);
-        //        gameView.addGraphicEntity(graphicMonster);
-        gameView.addGraphicEntity(graphicStarship);
+    const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::CONNECT)
+            .setData("")
+            .build();
 
-        logInformation("Starting game view...");
-        gameView.start();
-
-    } catch (const std::exception &e) {
-        // error here because logError is undefined logError("Exception caught in main: " + std::string(e.what()));
-        return EXIT_FAILURE;
-    }
-
-    return EXIT_SUCCESS;
+    adapter.sendData(message);
+    view.start();
 }

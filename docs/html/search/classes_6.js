@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['playercomponent_0',['PlayerComponent',['../classPlayerComponent.html',1,'']]],
-  ['positioncomponent_1',['PositionComponent',['../classPositionComponent.html',1,'']]]
+  ['healthcomponent_0',['HealthComponent',['../classHealthComponent.html',1,'']]],
+  ['huffmanalgorithm_1',['HuffmanAlgorithm',['../classRType_1_1HuffmanAlgorithm.html',1,'RType']]]
 ];

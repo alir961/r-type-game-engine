@@ -16,7 +16,7 @@ set(SOURCE_FILES
         src/compression/HuffmanAlgorithm.cpp
         src/BinaryEncoder.cpp)
 
-set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+#set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 
 add_executable(${PROJECT_NAME}_server ${SOURCE_FILES})
 
