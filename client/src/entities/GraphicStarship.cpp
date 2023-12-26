@@ -12,7 +12,7 @@ GraphicStarship::GraphicStarship(std::shared_ptr<Entity> &entity) : entity(entit
     sf::Texture texture;
     texture.loadFromFile("../../assets/r-typesheet42.gif");
     sprite.setTexture(texture);
-    currentFrame = sf::IntRect(100 + 1, 0, 33.2, 17.2); // NEED refact when we use it
+    currentFrame = sf::IntRect(100 + 1, 0, 50, 25); // NEED refact when we use it
     sprite.setTextureRect(currentFrame);
 }
 

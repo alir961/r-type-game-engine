@@ -15,35 +15,32 @@
 #include <memory>
 #include <vector>
 
-namespace RType {
+constexpr uint32_t WINDOW_WIDTH = 1920;
+constexpr uint32_t WINDOW_HEIGHT = 1920;
 
-    constexpr uint32_t WINDOW_WIDTH = 1920;
-    constexpr uint32_t WINDOW_HEIGHT = 1920;
+enum class ViewState {
+    MENU = 0,
+    OPTIONS = 1,
+    GAME = 2,
+    PAUSE = 3,
+    DEAD = 4
+};
 
-    enum class ViewState {
-        MENU = 0,
-        OPTIONS = 1,
-        GAME = 2,
-        PAUSE = 3,
-        DEAD = 4
-    };
+class GameView {
+private:
+    sf::RenderWindow _window;
+    ViewState _viewState;
+    sf::Clock animationClock;
+    std::vector<std::shared_ptr<IGraphicEntity>> graphicEntities;
 
-    class GameView {
-    private:
-        sf::RenderWindow _window;
-        ViewState _viewState;
-        sf::Clock animationClock;
-        std::vector<std::shared_ptr<IGraphicEntity>> graphicEntities;
+    void draw();
+    void updateEntities(float deltaTime);
 
-        void draw();
-        void updateEntities(float deltaTime);
+public:
+    explicit GameView();
+    ~GameView() = default;
 
-    public:
-        explicit GameView();
-        ~GameView() = default;
-
-        void start();
-        void setView(ViewState state);
-        void addGraphicEntity(std::shared_ptr<IGraphicEntity> entity);
-    };
-}// namespace RType
+    void start();
+    void setView(ViewState state);
+    void addGraphicEntity(std::shared_ptr<IGraphicEntity> entity);
+};

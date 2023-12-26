@@ -7,8 +7,6 @@
 
 #include "GameView.hpp"
 
-using namespace RType;
-
 GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::MENU) {
     _window.setFramerateLimit(60);
 }
