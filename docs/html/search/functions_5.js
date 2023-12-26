@@ -1,15 +1,18 @@
 var searchData=
 [
-  ['getcollisionstatus_0',['getCollisionStatus',['../classCollisionComponent.html#a306699f8586a38fc3a5a979ee3b17f5c',1,'CollisionComponent']]],
-  ['getcomponent_1',['getComponent',['../classEntity.html#a2420cb92474c95e5f4696e298f51f2e9',1,'Entity']]],
-  ['getcomponenttype_2',['getComponentType',['../classEntity.html#a3c7a36815defaef3beda1277b3424099',1,'Entity']]],
-  ['getdamage_3',['getDamage',['../classDamageComponent.html#a2801abfa1922b1a2a3d98ec5ca5622c4',1,'DamageComponent']]],
-  ['getdatabuffer_4',['getDataBuffer',['../classRType_1_1UDPAdapter.html#aadedbf91393829ac83b0e264ff5f9a82',1,'RType::UDPAdapter']]],
-  ['getfps_5',['GetFPS',['../classAMetricsModule.html#a52d5af99e04a6a531f112fd2567324d2',1,'AMetricsModule']]],
-  ['gethealth_6',['getHealth',['../classHealthComponent.html#a86a01197045074c044a77562ba5765cd',1,'HealthComponent']]],
-  ['getisplayer_7',['getIsPlayer',['../classPlayerComponent.html#a4cfa30dcb8f9ec27c4f4df46f9acdea7',1,'PlayerComponent']]],
-  ['getmessagebuffer_8',['getMessageBuffer',['../classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed',1,'RType::UDPAdapter']]],
-  ['getpositions_9',['getPositions',['../classPositionComponent.html#aa647c1f79f0ad8f23f55d15114ea4942',1,'PositionComponent']]],
-  ['getspeed_10',['getSpeed',['../classSpeedComponent.html#a7342a603f8839529ecf45bdc5ab76a45',1,'SpeedComponent']]],
-  ['graphicbullet_11',['GraphicBullet',['../classGraphicBullet.html#a985e9303c47380ba40ea7ff790d456e4',1,'GraphicBullet']]]
+  ['gameview_0',['GameView',['../classRType_1_1GameView.html#a94d95d4dff9f2838c54239655bfdc91d',1,'RType::GameView']]],
+  ['getcollisionstatus_1',['getCollisionStatus',['../classRType_1_1CollisionComponent.html#aa5e0ea9ce92298fec16e78412012e631',1,'RType::CollisionComponent']]],
+  ['getcomponent_2',['getComponent',['../classRType_1_1Entity.html#a0af143cde95786b2a05195d61a20ea13',1,'RType::Entity']]],
+  ['getcomponenttype_3',['getComponentType',['../classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97',1,'RType::Entity']]],
+  ['getdamage_4',['getDamage',['../classRType_1_1DamageComponent.html#ae7b3103290b52d10b524780c97521963',1,'RType::DamageComponent']]],
+  ['getdatabuffer_5',['getDataBuffer',['../classRType_1_1UDPAdapter.html#aadedbf91393829ac83b0e264ff5f9a82',1,'RType::UDPAdapter']]],
+  ['getentity_6',['getentity',['../classRType_1_1AGraphicEntity.html#a0e1d94e0353c1ec0db8dc35f7a993b3c',1,'RType::AGraphicEntity::getEntity()'],['../classRType_1_1GraphicEntity.html#aec4fd3c000bfcb9baa275ad3e34c9045',1,'RType::GraphicEntity::getEntity()']]],
+  ['getfps_7',['GetFPS',['../classRType_1_1AMetricsModule.html#a7e8d4563316ce9b3553598d0f92c4eb6',1,'RType::AMetricsModule']]],
+  ['gethealth_8',['getHealth',['../classRType_1_1HealthComponent.html#a5e78aaefcb1c1772b14d597a4f3904bd',1,'RType::HealthComponent']]],
+  ['getisplayer_9',['getIsPlayer',['../classRType_1_1PlayerComponent.html#aca02f1a17c339130bbbe94c7da188d66',1,'RType::PlayerComponent']]],
+  ['getmessagebuffer_10',['getMessageBuffer',['../classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed',1,'RType::UDPAdapter']]],
+  ['getpositions_11',['getPositions',['../classRType_1_1PositionComponent.html#a28b4a122706197d9617e0ceb2e6925c9',1,'RType::PositionComponent']]],
+  ['getspeed_12',['getSpeed',['../classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5',1,'RType::SpeedComponent']]],
+  ['getsprite_13',['getsprite',['../classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95',1,'RType::AGraphicEntity::getSprite()'],['../classRType_1_1GraphicEntity.html#afacc0cc5d61455344c76ff14dfe12a03',1,'RType::GraphicEntity::getSprite() override']]],
+  ['graphicentity_14',['GraphicEntity',['../classRType_1_1GraphicEntity.html#af45beb58a5303ed3732199bbc0d683e4',1,'RType::GraphicEntity']]]
 ];

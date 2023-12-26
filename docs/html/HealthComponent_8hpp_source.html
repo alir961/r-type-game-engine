@@ -91,40 +91,42 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;./AComponent.hpp&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classHealthComponent.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classHealthComponent.html">HealthComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classAComponent.html">AComponent</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1">   20</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1">HealthComponent</a>(<span class="keywordtype">int</span> health) : <a class="code hl_variable" href="classHealthComponent.html#a54c6d02d7838c6153b47bb86859e2d3f">_health</a>(health) {}</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classHealthComponent.html#af5a94017d6bf4dc92b25f52d4371eb48">   26</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classHealthComponent.html#af5a94017d6bf4dc92b25f52d4371eb48">setHealth</a>(<span class="keywordtype">int</span> health) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="classHealthComponent.html#a54c6d02d7838c6153b47bb86859e2d3f">_health</a> = health;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>RType {</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classRType_1_1HealthComponent.html">   15</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1HealthComponent.html">HealthComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classRType_1_1AComponent.html">AComponent</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classRType_1_1HealthComponent.html#a19ca7dcb97b6b2b2d7a324d97c5dbd5b">   21</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1HealthComponent.html#a19ca7dcb97b6b2b2d7a324d97c5dbd5b">HealthComponent</a>(<span class="keywordtype">int</span> health) : <a class="code hl_variable" href="classRType_1_1HealthComponent.html#ae7d60bf72b43b6f3863ecdf8001a21bd">_health</a>(health) {}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classRType_1_1HealthComponent.html#a21c15c69c5f966dedfc9a2d01a23f959">   27</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1HealthComponent.html#a21c15c69c5f966dedfc9a2d01a23f959">setHealth</a>(<span class="keywordtype">int</span> health) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <a class="code hl_variable" href="classRType_1_1HealthComponent.html#ae7d60bf72b43b6f3863ecdf8001a21bd">_health</a> = health;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        }</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classHealthComponent.html#a86a01197045074c044a77562ba5765cd">   34</a></span>    [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classHealthComponent.html#a86a01197045074c044a77562ba5765cd">getHealth</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classHealthComponent.html#a54c6d02d7838c6153b47bb86859e2d3f">_health</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classRType_1_1HealthComponent.html#a5e78aaefcb1c1772b14d597a4f3904bd">   35</a></span>        [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classRType_1_1HealthComponent.html#a5e78aaefcb1c1772b14d597a4f3904bd">getHealth</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classRType_1_1HealthComponent.html#ae7d60bf72b43b6f3863ecdf8001a21bd">_health</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        }</div>
 </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classHealthComponent.html#adb4b815cc27a7b76c78220ab4adb47ea">   41</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classHealthComponent.html#adb4b815cc27a7b76c78220ab4adb47ea">update</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classRType_1_1HealthComponent.html#a0fbc34a7272572746359af94f4e3824d">   42</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1HealthComponent.html#a0fbc34a7272572746359af94f4e3824d">update</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classHealthComponent.html#a54c6d02d7838c6153b47bb86859e2d3f">   46</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classHealthComponent.html#a54c6d02d7838c6153b47bb86859e2d3f">_health</a>; </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classRType_1_1HealthComponent.html#ae7d60bf72b43b6f3863ecdf8001a21bd">   47</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classRType_1_1HealthComponent.html#ae7d60bf72b43b6f3863ecdf8001a21bd">_health</a>; </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
 </div>
-<div class="ttc" id="aclassAComponent_html"><div class="ttname"><a href="classAComponent.html">AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
-<div class="ttc" id="aclassHealthComponent_html"><div class="ttname"><a href="classHealthComponent.html">HealthComponent</a></div><div class="ttdoc">Base class for health component.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:14</div></div>
-<div class="ttc" id="aclassHealthComponent_html_a54c6d02d7838c6153b47bb86859e2d3f"><div class="ttname"><a href="classHealthComponent.html#a54c6d02d7838c6153b47bb86859e2d3f">HealthComponent::_health</a></div><div class="ttdeci">int _health</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:46</div></div>
-<div class="ttc" id="aclassHealthComponent_html_a86a01197045074c044a77562ba5765cd"><div class="ttname"><a href="classHealthComponent.html#a86a01197045074c044a77562ba5765cd">HealthComponent::getHealth</a></div><div class="ttdeci">int getHealth() const</div><div class="ttdoc">Get the health of the damageable entity.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:34</div></div>
-<div class="ttc" id="aclassHealthComponent_html_abbd8c65f938d8079eecf76cc93065bb1"><div class="ttname"><a href="classHealthComponent.html#abbd8c65f938d8079eecf76cc93065bb1">HealthComponent::HealthComponent</a></div><div class="ttdeci">HealthComponent(int health)</div><div class="ttdoc">Base constructor for health component.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:20</div></div>
-<div class="ttc" id="aclassHealthComponent_html_adb4b815cc27a7b76c78220ab4adb47ea"><div class="ttname"><a href="classHealthComponent.html#adb4b815cc27a7b76c78220ab4adb47ea">HealthComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:41</div></div>
-<div class="ttc" id="aclassHealthComponent_html_af5a94017d6bf4dc92b25f52d4371eb48"><div class="ttname"><a href="classHealthComponent.html#af5a94017d6bf4dc92b25f52d4371eb48">HealthComponent::setHealth</a></div><div class="ttdeci">void setHealth(int health)</div><div class="ttdoc">Set the health of the damageable entity.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:26</div></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+<div class="ttc" id="aclassRType_1_1AComponent_html"><div class="ttname"><a href="classRType_1_1AComponent.html">RType::AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
+<div class="ttc" id="aclassRType_1_1HealthComponent_html"><div class="ttname"><a href="classRType_1_1HealthComponent.html">RType::HealthComponent</a></div><div class="ttdoc">Base class for health component.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:15</div></div>
+<div class="ttc" id="aclassRType_1_1HealthComponent_html_a0fbc34a7272572746359af94f4e3824d"><div class="ttname"><a href="classRType_1_1HealthComponent.html#a0fbc34a7272572746359af94f4e3824d">RType::HealthComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:42</div></div>
+<div class="ttc" id="aclassRType_1_1HealthComponent_html_a19ca7dcb97b6b2b2d7a324d97c5dbd5b"><div class="ttname"><a href="classRType_1_1HealthComponent.html#a19ca7dcb97b6b2b2d7a324d97c5dbd5b">RType::HealthComponent::HealthComponent</a></div><div class="ttdeci">HealthComponent(int health)</div><div class="ttdoc">Base constructor for health component.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:21</div></div>
+<div class="ttc" id="aclassRType_1_1HealthComponent_html_a21c15c69c5f966dedfc9a2d01a23f959"><div class="ttname"><a href="classRType_1_1HealthComponent.html#a21c15c69c5f966dedfc9a2d01a23f959">RType::HealthComponent::setHealth</a></div><div class="ttdeci">void setHealth(int health)</div><div class="ttdoc">Set the health of the damageable entity.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:27</div></div>
+<div class="ttc" id="aclassRType_1_1HealthComponent_html_a5e78aaefcb1c1772b14d597a4f3904bd"><div class="ttname"><a href="classRType_1_1HealthComponent.html#a5e78aaefcb1c1772b14d597a4f3904bd">RType::HealthComponent::getHealth</a></div><div class="ttdeci">int getHealth() const</div><div class="ttdoc">Get the health of the damageable entity.</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:35</div></div>
+<div class="ttc" id="aclassRType_1_1HealthComponent_html_ae7d60bf72b43b6f3863ecdf8001a21bd"><div class="ttname"><a href="classRType_1_1HealthComponent.html#ae7d60bf72b43b6f3863ecdf8001a21bd">RType::HealthComponent::_health</a></div><div class="ttdeci">int _health</div><div class="ttdef"><b>Definition</b> HealthComponent.hpp:47</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

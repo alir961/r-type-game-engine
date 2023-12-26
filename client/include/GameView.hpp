@@ -7,43 +7,93 @@
 
 #pragma once
 
-#include "entities/GraphicBullet.hpp"
-#include "entities/GraphicMonster.hpp"
-#include "entities/GraphicStarship.hpp"
+#include "GameView.hpp"
+#include "entities/GraphicEntityFactory.hpp"
+#include <engine/Logger.hpp>
+#include <engine/ecs/EntityManager.hpp>
+#include "entities/GraphicEntity.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <memory>
 #include <vector>
 
+constexpr uint32_t WINDOW_WIDTH = 1920;
+constexpr uint32_t WINDOW_HEIGHT = 1920;
+
 namespace RType {
-
-    constexpr uint32_t WINDOW_WIDTH = 1920;
-    constexpr uint32_t WINDOW_HEIGHT = 1920;
-
+    /**
+     * @enum ViewState
+     * @brief Enumeration representing different states of the game view.
+     */
     enum class ViewState {
-        MENU = 0,
-        OPTIONS = 1,
-        GAME = 2,
-        PAUSE = 3,
-        DEAD = 4
+        MENU = 0,     /**< Main menu state. */
+        OPTIONS = 1,  /**< Options menu state. */
+        GAME = 2,     /**< In-game state. */
+        PAUSE = 3,    /**< Pause state. */
+        DEAD = 4      /**< Game over state. */
     };
 
+    /**
+     * @class GameView
+     * @brief Represents the main game view handling graphics, input, and entities.
+     */
     class GameView {
     private:
-        sf::RenderWindow _window;
-        ViewState _viewState;
-        sf::Clock animationClock;
-        std::vector<std::shared_ptr<IGraphicEntity>> graphicEntities;
+        sf::RenderWindow _window;                     /**< SFML Render Window for rendering graphics. */
+        ViewState _viewState;                         /**< Current state of the game view. */
+        sf::Clock animationClock;                     /**< Clock for managing animations and time-related operations. */
+        std::vector<std::shared_ptr<AGraphicEntity>> graphicEntities; /**< Vector of graphic entities in the game. */
 
+        /**
+         * @brief Private method to handle drawing operations.
+         */
         void draw();
+
+        /**
+         * @brief Private method to update entities based on elapsed time.
+         * @param deltaTime Elapsed time since the last update.
+         */
         void updateEntities(float deltaTime);
 
+        /**
+         * @brief Private method to handle input for a specific graphic entity.
+         * @param entity The graphic entity to handle input for.
+         */
+        void handleInput(std::shared_ptr<AGraphicEntity> &entity);
+
+        /**
+         * @brief Private method to launch the SFML window and test keyboard input for a specific entity.
+         * @param entity The graphic entity to test with keyboard input.
+         */
+        void launchWindow(std::shared_ptr<AGraphicEntity> entity); // put graphical entity by parameters to test entity move with keyboard input : function is handleInput
+
     public:
+        /**
+         * @brief Constructor for the GameView class.
+         */
         explicit GameView();
+
+        /**
+         * @brief Destructor for the GameView class.
+         */
         ~GameView() = default;
 
-        void start();
+        /**
+         * @brief Method to start the game loop.
+         * @return Exit code or status of the game.
+         */
+        int start();
+
+        /**
+         * @brief Method to set the current view state.
+         * @param state The new view state to set.
+         */
         void setView(ViewState state);
-        void addGraphicEntity(std::shared_ptr<IGraphicEntity> entity);
+
+        /**
+         * @brief Method to add a graphic entity to the game.
+         * @param entity The graphic entity to be added.
+         */
+        void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
     };
-}// namespace RType
+}

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['_7eentity_0',['~Entity',['../classEntity.html#aa6ecb9c57b29b60cc49fe44ad4088ecf',1,'Entity']]],
-  ['_7eentitymanager_1',['~EntityManager',['../classEntityManager.html#a71a36c9fb8d579a1a1ec108e0fccf175',1,'EntityManager']]],
-  ['_7eigamemodule_2',['~IGameModule',['../classIGameModule.html#ad64d0edb46fbf697914d8cb3e58af0f0',1,'IGameModule']]]
+  ['_7eentity_0',['~Entity',['../classRType_1_1Entity.html#a06eb13461d762f875b3961e8a66b980e',1,'RType::Entity']]],
+  ['_7eentitymanager_1',['~EntityManager',['../classRType_1_1EntityManager.html#adf12e9191ee27b4d778148b95e91d5a8',1,'RType::EntityManager']]],
+  ['_7egameview_2',['~GameView',['../classRType_1_1GameView.html#a2d1e3a57ee15ed29235d8fb20e4bd925',1,'RType::GameView']]],
+  ['_7eigamemodule_3',['~IGameModule',['../classRType_1_1IGameModule.html#aa85212ae09e51ef5217dec3fe32bdda8',1,'RType::IGameModule']]]
 ];

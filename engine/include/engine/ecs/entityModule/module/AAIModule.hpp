@@ -8,15 +8,16 @@
 #pragma once
 #include "../IGameModule.hpp"
 
-/**
- * @class AAIModule
- * @brief Abstract class representing an AI module for the game.
- */
-class AAIModule : public IGameModule {
-public:
-
+namespace RType {
     /**
-     * @brief Pure virtual function to assign AI behavior to the module.
-     */
-    virtual void AssignAI() = 0;
-};
+    * @class AAIModule
+    * @brief Abstract class representing an AI module for the game.
+    */
+    class AAIModule : public IGameModule {
+    public:
+        /**
+        * @brief Pure virtual function to assign AI behavior to the module.
+        */
+        virtual void AssignAI() = 0;
+    };
+}

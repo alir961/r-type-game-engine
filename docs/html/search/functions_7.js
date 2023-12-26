@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['initialize_0',['Initialize',['../classIGameModule.html#a5d0ebe10c8a3cf9da8a05d40b26f6938',1,'IGameModule']]]
+  ['initialize_0',['Initialize',['../classRType_1_1IGameModule.html#af5c746effa3d7b7fe4f24c8a40209ea9',1,'RType::IGameModule']]]
 ];

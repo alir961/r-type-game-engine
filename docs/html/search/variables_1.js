@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['collisioncomponent_0',['collisioncomponent',['../classBullet.html#a8398e30ad9dbe398563dadbc7365e7d7',1,'Bullet::collisionComponent'],['../classMonster.html#a99254ae97c7405b98f57ab9b9899e1a0',1,'Monster::collisionComponent'],['../classStarship.html#a5a25f97dc0371809d9bc4dd95208e00e',1,'Starship::collisionComponent']]]
+  ['animationclock_0',['animationClock',['../classRType_1_1GameView.html#a831341598c50c4846ab49cdb64cd010e',1,'RType::GameView']]],
+  ['animationspeed_1',['animationSpeed',['../classRType_1_1GraphicEntity.html#aa83390dfa0437d8191a996c6d2ea5fce',1,'RType::GraphicEntity']]],
+  ['animationtime_2',['animationTime',['../classRType_1_1GraphicEntity.html#a48b11285a3fb37afeed099dc47d8c5d0',1,'RType::GraphicEntity']]]
 ];
