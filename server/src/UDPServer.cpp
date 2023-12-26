@@ -26,7 +26,7 @@ void RType::UDPServer::handleReceive(std::size_t bytesReceived) {
     const Message receiveMessage = Message::deserialize(receivedData);
 
     if (receiveMessage.type == MessageType::CONNECT) {
-        int sessionId = 1;
+        int sessionId = _sessions.setNewSession();
         const std::string messageData = "connect " + std::to_string(sessionId) + " ok";
         const RType::Message message = RType::NetworkMessageBuilder(MessageType::CONNECT_CALLBACK)
                 .setData(messageData)
