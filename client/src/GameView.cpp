@@ -5,7 +5,7 @@
 ** GameView.cpp
 */
 
-#include "GameView.hpp"
+#include ".././include/GameView.hpp"
 
 RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::MENU) {
     _window.setFramerateLimit(60);
@@ -32,7 +32,7 @@ void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
     }
 }
 
-void RType::GameView::start(std::shared_ptr<AGraphicEntity> graphicEntities) {
+void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntities) {
     while (_window.isOpen()) {
         sf::Event event{};
         while (_window.pollEvent(event)) {
@@ -68,4 +68,28 @@ void RType::GameView::draw() {
         entity->draw(_window);
     }
     _window.display();
+}
+
+int RType::GameView::Start() {
+    try {
+        RType::GameView gameView;
+        RType::EntityManager entityManager;
+
+        auto starshipEntity = entityManager.createEntity();
+        starshipEntity->addComponent<RType::SpeedComponent>(10);
+        starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(300, 30));
+
+        std::shared_ptr<RType::GraphicEntity> graphicStarship;
+        if (starshipEntity->hasComponents() == true) {
+            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity);
+            gameView.addGraphicEntity(graphicStarship);
+            logInformation("Starting game view...");
+            gameView.launchWindow(graphicStarship);
+        }
+
+    } catch (const std::exception &e) {
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }

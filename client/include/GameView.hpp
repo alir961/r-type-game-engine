@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include "GameView.hpp"
+#include "entities/GraphicEntityFactory.hpp"
+#include <engine/Logger.hpp>
+#include <engine/ecs/EntityManager.hpp>
 #include "entities/GraphicEntity.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
@@ -35,12 +39,13 @@ namespace RType {
         void draw();
         void updateEntities(float deltaTime);
         void handleInput(std::shared_ptr<AGraphicEntity> &entity);
+        void launchWindow(std::shared_ptr<AGraphicEntity> entity);// put graphical entity by parameters to test entity move with keyboard input : function is handleInput
 
     public:
         explicit GameView();
         ~GameView() = default;
 
-        void start(std::shared_ptr<AGraphicEntity> entity);// put graphical entity by parameters to test entity move with keyboard input : function is handleInput
+        int Start();
         void setView(ViewState state);
         void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
     };
