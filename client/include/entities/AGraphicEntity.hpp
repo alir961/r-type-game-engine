@@ -54,7 +54,14 @@ namespace RType {
                     currentPosition.second + speed));
         }
 
+        /**
+        * @brief Return the entity of the graphical entity
+        */
         virtual std::shared_ptr<Entity> getEntity() = 0;
+
+        /**
+        * @brief Return the sprite of the graphical entity
+        */
         virtual sf::Sprite getSprite() = 0;
     };
 }

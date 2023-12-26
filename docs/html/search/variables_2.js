@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['damagecomponent_0',['damageComponent',['../classBullet.html#acd192d2cbb57cb85af5a7107b4d21d35',1,'Bullet']]]
+  ['currentframe_0',['currentFrame',['../classRType_1_1GraphicEntity.html#a0f36b1b2eb16e5bf80ab4ea7a6e43228',1,'RType::GraphicEntity']]]
 ];

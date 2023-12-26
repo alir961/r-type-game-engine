@@ -1,12 +1,17 @@
 var searchData=
 [
-  ['aaimodule_0',['AAIModule',['../classAAIModule.html',1,'']]],
-  ['aaudiomodule_1',['AAudioModule',['../classAAudioModule.html',1,'']]],
-  ['acinematicmodule_2',['ACinematicModule',['../classACinematicModule.html',1,'']]],
-  ['acomponent_3',['AComponent',['../classAComponent.html',1,'']]],
-  ['aconsolemodule_4',['AConsoleModule',['../classAConsoleModule.html',1,'']]],
-  ['addcomponent_5',['addComponent',['../classEntity.html#ac1309a2a31bca7126a03ae98c1e52d44',1,'Entity']]],
-  ['ametricsmodule_6',['AMetricsModule',['../classAMetricsModule.html',1,'']]],
-  ['arguments_7',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]],
-  ['assignai_8',['AssignAI',['../classAAIModule.html#a53dd03bffea30e72eae522d9783009e8',1,'AAIModule']]]
+  ['aaimodule_0',['AAIModule',['../classRType_1_1AAIModule.html',1,'RType']]],
+  ['aaudiomodule_1',['AAudioModule',['../classRType_1_1AAudioModule.html',1,'RType']]],
+  ['acinematicmodule_2',['ACinematicModule',['../classRType_1_1ACinematicModule.html',1,'RType']]],
+  ['acomponent_3',['AComponent',['../classRType_1_1AComponent.html',1,'RType']]],
+  ['aconsolemodule_4',['AConsoleModule',['../classRType_1_1AConsoleModule.html',1,'RType']]],
+  ['addcomponent_5',['addComponent',['../classRType_1_1Entity.html#a9df39a966b72150b613d6215c7d8ba3b',1,'RType::Entity']]],
+  ['addgraphicentity_6',['addGraphicEntity',['../classRType_1_1GameView.html#af3a81e6bc19dd5a9ddd89a52f55ee58d',1,'RType::GameView']]],
+  ['agraphicentity_7',['AGraphicEntity',['../classRType_1_1AGraphicEntity.html',1,'RType']]],
+  ['ametricsmodule_8',['AMetricsModule',['../classRType_1_1AMetricsModule.html',1,'RType']]],
+  ['animationclock_9',['animationClock',['../classRType_1_1GameView.html#a831341598c50c4846ab49cdb64cd010e',1,'RType::GameView']]],
+  ['animationspeed_10',['animationSpeed',['../classRType_1_1GraphicEntity.html#aa83390dfa0437d8191a996c6d2ea5fce',1,'RType::GraphicEntity']]],
+  ['animationtime_11',['animationTime',['../classRType_1_1GraphicEntity.html#a48b11285a3fb37afeed099dc47d8c5d0',1,'RType::GraphicEntity']]],
+  ['arguments_12',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]],
+  ['assignai_13',['AssignAI',['../classRType_1_1AAIModule.html#a4c542efe4972cee9a566fa80e9149553',1,'RType::AAIModule']]]
 ];

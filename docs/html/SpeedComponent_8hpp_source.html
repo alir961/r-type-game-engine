@@ -91,40 +91,42 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;./AComponent.hpp&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classSpeedComponent.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classSpeedComponent.html">SpeedComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classAComponent.html">AComponent</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classSpeedComponent.html#a1454c66222c9174b7ab24cb7f285777e">   20</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classSpeedComponent.html#a1454c66222c9174b7ab24cb7f285777e">SpeedComponent</a>(<span class="keywordtype">int</span> speed) : <a class="code hl_variable" href="classSpeedComponent.html#a9075b68aa21e0931549d5e40eb90a353">_speed</a>(speed) {}</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classSpeedComponent.html#a8ab63b54c8d7ff6719d7edb86ab1b624">   26</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSpeedComponent.html#a8ab63b54c8d7ff6719d7edb86ab1b624">setSpeed</a>(<span class="keywordtype">int</span> speed) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="classSpeedComponent.html#a9075b68aa21e0931549d5e40eb90a353">_speed</a> = speed;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>RType {</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classRType_1_1SpeedComponent.html">   15</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1SpeedComponent.html">SpeedComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classRType_1_1AComponent.html">AComponent</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classRType_1_1SpeedComponent.html#a9833c364630fef251c19b9c641c7c565">   21</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1SpeedComponent.html#a9833c364630fef251c19b9c641c7c565">SpeedComponent</a>(<span class="keywordtype">int</span> speed) : <a class="code hl_variable" href="classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573">_speed</a>(speed) {}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classRType_1_1SpeedComponent.html#ad5f249698ec92172c55edecdb470d4b9">   27</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1SpeedComponent.html#ad5f249698ec92172c55edecdb470d4b9">setSpeed</a>(<span class="keywordtype">int</span> speed) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <a class="code hl_variable" href="classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573">_speed</a> = speed;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        }</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classSpeedComponent.html#a7342a603f8839529ecf45bdc5ab76a45">   34</a></span>    [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classSpeedComponent.html#a7342a603f8839529ecf45bdc5ab76a45">getSpeed</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSpeedComponent.html#a9075b68aa21e0931549d5e40eb90a353">_speed</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5">   35</a></span>        [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5">getSpeed</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573">_speed</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        }</div>
 </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classSpeedComponent.html#a83f9cf3e29f43e93573a3dc7114daf22">   41</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSpeedComponent.html#a83f9cf3e29f43e93573a3dc7114daf22">update</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classRType_1_1SpeedComponent.html#acf5a69513d37ff1a558801c2aac1ba93">   42</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1SpeedComponent.html#acf5a69513d37ff1a558801c2aac1ba93">update</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classSpeedComponent.html#a9075b68aa21e0931549d5e40eb90a353">   46</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classSpeedComponent.html#a9075b68aa21e0931549d5e40eb90a353">_speed</a>; </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573">   47</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573">_speed</a>; </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
 </div>
-<div class="ttc" id="aclassAComponent_html"><div class="ttname"><a href="classAComponent.html">AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
-<div class="ttc" id="aclassSpeedComponent_html"><div class="ttname"><a href="classSpeedComponent.html">SpeedComponent</a></div><div class="ttdoc">Base class for speed component.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:14</div></div>
-<div class="ttc" id="aclassSpeedComponent_html_a1454c66222c9174b7ab24cb7f285777e"><div class="ttname"><a href="classSpeedComponent.html#a1454c66222c9174b7ab24cb7f285777e">SpeedComponent::SpeedComponent</a></div><div class="ttdeci">SpeedComponent(int speed)</div><div class="ttdoc">Base constructor for speed component.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:20</div></div>
-<div class="ttc" id="aclassSpeedComponent_html_a7342a603f8839529ecf45bdc5ab76a45"><div class="ttname"><a href="classSpeedComponent.html#a7342a603f8839529ecf45bdc5ab76a45">SpeedComponent::getSpeed</a></div><div class="ttdeci">int getSpeed() const</div><div class="ttdoc">Get the speed of the entity.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:34</div></div>
-<div class="ttc" id="aclassSpeedComponent_html_a83f9cf3e29f43e93573a3dc7114daf22"><div class="ttname"><a href="classSpeedComponent.html#a83f9cf3e29f43e93573a3dc7114daf22">SpeedComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:41</div></div>
-<div class="ttc" id="aclassSpeedComponent_html_a8ab63b54c8d7ff6719d7edb86ab1b624"><div class="ttname"><a href="classSpeedComponent.html#a8ab63b54c8d7ff6719d7edb86ab1b624">SpeedComponent::setSpeed</a></div><div class="ttdeci">void setSpeed(int speed)</div><div class="ttdoc">Set the speed of the entity.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:26</div></div>
-<div class="ttc" id="aclassSpeedComponent_html_a9075b68aa21e0931549d5e40eb90a353"><div class="ttname"><a href="classSpeedComponent.html#a9075b68aa21e0931549d5e40eb90a353">SpeedComponent::_speed</a></div><div class="ttdeci">int _speed</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:46</div></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+<div class="ttc" id="aclassRType_1_1AComponent_html"><div class="ttname"><a href="classRType_1_1AComponent.html">RType::AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
+<div class="ttc" id="aclassRType_1_1SpeedComponent_html"><div class="ttname"><a href="classRType_1_1SpeedComponent.html">RType::SpeedComponent</a></div><div class="ttdoc">Base class for speed component.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:15</div></div>
+<div class="ttc" id="aclassRType_1_1SpeedComponent_html_a170bc0ce1f39fc1e327df445ff482573"><div class="ttname"><a href="classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573">RType::SpeedComponent::_speed</a></div><div class="ttdeci">int _speed</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:47</div></div>
+<div class="ttc" id="aclassRType_1_1SpeedComponent_html_a9833c364630fef251c19b9c641c7c565"><div class="ttname"><a href="classRType_1_1SpeedComponent.html#a9833c364630fef251c19b9c641c7c565">RType::SpeedComponent::SpeedComponent</a></div><div class="ttdeci">SpeedComponent(int speed)</div><div class="ttdoc">Base constructor for speed component.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:21</div></div>
+<div class="ttc" id="aclassRType_1_1SpeedComponent_html_acf5a69513d37ff1a558801c2aac1ba93"><div class="ttname"><a href="classRType_1_1SpeedComponent.html#acf5a69513d37ff1a558801c2aac1ba93">RType::SpeedComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:42</div></div>
+<div class="ttc" id="aclassRType_1_1SpeedComponent_html_ad5f249698ec92172c55edecdb470d4b9"><div class="ttname"><a href="classRType_1_1SpeedComponent.html#ad5f249698ec92172c55edecdb470d4b9">RType::SpeedComponent::setSpeed</a></div><div class="ttdeci">void setSpeed(int speed)</div><div class="ttdoc">Set the speed of the entity.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:27</div></div>
+<div class="ttc" id="aclassRType_1_1SpeedComponent_html_ad697f4a54a03f221532b116037ff32c5"><div class="ttname"><a href="classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5">RType::SpeedComponent::getSpeed</a></div><div class="ttdeci">int getSpeed() const</div><div class="ttdoc">Get the speed of the entity.</div><div class="ttdef"><b>Definition</b> SpeedComponent.hpp:35</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

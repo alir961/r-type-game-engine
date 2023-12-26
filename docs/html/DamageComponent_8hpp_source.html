@@ -91,40 +91,42 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;./AComponent.hpp&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classDamageComponent.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classDamageComponent.html">DamageComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classAComponent.html">AComponent</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classDamageComponent.html#a238f8b4a6308ae8c61d14da39ee0301d">   20</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classDamageComponent.html#a238f8b4a6308ae8c61d14da39ee0301d">DamageComponent</a>(<span class="keywordtype">int</span> damage) : <a class="code hl_variable" href="classDamageComponent.html#a8b4177f010dbd51c4d7983aef01eef02">_damage</a>(damage) {}</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classDamageComponent.html#ae46140f979eb86d408dca62a1ad9fd88">   26</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDamageComponent.html#ae46140f979eb86d408dca62a1ad9fd88">setDamage</a>(<span class="keywordtype">int</span> damage) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="classDamageComponent.html#a8b4177f010dbd51c4d7983aef01eef02">_damage</a> = damage;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>RType {</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classRType_1_1DamageComponent.html">   15</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1DamageComponent.html">DamageComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classRType_1_1AComponent.html">AComponent</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classRType_1_1DamageComponent.html#a206a02f70247b6b8c805bae3dbf0f1c4">   21</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1DamageComponent.html#a206a02f70247b6b8c805bae3dbf0f1c4">DamageComponent</a>(<span class="keywordtype">int</span> damage) : <a class="code hl_variable" href="classRType_1_1DamageComponent.html#a13761807f5e9c5d5161ebfb9fdbafa97">_damage</a>(damage) {}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classRType_1_1DamageComponent.html#a557065a54d3c6397eba962cbbca7c6aa">   27</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1DamageComponent.html#a557065a54d3c6397eba962cbbca7c6aa">setDamage</a>(<span class="keywordtype">int</span> damage) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <a class="code hl_variable" href="classRType_1_1DamageComponent.html#a13761807f5e9c5d5161ebfb9fdbafa97">_damage</a> = damage;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        }</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classDamageComponent.html#a2801abfa1922b1a2a3d98ec5ca5622c4">   34</a></span>    [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classDamageComponent.html#a2801abfa1922b1a2a3d98ec5ca5622c4">getDamage</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classDamageComponent.html#a8b4177f010dbd51c4d7983aef01eef02">_damage</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classRType_1_1DamageComponent.html#ae7b3103290b52d10b524780c97521963">   35</a></span>        [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classRType_1_1DamageComponent.html#ae7b3103290b52d10b524780c97521963">getDamage</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classRType_1_1DamageComponent.html#a13761807f5e9c5d5161ebfb9fdbafa97">_damage</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        }</div>
 </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classDamageComponent.html#a3be8aaef8a113106c9bdc4630d44239c">   41</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDamageComponent.html#a3be8aaef8a113106c9bdc4630d44239c">update</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classRType_1_1DamageComponent.html#a5f21a1f5a0093ec7be8b6573b3b5092d">   42</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1DamageComponent.html#a5f21a1f5a0093ec7be8b6573b3b5092d">update</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classDamageComponent.html#a8b4177f010dbd51c4d7983aef01eef02">   46</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classDamageComponent.html#a8b4177f010dbd51c4d7983aef01eef02">_damage</a>; </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classRType_1_1DamageComponent.html#a13761807f5e9c5d5161ebfb9fdbafa97">   47</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="classRType_1_1DamageComponent.html#a13761807f5e9c5d5161ebfb9fdbafa97">_damage</a>; </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
 </div>
-<div class="ttc" id="aclassAComponent_html"><div class="ttname"><a href="classAComponent.html">AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
-<div class="ttc" id="aclassDamageComponent_html"><div class="ttname"><a href="classDamageComponent.html">DamageComponent</a></div><div class="ttdoc">Base class for damage component.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:14</div></div>
-<div class="ttc" id="aclassDamageComponent_html_a238f8b4a6308ae8c61d14da39ee0301d"><div class="ttname"><a href="classDamageComponent.html#a238f8b4a6308ae8c61d14da39ee0301d">DamageComponent::DamageComponent</a></div><div class="ttdeci">DamageComponent(int damage)</div><div class="ttdoc">Base constructor for damager component.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:20</div></div>
-<div class="ttc" id="aclassDamageComponent_html_a2801abfa1922b1a2a3d98ec5ca5622c4"><div class="ttname"><a href="classDamageComponent.html#a2801abfa1922b1a2a3d98ec5ca5622c4">DamageComponent::getDamage</a></div><div class="ttdeci">int getDamage() const</div><div class="ttdoc">Get the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:34</div></div>
-<div class="ttc" id="aclassDamageComponent_html_a3be8aaef8a113106c9bdc4630d44239c"><div class="ttname"><a href="classDamageComponent.html#a3be8aaef8a113106c9bdc4630d44239c">DamageComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:41</div></div>
-<div class="ttc" id="aclassDamageComponent_html_a8b4177f010dbd51c4d7983aef01eef02"><div class="ttname"><a href="classDamageComponent.html#a8b4177f010dbd51c4d7983aef01eef02">DamageComponent::_damage</a></div><div class="ttdeci">int _damage</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:46</div></div>
-<div class="ttc" id="aclassDamageComponent_html_ae46140f979eb86d408dca62a1ad9fd88"><div class="ttname"><a href="classDamageComponent.html#ae46140f979eb86d408dca62a1ad9fd88">DamageComponent::setDamage</a></div><div class="ttdeci">void setDamage(int damage)</div><div class="ttdoc">Set the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:26</div></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+<div class="ttc" id="aclassRType_1_1AComponent_html"><div class="ttname"><a href="classRType_1_1AComponent.html">RType::AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
+<div class="ttc" id="aclassRType_1_1DamageComponent_html"><div class="ttname"><a href="classRType_1_1DamageComponent.html">RType::DamageComponent</a></div><div class="ttdoc">Base class for damage component.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:15</div></div>
+<div class="ttc" id="aclassRType_1_1DamageComponent_html_a13761807f5e9c5d5161ebfb9fdbafa97"><div class="ttname"><a href="classRType_1_1DamageComponent.html#a13761807f5e9c5d5161ebfb9fdbafa97">RType::DamageComponent::_damage</a></div><div class="ttdeci">int _damage</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:47</div></div>
+<div class="ttc" id="aclassRType_1_1DamageComponent_html_a206a02f70247b6b8c805bae3dbf0f1c4"><div class="ttname"><a href="classRType_1_1DamageComponent.html#a206a02f70247b6b8c805bae3dbf0f1c4">RType::DamageComponent::DamageComponent</a></div><div class="ttdeci">DamageComponent(int damage)</div><div class="ttdoc">Base constructor for damager component.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:21</div></div>
+<div class="ttc" id="aclassRType_1_1DamageComponent_html_a557065a54d3c6397eba962cbbca7c6aa"><div class="ttname"><a href="classRType_1_1DamageComponent.html#a557065a54d3c6397eba962cbbca7c6aa">RType::DamageComponent::setDamage</a></div><div class="ttdeci">void setDamage(int damage)</div><div class="ttdoc">Set the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:27</div></div>
+<div class="ttc" id="aclassRType_1_1DamageComponent_html_a5f21a1f5a0093ec7be8b6573b3b5092d"><div class="ttname"><a href="classRType_1_1DamageComponent.html#a5f21a1f5a0093ec7be8b6573b3b5092d">RType::DamageComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:42</div></div>
+<div class="ttc" id="aclassRType_1_1DamageComponent_html_ae7b3103290b52d10b524780c97521963"><div class="ttname"><a href="classRType_1_1DamageComponent.html#ae7b3103290b52d10b524780c97521963">RType::DamageComponent::getDamage</a></div><div class="ttdeci">int getDamage() const</div><div class="ttdoc">Get the damage inflicted by the weapon.</div><div class="ttdef"><b>Definition</b> DamageComponent.hpp:35</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

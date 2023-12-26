@@ -42,10 +42,10 @@ namespace RType {
         }
 
     private:
-        std::shared_ptr<Entity> &entity;
-        sf::Sprite sprite;
-        sf::IntRect currentFrame;
-        float animationTime;
-        float animationSpeed;
+        std::shared_ptr<Entity> &entity; /**< Entity of the graphical entity. */
+        sf::Sprite sprite; /**< Sprite of the graphical entity. */
+        sf::IntRect currentFrame; /**< Current Frame of the graphical entity. */
+        float animationTime; /**< Animation Time of the graphical entity. */
+        float animationSpeed; /**< Animation Speed of the graphical entity. */
     };
 }
