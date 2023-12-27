@@ -13,13 +13,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-      - name: Configure Project
-        uses: threeal/cmake-action@v1.3.0
-      - name: Run vcpkg
-        uses: lukka/run-vcpkg@v4
-        with:
-          vcpkgArguments: 'install'
-      - name: Generate Project Makefile
-        run: cmake -B build/out -S .
-      - name: Build Project
-        run: make -C build/out
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake
+          
+          git clone https://github.com/microsoft/vcpkg.git
+          cd vcpkg
+          ./bootstrap-vcpkg.sh
+          ./vcpkg integrate install
+      - name: Build with CMake and vcpkg
+        run: |
+          mkdir build
+          cd build
+          cmake -D CMAKE_C_COMPILER="/bin/gcc" -D CMAKE_CXX_COMPILER="/bin/g++" -D CMAKE_CXX_COMPILER="/bin/make" -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake ..
+          cmake --build .
