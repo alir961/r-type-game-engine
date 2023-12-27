@@ -7,22 +7,26 @@
 
 #pragma once
 
-#include "GameView.hpp"
-#include "entities/GraphicEntityFactory.hpp"
-#include <engine/Logger.hpp>
-#include <engine/ecs/EntityManager.hpp>
 #include "entities/GraphicEntity.hpp"
+#include "entities/GraphicEntityFactory.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
+#include <engine/Logger.hpp>
+#include <engine/ecs/EntityManager.hpp>
 #include <memory>
 #include <vector>
+#include "viewState/DeadState.hpp"
+#include "viewState/GameState.hpp"
+#include "viewState/PauseState.hpp"
 
 constexpr uint32_t WINDOW_WIDTH = 1920;
-constexpr uint32_t WINDOW_HEIGHT = 1920;
+constexpr uint32_t WINDOW_HEIGHT = 1080;
 
 namespace RType {
+    class MenuState;
+    class OptionsState;
     /**
-     * @enum ViewState
+     * @enum viewState
      * @brief Enumeration representing different states of the game view.
      */
     enum class ViewState {
@@ -42,7 +46,12 @@ namespace RType {
         sf::RenderWindow _window;                     /**< SFML Render Window for rendering graphics. */
         ViewState _viewState;                         /**< Current state of the game view. */
         sf::Clock animationClock;                     /**< Clock for managing animations and time-related operations. */
-        std::vector<std::shared_ptr<AGraphicEntity>> graphicEntities; /**< Vector of graphic entities in the game. */
+        std::vector<std::shared_ptr<AGraphicEntity>> _graphicEntities; /**< Vector of graphic entities in the game. */
+        DeadState _deadState;
+        GameState _gameState;
+        std::shared_ptr<MenuState> _menuState;
+        std::shared_ptr<OptionsState> _optionsState;
+        PauseState _pauseState;
 
         /**
          * @brief Private method to handle drawing operations.
@@ -97,3 +106,6 @@ namespace RType {
         void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
     };
 }
+
+#include "viewState/MenuState.hpp"
+#include "viewState/OptionsState.hpp"
