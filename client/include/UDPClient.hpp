@@ -12,16 +12,21 @@
 
 namespace RType {
     class UDPClient {
+    public:
+        using MessageHandlerFunction = std::function<void(const Message&)>;
+        UDPClient(asio::io_context &io_context, UDP::endpoint endpoint);
     private:
         void startReceive();
 
-        void handleReceive(std::size_t bytesReceived) const;
+        void handleReceive(std::size_t bytesReceived);
 
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
+        std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
 
-    public:
-        UDPClient(asio::io_context &io_context, UDP::endpoint endpoint);
+        void handleConnectCallbackMessage(const Message& receiveMessage);
+        void handleUnknownMessageType(const Message& receiveMessage);
+
     };
 }
