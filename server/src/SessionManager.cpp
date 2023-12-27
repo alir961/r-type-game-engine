@@ -5,16 +5,16 @@
 ** my_r-type
 */
 
-#include "../include/Sessions.hpp"
+#include "../include/SessionManager.hpp"
 
-RType::Session RType::Sessions::getClientEndpoint(int sessionId) {
+RType::Session RType::SessionManager::getClientSession(int sessionId) {
     auto session = _sessionMap.find(sessionId);
     if (session == _sessionMap.end())
         return {};
     return session->second;
 }
 
-int RType::Sessions::setNewSession() {
+int RType::SessionManager::setNewSession() {
     _sessionMap[_lastSessionID] = std::make_shared<Client>();
     _lastSessionID += 1;
     return _lastSessionID - 1;

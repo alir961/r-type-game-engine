@@ -8,7 +8,7 @@ set(HEADER_FILES
         include/compression/RLEAlgorithm.hpp
         include/compression/IDataCompression.hpp
         include/Client.hpp
-        include/Sessions.hpp)
+        include/SessionManager.hpp)
 
 set(SOURCE_FILES
         Main.cpp
@@ -17,7 +17,7 @@ set(SOURCE_FILES
         src/compression/RLEAlgorithm.cpp
         src/compression/HuffmanAlgorithm.cpp
         src/BinaryEncoder.cpp
-        src/Sessions.cpp
+        src/SessionManager.cpp
         src/Client.cpp)
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

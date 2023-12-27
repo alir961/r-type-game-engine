@@ -17,16 +17,16 @@ namespace RType {
 
     using Session = std::shared_ptr<Client>;
 
-    class Sessions {
+    class SessionManager {
     private:
         std::map<int, Session> _sessionMap;
         int _lastSessionID = 0;
     public:
-        Sessions() = default;
+        SessionManager() = default;
 
         void setLastSessionID(int sessionID) {_lastSessionID = sessionID;};
         int setNewSession();
 
-        Session getClientEndpoint(int sessionId);
+        Session getClientSession(int sessionId);
     };
 }
