@@ -15,9 +15,11 @@
 
 namespace RType {
 
+    using Session = std::shared_ptr<Client>;
+
     class Sessions {
     private:
-        std::map<int, std::shared_ptr<Client>> _sessionMap;
+        std::map<int, Session> _sessionMap;
         int _lastSessionID = 0;
     public:
         Sessions() = default;
@@ -25,6 +27,6 @@ namespace RType {
         void setLastSessionID(int sessionID) {_lastSessionID = sessionID;};
         int setNewSession();
 
-        std::shared_ptr<Client> getClientEndpoint(int sessionId);
+        Session getClientEndpoint(int sessionId);
     };
 }

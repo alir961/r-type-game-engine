@@ -7,7 +7,7 @@
 
 #include "../include/Sessions.hpp"
 
-std::shared_ptr<RType::Client> RType::Sessions::getClientEndpoint(int sessionId) {
+RType::Session RType::Sessions::getClientEndpoint(int sessionId) {
     auto session = _sessionMap.find(sessionId);
     if (session == _sessionMap.end())
         return {};

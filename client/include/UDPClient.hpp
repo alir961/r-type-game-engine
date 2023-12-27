@@ -15,7 +15,7 @@ namespace RType {
     private:
         void startReceive();
 
-        void handleReceive(std::size_t bytesReceived);
+        void handleReceive(std::size_t bytesReceived) const;
 
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;

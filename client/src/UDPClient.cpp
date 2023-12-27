@@ -18,17 +18,12 @@ void RType::UDPClient::startReceive() {
     _adapter.receiveMessage(receiveData);
 }
 
-void RType::UDPClient::handleReceive(std::size_t bytesReceived) {
+void RType::UDPClient::handleReceive(std::size_t bytesReceived) const {
     const MessageBuffer &buffer = _adapter.getMessageBuffer();
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
     const Message receiveMessage = Message::deserialize(receivedData);
 
-    std::cout << "Data: ";
-    for (char character : receiveMessage.data) {
-        std::cout << character;
-    }
-    std::cout << std::endl;
-    _adapter.sendData(asio::buffer(buffer.data(), bytesReceived));
+    std::cout << "Data: " << receiveMessage.toString() << "\n";
 }
 
 RType::UDPClient::UDPClient(asio::io_context &io_context, UDP::endpoint endpoint) :
