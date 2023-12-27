@@ -11,16 +11,18 @@ using namespace RType;
 
 void ResourceManager::loadTexture(const std::string& name, const std::string& filename) {
     sf::Texture texture;
-    if (texture.loadFromFile(filename)) {
-        textures[name] = texture;
+    if (!texture.loadFromFile(filename)) {
+        throw std::runtime_error("Failed to load texture from file: " + filename);
     }
+    textures[name] = std::move(texture);
 }
 
 void ResourceManager::loadSound(const std::string& name, const std::string& filename) {
     sf::SoundBuffer sound;
-    if (sound.loadFromFile(filename)) {
-        sounds[name] = sound;
+    if (!sound.loadFromFile(filename)) {
+        throw std::runtime_error("Failed to load sound from file: " + filename);
     }
+    sounds[name] = std::move(sound);
 }
 
 sf::Texture& ResourceManager::getTexture(const std::string& name) {
