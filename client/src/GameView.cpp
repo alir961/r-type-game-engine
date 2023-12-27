@@ -72,7 +72,6 @@ void RType::GameView::draw() {
 
 int RType::GameView::start() {
     try {
-        RType::GameView gameView;
         RType::EntityManager entityManager;
 
         auto starshipEntity = entityManager.createEntity();
@@ -82,9 +81,9 @@ int RType::GameView::start() {
         std::shared_ptr<RType::GraphicEntity> graphicStarship;
         if (starshipEntity->hasComponents() == true) {
             graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity);
-            gameView.addGraphicEntity(graphicStarship);
+            addGraphicEntity(graphicStarship);
             logInformation("Starting game view...");
-            gameView.launchWindow(graphicStarship);
+            launchWindow(graphicStarship);
         }
 
     } catch (const std::exception &e) {
