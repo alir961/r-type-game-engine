@@ -102,6 +102,9 @@ void RType::GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
 void RType::GameView::updateEntities(float deltaTime) {
     for (auto &entity: _graphicEntities) {
         entity->update(deltaTime);
+        _menuState->update();
+        _optionsState->update();
+        _pauseState->update();
     }
     switch (_viewState) {
         case ViewState::MENU:
