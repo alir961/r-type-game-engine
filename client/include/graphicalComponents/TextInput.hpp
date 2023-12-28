@@ -24,7 +24,7 @@ namespace RType {
          * @param y The y-coordinate of the input box.
          * @param defaultValue The default text value.
          */
-        TextInput(int x, int y, const std::string &defaultValue = "") : AInputBox(x, y, 15) {
+        TextInput(sf::RenderWindow &window, int x, int y, const std::string &defaultValue = "") : AInputBox(window, x, y, 15) {
             _textStr = defaultValue;
         }
 
@@ -32,11 +32,11 @@ namespace RType {
          * @brief Updates the TextInput based on user input.
          * @param window The SFML RenderWindow for updating the input box.
          */
-        void update(sf::RenderWindow& window) override {
+        void update() override {
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                 _active = _rect.getGlobalBounds().contains(
-                        static_cast<float>(sf::Mouse::getPosition(window).x),
-                        static_cast<float>(sf::Mouse::getPosition(window).y)
+                        static_cast<float>(sf::Mouse::getPosition(_window).x),
+                        static_cast<float>(sf::Mouse::getPosition(_window).y)
                 );
 
             if (!_active) return;

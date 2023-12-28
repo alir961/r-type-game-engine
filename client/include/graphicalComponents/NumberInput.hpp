@@ -24,7 +24,7 @@ namespace RType {
          * @param y The y-coordinate of the input box.
          * @param defaultValue The default numeric value.
          */
-        NumberInput(int x, int y, int defaultValue = 0) : AInputBox(x, y, 5) {
+        NumberInput(sf::RenderWindow &window, int x, int y, int defaultValue = 0) : AInputBox(window, x, y, 5) {
             if (defaultValue != 0)
                 _textStr = std::to_string(defaultValue);
             else
@@ -35,11 +35,11 @@ namespace RType {
          * @brief Updates the NumberInput based on user input.
          * @param window The SFML RenderWindow for updating the input box.
          */
-        void update(sf::RenderWindow& window) override {
+        void update() override {
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                 _active = _rect.getGlobalBounds().contains(
-                        static_cast<float>(sf::Mouse::getPosition(window).x),
-                        static_cast<float>(sf::Mouse::getPosition(window).y)
+                        static_cast<float>(sf::Mouse::getPosition(_window).x),
+                        static_cast<float>(sf::Mouse::getPosition(_window).y)
                 );
 
             if (!_active) return;

@@ -7,13 +7,14 @@
 
 #include ".././include/GameView.hpp"
 
-RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::MENU) {
+RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::LOGIN) {
     _window.setFramerateLimit(60);
     _menuState = std::make_shared<MenuState>(_window, *this);
     _optionsState = std::make_shared<OptionsState>(_window, *this);
     _pauseState = std::make_shared<PauseState>(_window, *this);
     _deadState = std::make_shared<DeadState>(_window, *this);
     _gameState = std::make_shared<GameState>(_window, *this);
+    _loginState = std::make_shared<LoginState>(_window, *this);
 }
 
 void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
@@ -90,9 +91,20 @@ void RType::GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
 void RType::GameView::updateEntities(float deltaTime) {
     for (auto &entity: _graphicEntities) {
         entity->update(deltaTime);
-        _menuState->update();
-        _optionsState->update();
-        _pauseState->update();
+    }
+    switch (_viewState) {
+        case ViewState::MENU:
+            _menuState->update();
+            break;
+        case ViewState::OPTIONS:
+            _optionsState->update();
+            break;
+        case ViewState::PAUSE:
+            _pauseState->update();
+            break;
+        case ViewState::LOGIN:
+            _loginState->update();
+            break;
     }
 }
 
@@ -113,6 +125,9 @@ void RType::GameView::draw() {
             break;
         case ViewState::DEAD:
             _deadState->draw(_window, _graphicEntities);
+            break;
+        case ViewState::LOGIN:
+            _loginState->draw(_window, _graphicEntities);
             break;
     }
     _window.display();

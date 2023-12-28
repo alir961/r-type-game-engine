@@ -25,6 +25,7 @@ namespace RType {
     class PauseState;
     class DeadState;
     class GameState;
+    class LoginState;
     /**
      * @enum viewState
      * @brief Enumeration representing different states of the game view.
@@ -34,7 +35,8 @@ namespace RType {
         OPTIONS = 1,  /**< Options menu state. */
         GAME = 2,     /**< In-game state. */
         PAUSE = 3,    /**< Pause state. */
-        DEAD = 4      /**< Game over state. */
+        DEAD = 4,     /**< Game over state. */
+        LOGIN = 5     /**< Game over state. */
     };
 
     /**
@@ -52,6 +54,7 @@ namespace RType {
         std::shared_ptr<PauseState> _pauseState;                          /**< Shared ptr to the Pause ViewState. */
         std::shared_ptr<DeadState> _deadState;                            /**< Shared ptr to the Dead ViewState. */
         std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
+        std::shared_ptr<LoginState> _loginState;                           /**< Shared ptr to the Login ViewState. */
 
         /**
          * @brief Private method to handle drawing operations.
@@ -112,3 +115,4 @@ namespace RType {
 #include "viewState/PauseState.hpp"
 #include "viewState/DeadState.hpp"
 #include "viewState/GameState.hpp"
+#include "viewState/LoginState.hpp"

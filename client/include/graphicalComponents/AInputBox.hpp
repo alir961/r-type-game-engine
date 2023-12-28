@@ -24,7 +24,7 @@ namespace RType {
          * @param y The y-coordinate of the input box.
          * @param maxChars The maximum number of characters the input box can hold.
          */
-        explicit AInputBox(float x, float y, size_t maxChars) : _x(x),
+        explicit AInputBox(sf::RenderWindow &window, float x, float y, size_t maxChars) : _window(window), _x(x),
                                                                 _y(y),
                                                                 _maxChars(maxChars) {
             _rect.setSize(sf::Vector2f(_width, _height));
@@ -46,18 +46,18 @@ namespace RType {
          * @brief Abstract method for updating the input box.
          * @param window The SFML RenderWindow for updating the input box.
          */
-        virtual void update(sf::RenderWindow& window) = 0;
+        virtual void update() = 0;
 
         /**
          * @brief Draws the input box on the SFML RenderWindow.
          * @param window The SFML RenderWindow to draw the input box on.
          */
-        void draw(sf::RenderWindow& window) {
-            window.draw(_rect);
+        void draw() {
+            _window.draw(_rect);
 
             _text.setString(_textStr);
             _text.setPosition(_x + 5, _y + 5);
-            window.draw(_text);
+            _window.draw(_text);
         }
 
         /**
@@ -68,6 +68,7 @@ namespace RType {
             return _active;
         }
 
+        sf::RenderWindow &_window; /**< The SFML RenderWindow where the text box will be drawn. */
         float _x; /**< The x-coordinate of the input box. */
         float _y; /**< The y-coordinate of the input box. */
         float _width = 200; /**< The width of the input box. */

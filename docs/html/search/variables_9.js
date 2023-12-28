@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['text_0',['text',['../classRType_1_1TextBox.html#a4d3295728b9166f5282861451a1eae9d',1,'RType::TextBox']]],
-  ['textcolor_1',['textColor',['../classRType_1_1TextBox.html#a4088b3751a883c0518591a3c386d050f',1,'RType::TextBox']]]
+  ['quitbox_0',['quitBox',['../classRType_1_1MenuState.html#ad0e1aa000b8bf1c6fbd86908841d1d53',1,'RType::MenuState']]]
 ];
