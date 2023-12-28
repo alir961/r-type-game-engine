@@ -55,6 +55,7 @@ namespace RType {
         std::shared_ptr<DeadState> _deadState;                            /**< Shared ptr to the Dead ViewState. */
         std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
         std::shared_ptr<LoginState> _loginState;                           /**< Shared ptr to the Login ViewState. */
+        sf::Event event{};
 
         /**
          * @brief Private method to handle drawing operations.
@@ -107,6 +108,10 @@ namespace RType {
          * @param entity The graphic entity to be added.
          */
         void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
+
+        sf::Event getEvent() {
+            return event;
+        }
     };
 }
 

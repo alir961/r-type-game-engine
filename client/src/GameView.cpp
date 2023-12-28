@@ -45,7 +45,6 @@ void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntiti
     float accumulatedTime = 0.0f;
 
     while (_window.isOpen()) {
-        sf::Event event{};
         while (_window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 _window.close();

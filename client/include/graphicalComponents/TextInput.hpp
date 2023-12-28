@@ -18,48 +18,35 @@ namespace RType {
      */
     class TextInput : public AInputBox {
     public:
-        /**
-         * @brief Constructor for TextInput.
-         * @param x The x-coordinate of the input box.
-         * @param y The y-coordinate of the input box.
-         * @param defaultValue The default text value.
-         */
-        TextInput(sf::RenderWindow &window, int x, int y, const std::string &defaultValue = "") : AInputBox(window, x, y, 15) {
-            _textStr = defaultValue;
+        TextInput(sf::RenderWindow &window, int x, int y, const std::string &defaultValue = "")
+            : AInputBox(window, x, y, 15) {
+            _text = defaultValue;
         }
 
-        /**
-         * @brief Updates the TextInput based on user input.
-         * @param window The SFML RenderWindow for updating the input box.
-         */
-        void update() override {
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-                _active = _rect.getGlobalBounds().contains(
-                        static_cast<float>(sf::Mouse::getPosition(_window).x),
-                        static_cast<float>(sf::Mouse::getPosition(_window).y)
-                );
+        void update(const sf::Event &event) override {
+            if (event.type == sf::Event::MouseButtonPressed &&
+                event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+                setActive(_rect.getGlobalBounds().contains(mousePos));
+            }
 
             if (!_active) return;
 
-            for (int i = 32; i <= 122; ++i) {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(i)) && _textStr.size() < _maxChars)
-                    _textStr += static_cast<char>(tolower(i));
+            if (event.type == sf::Event::TextEntered) {
+                if (_text.size() < _maxChars && event.text.unicode >= 32 && event.text.unicode <= 122) {
+                    _text += static_cast<char>(std::tolower(event.text.unicode));
+                }
             }
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && !_textStr.empty())
-                _textStr.pop_back();
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-                std::cout << "Text: " << getValue() << std::endl;
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::BackSpace) {
+                if (!_text.empty()) _text.pop_back();
             }
+
+            _textDisplay.setString(_text);
         }
 
-        /**
-         * @brief Gets the text entered in the input box.
-         * @return The text value.
-         */
         [[nodiscard]] const std::string &getValue() const {
-            return _textStr;
+            return _text;
         }
     };
 

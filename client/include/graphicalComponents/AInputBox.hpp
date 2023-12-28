@@ -18,67 +18,48 @@ namespace RType {
      */
     class AInputBox {
     public:
-        /**
-         * @brief Constructor for AInputBox.
-         * @param x The x-coordinate of the input box.
-         * @param y The y-coordinate of the input box.
-         * @param maxChars The maximum number of characters the input box can hold.
-         */
-        explicit AInputBox(sf::RenderWindow &window, float x, float y, size_t maxChars) : _window(window), _x(x),
-                                                                _y(y),
-                                                                _maxChars(maxChars) {
-            _rect.setSize(sf::Vector2f(_width, _height));
-            _rect.setPosition(_x, _y);
-            _rect.setOutlineThickness(2);
-            _rect.setOutlineColor(sf::Color::Blue);
+        explicit AInputBox(sf::RenderWindow &window, int x, int y, size_t maxChars)
+            : _x(x), _y(y), _maxChars(maxChars), _active(false), _window(window) {
+            _rect.setSize(sf::Vector2f(200, 40));
+            _rect.setPosition(x, y);
+            _rect.setOutlineColor(sf::Color(200, 200, 200));
+            _rect.setOutlineThickness(1);
+            _rect.setFillColor(sf::Color::Transparent);
 
-            _text.setFont(_font);
-            _text.setCharacterSize(_fontSize);
-            _text.setFillColor(sf::Color::White);
+            _font.loadFromFile("client/assets/ka1.ttf");
+            _textDisplay.setFont(_font);
+            _textDisplay.setCharacterSize(20);
+            _textDisplay.setPosition(x + 5, y + 5);
+            _textDisplay.setFillColor(sf::Color::White);
         }
 
-        /**
-         * @brief Virtual destructor for AInputBox.
-         */
         virtual ~AInputBox() = default;
 
-        /**
-         * @brief Abstract method for updating the input box.
-         * @param window The SFML RenderWindow for updating the input box.
-         */
-        virtual void update() = 0;
+        virtual void update(const sf::Event &event) = 0;
 
-        /**
-         * @brief Draws the input box on the SFML RenderWindow.
-         * @param window The SFML RenderWindow to draw the input box on.
-         */
-        void draw() {
+        void draw() const {
             _window.draw(_rect);
-
-            _text.setString(_textStr);
-            _text.setPosition(_x + 5, _y + 5);
-            _window.draw(_text);
+            _window.draw(_textDisplay);
         }
 
-        /**
-         * @brief Checks if the input box is currently active.
-         * @return True if the input box is active, false otherwise.
-         */
+        void setActive(bool active) {
+            _active = active;
+            _rect.setOutlineColor(active ? sf::Color::Blue : sf::Color(200, 200, 200));
+        }
+
         [[nodiscard]] bool isActive() const {
             return _active;
         }
 
-        sf::RenderWindow &_window; /**< The SFML RenderWindow where the text box will be drawn. */
-        float _x; /**< The x-coordinate of the input box. */
-        float _y; /**< The y-coordinate of the input box. */
-        float _width = 200; /**< The width of the input box. */
-        float _height = 40; /**< The height of the input box. */
-        int _fontSize = 20; /**< The font size of the text in the input box. */
-        size_t _maxChars; /**< The maximum number of characters the input box can hold. */
-        bool _active = false; /**< Flag indicating whether the input box is currently active. */
-        std::string _textStr; /**< The text content of the input box. */
-        sf::RectangleShape _rect; /**< SFML RectangleShape representing the input box. */
-        sf::Font _font; /**< SFML Font for the text in the input box. */
-        sf::Text _text; /**< SFML Text object for rendering text in the input box. */
+    protected:
+        float _x;
+        float _y;
+        size_t _maxChars;
+        bool _active;
+        std::string _text;
+        sf::RectangleShape _rect;
+        sf::Text _textDisplay;
+        sf::Font _font;
+        sf::RenderWindow &_window;
     };
 }

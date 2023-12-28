@@ -47,8 +47,8 @@ namespace RType {
          * @brief Updates the menu state.
          */
         void update() {
-            portBoxInput.update();
-            userNameBoxInput.update();
+            portBoxInput.update(_gameView.getEvent());
+            userNameBoxInput.update(_gameView.getEvent());
         }
 
         /**
