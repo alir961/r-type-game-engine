@@ -25,7 +25,6 @@ namespace RType {
             _rect.setOutlineColor(sf::Color(200, 200, 200));
             _rect.setOutlineThickness(1);
             _rect.setFillColor(sf::Color::Transparent);
-
             _font.loadFromFile("client/assets/ka1.ttf");
             _textDisplay.setFont(_font);
             _textDisplay.setCharacterSize(20);
