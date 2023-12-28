@@ -1,24 +1,26 @@
 /*
 ** EPITECH PROJECT, 2023
-** r-type
+** R-Type
 ** File description:
 ** GraphicEntity.cpp
 */
 
 #include "../../include/entities/GraphicEntity.hpp"
-#include <SFML/Graphics.hpp>
+#include "../ResourceManager.hpp"
 
-RType::GraphicEntity::GraphicEntity(std::shared_ptr<Entity> &entity) : entity(entity), animationTime(0.0f) {
-    sf::Texture texture;
-    texture.loadFromFile("../../assets/r-typesheet42.gif");
-    sprite.setTexture(texture);
-    currentFrame = sf::IntRect(100 + 1, 0, 50, 25); // NEED refact when we use it
+extern ResourceManager resourceManager;
+
+RType::GraphicEntity::GraphicEntity(std::shared_ptr<Entity> &entity, const std::string &path)
+    : entity(entity), animationTime(0.0f), animationSpeed(0.1f) {
+    resourceManager.loadTexture("entityTexture", path);
+    sprite.setTexture(resourceManager.getTexture("entityTexture"));
+    currentFrame = sf::IntRect(0, 0, 50, 25);
     sprite.setTextureRect(currentFrame);
 }
 
 void RType::GraphicEntity::update(float deltaTime) {
     animationTime += deltaTime;
-    if (animationTime >= 0.1f) {
+    if (animationTime >= animationSpeed) {
         currentFrame.left += 32;
         if (currentFrame.left >= sprite.getTexture()->getSize().x) {
             currentFrame.left = 0;
@@ -27,9 +29,10 @@ void RType::GraphicEntity::update(float deltaTime) {
         animationTime = 0.0f;
     }
 
-    std::shared_ptr position = entity->getComponent<PositionComponent>();
+    auto position = entity->getComponent<PositionComponent>();
     if (position) {
-        sprite.setPosition(position->getPositions().first, position->getPositions().second);
+        sprite.setPosition(static_cast<float>(position->getPosition().first),
+                           static_cast<float>(position->getPosition().second));
     }
 }
 
