@@ -34,7 +34,7 @@ namespace RType {
 
             if (event.type == sf::Event::TextEntered) {
                 if (_text.size() < _maxChars && event.text.unicode >= 32 && event.text.unicode <= 122) {
-                    _text += static_cast<char>(std::tolower(event.text.unicode));
+                    _text += char(std::tolower(event.text.unicode));
                 }
             }
 

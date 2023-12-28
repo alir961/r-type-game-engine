@@ -39,8 +39,10 @@ namespace RType {
                 }
 
                 if (event.type == sf::Event::TextEntered && !_keyPressed) {
-                    if (_text.size() < _maxChars && std::isdigit(event.text.unicode)) {
-                        _text += static_cast<char>(event.text.unicode);
+                    char inputChar = char(event.text.unicode);
+                    if (_text.size() < _maxChars &&
+                        (std::isdigit(inputChar) || inputChar == '.')) {
+                        _text += char(event.text.unicode);
                         _keyPressed = true;
                     }
                 }
