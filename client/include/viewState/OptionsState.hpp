@@ -7,6 +7,7 @@
 
 #pragma once
 #include "IDraw.hpp"
+#include "../graphicalComponents/TextBox.hpp"
 
 namespace RType {
     class GameView;
@@ -15,23 +16,30 @@ namespace RType {
     class OptionsState : public IDraw {
     public:
         OptionsState(sf::RenderWindow &window, GameView &gameView)
-            : _gameView(gameView) {}
+            : mainMenu(window, sf::Color::Cyan, 100.0f, 200.0f, "Exit To Main Menu"), _gameView(gameView) {}
 
         void handleInput() {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-                std::cout << "Return key pressed" << std::endl;
-                _gameView.setView(ViewState::MENU);
+            mainMenu.handleInput();
+
+            if (isMouseClicked()) {
+                if (mainMenu.getActive()) {
+                    std::cout << "Exit To Main Menu!" << std::endl;
+                    _gameView.setView(ViewState::MENU);
+                }
             }
         }
 
         void update() {
+            mainMenu.update();
         }
 
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+            mainMenu.draw();
             handleInput();
         }
 
     private:
+        TextBox mainMenu;
         GameView &_gameView;
 
         bool isMouseClicked() const {

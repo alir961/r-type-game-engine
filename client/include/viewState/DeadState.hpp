@@ -11,7 +11,10 @@
 namespace RType {
     class DeadState : public IDraw {
     public:
+        DeadState(sf::RenderWindow &window, GameView &gameView) : _gameView(gameView) {}
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>> graphicEntities) override {
         }
+    private:
+        GameView &_gameView;
     };
 }

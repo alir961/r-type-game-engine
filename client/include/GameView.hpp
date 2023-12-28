@@ -15,9 +15,6 @@
 #include <engine/ecs/EntityManager.hpp>
 #include <memory>
 #include <vector>
-#include "viewState/DeadState.hpp"
-#include "viewState/GameState.hpp"
-#include "viewState/PauseState.hpp"
 
 constexpr uint32_t WINDOW_WIDTH = 1920;
 constexpr uint32_t WINDOW_HEIGHT = 1080;
@@ -25,6 +22,9 @@ constexpr uint32_t WINDOW_HEIGHT = 1080;
 namespace RType {
     class MenuState;
     class OptionsState;
+    class PauseState;
+    class DeadState;
+    class GameState;
     /**
      * @enum viewState
      * @brief Enumeration representing different states of the game view.
@@ -47,11 +47,11 @@ namespace RType {
         ViewState _viewState;                         /**< Current state of the game view. */
         sf::Clock animationClock;                     /**< Clock for managing animations and time-related operations. */
         std::vector<std::shared_ptr<AGraphicEntity>> _graphicEntities; /**< Vector of graphic entities in the game. */
-        DeadState _deadState;
-        GameState _gameState;
         std::shared_ptr<MenuState> _menuState;
         std::shared_ptr<OptionsState> _optionsState;
-        PauseState _pauseState;
+        std::shared_ptr<PauseState> _pauseState;
+        std::shared_ptr<DeadState> _deadState;
+        std::shared_ptr<GameState> _gameState;
 
         /**
          * @brief Private method to handle drawing operations.
@@ -109,3 +109,6 @@ namespace RType {
 
 #include "viewState/MenuState.hpp"
 #include "viewState/OptionsState.hpp"
+#include "viewState/PauseState.hpp"
+#include "viewState/DeadState.hpp"
+#include "viewState/GameState.hpp"

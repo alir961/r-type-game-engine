@@ -16,7 +16,7 @@ namespace RType {
     class MenuState : public IDraw {
     public:
         MenuState(sf::RenderWindow &window, GameView &gameView)
-            : startBox(window, sf::Color::Cyan, 100.0f, 200.0f, "Start"),
+            : _window(window), startBox(window, sf::Color::Cyan, 100.0f, 200.0f, "Start"),
               optionsBox(window, sf::Color::Magenta, 100.0f, 250.0f, "Options"),
               quitBox(window, sf::Color::Cyan, 100.0f, 300.0f, "Quit"), _gameView(gameView) {}
 
@@ -34,7 +34,7 @@ namespace RType {
                     _gameView.setView(ViewState::OPTIONS);
                 } else if (quitBox.getActive()) {
                     std::cout << "Quit Game!" << std::endl;
-                    //close
+                    _window.close();
                 }
             }
         }
@@ -57,6 +57,7 @@ namespace RType {
         TextBox optionsBox;
         TextBox quitBox;
         GameView &_gameView;
+        sf::RenderWindow &_window;
 
         bool isMouseClicked() const {
             return sf::Mouse::isButtonPressed(sf::Mouse::Left);

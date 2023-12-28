@@ -11,30 +11,38 @@ RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT)
     _window.setFramerateLimit(60);
     _menuState = std::make_shared<MenuState>(_window, *this);
     _optionsState = std::make_shared<OptionsState>(_window, *this);
+    _pauseState = std::make_shared<PauseState>(_window, *this);
+    _deadState = std::make_shared<DeadState>(_window, *this);
+    _gameState = std::make_shared<GameState>(_window, *this);
 }
 
 void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
     sf::Sprite sprite = entity->getSprite();
     std::shared_ptr<Entity> gameEntity = entity->getEntity();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        entity->moveRight(sprite, gameEntity);
-    }
+    if (_viewState == ViewState::GAME) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            entity->moveRight(sprite, gameEntity);
+        }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        entity->moveLeft(sprite, gameEntity);
-    }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            entity->moveLeft(sprite, gameEntity);
+        }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        entity->moveUp(sprite, gameEntity);
-    }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            entity->moveUp(sprite, gameEntity);
+        }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        entity->moveDown(sprite, gameEntity);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            entity->moveDown(sprite, gameEntity);
+        }
     }
 }
 
 void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntities) {
+    const float fixedTimeStep = 1.0f / 60.0f;
+    float accumulatedTime = 0.0f;
+
     while (_window.isOpen()) {
         sf::Event event{};
         while (_window.pollEvent(event)) {
@@ -42,10 +50,31 @@ void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntiti
                 _window.close();
                 return;
             }
+            if (_viewState == ViewState::OPTIONS) {
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
+                    std::cout << "Return key pressed in OPTIONS state" << std::endl;
+                    setView(ViewState::MENU);
+                }
+            } else if (_viewState == ViewState::GAME) {
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+                    std::cout << "Escape key pressed in GAME state" << std::endl;
+                    setView(ViewState::PAUSE);
+                }
+            } else if (_viewState == ViewState::PAUSE) {
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+                    std::cout << "Escape key pressed in GAME state" << std::endl;
+                    setView(ViewState::GAME);
+                }
+            }
         }
         handleInput(graphicEntities);
+
         float deltaTime = animationClock.restart().asSeconds();
-        updateEntities(deltaTime);
+        accumulatedTime += deltaTime;
+        while (accumulatedTime >= fixedTimeStep) {
+            updateEntities(fixedTimeStep);
+            accumulatedTime -= fixedTimeStep;
+        }
         draw();
     }
 }
@@ -74,13 +103,13 @@ void RType::GameView::draw() {
             _optionsState->draw(_window, _graphicEntities);
             break;
         case ViewState::GAME:
-            _gameState.draw(_window, _graphicEntities);
+            _gameState->draw(_window, _graphicEntities);
             break;
         case ViewState::PAUSE:
-            _pauseState.draw(_window, _graphicEntities);
+            _pauseState->draw(_window, _graphicEntities);
             break;
         case ViewState::DEAD:
-            _deadState.draw(_window, _graphicEntities);
+            _deadState->draw(_window, _graphicEntities);
             break;
     }
     _window.display();
