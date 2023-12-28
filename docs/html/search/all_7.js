@@ -1,8 +1,23 @@
 var searchData=
 [
-  ['handleinput_0',['handleInput',['../classRType_1_1GameView.html#a17e2890c005f9f9b2a0cf63b18965f52',1,'RType::GameView']]],
-  ['hascomponent_1',['hasComponent',['../classRType_1_1Entity.html#a50f532f9a494fe31d8bf1991f7129abc',1,'RType::Entity']]],
-  ['hascomponents_2',['hasComponents',['../classRType_1_1Entity.html#acfc23ad76d1bd7186235d79b85a65a41',1,'RType::Entity']]],
-  ['healthcomponent_3',['healthcomponent',['../classRType_1_1HealthComponent.html',1,'RType::HealthComponent'],['../classRType_1_1HealthComponent.html#a19ca7dcb97b6b2b2d7a324d97c5dbd5b',1,'RType::HealthComponent::HealthComponent()']]],
-  ['huffmanalgorithm_4',['HuffmanAlgorithm',['../classRType_1_1HuffmanAlgorithm.html',1,'RType']]]
+  ['gamestate_0',['gamestate',['../classRType_1_1GameState.html',1,'RType::GameState'],['../classRType_1_1GameState.html#a9a264c4061b63965dadbaaee59dc52ec',1,'RType::GameState::GameState()']]],
+  ['gameview_1',['gameview',['../classRType_1_1GameView.html',1,'RType::GameView'],['../classRType_1_1GameView.html#a94d95d4dff9f2838c54239655bfdc91d',1,'RType::GameView::GameView()']]],
+  ['getactive_2',['getActive',['../classRType_1_1TextBox.html#abc171d7cfaea01e10a0fe7393e4f36c5',1,'RType::TextBox']]],
+  ['getcollisionstatus_3',['getCollisionStatus',['../classRType_1_1CollisionComponent.html#aa5e0ea9ce92298fec16e78412012e631',1,'RType::CollisionComponent']]],
+  ['getcomponent_4',['getComponent',['../classRType_1_1Entity.html#a0af143cde95786b2a05195d61a20ea13',1,'RType::Entity']]],
+  ['getcomponenttype_5',['getComponentType',['../classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97',1,'RType::Entity']]],
+  ['getdamage_6',['getDamage',['../classRType_1_1DamageComponent.html#ae7b3103290b52d10b524780c97521963',1,'RType::DamageComponent']]],
+  ['getdatabuffer_7',['getDataBuffer',['../classRType_1_1UDPAdapter.html#aadedbf91393829ac83b0e264ff5f9a82',1,'RType::UDPAdapter']]],
+  ['getentity_8',['getentity',['../classRType_1_1GraphicEntity.html#aec4fd3c000bfcb9baa275ad3e34c9045',1,'RType::GraphicEntity::getEntity()'],['../classRType_1_1AGraphicEntity.html#a0e1d94e0353c1ec0db8dc35f7a993b3c',1,'RType::AGraphicEntity::getEntity()']]],
+  ['getfont_9',['getFont',['../classRType_1_1TextBox.html#a4f121f0982e9212407bcbbeb7abead69',1,'RType::TextBox']]],
+  ['getfps_10',['GetFPS',['../classRType_1_1AMetricsModule.html#a7e8d4563316ce9b3553598d0f92c4eb6',1,'RType::AMetricsModule']]],
+  ['gethealth_11',['getHealth',['../classRType_1_1HealthComponent.html#a5e78aaefcb1c1772b14d597a4f3904bd',1,'RType::HealthComponent']]],
+  ['getisplayer_12',['getIsPlayer',['../classRType_1_1PlayerComponent.html#aca02f1a17c339130bbbe94c7da188d66',1,'RType::PlayerComponent']]],
+  ['getmessagebuffer_13',['getMessageBuffer',['../classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed',1,'RType::UDPAdapter']]],
+  ['getpositions_14',['getPositions',['../classRType_1_1PositionComponent.html#a28b4a122706197d9617e0ceb2e6925c9',1,'RType::PositionComponent']]],
+  ['getspeed_15',['getSpeed',['../classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5',1,'RType::SpeedComponent']]],
+  ['getsprite_16',['getsprite',['../classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95',1,'RType::AGraphicEntity::getSprite()'],['../classRType_1_1GraphicEntity.html#afacc0cc5d61455344c76ff14dfe12a03',1,'RType::GraphicEntity::getSprite()']]],
+  ['getvalue_17',['getvalue',['../classRType_1_1NumberInput.html#adad44f34268096830455de58ce724ca4',1,'RType::NumberInput::getValue()'],['../classRType_1_1TextInput.html#a370fee59b6414fa0d07038d673608714',1,'RType::TextInput::getValue()']]],
+  ['graphicentity_18',['graphicentity',['../classRType_1_1GraphicEntity.html',1,'RType::GraphicEntity'],['../classRType_1_1GraphicEntity.html#af45beb58a5303ed3732199bbc0d683e4',1,'RType::GraphicEntity::GraphicEntity()']]],
+  ['graphicentityfactory_19',['GraphicEntityFactory',['../classRType_1_1GraphicEntityFactory.html',1,'RType']]]
 ];

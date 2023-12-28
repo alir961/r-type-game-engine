@@ -43,15 +43,15 @@ namespace RType {
      */
     class GameView {
     private:
-        sf::RenderWindow _window;                     /**< SFML Render Window for rendering graphics. */
-        ViewState _viewState;                         /**< Current state of the game view. */
-        sf::Clock animationClock;                     /**< Clock for managing animations and time-related operations. */
-        std::vector<std::shared_ptr<AGraphicEntity>> _graphicEntities; /**< Vector of graphic entities in the game. */
-        std::shared_ptr<MenuState> _menuState;
-        std::shared_ptr<OptionsState> _optionsState;
-        std::shared_ptr<PauseState> _pauseState;
-        std::shared_ptr<DeadState> _deadState;
-        std::shared_ptr<GameState> _gameState;
+        sf::RenderWindow _window;                                         /**< SFML Render Window for rendering graphics. */
+        ViewState _viewState;                                             /**< Current state of the game view. */
+        sf::Clock animationClock;                                         /**< Clock for managing animations and time-related operations. */
+        std::vector<std::shared_ptr<AGraphicEntity>> _graphicEntities;    /**< Vector of graphic entities in the game. */
+        std::shared_ptr<MenuState> _menuState;                            /**< Shared ptr to the Menu ViewState. */
+        std::shared_ptr<OptionsState> _optionsState;                      /**< Shared ptr to the Options ViewState. */
+        std::shared_ptr<PauseState> _pauseState;                          /**< Shared ptr to the Pause ViewState. */
+        std::shared_ptr<DeadState> _deadState;                            /**< Shared ptr to the Dead ViewState. */
+        std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
 
         /**
          * @brief Private method to handle drawing operations.

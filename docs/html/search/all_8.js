@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['icomponent_0',['IComponent',['../classRType_1_1IComponent.html',1,'RType']]],
-  ['idatacompression_1',['IDataCompression',['../classRType_1_1IDataCompression.html',1,'RType']]],
-  ['igamemodule_2',['IGameModule',['../classRType_1_1IGameModule.html',1,'RType']]],
-  ['igraphicentity_3',['IGraphicEntity',['../classRType_1_1IGraphicEntity.html',1,'RType']]],
-  ['imodule_4',['IModule',['../classRType_1_1IModule.html',1,'RType']]],
-  ['initialize_5',['Initialize',['../classRType_1_1IGameModule.html#af5c746effa3d7b7fe4f24c8a40209ea9',1,'RType::IGameModule']]]
+  ['handleinput_0',['handleinput',['../classRType_1_1GameView.html#a17e2890c005f9f9b2a0cf63b18965f52',1,'RType::GameView::handleInput()'],['../classRType_1_1TextBox.html#a6ae819de887e41db3c5fac4e8a84a19c',1,'RType::TextBox::handleInput()'],['../classRType_1_1MenuState.html#a7d5718c3e621be69c015951df509155f',1,'RType::MenuState::handleInput()']]],
+  ['hascomponent_1',['hasComponent',['../classRType_1_1Entity.html#a50f532f9a494fe31d8bf1991f7129abc',1,'RType::Entity']]],
+  ['hascomponents_2',['hasComponents',['../classRType_1_1Entity.html#acfc23ad76d1bd7186235d79b85a65a41',1,'RType::Entity']]],
+  ['healthcomponent_3',['healthcomponent',['../classRType_1_1HealthComponent.html',1,'RType::HealthComponent'],['../classRType_1_1HealthComponent.html#a19ca7dcb97b6b2b2d7a324d97c5dbd5b',1,'RType::HealthComponent::HealthComponent()']]],
+  ['huffmanalgorithm_4',['HuffmanAlgorithm',['../classRType_1_1HuffmanAlgorithm.html',1,'RType']]]
 ];

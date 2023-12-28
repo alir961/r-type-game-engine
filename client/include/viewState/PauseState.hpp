@@ -16,30 +16,39 @@ namespace RType {
     class PauseState : public IDraw {
     public:
         PauseState(sf::RenderWindow &window, GameView &gameView)
-            : mainMenu(window, sf::Color::Cyan, 100.0f, 200.0f, "Exit To Main Menu"), _gameView(gameView) {}
+            : resume(window, sf::Color::Cyan, 500.0f, 195.0f, "Resume"),
+              mainMenu(window, sf::Color::Cyan, 500.0f, 245.0f, "Exit To Main Menu"), _gameView(gameView) {}
 
         void handleInput() {
             mainMenu.handleInput();
+            resume.handleInput();
 
             if (isMouseClicked()) {
                 if (mainMenu.getActive()) {
                     std::cout << "Exit To Main Menu!" << std::endl;
                     _gameView.setView(ViewState::MENU);
                 }
+                if (resume.getActive()) {
+                    std::cout << "Resume Game!" << std::endl;
+                    _gameView.setView(ViewState::GAME);
+                }
             }
         }
 
         void update() {
             mainMenu.update();
+            resume.update();
         }
 
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
             mainMenu.draw();
+            resume.draw();
             handleInput();
         }
 
     private:
         TextBox mainMenu;
+        TextBox resume;
         GameView &_gameView;
 
         bool isMouseClicked() const {

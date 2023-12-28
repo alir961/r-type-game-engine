@@ -16,7 +16,7 @@ namespace RType {
     class OptionsState : public IDraw {
     public:
         OptionsState(sf::RenderWindow &window, GameView &gameView)
-            : mainMenu(window, sf::Color::Cyan, 100.0f, 200.0f, "Exit To Main Menu"), _gameView(gameView) {}
+            : mainMenu(window, sf::Color::Cyan, 500.0f, 195.0f, "Exit To Main Menu"), _gameView(gameView) {}
 
         void handleInput() {
             mainMenu.handleInput();
