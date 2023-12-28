@@ -25,10 +25,22 @@ void ResourceManager::loadSound(const std::string& name, const std::string& file
     sounds[name] = std::move(sound);
 }
 
+void ResourceManager::loadFont(const std::string& name, const std::string& filename) {
+    sf::Font font;
+    if (!font.loadFromFile(filename)) {
+        throw std::runtime_error("Failed to load font from file: " + filename);
+    }
+    fonts[name] = std::move(font);
+}
+
 sf::Texture& ResourceManager::getTexture(const std::string& name) {
     return textures.at(name);
 }
 
 sf::SoundBuffer& ResourceManager::getSound(const std::string& name) {
     return sounds.at(name);
+}
+
+sf::Font& ResourceManager::getFont(const std::string& name) {
+    return fonts.at(name);
 }

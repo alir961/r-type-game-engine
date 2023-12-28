@@ -40,6 +40,15 @@ namespace RType {
         void loadSound(const std::string& name, const std::string& filename);
 
         /**
+         * @brief Charge une police : "font" à partir d'un fichier.
+         * @param name Nom associé à la police.
+         * @param filename Chemin du fichier de la font.
+         * @throw std::runtime_error Si le fichier ne peut pas être chargé.
+         */
+
+        void loadFont(const std::string& name, const std::string& filename);
+
+        /**
          * @brief Obtient une texture par son nom.
          * @param name Nom de la texture.
          * @return Référence à la texture demandée.
@@ -55,9 +64,19 @@ namespace RType {
          */
         sf::SoundBuffer& getSound(const std::string& name);
 
+        /**
+         * @brief Obtient une police par son nom.
+         * @param name Nom de la police.
+         * @return Référence à la police demandée.
+         * @throw std::out_of_range Si la police n'est pas trouvée.
+         */
+
+        sf::Font& getFont(const std::string& name);
+
     private:
         std::map<std::string, sf::Texture> textures;
         std::map<std::string, sf::SoundBuffer> sounds;
+        std::map<std::string, sf::Font> fonts;
     };
 
 } // namespace RType
