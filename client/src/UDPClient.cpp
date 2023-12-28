@@ -12,8 +12,7 @@ void RType::UDPClient::startReceive() {
         std::cout << "Receive " << bytes_received << "bytes!\n";
         if (!error)
             handleReceive(bytes_received);
-        else std::cout << "Error receiving message: " << error.message() << "\n";
-        startReceive();
+        else std::cerr << "Error receiving message: " << error.message() << "\n";
     };
     _adapter.receiveMessage(receiveData);
 }
@@ -43,7 +42,21 @@ RType::UDPClient::UDPClient(asio::io_context &io_context, UDP::endpoint endpoint
 }
 
 void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiveMessage) {
-    std::cout << "Data: " << receiveMessage.toString() << "\n";
+    const int CONNECT_SIZE = 7;
+    std::string message = receiveMessage.toString();
+    std::size_t pos1 = message.find("connect");
+    std::size_t pos2 = message.find("ok");
+
+    if (pos1 != std::string::npos && pos2 != std::string::npos) {
+        try {
+            int connectionId = std::stoi(message.substr(pos1 + CONNECT_SIZE, pos2 - (pos1 + CONNECT_SIZE)));
+            std::cout << "Connection ID: " << connectionId << "\n";
+        } catch (const std::exception& e) {
+            std::cerr << "Error: Failed to extract connection ID\n";
+        }
+    } else {
+        std::cerr << "Error: Unexpected message format\n";
+    }
 }
 
 void RType::UDPClient::handleUnknownMessageType(const RType::Message &) {

@@ -2,6 +2,7 @@ set(SOURCE_FILES
         Main.cpp
         src/GameView.cpp
         src/entities/GraphicEntity.cpp
+        src/UDPClient.cpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
