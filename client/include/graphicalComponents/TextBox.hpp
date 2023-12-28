@@ -40,14 +40,14 @@ namespace RType {
          */
         void handleInput() {
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(_window));
+                sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(_window));
                 if (inputBoxBounds.contains(mousePosition)) {
                     setActive(true);
                 } else {
                     setActive(false);
                 }
             }
-            sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(_window));
+            sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(_window));
             isHovered = inputBoxBounds.contains(mousePosition);
         }
 
