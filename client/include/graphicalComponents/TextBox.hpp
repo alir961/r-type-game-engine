@@ -19,15 +19,16 @@ namespace RType {
          * @brief Constructor for TextBox.
          * @param window The SFML RenderWindow where the text box will be drawn.
          * @param textColor The color of the text.
+         * @param fontSize The size of the text.
          * @param x The x-coordinate of the text box.
          * @param y The y-coordinate of the text box.
          * @param initialText The initial text to display in the text box.
          */
-        TextBox(sf::RenderWindow &window, const sf::Color &textColor, float x, float y, const std::string &initialText = "")
-            : _window(window), textColor(textColor), isActive(false), isHovered(false) {
+        TextBox(sf::RenderWindow &window, const sf::Color &textColor, unsigned int fontSize, float x, float y, const std::string &initialText = "")
+            : _window(window), textColor(textColor), fontSize(fontSize), isActive(false), isHovered(false) {
             font.loadFromFile("client/assets/ka1.ttf");
             text.setFont(font);
-            text.setCharacterSize(20);
+            text.setCharacterSize(fontSize);
             text.setPosition(x, y);
             text.setString(initialText);
             text.setFillColor(textColor);
@@ -92,6 +93,16 @@ namespace RType {
             return font;
         }
 
+        /**
+         * @brief Change the font size of the text.
+         * @param newSize The new font size.
+         */
+        void setFontSize(unsigned int newSize) {
+            fontSize = newSize;
+            text.setCharacterSize(fontSize);
+            updateText();
+        }
+
     private:
         sf::RenderWindow& _window; /**< The SFML RenderWindow where the text box will be drawn. */
         sf::Color textColor; /**< The color of the text. */
@@ -100,6 +111,7 @@ namespace RType {
         sf::FloatRect inputBoxBounds; /**< The bounding box of the text box. */
         bool isActive; /**< Flag indicating whether the text box is currently active. */
         bool isHovered; /**< Flag indicating whether the mouse cursor is hovering over the text box. */
+        unsigned int fontSize; /**< The size of the text. */
 
         /**
          * @brief Updates the text content of the text box.

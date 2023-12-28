@@ -25,14 +25,16 @@ namespace RType {
          * @param gameView The GameView associated with the state.
          */
         MenuState(sf::RenderWindow &window, GameView &gameView)
-            : _window(window), startBox(window, sf::Color::Cyan, 100.0f, 200.0f, "Start"),
-              optionsBox(window, sf::Color::Cyan, 100.0f, 250.0f, "Options"),
-              quitBox(window, sf::Color::Cyan, 100.0f, 300.0f, "Quit"), _gameView(gameView) {}
+            : _window(window), titleBox(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "R Type"),
+              startBox(window, sf::Color::Cyan, 20, 100.0f, 200.0f, "Start"),
+              optionsBox(window, sf::Color::Cyan, 20, 100.0f, 250.0f, "Options"),
+              quitBox(window, sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit"), _gameView(gameView) {}
 
         /**
          * @brief Handles user input for the menu.
          */
         void handleInput() {
+            titleBox.handleInput();
             startBox.handleInput();
             optionsBox.handleInput();
             quitBox.handleInput();
@@ -55,6 +57,7 @@ namespace RType {
          * @brief Updates the menu state.
          */
         void update() {
+            titleBox.update();
             startBox.update();
             optionsBox.update();
             quitBox.update();
@@ -66,6 +69,7 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow& window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+            titleBox.draw();
             startBox.draw();
             optionsBox.draw();
             quitBox.draw();
@@ -73,6 +77,7 @@ namespace RType {
         }
 
     private:
+        TextBox titleBox; /**< TextBox for the game title. */
         TextBox startBox; /**< TextBox for starting the game. */
         TextBox optionsBox; /**< TextBox for accessing options. */
         TextBox quitBox; /**< TextBox for quitting the game. */

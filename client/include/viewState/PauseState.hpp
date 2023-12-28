@@ -16,10 +16,12 @@ namespace RType {
     class PauseState : public IDraw {
     public:
         PauseState(sf::RenderWindow &window, GameView &gameView)
-            : resume(window, sf::Color::Cyan, 500.0f, 195.0f, "Resume"),
-              mainMenu(window, sf::Color::Cyan, 500.0f, 245.0f, "Exit To Main Menu"), _gameView(gameView) {}
+            : title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
+              resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
+              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu"), _gameView(gameView) {}
 
         void handleInput() {
+            title.handleInput();
             mainMenu.handleInput();
             resume.handleInput();
 
@@ -36,17 +38,20 @@ namespace RType {
         }
 
         void update() {
+            title.update();
             mainMenu.update();
             resume.update();
         }
 
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+            title.draw();
             mainMenu.draw();
             resume.draw();
             handleInput();
         }
 
     private:
+        TextBox title;
         TextBox mainMenu;
         TextBox resume;
         GameView &_gameView;
