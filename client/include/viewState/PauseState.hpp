@@ -38,7 +38,6 @@ namespace RType {
         }
 
         void update() {
-            title.update();
             mainMenu.update();
             resume.update();
         }

@@ -57,7 +57,6 @@ namespace RType {
          * @brief Updates the menu state.
          */
         void update() {
-            titleBox.update();
             startBox.update();
             optionsBox.update();
             quitBox.update();
