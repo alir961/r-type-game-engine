@@ -17,7 +17,7 @@ namespace RType {
     public:
         MenuState(sf::RenderWindow &window, GameView &gameView)
             : _window(window), startBox(window, sf::Color::Cyan, 100.0f, 200.0f, "Start"),
-              optionsBox(window, sf::Color::Magenta, 100.0f, 250.0f, "Options"),
+              optionsBox(window, sf::Color::Cyan, 100.0f, 250.0f, "Options"),
               quitBox(window, sf::Color::Cyan, 100.0f, 300.0f, "Quit"), _gameView(gameView) {}
 
         void handleInput() {

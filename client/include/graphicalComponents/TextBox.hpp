@@ -12,7 +12,7 @@ namespace RType {
     class TextBox {
     public:
         TextBox(sf::RenderWindow &window, const sf::Color &textColor, float x, float y, const std::string &initialText = "")
-            : window(window), textColor(textColor), isActive(false), isHovered(false) {
+            : _window(window), textColor(textColor), isActive(false), isHovered(false) {
             font.loadFromFile("client/assets/ka1.ttf");
             text.setFont(font);
             text.setCharacterSize(20);
@@ -24,28 +24,27 @@ namespace RType {
 
         void handleInput() {
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+                sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(_window));
                 if (inputBoxBounds.contains(mousePosition)) {
                     setActive(true);
                 } else {
                     setActive(false);
                 }
             }
-
-            sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+            sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(_window));
             isHovered = inputBoxBounds.contains(mousePosition);
         }
 
         void update() {
             if (isHovered) {
-                text.setFillColor(sf::Color(255, 255, 255, 200));
+                text.setFillColor(sf::Color::Cyan);
             } else {
-                text.setFillColor(sf::Color(255, 255, 255, 255));
+                text.setFillColor(sf::Color::Magenta);
             }
         }
 
         void draw() {
-            window.draw(text);
+            _window.draw(text);
         }
 
         void setActive(bool active) {
@@ -61,7 +60,7 @@ namespace RType {
         }
 
     private:
-        sf::RenderWindow &window;
+        sf::RenderWindow &_window;
         sf::Color textColor;
         sf::Text text;
         sf::Font font;
