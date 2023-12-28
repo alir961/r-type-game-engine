@@ -20,17 +20,23 @@ set(HEADER_FILES
         include/engine/ecs/entityModule/module/AMetricsModules.hpp
         include/engine/ecs/entityModule/module/AConsoleModule.hpp
         include/engine/network/NetworkMessage.hpp
-        include/engine/network/UDPAdapter.hpp)
+        include/engine/network/UDPAdapter.hpp
+        include/engine/modules/IModule.hpp
+        include/engine/modules/ModuleLoader.hpp
+)
 
 set(SOURCE_FILES
         src/Logger.cpp
         src/tools/NumberUtilities.cpp
         src/network/NetworkMessage.cpp
-        src/network/UDPAdapter.cpp)
+        src/network/UDPAdapter.cpp
+)
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 
 add_library(engine STATIC ${SOURCE_FILES})
+
+add_subdirectory(modules/sound)
 
 find_package(asio CONFIG REQUIRED)
 target_link_libraries(engine PRIVATE asio::asio)
