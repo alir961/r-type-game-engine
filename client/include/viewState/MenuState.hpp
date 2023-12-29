@@ -10,9 +10,6 @@
 #include "../graphicalComponents/TextBox.hpp"
 
 namespace RType {
-    class GameView;
-    enum class ViewState;
-
     /**
      * @class MenuState
      * @brief Represents a state with a menu for user interaction.
