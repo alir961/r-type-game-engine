@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "SoundModule.hpp"
+#include "engine/exception/ModuleException.hpp"
 
 extern "C" {
 RType::IModule *initializeSoundModule() {
@@ -28,14 +29,14 @@ void RType::SoundModule::unload() {
 
 void RType::SoundModule::loadSound(int id, const std::string &soundPath, float volume) {
     if (soundBuffers_.find(id) != soundBuffers_.end())
-        throw std::runtime_error("Sound already loaded");
+        throw ModuleException("Sound already loaded");
     soundBuffers_[id].loadFromFile(soundPath);
     sounds_[id] = {id, soundPath, volume};
 }
 
 void RType::SoundModule::playSound(int id) {
     if (soundBuffers_.find(id) == soundBuffers_.end())
-        throw std::runtime_error("Sound not loaded");
+        throw ModuleException("Sound not loaded");
     sf::Sound sound;
     sound.setBuffer(soundBuffers_[id]);
     sound.setVolume(sounds_[id].volume);
@@ -53,7 +54,7 @@ void RType::SoundModule::playAllSounds() {
 
 void RType::SoundModule::playLoopSound(int id) {
     if (soundBuffers_.find(id) == soundBuffers_.end())
-        throw std::runtime_error("Sound not loaded");
+        throw ModuleException("Sound not loaded");
     sf::Sound sound;
     sound.setBuffer(soundBuffers_[id]);
     sound.setVolume(sounds_[id].volume);
@@ -63,7 +64,7 @@ void RType::SoundModule::playLoopSound(int id) {
 
 void RType::SoundModule::stopSound(int id) {
     if (soundBuffers_.find(id) == soundBuffers_.end())
-        throw std::runtime_error("Sound not loaded");
+        throw ModuleException("Sound not loaded");
     sf::Sound sound;
     sound.setBuffer(soundBuffers_[id]);
     sound.setVolume(sounds_[id].volume);
