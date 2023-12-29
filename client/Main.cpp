@@ -2,11 +2,16 @@
 #include <engine/network/UDPAdapter.hpp>
 #include "include/GameView.hpp"
 #include "engine/network/NetworkMessage.hpp"
+#include "engine/modules/ModuleLoader.hpp"
+#include "../engine/modules/sound/SoundModule.hpp"
 
 int main() {
     RType::GameView view;
+    RType::ModuleLoader<RType::SoundModule> soundModuleLoader("build/out/engine/modules/sound/libsound_module.so");
+    RType::SoundModule *soundModule = soundModuleLoader.load();
 
     logInformation("Hello, World for client!");
+    soundModule->load();
 
     asio::io_context ioContext;
     UDP::socket socket(ioContext, UDP::endpoint(UDP::v4(), 0));
@@ -19,4 +24,7 @@ int main() {
 
     adapter.sendData(message);
     view.start();
+
+    soundModule->unload();
+    soundModuleLoader.unload();
 }
