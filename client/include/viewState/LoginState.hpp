@@ -39,7 +39,7 @@ namespace RType {
          */
         void handleInput() {
             loginButton.executeIfClicked([this] {
-                _gameView.setView(ViewState::GAME);
+                _gameView.setView(ViewState::MENU);
             });
         }
 
