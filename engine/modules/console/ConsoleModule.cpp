@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2023
-** NEWRTYPE
+** r-type
 ** File description:
-** ConsoleModule
+** No file there , just an epitech header example
 */
 
 #include "ConsoleModule.hpp"
@@ -26,18 +26,18 @@ void RType::ConsoleModule::unload() {
     std::cout << "Unload Console Module\n";
 }
 
-void RType::ConsoleModule::addMessage(const std::string& message) {
-   messages.push_back(message);
+void RType::ConsoleModule::addToHistory(const std::string &message) {
+    _history.push_back(message);
 }
 
-void RType::ConsoleModule::setInput(const std::string& input) {
-   this->input = input;
+void RType::ConsoleModule::setInput(const std::string &input) {
+    _input = input;
 }
 
-const std::vector<std::string>& RType::ConsoleModule::getMessages() const {
-   return messages;
+const RType::History &RType::ConsoleModule::getHistory() const {
+    return _history;
 }
 
-const std::string& RType::ConsoleModule::getInput() const {
-   return input;
+const std::string &RType::ConsoleModule::getInput() const {
+    return _input;
 }

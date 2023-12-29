@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2023
-** NEWRTYPE
+** r-type
 ** File description:
-** ParticuleModule
+** No file there , just an epitech header example
 */
 
 #include "ParticleModule.hpp"
@@ -26,17 +26,17 @@ void RType::ParticleModule::unload() {
     std::cout << "Unload Particle Module\n";
 }
 
-void RType::ParticleModule::addParticle(const ParticleModule::Particle& particle) {
-    particles.push_back(particle);
+void RType::ParticleModule::addParticle(const RType::Particle &particle) {
+    _particles.push_back(particle);
 }
 
-
 void RType::ParticleModule::update() {
-    for (auto& particle : particles) {
+    for (auto &particle: _particles) {
         particle.position += particle.velocity;
         particle.lifespan -= 1;
     }
-    particles.erase(std::remove_if(particles.begin(), particles.end(), [](const Particle& particle) {
+
+    _particles.erase(std::remove_if(_particles.begin(), _particles.end(), [](const Particle &particle) {
         return particle.lifespan <= 0;
-    }), particles.end());
+    }), _particles.end());
 }
