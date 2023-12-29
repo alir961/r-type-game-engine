@@ -96,6 +96,7 @@ void RType::GameView::setView(ViewState state) {
 
 void RType::GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
     _graphicEntities.push_back(entity);
+    std::cout << "Added entity with name: " << entity->getEntityName() << std::endl;
 }
 
 void RType::GameView::updateEntities(float deltaTime) {
@@ -172,7 +173,9 @@ int RType::GameView::start() {
 
         auto starshipEntity = entityManager.createEntity();
         starshipEntity->addComponent<RType::SpeedComponent>(10);
+        starshipEntity->addComponent<RType::HealthComponent>(100);
         starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(300, 30));
+        starshipEntity->addComponent<RType::PlayerComponent>(true);
 
         std::shared_ptr<RType::GraphicEntity> graphicStarship;
         if (starshipEntity->hasComponents() == true) {

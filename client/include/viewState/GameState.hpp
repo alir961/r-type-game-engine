@@ -8,6 +8,10 @@
 #pragma once
 #include "IDraw.hpp"
 #include "../graphicalComponents/TextBox.hpp"
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 namespace RType {
     /**
@@ -24,8 +28,9 @@ namespace RType {
         GameState(sf::RenderWindow &window, GameView &gameView)
             : _gameView(gameView),
               playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
-              healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, "HealthBar"),
-              pointsText(window, sf::Color::Cyan, 20, window.getSize().x - 100.0f, 10.0f, "Points") {}
+              pointsText(window, sf::Color::Cyan, 20, window.getSize().x - 100.0f, 10.0f, "Points"),
+              healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, "") {
+        }
 
         /**
          * @brief Draws entities on the SFML RenderWindow.
@@ -36,6 +41,13 @@ namespace RType {
             playerNameText.draw();
             healthBarText.draw();
             pointsText.draw();
+
+            std::shared_ptr<AGraphicEntity> player = _gameView.getGraphicEntityByName("playerStarship");
+            if (player != nullptr) {
+                float health = player->getEntity()->getComponent<HealthComponent>()->getHealth();
+                std::ostringstream healthString; healthString << std::fixed << std::setprecision(0) << health;
+                healthBarText.setText("Health: " + healthString.str());
+            } else healthBarText.setText("Player entity not found");
 
             for (auto &entity: graphicEntities) {
                 entity->draw(window);

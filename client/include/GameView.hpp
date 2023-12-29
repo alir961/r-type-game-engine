@@ -15,6 +15,7 @@
 #include <engine/ecs/EntityManager.hpp>
 #include <memory>
 #include <vector>
+#include <algorithm>
 
 constexpr uint32_t WINDOW_WIDTH = 1920;
 constexpr uint32_t WINDOW_HEIGHT = 1080;
@@ -89,6 +90,19 @@ namespace RType {
         void launchWindow(std::shared_ptr<AGraphicEntity> entity); // put graphical _entity by parameters to test _entity move with keyboard input : function is handleInput
 
     public:
+        std::shared_ptr<AGraphicEntity> getGraphicEntityByName(const std::string &name) const {
+            if (_graphicEntities.empty()) {
+                std::cout << "_graphicEntities is empty!" << std::endl;
+                return nullptr;
+            }
+            for (const auto &entity : _graphicEntities) {
+                if (entity->getEntityName() == name) {
+                    return entity;
+                }
+            }
+            return nullptr;
+        }
+
         /**
          * @brief Constructor for the GameView class.
          */

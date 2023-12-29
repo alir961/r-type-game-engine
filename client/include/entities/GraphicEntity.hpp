@@ -37,16 +37,18 @@ namespace RType {
          */
         void draw(sf::RenderWindow &window) override;
 
+        /**
+         * @brief get Entity.
+         */
         std::shared_ptr<Entity> getEntity() override {
             return _entity;
         }
 
+        /**
+         * @brief get Sprite.
+         */
         sf::Sprite getSprite() override {
             return _sprite;
-        }
-
-        std::string getEntityName() override {
-            return _entityName;
         }
 
     private:
@@ -55,7 +57,6 @@ namespace RType {
         sf::IntRect _currentFrame; /**< Current frame of the graphical _entity. */
         float _animationTime; /**< Animation time accumulator. */
         float _animationSpeed; /**< Speed of the animation. */
-        const std::string _entityName; /**< Entity name. */
         ResourceManager _resourceManager; /**< Resource Manager instance. */
     };
 }

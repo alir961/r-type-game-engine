@@ -103,6 +103,14 @@ namespace RType {
             updateText();
         }
 
+        /**
+         * @brief Change the text.
+         * @param newText The new text.
+         */
+        void setText(std::string newText) {
+            text.setString(newText);
+        }
+
     private:
         sf::RenderWindow& _window; /**< The SFML RenderWindow where the text box will be drawn. */
         sf::Color textColor; /**< The color of the text. */

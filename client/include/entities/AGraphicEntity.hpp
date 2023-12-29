@@ -13,7 +13,12 @@ namespace RType {
     * @brief Graphic Entity abstraction from the interface IGraphicEntity.
     */
     class AGraphicEntity : public IGraphicEntity {
+    private:
+        const std::string _entityName; /**< Entity name. */
+
     public:
+        AGraphicEntity(std::string entityName) : _entityName(entityName) {}
+
         void moveLeft(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) override {
             float speed = entity->getComponent<SpeedComponent>()->getSpeed();
             sprite.move(-speed, 0.0f);
@@ -67,6 +72,10 @@ namespace RType {
         /**
         * @brief Return the name of the graphical _entity
         */
-        virtual std::string getEntityName() = 0;
+        std::string getEntityName() {
+            return _entityName;
+        }
+
+        ~AGraphicEntity() = default;
     };
 }

@@ -8,7 +8,7 @@
 #include "../../include/entities/GraphicEntity.hpp"
 
 RType::GraphicEntity::GraphicEntity(std::shared_ptr<Entity> &entity, const std::string path, const std::string entityName)
-    : _entity(entity), _animationTime(0.0f), _animationSpeed(0.1f) {
+    : _entity(entity), _animationTime(0.0f), _animationSpeed(0.1f), AGraphicEntity(entityName) {
     _resourceManager.loadTexture(entityName, path);
     _sprite.setTexture(_resourceManager.getTexture(entityName));
     _currentFrame = sf::IntRect(0, 0, 50, 25);
