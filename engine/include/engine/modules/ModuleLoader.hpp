@@ -17,27 +17,51 @@ namespace RType {
         SOUND, UNKNOWN
     };
 
-    struct Module {
-        ModuleType type;
-        std::string path;
-        std::string name;
-    };
-
+    /**
+     * @brief Template class for dynamically loading and managing modules.
+     * @tparam T The type of the module to be loaded.
+     */
     template<typename T>
     class ModuleLoader {
     public:
+        /**
+        * @brief Explicit constructor to initialize the ModuleLoader with the specified path.
+        * @param path The path to the module file.
+        */
         explicit ModuleLoader(const std::string &path);
         ModuleLoader(ModuleLoader &&instance) noexcept = delete;
         ModuleLoader(ModuleLoader &instance) = delete;
 
-        T *load();
-        void unload();
-
+        /**
+         * @brief Destructor to unload the module and release resources.
+         */
         ~ModuleLoader();
 
+        /**
+         * @brief Loads the module and returns a pointer to the instantiated object of type T.
+         * @return A pointer to the loaded module object.
+         */
+        T *load();
+
+        /**
+         * @brief Unloads the module.
+         */
+        void unload();
+
+        /**
+         * @brief Static method to get the module type based on the provided path.
+         * @param path The path to the module file.
+         * @param existingHandle Pointer to an existing module handle (optional).
+         * @return The module type determined based on the path.
+         */
         static ModuleType getModuleType(const std::string &path, void *existingHandle = nullptr);
 
     private:
+        /**
+         * @brief Calls the constructor function with the specified name in the loaded module.
+         * @param functionName The name of the constructor function.
+         * @return A pointer to the instantiated object of type T.
+         */
         [[nodiscard]] T *callConstructor(const std::string &functionName) const;
 
         void *_handle = nullptr;
@@ -47,7 +71,7 @@ namespace RType {
 
     template<typename T>
     T *ModuleLoader<T>::callConstructor(const std::string &functionName) const {
-        T *(*initializeModule)();
+        T *(*initializeModule)() = nullptr;
 
         if (_handle == nullptr)
             throw ModuleException("No module loaded");
@@ -56,7 +80,6 @@ namespace RType {
 
         *(void **) (&initializeModule) = dlsym(_handle, functionName.c_str());
 
-        std::cout << "call constructor\n";
         if (initializeModule != nullptr)
             return initializeModule();
         throw ModuleException("Invalid library provided");
@@ -91,7 +114,7 @@ namespace RType {
 
     template<typename T>
     void ModuleLoader<T>::unload() {
-        void (*destroyLibrary)(T *);
+        void (*destroyLibrary)(T *) = nullptr;
 
         if (_module == nullptr) return;
         if (_handle == nullptr) throw ModuleException("No library loaded");
