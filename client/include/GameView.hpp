@@ -24,6 +24,7 @@ namespace RType {
     class OptionsState;
     class PauseState;
     class DeadState;
+    class WinState;
     class GameState;
     class LoginState;
     /**
@@ -36,7 +37,8 @@ namespace RType {
         GAME = 2,     /**< In-game state. */
         PAUSE = 3,    /**< Pause state. */
         DEAD = 4,     /**< Game over state. */
-        LOGIN = 5     /**< Game over state. */
+        LOGIN = 5,     /**< Game over state. */
+        WIN = 6      /**< Won game state. */
     };
 
     /**
@@ -53,6 +55,7 @@ namespace RType {
         std::shared_ptr<OptionsState> _optionsState;                      /**< Shared ptr to the Options ViewState. */
         std::shared_ptr<PauseState> _pauseState;                          /**< Shared ptr to the Pause ViewState. */
         std::shared_ptr<DeadState> _deadState;                            /**< Shared ptr to the Dead ViewState. */
+        std::shared_ptr<WinState> _winState;                            /**< Shared ptr to the Win ViewState. */
         std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
         std::shared_ptr<LoginState> _loginState;                           /**< Shared ptr to the Login ViewState. */
         sf::Event event{};
@@ -119,5 +122,6 @@ namespace RType {
 #include "viewState/OptionsState.hpp"
 #include "viewState/PauseState.hpp"
 #include "viewState/DeadState.hpp"
+#include "viewState/WinState.hpp"
 #include "viewState/GameState.hpp"
 #include "viewState/LoginState.hpp"

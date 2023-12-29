@@ -26,13 +26,17 @@ namespace RType {
          */
         OptionsState(sf::RenderWindow &window, GameView &gameView)
             : title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Options"),
-              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Exit To Main Menu"), _gameView(gameView) {}
+              sound(window, sf::Color::Cyan, 20, 500.0f, 250.0f, "Sound"),
+              soundVolume(window, sf::Color::Cyan, 20, 650.0f, 250.0f, "100"),
+              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 300.0f, "Exit To Main Menu"), _gameView(gameView) {}
 
         /**
          * @brief Handles user input for the options menu.
          */
         void handleInput() {
             title.handleInput();
+            sound.handleInput();
+            soundVolume.handleInput();
             mainMenu.handleInput();
 
             if (isMouseClicked()) {
@@ -58,12 +62,16 @@ namespace RType {
          */
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
             title.draw();
+            sound.draw();
+            soundVolume.draw();
             mainMenu.draw();
             handleInput();
         }
 
     private:
         TextBox title; /**< TextBox for the title. */
+        TextBox sound; /**< Sound of the GameView. */
+        TextBox soundVolume; /**< Game sound volume of the GameView. */
         TextBox mainMenu; /**< TextBox for the menu. */
         GameView &_gameView; /**< Reference to the GameView. */
 

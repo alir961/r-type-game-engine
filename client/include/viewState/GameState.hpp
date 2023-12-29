@@ -7,6 +7,7 @@
 
 #pragma once
 #include "IDraw.hpp"
+#include "../graphicalComponents/TextBox.hpp"
 
 namespace RType {
     /**
@@ -20,7 +21,11 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        GameState(sf::RenderWindow &window, GameView &gameView) : _gameView(gameView) {}
+        GameState(sf::RenderWindow &window, GameView &gameView)
+            : _gameView(gameView),
+              playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
+              healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, "HealthBar"),
+              pointsText(window, sf::Color::Cyan, 20, window.getSize().x - 100.0f, 10.0f, "Points") {}
 
         /**
          * @brief Draws entities on the SFML RenderWindow.
@@ -28,11 +33,19 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>> graphicEntities) override {
+            playerNameText.draw();
+            healthBarText.draw();
+            pointsText.draw();
+
             for (auto &entity: graphicEntities) {
                 entity->draw(window);
             }
         }
+
     private:
         GameView &_gameView; /**< The associated GameView. */
+        TextBox playerNameText;
+        TextBox healthBarText;
+        TextBox pointsText;
     };
 }

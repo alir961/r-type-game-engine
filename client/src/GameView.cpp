@@ -13,6 +13,7 @@ RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT)
     _optionsState = std::make_shared<OptionsState>(_window, *this);
     _pauseState = std::make_shared<PauseState>(_window, *this);
     _deadState = std::make_shared<DeadState>(_window, *this);
+    _winState = std::make_shared<WinState>(_window, *this);
     _gameState = std::make_shared<GameState>(_window, *this);
     _loginState = std::make_shared<LoginState>(_window, *this);
 }
@@ -50,6 +51,15 @@ void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntiti
                 _window.close();
                 return;
             }
+            // Testing Win/Lose State
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad8) {
+                std::cout << "Entering Win State" << std::endl;
+                setView(ViewState::WIN);
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad9) {
+                std::cout << "Entering Lose State" << std::endl;
+                setView(ViewState::DEAD);
+            }
             if (_viewState == ViewState::OPTIONS) {
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
                     std::cout << "Return key pressed in OPTIONS state" << std::endl;
@@ -64,6 +74,10 @@ void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntiti
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                     std::cout << "Escape key pressed in GAME state" << std::endl;
                     setView(ViewState::GAME);
+                }
+            } else if (_viewState == ViewState::WIN || _viewState == ViewState::DEAD) {
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+                    setView(ViewState::MENU);
                 }
             }
         }
@@ -138,6 +152,9 @@ void RType::GameView::draw() {
             break;
         case ViewState::DEAD:
             _deadState->draw(_window, _graphicEntities);
+            break;
+        case ViewState::WIN:
+            _winState->draw(_window, _graphicEntities);
             break;
         case ViewState::LOGIN:
             _loginState->draw(_window, _graphicEntities);
