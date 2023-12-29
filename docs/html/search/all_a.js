@@ -6,5 +6,6 @@ var searchData=
   ['loadtexture_3',['loadTexture',['../classRType_1_1ResourceManager.html#aaf9fe0d29a9c6f6f095600fc672ae334',1,'RType::ResourceManager']]],
   ['loginbutton_4',['loginButton',['../classRType_1_1LoginState.html#a9693369d5444b4ccf30bbf324f4f4879',1,'RType::LoginState']]],
   ['loginstate_5',['loginstate',['../classRType_1_1LoginState.html',1,'RType::LoginState'],['../classRType_1_1LoginState.html#a17b15dba366055fb034124e330fe84ef',1,'RType::LoginState::LoginState()']]],
-  ['lz4algorithm_6',['LZ4Algorithm',['../classRType_1_1LZ4Algorithm.html',1,'RType']]]
+  ['losetext_6',['loseText',['../classRType_1_1DeadState.html#ad66135d878ce23817230e6d5eea6e84a',1,'RType::DeadState']]],
+  ['lz4algorithm_7',['LZ4Algorithm',['../classRType_1_1LZ4Algorithm.html',1,'RType']]]
 ];

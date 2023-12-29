@@ -28,7 +28,7 @@ namespace RType {
         GameState(sf::RenderWindow &window, GameView &gameView)
             : _gameView(gameView),
               playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
-              pointsText(window, sf::Color::Cyan, 20, window.getSize().x - 100.0f, 10.0f, "Points"),
+              scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 100.0f, 10.0f, "Score"),
               healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, "") {
         }
 
@@ -40,10 +40,10 @@ namespace RType {
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>> graphicEntities) override {
             playerNameText.draw();
             healthBarText.draw();
-            pointsText.draw();
+            scoreText.draw();
 
             std::shared_ptr<AGraphicEntity> player = _gameView.getGraphicEntityByName("playerStarship");
-            if (player != nullptr) {
+            if (player != nullptr && player->getEntity()->getComponent<PlayerComponent>()) {
                 float health = player->getEntity()->getComponent<HealthComponent>()->getHealth();
                 std::ostringstream healthString; healthString << std::fixed << std::setprecision(0) << health;
                 healthBarText.setText("Health: " + healthString.str());
@@ -56,8 +56,8 @@ namespace RType {
 
     private:
         GameView &_gameView; /**< The associated GameView. */
-        TextBox playerNameText;
-        TextBox healthBarText;
-        TextBox pointsText;
+        TextBox playerNameText; /**< Player Name Text. */
+        TextBox healthBarText; /**< Health Text. */
+        TextBox scoreText; /**< Score Text. */
     };
 }

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['usernameboxinput_0',['userNameBoxInput',['../classRType_1_1LoginState.html#ae56931511f12c75db71704464e7b9354',1,'RType::LoginState']]],
-  ['usernameboxtitle_1',['userNameBoxTitle',['../classRType_1_1LoginState.html#afc624beccfa6427ed09ed1fa3b9222ac',1,'RType::LoginState']]]
+  ['rectangle_0',['rectangle',['../classRType_1_1RectBox.html#ae897a25212d52aa006283c27519a1ff4',1,'RType::RectBox']]],
+  ['resume_1',['resume',['../classRType_1_1PauseState.html#a8b44a2f55f54bc635870e54807603256',1,'RType::PauseState']]]
 ];

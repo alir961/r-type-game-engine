@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRType_1_1AGraphicEntity-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RType::AGraphicEntity Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -97,6 +98,9 @@ Inheritance diagram for RType::AGraphicEntity:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aca97fab81f75e830711bed52fb72619e" id="r_aca97fab81f75e830711bed52fb72619e"><td class="memItemLeft" align="right" valign="top"><a id="aca97fab81f75e830711bed52fb72619e" name="aca97fab81f75e830711bed52fb72619e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AGraphicEntity</b> (std::string entityName)</td></tr>
+<tr class="separator:aca97fab81f75e830711bed52fb72619e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d0a26e5d435be2c8b887cc6e19e07db" id="r_a2d0a26e5d435be2c8b887cc6e19e07db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#a2d0a26e5d435be2c8b887cc6e19e07db">moveLeft</a> (sf::Sprite &amp;sprite, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;entity) override</td></tr>
 <tr class="memdesc:a2d0a26e5d435be2c8b887cc6e19e07db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:a2d0a26e5d435be2c8b887cc6e19e07db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,15 +119,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af101c48797f5fbe2c17efaa1b42a6a95" id="r_af101c48797f5fbe2c17efaa1b42a6a95"><td class="memItemLeft" align="right" valign="top">virtual sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95">getSprite</a> ()=0</td></tr>
 <tr class="memdesc:af101c48797f5fbe2c17efaa1b42a6a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the _sprite of the graphical _entity.  <br /></td></tr>
 <tr class="separator:af101c48797f5fbe2c17efaa1b42a6a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8de91cf88eb2abd14d3ed8584724b67a" id="r_a8de91cf88eb2abd14d3ed8584724b67a"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#a8de91cf88eb2abd14d3ed8584724b67a">getEntityName</a> ()=0</td></tr>
-<tr class="memdesc:a8de91cf88eb2abd14d3ed8584724b67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the name of the graphical _entity.  <br /></td></tr>
-<tr class="separator:a8de91cf88eb2abd14d3ed8584724b67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3afb63bdf5fcbb2543449bbceca4194a" id="r_a3afb63bdf5fcbb2543449bbceca4194a"><td class="memItemLeft" align="right" valign="top"><a id="a3afb63bdf5fcbb2543449bbceca4194a" name="a3afb63bdf5fcbb2543449bbceca4194a"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getEntityName</b> ()</td></tr>
+<tr class="memdesc:a3afb63bdf5fcbb2543449bbceca4194a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the name of the graphical _entity. <br /></td></tr>
+<tr class="separator:a3afb63bdf5fcbb2543449bbceca4194a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5951043d1cb3d895128d3debd8f3f7c3" id="r_a5951043d1cb3d895128d3debd8f3f7c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1IGraphicEntity.html#a5951043d1cb3d895128d3debd8f3f7c3">update</a> (float deltaTime)=0</td></tr>
 <tr class="memdesc:a5951043d1cb3d895128d3debd8f3f7c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the graphic _entity based on the game state.  <br /></td></tr>
 <tr class="separator:a5951043d1cb3d895128d3debd8f3f7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa45e7e347ba32410e5c1417be5707440" id="r_aa45e7e347ba32410e5c1417be5707440"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1IGraphicEntity.html#aa45e7e347ba32410e5c1417be5707440">draw</a> (sf::RenderWindow &amp;window)=0</td></tr>
 <tr class="memdesc:aa45e7e347ba32410e5c1417be5707440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:aa45e7e347ba32410e5c1417be5707440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:affd18c39efe7107e7080f76a96f7e29f" id="r_affd18c39efe7107e7080f76a96f7e29f"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#affd18c39efe7107e7080f76a96f7e29f">_entityName</a></td></tr>
+<tr class="separator:affd18c39efe7107e7080f76a96f7e29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Graphic <a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> abstraction from the interface <a class="el" href="classRType_1_1IGraphicEntity.html" title="Graphic Entity interface.">IGraphicEntity</a>. </p>
@@ -190,35 +200,6 @@ Public Member Functions</h2></td></tr>
 <p>Return the _entity of the graphical _entity. </p>
 
 <p>Implemented in <a class="el" href="classRType_1_1GraphicEntity.html#aec4fd3c000bfcb9baa275ad3e34c9045">RType::GraphicEntity</a>.</p>
-
-</div>
-</div>
-<a id="a8de91cf88eb2abd14d3ed8584724b67a" name="a8de91cf88eb2abd14d3ed8584724b67a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8de91cf88eb2abd14d3ed8584724b67a">&#9670;&#160;</a></span>getEntityName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual std::string RType::AGraphicEntity::getEntityName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return the name of the graphical _entity. </p>
-
-<p>Implemented in <a class="el" href="classRType_1_1GraphicEntity.html#a36d1e84b6b39cb7b3b290291d3a9b019">RType::GraphicEntity</a>.</p>
 
 </div>
 </div>
@@ -472,6 +453,30 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Implemented in <a class="el" href="classRType_1_1GraphicEntity.html#a4e8c92f4b8b63739d3ee43d086b200bd">RType::GraphicEntity</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="affd18c39efe7107e7080f76a96f7e29f" name="affd18c39efe7107e7080f76a96f7e29f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd18c39efe7107e7080f76a96f7e29f">&#9670;&#160;</a></span>_entityName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string RType::AGraphicEntity::_entityName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> name. </p>
 
 </div>
 </div>
