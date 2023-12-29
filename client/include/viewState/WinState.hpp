@@ -30,6 +30,17 @@ namespace RType {
               pointsText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 215, "500pts"),
               exitText(window, sf::Color::White, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 315, "Exit") {}
 
+        void handleInput() {
+            exitText.handleInput();
+
+            if (isMouseClicked()) {
+                if (exitText.getActive()) {
+                    std::cout << "Exit To Main Menu!" << std::endl;
+                    _gameView.setView(ViewState::MENU);
+                }
+            }
+        }
+
         /**
          * @brief Updates the menu state.
          */
@@ -48,6 +59,7 @@ namespace RType {
             hpText.draw();
             pointsText.draw();
             exitText.draw();
+            handleInput();
         }
 
     private:
@@ -57,5 +69,9 @@ namespace RType {
         TextBox hpText; /**< Text "hp". */
         TextBox pointsText; /**< Text "pts". */
         TextBox exitText; /**< Exit Text. */
+
+        bool isMouseClicked() const {
+            return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+        }
     };
 }
