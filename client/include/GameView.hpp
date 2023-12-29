@@ -78,6 +78,11 @@ namespace RType {
         void handleInput(std::shared_ptr<AGraphicEntity> &entity);
 
         /**
+         * @brief Private method to handle basic input.
+         */
+        void basicInput();
+
+        /**
          * @brief Private method to launch the SFML window and test keyboard input for a specific _entity.
          * @param entity The graphic _entity to test with keyboard input.
          */

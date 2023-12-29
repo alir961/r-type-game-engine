@@ -23,20 +23,45 @@ void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
     std::shared_ptr<Entity> gameEntity = entity->getEntity();
 
     if (_viewState == ViewState::GAME) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            entity->moveRight(sprite, gameEntity);
-        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { entity->moveRight(sprite, gameEntity); }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            entity->moveLeft(sprite, gameEntity);
-        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) { entity->moveLeft(sprite, gameEntity); }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            entity->moveUp(sprite, gameEntity);
-        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { entity->moveUp(sprite, gameEntity); }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            entity->moveDown(sprite, gameEntity);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { entity->moveDown(sprite, gameEntity); }
+    }
+}
+
+void RType::GameView::basicInput() {
+    // Testing Win/Lose State
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad8) {
+        std::cout << "Entering Win State" << std::endl;
+        setView(ViewState::WIN);
+    }
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad9) {
+        std::cout << "Entering Lose State" << std::endl;
+        setView(ViewState::DEAD);
+    }
+    // Testing Win/Lose State
+    if (_viewState == ViewState::OPTIONS) {
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
+            std::cout << "Return key pressed in OPTIONS state" << std::endl;
+            setView(ViewState::MENU);
+        }
+    } else if (_viewState == ViewState::GAME) {
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+            std::cout << "Escape key pressed in GAME state" << std::endl;
+            setView(ViewState::PAUSE);
+        }
+    } else if (_viewState == ViewState::PAUSE) {
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+            std::cout << "Escape key pressed in GAME state" << std::endl;
+            setView(ViewState::GAME);
+        }
+    } else if (_viewState == ViewState::WIN || _viewState == ViewState::DEAD) {
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+            setView(ViewState::MENU);
         }
     }
 }
@@ -51,35 +76,7 @@ void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntiti
                 _window.close();
                 return;
             }
-            // Testing Win/Lose State
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad8) {
-                std::cout << "Entering Win State" << std::endl;
-                setView(ViewState::WIN);
-            }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad9) {
-                std::cout << "Entering Lose State" << std::endl;
-                setView(ViewState::DEAD);
-            }
-            if (_viewState == ViewState::OPTIONS) {
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
-                    std::cout << "Return key pressed in OPTIONS state" << std::endl;
-                    setView(ViewState::MENU);
-                }
-            } else if (_viewState == ViewState::GAME) {
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                    std::cout << "Escape key pressed in GAME state" << std::endl;
-                    setView(ViewState::PAUSE);
-                }
-            } else if (_viewState == ViewState::PAUSE) {
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                    std::cout << "Escape key pressed in GAME state" << std::endl;
-                    setView(ViewState::GAME);
-                }
-            } else if (_viewState == ViewState::WIN || _viewState == ViewState::DEAD) {
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                    setView(ViewState::MENU);
-                }
-            }
+            basicInput();
         }
         handleInput(graphicEntities);
 
@@ -117,6 +114,12 @@ void RType::GameView::updateEntities(float deltaTime) {
             break;
         case ViewState::LOGIN:
             _loginState->update();
+            break;
+        case ViewState::DEAD:
+            _deadState->update();
+            break;
+        case ViewState::WIN:
+            _winState->update();
             break;
     }
     switch (_viewState) {
