@@ -38,6 +38,7 @@ add_library(engine STATIC ${SOURCE_FILES})
 
 add_subdirectory(modules/sound)
 add_subdirectory(modules/console)
+add_subdirectory(modules/particle)
 
 find_package(asio CONFIG REQUIRED)
 target_link_libraries(engine PRIVATE asio::asio)
