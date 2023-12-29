@@ -16,21 +16,21 @@ namespace RType {
     public:
         /**
          * @brief Base constructor for collidable component.
-        * @param isCollidable The status of the entity (collidable or not).
+        * @param isCollidable The status of the _entity (collidable or not).
         */
         explicit CollisionComponent(bool isCollidable) : _isCollidable(isCollidable) {}
 
         /**
-        * @brief Set the collision status of the entity.
-        * @param isCollidable True if the entity is collidable, false otherwise.
+        * @brief Set the collision status of the _entity.
+        * @param isCollidable True if the _entity is collidable, false otherwise.
         */
         void setCollision(bool isCollidable) {
             _isCollidable = isCollidable;
         }
 
         /**
-        * @brief Get the collision status of the entity.
-        * @return True if the entity is collidable, false otherwise.
+        * @brief Get the collision status of the _entity.
+        * @return True if the _entity is collidable, false otherwise.
         */
         [[nodiscard]] bool getCollisionStatus() const {
             return _isCollidable;
@@ -44,6 +44,6 @@ namespace RType {
         }
 
     private:
-        bool _isCollidable; /**< Collision status of the entity. */
+        bool _isCollidable; /**< Collision status of the _entity. */
     };
 }

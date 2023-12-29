@@ -34,10 +34,10 @@ namespace RType {
          * @param y The Y-coordinate of the button.
          * @param text The text to be displayed on the button.
          */
-        explicit Button(sf::RenderWindow &window, int x, int y, std::string text) : _window(window), _x(x), _y(y),
+        explicit Button(sf::RenderWindow &window, float x, float y, std::string text) : _window(window), _x(x), _y(y),
                                                           _text(std::move(text)) {
-            _rectangle.setPosition(static_cast<float>(_x), static_cast<float>(_y));
-            _rectangle.setSize(sf::Vector2f(static_cast<float>(width), static_cast<float>(height)));
+            _rectangle.setPosition(x, y);
+            _rectangle.setSize(sf::Vector2f(float(width), float(height)));
         }
 
         /**
@@ -64,7 +64,7 @@ namespace RType {
          */
         void executeIfClicked(std::function<void()> function) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(_window);
-            bool mouseOver = _rectangle.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+            bool mouseOver = _rectangle.getGlobalBounds().contains(float(mousePosition.x), float(mousePosition.y));
             bool mouseClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 
             if (mouseOver && mouseClick) {

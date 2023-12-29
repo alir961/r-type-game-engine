@@ -75,13 +75,15 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRType_1_1NumberInput-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RType::NumberInput Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Represents an input box for numeric values.  
+<p>Represents an input box for entering numbers.  
  <a href="classRType_1_1NumberInput.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="NumberInput_8hpp_source.html">NumberInput.hpp</a>&gt;</code></p>
@@ -91,58 +93,67 @@ Inheritance diagram for RType::NumberInput:</div>
  <div class="center">
   <img src="classRType_1_1NumberInput.png" usemap="#RType::NumberInput_map" alt=""/>
   <map id="RType::NumberInput_map" name="RType::NumberInput_map">
-<area href="classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game." alt="RType::AInputBox" shape="rect" coords="0,0,125,24"/>
+<area href="classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game. This class provides a base for implementing in..." alt="RType::AInputBox" shape="rect" coords="0,0,125,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af8b2dd7166bdb121bc5d4ae1e429be62" id="r_af8b2dd7166bdb121bc5d4ae1e429be62"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1NumberInput.html#af8b2dd7166bdb121bc5d4ae1e429be62">NumberInput</a> (sf::RenderWindow &amp;window, int x, int y, int defaultValue=0)</td></tr>
-<tr class="memdesc:af8b2dd7166bdb121bc5d4ae1e429be62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for numeric values.">NumberInput</a>.  <br /></td></tr>
+<tr class="memdesc:af8b2dd7166bdb121bc5d4ae1e429be62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for entering numbers.">NumberInput</a>.  <br /></td></tr>
 <tr class="separator:af8b2dd7166bdb121bc5d4ae1e429be62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f08857ef4248dcdaa0eb48af0042dc7" id="r_a9f08857ef4248dcdaa0eb48af0042dc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1NumberInput.html#a9f08857ef4248dcdaa0eb48af0042dc7">update</a> () override</td></tr>
-<tr class="memdesc:a9f08857ef4248dcdaa0eb48af0042dc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for numeric values.">NumberInput</a> based on user input.  <br /></td></tr>
-<tr class="separator:a9f08857ef4248dcdaa0eb48af0042dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b48fed0b1e3ab3e00b61d1cf3b820ef" id="r_a5b48fed0b1e3ab3e00b61d1cf3b820ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1NumberInput.html#a5b48fed0b1e3ab3e00b61d1cf3b820ef">update</a> (const sf::Event &amp;event) override</td></tr>
+<tr class="memdesc:a5b48fed0b1e3ab3e00b61d1cf3b820ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function for handling events specific to <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for entering numbers.">NumberInput</a>. Overrides the base class <a class="el" href="classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game. This class provides a base for implementing in...">AInputBox</a>'s update function to handle number input.  <br /></td></tr>
+<tr class="separator:a5b48fed0b1e3ab3e00b61d1cf3b820ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad44f34268096830455de58ce724ca4" id="r_adad44f34268096830455de58ce724ca4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1NumberInput.html#adad44f34268096830455de58ce724ca4">getValue</a> () const</td></tr>
-<tr class="memdesc:adad44f34268096830455de58ce724ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the numeric value entered in the input box.  <br /></td></tr>
+<tr class="memdesc:adad44f34268096830455de58ce724ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the numerical value entered in the input box.  <br /></td></tr>
 <tr class="separator:adad44f34268096830455de58ce724ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a291708b0d800209add7c4d6a1fe4884a" id="r_a291708b0d800209add7c4d6a1fe4884a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a291708b0d800209add7c4d6a1fe4884a">draw</a> ()</td></tr>
-<tr class="memdesc:a291708b0d800209add7c4d6a1fe4884a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the input box on the SFML RenderWindow.  <br /></td></tr>
-<tr class="separator:a291708b0d800209add7c4d6a1fe4884a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a386d6fbc51ac70b54ea26dd2c28dac5b" id="r_a386d6fbc51ac70b54ea26dd2c28dac5b"><td class="memItemLeft" align="right" valign="top"><a id="a386d6fbc51ac70b54ea26dd2c28dac5b" name="a386d6fbc51ac70b54ea26dd2c28dac5b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> () const</td></tr>
+<tr class="memdesc:a386d6fbc51ac70b54ea26dd2c28dac5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the input box on the SFML RenderWindow. <br /></td></tr>
+<tr class="separator:a386d6fbc51ac70b54ea26dd2c28dac5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34be040b0be1934bca8f8f3e6b40255b" id="r_a34be040b0be1934bca8f8f3e6b40255b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a34be040b0be1934bca8f8f3e6b40255b">setActive</a> (bool active)</td></tr>
+<tr class="memdesc:a34be040b0be1934bca8f8f3e6b40255b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the activation state of the input box.  <br /></td></tr>
+<tr class="separator:a34be040b0be1934bca8f8f3e6b40255b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad07973eff01bd2e44209a71ac6e4c1b7" id="r_ad07973eff01bd2e44209a71ac6e4c1b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#ad07973eff01bd2e44209a71ac6e4c1b7">isActive</a> () const</td></tr>
-<tr class="memdesc:ad07973eff01bd2e44209a71ac6e4c1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the input box is currently active.  <br /></td></tr>
+<tr class="memdesc:ad07973eff01bd2e44209a71ac6e4c1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the input box is currently active.  <br /></td></tr>
 <tr class="separator:ad07973eff01bd2e44209a71ac6e4c1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a65cf16b03fb6ac6a9638d46f7df8e5ae" id="r_a65cf16b03fb6ac6a9638d46f7df8e5ae"><td class="memItemLeft" align="right" valign="top">sf::RenderWindow &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a65cf16b03fb6ac6a9638d46f7df8e5ae">_window</a></td></tr>
-<tr class="separator:a65cf16b03fb6ac6a9638d46f7df8e5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:acc29f38158c6378e489da4cfabbdad65" id="r_acc29f38158c6378e489da4cfabbdad65"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#acc29f38158c6378e489da4cfabbdad65">_x</a></td></tr>
 <tr class="separator:acc29f38158c6378e489da4cfabbdad65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb57c32425b3eb6d64b8c656feb9e9cf" id="r_adb57c32425b3eb6d64b8c656feb9e9cf"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#adb57c32425b3eb6d64b8c656feb9e9cf">_y</a></td></tr>
 <tr class="separator:adb57c32425b3eb6d64b8c656feb9e9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a253c5bac8eb48b60af2a11a7638a5a1e" id="r_a253c5bac8eb48b60af2a11a7638a5a1e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a253c5bac8eb48b60af2a11a7638a5a1e">_width</a> = 200</td></tr>
-<tr class="separator:a253c5bac8eb48b60af2a11a7638a5a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a965ba2b843e1027b52fec4a2c101e233" id="r_a965ba2b843e1027b52fec4a2c101e233"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a965ba2b843e1027b52fec4a2c101e233">_height</a> = 40</td></tr>
-<tr class="separator:a965ba2b843e1027b52fec4a2c101e233"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4429f1212376235790bfea7822b1ad0c" id="r_a4429f1212376235790bfea7822b1ad0c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a4429f1212376235790bfea7822b1ad0c">_fontSize</a> = 20</td></tr>
-<tr class="separator:a4429f1212376235790bfea7822b1ad0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf29257ce0d2758361e3c526f7d88141" id="r_acf29257ce0d2758361e3c526f7d88141"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#acf29257ce0d2758361e3c526f7d88141">_maxChars</a></td></tr>
 <tr class="separator:acf29257ce0d2758361e3c526f7d88141"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f2e2b0d0399f97520bd8e9d011c4a38" id="r_a1f2e2b0d0399f97520bd8e9d011c4a38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a1f2e2b0d0399f97520bd8e9d011c4a38">_active</a> = false</td></tr>
+<tr class="memitem:a1f2e2b0d0399f97520bd8e9d011c4a38" id="r_a1f2e2b0d0399f97520bd8e9d011c4a38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a1f2e2b0d0399f97520bd8e9d011c4a38">_active</a></td></tr>
 <tr class="separator:a1f2e2b0d0399f97520bd8e9d011c4a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bfdc246f429e7dc1af9767220ee0208" id="r_a0bfdc246f429e7dc1af9767220ee0208"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a0bfdc246f429e7dc1af9767220ee0208">_textStr</a></td></tr>
-<tr class="separator:a0bfdc246f429e7dc1af9767220ee0208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a715956eddb32d98a23562f0794ea1c50" id="r_a715956eddb32d98a23562f0794ea1c50"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a715956eddb32d98a23562f0794ea1c50">_text</a></td></tr>
+<tr class="separator:a715956eddb32d98a23562f0794ea1c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1180f8273fa271fbc8918e823d1c5fb5" id="r_a1180f8273fa271fbc8918e823d1c5fb5"><td class="memItemLeft" align="right" valign="top">sf::RectangleShape&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a1180f8273fa271fbc8918e823d1c5fb5">_rect</a></td></tr>
 <tr class="separator:a1180f8273fa271fbc8918e823d1c5fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad04262174bad57be4f7926bf581b052f" id="r_ad04262174bad57be4f7926bf581b052f"><td class="memItemLeft" align="right" valign="top">sf::Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#ad04262174bad57be4f7926bf581b052f">_textDisplay</a></td></tr>
+<tr class="separator:ad04262174bad57be4f7926bf581b052f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7c5227dd814dccedb7002f919821b1a" id="r_ac7c5227dd814dccedb7002f919821b1a"><td class="memItemLeft" align="right" valign="top">sf::Font&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#ac7c5227dd814dccedb7002f919821b1a">_font</a></td></tr>
 <tr class="separator:ac7c5227dd814dccedb7002f919821b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94a90ad0db33c52dc455bd46583cc225" id="r_a94a90ad0db33c52dc455bd46583cc225"><td class="memItemLeft" align="right" valign="top">sf::Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a94a90ad0db33c52dc455bd46583cc225">_text</a></td></tr>
-<tr class="separator:a94a90ad0db33c52dc455bd46583cc225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65cf16b03fb6ac6a9638d46f7df8e5ae" id="r_a65cf16b03fb6ac6a9638d46f7df8e5ae"><td class="memItemLeft" align="right" valign="top">sf::RenderWindow &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AInputBox.html#a65cf16b03fb6ac6a9638d46f7df8e5ae">_window</a></td></tr>
+<tr class="separator:a65cf16b03fb6ac6a9638d46f7df8e5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a346765d8a447f6c243a3332570c6f93f" id="r_a346765d8a447f6c243a3332570c6f93f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1NumberInput.html#a346765d8a447f6c243a3332570c6f93f">isValidInput</a> (char inputChar) const</td></tr>
+<tr class="memdesc:a346765d8a447f6c243a3332570c6f93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the input character is a valid number input.  <br /></td></tr>
+<tr class="separator:a346765d8a447f6c243a3332570c6f93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:adf99a45ed5f6862b599fdb8135cc5542" id="r_adf99a45ed5f6862b599fdb8135cc5542"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1NumberInput.html#adf99a45ed5f6862b599fdb8135cc5542">_keyPressed</a> {false}</td></tr>
+<tr class="separator:adf99a45ed5f6862b599fdb8135cc5542"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents an input box for numeric values. </p>
-<p>Inherits from <a class="el" href="classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game.">AInputBox</a> for common input box functionality. </p>
+<div class="textblock"><p>Represents an input box for entering numbers. </p>
+<p>Inherits from <a class="el" href="classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game. This class provides a base for implementing in...">AInputBox</a> for common input box functionality. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af8b2dd7166bdb121bc5d4ae1e429be62" name="af8b2dd7166bdb121bc5d4ae1e429be62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af8b2dd7166bdb121bc5d4ae1e429be62">&#9670;&#160;</a></span>NumberInput()</h2>
@@ -190,12 +201,13 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for numeric values.">NumberInput</a>. </p>
+<p>Constructor for <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for entering numbers.">NumberInput</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td>The x-coordinate of the input box. </td></tr>
-    <tr><td class="paramname">y</td><td>The y-coordinate of the input box. </td></tr>
-    <tr><td class="paramname">defaultValue</td><td>The default numeric value. </td></tr>
+    <tr><td class="paramname">window</td><td>Reference to the SFML RenderWindow. </td></tr>
+    <tr><td class="paramname">x</td><td>X-coordinate of the input box. </td></tr>
+    <tr><td class="paramname">y</td><td>Y-coordinate of the input box. </td></tr>
+    <tr><td class="paramname">defaultValue</td><td>Default value for the input box (optional, defaults to 0). </td></tr>
   </table>
   </dd>
 </dl>
@@ -203,39 +215,6 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a291708b0d800209add7c4d6a1fe4884a" name="a291708b0d800209add7c4d6a1fe4884a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a291708b0d800209add7c4d6a1fe4884a">&#9670;&#160;</a></span>draw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RType::AInputBox::draw </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draws the input box on the SFML RenderWindow. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">window</td><td>The SFML RenderWindow to draw the input box on. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="adad44f34268096830455de58ce724ca4" name="adad44f34268096830455de58ce724ca4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adad44f34268096830455de58ce724ca4">&#9670;&#160;</a></span>getValue()</h2>
 
@@ -259,8 +238,8 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the numeric value entered in the input box. </p>
-<dl class="section return"><dt>Returns</dt><dd>The numeric value. </dd></dl>
+<p>Get the numerical value entered in the input box. </p>
+<dl class="section return"><dt>Returns</dt><dd>The numerical value. </dd></dl>
 
 </div>
 </div>
@@ -287,13 +266,82 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if the input box is currently active. </p>
-<dl class="section return"><dt>Returns</dt><dd>True if the input box is active, false otherwise. </dd></dl>
+<p>Check if the input box is currently active. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if active, false otherwise. </dd></dl>
 
 </div>
 </div>
-<a id="a9f08857ef4248dcdaa0eb48af0042dc7" name="a9f08857ef4248dcdaa0eb48af0042dc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f08857ef4248dcdaa0eb48af0042dc7">&#9670;&#160;</a></span>update()</h2>
+<a id="a346765d8a447f6c243a3332570c6f93f" name="a346765d8a447f6c243a3332570c6f93f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a346765d8a447f6c243a3332570c6f93f">&#9670;&#160;</a></span>isValidInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RType::NumberInput::isValidInput </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>inputChar</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the input character is a valid number input. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputChar</td><td>The input character to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the character is a digit or '.', false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a34be040b0be1934bca8f8f3e6b40255b" name="a34be040b0be1934bca8f8f3e6b40255b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34be040b0be1934bca8f8f3e6b40255b">&#9670;&#160;</a></span>setActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::AInputBox::setActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the activation state of the input box. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">active</td><td>True to activate, false to deactivate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5b48fed0b1e3ab3e00b61d1cf3b820ef" name="a5b48fed0b1e3ab3e00b61d1cf3b820ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b48fed0b1e3ab3e00b61d1cf3b820ef">&#9670;&#160;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -304,7 +352,8 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void RType::NumberInput::update </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const sf::Event &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -315,15 +364,15 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Updates the <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for numeric values.">NumberInput</a> based on user input. </p>
+<p>Update function for handling events specific to <a class="el" href="classRType_1_1NumberInput.html" title="Represents an input box for entering numbers.">NumberInput</a>. Overrides the base class <a class="el" href="classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game. This class provides a base for implementing in...">AInputBox</a>'s update function to handle number input. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">window</td><td>The SFML RenderWindow for updating the input box. </td></tr>
+    <tr><td class="paramname">event</td><td>SFML Event to be processed. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classRType_1_1AInputBox.html#aecf95daf38b8689a727315a26d220571">RType::AInputBox</a>.</p>
+<p>Implements <a class="el" href="classRType_1_1AInputBox.html#a8a9b55f8d926d2b7e6f592e8a9751e9e">RType::AInputBox</a>.</p>
 
 </div>
 </div>
@@ -338,16 +387,16 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool RType::AInputBox::_active = false</td>
+          <td class="memname">bool RType::AInputBox::_active</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Flag indicating whether the input box is currently active. </p>
+<p>Activation state of the input box. </p>
 
 </div>
 </div>
@@ -366,16 +415,16 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>SFML Font for the text in the input box. </p>
+<p>SFML Font for the text display. </p>
 
 </div>
 </div>
-<a id="a4429f1212376235790bfea7822b1ad0c" name="a4429f1212376235790bfea7822b1ad0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4429f1212376235790bfea7822b1ad0c">&#9670;&#160;</a></span>_fontSize</h2>
+<a id="adf99a45ed5f6862b599fdb8135cc5542" name="adf99a45ed5f6862b599fdb8135cc5542"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf99a45ed5f6862b599fdb8135cc5542">&#9670;&#160;</a></span>_keyPressed</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -384,39 +433,16 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int RType::AInputBox::_fontSize = 20</td>
+          <td class="memname">bool RType::NumberInput::_keyPressed {false}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The font size of the text in the input box. </p>
-
-</div>
-</div>
-<a id="a965ba2b843e1027b52fec4a2c101e233" name="a965ba2b843e1027b52fec4a2c101e233"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a965ba2b843e1027b52fec4a2c101e233">&#9670;&#160;</a></span>_height</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RType::AInputBox::_height = 40</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The height of the input box. </p>
+<p>Flag indicating if a key is pressed. </p>
 
 </div>
 </div>
@@ -435,11 +461,11 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The maximum number of characters the input box can hold. </p>
+<p>Maximum number of characters allowed in the input box. </p>
 
 </div>
 </div>
@@ -458,7 +484,7 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -466,8 +492,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a94a90ad0db33c52dc455bd46583cc225" name="a94a90ad0db33c52dc455bd46583cc225"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94a90ad0db33c52dc455bd46583cc225">&#9670;&#160;</a></span>_text</h2>
+<a id="a715956eddb32d98a23562f0794ea1c50" name="a715956eddb32d98a23562f0794ea1c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a715956eddb32d98a23562f0794ea1c50">&#9670;&#160;</a></span>_text</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -476,21 +502,21 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Text RType::AInputBox::_text</td>
+          <td class="memname">std::string RType::AInputBox::_text</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>SFML Text object for rendering text in the input box. </p>
+<p>Text content of the input box. </p>
 
 </div>
 </div>
-<a id="a0bfdc246f429e7dc1af9767220ee0208" name="a0bfdc246f429e7dc1af9767220ee0208"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bfdc246f429e7dc1af9767220ee0208">&#9670;&#160;</a></span>_textStr</h2>
+<a id="ad04262174bad57be4f7926bf581b052f" name="ad04262174bad57be4f7926bf581b052f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad04262174bad57be4f7926bf581b052f">&#9670;&#160;</a></span>_textDisplay</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -499,39 +525,16 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string RType::AInputBox::_textStr</td>
+          <td class="memname">sf::Text RType::AInputBox::_textDisplay</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The text content of the input box. </p>
-
-</div>
-</div>
-<a id="a253c5bac8eb48b60af2a11a7638a5a1e" name="a253c5bac8eb48b60af2a11a7638a5a1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a253c5bac8eb48b60af2a11a7638a5a1e">&#9670;&#160;</a></span>_width</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RType::AInputBox::_width = 200</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The width of the input box. </p>
+<p>SFML Text displaying the text in the input box. </p>
 
 </div>
 </div>
@@ -550,11 +553,11 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The SFML RenderWindow where the text box will be drawn. </p>
+<p>Reference to the SFML RenderWindow. </p>
 
 </div>
 </div>
@@ -573,11 +576,11 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The x-coordinate of the input box. </p>
+<p>X-coordinate of the input box. </p>
 
 </div>
 </div>
@@ -596,11 +599,11 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The y-coordinate of the input box. </p>
+<p>Y-coordinate of the input box. </p>
 
 </div>
 </div>

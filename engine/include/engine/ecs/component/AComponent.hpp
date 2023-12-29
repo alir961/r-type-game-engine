@@ -16,8 +16,8 @@ namespace RType {
     class AComponent : public IComponent {
     public:
         /**
-    * @brief Base update function.
-    */
+        * @brief Base update function.
+        */
         virtual void update() = 0;
 
         AComponent() = default;

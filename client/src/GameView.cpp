@@ -142,7 +142,7 @@ int RType::GameView::start() {
 
         std::shared_ptr<RType::GraphicEntity> graphicStarship;
         if (starshipEntity->hasComponents() == true) {
-            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity);
+            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity, "client/assets/r-typesheet42.gif", "playerStarship");
             addGraphicEntity(graphicStarship);
             logInformation("Starting game view...");
             launchWindow(graphicStarship);

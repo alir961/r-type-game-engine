@@ -16,7 +16,7 @@ namespace RType {
     public:
         /**
         * @brief Base constructor for damager component.
-        * @param damage The damage of the entity.
+        * @param damage The damage of the _entity.
         */
         explicit DamageComponent(int damage) : _damage(damage) {}
 

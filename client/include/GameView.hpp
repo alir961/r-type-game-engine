@@ -69,16 +69,16 @@ namespace RType {
         void updateEntities(float deltaTime);
 
         /**
-         * @brief Private method to handle input for a specific graphic entity.
-         * @param entity The graphic entity to handle input for.
+         * @brief Private method to handle input for a specific graphic _entity.
+         * @param entity The graphic _entity to handle input for.
          */
         void handleInput(std::shared_ptr<AGraphicEntity> &entity);
 
         /**
-         * @brief Private method to launch the SFML window and test keyboard input for a specific entity.
-         * @param entity The graphic entity to test with keyboard input.
+         * @brief Private method to launch the SFML window and test keyboard input for a specific _entity.
+         * @param entity The graphic _entity to test with keyboard input.
          */
-        void launchWindow(std::shared_ptr<AGraphicEntity> entity); // put graphical entity by parameters to test entity move with keyboard input : function is handleInput
+        void launchWindow(std::shared_ptr<AGraphicEntity> entity); // put graphical _entity by parameters to test _entity move with keyboard input : function is handleInput
 
     public:
         /**
@@ -104,8 +104,8 @@ namespace RType {
         void setView(ViewState state);
 
         /**
-         * @brief Method to add a graphic entity to the game.
-         * @param entity The graphic entity to be added.
+         * @brief Method to add a graphic _entity to the game.
+         * @param entity The graphic _entity to be added.
          */
         void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
 

@@ -18,7 +18,7 @@ namespace RType {
     class Entity {
     public:
         /**
-        * @brief Get a component of a specific type associated with this entity.
+        * @brief Get a component of a specific type associated with this _entity.
         * @tparam T Type of the component.
         * @return Shared pointer to the component if found, nullptr otherwise.
         */
@@ -32,7 +32,7 @@ namespace RType {
         }
 
         /**
-        * @brief Add a component to the entity.
+        * @brief Add a component to the _entity.
         * @tparam T Type of the component.
         * @tparam Args Types of the arguments passed to the component constructor.
         * @param args Arguments to pass to the component constructor.
@@ -49,7 +49,7 @@ namespace RType {
         }
 
         /**
-        * @brief Remove a component of a specific type from the entity.
+        * @brief Remove a component of a specific type from the _entity.
         * @tparam T Type of the component to remove.
         */
         template<typename T>
@@ -61,7 +61,7 @@ namespace RType {
         }
 
         /**
-        * @brief Update all component associated with the entity.
+        * @brief Update all component associated with the _entity.
         */
         void updateComponents() {
             for (auto &pair: _components) {
@@ -70,7 +70,7 @@ namespace RType {
         }
 
         /**
-        * @brief Return true if the entity has a @tparam T component, false otherwise.
+        * @brief Return true if the _entity has a @tparam T component, false otherwise.
         * @tparam T Type of the component to remove.
         */
         template<typename T>
@@ -82,19 +82,19 @@ namespace RType {
         }
 
         /**
-        * @brief Return true if the entity has components, false otherwise.
+        * @brief Return true if the _entity has components, false otherwise.
         */
         bool hasComponents() const {
             return !_components.empty();
         }
 
         /**
-        * @brief Destructor for the entity, cleaning up all associated component.
+        * @brief Destructor for the _entity, cleaning up all associated component.
         */
         ~Entity() = default;
 
     private:
-        std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the entity. */
+        std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the _entity. */
 
         /**
         * @brief Get the component type enum value for a specific component type.

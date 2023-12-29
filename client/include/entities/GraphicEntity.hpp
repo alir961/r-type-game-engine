@@ -9,8 +9,8 @@
 #include "AGraphicEntity.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "../ecs/Entity.hpp"
-#include "../ResourceManager.hpp"
+#include "../../engine/include/engine/ecs/Entity.hpp"
+#include "../resources/ResourceManager.hpp"
 
 namespace RType {
     /**
@@ -20,36 +20,42 @@ namespace RType {
     public:
         /**
          * @brief Construct a new Graphic Entity object.
-         * @param entity Reference to the ECS entity associated with this graphic entity.
-         * @param path Path to the texture file for this graphic entity.
+         * @param entity Reference to the ECS _entity associated with this graphic _entity.
+         * @param path Path to the texture file for this graphic _entity.
          */
-        explicit GraphicEntity(std::shared_ptr<Entity> &entity, const std::string &path);
+        explicit GraphicEntity(std::shared_ptr<Entity> &entity, const std::string path, const std::string entityName);
 
         /**
-         * @brief Update the graphic entity based on the state of the ECS entity.
+         * @brief Update the graphic _entity based on the state of the ECS _entity.
          * @param deltaTime Time since last update.
          */
         void update(float deltaTime) override;
 
         /**
-         * @brief Draw the graphic entity to the provided window.
-         * @param window The window to draw the entity on.
+         * @brief Draw the graphic _entity to the provided window.
+         * @param window The window to draw the _entity on.
          */
         void draw(sf::RenderWindow &window) override;
 
         std::shared_ptr<Entity> getEntity() override {
-            return entity;
+            return _entity;
         }
 
         sf::Sprite getSprite() override {
-            return sprite;
+            return _sprite;
+        }
+
+        std::string getEntityName() override {
+            return _entityName;
         }
 
     private:
-        std::shared_ptr<Entity> entity; /**< Reference to the ECS entity. */
-        sf::Sprite sprite; /**< Sprite of the graphical entity. */
-        sf::IntRect currentFrame; /**< Current frame of the graphical entity. */
-        float animationTime; /**< Animation time accumulator. */
-        float animationSpeed; /**< Speed of the animation. */
+        std::shared_ptr<Entity> _entity; /**< Reference to the ECS _entity. */
+        sf::Sprite _sprite; /**< Sprite of the graphical _entity. */
+        sf::IntRect _currentFrame; /**< Current frame of the graphical _entity. */
+        float _animationTime; /**< Animation time accumulator. */
+        float _animationSpeed; /**< Speed of the animation. */
+        const std::string _entityName; /**< Entity name. */
+        ResourceManager _resourceManager; /**< Resource Manager instance. */
     };
 }

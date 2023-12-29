@@ -55,13 +55,18 @@ namespace RType {
         }
 
         /**
-        * @brief Return the entity of the graphical entity
+        * @brief Return the _entity of the graphical _entity
         */
         virtual std::shared_ptr<Entity> getEntity() = 0;
 
         /**
-        * @brief Return the sprite of the graphical entity
+        * @brief Return the _sprite of the graphical _entity
         */
         virtual sf::Sprite getSprite() = 0;
+
+        /**
+        * @brief Return the name of the graphical _entity
+        */
+        virtual std::string getEntityName() = 0;
     };
 }

@@ -3,7 +3,7 @@ var searchData=
   ['senddata_0',['senddata',['../classRType_1_1UDPAdapter.html#addb7ba87d6230c8c88756401041a58ae',1,'RType::UDPAdapter::sendData(const asio::const_buffer &amp;data)'],['../classRType_1_1UDPAdapter.html#abde7837c67983ab483b4595cc07d41c9',1,'RType::UDPAdapter::sendData(const Message &amp;message)'],['../classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b',1,'RType::UDPAdapter::sendData(const std::string &amp;data)']]],
   ['serialize_1',['serialize',['../structRType_1_1Message.html#adcce9cb697ba5ad5f85832c6d42edc83',1,'RType::Message']]],
   ['serverexception_2',['ServerException',['../classRType_1_1ServerException.html#aab683190edfa5e7087949fc46b931f72',1,'RType::ServerException']]],
-  ['setactive_3',['setActive',['../classRType_1_1TextBox.html#ac6271b31157b063e4a1628d0bcaaa9df',1,'RType::TextBox']]],
+  ['setactive_3',['setactive',['../classRType_1_1AInputBox.html#a34be040b0be1934bca8f8f3e6b40255b',1,'RType::AInputBox::setActive()'],['../classRType_1_1TextBox.html#ac6271b31157b063e4a1628d0bcaaa9df',1,'RType::TextBox::setActive()']]],
   ['setcollision_4',['setCollision',['../classRType_1_1CollisionComponent.html#a0de75ce2487e24313e176a72ee018f81',1,'RType::CollisionComponent']]],
   ['setdamage_5',['setDamage',['../classRType_1_1DamageComponent.html#a557065a54d3c6397eba962cbbca7c6aa',1,'RType::DamageComponent']]],
   ['setdata_6',['setData',['../classRType_1_1NetworkMessageBuilder.html#adb7e1a543bb408131057310ca4e714ce',1,'RType::NetworkMessageBuilder']]],

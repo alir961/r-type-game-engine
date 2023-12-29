@@ -16,13 +16,13 @@ namespace RType {
     public:
         /**
         * @brief Base constructor for player component.
-        * @param isPlayer The status of the entity (player or not).
+        * @param isPlayer The status of the _entity (player or not).
         */
         explicit PlayerComponent(bool isPlayer) : _isPlayer(isPlayer) {}
 
         /**
-        * @brief Check if the entity is controlled by a player.
-        * @return True if the entity is controlled by a player, false otherwise.
+        * @brief Check if the _entity is controlled by a player.
+        * @return True if the _entity is controlled by a player, false otherwise.
         */
         [[nodiscard]] bool getIsPlayer() const {
             return _isPlayer;
@@ -36,6 +36,6 @@ namespace RType {
         }
 
     private:
-        bool _isPlayer; /**< Flag indicating if the entity is controlled by a player. */
+        bool _isPlayer; /**< Flag indicating if the _entity is controlled by a player. */
     };
 }
