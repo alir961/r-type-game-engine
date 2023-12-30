@@ -6,5 +6,6 @@ var searchData=
   ['textinput_3',['textinput',['../classRType_1_1TextInput.html',1,'RType::TextInput'],['../classRType_1_1TextInput.html#ab67b043c788929a7a782a66bc8647a91',1,'RType::TextInput::TextInput()']]],
   ['title_4',['title',['../classRType_1_1OptionsState.html#a482f43ef6050523551375db7c534e8fc',1,'RType::OptionsState::title'],['../classRType_1_1PauseState.html#a2fd4b7e31d5e558f5956fc9fae5060ff',1,'RType::PauseState::title']]],
   ['titlebox_5',['titleBox',['../classRType_1_1MenuState.html#a7e78ba33829ce8b5743bb188041aa5f0',1,'RType::MenuState']]],
-  ['tostring_6',['toString',['../structRType_1_1Message.html#a0b8e6652542f706e0cc32615f1ebfbe5',1,'RType::Message']]]
+  ['togglemute_6',['toggleMute',['../classRType_1_1SoundModule.html#a02dd26e735203e25ca0132c1b169f8ee',1,'RType::SoundModule']]],
+  ['tostring_7',['toString',['../structRType_1_1Message.html#a0b8e6652542f706e0cc32615f1ebfbe5',1,'RType::Message']]]
 ];
