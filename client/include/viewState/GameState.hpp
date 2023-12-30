@@ -28,7 +28,7 @@ namespace RType {
         GameState(sf::RenderWindow &window, GameView &gameView)
             : _gameView(gameView),
               playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
-              scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 100.0f, 10.0f, "Score"),
+              scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
               healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, "") {
         }
 
@@ -46,7 +46,10 @@ namespace RType {
             if (player != nullptr && player->getEntity()->getComponent<PlayerComponent>()) {
                 float health = player->getEntity()->getComponent<HealthComponent>()->getHealth();
                 std::ostringstream healthString; healthString << std::fixed << std::setprecision(0) << health;
-                healthBarText.setText("Health: " + healthString.str());
+                healthBarText.setText("Health " + healthString.str());
+                float score = player->getEntity()->getComponent<PlayerComponent>()->getScore();
+                std::ostringstream scoreString; scoreString << std::fixed << std::setprecision(0) << score;
+                scoreText.setText("Score " + scoreString.str());
             } else healthBarText.setText("Player entity not found");
 
             for (auto &entity: graphicEntities) {
