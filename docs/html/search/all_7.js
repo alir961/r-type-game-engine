@@ -19,11 +19,12 @@ var searchData=
   ['getmessagebuffer_16',['getMessageBuffer',['../classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed',1,'RType::UDPAdapter']]],
   ['getmoduletype_17',['getModuleType',['../classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee',1,'RType::ModuleLoader']]],
   ['getpositions_18',['getPositions',['../classRType_1_1PositionComponent.html#a28b4a122706197d9617e0ceb2e6925c9',1,'RType::PositionComponent']]],
-  ['getsound_19',['getSound',['../classRType_1_1ResourceManager.html#ad7840b1c336d8f305116daa9e29c06fa',1,'RType::ResourceManager']]],
-  ['getspeed_20',['getSpeed',['../classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5',1,'RType::SpeedComponent']]],
-  ['getsprite_21',['getsprite',['../classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95',1,'RType::AGraphicEntity::getSprite()'],['../classRType_1_1GraphicEntity.html#afacc0cc5d61455344c76ff14dfe12a03',1,'RType::GraphicEntity::getSprite()']]],
-  ['gettexture_22',['getTexture',['../classRType_1_1ResourceManager.html#a5d2c7fbe76d5efadcf8d42e16211fb32',1,'RType::ResourceManager']]],
-  ['getvalue_23',['getvalue',['../classRType_1_1TextInput.html#a370fee59b6414fa0d07038d673608714',1,'RType::TextInput::getValue()'],['../classRType_1_1NumberInput.html#adad44f34268096830455de58ce724ca4',1,'RType::NumberInput::getValue()']]],
-  ['graphicentity_24',['graphicentity',['../classRType_1_1GraphicEntity.html#a5834a00fc3626a27c9073a616615ab8b',1,'RType::GraphicEntity::GraphicEntity()'],['../classRType_1_1GraphicEntity.html',1,'RType::GraphicEntity']]],
-  ['graphicentityfactory_25',['GraphicEntityFactory',['../classRType_1_1GraphicEntityFactory.html',1,'RType']]]
+  ['getscore_19',['getScore',['../classRType_1_1PlayerComponent.html#aade79c39d0d217d147c56d3f5c230401',1,'RType::PlayerComponent']]],
+  ['getsound_20',['getSound',['../classRType_1_1ResourceManager.html#ad7840b1c336d8f305116daa9e29c06fa',1,'RType::ResourceManager']]],
+  ['getspeed_21',['getSpeed',['../classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5',1,'RType::SpeedComponent']]],
+  ['getsprite_22',['getsprite',['../classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95',1,'RType::AGraphicEntity::getSprite()'],['../classRType_1_1GraphicEntity.html#afacc0cc5d61455344c76ff14dfe12a03',1,'RType::GraphicEntity::getSprite()']]],
+  ['gettexture_23',['getTexture',['../classRType_1_1ResourceManager.html#a5d2c7fbe76d5efadcf8d42e16211fb32',1,'RType::ResourceManager']]],
+  ['getvalue_24',['getvalue',['../classRType_1_1TextInput.html#a370fee59b6414fa0d07038d673608714',1,'RType::TextInput::getValue()'],['../classRType_1_1NumberInput.html#adad44f34268096830455de58ce724ca4',1,'RType::NumberInput::getValue()']]],
+  ['graphicentity_25',['graphicentity',['../classRType_1_1GraphicEntity.html#a5834a00fc3626a27c9073a616615ab8b',1,'RType::GraphicEntity::GraphicEntity()'],['../classRType_1_1GraphicEntity.html',1,'RType::GraphicEntity']]],
+  ['graphicentityfactory_26',['GraphicEntityFactory',['../classRType_1_1GraphicEntityFactory.html',1,'RType']]]
 ];

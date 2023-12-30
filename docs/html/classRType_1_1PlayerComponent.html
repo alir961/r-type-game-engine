@@ -104,6 +104,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca02f1a17c339130bbbe94c7da188d66" id="r_aca02f1a17c339130bbbe94c7da188d66"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PlayerComponent.html#aca02f1a17c339130bbbe94c7da188d66">getIsPlayer</a> () const</td></tr>
 <tr class="memdesc:aca02f1a17c339130bbbe94c7da188d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the _entity is controlled by a player.  <br /></td></tr>
 <tr class="separator:aca02f1a17c339130bbbe94c7da188d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade79c39d0d217d147c56d3f5c230401" id="r_aade79c39d0d217d147c56d3f5c230401"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PlayerComponent.html#aade79c39d0d217d147c56d3f5c230401">getScore</a> () const</td></tr>
+<tr class="memdesc:aade79c39d0d217d147c56d3f5c230401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the _entity score.  <br /></td></tr>
+<tr class="separator:aade79c39d0d217d147c56d3f5c230401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99bbcf88f16916488e0125a78f0ada3b" id="r_a99bbcf88f16916488e0125a78f0ada3b"><td class="memItemLeft" align="right" valign="top"><a id="a99bbcf88f16916488e0125a78f0ada3b" name="a99bbcf88f16916488e0125a78f0ada3b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setScore</b> (int score)</td></tr>
+<tr class="memdesc:a99bbcf88f16916488e0125a78f0ada3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the score. <br /></td></tr>
+<tr class="separator:a99bbcf88f16916488e0125a78f0ada3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ed4812ac9792f157509658500ef4665" id="r_a0ed4812ac9792f157509658500ef4665"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PlayerComponent.html#a0ed4812ac9792f157509658500ef4665">update</a> () override</td></tr>
 <tr class="memdesc:a0ed4812ac9792f157509658500ef4665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the component.  <br /></td></tr>
 <tr class="separator:a0ed4812ac9792f157509658500ef4665"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,6 +119,8 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:afbdbf9a78abc897d53f4105cce000ebc" id="r_afbdbf9a78abc897d53f4105cce000ebc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PlayerComponent.html#afbdbf9a78abc897d53f4105cce000ebc">_isPlayer</a></td></tr>
 <tr class="separator:afbdbf9a78abc897d53f4105cce000ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a653308c75f3fd857b2e910f5376564c7" id="r_a653308c75f3fd857b2e910f5376564c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PlayerComponent.html#a653308c75f3fd857b2e910f5376564c7">_score</a> = 0</td></tr>
+<tr class="separator:a653308c75f3fd857b2e910f5376564c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for player component. </p>
@@ -179,6 +188,34 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aade79c39d0d217d147c56d3f5c230401" name="aade79c39d0d217d147c56d3f5c230401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aade79c39d0d217d147c56d3f5c230401">&#9670;&#160;</a></span>getScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::PlayerComponent::getScore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check the _entity score. </p>
+<dl class="section return"><dt>Returns</dt><dd>score number. </dd></dl>
+
+</div>
+</div>
 <a id="a0ed4812ac9792f157509658500ef4665" name="a0ed4812ac9792f157509658500ef4665"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ed4812ac9792f157509658500ef4665">&#9670;&#160;</a></span>update()</h2>
 
@@ -229,6 +266,29 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Flag indicating if the _entity is controlled by a player. </p>
+
+</div>
+</div>
+<a id="a653308c75f3fd857b2e910f5376564c7" name="a653308c75f3fd857b2e910f5376564c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a653308c75f3fd857b2e910f5376564c7">&#9670;&#160;</a></span>_score</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::PlayerComponent::_score = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Int indicating the _entity score. </p>
 
 </div>
 </div>

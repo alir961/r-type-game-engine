@@ -29,6 +29,21 @@ namespace RType {
         }
 
         /**
+        * @brief Check the _entity score.
+        * @return score number.
+        */
+        [[nodiscard]] int getScore() const {
+            return _score;
+        }
+
+        /**
+        * @brief Set the score.
+        */
+        void setScore(int score) {
+            _score = score;
+        }
+
+        /**
         * @brief Update the component.
         */
         void update() override {
@@ -37,5 +52,6 @@ namespace RType {
 
     private:
         bool _isPlayer; /**< Flag indicating if the _entity is controlled by a player. */
+        int _score = 0; /**< Int indicating the _entity score. */
     };
 }

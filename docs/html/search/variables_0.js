@@ -27,13 +27,14 @@ var searchData=
   ['_5frect_24',['_rect',['../classRType_1_1AInputBox.html#a1180f8273fa271fbc8918e823d1c5fb5',1,'RType::AInputBox']]],
   ['_5frectangle_25',['_rectangle',['../classRType_1_1Button.html#a47cce058f4d60b83dd4bf48eb7ec5693',1,'RType::Button']]],
   ['_5fresourcemanager_26',['_resourceManager',['../classRType_1_1GraphicEntity.html#ad18e67c54a1b562d2b966d6b7b373a9d',1,'RType::GraphicEntity']]],
-  ['_5fspeed_27',['_speed',['../classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573',1,'RType::SpeedComponent']]],
-  ['_5fsprite_28',['_sprite',['../classRType_1_1GraphicEntity.html#a57c23583e13393f7462228eb65611ccf',1,'RType::GraphicEntity']]],
-  ['_5ftext_29',['_text',['../classRType_1_1AInputBox.html#a715956eddb32d98a23562f0794ea1c50',1,'RType::AInputBox::_text'],['../classRType_1_1Button.html#ae1cc72d128026daa1e762725c8b3769e',1,'RType::Button::_text']]],
-  ['_5ftextdisplay_30',['_textDisplay',['../classRType_1_1AInputBox.html#ad04262174bad57be4f7926bf581b052f',1,'RType::AInputBox']]],
-  ['_5fviewstate_31',['_viewState',['../classRType_1_1GameView.html#aaabf08ea40148c40da43e7d52c81566a',1,'RType::GameView']]],
-  ['_5fwindow_32',['_window',['../classRType_1_1GameView.html#aeaf8e6bfde1b1ccee00613a869544f4e',1,'RType::GameView::_window'],['../classRType_1_1AInputBox.html#a65cf16b03fb6ac6a9638d46f7df8e5ae',1,'RType::AInputBox::_window'],['../classRType_1_1Button.html#a135f55f454917144b75f0062125f7498',1,'RType::Button::_window'],['../classRType_1_1RectBox.html#a403d09567f7ce7fcf02740d4ea095be0',1,'RType::RectBox::_window'],['../classRType_1_1TextBox.html#a08c9cc13a707461ccae115f8b8d6580f',1,'RType::TextBox::_window'],['../classRType_1_1LoginState.html#a2974d3c531c7c5a71bffde806ccecdbe',1,'RType::LoginState::_window'],['../classRType_1_1MenuState.html#ade9666e11e45c7c622bd3c69b16a9035',1,'RType::MenuState::_window']]],
-  ['_5fwinstate_33',['_winState',['../classRType_1_1GameView.html#ad382d0c17b8aefbcd929de92cde60e73',1,'RType::GameView']]],
-  ['_5fx_34',['_x',['../classRType_1_1AInputBox.html#acc29f38158c6378e489da4cfabbdad65',1,'RType::AInputBox::_x'],['../classRType_1_1Button.html#afb5c241b78c04457563c7f2c285f0f39',1,'RType::Button::_x']]],
-  ['_5fy_35',['_y',['../classRType_1_1AInputBox.html#adb57c32425b3eb6d64b8c656feb9e9cf',1,'RType::AInputBox::_y'],['../classRType_1_1Button.html#aa4bed7e52040af23dbddf249530112c4',1,'RType::Button::_y']]]
+  ['_5fscore_27',['_score',['../classRType_1_1PlayerComponent.html#a653308c75f3fd857b2e910f5376564c7',1,'RType::PlayerComponent']]],
+  ['_5fspeed_28',['_speed',['../classRType_1_1SpeedComponent.html#a170bc0ce1f39fc1e327df445ff482573',1,'RType::SpeedComponent']]],
+  ['_5fsprite_29',['_sprite',['../classRType_1_1GraphicEntity.html#a57c23583e13393f7462228eb65611ccf',1,'RType::GraphicEntity']]],
+  ['_5ftext_30',['_text',['../classRType_1_1AInputBox.html#a715956eddb32d98a23562f0794ea1c50',1,'RType::AInputBox::_text'],['../classRType_1_1Button.html#ae1cc72d128026daa1e762725c8b3769e',1,'RType::Button::_text']]],
+  ['_5ftextdisplay_31',['_textDisplay',['../classRType_1_1AInputBox.html#ad04262174bad57be4f7926bf581b052f',1,'RType::AInputBox']]],
+  ['_5fviewstate_32',['_viewState',['../classRType_1_1GameView.html#aaabf08ea40148c40da43e7d52c81566a',1,'RType::GameView']]],
+  ['_5fwindow_33',['_window',['../classRType_1_1GameView.html#aeaf8e6bfde1b1ccee00613a869544f4e',1,'RType::GameView::_window'],['../classRType_1_1AInputBox.html#a65cf16b03fb6ac6a9638d46f7df8e5ae',1,'RType::AInputBox::_window'],['../classRType_1_1Button.html#a135f55f454917144b75f0062125f7498',1,'RType::Button::_window'],['../classRType_1_1RectBox.html#a403d09567f7ce7fcf02740d4ea095be0',1,'RType::RectBox::_window'],['../classRType_1_1TextBox.html#a08c9cc13a707461ccae115f8b8d6580f',1,'RType::TextBox::_window'],['../classRType_1_1LoginState.html#a2974d3c531c7c5a71bffde806ccecdbe',1,'RType::LoginState::_window'],['../classRType_1_1MenuState.html#ade9666e11e45c7c622bd3c69b16a9035',1,'RType::MenuState::_window']]],
+  ['_5fwinstate_34',['_winState',['../classRType_1_1GameView.html#ad382d0c17b8aefbcd929de92cde60e73',1,'RType::GameView']]],
+  ['_5fx_35',['_x',['../classRType_1_1AInputBox.html#acc29f38158c6378e489da4cfabbdad65',1,'RType::AInputBox::_x'],['../classRType_1_1Button.html#afb5c241b78c04457563c7f2c285f0f39',1,'RType::Button::_x']]],
+  ['_5fy_36',['_y',['../classRType_1_1AInputBox.html#adb57c32425b3eb6d64b8c656feb9e9cf',1,'RType::AInputBox::_y'],['../classRType_1_1Button.html#aa4bed7e52040af23dbddf249530112c4',1,'RType::Button::_y']]]
 ];

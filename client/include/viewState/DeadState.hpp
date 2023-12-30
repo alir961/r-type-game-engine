@@ -9,6 +9,10 @@
 #include "IDraw.hpp"
 #include "../graphicalComponents/RectBox.hpp"
 #include "../graphicalComponents/TextBox.hpp"
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 namespace RType {
     /**
@@ -26,8 +30,8 @@ namespace RType {
             : _gameView(gameView),
               backgroundRect(window, sf::Vector2f(((((window.getSize().x - 450) / 2))), ((window.getSize().y - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f),
               loseText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Lose!"),
-              hpText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 115, "100hp"),
-              pointsText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 215, "500pts"),
+              hpText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 115, ""),
+              scoreText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 215, ""),
               exitText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 315, "Exit") {}
 
         /**
@@ -60,9 +64,19 @@ namespace RType {
             backgroundRect.draw();
             loseText.draw();
             hpText.draw();
-            pointsText.draw();
+            scoreText.draw();
             exitText.draw();
             handleInput();
+
+            std::shared_ptr<AGraphicEntity> player = _gameView.getGraphicEntityByName("playerStarship");
+            if (player != nullptr && player->getEntity()->getComponent<PlayerComponent>()) {
+                float health = player->getEntity()->getComponent<HealthComponent>()->getHealth();
+                std::ostringstream healthString; healthString << std::fixed << std::setprecision(0) << health;
+                hpText.setText("Health " + healthString.str());
+                float score = player->getEntity()->getComponent<PlayerComponent>()->getScore();
+                std::ostringstream scoreString; scoreString << std::fixed << std::setprecision(0) << score;
+                scoreText.setText("Score " + scoreString.str());
+            } else hpText.setText("Player entity not found");
         }
 
     private:
@@ -70,7 +84,7 @@ namespace RType {
         RectBox backgroundRect; /**< Rectangle of background. */
         TextBox loseText; /**< Text "You Lose!". */
         TextBox hpText; /**< Text "hp". */
-        TextBox pointsText; /**< Text "pts". */
+        TextBox scoreText; /**< Text "pts". */
         TextBox exitText; /**< Exit Text. */
 
         bool isMouseClicked() const {
