@@ -16,21 +16,21 @@ namespace RType {
     public:
         /**
         * @brief Base constructor for health component.
-        * @param health The health of the entity.
+        * @param health The health of the _entity.
         */
         explicit HealthComponent(int health) : _health(health) {}
 
         /**
-        * @brief Set the health of the damageable entity.
-        * @param health The health of the damageable entity.
+        * @brief Set the health of the damageable _entity.
+        * @param health The health of the damageable _entity.
         */
         void setHealth(int health) {
             _health = health;
         }
 
         /**
-        * @brief Get the health of the damageable entity.
-        * @return The health of the damageable entity.
+        * @brief Get the health of the damageable _entity.
+        * @return The health of the damageable _entity.
         */
         [[nodiscard]] int getHealth() const {
             return _health;
@@ -44,6 +44,6 @@ namespace RType {
         }
 
     private:
-        int _health; /**< Health of the damageable entity. */
+        int _health; /**< Health of the damageable _entity. */
     };
 }

@@ -17,12 +17,12 @@ namespace RType {
     public:
         /**
         * @brief Base constructor for position component.
-        * @param position The position of the entity.
+        * @param position The position of the _entity.
         */
         explicit PositionComponent(std::pair<int, int> position) : _position(std::move(position)) {}
 
         /**
-        * @brief Set the position of the entity.
+        * @brief Set the position of the _entity.
         * @param position A map representing the position coordinates.
         */
         void setPositions(std::pair<int, int> position) {
@@ -30,7 +30,7 @@ namespace RType {
         }
 
         /**
-        * @brief Get the position of the entity.
+        * @brief Get the position of the _entity.
         * @return A map representing the position coordinates.
         */
         [[nodiscard]] std::pair<int, int> getPositions() const {
@@ -45,6 +45,6 @@ namespace RType {
         }
 
     private:
-        std::pair<int, int> _position; /**< Position of the entity. */
+        std::pair<int, int> _position; /**< Position of the _entity. */
     };
 }

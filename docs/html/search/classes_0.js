@@ -6,6 +6,7 @@ var searchData=
   ['acomponent_3',['AComponent',['../classRType_1_1AComponent.html',1,'RType']]],
   ['aconsolemodule_4',['AConsoleModule',['../classRType_1_1AConsoleModule.html',1,'RType']]],
   ['agraphicentity_5',['AGraphicEntity',['../classRType_1_1AGraphicEntity.html',1,'RType']]],
-  ['ametricsmodule_6',['AMetricsModule',['../classRType_1_1AMetricsModule.html',1,'RType']]],
-  ['arguments_7',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]]
+  ['ainputbox_6',['AInputBox',['../classRType_1_1AInputBox.html',1,'RType']]],
+  ['ametricsmodule_7',['AMetricsModule',['../classRType_1_1AMetricsModule.html',1,'RType']]],
+  ['arguments_8',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['currentframe_0',['currentFrame',['../classRType_1_1GraphicEntity.html#a0f36b1b2eb16e5bf80ab4ea7a6e43228',1,'RType::GraphicEntity']]]
+  ['backgroundrect_0',['backgroundrect',['../classRType_1_1DeadState.html#a23a1ae1b8b8dad79cba896a898c842fa',1,'RType::DeadState::backgroundRect'],['../classRType_1_1WinState.html#a46d096f8269f441ca8bca009cebc96c3',1,'RType::WinState::backgroundRect']]]
 ];

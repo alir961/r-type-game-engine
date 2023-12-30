@@ -21,7 +21,7 @@ namespace RType {
         Collision, /**< Component type for collision. */
         Damage,    /**< Component type for damage. */
         Health,    /**< Component type for health. */
-        Player,    /**< Component type for playable entity. */
+        Player,    /**< Component type for playable _entity. */
         Position,  /**< Component type for position. */
         Speed      /**< Component type for speed. */
     };

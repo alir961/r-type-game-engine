@@ -1,4 +1,32 @@
 var searchData=
 [
-  ['what_0',['what',['../classRType_1_1ConfigurationException.html#a98c227584c7fd593bf1de5c98cba613f',1,'RType::ConfigurationException::what()'],['../classRType_1_1ModuleException.html#ad0c364f86892db67185b6be84f188861',1,'RType::ModuleException::what()'],['../classRType_1_1NetworkException.html#a236a8bc15606d7ea1f53c657876afbaf',1,'RType::NetworkException::what()'],['../classRType_1_1ServerException.html#a8c26617bc78a601f5ec814b7812c13d1',1,'RType::ServerException::what()']]]
+  ['scoretext_0',['scoreText',['../classRType_1_1GameState.html#a0011298f09f932342a3cf5ada4e8f221',1,'RType::GameState']]],
+  ['senddata_1',['senddata',['../classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b',1,'RType::UDPAdapter::sendData(const std::string &amp;data)'],['../classRType_1_1UDPAdapter.html#addb7ba87d6230c8c88756401041a58ae',1,'RType::UDPAdapter::sendData(const asio::const_buffer &amp;data)'],['../classRType_1_1UDPAdapter.html#abde7837c67983ab483b4595cc07d41c9',1,'RType::UDPAdapter::sendData(const Message &amp;message)']]],
+  ['serialize_2',['serialize',['../structRType_1_1Message.html#adcce9cb697ba5ad5f85832c6d42edc83',1,'RType::Message']]],
+  ['serverexception_3',['serverexception',['../classRType_1_1ServerException.html',1,'RType::ServerException'],['../classRType_1_1ServerException.html#aab683190edfa5e7087949fc46b931f72',1,'RType::ServerException::ServerException()']]],
+  ['setactive_4',['setactive',['../classRType_1_1AInputBox.html#a34be040b0be1934bca8f8f3e6b40255b',1,'RType::AInputBox::setActive()'],['../classRType_1_1TextBox.html#ac6271b31157b063e4a1628d0bcaaa9df',1,'RType::TextBox::setActive()']]],
+  ['setcollision_5',['setCollision',['../classRType_1_1CollisionComponent.html#a0de75ce2487e24313e176a72ee018f81',1,'RType::CollisionComponent']]],
+  ['setdamage_6',['setDamage',['../classRType_1_1DamageComponent.html#a557065a54d3c6397eba962cbbca7c6aa',1,'RType::DamageComponent']]],
+  ['setdata_7',['setData',['../classRType_1_1NetworkMessageBuilder.html#adb7e1a543bb408131057310ca4e714ce',1,'RType::NetworkMessageBuilder']]],
+  ['setfillcolor_8',['setFillColor',['../classRType_1_1RectBox.html#a077d43e997e68bc5a5e60e6f6b4922f3',1,'RType::RectBox']]],
+  ['setfontsize_9',['setFontSize',['../classRType_1_1TextBox.html#a27cd53f31591b81de6f62be959a7c830',1,'RType::TextBox']]],
+  ['sethealth_10',['setHealth',['../classRType_1_1HealthComponent.html#a21c15c69c5f966dedfc9a2d01a23f959',1,'RType::HealthComponent']]],
+  ['setoutlinecolor_11',['setOutlineColor',['../classRType_1_1RectBox.html#adaedfcc9b38c0c7784a76003ffce4706',1,'RType::RectBox']]],
+  ['setoutlinethickness_12',['setOutlineThickness',['../classRType_1_1RectBox.html#a280c89f71857c680403f8598f69d37ff',1,'RType::RectBox']]],
+  ['setposition_13',['setPosition',['../classRType_1_1RectBox.html#a7d299a3492305cda84e4fafa3b414779',1,'RType::RectBox']]],
+  ['setpositions_14',['setPositions',['../classRType_1_1PositionComponent.html#a79d41c6736459035e36d6a04a9de489b',1,'RType::PositionComponent']]],
+  ['setsize_15',['setSize',['../classRType_1_1RectBox.html#a3fb7dfdec4a00f228f1937707703c57b',1,'RType::RectBox']]],
+  ['setspeed_16',['setSpeed',['../classRType_1_1SpeedComponent.html#ad5f249698ec92172c55edecdb470d4b9',1,'RType::SpeedComponent']]],
+  ['settext_17',['setText',['../classRType_1_1TextBox.html#a8beaed26b10e88549b7e4efc3fd9c376',1,'RType::TextBox']]],
+  ['settype_18',['setType',['../classRType_1_1NetworkMessageBuilder.html#a461a850b527eeec5d16dccd3ac3b98cf',1,'RType::NetworkMessageBuilder']]],
+  ['setview_19',['setView',['../classRType_1_1GameView.html#ad79df2f3f3ec885212ae25941346aec8',1,'RType::GameView']]],
+  ['shutdown_20',['Shutdown',['../classRType_1_1IGameModule.html#a117ce0e3ea9adf46785d90f04467dfe2',1,'RType::IGameModule']]],
+  ['size_21',['size',['../classRType_1_1RectBox.html#a8c0f7806ffe067e57cb8f9405b06f3e4',1,'RType::RectBox']]],
+  ['sound_22',['sound',['../classRType_1_1OptionsState.html#a18d70ff1ab6ce79e3c1eeda9219a82a1',1,'RType::OptionsState']]],
+  ['soundvolume_23',['soundVolume',['../classRType_1_1OptionsState.html#a5f1afa1e281cf2ac4441575068e910ea',1,'RType::OptionsState']]],
+  ['speedcomponent_24',['speedcomponent',['../classRType_1_1SpeedComponent.html',1,'RType::SpeedComponent'],['../classRType_1_1SpeedComponent.html#a9833c364630fef251c19b9c641c7c565',1,'RType::SpeedComponent::SpeedComponent()']]],
+  ['start_25',['start',['../classRType_1_1GameView.html#abcf3dd55c4c9f2477e441c8db638ef15',1,'RType::GameView']]],
+  ['startbox_26',['startBox',['../classRType_1_1MenuState.html#a3a24487dc57e1503e60ad2eac37a3bfc',1,'RType::MenuState']]],
+  ['stopallaudio_27',['StopAllAudio',['../classRType_1_1AAudioModule.html#a1df6796b08f6f4b865281ebcb9660b42',1,'RType::AAudioModule']]],
+  ['stopaudio_28',['StopAudio',['../classRType_1_1AAudioModule.html#a0db2cdee64925ac0ed0c5e77aad8723b',1,'RType::AAudioModule']]]
 ];

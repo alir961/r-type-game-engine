@@ -1,5 +1,27 @@
 var searchData=
 [
-  ['togglemute_0',['toggleMute',['../classRType_1_1SoundModule.html#a02dd26e735203e25ca0132c1b169f8ee',1,'RType::SoundModule']]],
-  ['tostring_1',['toString',['../structRType_1_1Message.html#a0b8e6652542f706e0cc32615f1ebfbe5',1,'RType::Message']]]
+  ['senddata_0',['senddata',['../classRType_1_1UDPAdapter.html#addb7ba87d6230c8c88756401041a58ae',1,'RType::UDPAdapter::sendData(const asio::const_buffer &amp;data)'],['../classRType_1_1UDPAdapter.html#abde7837c67983ab483b4595cc07d41c9',1,'RType::UDPAdapter::sendData(const Message &amp;message)'],['../classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b',1,'RType::UDPAdapter::sendData(const std::string &amp;data)']]],
+  ['serialize_1',['serialize',['../structRType_1_1Message.html#adcce9cb697ba5ad5f85832c6d42edc83',1,'RType::Message']]],
+  ['serverexception_2',['ServerException',['../classRType_1_1ServerException.html#aab683190edfa5e7087949fc46b931f72',1,'RType::ServerException']]],
+  ['setactive_3',['setactive',['../classRType_1_1AInputBox.html#a34be040b0be1934bca8f8f3e6b40255b',1,'RType::AInputBox::setActive()'],['../classRType_1_1TextBox.html#ac6271b31157b063e4a1628d0bcaaa9df',1,'RType::TextBox::setActive()']]],
+  ['setcollision_4',['setCollision',['../classRType_1_1CollisionComponent.html#a0de75ce2487e24313e176a72ee018f81',1,'RType::CollisionComponent']]],
+  ['setdamage_5',['setDamage',['../classRType_1_1DamageComponent.html#a557065a54d3c6397eba962cbbca7c6aa',1,'RType::DamageComponent']]],
+  ['setdata_6',['setData',['../classRType_1_1NetworkMessageBuilder.html#adb7e1a543bb408131057310ca4e714ce',1,'RType::NetworkMessageBuilder']]],
+  ['setfillcolor_7',['setFillColor',['../classRType_1_1RectBox.html#a077d43e997e68bc5a5e60e6f6b4922f3',1,'RType::RectBox']]],
+  ['setfontsize_8',['setFontSize',['../classRType_1_1TextBox.html#a27cd53f31591b81de6f62be959a7c830',1,'RType::TextBox']]],
+  ['sethealth_9',['setHealth',['../classRType_1_1HealthComponent.html#a21c15c69c5f966dedfc9a2d01a23f959',1,'RType::HealthComponent']]],
+  ['setoutlinecolor_10',['setOutlineColor',['../classRType_1_1RectBox.html#adaedfcc9b38c0c7784a76003ffce4706',1,'RType::RectBox']]],
+  ['setoutlinethickness_11',['setOutlineThickness',['../classRType_1_1RectBox.html#a280c89f71857c680403f8598f69d37ff',1,'RType::RectBox']]],
+  ['setposition_12',['setPosition',['../classRType_1_1RectBox.html#a7d299a3492305cda84e4fafa3b414779',1,'RType::RectBox']]],
+  ['setpositions_13',['setPositions',['../classRType_1_1PositionComponent.html#a79d41c6736459035e36d6a04a9de489b',1,'RType::PositionComponent']]],
+  ['setsize_14',['setSize',['../classRType_1_1RectBox.html#a3fb7dfdec4a00f228f1937707703c57b',1,'RType::RectBox']]],
+  ['setspeed_15',['setSpeed',['../classRType_1_1SpeedComponent.html#ad5f249698ec92172c55edecdb470d4b9',1,'RType::SpeedComponent']]],
+  ['settext_16',['setText',['../classRType_1_1TextBox.html#a8beaed26b10e88549b7e4efc3fd9c376',1,'RType::TextBox']]],
+  ['settype_17',['setType',['../classRType_1_1NetworkMessageBuilder.html#a461a850b527eeec5d16dccd3ac3b98cf',1,'RType::NetworkMessageBuilder']]],
+  ['setview_18',['setView',['../classRType_1_1GameView.html#ad79df2f3f3ec885212ae25941346aec8',1,'RType::GameView']]],
+  ['shutdown_19',['Shutdown',['../classRType_1_1IGameModule.html#a117ce0e3ea9adf46785d90f04467dfe2',1,'RType::IGameModule']]],
+  ['speedcomponent_20',['SpeedComponent',['../classRType_1_1SpeedComponent.html#a9833c364630fef251c19b9c641c7c565',1,'RType::SpeedComponent']]],
+  ['start_21',['start',['../classRType_1_1GameView.html#abcf3dd55c4c9f2477e441c8db638ef15',1,'RType::GameView']]],
+  ['stopallaudio_22',['StopAllAudio',['../classRType_1_1AAudioModule.html#a1df6796b08f6f4b865281ebcb9660b42',1,'RType::AAudioModule']]],
+  ['stopaudio_23',['StopAudio',['../classRType_1_1AAudioModule.html#a0db2cdee64925ac0ed0c5e77aad8723b',1,'RType::AAudioModule']]]
 ];

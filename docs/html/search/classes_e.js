@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['udpadapter_0',['UDPAdapter',['../classRType_1_1UDPAdapter.html',1,'RType']]],
-  ['udpserver_1',['UDPServer',['../classRType_1_1UDPServer.html',1,'RType']]]
+  ['serverexception_0',['ServerException',['../classRType_1_1ServerException.html',1,'RType']]],
+  ['speedcomponent_1',['SpeedComponent',['../classRType_1_1SpeedComponent.html',1,'RType']]]
 ];

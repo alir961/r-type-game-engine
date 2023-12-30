@@ -1,0 +1,88 @@
+/*
+** EPITECH PROJECT, 2023
+** r-type
+** File description:
+** GameView.hpp
+*/
+
+#pragma once
+#include "IDraw.hpp"
+#include "../graphicalComponents/TextBox.hpp"
+
+namespace RType {
+    /**
+     * @brief Represents the pause menu state in the game.
+     *
+     * This class provides functionality for handling user input, updating the state,
+     * and drawing elements related to the pause menu.
+     */
+    class PauseState : public IDraw {
+    public:
+        /**
+         * @brief Constructs the PauseState.
+         *
+         * @param window Reference to the SFML render window.
+         * @param gameView Reference to the GameView.
+         */
+        PauseState(sf::RenderWindow &window, GameView &gameView)
+            : title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
+              resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
+              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu"), _gameView(gameView) {}
+
+        /**
+         * @brief Handles user input for the pause menu.
+         */
+        void handleInput() {
+            title.handleInput();
+            mainMenu.handleInput();
+            resume.handleInput();
+
+            if (isMouseClicked()) {
+                if (mainMenu.getActive()) {
+                    std::cout << "Exit To Main Menu!" << std::endl;
+                    _gameView.setView(ViewState::MENU);
+                }
+                if (resume.getActive()) {
+                    std::cout << "Resume Game!" << std::endl;
+                    _gameView.setView(ViewState::GAME);
+                }
+            }
+        }
+
+        /**
+         * @brief Updates the pause menu state.
+         */
+        void update() {
+            mainMenu.update();
+            resume.update();
+        }
+
+        /**
+         * @brief Draws elements of the pause menu on the screen.
+         *
+         * @param window Reference to the SFML render window.
+         * @param entities A vector of shared pointers to graphic entities.
+         */
+        void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+            title.draw();
+            mainMenu.draw();
+            resume.draw();
+            handleInput();
+        }
+
+    private:
+        TextBox title; /**< TextBox for the title. */
+        TextBox mainMenu; /**< TextBox for the menu. */
+        TextBox resume; /**< TextBox for resume. */
+        GameView &_gameView; /**< Reference to the GameView. */
+
+        /**
+         * @brief Checks if the left mouse button is clicked.
+         *
+         * @return True if the left mouse button is clicked, false otherwise.
+         */
+        bool isMouseClicked() const {
+            return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+        }
+    };
+}

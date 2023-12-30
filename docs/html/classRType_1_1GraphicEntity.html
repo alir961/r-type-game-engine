@@ -98,52 +98,60 @@ Inheritance diagram for RType::GraphicEntity:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af45beb58a5303ed3732199bbc0d683e4" id="r_af45beb58a5303ed3732199bbc0d683e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#af45beb58a5303ed3732199bbc0d683e4">GraphicEntity</a> (std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;<a class="el" href="classRType_1_1GraphicEntity.html#a5a3bbd96907815e880f831b8d9b7b7a3">entity</a>)</td></tr>
-<tr class="memdesc:af45beb58a5303ed3732199bbc0d683e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Graphic Bullet object.  <br /></td></tr>
-<tr class="separator:af45beb58a5303ed3732199bbc0d683e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5834a00fc3626a27c9073a616615ab8b" id="r_a5834a00fc3626a27c9073a616615ab8b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a5834a00fc3626a27c9073a616615ab8b">GraphicEntity</a> (std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;entity, const std::string path, const std::string entityName)</td></tr>
+<tr class="memdesc:a5834a00fc3626a27c9073a616615ab8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Graphic <a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> object.  <br /></td></tr>
+<tr class="separator:a5834a00fc3626a27c9073a616615ab8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e8c92f4b8b63739d3ee43d086b200bd" id="r_a4e8c92f4b8b63739d3ee43d086b200bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a4e8c92f4b8b63739d3ee43d086b200bd">update</a> (float deltaTime) override</td></tr>
-<tr class="memdesc:a4e8c92f4b8b63739d3ee43d086b200bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the graphic entity based on the state of the ECS entity.  <br /></td></tr>
+<tr class="memdesc:a4e8c92f4b8b63739d3ee43d086b200bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the graphic _entity based on the state of the ECS _entity.  <br /></td></tr>
 <tr class="separator:a4e8c92f4b8b63739d3ee43d086b200bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d3a73bbc344d22517d0ac8bd759379" id="r_a37d3a73bbc344d22517d0ac8bd759379"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a37d3a73bbc344d22517d0ac8bd759379">draw</a> (sf::RenderWindow &amp;window) override</td></tr>
-<tr class="memdesc:a37d3a73bbc344d22517d0ac8bd759379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic entity to the provided window.  <br /></td></tr>
+<tr class="memdesc:a37d3a73bbc344d22517d0ac8bd759379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:a37d3a73bbc344d22517d0ac8bd759379"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec4fd3c000bfcb9baa275ad3e34c9045" id="r_aec4fd3c000bfcb9baa275ad3e34c9045"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#aec4fd3c000bfcb9baa275ad3e34c9045">getEntity</a> () override</td></tr>
-<tr class="memdesc:aec4fd3c000bfcb9baa275ad3e34c9045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the entity of the graphical entity.  <br /></td></tr>
+<tr class="memdesc:aec4fd3c000bfcb9baa275ad3e34c9045"><td class="mdescLeft">&#160;</td><td class="mdescRight">get <a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a>.  <br /></td></tr>
 <tr class="separator:aec4fd3c000bfcb9baa275ad3e34c9045"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afacc0cc5d61455344c76ff14dfe12a03" id="r_afacc0cc5d61455344c76ff14dfe12a03"><td class="memItemLeft" align="right" valign="top">sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#afacc0cc5d61455344c76ff14dfe12a03">getSprite</a> () override</td></tr>
-<tr class="memdesc:afacc0cc5d61455344c76ff14dfe12a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sprite of the graphical entity.  <br /></td></tr>
+<tr class="memdesc:afacc0cc5d61455344c76ff14dfe12a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">get Sprite.  <br /></td></tr>
 <tr class="separator:afacc0cc5d61455344c76ff14dfe12a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d0a26e5d435be2c8b887cc6e19e07db" id="r_a2d0a26e5d435be2c8b887cc6e19e07db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#a2d0a26e5d435be2c8b887cc6e19e07db">moveLeft</a> (sf::Sprite &amp;<a class="el" href="classRType_1_1GraphicEntity.html#abea2cfe25d58f7d101734e9556bd629b">sprite</a>, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;<a class="el" href="classRType_1_1GraphicEntity.html#a5a3bbd96907815e880f831b8d9b7b7a3">entity</a>) override</td></tr>
-<tr class="memdesc:a2d0a26e5d435be2c8b887cc6e19e07db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic entity to the provided window.  <br /></td></tr>
+<tr class="memitem:a2d0a26e5d435be2c8b887cc6e19e07db" id="r_a2d0a26e5d435be2c8b887cc6e19e07db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#a2d0a26e5d435be2c8b887cc6e19e07db">moveLeft</a> (sf::Sprite &amp;sprite, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;entity) override</td></tr>
+<tr class="memdesc:a2d0a26e5d435be2c8b887cc6e19e07db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:a2d0a26e5d435be2c8b887cc6e19e07db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa89146d5b0e4f6c34a66c94adcb0c3d" id="r_afa89146d5b0e4f6c34a66c94adcb0c3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#afa89146d5b0e4f6c34a66c94adcb0c3d">moveRight</a> (sf::Sprite &amp;<a class="el" href="classRType_1_1GraphicEntity.html#abea2cfe25d58f7d101734e9556bd629b">sprite</a>, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;<a class="el" href="classRType_1_1GraphicEntity.html#a5a3bbd96907815e880f831b8d9b7b7a3">entity</a>) override</td></tr>
-<tr class="memdesc:afa89146d5b0e4f6c34a66c94adcb0c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic entity to the provided window.  <br /></td></tr>
+<tr class="memitem:afa89146d5b0e4f6c34a66c94adcb0c3d" id="r_afa89146d5b0e4f6c34a66c94adcb0c3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#afa89146d5b0e4f6c34a66c94adcb0c3d">moveRight</a> (sf::Sprite &amp;sprite, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;entity) override</td></tr>
+<tr class="memdesc:afa89146d5b0e4f6c34a66c94adcb0c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:afa89146d5b0e4f6c34a66c94adcb0c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1a7706a584c13a1851bb49e2803fc37" id="r_af1a7706a584c13a1851bb49e2803fc37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#af1a7706a584c13a1851bb49e2803fc37">moveUp</a> (sf::Sprite &amp;<a class="el" href="classRType_1_1GraphicEntity.html#abea2cfe25d58f7d101734e9556bd629b">sprite</a>, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;<a class="el" href="classRType_1_1GraphicEntity.html#a5a3bbd96907815e880f831b8d9b7b7a3">entity</a>) override</td></tr>
-<tr class="memdesc:af1a7706a584c13a1851bb49e2803fc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic entity to the provided window.  <br /></td></tr>
+<tr class="memitem:af1a7706a584c13a1851bb49e2803fc37" id="r_af1a7706a584c13a1851bb49e2803fc37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#af1a7706a584c13a1851bb49e2803fc37">moveUp</a> (sf::Sprite &amp;sprite, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;entity) override</td></tr>
+<tr class="memdesc:af1a7706a584c13a1851bb49e2803fc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:af1a7706a584c13a1851bb49e2803fc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1b1e5051bf79f0756f10e1bbb4b56fa" id="r_ac1b1e5051bf79f0756f10e1bbb4b56fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#ac1b1e5051bf79f0756f10e1bbb4b56fa">moveDown</a> (sf::Sprite &amp;<a class="el" href="classRType_1_1GraphicEntity.html#abea2cfe25d58f7d101734e9556bd629b">sprite</a>, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;<a class="el" href="classRType_1_1GraphicEntity.html#a5a3bbd96907815e880f831b8d9b7b7a3">entity</a>) override</td></tr>
-<tr class="memdesc:ac1b1e5051bf79f0756f10e1bbb4b56fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic entity to the provided window.  <br /></td></tr>
+<tr class="memitem:ac1b1e5051bf79f0756f10e1bbb4b56fa" id="r_ac1b1e5051bf79f0756f10e1bbb4b56fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#ac1b1e5051bf79f0756f10e1bbb4b56fa">moveDown</a> (sf::Sprite &amp;sprite, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;entity) override</td></tr>
+<tr class="memdesc:ac1b1e5051bf79f0756f10e1bbb4b56fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:ac1b1e5051bf79f0756f10e1bbb4b56fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3afb63bdf5fcbb2543449bbceca4194a" id="r_a3afb63bdf5fcbb2543449bbceca4194a"><td class="memItemLeft" align="right" valign="top"><a id="a3afb63bdf5fcbb2543449bbceca4194a" name="a3afb63bdf5fcbb2543449bbceca4194a"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getEntityName</b> ()</td></tr>
+<tr class="memdesc:a3afb63bdf5fcbb2543449bbceca4194a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the name of the graphical _entity. <br /></td></tr>
+<tr class="separator:a3afb63bdf5fcbb2543449bbceca4194a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a5a3bbd96907815e880f831b8d9b7b7a3" id="r_a5a3bbd96907815e880f831b8d9b7b7a3"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a5a3bbd96907815e880f831b8d9b7b7a3">entity</a></td></tr>
-<tr class="separator:a5a3bbd96907815e880f831b8d9b7b7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abea2cfe25d58f7d101734e9556bd629b" id="r_abea2cfe25d58f7d101734e9556bd629b"><td class="memItemLeft" align="right" valign="top">sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#abea2cfe25d58f7d101734e9556bd629b">sprite</a></td></tr>
-<tr class="separator:abea2cfe25d58f7d101734e9556bd629b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f36b1b2eb16e5bf80ab4ea7a6e43228" id="r_a0f36b1b2eb16e5bf80ab4ea7a6e43228"><td class="memItemLeft" align="right" valign="top">sf::IntRect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a0f36b1b2eb16e5bf80ab4ea7a6e43228">currentFrame</a></td></tr>
-<tr class="separator:a0f36b1b2eb16e5bf80ab4ea7a6e43228"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48b11285a3fb37afeed099dc47d8c5d0" id="r_a48b11285a3fb37afeed099dc47d8c5d0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a48b11285a3fb37afeed099dc47d8c5d0">animationTime</a></td></tr>
-<tr class="separator:a48b11285a3fb37afeed099dc47d8c5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa83390dfa0437d8191a996c6d2ea5fce" id="r_aa83390dfa0437d8191a996c6d2ea5fce"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#aa83390dfa0437d8191a996c6d2ea5fce">animationSpeed</a></td></tr>
-<tr class="separator:aa83390dfa0437d8191a996c6d2ea5fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9364e7dcfac0a30cb59cc6bc5add6f1e" id="r_a9364e7dcfac0a30cb59cc6bc5add6f1e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a9364e7dcfac0a30cb59cc6bc5add6f1e">_entity</a></td></tr>
+<tr class="separator:a9364e7dcfac0a30cb59cc6bc5add6f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57c23583e13393f7462228eb65611ccf" id="r_a57c23583e13393f7462228eb65611ccf"><td class="memItemLeft" align="right" valign="top">sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#a57c23583e13393f7462228eb65611ccf">_sprite</a></td></tr>
+<tr class="separator:a57c23583e13393f7462228eb65611ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc10b187da6070955406d5575579f17" id="r_affc10b187da6070955406d5575579f17"><td class="memItemLeft" align="right" valign="top">sf::IntRect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#affc10b187da6070955406d5575579f17">_currentFrame</a></td></tr>
+<tr class="separator:affc10b187da6070955406d5575579f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7776a40c3ac73ec7fce70c764e316f5" id="r_af7776a40c3ac73ec7fce70c764e316f5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#af7776a40c3ac73ec7fce70c764e316f5">_animationTime</a></td></tr>
+<tr class="separator:af7776a40c3ac73ec7fce70c764e316f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adabf70cc0cfe6ca57061442d25166e78" id="r_adabf70cc0cfe6ca57061442d25166e78"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#adabf70cc0cfe6ca57061442d25166e78">_animationSpeed</a></td></tr>
+<tr class="separator:adabf70cc0cfe6ca57061442d25166e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18e67c54a1b562d2b966d6b7b373a9d" id="r_ad18e67c54a1b562d2b966d6b7b373a9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1ResourceManager.html">ResourceManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GraphicEntity.html#ad18e67c54a1b562d2b966d6b7b373a9d">_resourceManager</a></td></tr>
+<tr class="separator:ad18e67c54a1b562d2b966d6b7b373a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affd18c39efe7107e7080f76a96f7e29f" id="r_affd18c39efe7107e7080f76a96f7e29f"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1AGraphicEntity.html#affd18c39efe7107e7080f76a96f7e29f">_entityName</a></td></tr>
+<tr class="separator:affd18c39efe7107e7080f76a96f7e29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Graphic <a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> class from the abstract <a class="el" href="classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity.">AGraphicEntity</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af45beb58a5303ed3732199bbc0d683e4" name="af45beb58a5303ed3732199bbc0d683e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af45beb58a5303ed3732199bbc0d683e4">&#9670;&#160;</a></span>GraphicEntity()</h2>
+<a id="a5834a00fc3626a27c9073a616615ab8b" name="a5834a00fc3626a27c9073a616615ab8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5834a00fc3626a27c9073a616615ab8b">&#9670;&#160;</a></span>GraphicEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,8 +163,24 @@ Private Attributes</h2></td></tr>
           <td class="memname">RType::GraphicEntity::GraphicEntity </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>entityName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -166,10 +190,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Construct a new Graphic Bullet object. </p>
+<p>Construct a new Graphic <a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entity</td><td>Reference to the ECS entity associated with this graphic entity </td></tr>
+    <tr><td class="paramname">entity</td><td>Reference to the ECS _entity associated with this graphic _entity. </td></tr>
+    <tr><td class="paramname">path</td><td>Path to the texture file for this graphic _entity. </td></tr>
   </table>
   </dd>
 </dl>
@@ -201,10 +226,10 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Draw the graphic entity to the provided window. </p>
+<p>Draw the graphic _entity to the provided window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">window</td><td>The window to draw the entity on </td></tr>
+    <tr><td class="paramname">window</td><td>The window to draw the _entity on. </td></tr>
   </table>
   </dd>
 </dl>
@@ -236,7 +261,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return the entity of the graphical entity. </p>
+<p>get <a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a>. </p>
 
 <p>Implements <a class="el" href="classRType_1_1AGraphicEntity.html#a0e1d94e0353c1ec0db8dc35f7a993b3c">RType::AGraphicEntity</a>.</p>
 
@@ -265,7 +290,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return the sprite of the graphical entity. </p>
+<p>get Sprite. </p>
 
 <p>Implements <a class="el" href="classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95">RType::AGraphicEntity</a>.</p>
 
@@ -305,11 +330,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Draw the graphic entity to the provided window. </p>
+<p>Draw the graphic _entity to the provided window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sprite</td><td>The sprite to move </td></tr>
-    <tr><td class="paramname">entity</td><td>The entity to move </td></tr>
+    <tr><td class="paramname">sprite</td><td>The _sprite to move </td></tr>
+    <tr><td class="paramname">entity</td><td>The _entity to move </td></tr>
   </table>
   </dd>
 </dl>
@@ -352,11 +377,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Draw the graphic entity to the provided window. </p>
+<p>Draw the graphic _entity to the provided window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sprite</td><td>The sprite to move </td></tr>
-    <tr><td class="paramname">entity</td><td>The entity to move </td></tr>
+    <tr><td class="paramname">sprite</td><td>The _sprite to move </td></tr>
+    <tr><td class="paramname">entity</td><td>The _entity to move </td></tr>
   </table>
   </dd>
 </dl>
@@ -399,11 +424,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Draw the graphic entity to the provided window. </p>
+<p>Draw the graphic _entity to the provided window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sprite</td><td>The sprite to move </td></tr>
-    <tr><td class="paramname">entity</td><td>The entity to move </td></tr>
+    <tr><td class="paramname">sprite</td><td>The _sprite to move </td></tr>
+    <tr><td class="paramname">entity</td><td>The _entity to move </td></tr>
   </table>
   </dd>
 </dl>
@@ -446,11 +471,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Draw the graphic entity to the provided window. </p>
+<p>Draw the graphic _entity to the provided window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sprite</td><td>The sprite to move </td></tr>
-    <tr><td class="paramname">entity</td><td>The entity to move </td></tr>
+    <tr><td class="paramname">sprite</td><td>The _sprite to move </td></tr>
+    <tr><td class="paramname">entity</td><td>The _entity to move </td></tr>
   </table>
   </dd>
 </dl>
@@ -483,10 +508,10 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Update the graphic entity based on the state of the ECS entity. </p>
+<p>Update the graphic _entity based on the state of the ECS _entity. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">deltaTime</td><td>Time since last update </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Time since last update. </td></tr>
   </table>
   </dd>
 </dl>
@@ -496,8 +521,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa83390dfa0437d8191a996c6d2ea5fce" name="aa83390dfa0437d8191a996c6d2ea5fce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa83390dfa0437d8191a996c6d2ea5fce">&#9670;&#160;</a></span>animationSpeed</h2>
+<a id="adabf70cc0cfe6ca57061442d25166e78" name="adabf70cc0cfe6ca57061442d25166e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adabf70cc0cfe6ca57061442d25166e78">&#9670;&#160;</a></span>_animationSpeed</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -506,7 +531,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float RType::GraphicEntity::animationSpeed</td>
+          <td class="memname">float RType::GraphicEntity::_animationSpeed</td>
         </tr>
       </table>
   </td>
@@ -515,12 +540,12 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Animation Speed of the graphical entity. </p>
+<p>Speed of the animation. </p>
 
 </div>
 </div>
-<a id="a48b11285a3fb37afeed099dc47d8c5d0" name="a48b11285a3fb37afeed099dc47d8c5d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48b11285a3fb37afeed099dc47d8c5d0">&#9670;&#160;</a></span>animationTime</h2>
+<a id="af7776a40c3ac73ec7fce70c764e316f5" name="af7776a40c3ac73ec7fce70c764e316f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7776a40c3ac73ec7fce70c764e316f5">&#9670;&#160;</a></span>_animationTime</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -529,7 +554,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float RType::GraphicEntity::animationTime</td>
+          <td class="memname">float RType::GraphicEntity::_animationTime</td>
         </tr>
       </table>
   </td>
@@ -538,12 +563,12 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Animation Time of the graphical entity. </p>
+<p>Animation time accumulator. </p>
 
 </div>
 </div>
-<a id="a0f36b1b2eb16e5bf80ab4ea7a6e43228" name="a0f36b1b2eb16e5bf80ab4ea7a6e43228"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f36b1b2eb16e5bf80ab4ea7a6e43228">&#9670;&#160;</a></span>currentFrame</h2>
+<a id="affc10b187da6070955406d5575579f17" name="affc10b187da6070955406d5575579f17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affc10b187da6070955406d5575579f17">&#9670;&#160;</a></span>_currentFrame</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -552,7 +577,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">sf::IntRect RType::GraphicEntity::currentFrame</td>
+          <td class="memname">sf::IntRect RType::GraphicEntity::_currentFrame</td>
         </tr>
       </table>
   </td>
@@ -561,12 +586,12 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Current Frame of the graphical entity. </p>
+<p>Current frame of the graphical _entity. </p>
 
 </div>
 </div>
-<a id="a5a3bbd96907815e880f831b8d9b7b7a3" name="a5a3bbd96907815e880f831b8d9b7b7a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a3bbd96907815e880f831b8d9b7b7a3">&#9670;&#160;</a></span>entity</h2>
+<a id="a9364e7dcfac0a30cb59cc6bc5add6f1e" name="a9364e7dcfac0a30cb59cc6bc5add6f1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9364e7dcfac0a30cb59cc6bc5add6f1e">&#9670;&#160;</a></span>_entity</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -575,7 +600,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classRType_1_1Entity.html">Entity</a>&gt;&amp; RType::GraphicEntity::entity</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classRType_1_1Entity.html">Entity</a>&gt; RType::GraphicEntity::_entity</td>
         </tr>
       </table>
   </td>
@@ -584,12 +609,12 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> of the graphical entity. </p>
+<p>Reference to the ECS _entity. </p>
 
 </div>
 </div>
-<a id="abea2cfe25d58f7d101734e9556bd629b" name="abea2cfe25d58f7d101734e9556bd629b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abea2cfe25d58f7d101734e9556bd629b">&#9670;&#160;</a></span>sprite</h2>
+<a id="affd18c39efe7107e7080f76a96f7e29f" name="affd18c39efe7107e7080f76a96f7e29f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd18c39efe7107e7080f76a96f7e29f">&#9670;&#160;</a></span>_entityName</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -598,7 +623,30 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Sprite RType::GraphicEntity::sprite</td>
+          <td class="memname">const std::string RType::AGraphicEntity::_entityName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> name. </p>
+
+</div>
+</div>
+<a id="ad18e67c54a1b562d2b966d6b7b373a9d" name="ad18e67c54a1b562d2b966d6b7b373a9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18e67c54a1b562d2b966d6b7b373a9d">&#9670;&#160;</a></span>_resourceManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRType_1_1ResourceManager.html">ResourceManager</a> RType::GraphicEntity::_resourceManager</td>
         </tr>
       </table>
   </td>
@@ -607,7 +655,30 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sprite of the graphical entity. </p>
+<p>Resource Manager instance. </p>
+
+</div>
+</div>
+<a id="a57c23583e13393f7462228eb65611ccf" name="a57c23583e13393f7462228eb65611ccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57c23583e13393f7462228eb65611ccf">&#9670;&#160;</a></span>_sprite</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Sprite RType::GraphicEntity::_sprite</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sprite of the graphical _entity. </p>
 
 </div>
 </div>

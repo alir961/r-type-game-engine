@@ -16,21 +16,21 @@ namespace RType {
     public:
         /**
         * @brief Base constructor for speed component.
-        * @param speed The speed of the entity.
+        * @param speed The speed of the _entity.
         */
         explicit SpeedComponent(int speed) : _speed(speed) {}
 
         /**
-        * @brief Set the speed of the entity.
-        * @param speed The speed of the entity.
+        * @brief Set the speed of the _entity.
+        * @param speed The speed of the _entity.
         */
         void setSpeed(int speed) {
             _speed = speed;
         }
 
         /**
-        * @brief Get the speed of the entity.
-        * @return The speed of the entity.
+        * @brief Get the speed of the _entity.
+        * @return The speed of the _entity.
         */
         [[nodiscard]] int getSpeed() const {
             return _speed;
@@ -44,6 +44,6 @@ namespace RType {
         }
 
     private:
-        int _speed; /**< Speed of the entity. */
+        int _speed; /**< Speed of the _entity. */
     };
 }

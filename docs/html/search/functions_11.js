@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['_7eentity_0',['~Entity',['../classRType_1_1Entity.html#a06eb13461d762f875b3961e8a66b980e',1,'RType::Entity']]],
-  ['_7eentitymanager_1',['~EntityManager',['../classRType_1_1EntityManager.html#adf12e9191ee27b4d778148b95e91d5a8',1,'RType::EntityManager']]],
-  ['_7egameview_2',['~GameView',['../classRType_1_1GameView.html#a2d1e3a57ee15ed29235d8fb20e4bd925',1,'RType::GameView']]],
-  ['_7eigamemodule_3',['~IGameModule',['../classRType_1_1IGameModule.html#aa85212ae09e51ef5217dec3fe32bdda8',1,'RType::IGameModule']]],
-  ['_7emoduleloader_4',['~ModuleLoader',['../classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23',1,'RType::ModuleLoader']]]
+  ['what_0',['what',['../classRType_1_1ConfigurationException.html#a98c227584c7fd593bf1de5c98cba613f',1,'RType::ConfigurationException::what()'],['../classRType_1_1NetworkException.html#a236a8bc15606d7ea1f53c657876afbaf',1,'RType::NetworkException::what()'],['../classRType_1_1ServerException.html#a8c26617bc78a601f5ec814b7812c13d1',1,'RType::ServerException::what()']]],
+  ['winstate_1',['WinState',['../classRType_1_1WinState.html#a0cbec9a7a03dcfc422f652809fab3436',1,'RType::WinState']]]
 ];
