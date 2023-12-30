@@ -18,8 +18,8 @@ namespace RType {
     using LoginButton = Button<200, 40>;
 
     /**
-     * @class MenuState
-     * @brief Represents a state with a menu for user interaction.
+     * @class LoginState
+     * @brief Represents a login state with input box for user interaction.
      */
     class LoginState : public IDraw {
     public:
