@@ -59,6 +59,8 @@ namespace RType {
          */
         void draw() const {
             _window.draw(_rect);
+            _window.draw(_textDisplay);
+        }
 
         /**
          * @brief Set the activation state of the input box.

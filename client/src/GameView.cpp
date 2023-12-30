@@ -123,20 +123,6 @@ void RType::GameView::updateEntities(float deltaTime) {
             _winState->update();
             break;
     }
-    switch (_viewState) {
-        case ViewState::MENU:
-            _menuState->update();
-            break;
-        case ViewState::OPTIONS:
-            _optionsState->update();
-            break;
-        case ViewState::PAUSE:
-            _pauseState->update();
-            break;
-        case ViewState::LOGIN:
-            _loginState->update();
-            break;
-    }
 }
 
 void RType::GameView::draw() {
