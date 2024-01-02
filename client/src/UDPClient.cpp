@@ -10,8 +10,9 @@
 void RType::UDPClient::startReceive() {
     auto receiveData = [this](const boost::system::error_code &error, std::size_t bytes_received) {
         std::cout << "Receive " << bytes_received << "bytes!\n";
-        if (!error)
+        if (!error) {
             handleReceive(bytes_received);
+        }
         else std::cerr << "Error receiving message: " << error.message() << "\n";
     };
     _adapter.receiveMessage(receiveData);
@@ -34,6 +35,7 @@ RType::UDPClient::UDPClient(asio::io_context &io_context, UDP::endpoint endpoint
     _adapter(_socket, endpoint) {
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message& msg) {handleConnectCallbackMessage(msg);};
     _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
+    _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameCallbackMessageType(msg);};
     const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::CONNECT)
             .setData("")
             .build();
@@ -42,23 +44,23 @@ RType::UDPClient::UDPClient(asio::io_context &io_context, UDP::endpoint endpoint
 }
 
 void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiveMessage) {
-    const int CONNECT_SIZE = 7;
     std::string message = receiveMessage.toString();
-    std::size_t pos1 = message.find("connect");
-    std::size_t pos2 = message.find("ok");
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int connectionId = std::stoi(splitMessage[1]);
+    const std::string messageData = std::format("player {} {}\n", connectionId, "Zeubio");
+    const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
+            .setData(messageData)
+            .build();
+    const std::vector<std::byte> binaryData = response.serialize();
 
-    if (pos1 != std::string::npos && pos2 != std::string::npos) {
-        try {
-            int connectionId = std::stoi(message.substr(pos1 + CONNECT_SIZE, pos2 - (pos1 + CONNECT_SIZE)));
-            std::cout << "Connection ID: " << connectionId << "\n";
-        } catch (const std::exception& e) {
-            std::cerr << "Error: Failed to extract connection ID\n";
-        }
-    } else {
-        std::cerr << "Error: Unexpected message format\n";
-    }
+    _adapter.sendData(asio::buffer(binaryData));
+    std::cout << "Connection ID: " << connectionId << "\n";
 }
 
 void RType::UDPClient::handleUnknownMessageType(const RType::Message &) {
     std::cout << "Unknown message!" << "\n";
+}
+
+void RType::UDPClient::handlePlayerNameCallbackMessageType(const RType::Message &receiveMessage) {
+    std::cout << receiveMessage.toString();
 }

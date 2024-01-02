@@ -37,6 +37,7 @@ RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &e
         _adapter(_socket, _remoteEndpoint) {
     _handlers[MessageType::CONNECT] = [this](const Message& msg) {handleConnectMessage(msg);};
     _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
+    _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameMessageType(msg);};
     startReceive();
 }
 
@@ -63,6 +64,21 @@ void RType::UDPServer::handleConnectMessage(const RType::Message &) {
 void RType::UDPServer::handleUnknownMessageType(const RType::Message &) {
     const RType::Message response = RType::NetworkMessageBuilder(MessageType::UNKNOWN)
             .setData("Unknown Message!")
+            .build();
+    const std::vector<std::byte> binaryData = response.serialize();
+    _adapter.sendData(asio::buffer(binaryData));
+}
+
+void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::string playerName = splitMessage[2];
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+    session->setPlayerName(playerName);
+    std::cout << "PlayerName: " << sessionID << " " << playerName << "\n";
+    const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
+            .setData(std::format("player {}", sessionID))
             .build();
     const std::vector<std::byte> binaryData = response.serialize();
     _adapter.sendData(asio::buffer(binaryData));

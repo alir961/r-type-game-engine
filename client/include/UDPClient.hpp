@@ -8,6 +8,7 @@
 #pragma once
 
 #include <engine/network/UDPAdapter.hpp>
+#include <engine/tools/Split.hpp>
 #include <iostream>
 
 namespace RType {
@@ -26,6 +27,7 @@ namespace RType {
 
         void handleConnectCallbackMessage(const Message& receiveMessage);
         void handleUnknownMessageType(const Message& receiveMessage);
+        void handlePlayerNameCallbackMessageType(const Message& receiveMessage);
 
     };
 }

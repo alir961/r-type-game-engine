@@ -39,11 +39,11 @@ void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
 void RType::GameView::basicInput() {
     // Testing Win/Lose State
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad8) {
-        std::cout << "Entering Win State" << std::endl;
+        std::cout << "Entering Win State" << '\n';
         setView(ViewState::WIN);
     }
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad9) {
-        std::cout << "Entering Lose State" << std::endl;
+        std::cout << "Entering Lose State" << '\n';
         setView(ViewState::DEAD);
     }
     // Testing Win/Lose State
@@ -80,8 +80,8 @@ void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntiti
                 return;
             }
             basicInput();
+            _client.startReceive();
         }
-        _client.startReceive();
         handleInput(graphicEntities);
 
         float deltaTime = animationClock.restart().asSeconds();

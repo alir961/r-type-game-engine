@@ -8,6 +8,7 @@
 #pragma once
 
 #include <engine/network/UDPAdapter.hpp>
+#include <engine/tools/Split.hpp>
 #include <iostream>
 #include "SessionManager.hpp"
 
@@ -35,6 +36,7 @@ namespace RType {
 
         void handleConnectMessage(const Message& message);
         void handleUnknownMessageType(const Message& message);
+        void handlePlayerNameMessageType(const Message& message);
     };
 
 }

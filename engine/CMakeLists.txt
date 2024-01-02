@@ -1,6 +1,8 @@
 set(HEADER_FILES
         include/engine/exception/ConfigurationException.hpp
         include/engine/tools/NumberUtilities.hpp
+        include/engine/tools/Split.hpp
+        include/engine/tools/SafeQueue.hpp
         include/engine/ecs/component/CollisionComponent.hpp
         include/engine/ecs/component/DamageComponent.hpp
         include/engine/ecs/component/HealthComponent.hpp
@@ -28,6 +30,7 @@ set(HEADER_FILES
 set(SOURCE_FILES
         src/Logger.cpp
         src/tools/NumberUtilities.cpp
+        src/tools/Split.cpp
         src/network/NetworkMessage.cpp
         src/network/UDPAdapter.cpp
 )
