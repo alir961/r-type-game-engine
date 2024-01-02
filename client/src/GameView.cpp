@@ -7,10 +7,11 @@
 
 #include "../include/GameView.hpp"
 
-RType::GameView::GameView(asio::io_context &io_context, UDP::endpoint endpoint) :
+RType::GameView::GameView(IGraphicalModule *graphicalModule, asio::io_context &io_context, UDP::endpoint endpoint) :
         _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"),
         _viewState(ViewState::LOGIN),
-        _client(io_context, std::move(endpoint)) {
+        _client(io_context, std::move(endpoint)),
+        _graphicalModule(graphicalModule) {
     _window.setFramerateLimit(60);
     _menuState = std::make_shared<MenuState>(_window, *this, _graphicalModule);
     _optionsState = std::make_shared<OptionsState>(_window, *this, _graphicalModule);

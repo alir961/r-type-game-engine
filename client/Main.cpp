@@ -1,12 +1,10 @@
 #include <engine/Logger.hpp>
 #include <engine/network/UDPAdapter.hpp>
 #include "include/GameView.hpp"
-#include "engine/network/NetworkMessage.hpp"
-#include "engine/modules/ModuleLoader.hpp"
+#include <engine/modules/ModuleLoader.hpp>
 #include "../engine/modules/sound/SoundModule.hpp"
 #include "../engine/modules/console/ConsoleModule.hpp"
 #include "../engine/modules/particle/ParticleModule.hpp"
-#include "../engine/modules/graphical/GraphicalModule.hpp"
 
 int main() {
     asio::io_context ioContext;
