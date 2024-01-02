@@ -24,11 +24,12 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the GameView.
          */
-        OptionsState(sf::RenderWindow &window, GameView &gameView)
-            : title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Options"),
+        OptionsState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
+            : _graphicalModule(graphicalModule), _gameView(gameView),
+              title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Options"),
               sound(window, sf::Color::Cyan, 20, 500.0f, 250.0f, "Sound"),
               soundVolume(window, sf::Color::Cyan, 20, 650.0f, 250.0f, "100"),
-              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 300.0f, "Exit To Main Menu"), _gameView(gameView) {}
+              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 300.0f, "Exit To Main Menu") {}
 
         /**
          * @brief Handles user input for the options menu.
@@ -61,10 +62,10 @@ namespace RType {
          * @param entities A vector of shared pointers to graphic entities.
          */
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
-            title.draw();
-            sound.draw();
-            soundVolume.draw();
-            mainMenu.draw();
+            title.draw(_graphicalModule);
+            sound.draw(_graphicalModule);
+            soundVolume.draw(_graphicalModule);
+            mainMenu.draw(_graphicalModule);
             handleInput();
         }
 
@@ -74,6 +75,7 @@ namespace RType {
         TextBox soundVolume; /**< Game sound volume of the GameView. */
         TextBox mainMenu; /**< TextBox for the menu. */
         GameView &_gameView; /**< Reference to the GameView. */
+        IGraphicalModule *_graphicalModule;
 
         /**
          * @brief Checks if the left mouse button is clicked.

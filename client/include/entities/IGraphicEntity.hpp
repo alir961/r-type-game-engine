@@ -8,6 +8,7 @@
 #pragma once
 #include "engine/ecs/Entity.hpp"
 #include "engine/ecs/component/PositionComponent.hpp"
+#include "engine/modules/IGraphicalModule.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace RType {
@@ -28,7 +29,7 @@ namespace RType {
         * @brief Draw the graphic _entity to the provided window
         * @param window The window to draw the _entity on
         */
-        virtual void draw(sf::RenderWindow &window) = 0;
+        virtual void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) = 0;
 
         /**
         * @brief Draw the graphic _entity to the provided window

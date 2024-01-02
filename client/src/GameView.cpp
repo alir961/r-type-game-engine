@@ -5,17 +5,17 @@
 ** GameView.cpp
 */
 
-#include ".././include/GameView.hpp"
+#include "../include/GameView.hpp"
 
-RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::LOGIN) {
+RType::GameView::GameView(IGraphicalModule *graphicalModule) : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::LOGIN), _graphicalModule(graphicalModule) {
     _window.setFramerateLimit(60);
-    _menuState = std::make_shared<MenuState>(_window, *this);
-    _optionsState = std::make_shared<OptionsState>(_window, *this);
-    _pauseState = std::make_shared<PauseState>(_window, *this);
-    _deadState = std::make_shared<DeadState>(_window, *this);
-    _winState = std::make_shared<WinState>(_window, *this);
-    _gameState = std::make_shared<GameState>(_window, *this);
-    _loginState = std::make_shared<LoginState>(_window, *this);
+    _menuState = std::make_shared<MenuState>(_window, *this, _graphicalModule);
+    _optionsState = std::make_shared<OptionsState>(_window, *this, _graphicalModule);
+    _pauseState = std::make_shared<PauseState>(_window, *this, _graphicalModule);
+    _deadState = std::make_shared<DeadState>(_window, *this, _graphicalModule);
+    _winState = std::make_shared<WinState>(_window, *this, _graphicalModule);
+    _gameState = std::make_shared<GameState>(_window, *this, _graphicalModule);
+    _loginState = std::make_shared<LoginState>(_window, *this, _graphicalModule);
 }
 
 void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {

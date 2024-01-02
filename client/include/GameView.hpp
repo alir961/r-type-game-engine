@@ -9,6 +9,7 @@
 
 #include "entities/GraphicEntity.hpp"
 #include "entities/GraphicEntityFactory.hpp"
+#include "../../engine/modules/graphical/GraphicalModule.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include <engine/Logger.hpp>
@@ -60,6 +61,12 @@ namespace RType {
         std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
         std::shared_ptr<LoginState> _loginState;                           /**< Shared ptr to the Login ViewState. */
         sf::Event event{};
+        IGraphicalModule *_graphicalModule;
+
+        void setGraphical(IGraphicalModule *graphicalModule)
+        {
+            _graphicalModule = graphicalModule;
+        }
 
         /**
          * @brief Private method to handle drawing operations.
@@ -106,7 +113,7 @@ namespace RType {
         /**
          * @brief Constructor for the GameView class.
          */
-        explicit GameView();
+        explicit GameView(IGraphicalModule *graphicalModule);
 
         /**
          * @brief Destructor for the GameView class.

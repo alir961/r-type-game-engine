@@ -34,27 +34,26 @@ namespace RType {
          * @param y The Y-coordinate of the button.
          * @param text The text to be displayed on the button.
          */
-        explicit Button(sf::RenderWindow &window, float x, float y, std::string text) : _window(window), _x(x), _y(y),
-                                                          _text(std::move(text)) {
+        explicit Button(sf::RenderWindow &window, float x, float y, std::string text) : _window(window), _x(x), _y(y), _text(std::move(text)) {
             _rectangle.setPosition(x, y);
-            _rectangle.setSize(sf::Vector2f(float(width), float(height)));
+            _rectangle.setSize(sf::Vector2f(static_cast<float>(width), static_cast<float>(height)));
         }
 
         /**
          * @brief Draws the button on the SFML RenderWindow.
          */
-        void draw() {
+        void draw(IGraphicalModule *graphicalModule) {
             bool mouseOver = _rectangle.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(_window)));
 
             _rectangle.setFillColor(mouseOver ? sf::Color(200, 200, 200) : sf::Color(128, 128, 128));
-            _window.draw(_rectangle);
+            graphicalModule->drawRect(_window, _rectangle);
 
             sf::Font font;
             if (font.loadFromFile("client/assets/ka1.ttf")) {
                 sf::Text buttonText(_text, font, 20);
                 buttonText.setPosition(_x + 20, _y + 10);
                 buttonText.setFillColor(sf::Color::White);
-                _window.draw(buttonText);
+                graphicalModule->drawText(_window, buttonText);
             }
         }
 
@@ -64,7 +63,7 @@ namespace RType {
          */
         void executeIfClicked(std::function<void()> function) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(_window);
-            bool mouseOver = _rectangle.getGlobalBounds().contains(float(mousePosition.x), float(mousePosition.y));
+            bool mouseOver = _rectangle.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
             bool mouseClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 
             if (mouseOver && mouseClick) {

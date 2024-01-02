@@ -21,11 +21,12 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        MenuState(sf::RenderWindow &window, GameView &gameView)
-            : _window(window), titleBox(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "R Type"),
+        MenuState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
+            : _window(window), _graphicalModule(graphicalModule), _gameView(gameView),
+              titleBox(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "R Type"),
               startBox(window, sf::Color::Cyan, 20, 100.0f, 200.0f, "Start"),
               optionsBox(window, sf::Color::Cyan, 20, 100.0f, 250.0f, "Options"),
-              quitBox(window, sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit"), _gameView(gameView) {}
+              quitBox(window, sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit") {}
 
         /**
          * @brief Handles user input for the menu.
@@ -65,10 +66,10 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow& window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
-            titleBox.draw();
-            startBox.draw();
-            optionsBox.draw();
-            quitBox.draw();
+            titleBox.draw(_graphicalModule);
+            startBox.draw(_graphicalModule);
+            optionsBox.draw(_graphicalModule);
+            quitBox.draw(_graphicalModule);
             handleInput();
         }
 
@@ -79,6 +80,7 @@ namespace RType {
         TextBox quitBox; /**< TextBox for quitting the game. */
         GameView &_gameView; /**< The associated GameView. */
         sf::RenderWindow &_window; /**< The SFML RenderWindow. */
+        IGraphicalModule *_graphicalModule;
 
         /**
          * @brief Checks if the left mouse button is clicked.

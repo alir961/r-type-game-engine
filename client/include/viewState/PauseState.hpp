@@ -24,10 +24,11 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the GameView.
          */
-        PauseState(sf::RenderWindow &window, GameView &gameView)
-            : title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
+        PauseState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
+            : _graphicalModule(graphicalModule), _gameView(gameView),
+              title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
               resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
-              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu"), _gameView(gameView) {}
+              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu") {}
 
         /**
          * @brief Handles user input for the pause menu.
@@ -64,9 +65,9 @@ namespace RType {
          * @param entities A vector of shared pointers to graphic entities.
          */
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
-            title.draw();
-            mainMenu.draw();
-            resume.draw();
+            title.draw(_graphicalModule);
+            mainMenu.draw(_graphicalModule);
+            resume.draw(_graphicalModule);
             handleInput();
         }
 
@@ -75,6 +76,7 @@ namespace RType {
         TextBox mainMenu; /**< TextBox for the menu. */
         TextBox resume; /**< TextBox for resume. */
         GameView &_gameView; /**< Reference to the GameView. */
+        IGraphicalModule *_graphicalModule;
 
         /**
          * @brief Checks if the left mouse button is clicked.

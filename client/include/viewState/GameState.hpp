@@ -25,8 +25,8 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        GameState(sf::RenderWindow &window, GameView &gameView)
-            : _gameView(gameView),
+        GameState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
+            : _gameView(gameView), _graphicalModule(graphicalModule),
               playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
               scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
               healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, "") {
@@ -38,9 +38,9 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>> graphicEntities) override {
-            playerNameText.draw();
-            healthBarText.draw();
-            scoreText.draw();
+            playerNameText.draw(_graphicalModule);
+            healthBarText.draw(_graphicalModule);
+            scoreText.draw(_graphicalModule);
 
             std::shared_ptr<AGraphicEntity> player = _gameView.getGraphicEntityByName("playerStarship");
             if (player != nullptr && player->getEntity()->getComponent<PlayerComponent>()) {
@@ -53,7 +53,7 @@ namespace RType {
             } else healthBarText.setText("Player entity not found");
 
             for (auto &entity: graphicEntities) {
-                entity->draw(window);
+                entity->draw(window, _graphicalModule);
             }
         }
 
@@ -62,5 +62,6 @@ namespace RType {
         TextBox playerNameText; /**< Player Name Text. */
         TextBox healthBarText; /**< Health Text. */
         TextBox scoreText; /**< Score Text. */
+        IGraphicalModule *_graphicalModule;
     };
 }

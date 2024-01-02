@@ -26,8 +26,8 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        WinState(sf::RenderWindow &window, GameView &gameView)
-            : _gameView(gameView),
+        WinState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
+            : _gameView(gameView), _graphicalModule(graphicalModule),
               backgroundRect(window, sf::Vector2f(((((window.getSize().x - 450) / 2))), ((window.getSize().y - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f),
               wonText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Won!"),
               hpText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 115, ""),
@@ -61,11 +61,11 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>> graphicEntities) override {
-            backgroundRect.draw();
-            wonText.draw();
-            hpText.draw();
-            scoreText.draw();
-            exitText.draw();
+            backgroundRect.draw(_graphicalModule);
+            wonText.draw(_graphicalModule);
+            hpText.draw(_graphicalModule);
+            scoreText.draw(_graphicalModule);
+            exitText.draw(_graphicalModule);
             handleInput();
 
             std::shared_ptr<AGraphicEntity> player = _gameView.getGraphicEntityByName("playerStarship");
@@ -86,6 +86,7 @@ namespace RType {
         TextBox hpText; /**< Text "hp". */
         TextBox scoreText; /**< Text "pts". */
         TextBox exitText; /**< Exit Text. */
+        IGraphicalModule *_graphicalModule;
 
         bool isMouseClicked() const {
             return sf::Mouse::isButtonPressed(sf::Mouse::Left);
