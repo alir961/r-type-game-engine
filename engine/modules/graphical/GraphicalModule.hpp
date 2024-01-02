@@ -8,6 +8,7 @@
 #pragma once
 #include "engine/modules/IModule.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 namespace RType {
 
@@ -16,7 +17,16 @@ namespace RType {
         void load() override;
         void unload() override;
 
-    private:
+        /**
+         * @brief Draw a text in SFML.
+         * @param window, text The window where to draw, the text we want to display.
+         */
+        void drawText(sf::RenderWindow &window, sf::Text text);
 
+        /**
+         * @brief Draw a sprite in SFMl.
+         * @param window, sprite The window where to draw, the sprite we want to display.
+         */
+        void drawSprite(sf::RenderWindow &window, sf::Sprite sprite);
     };
 }

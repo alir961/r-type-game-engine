@@ -24,3 +24,11 @@ void RType::GraphicalModule::load() {
 void RType::GraphicalModule::unload() {
     std::cout << "Unload Graphical Module\n";
 }
+
+void RType::GraphicalModule::drawText(sf::RenderWindow &window, sf::Text text) {
+    window.draw(text);
+}
+
+void RType::GraphicalModule::drawSprite(sf::RenderWindow &window, sf::Sprite sprite) {
+    window.draw(sprite);
+}
