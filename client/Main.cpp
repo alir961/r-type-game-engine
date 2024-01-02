@@ -6,20 +6,24 @@
 #include "../engine/modules/sound/SoundModule.hpp"
 #include "../engine/modules/console/ConsoleModule.hpp"
 #include "../engine/modules/particle/ParticleModule.hpp"
+#include "../engine/modules/graphical/GraphicalModule.hpp"
 
 int main() {
     RType::GameView view;
     RType::ModuleLoader<RType::SoundModule> soundModuleLoader("build/out/engine/modules/sound/libsound_module.so");
     RType::ModuleLoader<RType::ConsoleModule> consoleModuleLoader("build/out/engine/modules/console/libconsole_module.so");
     RType::ModuleLoader<RType::ParticleModule> particleModuleLoader("build/out/engine/modules/particle/libparticle_module.so");
+    RType::ModuleLoader<RType::GraphicalModule> graphicalModuleLoader("build/out/engine/modules/graphical/libgraphical_module.so");
     RType::SoundModule *soundModule = soundModuleLoader.load();
     RType::ConsoleModule *consoleModule = consoleModuleLoader.load();
     RType::ParticleModule *particleModule = particleModuleLoader.load();
+    RType::GraphicalModule *graphicalModule = graphicalModuleLoader.load();
 
     logInformation("Hello, World for client!");
     soundModule->load();
     consoleModule->load();
     particleModule->load();
+    graphicalModule->load();
 
     asio::io_context ioContext;
     UDP::socket socket(ioContext, UDP::endpoint(UDP::v4(), 0));
@@ -39,4 +43,5 @@ int main() {
     consoleModuleLoader.unload();
     soundModuleLoader.unload();
     particleModuleLoader.unload();
+    graphicalModule->unload();
 }

@@ -14,7 +14,7 @@
 namespace RType {
 
     enum class ModuleType {
-        SOUND, CONSOLE, PARTICLE, UNKNOWN
+        SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN
     };
 
     /**
@@ -110,6 +110,8 @@ namespace RType {
             loadedModule = callConstructor("initializeConsoleModule");
         if (_type == ModuleType::PARTICLE)
             loadedModule = callConstructor("initializeParticleModule");
+        if (_type == ModuleType::GRAPHICAL)
+            loadedModule = callConstructor("initializeGraphicalModule");
         if (loadedModule == nullptr)
             throw ModuleException("Invalid loadedModule provided");
         _module = loadedModule;
@@ -148,6 +150,9 @@ namespace RType {
 
         if (dlsym(handle, "initializeParticleModule") != nullptr)
             return ModuleType::PARTICLE;
+
+        if (dlsym(handle, "initializeGraphicalModule") != nullptr)
+            return ModuleType::GRAPHICAL;
 
         return ModuleType::UNKNOWN;
     }
