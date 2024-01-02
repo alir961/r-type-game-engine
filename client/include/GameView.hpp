@@ -9,6 +9,7 @@
 
 #include "entities/GraphicEntity.hpp"
 #include "entities/GraphicEntityFactory.hpp"
+#include "UDPClient.hpp"
 #include "../../engine/modules/graphical/GraphicalModule.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
@@ -60,6 +61,7 @@ namespace RType {
         std::shared_ptr<WinState> _winState;                            /**< Shared ptr to the Win ViewState. */
         std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
         std::shared_ptr<LoginState> _loginState;                           /**< Shared ptr to the Login ViewState. */
+        UDPClient _client;
         sf::Event event{};
         IGraphicalModule *_graphicalModule;
 
@@ -113,7 +115,7 @@ namespace RType {
         /**
          * @brief Constructor for the GameView class.
          */
-        explicit GameView(IGraphicalModule *graphicalModule);
+        explicit GameView(IGraphicalModule *graphicalModule, asio::io_context &io_context, UDP::endpoint endpoint);
 
         /**
          * @brief Destructor for the GameView class.

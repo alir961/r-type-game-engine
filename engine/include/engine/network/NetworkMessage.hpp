@@ -33,6 +33,7 @@ namespace RType {
         CONNECT_CALLBACK,
         DISCONNECT,
         CONFIRMATION,
+        PLAYER_NAME,
     };
 
     /**

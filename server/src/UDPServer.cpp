@@ -25,22 +25,19 @@ void RType::UDPServer::handleReceive(std::size_t bytesReceived) {
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
     const Message receiveMessage = Message::deserialize(receivedData);
 
-    if (receiveMessage.type == MessageType::CONNECT) {
-        const std::string sessionId = "id";
-        const std::string messageData = "connect " + sessionId + " ok";
-        const RType::Message message = RType::NetworkMessageBuilder(MessageType::CONNECT_CALLBACK)
-                .setData(messageData)
-                .build();
-        const std::vector<std::byte> binaryData = message.serialize();
-
-        std::cout << "New connection!\n";
-        _adapter.sendData(asio::buffer(binaryData));
-    } else _adapter.sendData(asio::buffer(buffer.data(), bytesReceived));
+    auto handlerIt = _handlers.find(receiveMessage.type);
+    if (handlerIt != _handlers.end())
+        handlerIt->second(receiveMessage);
+    else
+        handleUnknownMessageType(receiveMessage);
 }
 
 RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint) :
         _socket(io_context, endpoint),
         _adapter(_socket, _remoteEndpoint) {
+    _handlers[MessageType::CONNECT] = [this](const Message& msg) {handleConnectMessage(msg);};
+    _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
+    _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameMessageType(msg);};
     startReceive();
 }
 
@@ -50,4 +47,39 @@ RType::UDPServer::~UDPServer() {
     } catch (std::exception &exception) {
         std::cerr << "Unable to close server socket: " << exception.what() << "\n";
     }
+}
+
+void RType::UDPServer::handleConnectMessage(const RType::Message &) {
+    int sessionId = _sessions.setNewSession();
+    const std::string messageData = std::format("connect {} ok", sessionId);
+    const RType::Message response = RType::NetworkMessageBuilder(MessageType::CONNECT_CALLBACK)
+            .setData(messageData)
+            .build();
+    const std::vector<std::byte> binaryData = response.serialize();
+
+    std::cout << "New connection!\n";
+    _adapter.sendData(asio::buffer(binaryData));
+}
+
+void RType::UDPServer::handleUnknownMessageType(const RType::Message &) {
+    const RType::Message response = RType::NetworkMessageBuilder(MessageType::UNKNOWN)
+            .setData("Unknown Message!")
+            .build();
+    const std::vector<std::byte> binaryData = response.serialize();
+    _adapter.sendData(asio::buffer(binaryData));
+}
+
+void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::string playerName = splitMessage[2];
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+    session->setPlayerName(playerName);
+    std::cout << "PlayerName: " << sessionID << " " << playerName << "\n";
+    const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
+            .setData(std::format("player {}", sessionID))
+            .build();
+    const std::vector<std::byte> binaryData = response.serialize();
+    _adapter.sendData(asio::buffer(binaryData));
 }

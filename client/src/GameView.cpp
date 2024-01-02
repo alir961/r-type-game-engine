@@ -7,7 +7,11 @@
 
 #include "../include/GameView.hpp"
 
-RType::GameView::GameView(IGraphicalModule *graphicalModule) : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::LOGIN), _graphicalModule(graphicalModule) {
+RType::GameView::GameView(IGraphicalModule *graphicalModule, asio::io_context &io_context, UDP::endpoint endpoint) :
+        _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"),
+        _viewState(ViewState::LOGIN),
+        _client(io_context, std::move(endpoint)),
+        _graphicalModule(graphicalModule) {
     _window.setFramerateLimit(60);
     _menuState = std::make_shared<MenuState>(_window, *this, _graphicalModule);
     _optionsState = std::make_shared<OptionsState>(_window, *this, _graphicalModule);
@@ -36,11 +40,11 @@ void RType::GameView::handleInput(std::shared_ptr<AGraphicEntity> &entity) {
 void RType::GameView::basicInput() {
     // Testing Win/Lose State
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad8) {
-        std::cout << "Entering Win State" << std::endl;
+        std::cout << "Entering Win State" << '\n';
         setView(ViewState::WIN);
     }
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad9) {
-        std::cout << "Entering Lose State" << std::endl;
+        std::cout << "Entering Lose State" << '\n';
         setView(ViewState::DEAD);
     }
     // Testing Win/Lose State
@@ -77,6 +81,7 @@ void RType::GameView::launchWindow(std::shared_ptr<AGraphicEntity> graphicEntiti
                 return;
             }
             basicInput();
+            _client.startReceive();
         }
         handleInput(graphicEntities);
 
@@ -102,6 +107,9 @@ void RType::GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
 void RType::GameView::updateEntities(float deltaTime) {
     for (auto &entity: _graphicEntities) {
         entity->update(deltaTime);
+        _menuState->update();
+        _optionsState->update();
+        _pauseState->update();
     }
     switch (_viewState) {
         case ViewState::MENU:

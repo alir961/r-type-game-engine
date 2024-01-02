@@ -11,8 +11,8 @@
 namespace RType {
 
     std::vector<std::byte> Message::serialize() const {
-            return std::vector<std::byte>(reinterpret_cast<const std::byte *>(this),
-                                          reinterpret_cast<const std::byte *>(this + 1));
+        return std::vector<std::byte>(reinterpret_cast<const std::byte *>(this),
+                                      reinterpret_cast<const std::byte *>(this + 1));
     }
 
     Message Message::deserialize(const std::vector<std::byte> &data) {
