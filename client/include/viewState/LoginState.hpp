@@ -28,11 +28,11 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        LoginState(sf::RenderWindow &window, GameView &gameView)
-            : _window(window), portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
+        LoginState(sf::RenderWindow &window, GameView &gameView, GraphicalModule *graphicalModule)
+            : _window(window), _graphicalModule(graphicalModule), _gameView(gameView),
+              portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
               userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "User Name"),
-              portBoxInput(window, 800.0f, 340.0f), userNameBoxInput(window, 800.0f, 440.0f),
-              _gameView(gameView) {}
+              portBoxInput(window, 800.0f, 340.0f), userNameBoxInput(window, 800.0f, 440.0f) {}
 
         /**
          * @brief Handles user input for the menu.
@@ -57,11 +57,11 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow& window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
-            portBoxTitle.draw();
-            userNameBoxTitle.draw();
-            portBoxInput.draw();
-            userNameBoxInput.draw();
-            loginButton.draw();
+            portBoxTitle.draw(_graphicalModule);
+            userNameBoxTitle.draw(_graphicalModule);
+            portBoxInput.draw(_graphicalModule);
+            userNameBoxInput.draw(_graphicalModule);
+            loginButton.draw(_graphicalModule);
             handleInput();
         }
 
@@ -73,6 +73,7 @@ namespace RType {
         NumberInput portBoxInput; /**< TextBoxInput for Port of the game server. */
         TextInput userNameBoxInput; /**< TextBoxInput for UserName options. */
         LoginButton loginButton = LoginButton(_window, 800, 500, "Login"); /**< Button for Log-in the game. */
+        GraphicalModule *_graphicalModule;
 
         /**
          * @brief Checks if the left mouse button is clicked.

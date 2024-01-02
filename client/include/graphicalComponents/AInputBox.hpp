@@ -57,9 +57,9 @@ namespace RType {
         /**
          * @brief Draw the input box on the SFML RenderWindow.
          */
-        void draw() const {
-            _window.draw(_rect);
-            _window.draw(_textDisplay);
+        void draw(GraphicalModule *graphicalModule) const {
+            graphicalModule->drawRect(_window, _rect);
+            graphicalModule->drawText(_window, _textDisplay);
         }
 
         /**

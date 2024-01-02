@@ -9,7 +9,6 @@
 #include "../engine/modules/graphical/GraphicalModule.hpp"
 
 int main() {
-    RType::GameView view;
     RType::ModuleLoader<RType::SoundModule> soundModuleLoader("build/out/engine/modules/sound/libsound_module.so");
     RType::ModuleLoader<RType::ConsoleModule> consoleModuleLoader("build/out/engine/modules/console/libconsole_module.so");
     RType::ModuleLoader<RType::ParticleModule> particleModuleLoader("build/out/engine/modules/particle/libparticle_module.so");
@@ -18,6 +17,7 @@ int main() {
     RType::ConsoleModule *consoleModule = consoleModuleLoader.load();
     RType::ParticleModule *particleModule = particleModuleLoader.load();
     RType::GraphicalModule *graphicalModule = graphicalModuleLoader.load();
+    RType::GameView view(graphicalModule);
 
     logInformation("Hello, World for client!");
     soundModule->load();

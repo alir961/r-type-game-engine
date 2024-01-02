@@ -32,3 +32,7 @@ void RType::GraphicalModule::drawText(sf::RenderWindow &window, sf::Text text) {
 void RType::GraphicalModule::drawSprite(sf::RenderWindow &window, sf::Sprite sprite) {
     window.draw(sprite);
 }
+
+void RType::GraphicalModule::drawRect(sf::RenderWindow &window, sf::RectangleShape rect) {
+    window.draw(rect);
+}
