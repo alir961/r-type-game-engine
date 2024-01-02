@@ -12,11 +12,11 @@ int main() {
     RType::ModuleLoader<RType::SoundModule> soundModuleLoader("build/out/engine/modules/sound/libsound_module.so");
     RType::ModuleLoader<RType::ConsoleModule> consoleModuleLoader("build/out/engine/modules/console/libconsole_module.so");
     RType::ModuleLoader<RType::ParticleModule> particleModuleLoader("build/out/engine/modules/particle/libparticle_module.so");
-    RType::ModuleLoader<RType::GraphicalModule> graphicalModuleLoader("build/out/engine/modules/graphical/libgraphical_module.so");
+    RType::ModuleLoader<RType::IGraphicalModule> graphicalModuleLoader("build/out/engine/modules/graphical/libgraphical_module.so");
     RType::SoundModule *soundModule = soundModuleLoader.load();
     RType::ConsoleModule *consoleModule = consoleModuleLoader.load();
     RType::ParticleModule *particleModule = particleModuleLoader.load();
-    RType::GraphicalModule *graphicalModule = graphicalModuleLoader.load();
+    RType::IGraphicalModule *graphicalModule = graphicalModuleLoader.load();
     RType::GameView view(graphicalModule);
 
     logInformation("Hello, World for client!");

@@ -35,7 +35,7 @@ namespace RType {
          * @brief Draw the graphic _entity to the provided window.
          * @param window The window to draw the _entity on.
          */
-        void draw(sf::RenderWindow &window) override;
+        void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) override;
 
         /**
          * @brief get Entity.

@@ -33,6 +33,6 @@ void RType::GraphicEntity::update(float deltaTime) {
     }
 }
 
-void RType::GraphicEntity::draw(sf::RenderWindow &window) {
-    window.draw(_sprite);
+void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) {
+    graphicalModule->drawSprite(window, _sprite);
 }

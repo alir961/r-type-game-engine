@@ -65,7 +65,7 @@ namespace RType {
         /**
          * @brief Draws the text box on the associated SFML RenderWindow.
          */
-        void draw(GraphicalModule *graphicalModule) {
+        void draw(IGraphicalModule *graphicalModule) {
             graphicalModule->drawText(_window, text);
         }
 

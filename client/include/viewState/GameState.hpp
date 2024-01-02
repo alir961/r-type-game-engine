@@ -25,7 +25,7 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        GameState(sf::RenderWindow &window, GameView &gameView, GraphicalModule *graphicalModule)
+        GameState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
             : _gameView(gameView), _graphicalModule(graphicalModule),
               playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
               scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
@@ -53,7 +53,7 @@ namespace RType {
             } else healthBarText.setText("Player entity not found");
 
             for (auto &entity: graphicEntities) {
-                entity->draw(window);
+                entity->draw(window, _graphicalModule);
             }
         }
 
@@ -62,6 +62,6 @@ namespace RType {
         TextBox playerNameText; /**< Player Name Text. */
         TextBox healthBarText; /**< Health Text. */
         TextBox scoreText; /**< Score Text. */
-        GraphicalModule *_graphicalModule;
+        IGraphicalModule *_graphicalModule;
     };
 }

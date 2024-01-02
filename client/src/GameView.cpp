@@ -7,7 +7,7 @@
 
 #include "../include/GameView.hpp"
 
-RType::GameView::GameView(GraphicalModule *graphicalModule) : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::LOGIN), _graphicalModule(graphicalModule) {
+RType::GameView::GameView(IGraphicalModule *graphicalModule) : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::LOGIN), _graphicalModule(graphicalModule) {
     _window.setFramerateLimit(60);
     _menuState = std::make_shared<MenuState>(_window, *this, _graphicalModule);
     _optionsState = std::make_shared<OptionsState>(_window, *this, _graphicalModule);

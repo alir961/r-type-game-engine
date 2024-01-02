@@ -15,3 +15,4 @@ install(
 )
 
 target_link_libraries(graphical_module PRIVATE engine)
+target_link_libraries(graphical_module PRIVATE sfml-system sfml-network sfml-graphics sfml-window -lsfml-audio)

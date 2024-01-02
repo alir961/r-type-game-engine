@@ -24,7 +24,7 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the GameView.
          */
-        PauseState(sf::RenderWindow &window, GameView &gameView, GraphicalModule *graphicalModule)
+        PauseState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
             : _graphicalModule(graphicalModule), _gameView(gameView),
               title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
               resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
@@ -76,7 +76,7 @@ namespace RType {
         TextBox mainMenu; /**< TextBox for the menu. */
         TextBox resume; /**< TextBox for resume. */
         GameView &_gameView; /**< Reference to the GameView. */
-        GraphicalModule *_graphicalModule;
+        IGraphicalModule *_graphicalModule;
 
         /**
          * @brief Checks if the left mouse button is clicked.

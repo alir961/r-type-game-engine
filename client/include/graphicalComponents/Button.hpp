@@ -42,7 +42,7 @@ namespace RType {
         /**
          * @brief Draws the button on the SFML RenderWindow.
          */
-        void draw(GraphicalModule *graphicalModule) {
+        void draw(IGraphicalModule *graphicalModule) {
             bool mouseOver = _rectangle.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(_window)));
 
             _rectangle.setFillColor(mouseOver ? sf::Color(200, 200, 200) : sf::Color(128, 128, 128));

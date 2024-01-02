@@ -28,7 +28,7 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        LoginState(sf::RenderWindow &window, GameView &gameView, GraphicalModule *graphicalModule)
+        LoginState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
             : _window(window), _graphicalModule(graphicalModule), _gameView(gameView),
               portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
               userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "User Name"),
@@ -73,7 +73,7 @@ namespace RType {
         NumberInput portBoxInput; /**< TextBoxInput for Port of the game server. */
         TextInput userNameBoxInput; /**< TextBoxInput for UserName options. */
         LoginButton loginButton = LoginButton(_window, 800, 500, "Login"); /**< Button for Log-in the game. */
-        GraphicalModule *_graphicalModule;
+        IGraphicalModule *_graphicalModule;
 
         /**
          * @brief Checks if the left mouse button is clicked.

@@ -61,9 +61,9 @@ namespace RType {
         std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
         std::shared_ptr<LoginState> _loginState;                           /**< Shared ptr to the Login ViewState. */
         sf::Event event{};
-        GraphicalModule *_graphicalModule;
+        IGraphicalModule *_graphicalModule;
 
-        void setGraphical(GraphicalModule *graphicalModule)
+        void setGraphical(IGraphicalModule *graphicalModule)
         {
             _graphicalModule = graphicalModule;
         }
@@ -113,7 +113,7 @@ namespace RType {
         /**
          * @brief Constructor for the GameView class.
          */
-        explicit GameView(GraphicalModule *graphicalModule);
+        explicit GameView(IGraphicalModule *graphicalModule);
 
         /**
          * @brief Destructor for the GameView class.

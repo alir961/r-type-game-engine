@@ -26,7 +26,7 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The GameView associated with the state.
          */
-        DeadState(sf::RenderWindow &window, GameView &gameView, GraphicalModule *graphicalModule)
+        DeadState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
             : _gameView(gameView), _graphicalModule(graphicalModule),
               backgroundRect(window, sf::Vector2f(((((window.getSize().x - 450) / 2))), ((window.getSize().y - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f),
               loseText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Lose!"),
@@ -86,7 +86,7 @@ namespace RType {
         TextBox hpText; /**< Text "hp". */
         TextBox scoreText; /**< Text "pts". */
         TextBox exitText; /**< Exit Text. */
-        GraphicalModule *_graphicalModule;
+        IGraphicalModule *_graphicalModule;
 
         bool isMouseClicked() const {
             return sf::Mouse::isButtonPressed(sf::Mouse::Left);
