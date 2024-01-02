@@ -5,7 +5,7 @@
 ** GameView.cpp
 */
 
-#include ".././include/GameView.hpp"
+#include "../include/GameView.hpp"
 
 RType::GameView::GameView() : _window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), _viewState(ViewState::LOGIN) {
     _window.setFramerateLimit(60);

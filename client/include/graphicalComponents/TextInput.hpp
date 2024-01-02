@@ -43,9 +43,9 @@ namespace RType {
 
             if (_active) {
                 if (event.type == sf::Event::TextEntered && !_keyPressed) {
-                    char inputChar = char(event.text.unicode);
+                    char inputChar = static_cast<char>(event.text.unicode);
                     if (isValidInput(inputChar) && _text.size() < _maxChars) {
-                        _text += char(std::tolower(event.text.unicode));
+                        _text += static_cast<char>(std::tolower(event.text.unicode));
                         _keyPressed = true;
                     }
                 } else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::BackSpace) {
