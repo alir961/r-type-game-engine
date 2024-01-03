@@ -51,7 +51,7 @@ namespace RType {
          * @brief Draw a sprite like a pro in SFMl.
          * @param window, rect The window where to draw, the rect we want to display.
          */
-        void drawRectPro(sf::RenderWindow &window, float rectScaleX, float rectScaleY, float x, float y, const std::string &lineColor, const std::string &fillColor, const std::string &texturePath) override;
+        void drawRectPro(sf::RenderWindow &window, float rectScaleX, float rectScaleY, float x, float y, float outlineThickness, const std::string &lineColor, const std::string &fillColor, const std::string &texturePath) override;
 
         /**
          * @brief Return the sf::Color corresponding to the colorName param.
