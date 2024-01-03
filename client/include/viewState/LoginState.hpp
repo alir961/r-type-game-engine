@@ -6,6 +6,7 @@
 */
 
 #pragma once
+
 #include "IDraw.hpp"
 #include "../graphicalComponents/TextBox.hpp"
 #include "../graphicalComponents/NumberInput.hpp"
@@ -13,7 +14,7 @@
 #include "../graphicalComponents/Button.hpp"
 
 namespace RType {
-    class GameView;
+
     enum class ViewState;
     using LoginButton = Button<200, 40>;
 
@@ -29,10 +30,11 @@ namespace RType {
          * @param gameView The GameView associated with the state.
          */
         LoginState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
-            : _window(window), _graphicalModule(graphicalModule), _gameView(gameView),
-              portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
-              userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "User Name"),
-              portBoxInput(window, 800.0f, 340.0f), userNameBoxInput(window, 800.0f, 440.0f) {}
+                : _gameView(gameView), _window(window),
+                  portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
+                  userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "Username"),
+                  portBoxInput(window, 800.0f, 340.0f),
+                  userNameBoxInput(window, 800.0f, 440.0f), _graphicalModule(graphicalModule) {}
 
         /**
          * @brief Handles user input for the menu.
@@ -56,7 +58,7 @@ namespace RType {
          * @param window The SFML RenderWindow on which to draw the menu.
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
-        void draw(sf::RenderWindow& window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+        void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
             portBoxTitle.draw(_graphicalModule);
             userNameBoxTitle.draw(_graphicalModule);
             portBoxInput.draw(_graphicalModule);

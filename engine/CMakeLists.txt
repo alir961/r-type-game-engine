@@ -25,6 +25,8 @@ set(HEADER_FILES
         include/engine/network/UDPAdapter.hpp
         include/engine/modules/IModule.hpp
         include/engine/modules/ModuleLoader.hpp
+        include/engine/modules/IGraphicalModule.hpp
+        include/engine/modules/ModuleProvider.hpp
 )
 
 set(SOURCE_FILES
@@ -33,6 +35,7 @@ set(SOURCE_FILES
         src/tools/Split.cpp
         src/network/NetworkMessage.cpp
         src/network/UDPAdapter.cpp
+        src/modules/ModuleProvider.cpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

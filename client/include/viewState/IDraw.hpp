@@ -6,8 +6,9 @@
 */
 
 #pragma once
-#include <SFML/Graphics.hpp>
+
 #include "../entities/AGraphicEntity.hpp"
+#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace RType {
