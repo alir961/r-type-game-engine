@@ -98,9 +98,9 @@ Inheritance diagram for RType::WinState:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0cbec9a7a03dcfc422f652809fab3436" id="r_a0cbec9a7a03dcfc422f652809fab3436"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1WinState.html#a0cbec9a7a03dcfc422f652809fab3436">WinState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView)</td></tr>
-<tr class="memdesc:a0cbec9a7a03dcfc422f652809fab3436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1WinState.html" title="Represents a state where entities are not drawn.">WinState</a>.  <br /></td></tr>
-<tr class="separator:a0cbec9a7a03dcfc422f652809fab3436"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f797e5219b2c0359d2f52896048128" id="r_a85f797e5219b2c0359d2f52896048128"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1WinState.html#a85f797e5219b2c0359d2f52896048128">WinState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
+<tr class="memdesc:a85f797e5219b2c0359d2f52896048128"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1WinState.html" title="Represents a state where entities are not drawn.">WinState</a>.  <br /></td></tr>
+<tr class="separator:a85f797e5219b2c0359d2f52896048128"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5975dc16bf1d95c219c59af7330064bc" id="r_a5975dc16bf1d95c219c59af7330064bc"><td class="memItemLeft" align="right" valign="top"><a id="a5975dc16bf1d95c219c59af7330064bc" name="a5975dc16bf1d95c219c59af7330064bc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>handleInput</b> ()</td></tr>
 <tr class="memdesc:a5975dc16bf1d95c219c59af7330064bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles user input for the menu. <br /></td></tr>
@@ -133,12 +133,15 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a298715ed4caceef593d345bbf1c35265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8432475ae2916b1c26c7b831c236a33" id="r_ac8432475ae2916b1c26c7b831c236a33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1TextBox.html">TextBox</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1WinState.html#ac8432475ae2916b1c26c7b831c236a33">exitText</a></td></tr>
 <tr class="separator:ac8432475ae2916b1c26c7b831c236a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a220653790cf9e6a2bf4a85a9b91b4611" id="r_a220653790cf9e6a2bf4a85a9b91b4611"><td class="memItemLeft" align="right" valign="top"><a id="a220653790cf9e6a2bf4a85a9b91b4611" name="a220653790cf9e6a2bf4a85a9b91b4611"></a>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<tr class="separator:a220653790cf9e6a2bf4a85a9b91b4611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a state where entities are not drawn. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0cbec9a7a03dcfc422f652809fab3436" name="a0cbec9a7a03dcfc422f652809fab3436"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cbec9a7a03dcfc422f652809fab3436">&#9670;&#160;</a></span>WinState()</h2>
+<a id="a85f797e5219b2c0359d2f52896048128" name="a85f797e5219b2c0359d2f52896048128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85f797e5219b2c0359d2f52896048128">&#9670;&#160;</a></span>WinState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +159,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td>
-          <td class="paramname"><em>gameView</em>&#160;</td>
+          <td class="paramname"><em>gameView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td>
+          <td class="paramname"><em>graphicalModule</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

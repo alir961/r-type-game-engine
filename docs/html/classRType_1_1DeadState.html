@@ -98,9 +98,9 @@ Inheritance diagram for RType::DeadState:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac25cad696addcf210be2e4d5bd4603f4" id="r_ac25cad696addcf210be2e4d5bd4603f4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1DeadState.html#ac25cad696addcf210be2e4d5bd4603f4">DeadState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView)</td></tr>
-<tr class="memdesc:ac25cad696addcf210be2e4d5bd4603f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1DeadState.html" title="Represents a state where entities are not drawn.">DeadState</a>.  <br /></td></tr>
-<tr class="separator:ac25cad696addcf210be2e4d5bd4603f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d945d1ab2df1f56c9fe1ae907cf10a0" id="r_a6d945d1ab2df1f56c9fe1ae907cf10a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1DeadState.html#a6d945d1ab2df1f56c9fe1ae907cf10a0">DeadState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
+<tr class="memdesc:a6d945d1ab2df1f56c9fe1ae907cf10a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1DeadState.html" title="Represents a state where entities are not drawn.">DeadState</a>.  <br /></td></tr>
+<tr class="separator:a6d945d1ab2df1f56c9fe1ae907cf10a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab19a993a0b0340db7c2d0161c1536ab9" id="r_ab19a993a0b0340db7c2d0161c1536ab9"><td class="memItemLeft" align="right" valign="top"><a id="ab19a993a0b0340db7c2d0161c1536ab9" name="ab19a993a0b0340db7c2d0161c1536ab9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>handleInput</b> ()</td></tr>
 <tr class="memdesc:ab19a993a0b0340db7c2d0161c1536ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles user input for the menu. <br /></td></tr>
@@ -133,12 +133,15 @@ Private Attributes</h2></td></tr>
 <tr class="separator:af29a0533ea404b07449e6641743ea949"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a846d1a789a0df73cb03f469791d60a2c" id="r_a846d1a789a0df73cb03f469791d60a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1TextBox.html">TextBox</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1DeadState.html#a846d1a789a0df73cb03f469791d60a2c">exitText</a></td></tr>
 <tr class="separator:a846d1a789a0df73cb03f469791d60a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af849d3dfc699b2244107c1d33232df9f" id="r_af849d3dfc699b2244107c1d33232df9f"><td class="memItemLeft" align="right" valign="top"><a id="af849d3dfc699b2244107c1d33232df9f" name="af849d3dfc699b2244107c1d33232df9f"></a>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<tr class="separator:af849d3dfc699b2244107c1d33232df9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a state where entities are not drawn. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac25cad696addcf210be2e4d5bd4603f4" name="ac25cad696addcf210be2e4d5bd4603f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac25cad696addcf210be2e4d5bd4603f4">&#9670;&#160;</a></span>DeadState()</h2>
+<a id="a6d945d1ab2df1f56c9fe1ae907cf10a0" name="a6d945d1ab2df1f56c9fe1ae907cf10a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d945d1ab2df1f56c9fe1ae907cf10a0">&#9670;&#160;</a></span>DeadState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +159,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td>
-          <td class="paramname"><em>gameView</em>&#160;</td>
+          <td class="paramname"><em>gameView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td>
+          <td class="paramname"><em>graphicalModule</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

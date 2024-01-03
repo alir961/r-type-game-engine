@@ -98,9 +98,9 @@ Inheritance diagram for RType::PauseState:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5d02b964e82e14ae2f9c4af908bb33ed" id="r_a5d02b964e82e14ae2f9c4af908bb33ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PauseState.html#a5d02b964e82e14ae2f9c4af908bb33ed">PauseState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView)</td></tr>
-<tr class="memdesc:a5d02b964e82e14ae2f9c4af908bb33ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the <a class="el" href="classRType_1_1PauseState.html" title="Represents the pause menu state in the game.">PauseState</a>.  <br /></td></tr>
-<tr class="separator:a5d02b964e82e14ae2f9c4af908bb33ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e1aa70353b929fc7a8d9a952764905" id="r_ad9e1aa70353b929fc7a8d9a952764905"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PauseState.html#ad9e1aa70353b929fc7a8d9a952764905">PauseState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
+<tr class="memdesc:ad9e1aa70353b929fc7a8d9a952764905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the <a class="el" href="classRType_1_1PauseState.html" title="Represents the pause menu state in the game.">PauseState</a>.  <br /></td></tr>
+<tr class="separator:ad9e1aa70353b929fc7a8d9a952764905"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d94e52498d88af5dc6f397578ff4112" id="r_a2d94e52498d88af5dc6f397578ff4112"><td class="memItemLeft" align="right" valign="top"><a id="a2d94e52498d88af5dc6f397578ff4112" name="a2d94e52498d88af5dc6f397578ff4112"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>handleInput</b> ()</td></tr>
 <tr class="memdesc:a2d94e52498d88af5dc6f397578ff4112"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles user input for the pause menu. <br /></td></tr>
@@ -129,13 +129,16 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a8b44a2f55f54bc635870e54807603256"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a130940e2da687a8a9df85cdc9f003d2e" id="r_a130940e2da687a8a9df85cdc9f003d2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1PauseState.html#a130940e2da687a8a9df85cdc9f003d2e">_gameView</a></td></tr>
 <tr class="separator:a130940e2da687a8a9df85cdc9f003d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2d5d50e67e6f7cfe32a3db2bc4badd1" id="r_ad2d5d50e67e6f7cfe32a3db2bc4badd1"><td class="memItemLeft" align="right" valign="top"><a id="ad2d5d50e67e6f7cfe32a3db2bc4badd1" name="ad2d5d50e67e6f7cfe32a3db2bc4badd1"></a>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<tr class="separator:ad2d5d50e67e6f7cfe32a3db2bc4badd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the pause menu state in the game. </p>
 <p>This class provides functionality for handling user input, updating the state, and drawing elements related to the pause menu. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5d02b964e82e14ae2f9c4af908bb33ed" name="a5d02b964e82e14ae2f9c4af908bb33ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d02b964e82e14ae2f9c4af908bb33ed">&#9670;&#160;</a></span>PauseState()</h2>
+<a id="ad9e1aa70353b929fc7a8d9a952764905" name="ad9e1aa70353b929fc7a8d9a952764905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e1aa70353b929fc7a8d9a952764905">&#9670;&#160;</a></span>PauseState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,7 +156,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td>
-          <td class="paramname"><em>gameView</em>&#160;</td>
+          <td class="paramname"><em>gameView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td>
+          <td class="paramname"><em>graphicalModule</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

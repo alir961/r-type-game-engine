@@ -92,10 +92,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a03f7a10cb5f3582e75e89c0d8f948725" id="r_a03f7a10cb5f3582e75e89c0d8f948725"><td class="memItemLeft" align="right" valign="top"><a id="a03f7a10cb5f3582e75e89c0d8f948725" name="a03f7a10cb5f3582e75e89c0d8f948725"></a>
 std::shared_ptr&lt; <a class="el" href="classRType_1_1AGraphicEntity.html">AGraphicEntity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getGraphicEntityByName</b> (const std::string &amp;name) const</td></tr>
 <tr class="separator:a03f7a10cb5f3582e75e89c0d8f948725"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94d95d4dff9f2838c54239655bfdc91d" id="r_a94d95d4dff9f2838c54239655bfdc91d"><td class="memItemLeft" align="right" valign="top"><a id="a94d95d4dff9f2838c54239655bfdc91d" name="a94d95d4dff9f2838c54239655bfdc91d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GameView</b> ()</td></tr>
-<tr class="memdesc:a94d95d4dff9f2838c54239655bfdc91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classRType_1_1GameView.html" title="Represents the main game view handling graphics, input, and entities.">GameView</a> class. <br /></td></tr>
-<tr class="separator:a94d95d4dff9f2838c54239655bfdc91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2709cff540e722390366ddaeb54bf0d" id="r_af2709cff540e722390366ddaeb54bf0d"><td class="memItemLeft" align="right" valign="top"><a id="af2709cff540e722390366ddaeb54bf0d" name="af2709cff540e722390366ddaeb54bf0d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>GameView</b> (<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule, asio::io_context &amp;io_context, UDP::endpoint endpoint)</td></tr>
+<tr class="memdesc:af2709cff540e722390366ddaeb54bf0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classRType_1_1GameView.html" title="Represents the main game view handling graphics, input, and entities.">GameView</a> class. <br /></td></tr>
+<tr class="separator:af2709cff540e722390366ddaeb54bf0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d1e3a57ee15ed29235d8fb20e4bd925" id="r_a2d1e3a57ee15ed29235d8fb20e4bd925"><td class="memItemLeft" align="right" valign="top"><a id="a2d1e3a57ee15ed29235d8fb20e4bd925" name="a2d1e3a57ee15ed29235d8fb20e4bd925"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~GameView</b> ()=default</td></tr>
 <tr class="memdesc:a2d1e3a57ee15ed29235d8fb20e4bd925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classRType_1_1GameView.html" title="Represents the main game view handling graphics, input, and entities.">GameView</a> class. <br /></td></tr>
@@ -115,6 +115,9 @@ sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>getEvent</b> ()<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a9ad5461ce3975a79ffdc754730f8afe0" id="r_a9ad5461ce3975a79ffdc754730f8afe0"><td class="memItemLeft" align="right" valign="top"><a id="a9ad5461ce3975a79ffdc754730f8afe0" name="a9ad5461ce3975a79ffdc754730f8afe0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setGraphical</b> (<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
+<tr class="separator:a9ad5461ce3975a79ffdc754730f8afe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5dce0c912e2afaee7129e8462e20fd5" id="r_ab5dce0c912e2afaee7129e8462e20fd5"><td class="memItemLeft" align="right" valign="top"><a id="ab5dce0c912e2afaee7129e8462e20fd5" name="ab5dce0c912e2afaee7129e8462e20fd5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()</td></tr>
 <tr class="memdesc:ab5dce0c912e2afaee7129e8462e20fd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private method to handle drawing operations. <br /></td></tr>
@@ -157,9 +160,15 @@ Private Attributes</h2></td></tr>
 <tr class="separator:af5b0c40cafd546c565486aaa6de0ebec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05210b8701f675f360dd4b50668e499c" id="r_a05210b8701f675f360dd4b50668e499c"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classRType_1_1LoginState.html">LoginState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GameView.html#a05210b8701f675f360dd4b50668e499c">_loginState</a></td></tr>
 <tr class="separator:a05210b8701f675f360dd4b50668e499c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9b45bc300442a64b11327c3da949be4" id="r_ad9b45bc300442a64b11327c3da949be4"><td class="memItemLeft" align="right" valign="top"><a id="ad9b45bc300442a64b11327c3da949be4" name="ad9b45bc300442a64b11327c3da949be4"></a>
+<a class="el" href="classRType_1_1UDPClient.html">UDPClient</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_client</b></td></tr>
+<tr class="separator:ad9b45bc300442a64b11327c3da949be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a621f8a90d9087d16b18f3a2aa989e302" id="r_a621f8a90d9087d16b18f3a2aa989e302"><td class="memItemLeft" align="right" valign="top"><a id="a621f8a90d9087d16b18f3a2aa989e302" name="a621f8a90d9087d16b18f3a2aa989e302"></a>
 sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>event</b> {}</td></tr>
 <tr class="separator:a621f8a90d9087d16b18f3a2aa989e302"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f1259617c72a195ca8f94e8571f20b" id="r_a58f1259617c72a195ca8f94e8571f20b"><td class="memItemLeft" align="right" valign="top"><a id="a58f1259617c72a195ca8f94e8571f20b" name="a58f1259617c72a195ca8f94e8571f20b"></a>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<tr class="separator:a58f1259617c72a195ca8f94e8571f20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the main game view handling graphics, input, and entities. </p>

@@ -100,9 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5951043d1cb3d895128d3debd8f3f7c3" id="r_a5951043d1cb3d895128d3debd8f3f7c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1IGraphicEntity.html#a5951043d1cb3d895128d3debd8f3f7c3">update</a> (float deltaTime)=0</td></tr>
 <tr class="memdesc:a5951043d1cb3d895128d3debd8f3f7c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the graphic _entity based on the game state.  <br /></td></tr>
 <tr class="separator:a5951043d1cb3d895128d3debd8f3f7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa45e7e347ba32410e5c1417be5707440" id="r_aa45e7e347ba32410e5c1417be5707440"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1IGraphicEntity.html#aa45e7e347ba32410e5c1417be5707440">draw</a> (sf::RenderWindow &amp;window)=0</td></tr>
-<tr class="memdesc:aa45e7e347ba32410e5c1417be5707440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
-<tr class="separator:aa45e7e347ba32410e5c1417be5707440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a0df4b92c5bbd4a70bde296843075bd" id="r_a6a0df4b92c5bbd4a70bde296843075bd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1IGraphicEntity.html#a6a0df4b92c5bbd4a70bde296843075bd">draw</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)=0</td></tr>
+<tr class="memdesc:a6a0df4b92c5bbd4a70bde296843075bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
+<tr class="separator:a6a0df4b92c5bbd4a70bde296843075bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fe793d350b72602f32dc6024f4f0cbc" id="r_a1fe793d350b72602f32dc6024f4f0cbc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1IGraphicEntity.html#a1fe793d350b72602f32dc6024f4f0cbc">moveLeft</a> (sf::Sprite &amp;sprite, std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &amp;entity)=0</td></tr>
 <tr class="memdesc:a1fe793d350b72602f32dc6024f4f0cbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the graphic _entity to the provided window.  <br /></td></tr>
 <tr class="separator:a1fe793d350b72602f32dc6024f4f0cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,8 +119,8 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Graphic <a class="el" href="classRType_1_1Entity.html" title="Entity class representing an object in the system.">Entity</a> interface. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa45e7e347ba32410e5c1417be5707440" name="aa45e7e347ba32410e5c1417be5707440"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa45e7e347ba32410e5c1417be5707440">&#9670;&#160;</a></span>draw()</h2>
+<a id="a6a0df4b92c5bbd4a70bde296843075bd" name="a6a0df4b92c5bbd4a70bde296843075bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a0df4b92c5bbd4a70bde296843075bd">&#9670;&#160;</a></span>draw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,8 +132,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void RType::IGraphicEntity::draw </td>
           <td>(</td>
           <td class="paramtype">sf::RenderWindow &amp;&#160;</td>
-          <td class="paramname"><em>window</em></td><td>)</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td>
+          <td class="paramname"><em>graphicalModule</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -151,7 +161,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classRType_1_1GraphicEntity.html#a37d3a73bbc344d22517d0ac8bd759379">RType::GraphicEntity</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1GraphicEntity.html#a9bff8990f3ff0c6f3c5d1fb11150baa9">RType::GraphicEntity</a>.</p>
 
 </div>
 </div>

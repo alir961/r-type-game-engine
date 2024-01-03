@@ -98,9 +98,9 @@ Inheritance diagram for RType::LoginState:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a17b15dba366055fb034124e330fe84ef" id="r_a17b15dba366055fb034124e330fe84ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1LoginState.html#a17b15dba366055fb034124e330fe84ef">LoginState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView)</td></tr>
-<tr class="memdesc:a17b15dba366055fb034124e330fe84ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1MenuState.html" title="Represents a state with a menu for user interaction.">MenuState</a>.  <br /></td></tr>
-<tr class="separator:a17b15dba366055fb034124e330fe84ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55fcad27a85ced6eacb8c1dc48bff83d" id="r_a55fcad27a85ced6eacb8c1dc48bff83d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1LoginState.html#a55fcad27a85ced6eacb8c1dc48bff83d">LoginState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
+<tr class="memdesc:a55fcad27a85ced6eacb8c1dc48bff83d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1MenuState.html" title="Represents a state with a menu for user interaction.">MenuState</a>.  <br /></td></tr>
+<tr class="separator:a55fcad27a85ced6eacb8c1dc48bff83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7fb91e03515c334a71ec26941212bca" id="r_aa7fb91e03515c334a71ec26941212bca"><td class="memItemLeft" align="right" valign="top"><a id="aa7fb91e03515c334a71ec26941212bca" name="aa7fb91e03515c334a71ec26941212bca"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>handleInput</b> ()</td></tr>
 <tr class="memdesc:aa7fb91e03515c334a71ec26941212bca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles user input for the menu. <br /></td></tr>
@@ -135,12 +135,15 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ae56931511f12c75db71704464e7b9354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9693369d5444b4ccf30bbf324f4f4879" id="r_a9693369d5444b4ccf30bbf324f4f4879"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1Button.html">LoginButton</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1LoginState.html#a9693369d5444b4ccf30bbf324f4f4879">loginButton</a> = <a class="el" href="classRType_1_1Button.html">LoginButton</a>(<a class="el" href="classRType_1_1LoginState.html#a2974d3c531c7c5a71bffde806ccecdbe">_window</a>, 800, 500, &quot;Login&quot;)</td></tr>
 <tr class="separator:a9693369d5444b4ccf30bbf324f4f4879"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af787713ba0dfb95ee7d422b501db772c" id="r_af787713ba0dfb95ee7d422b501db772c"><td class="memItemLeft" align="right" valign="top"><a id="af787713ba0dfb95ee7d422b501db772c" name="af787713ba0dfb95ee7d422b501db772c"></a>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<tr class="separator:af787713ba0dfb95ee7d422b501db772c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a login state with input box for user interaction. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a17b15dba366055fb034124e330fe84ef" name="a17b15dba366055fb034124e330fe84ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17b15dba366055fb034124e330fe84ef">&#9670;&#160;</a></span>LoginState()</h2>
+<a id="a55fcad27a85ced6eacb8c1dc48bff83d" name="a55fcad27a85ced6eacb8c1dc48bff83d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55fcad27a85ced6eacb8c1dc48bff83d">&#9670;&#160;</a></span>LoginState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -158,7 +161,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td>
-          <td class="paramname"><em>gameView</em>&#160;</td>
+          <td class="paramname"><em>gameView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td>
+          <td class="paramname"><em>graphicalModule</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

@@ -97,9 +97,9 @@ Inheritance diagram for RType::GameState:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9a264c4061b63965dadbaaee59dc52ec" id="r_a9a264c4061b63965dadbaaee59dc52ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GameState.html#a9a264c4061b63965dadbaaee59dc52ec">GameState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView)</td></tr>
-<tr class="memdesc:a9a264c4061b63965dadbaaee59dc52ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1GameState.html" title="Represents a state where entities are drawn.">GameState</a>.  <br /></td></tr>
-<tr class="separator:a9a264c4061b63965dadbaaee59dc52ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11d8c37470e92c295b58deedb8d86830" id="r_a11d8c37470e92c295b58deedb8d86830"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GameState.html#a11d8c37470e92c295b58deedb8d86830">GameState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
+<tr class="memdesc:a11d8c37470e92c295b58deedb8d86830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1GameState.html" title="Represents a state where entities are drawn.">GameState</a>.  <br /></td></tr>
+<tr class="separator:a11d8c37470e92c295b58deedb8d86830"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad9ced34a14ae5fc5545c9b5ac4d2a27" id="r_aad9ced34a14ae5fc5545c9b5ac4d2a27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GameState.html#aad9ced34a14ae5fc5545c9b5ac4d2a27">draw</a> (sf::RenderWindow &amp;window, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classRType_1_1AGraphicEntity.html">RType::AGraphicEntity</a> &gt; &gt; graphicEntities) override</td></tr>
 <tr class="memdesc:aad9ced34a14ae5fc5545c9b5ac4d2a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws entities on the SFML RenderWindow.  <br /></td></tr>
 <tr class="separator:aad9ced34a14ae5fc5545c9b5ac4d2a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,12 +114,15 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a02164315cf808965f1dcccb98f6160c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0011298f09f932342a3cf5ada4e8f221" id="r_a0011298f09f932342a3cf5ada4e8f221"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1TextBox.html">TextBox</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1GameState.html#a0011298f09f932342a3cf5ada4e8f221">scoreText</a></td></tr>
 <tr class="separator:a0011298f09f932342a3cf5ada4e8f221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb9efe6662b962024c62f9d630d8fcb0" id="r_aeb9efe6662b962024c62f9d630d8fcb0"><td class="memItemLeft" align="right" valign="top"><a id="aeb9efe6662b962024c62f9d630d8fcb0" name="aeb9efe6662b962024c62f9d630d8fcb0"></a>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<tr class="separator:aeb9efe6662b962024c62f9d630d8fcb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a state where entities are drawn. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9a264c4061b63965dadbaaee59dc52ec" name="a9a264c4061b63965dadbaaee59dc52ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a264c4061b63965dadbaaee59dc52ec">&#9670;&#160;</a></span>GameState()</h2>
+<a id="a11d8c37470e92c295b58deedb8d86830" name="a11d8c37470e92c295b58deedb8d86830"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d8c37470e92c295b58deedb8d86830">&#9670;&#160;</a></span>GameState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,7 +140,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td>
-          <td class="paramname"><em>gameView</em>&#160;</td>
+          <td class="paramname"><em>gameView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td>
+          <td class="paramname"><em>graphicalModule</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

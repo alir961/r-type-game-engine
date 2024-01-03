@@ -98,9 +98,9 @@ Inheritance diagram for RType::OptionsState:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2c7e6de4379c1f52b334065702412505" id="r_a2c7e6de4379c1f52b334065702412505"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1OptionsState.html#a2c7e6de4379c1f52b334065702412505">OptionsState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView)</td></tr>
-<tr class="memdesc:a2c7e6de4379c1f52b334065702412505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the <a class="el" href="classRType_1_1OptionsState.html" title="Represents the options menu state in the game.">OptionsState</a>.  <br /></td></tr>
-<tr class="separator:a2c7e6de4379c1f52b334065702412505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9009e262582b7fe18c9c95854fbceaee" id="r_a9009e262582b7fe18c9c95854fbceaee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1OptionsState.html#a9009e262582b7fe18c9c95854fbceaee">OptionsState</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
+<tr class="memdesc:a9009e262582b7fe18c9c95854fbceaee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the <a class="el" href="classRType_1_1OptionsState.html" title="Represents the options menu state in the game.">OptionsState</a>.  <br /></td></tr>
+<tr class="separator:a9009e262582b7fe18c9c95854fbceaee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad76fa1dd722ee9f936333f67e31be600" id="r_ad76fa1dd722ee9f936333f67e31be600"><td class="memItemLeft" align="right" valign="top"><a id="ad76fa1dd722ee9f936333f67e31be600" name="ad76fa1dd722ee9f936333f67e31be600"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>handleInput</b> ()</td></tr>
 <tr class="memdesc:ad76fa1dd722ee9f936333f67e31be600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles user input for the options menu. <br /></td></tr>
@@ -131,13 +131,16 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a393bc77f5738d5f9b20b92f6c7c9de1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79b41e7c4f62e4fff6f4e955f92a6c8d" id="r_a79b41e7c4f62e4fff6f4e955f92a6c8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1OptionsState.html#a79b41e7c4f62e4fff6f4e955f92a6c8d">_gameView</a></td></tr>
 <tr class="separator:a79b41e7c4f62e4fff6f4e955f92a6c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e8d40e00c67a36d1b7012b8795013bc" id="r_a7e8d40e00c67a36d1b7012b8795013bc"><td class="memItemLeft" align="right" valign="top"><a id="a7e8d40e00c67a36d1b7012b8795013bc" name="a7e8d40e00c67a36d1b7012b8795013bc"></a>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<tr class="separator:a7e8d40e00c67a36d1b7012b8795013bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the options menu state in the game. </p>
 <p>This class provides functionality for handling user input, updating the state, and drawing elements related to the options menu. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2c7e6de4379c1f52b334065702412505" name="a2c7e6de4379c1f52b334065702412505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c7e6de4379c1f52b334065702412505">&#9670;&#160;</a></span>OptionsState()</h2>
+<a id="a9009e262582b7fe18c9c95854fbceaee" name="a9009e262582b7fe18c9c95854fbceaee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9009e262582b7fe18c9c95854fbceaee">&#9670;&#160;</a></span>OptionsState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,7 +158,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classRType_1_1GameView.html">GameView</a> &amp;&#160;</td>
-          <td class="paramname"><em>gameView</em>&#160;</td>
+          <td class="paramname"><em>gameView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td>
+          <td class="paramname"><em>graphicalModule</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
