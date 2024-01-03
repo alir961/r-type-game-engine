@@ -7,10 +7,8 @@
 
 #include "../include/ClientViewport.hpp"
 
-RType::ClientViewport::ClientViewport(IGraphicalModule *graphicalModule, asio::io_context &ioContext,
-                                      UDP::endpoint endpoint) :
-        _client(ioContext, std::move(endpoint)),
-        _graphicalModule(graphicalModule) {
+RType::ClientViewport::ClientViewport(IGraphicalModule *graphicalModule, asio::io_context &ioContext, UDP::endpoint endpoint)
+    : _client(ioContext, std::move(endpoint)), _graphicalModule(graphicalModule) {
     _window.setFramerateLimit(WINDOW_FPS);
     _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule);
 }
@@ -28,16 +26,6 @@ void RType::ClientViewport::handleInput(const GraphicEntityPtr &entity) const {
 }
 
 void RType::ClientViewport::basicInput() {
-    // Testing Win/Lose State
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad8) {
-        std::cout << "Entering Win State" << '\n';
-        setView(ViewState::WIN);
-    }
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad9) {
-        std::cout << "Entering Lose State" << '\n';
-        setView(ViewState::DEAD);
-    }
-    // Testing Win/Lose State
     if (_viewState == ViewState::OPTIONS) {
         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
             std::cout << "Return key pressed in OPTIONS state" << std::endl;
@@ -141,9 +129,7 @@ int RType::ClientViewport::start() {
 
         std::shared_ptr<RType::GraphicEntity> graphicStarship;
         if (starshipEntity->hasComponents()) {
-            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity,
-                                                                               "client/assets/r-typesheet42.gif",
-                                                                               "playerStarship");
+            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/r-typesheet42.gif","playerStarship");
             addGraphicEntity(graphicStarship);
             logInformation("Starting game view...");
             launchWindow(graphicStarship);

@@ -63,10 +63,6 @@ namespace RType {
         sf::Event event{};
         IGraphicalModule *_graphicalModule;
 
-        void setGraphical(IGraphicalModule *graphicalModule) {
-            _graphicalModule = graphicalModule;
-        }
-
         /**
          * @brief Private method to handle drawing operations.
          */
