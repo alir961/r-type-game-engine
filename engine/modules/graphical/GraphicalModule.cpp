@@ -64,9 +64,9 @@ void RType::GraphicalModule::drawSpritePro(sf::RenderWindow &window, float sprit
     window.draw(sprite);
 }
 
-void RType::GraphicalModule::drawRectPro(sf::RenderWindow &window, float rectScaleX, float rectScaleY, float x, float y, float outlineThickness, const std::string &lineColor, const std::string &fillColor, const std::string &texturePath) {
+void RType::GraphicalModule::drawRectPro(sf::RenderWindow &window, float rectSizeX, float rectSizeY, float x, float y, float outlineThickness, const std::string &lineColor, const std::string &fillColor, const std::string &texturePath) {
     sf::RectangleShape rect;
-    rect.setScale(rectScaleX, rectScaleY);
+    rect.setSize(sf::Vector2f(rectSizeX, rectSizeY));
     rect.setPosition(x, y);
     rect.setOutlineThickness(outlineThickness);
     rect.setOutlineColor(getColorFromString(lineColor));
