@@ -17,9 +17,9 @@ int64_t RType::parseToLong(const char *string) {
     return parsed;
 }
 
-u_int64_t RType::parseToUnsignedLong(const char *string) {
+uint64_t  RType::parseToUnsignedLong(const char *string) {
     char *pointer = nullptr;
-    const u_int64_t parsed = std::strtoul(string, &pointer, 10);
+    const uint64_t  parsed = std::strtoul(string, &pointer, 10);
 
     if (string == pointer)
         throw ServerException("Unable to parse long for this string");

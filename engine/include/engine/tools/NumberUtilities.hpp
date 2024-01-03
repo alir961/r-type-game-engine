@@ -8,11 +8,12 @@
 #pragma once
 
 #include <cstdlib>
+#include <cstdint>
 
 namespace RType {
 
     int64_t parseToLong(const char *string);
 
-    u_int64_t parseToUnsignedLong(const char *string);
+    uint64_t  parseToUnsignedLong(const char *string);
 
 }
