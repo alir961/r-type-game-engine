@@ -8,6 +8,7 @@
 #pragma once
 #include "IDraw.hpp"
 #include "../graphicalComponents/TextBox.hpp"
+#include "../graphicalComponents/Background.hpp"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -29,7 +30,12 @@ namespace RType {
             : _gameView(gameView), _graphicalModule(graphicalModule),
               playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
               scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
-              healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, "") {
+              healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, ""),
+              _background(window, {"client/assets/background/1.png",
+                              "client/assets/background/2.png",
+                              "client/assets/background/3.png",
+                              "client/assets/background/4.png"},
+                              { 0.2f, 0.5f, 1.0f, 2.0f }){
         }
 
         /**
@@ -38,6 +44,9 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>> graphicEntities) override {
+            float deltaTime = _clock.restart().asSeconds();
+            _background.update(deltaTime);
+            _background.draw(window);
             playerNameText.draw(_graphicalModule);
             healthBarText.draw(_graphicalModule);
             scoreText.draw(_graphicalModule);
@@ -63,5 +72,7 @@ namespace RType {
         TextBox healthBarText; /**< Health Text. */
         TextBox scoreText; /**< Score Text. */
         IGraphicalModule *_graphicalModule;
+        Background _background;
+        sf::Clock _clock;
     };
 }
