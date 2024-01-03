@@ -88,12 +88,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7f60f9d036e89ccec8094410d41a4af3" id="r_a7f60f9d036e89ccec8094410d41a4af3"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1EntityManager.html#a7f60f9d036e89ccec8094410d41a4af3">createEntity</a> ()</td></tr>
-<tr class="memdesc:a7f60f9d036e89ccec8094410d41a4af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new _entity and add it to the <a class="el" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system.">EntityManager</a>.  <br /></td></tr>
-<tr class="separator:a7f60f9d036e89ccec8094410d41a4af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a437e23c37ca4c2069b1fe226afbe7daf" id="r_a437e23c37ca4c2069b1fe226afbe7daf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1EntityManager.html#a437e23c37ca4c2069b1fe226afbe7daf">destroyEntity</a> (std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; entity)</td></tr>
-<tr class="memdesc:a437e23c37ca4c2069b1fe226afbe7daf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy an _entity and remove it from the <a class="el" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system.">EntityManager</a>.  <br /></td></tr>
-<tr class="separator:a437e23c37ca4c2069b1fe226afbe7daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac479f78caeecdf2008b291c693eb99e1" id="r_ac479f78caeecdf2008b291c693eb99e1"><td class="memItemLeft" align="right" valign="top">EntityPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1EntityManager.html#ac479f78caeecdf2008b291c693eb99e1">createEntity</a> ()</td></tr>
+<tr class="memdesc:ac479f78caeecdf2008b291c693eb99e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new _entity and add it to the <a class="el" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system.">EntityManager</a>.  <br /></td></tr>
+<tr class="separator:ac479f78caeecdf2008b291c693eb99e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29d74178e81b403f6e12842560e9915f" id="r_a29d74178e81b403f6e12842560e9915f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1EntityManager.html#a29d74178e81b403f6e12842560e9915f">destroyEntity</a> (EntityPtr entity)</td></tr>
+<tr class="memdesc:a29d74178e81b403f6e12842560e9915f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy an _entity and remove it from the <a class="el" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system.">EntityManager</a>.  <br /></td></tr>
+<tr class="separator:a29d74178e81b403f6e12842560e9915f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a6039c785bf4ffce2a9ddcf26cf052e" id="r_a4a6039c785bf4ffce2a9ddcf26cf052e"><td class="memItemLeft" align="right" valign="top"><a id="a4a6039c785bf4ffce2a9ddcf26cf052e" name="a4a6039c785bf4ffce2a9ddcf26cf052e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateEntities</b> ()</td></tr>
 <tr class="memdesc:a4a6039c785bf4ffce2a9ddcf26cf052e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update all entities in the <a class="el" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system.">EntityManager</a>. <br /></td></tr>
@@ -105,14 +105,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateEntities</b> ()
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a183849356ee85cccb72b7dab5487c9af" id="r_a183849356ee85cccb72b7dab5487c9af"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1EntityManager.html#a183849356ee85cccb72b7dab5487c9af">_entities</a></td></tr>
-<tr class="separator:a183849356ee85cccb72b7dab5487c9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e40805d519453e6b5ecf242c24f6ba" id="r_a31e40805d519453e6b5ecf242c24f6ba"><td class="memItemLeft" align="right" valign="top">std::vector&lt; EntityPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1EntityManager.html#a31e40805d519453e6b5ecf242c24f6ba">_entities</a></td></tr>
+<tr class="separator:a31e40805d519453e6b5ecf242c24f6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system.">EntityManager</a> class responsible for managing entities in the system. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7f60f9d036e89ccec8094410d41a4af3" name="a7f60f9d036e89ccec8094410d41a4af3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f60f9d036e89ccec8094410d41a4af3">&#9670;&#160;</a></span>createEntity()</h2>
+<a id="ac479f78caeecdf2008b291c693eb99e1" name="ac479f78caeecdf2008b291c693eb99e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac479f78caeecdf2008b291c693eb99e1">&#9670;&#160;</a></span>createEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,7 +121,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt; RType::EntityManager::createEntity </td>
+          <td class="memname">EntityPtr RType::EntityManager::createEntity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -139,8 +139,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a437e23c37ca4c2069b1fe226afbe7daf" name="a437e23c37ca4c2069b1fe226afbe7daf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a437e23c37ca4c2069b1fe226afbe7daf">&#9670;&#160;</a></span>destroyEntity()</h2>
+<a id="a29d74178e81b403f6e12842560e9915f" name="a29d74178e81b403f6e12842560e9915f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29d74178e81b403f6e12842560e9915f">&#9670;&#160;</a></span>destroyEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,7 +151,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void RType::EntityManager::destroyEntity </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classRType_1_1Entity.html">Entity</a> &gt;&#160;</td>
+          <td class="paramtype">EntityPtr&#160;</td>
           <td class="paramname"><em>entity</em></td><td>)</td>
           <td></td>
         </tr>
@@ -174,8 +174,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a183849356ee85cccb72b7dab5487c9af" name="a183849356ee85cccb72b7dab5487c9af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a183849356ee85cccb72b7dab5487c9af">&#9670;&#160;</a></span>_entities</h2>
+<a id="a31e40805d519453e6b5ecf242c24f6ba" name="a31e40805d519453e6b5ecf242c24f6ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31e40805d519453e6b5ecf242c24f6ba">&#9670;&#160;</a></span>_entities</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +184,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classRType_1_1Entity.html">Entity</a>&gt; &gt; RType::EntityManager::_entities</td>
+          <td class="memname">std::vector&lt;EntityPtr&gt; RType::EntityManager::_entities</td>
         </tr>
       </table>
   </td>

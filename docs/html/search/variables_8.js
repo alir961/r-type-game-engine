@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainmenu_0',['mainmenu',['../classRType_1_1OptionsState.html#a393bc77f5738d5f9b20b92f6c7c9de1d',1,'RType::OptionsState::mainMenu'],['../classRType_1_1PauseState.html#a2b62a95d6a7f96925944bc0a544bf68b',1,'RType::PauseState::mainMenu']]]
+  ['mainmenu_0',['mainmenu',['../classRType_1_1OptionsView.html#a6b5eb582edee71611c9626b2c7acc306',1,'RType::OptionsView::mainMenu'],['../classRType_1_1PauseView.html#a8c1d6ceb6a4ccaea6ab58e62f83eef94',1,'RType::PauseView::mainMenu']]]
 ];

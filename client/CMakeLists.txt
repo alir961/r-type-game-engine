@@ -1,8 +1,8 @@
 set(SOURCE_FILES
         Main.cpp
-        src/GameView.cpp
+        src/ClientViewport.cpp
         src/entities/GraphicEntity.cpp
-        src/graphicalComponents/Background.cpp
+        src/components/Background.cpp
         src/UDPClient.cpp
 )
 

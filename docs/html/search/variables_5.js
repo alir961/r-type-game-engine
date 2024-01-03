@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['healthbartext_0',['healthBarText',['../classRType_1_1GameState.html#a02164315cf808965f1dcccb98f6160c2',1,'RType::GameState']]],
-  ['hptext_1',['hptext',['../classRType_1_1DeadState.html#a2ee44215fa995fc88a412e4143288d7a',1,'RType::DeadState::hpText'],['../classRType_1_1WinState.html#aeb702fcf36b2e665a38f79cca9857b28',1,'RType::WinState::hpText']]]
+  ['healthbartext_0',['healthBarText',['../classRType_1_1GameView.html#aeb39c4eadf939807be4563913a14a496',1,'RType::GameView']]],
+  ['hptext_1',['hptext',['../classRType_1_1DeadView.html#a88abf1608429f406ff295e942e624abc',1,'RType::DeadView::hpText'],['../classRType_1_1WinView.html#a9029c48607667b09df97ec32020ec5a7',1,'RType::WinView::hpText']]]
 ];

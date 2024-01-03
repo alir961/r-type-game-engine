@@ -1,4 +1,4 @@
-#include "include/GameView.hpp"
+#include "include/ClientViewport.hpp"
 #include <engine/Logger.hpp>
 #include <engine/network/UDPAdapter.hpp>
 #include <engine/modules/ModuleLoader.hpp>
@@ -10,7 +10,7 @@ int main() {
     const UDP::endpoint endpoint(serverAddress, 9002);
     RType::ModuleProvider provider;
     auto *graphicalModule = provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
-    RType::GameView view(graphicalModule, ioContext, endpoint);
+    RType::ClientViewport view(graphicalModule, ioContext, endpoint);
 
     logInformation("Hello, World for client!");
     ioContext.run();

@@ -12,6 +12,7 @@
 #include <memory>
 
 namespace RType {
+
     /**
     * @brief Entity class representing an object in the system.
     */
@@ -118,4 +119,6 @@ namespace RType {
             }
         }
     };
+
+    using EntityPtr = std::shared_ptr<Entity>;
 }

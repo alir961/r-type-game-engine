@@ -23,8 +23,8 @@ namespace RType {
         * @brief Create a new _entity and add it to the EntityManager.
         * @return Shared pointer to the created _entity.
         */
-        std::shared_ptr<Entity> createEntity() {
-            std::shared_ptr<Entity> entity = std::make_shared<Entity>();
+        EntityPtr createEntity() {
+            EntityPtr entity = std::make_shared<Entity>();
             _entities.push_back(entity);
             return entity;
         }
@@ -33,7 +33,7 @@ namespace RType {
         * @brief Destroy an _entity and remove it from the EntityManager.
         * @param entity Shared pointer to the _entity to destroy.
         */
-        void destroyEntity(std::shared_ptr<Entity> entity) {
+        void destroyEntity(EntityPtr entity) {
             auto it = std::find(_entities.begin(), _entities.end(), entity);
             if (it != _entities.end()) {
                 _entities.erase(it);
@@ -55,6 +55,6 @@ namespace RType {
         ~EntityManager() = default;
 
     private:
-        std::vector<std::shared_ptr<Entity>> _entities; /**< Vector to store entities managed by the EntityManager. */
+        std::vector<EntityPtr> _entities; /**< Vector to store entities managed by the EntityManager. */
     };
 }
