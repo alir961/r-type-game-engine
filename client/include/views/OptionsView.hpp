@@ -2,30 +2,32 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** GameView.hpp
+** ClientViewport.hpp
 */
 
 #pragma once
-#include "IDraw.hpp"
-#include "../graphicalComponents/TextBox.hpp"
+
+#include "IView.hpp"
+#include "../components/TextBox.hpp"
 
 namespace RType {
+
     /**
      * @brief Represents the options menu state in the game.
      *
      * This class provides functionality for handling user input, updating the state,
      * and drawing elements related to the options menu.
      */
-    class OptionsState : public IDraw {
+    class OptionsView : public IView {
     public:
         /**
-         * @brief Constructs the OptionsState.
+         * @brief Constructs the OptionsView.
          *
          * @param window Reference to the SFML render window.
-         * @param gameView Reference to the GameView.
+         * @param gameView Reference to the ClientViewport.
          */
-        OptionsState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
-            : _graphicalModule(graphicalModule), _gameView(gameView),
+        OptionsView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
+            : _graphicalModule(graphicalModule), _viewport(gameView),
               title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Options"),
               sound(window, sf::Color::Cyan, 20, 500.0f, 250.0f, "Sound"),
               soundVolume(window, sf::Color::Cyan, 20, 650.0f, 250.0f, "100"),
@@ -43,7 +45,7 @@ namespace RType {
             if (isMouseClicked()) {
                 if (mainMenu.getActive()) {
                     std::cout << "Exit To Main Menu!" << std::endl;
-                    _gameView.setView(ViewState::MENU);
+                    _viewport.setView(ViewState::MENU);
                 }
             }
         }
@@ -51,7 +53,7 @@ namespace RType {
         /**
          * @brief Updates the options menu state.
          */
-        void update() {
+        void update() override {
             mainMenu.update();
         }
 
@@ -61,7 +63,7 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param entities A vector of shared pointers to graphic entities.
          */
-        void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr>) override {
             title.draw(_graphicalModule);
             sound.draw(_graphicalModule);
             soundVolume.draw(_graphicalModule);
@@ -71,10 +73,10 @@ namespace RType {
 
     private:
         TextBox title; /**< TextBox for the title. */
-        TextBox sound; /**< Sound of the GameView. */
-        TextBox soundVolume; /**< Game sound volume of the GameView. */
+        TextBox sound; /**< Sound of the ClientViewport. */
+        TextBox soundVolume; /**< Game sound volume of the ClientViewport. */
         TextBox mainMenu; /**< TextBox for the menu. */
-        GameView &_gameView; /**< Reference to the GameView. */
+        ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_graphicalModule;
 
         /**

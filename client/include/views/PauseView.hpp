@@ -2,30 +2,32 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** GameView.hpp
+** ClientViewport.hpp
 */
 
 #pragma once
-#include "IDraw.hpp"
-#include "../graphicalComponents/TextBox.hpp"
+
+#include "IView.hpp"
+#include "../components/TextBox.hpp"
 
 namespace RType {
+
     /**
      * @brief Represents the pause menu state in the game.
      *
      * This class provides functionality for handling user input, updating the state,
      * and drawing elements related to the pause menu.
      */
-    class PauseState : public IDraw {
+    class PauseView : public IView {
     public:
         /**
-         * @brief Constructs the PauseState.
+         * @brief Constructs the PauseView.
          *
          * @param window Reference to the SFML render window.
-         * @param gameView Reference to the GameView.
+         * @param gameView Reference to the ClientViewport.
          */
-        PauseState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
-            : _graphicalModule(graphicalModule), _gameView(gameView),
+        PauseView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
+            : _graphicalModule(graphicalModule), _viewport(gameView),
               title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
               resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
               mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu") {}
@@ -41,11 +43,11 @@ namespace RType {
             if (isMouseClicked()) {
                 if (mainMenu.getActive()) {
                     std::cout << "Exit To Main Menu!" << std::endl;
-                    _gameView.setView(ViewState::MENU);
+                    _viewport.setView(ViewState::MENU);
                 }
                 if (resume.getActive()) {
                     std::cout << "Resume Game!" << std::endl;
-                    _gameView.setView(ViewState::GAME);
+                    _viewport.setView(ViewState::GAME);
                 }
             }
         }
@@ -53,7 +55,7 @@ namespace RType {
         /**
          * @brief Updates the pause menu state.
          */
-        void update() {
+        void update() override {
             mainMenu.update();
             resume.update();
         }
@@ -64,7 +66,7 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param entities A vector of shared pointers to graphic entities.
          */
-        void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr>) override {
             title.draw(_graphicalModule);
             mainMenu.draw(_graphicalModule);
             resume.draw(_graphicalModule);
@@ -75,7 +77,7 @@ namespace RType {
         TextBox title; /**< TextBox for the title. */
         TextBox mainMenu; /**< TextBox for the menu. */
         TextBox resume; /**< TextBox for resume. */
-        GameView &_gameView; /**< Reference to the GameView. */
+        ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_graphicalModule;
 
         /**

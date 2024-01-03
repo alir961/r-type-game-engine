@@ -2,27 +2,22 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** GameView.cpp
+** ClientViewport.cpp
 */
 
-#include "../include/GameView.hpp"
+#include "../include/ClientViewport.hpp"
 
-RType::GameView::GameView(IGraphicalModule *graphicalModule, asio::io_context &ioContext, UDP::endpoint endpoint) :
+RType::ClientViewport::ClientViewport(IGraphicalModule *graphicalModule, asio::io_context &ioContext,
+                                      UDP::endpoint endpoint) :
         _client(ioContext, std::move(endpoint)),
         _graphicalModule(graphicalModule) {
     _window.setFramerateLimit(WINDOW_FPS);
-    _menuState = std::make_shared<MenuState>(_window, *this, _graphicalModule);
-    _optionsState = std::make_shared<OptionsState>(_window, *this, _graphicalModule);
-    _pauseState = std::make_shared<PauseState>(_window, *this, _graphicalModule);
-    _deadState = std::make_shared<DeadState>(_window, *this, _graphicalModule);
-    _winState = std::make_shared<WinState>(_window, *this, _graphicalModule);
-    _gameState = std::make_shared<GameState>(_window, *this, _graphicalModule);
-    _loginState = std::make_shared<LoginState>(_window, *this, _graphicalModule);
+    _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule);
 }
 
-void RType::GameView::handleInput(const GraphicEntityPtr &entity) const {
+void RType::ClientViewport::handleInput(const GraphicEntityPtr &entity) const {
     sf::Sprite sprite = entity->getSprite();
-    std::shared_ptr<Entity> gameEntity = entity->getEntity();
+    EntityPtr gameEntity = entity->getEntity();
 
     if (_viewState != ViewState::GAME)
         return;
@@ -32,7 +27,7 @@ void RType::GameView::handleInput(const GraphicEntityPtr &entity) const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) entity->moveDown(sprite, gameEntity);
 }
 
-void RType::GameView::basicInput() {
+void RType::ClientViewport::basicInput() {
     // Testing Win/Lose State
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Numpad8) {
         std::cout << "Entering Win State" << '\n';
@@ -65,7 +60,7 @@ void RType::GameView::basicInput() {
     }
 }
 
-void RType::GameView::launchWindow(const GraphicEntityPtr &entity) {
+void RType::ClientViewport::launchWindow(const GraphicEntityPtr &entity) {
     const float fixedTimeStep = 1.F / WINDOW_FPS;
     float accumulatedTime = 0.F;
 
@@ -89,78 +84,52 @@ void RType::GameView::launchWindow(const GraphicEntityPtr &entity) {
     }
 }
 
-void RType::GameView::setView(ViewState state) {
+void RType::ClientViewport::setView(ViewState state) {
+    switch (state) {
+        case ViewState::MENU:
+            _selectedView = std::make_shared<MenuView>(_window, *this, _graphicalModule);
+            break;
+        case ViewState::OPTIONS:
+            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule);
+            break;
+        case ViewState::GAME:
+            _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule);
+            break;
+        case ViewState::PAUSE:
+            _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule);
+            break;
+        case ViewState::DEAD:
+            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule);
+            break;
+        case ViewState::LOGIN:
+            _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule);
+            break;
+        case ViewState::WIN:
+            _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule);
+            break;
+    }
     _viewState = state;
 }
 
-void RType::GameView::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
+void RType::ClientViewport::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
     _graphicEntities.push_back(entity);
     std::cout << "Added entity with name: " << entity->getEntityName() << std::endl;
 }
 
-void RType::GameView::updateEntities(float deltaTime) {
+void RType::ClientViewport::updateEntities(float deltaTime) {
     for (const auto &entity: _graphicEntities) {
         entity->update(deltaTime);
-        _menuState->update();
-        _optionsState->update();
-        _pauseState->update();
-    }
-    switch (_viewState) {
-        case ViewState::MENU:
-            _menuState->update();
-            break;
-        case ViewState::OPTIONS:
-            _optionsState->update();
-            break;
-        case ViewState::PAUSE:
-            _pauseState->update();
-            break;
-        case ViewState::LOGIN:
-            _loginState->update();
-            break;
-        case ViewState::DEAD:
-            _deadState->update();
-            break;
-        case ViewState::WIN:
-            _winState->update();
-            break;
-        default:
-            break;
+        _selectedView->update();
     }
 }
 
-void RType::GameView::draw() {
+void RType::ClientViewport::draw() {
     _window.clear();
-    switch (_viewState) {
-        using enum RType::ViewState;
-        case MENU:
-            _menuState->draw(_window, _graphicEntities);
-            break;
-        case OPTIONS:
-            _optionsState->draw(_window, _graphicEntities);
-            break;
-        case GAME:
-            _gameState->draw(_window, _graphicEntities);
-            break;
-        case PAUSE:
-            _pauseState->draw(_window, _graphicEntities);
-            break;
-        case DEAD:
-            _deadState->draw(_window, _graphicEntities);
-            break;
-        case WIN:
-            _winState->draw(_window, _graphicEntities);
-            break;
-        case LOGIN:
-            _loginState->draw(_window, _graphicEntities);
-            break;
-        default:
-            break;
-    }
+    _selectedView->draw(_window, _graphicEntities);
     _window.display();
 }
 
-int RType::GameView::start() {
+int RType::ClientViewport::start() {
     try {
         RType::EntityManager entityManager;
 
@@ -172,7 +141,9 @@ int RType::GameView::start() {
 
         std::shared_ptr<RType::GraphicEntity> graphicStarship;
         if (starshipEntity->hasComponents()) {
-            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity, "client/assets/r-typesheet42.gif", "playerStarship");
+            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity,
+                                                                               "client/assets/r-typesheet42.gif",
+                                                                               "playerStarship");
             addGraphicEntity(graphicStarship);
             logInformation("Starting game view...");
             launchWindow(graphicStarship);

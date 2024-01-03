@@ -5,7 +5,7 @@
 ** my_r-type
 */
 
-#include "../../include/graphicalComponents/Background.hpp"
+#include "../../include/components/Background.hpp"
 
 RType::Background::Background(sf::RenderWindow &window, const std::vector<std::string> &imagePaths, const std::vector<float> &speeds) {
     for (const auto& path : imagePaths) {

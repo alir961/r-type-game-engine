@@ -36,27 +36,27 @@ namespace RType {
         * @param sprite The _sprite to move
         * @param entity The _entity to move
         */
-        virtual void moveLeft(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) = 0;
+        virtual void moveLeft(sf::Sprite &sprite, EntityPtr &entity) = 0;
 
         /**
         * @brief Draw the graphic _entity to the provided window
         * @param sprite The _sprite to move
         * @param entity The _entity to move
         */
-        virtual void moveRight(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) = 0;
+        virtual void moveRight(sf::Sprite &sprite, EntityPtr &entity) = 0;
 
         /**
         * @brief Draw the graphic _entity to the provided window
         * @param sprite The _sprite to move
         * @param entity The _entity to move
         */
-        virtual void moveUp(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) = 0;
+        virtual void moveUp(sf::Sprite &sprite, EntityPtr &entity) = 0;
 
         /**
         * @brief Draw the graphic _entity to the provided window
         * @param sprite The _sprite to move
         * @param entity The _entity to move
         */
-        virtual void moveDown(sf::Sprite &sprite, std::shared_ptr<Entity> &entity) = 0;
+        virtual void moveDown(sf::Sprite &sprite, EntityPtr &entity) = 0;
     };
 }

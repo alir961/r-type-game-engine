@@ -2,11 +2,12 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** GameView.hpp
+** ClientViewport.hpp
 */
 
 #pragma once
 
+#include "views/IView.hpp"
 #include "entities/GraphicEntity.hpp"
 #include "entities/GraphicEntityFactory.hpp"
 #include "UDPClient.hpp"
@@ -21,22 +22,20 @@
 
 namespace RType {
 
-    class MenuState;
-    class OptionsState;
-    class PauseState;
-    class DeadState;
-    class WinState;
-    class GameState;
-    class LoginState;
+    class MenuView;
+    class OptionsView;
+    class PauseView;
+    class DeadView;
+    class WinView;
+    class GameView;
+    class LoginView;
 
     constexpr uint32_t WINDOW_WIDTH = 1920;
     constexpr uint32_t WINDOW_HEIGHT = 1080;
     constexpr int WINDOW_FPS = 60;
 
-    using GraphicEntityPtr = std::shared_ptr<AGraphicEntity>;
-
     /**
-     * @enum viewState
+     * @enum views
      * @brief Enumeration representing different states of the game view.
      */
     enum class ViewState {
@@ -50,22 +49,16 @@ namespace RType {
     };
 
     /**
-     * @class GameView
+     * @class ClientViewport
      * @brief Represents the main game view handling graphics, input, and entities.
      */
-    class GameView {
+    class ClientViewport {
     private:
         sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
         ViewState _viewState = ViewState::LOGIN;                          /**< Current state of the game view. */
         sf::Clock animationClock;                                         /**< Clock for managing animations and time-related operations. */
         std::vector<GraphicEntityPtr> _graphicEntities;                   /**< Vector of graphic entities in the game. */
-        std::shared_ptr<MenuState> _menuState;                            /**< Shared ptr to the Menu ViewState. */
-        std::shared_ptr<OptionsState> _optionsState;                      /**< Shared ptr to the Options ViewState. */
-        std::shared_ptr<PauseState> _pauseState;                          /**< Shared ptr to the Pause ViewState. */
-        std::shared_ptr<DeadState> _deadState;                            /**< Shared ptr to the Dead ViewState. */
-        std::shared_ptr<WinState> _winState;                              /**< Shared ptr to the Win ViewState. */
-        std::shared_ptr<GameState> _gameState;                            /**< Shared ptr to the Game ViewState. */
-        std::shared_ptr<LoginState> _loginState;                          /**< Shared ptr to the Login ViewState. */
+        std::shared_ptr<IView> _selectedView;
         UDPClient _client;
         sf::Event event{};
         IGraphicalModule *_graphicalModule;
@@ -104,14 +97,14 @@ namespace RType {
 
     public:
         /**
-         * @brief Constructor for the GameView class.
+         * @brief Constructor for the ClientViewport class.
          */
-        explicit GameView(IGraphicalModule *graphicalModule, asio::io_context &ioContext, UDP::endpoint endpoint);
+        explicit ClientViewport(IGraphicalModule *graphicalModule, asio::io_context &ioContext, UDP::endpoint endpoint);
 
         /**
-         * @brief Destructor for the GameView class.
+         * @brief Destructor for the ClientViewport class.
          */
-        ~GameView() = default;
+        ~ClientViewport() = default;
 
         /**
          * @brief Method to start the game loop.
@@ -129,14 +122,14 @@ namespace RType {
          * @brief Method to add a graphic _entity to the game.
          * @param entity The graphic _entity to be added.
          */
-        void addGraphicEntity(std::shared_ptr<AGraphicEntity> entity);
+        void addGraphicEntity(GraphicEntityPtr entity);
 
         /**
          * @brief Method to retrieve a graphic entity by name
          * @param name The entity name
          * @return Find entity or nullptr
          */
-        std::shared_ptr<AGraphicEntity> getGraphicEntityByName(const std::string &name) const {
+        GraphicEntityPtr getGraphicEntityByName(const std::string &name) const {
             for (const auto &entity: _graphicEntities) {
                 if (entity->getEntityName() == name)
                     return entity;
@@ -155,10 +148,10 @@ namespace RType {
     };
 }
 
-#include "viewState/MenuState.hpp"
-#include "viewState/OptionsState.hpp"
-#include "viewState/PauseState.hpp"
-#include "viewState/DeadState.hpp"
-#include "viewState/WinState.hpp"
-#include "viewState/GameState.hpp"
-#include "viewState/LoginState.hpp"
+#include "views/MenuView.hpp"
+#include "views/OptionsView.hpp"
+#include "views/PauseView.hpp"
+#include "views/DeadView.hpp"
+#include "views/WinView.hpp"
+#include "views/GameView.hpp"
+#include "views/LoginView.hpp"

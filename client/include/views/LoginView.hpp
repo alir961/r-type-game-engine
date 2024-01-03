@@ -2,16 +2,16 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** GameView.hpp
+** ClientViewport.hpp
 */
 
 #pragma once
 
-#include "IDraw.hpp"
-#include "../graphicalComponents/TextBox.hpp"
-#include "../graphicalComponents/NumberInput.hpp"
-#include "../graphicalComponents/TextInput.hpp"
-#include "../graphicalComponents/Button.hpp"
+#include "IView.hpp"
+#include "../components/TextBox.hpp"
+#include "../components/NumberInput.hpp"
+#include "../components/TextInput.hpp"
+#include "../components/Button.hpp"
 
 namespace RType {
 
@@ -19,18 +19,18 @@ namespace RType {
     using LoginButton = Button<200, 40>;
 
     /**
-     * @class LoginState
+     * @class LoginView
      * @brief Represents a login state with input box for user interaction.
      */
-    class LoginState : public IDraw {
+    class LoginView : public IView {
     public:
         /**
-         * @brief Constructor for MenuState.
+         * @brief Constructor for MenuView.
          * @param window The SFML RenderWindow.
-         * @param gameView The GameView associated with the state.
+         * @param gameView The ClientViewport associated with the state.
          */
-        LoginState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
-                : _gameView(gameView), _window(window),
+        LoginView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
+                : _viewport(gameView), _window(window),
                   portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
                   userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "Username"),
                   portBoxInput(window, 800.0f, 340.0f),
@@ -41,16 +41,16 @@ namespace RType {
          */
         void handleInput() {
             loginButton.executeIfClicked([this] {
-                _gameView.setView(ViewState::MENU);
+                _viewport.setView(ViewState::MENU);
             });
         }
 
         /**
          * @brief Updates the menu state.
          */
-        void update() {
-            portBoxInput.update(_gameView.getEvent());
-            userNameBoxInput.update(_gameView.getEvent());
+        void update() override {
+            portBoxInput.update(_viewport.getEvent());
+            userNameBoxInput.update(_viewport.getEvent());
         }
 
         /**
@@ -58,7 +58,7 @@ namespace RType {
          * @param window The SFML RenderWindow on which to draw the menu.
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
-        void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>>) override {
+        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> entities) override {
             portBoxTitle.draw(_graphicalModule);
             userNameBoxTitle.draw(_graphicalModule);
             portBoxInput.draw(_graphicalModule);
@@ -68,7 +68,7 @@ namespace RType {
         }
 
     private:
-        GameView &_gameView; /**< The associated GameView. */
+        ClientViewport &_viewport; /**< The associated ClientViewport. */
         sf::RenderWindow &_window; /**< The SFML RenderWindow. */
         TextBox portBoxTitle; /**< TextBox for Port of the game server. */
         TextBox userNameBoxTitle; /**< TextBox for UserName options. */

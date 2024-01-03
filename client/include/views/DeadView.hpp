@@ -2,34 +2,36 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** WinState.hpp
+** DeadView.hpp
 */
 
 #pragma once
-#include "IDraw.hpp"
-#include "../graphicalComponents/RectBox.hpp"
-#include "../graphicalComponents/TextBox.hpp"
+
+#include "../components/RectBox.hpp"
+#include "../components/TextBox.hpp"
+#include "IView.hpp"
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <iomanip>
 
 namespace RType {
+
     /**
-     * @class WinState
+     * @class DeadView
      * @brief Represents a state where entities are not drawn.
      */
-    class WinState : public IDraw {
+    class DeadView : public IView {
     public:
         /**
-         * @brief Constructor for WinState.
+         * @brief Constructor for DeadView.
          * @param window The SFML RenderWindow.
-         * @param gameView The GameView associated with the state.
+         * @param gameView The ClientViewport associated with the state.
          */
-        WinState(sf::RenderWindow &window, GameView &gameView, IGraphicalModule *graphicalModule)
-            : _gameView(gameView), _graphicalModule(graphicalModule),
+        DeadView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
+            : _viewport(gameView), _graphicalModule(graphicalModule),
               backgroundRect(window, sf::Vector2f(((((window.getSize().x - 450) / 2))), ((window.getSize().y - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f),
-              wonText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Won!"),
+              loseText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Lose!"),
               hpText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 115, ""),
               scoreText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 215, ""),
               exitText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 315, "Exit") {}
@@ -40,55 +42,56 @@ namespace RType {
         void handleInput() {
             exitText.handleInput();
 
-            if (isMouseClicked()) {
-                if (exitText.getActive()) {
-                    std::cout << "Exit To Main Menu!" << std::endl;
-                    _gameView.setView(ViewState::MENU);
-                }
+            if (!isMouseClicked())
+                return;
+            if (exitText.getActive()) {
+                std::cout << "Exit To Main Menu!\n";
+                _viewport.setView(ViewState::MENU);
             }
         }
 
         /**
          * @brief Updates the menu state.
          */
-        void update() {
+        void update() override {
             exitText.update();
         }
 
         /**
          * @brief Draws entities on the SFML RenderWindow.
          * @param window The SFML RenderWindow on which to draw entities.
-         * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
+         * @param entities A vector of shared pointers to AGraphicEntity objects.
          */
-        void draw(sf::RenderWindow &window, std::vector<std::shared_ptr<RType::AGraphicEntity>> graphicEntities) override {
+        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> entities) override {
+            const GraphicEntityPtr player = _viewport.getGraphicEntityByName("playerStarship");
+            const EntityPtr entity = player->getEntity();
+
             backgroundRect.draw(_graphicalModule);
-            wonText.draw(_graphicalModule);
+            loseText.draw(_graphicalModule);
             hpText.draw(_graphicalModule);
             scoreText.draw(_graphicalModule);
             exitText.draw(_graphicalModule);
             handleInput();
 
-            std::shared_ptr<AGraphicEntity> player = _gameView.getGraphicEntityByName("playerStarship");
-            if (player != nullptr && player->getEntity()->getComponent<PlayerComponent>()) {
-                float health = player->getEntity()->getComponent<HealthComponent>()->getHealth();
-                std::ostringstream healthString; healthString << std::fixed << std::setprecision(0) << health;
-                hpText.setText("Health " + healthString.str());
-                float score = player->getEntity()->getComponent<PlayerComponent>()->getScore();
-                std::ostringstream scoreString; scoreString << std::fixed << std::setprecision(0) << score;
-                scoreText.setText("Score " + scoreString.str());
+            if (player != nullptr && entity->getComponent<PlayerComponent>()) {
+                const int health = entity->getComponent<HealthComponent>()->getHealth();
+                const int score = entity->getComponent<PlayerComponent>()->getScore();
+
+                hpText.setText("Health " + std::to_string(health));
+                scoreText.setText("Score " + std::to_string(score));
             } else hpText.setText("Player entity not found");
         }
 
     private:
-        GameView &_gameView; /**< The associated GameView. */
+        ClientViewport &_viewport; /**< The associated ClientViewport. */
         RectBox backgroundRect; /**< Rectangle of background. */
-        TextBox wonText; /**< Text "You won!". */
+        TextBox loseText; /**< Text "You Lose!". */
         TextBox hpText; /**< Text "hp". */
         TextBox scoreText; /**< Text "pts". */
         TextBox exitText; /**< Exit Text. */
         IGraphicalModule *_graphicalModule;
 
-        bool isMouseClicked() const {
+        static bool isMouseClicked() {
             return sf::Mouse::isButtonPressed(sf::Mouse::Left);
         }
     };

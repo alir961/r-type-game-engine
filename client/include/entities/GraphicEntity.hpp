@@ -23,7 +23,7 @@ namespace RType {
          * @param entity Reference to the ECS _entity associated with this graphic _entity.
          * @param path Path to the texture file for this graphic _entity.
          */
-        explicit GraphicEntity(std::shared_ptr<Entity> &entity, const std::string path, const std::string entityName);
+        explicit GraphicEntity(EntityPtr &entity, const std::string path, const std::string entityName);
 
         /**
          * @brief Update the graphic _entity based on the state of the ECS _entity.
@@ -40,7 +40,7 @@ namespace RType {
         /**
          * @brief get Entity.
          */
-        std::shared_ptr<Entity> getEntity() override {
+        EntityPtr getEntity() override {
             return _entity;
         }
 
@@ -52,7 +52,7 @@ namespace RType {
         }
 
     private:
-        std::shared_ptr<Entity> _entity; /**< Reference to the ECS _entity. */
+        EntityPtr _entity; /**< Reference to the ECS _entity. */
         sf::Sprite _sprite; /**< Sprite of the graphical _entity. */
         sf::IntRect _currentFrame; /**< Current frame of the graphical _entity. */
         float _animationTime; /**< Animation time accumulator. */

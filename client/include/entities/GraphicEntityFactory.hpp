@@ -8,7 +8,7 @@ namespace RType {
     */
     class GraphicEntityFactory {
     public:
-        static std::shared_ptr<GraphicEntity> createGraphicEntity(std::shared_ptr<Entity> &entity, const std::string &path, const std::string entityName) {
+        static std::shared_ptr<GraphicEntity> createGraphicEntity(EntityPtr &entity, const std::string &path, const std::string entityName) {
             return std::make_shared<GraphicEntity>(entity, path, entityName);
         }
     };
