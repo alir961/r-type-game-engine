@@ -2,6 +2,7 @@ set(SOURCE_FILES
         Main.cpp
         src/GameView.cpp
         src/entities/GraphicEntity.cpp
+        src/graphicalComponents/Background.cpp
         src/UDPClient.cpp
 )
 
