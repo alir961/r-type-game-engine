@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wontext_0',['wonText',['../classRType_1_1WinState.html#a1bef53ff0b56ff4f69cf6506a7ab267c',1,'RType::WinState']]]
+  ['wontext_0',['wonText',['../classRType_1_1WinView.html#a41564c6b4fc939b1c296270d1097d54e',1,'RType::WinView']]]
 ];

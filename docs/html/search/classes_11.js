@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['winstate_0',['WinState',['../classRType_1_1WinState.html',1,'RType']]]
+  ['winview_0',['WinView',['../classRType_1_1WinView.html',1,'RType']]]
 ];

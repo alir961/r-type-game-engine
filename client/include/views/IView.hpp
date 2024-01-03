@@ -13,6 +13,9 @@ namespace RType {
 
     class IView : public IDrawable {
     public:
+        /**
+         * @brief Pure virtual function for update graphical object for next render.
+         */
         virtual void update() = 0;
 
         /**

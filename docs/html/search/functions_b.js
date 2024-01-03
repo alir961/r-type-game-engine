@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['optionsstate_0',['OptionsState',['../classRType_1_1OptionsState.html#a9009e262582b7fe18c9c95854fbceaee',1,'RType::OptionsState']]]
+  ['optionsview_0',['OptionsView',['../classRType_1_1OptionsView.html#a962b68779f08071df6ffae7522ee1c5b',1,'RType::OptionsView']]]
 ];

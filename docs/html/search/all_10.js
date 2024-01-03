@@ -6,6 +6,6 @@ var searchData=
   ['rectbox_3',['rectbox',['../classRType_1_1RectBox.html',1,'RType::RectBox'],['../classRType_1_1RectBox.html#a513a09dd7089b5d9cbe427301a19c721',1,'RType::RectBox::RectBox()']]],
   ['removecomponent_4',['removeComponent',['../classRType_1_1Entity.html#a2f28f0f9f5c440aafe9e72c52f95afb0',1,'RType::Entity']]],
   ['resourcemanager_5',['ResourceManager',['../classRType_1_1ResourceManager.html',1,'RType']]],
-  ['resume_6',['resume',['../classRType_1_1PauseState.html#a8b44a2f55f54bc635870e54807603256',1,'RType::PauseState']]],
+  ['resume_6',['resume',['../classRType_1_1PauseView.html#af77edd1ee004591c15c8d2b228f97bfb',1,'RType::PauseView']]],
   ['rlealgorithm_7',['RLEAlgorithm',['../classRType_1_1RLEAlgorithm.html',1,'RType']]]
 ];

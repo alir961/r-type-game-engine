@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pausestate_0',['PauseState',['../classRType_1_1PauseState.html#ad9e1aa70353b929fc7a8d9a952764905',1,'RType::PauseState']]],
+  ['pauseview_0',['PauseView',['../classRType_1_1PauseView.html#ae775ad0b47f61464034510fc61dcfb92',1,'RType::PauseView']]],
   ['playallsounds_1',['playAllSounds',['../classRType_1_1SoundModule.html#ab71dfca021cde228402c9bd5b3ac1f05',1,'RType::SoundModule']]],
   ['playaudio_2',['PlayAudio',['../classRType_1_1AAudioModule.html#a8ff0f7c2f2ebf68f8de8af5501fc1d94',1,'RType::AAudioModule']]],
   ['playcinematic_3',['PlayCinematic',['../classRType_1_1ACinematicModule.html#a35d9e3c134352db9b2ebc8c8a411ba68',1,'RType::ACinematicModule']]],

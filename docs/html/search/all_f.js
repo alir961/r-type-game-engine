@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quitbox_0',['quitBox',['../classRType_1_1MenuState.html#ad0e1aa000b8bf1c6fbd86908841d1d53',1,'RType::MenuState']]]
+  ['quitbox_0',['quitBox',['../classRType_1_1MenuView.html#a508768eca6849f472aec151b9dc4cfec',1,'RType::MenuView']]]
 ];
