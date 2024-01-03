@@ -35,31 +35,26 @@ namespace RType {
          * @param event SFML Event to be processed.
          */
         void update(const sf::Event &event) override {
-            if (event.type == sf::Event::MouseButtonPressed &&
-                event.mouseButton.button == sf::Mouse::Left) {
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
                 setActive(_rect.getGlobalBounds().contains(mousePos));
             }
-
             if (_active) {
                 if (event.type == sf::Event::TextEntered && !_keyPressed) {
                     char inputChar = static_cast<char>(event.text.unicode);
-                    if (isValidInput(inputChar) && _text.size() < _maxChars) {
-                        _text += static_cast<char>(std::tolower(event.text.unicode));
-                        _keyPressed = true;
-                    }
-                } else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::BackSpace) {
-                    if (!_text.empty()) {
-                        _text.pop_back();
+                    if (inputChar == '\b') {
+                        if (!_text.empty()) {
+                            _text.pop_back();
+                            _keyPressed = true;
+                        }
+                    } else if (isValidInput(inputChar) && _text.size() < _maxChars) {
+                        _text += std::tolower(inputChar);
                         _keyPressed = true;
                     }
                 }
             }
-
-            if (event.type == sf::Event::KeyReleased || event.type == sf::Event::MouseButtonReleased) {
-                _keyPressed = false;
-            }
-            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Enter && _active) std::cout << _text << std::endl;
+            if (event.type == sf::Event::KeyReleased || event.type == sf::Event::MouseButtonReleased) { _keyPressed = false; }
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Enter && _active) { std::cout << _text << std::endl; }
             _textDisplay.setString(_text);
         }
 
