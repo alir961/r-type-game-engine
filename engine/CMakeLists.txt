@@ -51,6 +51,6 @@ add_subdirectory(modules/graphical)
 
 find_package(asio CONFIG REQUIRED)
 target_link_libraries(engine PRIVATE asio::asio)
-
+target_link_libraries(engine PRIVATE ws2_32)
 target_include_directories(engine PRIVATE include/engine)
 target_include_directories(engine PUBLIC include)
