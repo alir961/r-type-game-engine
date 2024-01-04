@@ -42,6 +42,8 @@ set(SOURCE_FILES
 
 add_library(engine STATIC ${SOURCE_FILES})
 
+set_property(TARGET engine PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 add_subdirectory(modules/sound)
 add_subdirectory(modules/console)
 add_subdirectory(modules/particle)
@@ -49,5 +51,6 @@ add_subdirectory(modules/graphical)
 
 find_package(asio CONFIG REQUIRED)
 target_link_libraries(engine PRIVATE asio::asio)
+
 target_include_directories(engine PRIVATE include/engine)
 target_include_directories(engine PUBLIC include)

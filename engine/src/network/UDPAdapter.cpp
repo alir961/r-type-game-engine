@@ -6,10 +6,9 @@
 */
 
 #include <iostream>
-#include <boost/asio.hpp>
 #include "engine/network/UDPAdapter.hpp"
 
-void RType::UDPAdapter::errorFunction(const boost::system::error_code &error, std::size_t bytes_send) {
+void RType::UDPAdapter::errorFunction(const asio::error_code &error, std::size_t bytes_send) {
     if (error)
         std::cerr << "Error sending data: " << error.message() << "\n";
     else std::cout << "UDPAdapter: " << bytes_send << "bytes send!\n";
@@ -30,7 +29,7 @@ void RType::UDPAdapter::sendData(const RType::Message &message) {
 }
 
 void RType::UDPAdapter::receiveData(ReceiveCallback callback) {
-    const auto &buffer = boost::asio::buffer(_dataBuffer);
+    const auto &buffer = asio::buffer(_dataBuffer);
 
     _socket.async_receive_from(asio::buffer(buffer), _remoteEndpoint, callback);
 }

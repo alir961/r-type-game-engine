@@ -14,4 +14,7 @@ install(
         include/particle_module
 )
 
+find_package(SFML COMPONENTS window graphics CONFIG REQUIRED)
+target_link_libraries(particle_module LINK_PRIVATE sfml-graphics sfml-window)
+
 target_link_libraries(particle_module PRIVATE engine)

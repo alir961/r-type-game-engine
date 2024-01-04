@@ -8,10 +8,8 @@
 #pragma once
 
 #include <string>
-#include <boost/asio.hpp>
+#include <asio.hpp>
 #include "NetworkMessage.hpp"
-
-namespace asio = boost::asio;
 
 using UDP = asio::ip::udp;
 
@@ -25,7 +23,7 @@ namespace RType {
     /**
      * @brief Callback function type for handling asynchronous receive operations.
      */
-    using ReceiveCallback = std::function<void(const boost::system::error_code &error, std::size_t bytes_received)>;
+    using ReceiveCallback = std::function<void(const asio::error_code &error, std::size_t bytes_received)>;
 
     /**
      * @brief Buffer type for storing received or to-be-sent data.
@@ -53,7 +51,7 @@ namespace RType {
          * @param error The error code.
          * @param bytesReceived The number of bytes received.
          */
-        static void errorFunction(const boost::system::error_code &error, std::size_t);
+        static void errorFunction(const asio::error_code &error, std::size_t);
 
     public:
         /**

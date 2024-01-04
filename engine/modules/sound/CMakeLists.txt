@@ -14,4 +14,7 @@ install(
         include/sound_module
 )
 
+find_package(SFML COMPONENTS audio CONFIG REQUIRED)
+target_link_libraries(sound_module LINK_PRIVATE sfml-audio)
+
 target_link_libraries(sound_module PRIVATE engine)

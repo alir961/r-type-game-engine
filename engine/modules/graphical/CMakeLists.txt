@@ -14,5 +14,8 @@ install(
         include/graphical_module
 )
 
+
+find_package(SFML COMPONENTS window graphics CONFIG REQUIRED)
+target_link_libraries(graphical_module LINK_PRIVATE sfml-graphics sfml-window)
+
 target_link_libraries(graphical_module PRIVATE engine)
-target_link_libraries(graphical_module PRIVATE sfml-system sfml-network sfml-graphics sfml-window -lsfml-audio)

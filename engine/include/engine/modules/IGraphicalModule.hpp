@@ -6,6 +6,7 @@
 */
 
 #pragma once
+
 #include "engine/modules/IModule.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>

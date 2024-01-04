@@ -1,7 +1,6 @@
 {
   "dependencies": [
     "sfml",
-    "asio",
-    "boost-asio"
+    "asio"
   ]
 }
