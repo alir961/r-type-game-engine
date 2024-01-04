@@ -64,7 +64,7 @@ void RType::ClientViewport::launchWindow(const GraphicEntityPtr &entity) {
         }
         handleInput(entity);
 
-        accumulatedTime += animationClock.restart().asSeconds();
+        accumulatedTime += _animationClock.restart().asSeconds();
         while (accumulatedTime >= fixedTimeStep) {
             updateEntities(fixedTimeStep);
             accumulatedTime -= fixedTimeStep;

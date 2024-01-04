@@ -31,16 +31,16 @@ namespace RType {
          */
         LoginView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
                 : _viewport(gameView), _window(window), _graphicalModule(graphicalModule), _provider(provider),
-                  portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
-                  userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "Username"),
-                  portBoxInput(window, 800.0f, 340.0f),
-                  userNameBoxInput(window, 800.0f, 440.0f) {}
+              _portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
+              _userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "Username"),
+              _portBoxInput(window, 800.0f, 340.0f),
+              _userNameBoxInput(window, 800.0f, 440.0f) {}
 
         /**
          * @brief Handles user input for the menu.
          */
         void handleInput() {
-            loginButton.executeIfClicked([this] {
+            _loginButton.executeIfClicked([this] {
                 _viewport.setView(ViewState::MENU);
             });
         }
@@ -49,8 +49,8 @@ namespace RType {
          * @brief Updates the menu state.
          */
         void update() override {
-            portBoxInput.update(_viewport.getEvent());
-            userNameBoxInput.update(_viewport.getEvent());
+            _portBoxInput.update(_viewport.getEvent());
+            _userNameBoxInput.update(_viewport.getEvent());
         }
 
         /**
@@ -59,22 +59,22 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> entities) override {
-            portBoxTitle.draw(_graphicalModule);
-            userNameBoxTitle.draw(_graphicalModule);
-            portBoxInput.draw(_graphicalModule);
-            userNameBoxInput.draw(_graphicalModule);
-            loginButton.draw(_graphicalModule);
+            _portBoxTitle.draw(_graphicalModule);
+            _userNameBoxTitle.draw(_graphicalModule);
+            _portBoxInput.draw(_graphicalModule);
+            _userNameBoxInput.draw(_graphicalModule);
+            _loginButton.draw(_graphicalModule);
             handleInput();
         }
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         sf::RenderWindow &_window; /**< The SFML RenderWindow. */
-        TextBox portBoxTitle; /**< TextBox for Port of the game server. */
-        TextBox userNameBoxTitle; /**< TextBox for UserName options. */
-        NumberInput portBoxInput; /**< TextBoxInput for Port of the game server. */
-        TextInput userNameBoxInput; /**< TextBoxInput for UserName options. */
-        LoginButton loginButton = LoginButton(_window, 800, 500, "Login"); /**< Button for Log-in the game. */
+        TextBox _portBoxTitle; /**< TextBox for Port of the game server. */
+        TextBox _userNameBoxTitle; /**< TextBox for UserName options. */
+        NumberInput _portBoxInput; /**< TextBoxInput for Port of the game server. */
+        TextInput _userNameBoxInput; /**< TextBoxInput for UserName options. */
+        LoginButton _loginButton = LoginButton(_window, 800, 500, "Login"); /**< Button for Log-in the game. */
         IGraphicalModule *_graphicalModule;
         ModuleProvider &_provider;
 

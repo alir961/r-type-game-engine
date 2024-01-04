@@ -54,7 +54,7 @@ namespace RType {
     private:
         sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
         ViewState _viewState = ViewState::LOGIN;                          /**< Current state of the game view. */
-        sf::Clock animationClock;                                         /**< Clock for managing animations and time-related operations. */
+        sf::Clock _animationClock;                                         /**< Clock for managing animations and time-related operations. */
         std::vector<GraphicEntityPtr> _graphicEntities;                   /**< Vector of graphic entities in the game. */
         std::shared_ptr<IView> _selectedView;
         UDPClient _client;

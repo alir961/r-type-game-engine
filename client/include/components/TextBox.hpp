@@ -25,13 +25,13 @@ namespace RType {
          * @param initialText The initial text to display in the text box.
          */
         TextBox(sf::RenderWindow &window, const sf::Color &textColor, unsigned int fontSize, float x, float y, const std::string &initialText = "")
-            : _window(window), textColor(textColor), fontSize(fontSize), isActive(false), isHovered(false) {
-            font.loadFromFile("client/assets/ka1.ttf");
-            text.setFont(font);
-            text.setCharacterSize(fontSize);
-            text.setPosition(x, y);
-            text.setString(initialText);
-            text.setFillColor(textColor);
+            : _window(window), _textColor(textColor), _fontSize(fontSize), _isActive(false), _isHovered(false) {
+            _font.loadFromFile("client/assets/ka1.ttf");
+            _text.setFont(_font);
+            _text.setCharacterSize(fontSize);
+            _text.setPosition(x, y);
+            _text.setString(initialText);
+            _text.setFillColor(textColor);
             updateText();
         }
 
@@ -41,24 +41,24 @@ namespace RType {
         void handleInput() {
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(_window));
-                if (inputBoxBounds.contains(mousePosition)) {
+                if (_inputBoxBounds.contains(mousePosition)) {
                     setActive(true);
                 } else {
                     setActive(false);
                 }
             }
             sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(_window));
-            isHovered = inputBoxBounds.contains(mousePosition);
+            _isHovered = _inputBoxBounds.contains(mousePosition);
         }
 
         /**
          * @brief Updates the appearance of the text box based on its state.
          */
         void update() {
-            if (isHovered) {
-                text.setFillColor(sf::Color::Cyan);
+            if (_isHovered) {
+                _text.setFillColor(sf::Color::Cyan);
             } else {
-                text.setFillColor(sf::Color::Magenta);
+                _text.setFillColor(sf::Color::Magenta);
             }
         }
 
@@ -66,7 +66,7 @@ namespace RType {
          * @brief Draws the text box on the associated SFML RenderWindow.
          */
         void draw(IGraphicalModule *graphicalModule) {
-            graphicalModule->drawText(_window, text);
+            graphicalModule->drawText(_window, _text);
         }
 
         /**
@@ -74,7 +74,7 @@ namespace RType {
          * @param active True to set the text box as active, false otherwise.
          */
         void setActive(bool active) {
-            isActive = active;
+            _isActive = active;
         }
 
         /**
@@ -82,7 +82,7 @@ namespace RType {
          * @return True if the text box is active, false otherwise.
          */
         bool getActive() const {
-            return isActive;
+            return _isActive;
         }
 
         /**
@@ -90,7 +90,7 @@ namespace RType {
          * @return The SFML Font object.
          */
         const sf::Font &getFont() const {
-            return font;
+            return _font;
         }
 
         /**
@@ -98,8 +98,8 @@ namespace RType {
          * @param newSize The new font size.
          */
         void setFontSize(unsigned int newSize) {
-            fontSize = newSize;
-            text.setCharacterSize(fontSize);
+            _fontSize = newSize;
+            _text.setCharacterSize(_fontSize);
             updateText();
         }
 
@@ -108,25 +108,25 @@ namespace RType {
          * @param newText The new text.
          */
         void setText(std::string newText) {
-            text.setString(newText);
+            _text.setString(newText);
         }
 
     private:
         sf::RenderWindow& _window; /**< The SFML RenderWindow where the text box will be drawn. */
-        sf::Color textColor; /**< The color of the text. */
-        sf::Text text; /**< The SFML Text object representing the text box content. */
-        sf::Font font; /**< The SFML Font used for rendering text. */
-        sf::FloatRect inputBoxBounds; /**< The bounding box of the text box. */
-        bool isActive; /**< Flag indicating whether the text box is currently active. */
-        bool isHovered; /**< Flag indicating whether the mouse cursor is hovering over the text box. */
-        unsigned int fontSize; /**< The size of the text. */
+        sf::Color _textColor; /**< The color of the text. */
+        sf::Text _text; /**< The SFML Text object representing the text box content. */
+        sf::Font _font; /**< The SFML Font used for rendering text. */
+        sf::FloatRect _inputBoxBounds; /**< The bounding box of the text box. */
+        bool _isActive; /**< Flag indicating whether the text box is currently active. */
+        bool _isHovered; /**< Flag indicating whether the mouse cursor is hovering over the text box. */
+        unsigned int _fontSize; /**< The size of the text. */
 
         /**
          * @brief Updates the text content of the text box.
          */
         void updateText() {
-            text.setString(text.getString());
-            inputBoxBounds = text.getGlobalBounds();
+            _text.setString(_text.getString());
+            _inputBoxBounds = _text.getGlobalBounds();
         }
     };
 }

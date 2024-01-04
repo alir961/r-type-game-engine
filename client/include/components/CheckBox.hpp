@@ -16,6 +16,7 @@ namespace RType {
      */
     class CheckBox {
     public:
+        using ModuleCallback = std::function<void(std::string)>;
         /**
          * @brief Constructor for CheckBox.
          * @param window The SFML RenderWindow where the checkbox will be drawn.
@@ -29,16 +30,16 @@ namespace RType {
         CheckBox(sf::RenderWindow &window, float x, float y, float sizeX, float sizeY, const std::string boxName,
                  const sf::Color &activeColor = sf::Color::Cyan, const sf::Color &inactiveColor = sf::Color::Red,
                  const sf::Color &outlineColor = sf::Color::Black, float outlineThickness = 0.0f)
-            : _window(window), _x(x), _y(y), _sizeX(sizeX), _sizeY(sizeY), activeColor(activeColor),
-              inactiveColor(inactiveColor), outlineColor(outlineColor), outlineThickness(outlineThickness),
-              isActive(false), _boxName(boxName) {
-            rectangle.setPosition(_x, _y);
-            rectangle.setSize(sf::Vector2f(_sizeX, _sizeY));
-            rectangle.setFillColor(sf::Color::Magenta);
-            font.loadFromFile("client/assets/ka1.ttf");
+            : _window(window), _x(x), _y(y), _sizeX(sizeX), _sizeY(sizeY), _activeColor(activeColor),
+              _inactiveColor(inactiveColor), _outlineColor(outlineColor), _outlineThickness(outlineThickness),
+              _isActive(false), _boxName(boxName) {
+            _rectangle.setPosition(_x, _y);
+            _rectangle.setSize(sf::Vector2f(_sizeX, _sizeY));
+            _rectangle.setFillColor(sf::Color::Magenta);
+            _font.loadFromFile("client/assets/ka1.ttf");
             _textSize = (_sizeX + _sizeY) / 5.0f;
             _boxNameText.setCharacterSize(static_cast<unsigned int>(_textSize));
-            _boxNameText.setFont(font);
+            _boxNameText.setFont(_font);
             _boxNameText.setString(boxName);
             _boxNameText.setFillColor(sf::Color::White);
             _boxNameText.setPosition(_x, _y + _sizeY);
@@ -49,7 +50,7 @@ namespace RType {
          * @brief Draws the checkbox on the associated SFML RenderWindow.
          */
         void draw(IGraphicalModule *graphicalModule) {
-            graphicalModule->drawRect(_window, rectangle);
+            graphicalModule->drawRect(_window, _rectangle);
             graphicalModule->drawText(_window, _boxNameText);
         }
 
@@ -58,26 +59,22 @@ namespace RType {
          * Toggles the state of the checkbox and adjusts the appearance accordingly.
          * Also updates the opacity based on the state.
          */
-        void handleInput(ModuleProvider &provider) {
-            if (clickCoolDown.getElapsedTime().asSeconds() < clickCoolDownTime) return;
+        void handleInput(ModuleCallback loadCallback, ModuleCallback unloadCallback) {
+            if (_clickCoolDown.getElapsedTime().asSeconds() < _clickCoolDownTime) return;
             sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(_window));
             std::transform(_boxName.begin(), _boxName.end(), _boxName.begin(), [](unsigned char c) {
                 return std::tolower(c);
             });
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                if (rectangle.getGlobalBounds().contains(mousePosition)) {
-                    isActive = !isActive;
+                if (_rectangle.getGlobalBounds().contains(mousePosition)) {
+                    _isActive = !_isActive;
                     setAppearance();
-                    clickCoolDown.restart();
-                    if (isActive) {
-                        if (_boxName == "sound") _soundModule = provider.loadAndGetModule<RType::IModule>(RType::ModuleType::SOUND);
-                        if (_boxName == "particles") _particleModule = provider.loadAndGetModule<RType::IModule>(RType::ModuleType::PARTICLE);
-                        if (_boxName == "console") _consoleModule = provider.loadAndGetModule<RType::IModule>(RType::ModuleType::CONSOLE);
+                    _clickCoolDown.restart();
+                    if (_isActive) {
+                        loadCallback(_boxName);
                         std::cout << _boxName << " Box set active!" << std::endl;
                     } else {
-                        if (_boxName == "sound") provider.unloadModule(RType::ModuleType::SOUND);
-                        if (_boxName == "particles") provider.unloadModule(RType::ModuleType::PARTICLE);
-                        if (_boxName == "console") provider.unloadModule(RType::ModuleType::CONSOLE);
+                        unloadCallback(_boxName);
                         std::cout << _boxName << " Box set inactive!" << std::endl;
                     }
                 }
@@ -88,33 +85,30 @@ namespace RType {
         sf::RenderWindow &_window; /**< The SFML RenderWindow where the checkbox will be drawn. */
         float _x, _y;
         float _sizeX, _sizeY;
-        sf::Color activeColor; /**< The color to fill the checkbox when active. */
-        sf::Color inactiveColor; /**< The color to fill the checkbox when inactive. */
-        sf::Color outlineColor; /**< The color of the outline of the checkbox. */
-        float outlineThickness; /**< The thickness of the outline of the checkbox. */
-        bool isActive; /**< The current state of the checkbox (active or inactive). */
-        sf::RectangleShape rectangle; /**< The SFML RectangleShape representing the checkbox. */
-        sf::Clock clickCoolDown;
-        const float clickCoolDownTime = 0.1;
+        sf::Color _activeColor; /**< The color to fill the checkbox when active. */
+        sf::Color _inactiveColor; /**< The color to fill the checkbox when inactive. */
+        sf::Color _outlineColor; /**< The color of the outline of the checkbox. */
+        float _outlineThickness; /**< The thickness of the outline of the checkbox. */
+        bool _isActive; /**< The current state of the checkbox (active or inactive). */
+        sf::RectangleShape _rectangle; /**< The SFML RectangleShape representing the checkbox. */
+        sf::Clock _clickCoolDown;
+        const float _clickCoolDownTime = 0.1;
         std::string _boxName;
-        sf::Font font;
+        sf::Font _font;
         sf::Text _boxNameText;
         float _textSize;
-        IModule *_soundModule;
-        IModule *_particleModule;
-        IModule *_consoleModule;
 
         /**
          * @brief Sets the appearance of the checkbox based on its current state.
          */
         void setAppearance() {
-            if (isActive) {
-                rectangle.setFillColor(activeColor);
+            if (_isActive) {
+                _rectangle.setFillColor(_activeColor);
             } else {
-                rectangle.setFillColor(inactiveColor);
+                _rectangle.setFillColor(_inactiveColor);
             }
-            rectangle.setOutlineColor(outlineColor);
-            rectangle.setOutlineThickness(outlineThickness);
+            _rectangle.setOutlineColor(_outlineColor);
+            _rectangle.setOutlineThickness(_outlineThickness);
         }
     };
 }

@@ -26,28 +26,28 @@ namespace RType {
          */
         MenuView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
             : _window(window), _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
-              titleBox(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "R Type"),
-              startBox(window, sf::Color::Cyan, 20, 100.0f, 200.0f, "Start"),
-              optionsBox(window, sf::Color::Cyan, 20, 100.0f, 250.0f, "Options"),
-              quitBox(window, sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit") {}
+              _titleBox(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "R Type"),
+              _startBox(window, sf::Color::Cyan, 20, 100.0f, 200.0f, "Start"),
+              _optionsBox(window, sf::Color::Cyan, 20, 100.0f, 250.0f, "Options"),
+              _quitBox(window, sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit") {}
 
         /**
          * @brief Handles user input for the menu.
          */
         void handleInput() {
-            titleBox.handleInput();
-            startBox.handleInput();
-            optionsBox.handleInput();
-            quitBox.handleInput();
+            _titleBox.handleInput();
+            _startBox.handleInput();
+            _optionsBox.handleInput();
+            _quitBox.handleInput();
 
             if (isMouseClicked()) {
-                if (startBox.getActive()) {
+                if (_startBox.getActive()) {
                     std::cout << "Start Game!\n";
                     _viewport.setView(ViewState::GAME);
-                } else if (optionsBox.getActive()) {
+                } else if (_optionsBox.getActive()) {
                     std::cout << "Options Selected!\n";
                     _viewport.setView(ViewState::OPTIONS);
-                } else if (quitBox.getActive()) {
+                } else if (_quitBox.getActive()) {
                     std::cout << "Quit Game!\n";
                     _window.close();
                 }
@@ -58,9 +58,9 @@ namespace RType {
          * @brief Updates the menu state.
          */
         void update() override {
-            startBox.update();
-            optionsBox.update();
-            quitBox.update();
+            _startBox.update();
+            _optionsBox.update();
+            _quitBox.update();
         }
 
         /**
@@ -69,18 +69,18 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow& window, std::vector<GraphicEntityPtr>) override {
-            titleBox.draw(_graphicalModule);
-            startBox.draw(_graphicalModule);
-            optionsBox.draw(_graphicalModule);
-            quitBox.draw(_graphicalModule);
+            _titleBox.draw(_graphicalModule);
+            _startBox.draw(_graphicalModule);
+            _optionsBox.draw(_graphicalModule);
+            _quitBox.draw(_graphicalModule);
             handleInput();
         }
 
     private:
-        TextBox titleBox; /**< TextBox for the game title. */
-        TextBox startBox; /**< TextBox for starting the game. */
-        TextBox optionsBox; /**< TextBox for accessing options. */
-        TextBox quitBox; /**< TextBox for quitting the game. */
+        TextBox _titleBox; /**< TextBox for the game title. */
+        TextBox _startBox; /**< TextBox for starting the game. */
+        TextBox _optionsBox; /**< TextBox for accessing options. */
+        TextBox _quitBox; /**< TextBox for quitting the game. */
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         sf::RenderWindow &_window; /**< The SFML RenderWindow. */
         IGraphicalModule *_graphicalModule;
