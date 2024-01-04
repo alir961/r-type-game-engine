@@ -7,13 +7,13 @@
 
 #pragma once
 
-#include "IView.hpp"
 #include "../components/RectBox.hpp"
 #include "../components/TextBox.hpp"
-#include <iostream>
-#include <string>
-#include <sstream>
+#include "IView.hpp"
 #include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 namespace RType {
 
@@ -28,8 +28,8 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        WinView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-            : _viewport(gameView), _graphicalModule(graphicalModule),
+        WinView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider),
               backgroundRect(window, sf::Vector2f(((((window.getSize().x - 450) / 2))), ((window.getSize().y - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f),
               wonText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Won!"),
               hpText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 115, ""),
@@ -90,6 +90,7 @@ namespace RType {
         TextBox scoreText; /**< Text "pts". */
         TextBox exitText; /**< Exit Text. */
         IGraphicalModule *_graphicalModule;
+        ModuleProvider &_provider;
 
         bool isMouseClicked() const {
             return sf::Mouse::isButtonPressed(sf::Mouse::Left);

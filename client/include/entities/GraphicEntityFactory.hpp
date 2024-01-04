@@ -1,6 +1,5 @@
 #pragma once
 #include "GraphicEntity.hpp"
-#include "engine/ecs/Entity.hpp"
 
 namespace RType {
     /**

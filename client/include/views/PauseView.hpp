@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "IView.hpp"
 #include "../components/TextBox.hpp"
+#include "IView.hpp"
 
 namespace RType {
 
@@ -26,8 +26,8 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
          */
-        PauseView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-            : _graphicalModule(graphicalModule), _viewport(gameView),
+        PauseView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+            : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
               title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
               resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
               mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu") {}
@@ -79,6 +79,7 @@ namespace RType {
         TextBox resume; /**< TextBox for resume. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_graphicalModule;
+        ModuleProvider &_provider;
 
         /**
          * @brief Checks if the left mouse button is clicked.

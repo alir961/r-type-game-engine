@@ -28,8 +28,8 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        GameView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-            : _viewport(gameView), _graphicalModule(graphicalModule),
+        GameView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider),
               playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
               scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
               healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, ""),
@@ -79,5 +79,6 @@ namespace RType {
         IGraphicalModule *_graphicalModule;
         Background _background;
         sf::Clock _clock;
+        ModuleProvider &_provider;
     };
 }

@@ -27,8 +27,8 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
          */
-        OptionsView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-            : _graphicalModule(graphicalModule), _viewport(gameView),
+        OptionsView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+            : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
               title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Options"),
               sound(window, sf::Color::Cyan, 20, 500.0f, 250.0f, "Sound"),
               soundVolume(window, sf::Color::Cyan, 20, 650.0f, 250.0f, "100"),
@@ -45,9 +45,9 @@ namespace RType {
             sound.handleInput();
             soundVolume.handleInput();
             mainMenu.handleInput();
-            consoleModule.handleInput();
-            particleModule.handleInput();
-            soundModule.handleInput();
+            consoleModule.handleInput(_provider);
+            particleModule.handleInput(_provider);
+            soundModule.handleInput(_provider);
 
             if (isMouseClicked()) {
                 if (mainMenu.getActive()) {
@@ -91,6 +91,7 @@ namespace RType {
         CheckBox consoleModule;
         CheckBox particleModule;
         CheckBox soundModule;
+        ModuleProvider &_provider;
 
         /**
          * @brief Checks if the left mouse button is clicked.

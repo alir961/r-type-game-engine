@@ -7,8 +7,9 @@
 
 #pragma once
 
-#include "IView.hpp"
+#include "../../../engine/modules/graphical/GraphicalModule.hpp"
 #include "../components/TextBox.hpp"
+#include "IView.hpp"
 
 namespace RType {
 
@@ -23,8 +24,8 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        MenuView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-            : _window(window), _graphicalModule(graphicalModule), _viewport(gameView),
+        MenuView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+            : _window(window), _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
               titleBox(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "R Type"),
               startBox(window, sf::Color::Cyan, 20, 100.0f, 200.0f, "Start"),
               optionsBox(window, sf::Color::Cyan, 20, 100.0f, 250.0f, "Options"),
@@ -83,6 +84,7 @@ namespace RType {
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         sf::RenderWindow &_window; /**< The SFML RenderWindow. */
         IGraphicalModule *_graphicalModule;
+        ModuleProvider &_provider;
 
         /**
          * @brief Checks if the left mouse button is clicked.

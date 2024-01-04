@@ -7,6 +7,7 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <cstring>
 
 namespace RType {
     /**
@@ -30,7 +31,7 @@ namespace RType {
                  const sf::Color &outlineColor = sf::Color::Black, float outlineThickness = 0.0f)
             : _window(window), _x(x), _y(y), _sizeX(sizeX), _sizeY(sizeY), activeColor(activeColor),
               inactiveColor(inactiveColor), outlineColor(outlineColor), outlineThickness(outlineThickness),
-              isActive(true), _boxName(boxName) {
+              isActive(false), _boxName(boxName) {
             rectangle.setPosition(_x, _y);
             rectangle.setSize(sf::Vector2f(_sizeX, _sizeY));
             rectangle.setFillColor(sf::Color::Magenta);
@@ -57,21 +58,28 @@ namespace RType {
          * Toggles the state of the checkbox and adjusts the appearance accordingly.
          * Also updates the opacity based on the state.
          */
-        void handleInput() {
-            if (clickCoolDown.getElapsedTime().asSeconds() < clickCoolDownTime) {
-                return;
-            }
-
+        void handleInput(ModuleProvider &provider) {
+            if (clickCoolDown.getElapsedTime().asSeconds() < clickCoolDownTime) return;
             sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(_window));
+            std::transform(_boxName.begin(), _boxName.end(), _boxName.begin(), [](unsigned char c) {
+                return std::tolower(c);
+            });
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 if (rectangle.getGlobalBounds().contains(mousePosition)) {
                     isActive = !isActive;
                     setAppearance();
                     clickCoolDown.restart();
-                    if (isActive == true)
+                    if (isActive) {
+                        if (_boxName == "sound") _soundModule = provider.loadAndGetModule<RType::IModule>(RType::ModuleType::SOUND);
+                        if (_boxName == "particles") _particleModule = provider.loadAndGetModule<RType::IModule>(RType::ModuleType::PARTICLE);
+                        if (_boxName == "console") _consoleModule = provider.loadAndGetModule<RType::IModule>(RType::ModuleType::CONSOLE);
                         std::cout << _boxName << " Box set active!" << std::endl;
-                    else
+                    } else {
+                        if (_boxName == "sound") provider.unloadModule(RType::ModuleType::SOUND);
+                        if (_boxName == "particles") provider.unloadModule(RType::ModuleType::PARTICLE);
+                        if (_boxName == "console") provider.unloadModule(RType::ModuleType::CONSOLE);
                         std::cout << _boxName << " Box set inactive!" << std::endl;
+                    }
                 }
             }
         }
@@ -92,6 +100,9 @@ namespace RType {
         sf::Font font;
         sf::Text _boxNameText;
         float _textSize;
+        IModule *_soundModule;
+        IModule *_particleModule;
+        IModule *_consoleModule;
 
         /**
          * @brief Sets the appearance of the checkbox based on its current state.

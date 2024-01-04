@@ -7,10 +7,11 @@
 
 #include "../include/ClientViewport.hpp"
 
-RType::ClientViewport::ClientViewport(IGraphicalModule *graphicalModule, asio::io_context &ioContext, UDP::endpoint endpoint)
-    : _client(ioContext, std::move(endpoint)), _graphicalModule(graphicalModule) {
+RType::ClientViewport::ClientViewport(asio::io_context &ioContext, UDP::endpoint endpoint)
+    : _client(ioContext, std::move(endpoint)) {
     _window.setFramerateLimit(WINDOW_FPS);
-    _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule);
+    _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
+    _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
 }
 
 void RType::ClientViewport::handleInput(const GraphicEntityPtr &entity) const {
@@ -75,25 +76,25 @@ void RType::ClientViewport::launchWindow(const GraphicEntityPtr &entity) {
 void RType::ClientViewport::setView(ViewState state) {
     switch (state) {
         case ViewState::MENU:
-            _selectedView = std::make_shared<MenuView>(_window, *this, _graphicalModule);
+            _selectedView = std::make_shared<MenuView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::OPTIONS:
-            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule);
+            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::GAME:
-            _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule);
+            _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::PAUSE:
-            _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule);
+            _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::DEAD:
-            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule);
+            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::LOGIN:
-            _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule);
+            _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::WIN:
-            _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule);
+            _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule, _provider);
             break;
     }
     _viewState = state;

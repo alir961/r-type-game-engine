@@ -8,11 +8,8 @@
 #pragma once
 
 #include "views/IView.hpp"
-#include "entities/GraphicEntity.hpp"
-#include "entities/GraphicEntityFactory.hpp"
 #include "UDPClient.hpp"
-#include "../../engine/modules/graphical/GraphicalModule.hpp"
-#include <SFML/Graphics.hpp>
+#include "../../engine/include/engine/modules/ModuleProvider.hpp"
 #include <SFML/System/Clock.hpp>
 #include <engine/Logger.hpp>
 #include <engine/ecs/EntityManager.hpp>
@@ -29,6 +26,7 @@ namespace RType {
     class WinView;
     class GameView;
     class LoginView;
+    class GraphicalModule;
 
     constexpr uint32_t WINDOW_WIDTH = 1920;
     constexpr uint32_t WINDOW_HEIGHT = 1080;
@@ -62,6 +60,7 @@ namespace RType {
         UDPClient _client;
         sf::Event event{};
         IGraphicalModule *_graphicalModule;
+        ModuleProvider _provider = ModuleProvider();
 
         /**
          * @brief Private method to handle drawing operations.
@@ -95,7 +94,7 @@ namespace RType {
         /**
          * @brief Constructor for the ClientViewport class.
          */
-        explicit ClientViewport(IGraphicalModule *graphicalModule, asio::io_context &ioContext, UDP::endpoint endpoint);
+        explicit ClientViewport(asio::io_context &ioContext, UDP::endpoint endpoint);
 
         /**
          * @brief Destructor for the ClientViewport class.
@@ -151,3 +150,4 @@ namespace RType {
 #include "views/WinView.hpp"
 #include "views/GameView.hpp"
 #include "views/LoginView.hpp"
+#include "entities/GraphicEntityFactory.hpp"

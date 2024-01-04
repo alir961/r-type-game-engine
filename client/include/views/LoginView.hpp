@@ -29,12 +29,12 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        LoginView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-                : _viewport(gameView), _window(window),
+        LoginView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+                : _viewport(gameView), _window(window), _graphicalModule(graphicalModule), _provider(provider),
                   portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
                   userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "Username"),
                   portBoxInput(window, 800.0f, 340.0f),
-                  userNameBoxInput(window, 800.0f, 440.0f), _graphicalModule(graphicalModule) {}
+                  userNameBoxInput(window, 800.0f, 440.0f) {}
 
         /**
          * @brief Handles user input for the menu.
@@ -76,6 +76,7 @@ namespace RType {
         TextInput userNameBoxInput; /**< TextBoxInput for UserName options. */
         LoginButton loginButton = LoginButton(_window, 800, 500, "Login"); /**< Button for Log-in the game. */
         IGraphicalModule *_graphicalModule;
+        ModuleProvider &_provider;
 
         /**
          * @brief Checks if the left mouse button is clicked.
