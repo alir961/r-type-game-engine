@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "IView.hpp"
 #include "../components/TextBox.hpp"
+#include "IView.hpp"
 
 namespace RType {
 
@@ -26,26 +26,26 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
          */
-        PauseView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-            : _graphicalModule(graphicalModule), _viewport(gameView),
-              title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
-              resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
-              mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu") {}
+        PauseView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+            : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
+              _title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
+              _resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
+              _mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu") {}
 
         /**
          * @brief Handles user input for the pause menu.
          */
         void handleInput() {
-            title.handleInput();
-            mainMenu.handleInput();
-            resume.handleInput();
+            _title.handleInput();
+            _mainMenu.handleInput();
+            _resume.handleInput();
 
             if (isMouseClicked()) {
-                if (mainMenu.getActive()) {
+                if (_mainMenu.getActive()) {
                     std::cout << "Exit To Main Menu!" << std::endl;
                     _viewport.setView(ViewState::MENU);
                 }
-                if (resume.getActive()) {
+                if (_resume.getActive()) {
                     std::cout << "Resume Game!" << std::endl;
                     _viewport.setView(ViewState::GAME);
                 }
@@ -56,8 +56,8 @@ namespace RType {
          * @brief Updates the pause menu state.
          */
         void update() override {
-            mainMenu.update();
-            resume.update();
+            _mainMenu.update();
+            _resume.update();
         }
 
         /**
@@ -67,18 +67,19 @@ namespace RType {
          * @param entities A vector of shared pointers to graphic entities.
          */
         void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr>) override {
-            title.draw(_graphicalModule);
-            mainMenu.draw(_graphicalModule);
-            resume.draw(_graphicalModule);
+            _title.draw(_graphicalModule);
+            _mainMenu.draw(_graphicalModule);
+            _resume.draw(_graphicalModule);
             handleInput();
         }
 
     private:
-        TextBox title; /**< TextBox for the title. */
-        TextBox mainMenu; /**< TextBox for the menu. */
-        TextBox resume; /**< TextBox for resume. */
+        TextBox _title; /**< TextBox for the title. */
+        TextBox _mainMenu; /**< TextBox for the menu. */
+        TextBox _resume; /**< TextBox for resume. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_graphicalModule;
+        ModuleProvider &_provider;
 
         /**
          * @brief Checks if the left mouse button is clicked.

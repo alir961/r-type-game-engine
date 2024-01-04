@@ -27,20 +27,20 @@ namespace RType {
         RectBox(sf::RenderWindow &window, const sf::Vector2f &position, const sf::Vector2f &size,
                 const sf::Color &fillColor = sf::Color::White, const sf::Color &outlineColor = sf::Color::Black,
                 float outlineThickness = 0.0f)
-            : _window(window), position(position), size(size), fillColor(fillColor),
-              outlineColor(outlineColor), outlineThickness(outlineThickness) {
-            rectangle.setPosition(position);
-            rectangle.setSize(size);
-            rectangle.setFillColor(fillColor);
-            rectangle.setOutlineColor(outlineColor);
-            rectangle.setOutlineThickness(outlineThickness);
+            : _window(window), _position(position), _size(size), _fillColor(fillColor),
+              _outlineColor(outlineColor), _outlineThickness(outlineThickness) {
+            _rectangle.setPosition(position);
+            _rectangle.setSize(size);
+            _rectangle.setFillColor(fillColor);
+            _rectangle.setOutlineColor(outlineColor);
+            _rectangle.setOutlineThickness(outlineThickness);
         }
 
         /**
          * @brief Draws the rectangle on the associated SFML RenderWindow.
          */
         void draw(IGraphicalModule *graphicalModule) {
-            graphicalModule->drawRect(_window, rectangle);
+            graphicalModule->drawRect(_window, _rectangle);
         }
 
         /**
@@ -48,8 +48,8 @@ namespace RType {
          * @param newPosition The new position of the top-left corner of the rectangle.
          */
         void setPosition(const sf::Vector2f &newPosition) {
-            position = newPosition;
-            rectangle.setPosition(position);
+            _position = newPosition;
+            _rectangle.setPosition(_position);
         }
 
         /**
@@ -57,8 +57,8 @@ namespace RType {
          * @param newSize The new size of the rectangle.
          */
         void setSize(const sf::Vector2f &newSize) {
-            size = newSize;
-            rectangle.setSize(size);
+            _size = newSize;
+            _rectangle.setSize(_size);
         }
 
         /**
@@ -66,8 +66,8 @@ namespace RType {
          * @param newFillColor The new fill color of the rectangle.
          */
         void setFillColor(const sf::Color &newFillColor) {
-            fillColor = newFillColor;
-            rectangle.setFillColor(fillColor);
+            _fillColor = newFillColor;
+            _rectangle.setFillColor(_fillColor);
         }
 
         /**
@@ -75,8 +75,8 @@ namespace RType {
          * @param newOutlineColor The new outline color of the rectangle.
          */
         void setOutlineColor(const sf::Color &newOutlineColor) {
-            outlineColor = newOutlineColor;
-            rectangle.setOutlineColor(outlineColor);
+            _outlineColor = newOutlineColor;
+            _rectangle.setOutlineColor(_outlineColor);
         }
 
         /**
@@ -84,17 +84,17 @@ namespace RType {
          * @param newOutlineThickness The new outline thickness of the rectangle.
          */
         void setOutlineThickness(float newOutlineThickness) {
-            outlineThickness = newOutlineThickness;
-            rectangle.setOutlineThickness(outlineThickness);
+            _outlineThickness = newOutlineThickness;
+            _rectangle.setOutlineThickness(_outlineThickness);
         }
 
     private:
         sf::RenderWindow &_window; /**< The SFML RenderWindow where the rectangle box will be drawn. */
-        sf::Vector2f position; /**< The position of the top-left corner of the rectangle. */
-        sf::Vector2f size; /**< The size of the rectangle. */
-        sf::Color fillColor; /**< The color to fill the rectangle. */
-        sf::Color outlineColor; /**< The color of the outline of the rectangle. */
-        float outlineThickness; /**< The thickness of the outline of the rectangle. */
-        sf::RectangleShape rectangle; /**< The SFML RectangleShape representing the rectangle box. */
+        sf::Vector2f _position; /**< The position of the top-left corner of the rectangle. */
+        sf::Vector2f _size; /**< The size of the rectangle. */
+        sf::Color _fillColor; /**< The color to fill the rectangle. */
+        sf::Color _outlineColor; /**< The color of the outline of the rectangle. */
+        float _outlineThickness; /**< The thickness of the outline of the rectangle. */
+        sf::RectangleShape _rectangle; /**< The SFML RectangleShape representing the rectangle box. */
     };
 }

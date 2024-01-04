@@ -28,11 +28,11 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        GameView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule)
-            : _viewport(gameView), _graphicalModule(graphicalModule),
-              playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
-              scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
-              healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, ""),
+        GameView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider),
+              _playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
+              _scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
+              _healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, ""),
               _background(window, {"client/assets/background/1.png",
                               "client/assets/background/2.png",
                               "client/assets/background/3.png",
@@ -54,17 +54,18 @@ namespace RType {
 
             _background.update(deltaTime);
             _background.draw(window);
-            playerNameText.draw(_graphicalModule);
-            healthBarText.draw(_graphicalModule);
-            scoreText.draw(_graphicalModule);
+            _playerNameText.draw(_graphicalModule);
+            _healthBarText.draw(_graphicalModule);
+            _scoreText.draw(_graphicalModule);
 
             if (player != nullptr && playerEntity->getComponent<PlayerComponent>()) {
                 const int health = playerEntity->getComponent<HealthComponent>()->getHealth();
                 const int score = playerEntity->getComponent<PlayerComponent>()->getScore();
 
-                healthBarText.setText("Health " + std::to_string(health));
-                scoreText.setText("Score " + std::to_string(score));
-            } else healthBarText.setText("Player playerEntity not found");
+                _healthBarText.setText("Health " + std::to_string(health));
+                _scoreText.setText("Score " + std::to_string(score));
+            } else
+                _healthBarText.setText("Player playerEntity not found");
 
             for (auto &entity: graphicEntities) {
                 entity->draw(window, _graphicalModule);
@@ -73,11 +74,12 @@ namespace RType {
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        TextBox playerNameText; /**< Player Name Text. */
-        TextBox healthBarText; /**< Health Text. */
-        TextBox scoreText; /**< Score Text. */
+        TextBox _playerNameText; /**< Player Name Text. */
+        TextBox _healthBarText; /**< Health Text. */
+        TextBox _scoreText; /**< Score Text. */
         IGraphicalModule *_graphicalModule;
         Background _background;
         sf::Clock _clock;
+        ModuleProvider &_provider;
     };
 }

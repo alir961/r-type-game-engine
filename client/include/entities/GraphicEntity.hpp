@@ -7,9 +7,7 @@
 
 #pragma once
 #include "AGraphicEntity.hpp"
-#include <SFML/Graphics.hpp>
 #include <memory>
-#include "../../engine/include/engine/ecs/Entity.hpp"
 #include "../resources/ResourceManager.hpp"
 
 namespace RType {
