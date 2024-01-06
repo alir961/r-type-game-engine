@@ -71,15 +71,34 @@ namespace RType {
         }
 
         /**
-        * @brief Return true if the _entity has a @tparam T component, false otherwise.
-        * @tparam T Type of the component to remove.
+        * @brief Check if the _entity has a set of base components.
+        * @return True if all specified components are present, false otherwise.
         */
-        template<typename T>
-        bool hasComponent() {
-            if (_components.find(getComponent<T>()) == nullptr) {
-                return false;
+        bool hasBaseComponents() const {
+            bool allComponentsPresent = true;
+            const std::type_info *componentTypes[] = {
+                    &typeid(SpeedComponent),
+                    &typeid(HealthComponent),
+                    &typeid(PositionComponent),
+                    &typeid(SizeComponent),
+                    &typeid(PlayerComponent)
+            };
+            for (const auto *type : componentTypes) {
+                bool hasComponent = false;
+                for (const auto &pair : _components) {
+                    const std::type_info &currentType = typeid(*(pair.second));
+                    if (currentType == *type) {
+                        hasComponent = true;
+                        break;
+                    }
+                }
+                if (!hasComponent) {
+                    allComponentsPresent = false;
+                    std::cout << "Entity doesn't have the required component: " << type->name() << std::endl;
+                    break;
+                }
             }
-            return true;
+            return allComponentsPresent;
         }
 
         /**
@@ -104,8 +123,8 @@ namespace RType {
         */
         template<typename T>
         ComponentType getComponentType() const {
-            if constexpr (std::is_same_v<T, CollisionComponent>) {
-                return ComponentType::Collision;
+            if constexpr (std::is_same_v<T, SizeComponent>) {
+                return ComponentType::Size;
             } else if constexpr (std::is_same_v<T, DamageComponent>) {
                 return ComponentType::Damage;
             } else if constexpr (std::is_same_v<T, HealthComponent>) {

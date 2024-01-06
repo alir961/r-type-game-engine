@@ -81,6 +81,9 @@ void RType::ClientViewport::setView(ViewState state) {
         case ViewState::OPTIONS:
             _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider);
             break;
+        case ViewState::OPTIONSGAME:
+            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider, true);
+            break;
         case ViewState::GAME:
             _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule, _provider);
             break;
@@ -126,10 +129,11 @@ int RType::ClientViewport::start() {
         starshipEntity->addComponent<RType::SpeedComponent>(10);
         starshipEntity->addComponent<RType::HealthComponent>(100);
         starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(300, 30));
+        starshipEntity->addComponent<RType::SizeComponent>(2.0f, 2.0f);
         starshipEntity->addComponent<RType::PlayerComponent>(true);
 
         std::shared_ptr<RType::GraphicEntity> graphicStarship;
-        if (starshipEntity->hasComponents()) {
+        if (starshipEntity->hasBaseComponents()) {
             graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
             addGraphicEntity(graphicStarship);
             logInformation("Starting game view...");

@@ -13,7 +13,8 @@ RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string path, c
     _sprite.setTexture(_resourceManager.getTexture(entityName));
     _currentFrame = sf::IntRect(0, 0, 33, 15);
     _sprite.setTextureRect(_currentFrame);
-    _sprite.setScale(2.0f, 2.0f);
+    auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
+    _sprite.setScale(entitySize.first, entitySize.second);
 }
 
 void RType::GraphicEntity::update(float deltaTime) {

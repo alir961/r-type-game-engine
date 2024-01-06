@@ -30,7 +30,8 @@ namespace RType {
             : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
               _title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
               _resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
-              _mainMenu(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Exit To Main Menu") {}
+              _options(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Options"),
+              _mainMenu(window, sf::Color::Cyan, 20, 500.0f, 295.0f, "Exit To Main Menu") {}
 
         /**
          * @brief Handles user input for the pause menu.
@@ -39,6 +40,7 @@ namespace RType {
             _title.handleInput();
             _mainMenu.handleInput();
             _resume.handleInput();
+            _options.handleInput();
 
             if (isMouseClicked()) {
                 if (_mainMenu.getActive()) {
@@ -49,6 +51,10 @@ namespace RType {
                     std::cout << "Resume Game!" << std::endl;
                     _viewport.setView(ViewState::GAME);
                 }
+                if (_options.getActive()) {
+                    std::cout << "Resume Game!" << std::endl;
+                    _viewport.setView(ViewState::OPTIONSGAME);
+                }
             }
         }
 
@@ -58,6 +64,7 @@ namespace RType {
         void update() override {
             _mainMenu.update();
             _resume.update();
+            _options.update();
         }
 
         /**
@@ -70,6 +77,7 @@ namespace RType {
             _title.draw(_graphicalModule);
             _mainMenu.draw(_graphicalModule);
             _resume.draw(_graphicalModule);
+            _options.draw(_graphicalModule);
             handleInput();
         }
 
@@ -77,6 +85,7 @@ namespace RType {
         TextBox _title; /**< TextBox for the title. */
         TextBox _mainMenu; /**< TextBox for the menu. */
         TextBox _resume; /**< TextBox for resume. */
+        TextBox _options; /**< TextBox to go options. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_graphicalModule;
         ModuleProvider &_provider;

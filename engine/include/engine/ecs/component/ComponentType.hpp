@@ -6,11 +6,11 @@
 */
 
 #pragma once
-#include "CollisionComponent.hpp"
 #include "DamageComponent.hpp"
 #include "HealthComponent.hpp"
 #include "PlayerComponent.hpp"
 #include "PositionComponent.hpp"
+#include "SizeComponent.hpp"
 #include "SpeedComponent.hpp"
 
 namespace RType {
@@ -18,7 +18,7 @@ namespace RType {
     * @brief Enum to represent different types of component.
     */
     enum class ComponentType {
-        Collision, /**< Component type for collision. */
+        Size, /**< Component type for collision. */
         Damage,    /**< Component type for damage. */
         Health,    /**< Component type for health. */
         Player,    /**< Component type for playable _entity. */

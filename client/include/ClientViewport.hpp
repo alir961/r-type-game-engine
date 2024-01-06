@@ -43,7 +43,8 @@ namespace RType {
         PAUSE = 3,    /**< Pause state. */
         DEAD = 4,     /**< Game over state. */
         LOGIN = 5,     /**< Game over state. */
-        WIN = 6      /**< Won game state. */
+        WIN = 6,      /**< Won game state. */
+        OPTIONSGAME = 7
     };
 
     /**
