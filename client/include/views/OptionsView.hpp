@@ -28,15 +28,16 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
          */
-        OptionsView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
-            : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
+        OptionsView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider, bool inGame = false)
+            : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider), _inGame(inGame),
               _title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Options"),
-              _sound(window, sf::Color::Cyan, 20, 500.0f, 250.0f, "Sound"),
-              _soundVolume(window, sf::Color::Cyan, 20, 650.0f, 250.0f, "100"),
-              _mainMenu(window, sf::Color::Cyan, 20, 500.0f, 300.0f, "Exit To Main Menu"),
-              _consoleModuleBox(window, window.getSize().x / 4.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Console"),
-              _particleModuleBox(window, window.getSize().x / 4.0f + 200.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Particle"),
-              _soundModuleBox(window, window.getSize().x / 4.0f + 400.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Sound") {}
+              _sound(window, sf::Color::Cyan, 20, 700.0f, 250.0f, "Sound"),
+              _soundVolume(window, sf::Color::Cyan, 20, 850.0f, 250.0f, "100"),
+              _mainMenu(window, sf::Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"),
+              _consoleModuleBox(window, window.getSize().x / 3.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Console"),
+              _particleModuleBox(window, window.getSize().x / 3.0f + 200.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Particle"),
+              _soundModuleBox(window, window.getSize().x / 3.0f + 400.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Sound"),
+              _back(window, sf::Color::Cyan, 20, 700.0f, 350.0f, "Go Back") {}
 
         /**
          * @brief Handles user input for the options menu.
@@ -46,6 +47,7 @@ namespace RType {
             _sound.handleInput();
             _soundVolume.handleInput();
             _mainMenu.handleInput();
+            if (_inGame == true) _back.handleInput();
             _soundModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
                                     [this](std::string moduleName) { unloadModule(moduleName);});
             _particleModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
@@ -57,6 +59,10 @@ namespace RType {
                 if (_mainMenu.getActive()) {
                     std::cout << "Exit To Main Menu!" << std::endl;
                     _viewport.setView(ViewState::MENU);
+                }
+                if (_inGame == true && _back.getActive()) {
+                    std::cout << "Back to Pause" << std::endl;
+                    _viewport.setView(ViewState::PAUSE);
                 }
             }
         }
@@ -104,6 +110,7 @@ namespace RType {
          */
         void update() override {
             _mainMenu.update();
+            if (_inGame == true) _back.update();
         }
 
         /**
@@ -120,6 +127,7 @@ namespace RType {
             _consoleModuleBox.draw(_graphicalModule);
             _particleModuleBox.draw(_graphicalModule);
             _soundModuleBox.draw(_graphicalModule);
+            if (_inGame == true) _back.draw(_graphicalModule);
             handleInput();
         }
 
@@ -128,6 +136,7 @@ namespace RType {
         TextBox _sound; /**< Sound of the ClientViewport. */
         TextBox _soundVolume; /**< Game sound volume of the ClientViewport. */
         TextBox _mainMenu; /**< TextBox for the menu. */
+        TextBox _back; /**< TextBox to go back. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_graphicalModule;
         CheckBox _consoleModuleBox;
@@ -137,6 +146,7 @@ namespace RType {
         IModule *_soundModule;
         IModule *_particleModule;
         IModule *_consoleModule;
+        bool _inGame;
 
         /**
          * @brief Checks if the left mouse button is clicked.
