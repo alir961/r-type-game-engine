@@ -89,10 +89,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aad6bca4b3d89c6b65445c32ebed89e8e" id="r_aad6bca4b3d89c6b65445c32ebed89e8e"><td class="memItemLeft" align="right" valign="top"><a id="aad6bca4b3d89c6b65445c32ebed89e8e" name="aad6bca4b3d89c6b65445c32ebed89e8e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ClientViewport</b> (<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule, asio::io_context &amp;ioContext, UDP::endpoint endpoint)</td></tr>
-<tr class="memdesc:aad6bca4b3d89c6b65445c32ebed89e8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classRType_1_1ClientViewport.html" title="Represents the main game view handling graphics, input, and entities.">ClientViewport</a> class. <br /></td></tr>
-<tr class="separator:aad6bca4b3d89c6b65445c32ebed89e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08c442de211898a6f7d1a34666c2ef0" id="r_ac08c442de211898a6f7d1a34666c2ef0"><td class="memItemLeft" align="right" valign="top"><a id="ac08c442de211898a6f7d1a34666c2ef0" name="ac08c442de211898a6f7d1a34666c2ef0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ClientViewport</b> ()</td></tr>
+<tr class="memdesc:ac08c442de211898a6f7d1a34666c2ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classRType_1_1ClientViewport.html" title="Represents the main game view handling graphics, input, and entities.">ClientViewport</a> class. <br /></td></tr>
+<tr class="separator:ac08c442de211898a6f7d1a34666c2ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5ae42eed4503439a6d3ae7d06f5e15f" id="r_ad5ae42eed4503439a6d3ae7d06f5e15f"><td class="memItemLeft" align="right" valign="top"><a id="ad5ae42eed4503439a6d3ae7d06f5e15f" name="ad5ae42eed4503439a6d3ae7d06f5e15f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~ClientViewport</b> ()=default</td></tr>
 <tr class="memdesc:ad5ae42eed4503439a6d3ae7d06f5e15f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classRType_1_1ClientViewport.html" title="Represents the main game view handling graphics, input, and entities.">ClientViewport</a> class. <br /></td></tr>
@@ -111,12 +111,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac8add3f1d7feb3f4659edadf3ebb48bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf0a23f520b2d35d21ae07a2c043ede0" id="r_abf0a23f520b2d35d21ae07a2c043ede0"><td class="memItemLeft" align="right" valign="top">sf::Event&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0">getEvent</a> () const</td></tr>
 <tr class="separator:abf0a23f520b2d35d21ae07a2c043ede0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae14a3cf170f2d95e1c776a614a12d304" id="r_ae14a3cf170f2d95e1c776a614a12d304"><td class="memItemLeft" align="right" valign="top"><a id="ae14a3cf170f2d95e1c776a614a12d304" name="ae14a3cf170f2d95e1c776a614a12d304"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>connectToServer</b> (const std::string &amp;hostname, int port, std::string username)</td></tr>
+<tr class="separator:ae14a3cf170f2d95e1c776a614a12d304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a6b9f46b287987af6cac81036ceba2a0b" id="r_a6b9f46b287987af6cac81036ceba2a0b"><td class="memItemLeft" align="right" valign="top"><a id="a6b9f46b287987af6cac81036ceba2a0b" name="a6b9f46b287987af6cac81036ceba2a0b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setGraphical</b> (<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule)</td></tr>
-<tr class="separator:a6b9f46b287987af6cac81036ceba2a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afaea3cc026e1aa63de8183251dd54681" id="r_afaea3cc026e1aa63de8183251dd54681"><td class="memItemLeft" align="right" valign="top"><a id="afaea3cc026e1aa63de8183251dd54681" name="afaea3cc026e1aa63de8183251dd54681"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()</td></tr>
 <tr class="memdesc:afaea3cc026e1aa63de8183251dd54681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private method to handle drawing operations. <br /></td></tr>
@@ -142,22 +142,25 @@ sf::RenderWindow&#160;</td><td class="memItemRight" valign="bottom"><b>_window</
 <tr class="separator:a73b82de765a8e5ef2aa3de6d9021ff4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0218ef78c66038b4442d1da1f3db403b" id="r_a0218ef78c66038b4442d1da1f3db403b"><td class="memItemLeft" align="right" valign="top">ViewState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1ClientViewport.html#a0218ef78c66038b4442d1da1f3db403b">_viewState</a> = ViewState::LOGIN</td></tr>
 <tr class="separator:a0218ef78c66038b4442d1da1f3db403b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dcafb09c6f452e604bf578929a2a43a" id="r_a5dcafb09c6f452e604bf578929a2a43a"><td class="memItemLeft" align="right" valign="top">sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1ClientViewport.html#a5dcafb09c6f452e604bf578929a2a43a">animationClock</a></td></tr>
-<tr class="separator:a5dcafb09c6f452e604bf578929a2a43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f32662a4ea8c9bdd6ec45c30b601f7" id="r_a26f32662a4ea8c9bdd6ec45c30b601f7"><td class="memItemLeft" align="right" valign="top">sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1ClientViewport.html#a26f32662a4ea8c9bdd6ec45c30b601f7">_animationClock</a></td></tr>
+<tr class="separator:a26f32662a4ea8c9bdd6ec45c30b601f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f2853f79455b0a05c2d5ef2b8fa75d" id="r_a72f2853f79455b0a05c2d5ef2b8fa75d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; GraphicEntityPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">_graphicEntities</a></td></tr>
 <tr class="separator:a72f2853f79455b0a05c2d5ef2b8fa75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a754e62fa8e6b52c81b3f179d900fdd48" id="r_a754e62fa8e6b52c81b3f179d900fdd48"><td class="memItemLeft" align="right" valign="top"><a id="a754e62fa8e6b52c81b3f179d900fdd48" name="a754e62fa8e6b52c81b3f179d900fdd48"></a>
 std::shared_ptr&lt; <a class="el" href="classRType_1_1IView.html">IView</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_selectedView</b></td></tr>
 <tr class="separator:a754e62fa8e6b52c81b3f179d900fdd48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af30b08d3340c554550336c9bfefe1c61" id="r_af30b08d3340c554550336c9bfefe1c61"><td class="memItemLeft" align="right" valign="top"><a id="af30b08d3340c554550336c9bfefe1c61" name="af30b08d3340c554550336c9bfefe1c61"></a>
-<a class="el" href="classRType_1_1UDPClient.html">UDPClient</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_client</b></td></tr>
-<tr class="separator:af30b08d3340c554550336c9bfefe1c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ce4330b03d80708fdc3250e1664c70f" id="r_a3ce4330b03d80708fdc3250e1664c70f"><td class="memItemLeft" align="right" valign="top"><a id="a3ce4330b03d80708fdc3250e1664c70f" name="a3ce4330b03d80708fdc3250e1664c70f"></a>
+UDPClientPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_client</b></td></tr>
+<tr class="separator:a3ce4330b03d80708fdc3250e1664c70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b9d52c9f1d28264aea8309fff81e152" id="r_a3b9d52c9f1d28264aea8309fff81e152"><td class="memItemLeft" align="right" valign="top"><a id="a3b9d52c9f1d28264aea8309fff81e152" name="a3b9d52c9f1d28264aea8309fff81e152"></a>
 sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>event</b> {}</td></tr>
 <tr class="separator:a3b9d52c9f1d28264aea8309fff81e152"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a524662edaeeba93c936bc87028c2ace2" id="r_a524662edaeeba93c936bc87028c2ace2"><td class="memItemLeft" align="right" valign="top"><a id="a524662edaeeba93c936bc87028c2ace2" name="a524662edaeeba93c936bc87028c2ace2"></a>
 <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
 <tr class="separator:a524662edaeeba93c936bc87028c2ace2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05a77edeb8182474c3794ff26244c56" id="r_ac05a77edeb8182474c3794ff26244c56"><td class="memItemLeft" align="right" valign="top"><a id="ac05a77edeb8182474c3794ff26244c56" name="ac05a77edeb8182474c3794ff26244c56"></a>
+<a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_provider</b> = <a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a>()</td></tr>
+<tr class="separator:ac05a77edeb8182474c3794ff26244c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the main game view handling graphics, input, and entities. </p>
@@ -398,6 +401,29 @@ sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>event</b> {}</td
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a26f32662a4ea8c9bdd6ec45c30b601f7" name="a26f32662a4ea8c9bdd6ec45c30b601f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f32662a4ea8c9bdd6ec45c30b601f7">&#9670;&#160;</a></span>_animationClock</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Clock RType::ClientViewport::_animationClock</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Clock for managing animations and time-related operations. </p>
+
+</div>
+</div>
 <a id="a72f2853f79455b0a05c2d5ef2b8fa75d" name="a72f2853f79455b0a05c2d5ef2b8fa75d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72f2853f79455b0a05c2d5ef2b8fa75d">&#9670;&#160;</a></span>_graphicEntities</h2>
 
@@ -441,29 +467,6 @@ sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>event</b> {}</td
 </table>
 </div><div class="memdoc">
 <p>Current state of the game view. </p>
-
-</div>
-</div>
-<a id="a5dcafb09c6f452e604bf578929a2a43a" name="a5dcafb09c6f452e604bf578929a2a43a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dcafb09c6f452e604bf578929a2a43a">&#9670;&#160;</a></span>animationClock</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Clock RType::ClientViewport::animationClock</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Clock for managing animations and time-related operations. </p>
 
 </div>
 </div>

@@ -36,6 +36,7 @@ set(SOURCE_FILES
         src/network/NetworkMessage.cpp
         src/network/UDPAdapter.cpp
         src/modules/ModuleProvider.cpp
+        include/engine/tools/Thread.hpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

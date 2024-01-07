@@ -5,6 +5,7 @@
 ** No file there , just an epitech header example
 */
 
+#include <iostream>
 #include "network/NetworkMessage.hpp"
 #include "exception/NetworkException.hpp"
 
@@ -25,8 +26,10 @@ namespace RType {
     std::string Message::toString() const {
         std::string result;
 
-        for (const auto &item: data)
+        for (const auto &item: data) {
+            if (item == 0) break;
             result += item;
+        }
         return result;
     }
 

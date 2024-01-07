@@ -58,7 +58,7 @@ namespace RType {
         sf::Clock _animationClock;                                         /**< Clock for managing animations and time-related operations. */
         std::vector<GraphicEntityPtr> _graphicEntities;                   /**< Vector of graphic entities in the game. */
         std::shared_ptr<IView> _selectedView;
-        UDPClient _client;
+        UDPClientPtr _client;
         sf::Event event{};
         IGraphicalModule *_graphicalModule;
         ModuleProvider _provider = ModuleProvider();
@@ -95,7 +95,7 @@ namespace RType {
         /**
          * @brief Constructor for the ClientViewport class.
          */
-        explicit ClientViewport(asio::io_context &ioContext, UDP::endpoint endpoint);
+        explicit ClientViewport();
 
         /**
          * @brief Destructor for the ClientViewport class.
@@ -140,6 +140,11 @@ namespace RType {
          */
         [[nodiscard]] sf::Event getEvent() const {
             return event;
+        }
+
+        void connectToServer(const std::string& hostname, int port, std::string username) {
+            _client = std::make_shared<RType::UDPClient>(hostname, port, username);
+            //ioContext.run();
         }
     };
 }

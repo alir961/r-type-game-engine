@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['gameview_0',['GameView',['../classRType_1_1GameView.html#a05d016644c1295f585c223185ab4f4e4',1,'RType::GameView']]],
+  ['gameview_0',['GameView',['../classRType_1_1GameView.html#a969adb6557532dbb22e530fbac717e84',1,'RType::GameView']]],
   ['get_1',['get',['../classRType_1_1ModuleProvider.html#a33256e84b9a71cefa6842e1db3b91965',1,'RType::ModuleProvider']]],
   ['getactive_2',['getActive',['../classRType_1_1TextBox.html#abc171d7cfaea01e10a0fe7393e4f36c5',1,'RType::TextBox']]],
-  ['getcollisionstatus_3',['getCollisionStatus',['../classRType_1_1CollisionComponent.html#aa5e0ea9ce92298fec16e78412012e631',1,'RType::CollisionComponent']]],
+  ['getcolorfromstring_3',['getcolorfromstring',['../classRType_1_1IGraphicalModule.html#a22266f85b2f4b72b4bf5c50a0c03e88e',1,'RType::IGraphicalModule::getColorFromString()'],['../classRType_1_1GraphicalModule.html#afe702d525ba571bd6fec268852997516',1,'RType::GraphicalModule::getColorFromString()']]],
   ['getcomponent_4',['getComponent',['../classRType_1_1Entity.html#a0af143cde95786b2a05195d61a20ea13',1,'RType::Entity']]],
   ['getcomponenttype_5',['getComponentType',['../classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97',1,'RType::Entity']]],
   ['getdamage_6',['getDamage',['../classRType_1_1DamageComponent.html#ae7b3103290b52d10b524780c97521963',1,'RType::DamageComponent']]],
@@ -22,10 +22,11 @@ var searchData=
   ['getmoduletype_19',['getModuleType',['../classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee',1,'RType::ModuleLoader']]],
   ['getpositions_20',['getPositions',['../classRType_1_1PositionComponent.html#a28b4a122706197d9617e0ceb2e6925c9',1,'RType::PositionComponent']]],
   ['getscore_21',['getScore',['../classRType_1_1PlayerComponent.html#aade79c39d0d217d147c56d3f5c230401',1,'RType::PlayerComponent']]],
-  ['getsound_22',['getSound',['../classRType_1_1ResourceManager.html#ad7840b1c336d8f305116daa9e29c06fa',1,'RType::ResourceManager']]],
-  ['getspeed_23',['getSpeed',['../classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5',1,'RType::SpeedComponent']]],
-  ['getsprite_24',['getsprite',['../classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95',1,'RType::AGraphicEntity::getSprite()'],['../classRType_1_1GraphicEntity.html#afacc0cc5d61455344c76ff14dfe12a03',1,'RType::GraphicEntity::getSprite()']]],
-  ['gettexture_25',['getTexture',['../classRType_1_1ResourceManager.html#a5d2c7fbe76d5efadcf8d42e16211fb32',1,'RType::ResourceManager']]],
-  ['getvalue_26',['getvalue',['../classRType_1_1NumberInput.html#adad44f34268096830455de58ce724ca4',1,'RType::NumberInput::getValue()'],['../classRType_1_1TextInput.html#a370fee59b6414fa0d07038d673608714',1,'RType::TextInput::getValue()']]],
-  ['graphicentity_27',['GraphicEntity',['../classRType_1_1GraphicEntity.html#a411c651649104652dfa8502e371e7ec4',1,'RType::GraphicEntity']]]
+  ['getsize_22',['getSize',['../classRType_1_1SizeComponent.html#a2b693794203ece030ec4f2ec757bddab',1,'RType::SizeComponent']]],
+  ['getsound_23',['getSound',['../classRType_1_1ResourceManager.html#ad7840b1c336d8f305116daa9e29c06fa',1,'RType::ResourceManager']]],
+  ['getspeed_24',['getSpeed',['../classRType_1_1SpeedComponent.html#ad697f4a54a03f221532b116037ff32c5',1,'RType::SpeedComponent']]],
+  ['getsprite_25',['getsprite',['../classRType_1_1AGraphicEntity.html#af101c48797f5fbe2c17efaa1b42a6a95',1,'RType::AGraphicEntity::getSprite()'],['../classRType_1_1GraphicEntity.html#afacc0cc5d61455344c76ff14dfe12a03',1,'RType::GraphicEntity::getSprite()']]],
+  ['gettexture_26',['getTexture',['../classRType_1_1ResourceManager.html#a5d2c7fbe76d5efadcf8d42e16211fb32',1,'RType::ResourceManager']]],
+  ['getvalue_27',['getvalue',['../classRType_1_1NumberInput.html#adad44f34268096830455de58ce724ca4',1,'RType::NumberInput::getValue()'],['../classRType_1_1TextInput.html#a370fee59b6414fa0d07038d673608714',1,'RType::TextInput::getValue()']]],
+  ['graphicentity_28',['GraphicEntity',['../classRType_1_1GraphicEntity.html#a411c651649104652dfa8502e371e7ec4',1,'RType::GraphicEntity']]]
 ];

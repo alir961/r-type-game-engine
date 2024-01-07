@@ -91,123 +91,126 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;views/IView.hpp&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;entities/GraphicEntity.hpp&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;entities/GraphicEntityFactory.hpp&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;UDPClient.hpp&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;../../engine/modules/graphical/GraphicalModule.hpp&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;SFML/Graphics.hpp&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;SFML/System/Clock.hpp&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;engine/Logger.hpp&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;engine/ecs/EntityManager.hpp&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span>RType {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">class </span>MenuView;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">class </span>OptionsView;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">class </span>PauseView;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">class </span>DeadView;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">class </span>WinView;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">class </span>GameView;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">class </span>LoginView;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">constexpr</span> uint32_t WINDOW_WIDTH = 1920;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">constexpr</span> uint32_t WINDOW_HEIGHT = 1080;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">constexpr</span> <span class="keywordtype">int</span> WINDOW_FPS = 60;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">enum class</span> ViewState {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        MENU = 0,     </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        OPTIONS = 1,  </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        GAME = 2,     </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        PAUSE = 3,    </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        DEAD = 4,     </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        LOGIN = 5,     </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        WIN = 6      </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    };</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="foldopen" id="foldopen00055" data-start="{" data-end="};">
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html">   55</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1ClientViewport.html">ClientViewport</a> {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), <span class="stringliteral">&quot;R-Type&quot;</span>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#a0218ef78c66038b4442d1da1f3db403b">   58</a></span>        ViewState <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a0218ef78c66038b4442d1da1f3db403b">_viewState</a> = ViewState::LOGIN;                          </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#a5dcafb09c6f452e604bf578929a2a43a">   59</a></span>        sf::Clock <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a5dcafb09c6f452e604bf578929a2a43a">animationClock</a>;                                         </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">   60</a></span>        std::vector&lt;GraphicEntityPtr&gt; <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">_graphicEntities</a>;                   </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        std::shared_ptr&lt;IView&gt; _selectedView;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_class" href="classRType_1_1UDPClient.html">UDPClient</a> _client;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        sf::Event <span class="keyword">event</span>{};</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_class" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *_graphicalModule;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;UDPClient.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;../../engine/include/engine/modules/ModuleProvider.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;SFML/System/Clock.hpp&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;engine/Logger.hpp&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;engine/ecs/EntityManager.hpp&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span>RType {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">class </span>MenuView;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">class </span>OptionsView;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">class </span>PauseView;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">class </span>DeadView;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">class </span>WinView;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">class </span>GameView;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">class </span>LoginView;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">class </span>GraphicalModule;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">constexpr</span> uint32_t WINDOW_WIDTH = 1920;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">constexpr</span> uint32_t WINDOW_HEIGHT = 1080;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">constexpr</span> <span class="keywordtype">int</span> WINDOW_FPS = 60;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">enum class</span> ViewState {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        MENU = 0,     </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        OPTIONS = 1,  </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        GAME = 2,     </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        PAUSE = 3,    </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        DEAD = 4,     </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        LOGIN = 5,     </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        WIN = 6,      </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        OPTIONSGAME = 7</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html">   54</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1ClientViewport.html">ClientViewport</a> {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), <span class="stringliteral">&quot;R-Type&quot;</span>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#a0218ef78c66038b4442d1da1f3db403b">   57</a></span>        ViewState <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a0218ef78c66038b4442d1da1f3db403b">_viewState</a> = ViewState::LOGIN;                          </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#a26f32662a4ea8c9bdd6ec45c30b601f7">   58</a></span>        sf::Clock <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a26f32662a4ea8c9bdd6ec45c30b601f7">_animationClock</a>;                                         </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">   59</a></span>        std::vector&lt;GraphicEntityPtr&gt; <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">_graphicEntities</a>;                   </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        std::shared_ptr&lt;IView&gt; _selectedView;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        UDPClientPtr _client;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        sf::Event <span class="keyword">event</span>{};</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_class" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *_graphicalModule;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_class" href="classRType_1_1ModuleProvider.html">ModuleProvider</a> _provider = <a class="code hl_class" href="classRType_1_1ModuleProvider.html">ModuleProvider</a>();</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">void</span> setGraphical(<a class="code hl_class" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            _graphicalModule = graphicalModule;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#afaea3cc026e1aa63de8183251dd54681">draw</a>();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a4091ba25cb2faa30d51e2af7ec2652bb">updateEntities</a>(<span class="keywordtype">float</span> deltaTime);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a5066142faaeecffd386da4eefb688d7d">handleInput</a>(<span class="keyword">const</span> GraphicEntityPtr &amp;entity) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#ae96a9e1f293d8dc588ff7d4a570870ac">basicInput</a>();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#ad55eb0680b2dcf3759740e705dd9ad1a">launchWindow</a>(<span class="keyword">const</span> GraphicEntityPtr &amp;entity);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keyword">explicit</span> ClientViewport(IGraphicalModule *graphicalModule, asio::io_context &amp;ioContext, UDP::endpoint endpoint);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#ad5ae42eed4503439a6d3ae7d06f5e15f">  107</a></span>        <a class="code hl_function" href="classRType_1_1ClientViewport.html#ad5ae42eed4503439a6d3ae7d06f5e15f">~ClientViewport</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a8d364360069113963b337decefdf2fb6">start</a>();</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a956ec89a8c04bcf080dae71472be5ff0">setView</a>(ViewState state);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a11d83cf2a9b8317b693e6a92d8505613">addGraphicEntity</a>(GraphicEntityPtr entity);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#ac8add3f1d7feb3f4659edadf3ebb48bf">  132</a></span>        GraphicEntityPtr <a class="code hl_function" href="classRType_1_1ClientViewport.html#ac8add3f1d7feb3f4659edadf3ebb48bf">getGraphicEntityByName</a>(<span class="keyword">const</span> std::string &amp;name)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity: <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">_graphicEntities</a>) {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="keywordflow">if</span> (entity-&gt;getEntityName() == name)</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                    <span class="keywordflow">return</span> entity;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            std::cerr &lt;&lt; <span class="stringliteral">&quot;Unable tu find entity &quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#afaea3cc026e1aa63de8183251dd54681">draw</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a4091ba25cb2faa30d51e2af7ec2652bb">updateEntities</a>(<span class="keywordtype">float</span> deltaTime);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a5066142faaeecffd386da4eefb688d7d">handleInput</a>(<span class="keyword">const</span> GraphicEntityPtr &amp;entity) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#ae96a9e1f293d8dc588ff7d4a570870ac">basicInput</a>();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#ad55eb0680b2dcf3759740e705dd9ad1a">launchWindow</a>(<span class="keyword">const</span> GraphicEntityPtr &amp;entity);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#ac08c442de211898a6f7d1a34666c2ef0">ClientViewport</a>();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#ad5ae42eed4503439a6d3ae7d06f5e15f">  103</a></span>        <a class="code hl_function" href="classRType_1_1ClientViewport.html#ad5ae42eed4503439a6d3ae7d06f5e15f">~ClientViewport</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a8d364360069113963b337decefdf2fb6">start</a>();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a956ec89a8c04bcf080dae71472be5ff0">setView</a>(ViewState state);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ClientViewport.html#a11d83cf2a9b8317b693e6a92d8505613">addGraphicEntity</a>(GraphicEntityPtr entity);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#ac8add3f1d7feb3f4659edadf3ebb48bf">  128</a></span>        GraphicEntityPtr <a class="code hl_function" href="classRType_1_1ClientViewport.html#ac8add3f1d7feb3f4659edadf3ebb48bf">getGraphicEntityByName</a>(<span class="keyword">const</span> std::string &amp;name)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entity: <a class="code hl_variable" href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">_graphicEntities</a>) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                <span class="keywordflow">if</span> (entity-&gt;getEntityName() == name)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                    <span class="keywordflow">return</span> entity;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            std::cerr &lt;&lt; <span class="stringliteral">&quot;Unable tu find entity &quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        }</div>
 </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0">  145</a></span>        [[nodiscard]] sf::Event <a class="code hl_function" href="classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0">getEvent</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <span class="keywordflow">return</span> event;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0">  141</a></span>        [[nodiscard]] sf::Event <a class="code hl_function" href="classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0">getEvent</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordflow">return</span> event;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        }</div>
 </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    };</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordtype">void</span> connectToServer(<span class="keyword">const</span> std::string&amp; hostname, <span class="keywordtype">int</span> port, std::string username) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            _client = std::make_shared&lt;RType::UDPClient&gt;(hostname, port, username);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="comment">//ioContext.run();</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    };</div>
 </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>}</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="preprocessor">#include &quot;views/MenuView.hpp&quot;</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="preprocessor">#include &quot;views/OptionsView.hpp&quot;</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#include &quot;views/PauseView.hpp&quot;</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="preprocessor">#include &quot;views/DeadView.hpp&quot;</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">#include &quot;views/WinView.hpp&quot;</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#include &quot;views/GameView.hpp&quot;</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="preprocessor">#include &quot;views/LoginView.hpp&quot;</span></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html"><div class="ttname"><a href="classRType_1_1ClientViewport.html">RType::ClientViewport</a></div><div class="ttdoc">Represents the main game view handling graphics, input, and entities.</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:55</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a0218ef78c66038b4442d1da1f3db403b"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a0218ef78c66038b4442d1da1f3db403b">RType::ClientViewport::_viewState</a></div><div class="ttdeci">ViewState _viewState</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:58</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a11d83cf2a9b8317b693e6a92d8505613"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a11d83cf2a9b8317b693e6a92d8505613">RType::ClientViewport::addGraphicEntity</a></div><div class="ttdeci">void addGraphicEntity(GraphicEntityPtr entity)</div><div class="ttdoc">Method to add a graphic _entity to the game.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:114</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a4091ba25cb2faa30d51e2af7ec2652bb"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a4091ba25cb2faa30d51e2af7ec2652bb">RType::ClientViewport::updateEntities</a></div><div class="ttdeci">void updateEntities(float deltaTime)</div><div class="ttdoc">Private method to update entities based on elapsed time.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:119</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a5066142faaeecffd386da4eefb688d7d"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a5066142faaeecffd386da4eefb688d7d">RType::ClientViewport::handleInput</a></div><div class="ttdeci">void handleInput(const GraphicEntityPtr &amp;entity) const</div><div class="ttdoc">Private method to handle input for a specific graphic _entity.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:18</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a5dcafb09c6f452e604bf578929a2a43a"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a5dcafb09c6f452e604bf578929a2a43a">RType::ClientViewport::animationClock</a></div><div class="ttdeci">sf::Clock animationClock</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:59</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a72f2853f79455b0a05c2d5ef2b8fa75d"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">RType::ClientViewport::_graphicEntities</a></div><div class="ttdeci">std::vector&lt; GraphicEntityPtr &gt; _graphicEntities</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:60</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a8d364360069113963b337decefdf2fb6"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a8d364360069113963b337decefdf2fb6">RType::ClientViewport::start</a></div><div class="ttdeci">int start()</div><div class="ttdoc">Method to start the game loop.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:132</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_a956ec89a8c04bcf080dae71472be5ff0"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a956ec89a8c04bcf080dae71472be5ff0">RType::ClientViewport::setView</a></div><div class="ttdeci">void setView(ViewState state)</div><div class="ttdoc">Method to set the current view state.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:87</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_abf0a23f520b2d35d21ae07a2c043ede0"><div class="ttname"><a href="classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0">RType::ClientViewport::getEvent</a></div><div class="ttdeci">sf::Event getEvent() const</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:145</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_ac8add3f1d7feb3f4659edadf3ebb48bf"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ac8add3f1d7feb3f4659edadf3ebb48bf">RType::ClientViewport::getGraphicEntityByName</a></div><div class="ttdeci">GraphicEntityPtr getGraphicEntityByName(const std::string &amp;name) const</div><div class="ttdoc">Method to retrieve a graphic entity by name.</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:132</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_ad55eb0680b2dcf3759740e705dd9ad1a"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ad55eb0680b2dcf3759740e705dd9ad1a">RType::ClientViewport::launchWindow</a></div><div class="ttdeci">void launchWindow(const GraphicEntityPtr &amp;entity)</div><div class="ttdoc">Private method to launch the SFML window and test keyboard input for a specific _entity.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:63</div></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>}</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="preprocessor">#include &quot;views/MenuView.hpp&quot;</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#include &quot;views/OptionsView.hpp&quot;</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="preprocessor">#include &quot;views/PauseView.hpp&quot;</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">#include &quot;views/DeadView.hpp&quot;</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#include &quot;views/WinView.hpp&quot;</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="preprocessor">#include &quot;views/GameView.hpp&quot;</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#include &quot;views/LoginView.hpp&quot;</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="preprocessor">#include &quot;entities/GraphicEntityFactory.hpp&quot;</span></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html"><div class="ttname"><a href="classRType_1_1ClientViewport.html">RType::ClientViewport</a></div><div class="ttdoc">Represents the main game view handling graphics, input, and entities.</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:54</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a0218ef78c66038b4442d1da1f3db403b"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a0218ef78c66038b4442d1da1f3db403b">RType::ClientViewport::_viewState</a></div><div class="ttdeci">ViewState _viewState</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:57</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a11d83cf2a9b8317b693e6a92d8505613"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a11d83cf2a9b8317b693e6a92d8505613">RType::ClientViewport::addGraphicEntity</a></div><div class="ttdeci">void addGraphicEntity(GraphicEntityPtr entity)</div><div class="ttdoc">Method to add a graphic _entity to the game.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:104</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a26f32662a4ea8c9bdd6ec45c30b601f7"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a26f32662a4ea8c9bdd6ec45c30b601f7">RType::ClientViewport::_animationClock</a></div><div class="ttdeci">sf::Clock _animationClock</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:58</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a4091ba25cb2faa30d51e2af7ec2652bb"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a4091ba25cb2faa30d51e2af7ec2652bb">RType::ClientViewport::updateEntities</a></div><div class="ttdeci">void updateEntities(float deltaTime)</div><div class="ttdoc">Private method to update entities based on elapsed time.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:109</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a5066142faaeecffd386da4eefb688d7d"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a5066142faaeecffd386da4eefb688d7d">RType::ClientViewport::handleInput</a></div><div class="ttdeci">void handleInput(const GraphicEntityPtr &amp;entity) const</div><div class="ttdoc">Private method to handle input for a specific graphic _entity.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:16</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a72f2853f79455b0a05c2d5ef2b8fa75d"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a72f2853f79455b0a05c2d5ef2b8fa75d">RType::ClientViewport::_graphicEntities</a></div><div class="ttdeci">std::vector&lt; GraphicEntityPtr &gt; _graphicEntities</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:59</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a8d364360069113963b337decefdf2fb6"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a8d364360069113963b337decefdf2fb6">RType::ClientViewport::start</a></div><div class="ttdeci">int start()</div><div class="ttdoc">Method to start the game loop.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:122</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_a956ec89a8c04bcf080dae71472be5ff0"><div class="ttname"><a href="classRType_1_1ClientViewport.html#a956ec89a8c04bcf080dae71472be5ff0">RType::ClientViewport::setView</a></div><div class="ttdeci">void setView(ViewState state)</div><div class="ttdoc">Method to set the current view state.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:74</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_abf0a23f520b2d35d21ae07a2c043ede0"><div class="ttname"><a href="classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0">RType::ClientViewport::getEvent</a></div><div class="ttdeci">sf::Event getEvent() const</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:141</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_ac08c442de211898a6f7d1a34666c2ef0"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ac08c442de211898a6f7d1a34666c2ef0">RType::ClientViewport::ClientViewport</a></div><div class="ttdeci">ClientViewport()</div><div class="ttdoc">Constructor for the ClientViewport class.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:10</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_ac8add3f1d7feb3f4659edadf3ebb48bf"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ac8add3f1d7feb3f4659edadf3ebb48bf">RType::ClientViewport::getGraphicEntityByName</a></div><div class="ttdeci">GraphicEntityPtr getGraphicEntityByName(const std::string &amp;name) const</div><div class="ttdoc">Method to retrieve a graphic entity by name.</div><div class="ttdef"><b>Definition</b> ClientViewport.hpp:128</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_ad55eb0680b2dcf3759740e705dd9ad1a"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ad55eb0680b2dcf3759740e705dd9ad1a">RType::ClientViewport::launchWindow</a></div><div class="ttdeci">void launchWindow(const GraphicEntityPtr &amp;entity)</div><div class="ttdoc">Private method to launch the SFML window and test keyboard input for a specific _entity.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:51</div></div>
 <div class="ttc" id="aclassRType_1_1ClientViewport_html_ad5ae42eed4503439a6d3ae7d06f5e15f"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ad5ae42eed4503439a6d3ae7d06f5e15f">RType::ClientViewport::~ClientViewport</a></div><div class="ttdeci">~ClientViewport()=default</div><div class="ttdoc">Destructor for the ClientViewport class.</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_ae96a9e1f293d8dc588ff7d4a570870ac"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ae96a9e1f293d8dc588ff7d4a570870ac">RType::ClientViewport::basicInput</a></div><div class="ttdeci">void basicInput()</div><div class="ttdoc">Private method to handle basic input.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:30</div></div>
-<div class="ttc" id="aclassRType_1_1ClientViewport_html_afaea3cc026e1aa63de8183251dd54681"><div class="ttname"><a href="classRType_1_1ClientViewport.html#afaea3cc026e1aa63de8183251dd54681">RType::ClientViewport::draw</a></div><div class="ttdeci">void draw()</div><div class="ttdoc">Private method to handle drawing operations.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:126</div></div>
-<div class="ttc" id="aclassRType_1_1IGraphicalModule_html"><div class="ttname"><a href="classRType_1_1IGraphicalModule.html">RType::IGraphicalModule</a></div><div class="ttdef"><b>Definition</b> IGraphicalModule.hpp:15</div></div>
-<div class="ttc" id="aclassRType_1_1UDPClient_html"><div class="ttname"><a href="classRType_1_1UDPClient.html">RType::UDPClient</a></div><div class="ttdef"><b>Definition</b> UDPClient.hpp:15</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_ae96a9e1f293d8dc588ff7d4a570870ac"><div class="ttname"><a href="classRType_1_1ClientViewport.html#ae96a9e1f293d8dc588ff7d4a570870ac">RType::ClientViewport::basicInput</a></div><div class="ttdeci">void basicInput()</div><div class="ttdoc">Private method to handle basic input.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:28</div></div>
+<div class="ttc" id="aclassRType_1_1ClientViewport_html_afaea3cc026e1aa63de8183251dd54681"><div class="ttname"><a href="classRType_1_1ClientViewport.html#afaea3cc026e1aa63de8183251dd54681">RType::ClientViewport::draw</a></div><div class="ttdeci">void draw()</div><div class="ttdoc">Private method to handle drawing operations.</div><div class="ttdef"><b>Definition</b> ClientViewport.cpp:116</div></div>
+<div class="ttc" id="aclassRType_1_1IGraphicalModule_html"><div class="ttname"><a href="classRType_1_1IGraphicalModule.html">RType::IGraphicalModule</a></div><div class="ttdef"><b>Definition</b> IGraphicalModule.hpp:17</div></div>
+<div class="ttc" id="aclassRType_1_1ModuleProvider_html"><div class="ttname"><a href="classRType_1_1ModuleProvider.html">RType::ModuleProvider</a></div><div class="ttdoc">Class representing a module provider that manages loading and unloading of modules.</div><div class="ttdef"><b>Definition</b> ModuleProvider.hpp:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

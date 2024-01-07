@@ -7,8 +7,7 @@
 
 #include "../include/ClientViewport.hpp"
 
-RType::ClientViewport::ClientViewport(asio::io_context &ioContext, UDP::endpoint endpoint)
-    : _client(ioContext, std::move(endpoint)) {
+RType::ClientViewport::ClientViewport() {
     _window.setFramerateLimit(WINDOW_FPS);
     _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
     _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
@@ -60,7 +59,6 @@ void RType::ClientViewport::launchWindow(const GraphicEntityPtr &entity) {
                 return;
             }
             basicInput();
-            _client.startReceive();
         }
         handleInput(entity);
 
