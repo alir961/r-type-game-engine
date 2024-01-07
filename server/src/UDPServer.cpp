@@ -68,6 +68,7 @@ void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receive
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
     session->setPlayerName(playerName);
+    session->setPlayerEntity(createPlayerEntity());
     sendMessage(MessageType::PLAYER_NAME, std::format("player {}", sessionID));
 }
 
@@ -113,4 +114,15 @@ void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMess
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
     std::cout << session->getPlayerName() << ": Move Up!\n";
+}
+
+RType::EntityPtr RType::UDPServer::createPlayerEntity() {
+    EntityPtr playerEntity = _entityManager.createEntity();
+
+    playerEntity->addComponent<SpeedComponent>(10);
+    playerEntity->addComponent<HealthComponent>(100);
+    playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
+    playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
+    playerEntity->addComponent<PlayerComponent>(true);
+    return playerEntity;
 }

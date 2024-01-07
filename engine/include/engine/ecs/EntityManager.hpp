@@ -50,6 +50,11 @@ namespace RType {
         }
 
         /**
+        * @brief Constructor for the EntityManager.
+        */
+        EntityManager() = default;
+
+        /**
         * @brief Destructor for the EntityManager, cleaning up all associated entities.
         */
         ~EntityManager() = default;
