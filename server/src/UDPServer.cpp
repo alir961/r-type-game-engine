@@ -24,8 +24,8 @@ void RType::UDPServer::handleReceive(std::size_t bytesReceived) {
     const MessageBuffer &buffer = _adapter.getMessageBuffer();
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
     const Message receiveMessage = Message::deserialize(receivedData);
-
     auto handlerIt = _handlers.find(receiveMessage.type);
+
     if (handlerIt != _handlers.end())
         handlerIt->second(receiveMessage);
     else
@@ -66,6 +66,7 @@ void RType::UDPServer::handleUnknownMessageType(const RType::Message &) {
             .setData("Unknown Message!")
             .build();
     const std::vector<std::byte> binaryData = response.serialize();
+
     _adapter.sendData(asio::buffer(binaryData));
 }
 
@@ -75,6 +76,7 @@ void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receive
     int sessionID = std::stoi(splitMessage[1]);
     std::string playerName = splitMessage[2];
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
     session->setPlayerName(playerName);
     std::cout << "PlayerName: " << sessionID << " " << playerName << "\n";
     const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
