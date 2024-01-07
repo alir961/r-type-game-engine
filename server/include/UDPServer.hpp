@@ -28,6 +28,8 @@ namespace RType {
 
         void handleReceive(std::size_t bytesReceived);
 
+        void sendMessage(MessageType type, const std::string_view &data);
+
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;

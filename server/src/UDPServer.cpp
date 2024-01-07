@@ -51,23 +51,13 @@ RType::UDPServer::~UDPServer() {
 
 void RType::UDPServer::handleConnectMessage(const RType::Message &) {
     int sessionId = _sessions.setNewSession();
-    const std::string messageData = std::format("connect {} ok", sessionId);
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::CONNECT_CALLBACK)
-            .setData(messageData)
-            .build();
-    const std::vector<std::byte> binaryData = response.serialize();
 
-    std::cout << "New connection!\n";
-    _adapter.sendData(asio::buffer(binaryData));
+    std::cout << "New connection! SessionId: " << sessionId << "!\n";
+    sendMessage(MessageType::CONNECT_CALLBACK, std::format("connect {} ok", sessionId));
 }
 
 void RType::UDPServer::handleUnknownMessageType(const RType::Message &) {
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::UNKNOWN)
-            .setData("Unknown Message!")
-            .build();
-    const std::vector<std::byte> binaryData = response.serialize();
-
-    _adapter.sendData(asio::buffer(binaryData));
+    std::cout << "Unknown Message!\n";
 }
 
 void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receiveMessage) {
@@ -78,9 +68,12 @@ void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receive
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
     session->setPlayerName(playerName);
-    std::cout << "PlayerName: " << sessionID << " " << playerName << "\n";
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
-            .setData(std::format("player {}", sessionID))
+    sendMessage(MessageType::PLAYER_NAME, std::format("player {}", sessionID));
+}
+
+void RType::UDPServer::sendMessage(MessageType type, const std::string_view &data) {
+    const RType::Message response = RType::NetworkMessageBuilder(type)
+            .setData(data)
             .build();
     const std::vector<std::byte> binaryData = response.serialize();
     _adapter.sendData(asio::buffer(binaryData));
