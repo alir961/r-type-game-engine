@@ -36,9 +36,13 @@ namespace RType {
         SessionManager _sessions;
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
 
-        void handleConnectMessage(const Message& message);
-        void handleUnknownMessageType(const Message& message);
-        void handlePlayerNameMessageType(const Message& message);
+        void handleConnectMessage(const Message& receiveMessage);
+        void handleUnknownMessageType(const Message& receiveMessage);
+        void handlePlayerNameMessageType(const Message& receiveMessage);
+        void handleMoveLeftMessageType(const Message& receiveMessage);
+        void handleMoveRightMessageType(const Message& receiveMessage);
+        void handleMoveDownMessageType(const Message& receiveMessage);
+        void handleMoveUpMessageType(const Message& receiveMessage);
     };
 
 }

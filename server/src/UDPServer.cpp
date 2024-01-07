@@ -78,3 +78,39 @@ void RType::UDPServer::sendMessage(MessageType type, const std::string_view &dat
     const std::vector<std::byte> binaryData = response.serialize();
     _adapter.sendData(asio::buffer(binaryData));
 }
+
+void RType::UDPServer::handleMoveLeftMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Left!\n";
+}
+
+void RType::UDPServer::handleMoveRightMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Right!\n";
+}
+
+void RType::UDPServer::handleMoveDownMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Down!\n";
+}
+
+void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Up!\n";
+}
