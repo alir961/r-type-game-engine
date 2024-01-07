@@ -89,6 +89,7 @@ void RType::UDPServer::handleMoveLeftMessageType(const RType::Message &receiveMe
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
+    sendMessage(MessageType::MOVE_LEFT, std::format("move_left {} ok\n", sessionID));
     std::cout << session->getPlayerName() << ": Move Left!\n";
 }
 
@@ -98,6 +99,7 @@ void RType::UDPServer::handleMoveRightMessageType(const RType::Message &receiveM
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
+    sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {} ok\n", sessionID));
     std::cout << session->getPlayerName() << ": Move Right!\n";
 }
 
@@ -107,6 +109,7 @@ void RType::UDPServer::handleMoveDownMessageType(const RType::Message &receiveMe
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
+    sendMessage(MessageType::MOVE_DOWN, std::format("move_down {} ok\n", sessionID));
     std::cout << session->getPlayerName() << ": Move Down!\n";
 }
 
@@ -116,6 +119,7 @@ void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMess
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
+    sendMessage(MessageType::MOVE_DOWN, std::format("move_up {} ok\n", sessionID));
     std::cout << session->getPlayerName() << ": Move Up!\n";
 }
 
