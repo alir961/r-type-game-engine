@@ -106,4 +106,6 @@ namespace RType {
         [[nodiscard]] const MessageBuffer &getMessageBuffer() const;
     };
 
+    using UDPAdapterPtr = std::shared_ptr<UDPAdapter>;
+
 }

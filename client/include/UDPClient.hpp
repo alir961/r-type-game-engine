@@ -10,24 +10,69 @@
 #include <engine/network/UDPAdapter.hpp>
 #include <engine/tools/Split.hpp>
 #include <iostream>
+#include "engine/tools/Thread.hpp"
 
 namespace RType {
+
+    /**
+     * @brief Type alias for a message handler function.
+     */
+    using MessageHandlerFunction = std::function<void(const Message&)>;
+
+    /**
+     * @brief Class representing a UDP client for communication.
+     */
     class UDPClient {
     public:
-        using MessageHandlerFunction = std::function<void(const Message&)>;
-        UDPClient(asio::io_context &io_context, UDP::endpoint endpoint);
-        void startReceive();
-    private:
+        /**
+         * @brief Constructor for UDPClient.
+         * @param hostname The hostname of the server.
+         * @param port The port number for communication.
+         * @param username The username associated with the client.
+         */
+        UDPClient(const std::string &hostname, int port, std::string username);
 
+        /**
+         * @brief Initiates the process to start receiving messages.
+         */
+        void startReceive();
+
+    private:
+        /**
+         * @brief Sets up the message handlers for different message types.
+         */
+        void setupHandlers();
+
+        /**
+         * @brief Handles the received data.
+         * @param bytesReceived The number of bytes received.
+         */
         void handleReceive(std::size_t bytesReceived);
 
-        UDP::socket _socket;
-        UDPAdapter _adapter;
-        std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
+        std::string _username; ///< The username associated with the client.
+        asio::io_context _context; ///< The IO context for asynchronous operations.
+        UDP::endpoint _endpoint; ///< The endpoint for communication.
+        UDP::socket _socket; ///< The UDP socket for communication.
+        UDPAdapterPtr _adapter; ///< The UDP adapter for handling send/receive operations.
+        RType::Thread _thread = RType::Thread(); ///< Thread for asynchronous operations.
+        std::unordered_map<MessageType, MessageHandlerFunction> _handlers; ///< Map of message handlers.
 
+        /**
+         * @brief Handles the connection callback message.
+         * @param receiveMessage The received message.
+         */
         void handleConnectCallbackMessage(const Message& receiveMessage);
-        void handleUnknownMessageType(const Message& receiveMessage);
-        void handlePlayerNameCallbackMessageType(const Message& receiveMessage);
 
+        /**
+         * @brief Handles the player name callback message.
+         * @param receiveMessage The received message.
+         */
+        void handlePlayerNameCallbackMessageType(const Message& receiveMessage);
     };
+
+    /**
+     * @brief Type alias for a shared pointer to UDPClient.
+     */
+    using UDPClientPtr = std::shared_ptr<UDPClient>;
+
 }
