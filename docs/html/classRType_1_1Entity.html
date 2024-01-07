@@ -105,10 +105,9 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>updateComponents</b> ()</td></tr>
 <tr class="memdesc:a2e890f349569f4fa3d39c79b85d7342d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update all component associated with the _entity. <br /></td></tr>
 <tr class="separator:a2e890f349569f4fa3d39c79b85d7342d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50f532f9a494fe31d8bf1991f7129abc" id="r_a50f532f9a494fe31d8bf1991f7129abc"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">typename</a> <a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">T</a> &gt; </td></tr>
-<tr class="memitem:a50f532f9a494fe31d8bf1991f7129abc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRType_1_1Entity.html#a50f532f9a494fe31d8bf1991f7129abc">hasComponent</a> ()</td></tr>
-<tr class="memdesc:a50f532f9a494fe31d8bf1991f7129abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the _entity has a.  <br /></td></tr>
-<tr class="separator:a50f532f9a494fe31d8bf1991f7129abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab179445aedd4b9a0ef7f57ca7a1345f8" id="r_ab179445aedd4b9a0ef7f57ca7a1345f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRType_1_1Entity.html#ab179445aedd4b9a0ef7f57ca7a1345f8">hasBaseComponents</a> () <a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">const</a></td></tr>
+<tr class="memdesc:ab179445aedd4b9a0ef7f57ca7a1345f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the _entity has a set of base components.  <br /></td></tr>
+<tr class="separator:ab179445aedd4b9a0ef7f57ca7a1345f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfc23ad76d1bd7186235d79b85a65a41" id="r_acfc23ad76d1bd7186235d79b85a65a41"><td class="memItemLeft" align="right" valign="top"><a id="acfc23ad76d1bd7186235d79b85a65a41" name="acfc23ad76d1bd7186235d79b85a65a41"></a>
 <a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hasComponents</b> () <a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">const</a></td></tr>
 <tr class="memdesc:acfc23ad76d1bd7186235d79b85a65a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the _entity has components, false otherwise. <br /></td></tr>
@@ -249,22 +248,20 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a50f532f9a494fe31d8bf1991f7129abc" name="a50f532f9a494fe31d8bf1991f7129abc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50f532f9a494fe31d8bf1991f7129abc">&#9670;&#160;</a></span>hasComponent()</h2>
+<a id="ab179445aedd4b9a0ef7f57ca7a1345f8" name="ab179445aedd4b9a0ef7f57ca7a1345f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab179445aedd4b9a0ef7f57ca7a1345f8">&#9670;&#160;</a></span>hasBaseComponents()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">typename</a> <a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">bool</a> RType::Entity::hasComponent </td>
+          <td class="memname"><a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b719948f2fd97">bool</a> RType::Entity::hasBaseComponents </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -274,14 +271,8 @@ template&lt;<a class="el" href="classRType_1_1Entity.html#ad7d79f9f2e4c3ceec50b7
 </table>
 </div><div class="memdoc">
 
-<p>Return true if the _entity has a. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>component, false otherwise. </td></tr>
-    <tr><td class="paramname">T</td><td>Type of the component to remove. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Check if the _entity has a set of base components. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if all specified components are present, false otherwise. </dd></dl>
 
 </div>
 </div>

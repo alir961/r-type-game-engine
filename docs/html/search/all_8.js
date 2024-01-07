@@ -1,10 +1,16 @@
 var searchData=
 [
-  ['handleinput_0',['handleinput',['../classRType_1_1ClientViewport.html#a5066142faaeecffd386da4eefb688d7d',1,'RType::ClientViewport::handleInput()'],['../classRType_1_1TextBox.html#a6ae819de887e41db3c5fac4e8a84a19c',1,'RType::TextBox::handleInput()'],['../classRType_1_1DeadView.html#aa1f5ec9d80f600b9b47befcec5b1d231',1,'RType::DeadView::handleInput()'],['../classRType_1_1LoginView.html#a72654ae9af346bcab698b611ca40b6e5',1,'RType::LoginView::handleInput()'],['../classRType_1_1MenuView.html#a1a59d26f64a650b1b96b7ecf2fb4f2dc',1,'RType::MenuView::handleInput()'],['../classRType_1_1OptionsView.html#aa14ba7cfe4c66132e4847fcfa7133dcc',1,'RType::OptionsView::handleInput()'],['../classRType_1_1PauseView.html#a4156ac71c65a78fe8950fc30c5cd440c',1,'RType::PauseView::handleInput()'],['../classRType_1_1WinView.html#a9bcc0c34c23b13ef2c2b93997d9e5628',1,'RType::WinView::handleInput()']]],
-  ['hascomponent_1',['hasComponent',['../classRType_1_1Entity.html#a50f532f9a494fe31d8bf1991f7129abc',1,'RType::Entity']]],
-  ['hascomponents_2',['hasComponents',['../classRType_1_1Entity.html#acfc23ad76d1bd7186235d79b85a65a41',1,'RType::Entity']]],
-  ['healthbartext_3',['healthBarText',['../classRType_1_1GameView.html#aeb39c4eadf939807be4563913a14a496',1,'RType::GameView']]],
-  ['healthcomponent_4',['healthcomponent',['../classRType_1_1HealthComponent.html',1,'RType::HealthComponent'],['../classRType_1_1HealthComponent.html#a19ca7dcb97b6b2b2d7a324d97c5dbd5b',1,'RType::HealthComponent::HealthComponent()']]],
-  ['hptext_5',['hptext',['../classRType_1_1DeadView.html#a88abf1608429f406ff295e942e624abc',1,'RType::DeadView::hpText'],['../classRType_1_1WinView.html#a9029c48607667b09df97ec32020ec5a7',1,'RType::WinView::hpText']]],
-  ['huffmanalgorithm_6',['HuffmanAlgorithm',['../classRType_1_1HuffmanAlgorithm.html',1,'RType']]]
+  ['icomponent_0',['IComponent',['../classRType_1_1IComponent.html',1,'RType']]],
+  ['idatacompression_1',['IDataCompression',['../classRType_1_1IDataCompression.html',1,'RType']]],
+  ['idrawable_2',['IDrawable',['../classRType_1_1IDrawable.html',1,'RType']]],
+  ['igamemodule_3',['IGameModule',['../classRType_1_1IGameModule.html',1,'RType']]],
+  ['igraphicalmodule_4',['IGraphicalModule',['../classRType_1_1IGraphicalModule.html',1,'RType']]],
+  ['igraphicentity_5',['IGraphicEntity',['../classRType_1_1IGraphicEntity.html',1,'RType']]],
+  ['imodule_6',['IModule',['../classRType_1_1IModule.html',1,'RType']]],
+  ['initialize_7',['Initialize',['../classRType_1_1IGameModule.html#af5c746effa3d7b7fe4f24c8a40209ea9',1,'RType::IGameModule']]],
+  ['isactive_8',['isActive',['../classRType_1_1AInputBox.html#ad07973eff01bd2e44209a71ac6e4c1b7',1,'RType::AInputBox']]],
+  ['isempty_9',['isEmpty',['../classRType_1_1SafeQueue.html#a60b78f390df0b08e2b61185c95233aa4',1,'RType::SafeQueue']]],
+  ['ismouseclicked_10',['ismouseclicked',['../classRType_1_1LoginView.html#a4ff415e6fda7329751c19384bf527941',1,'RType::LoginView::isMouseClicked()'],['../classRType_1_1MenuView.html#a026680d9d2a71a1b8b18c01cddd3ee84',1,'RType::MenuView::isMouseClicked()'],['../classRType_1_1OptionsView.html#ae0f97d6aaae4a63c243dff8588d6af64',1,'RType::OptionsView::isMouseClicked()'],['../classRType_1_1PauseView.html#a53e252e1618bf936e25bad71421951c8',1,'RType::PauseView::isMouseClicked()']]],
+  ['isvalidinput_11',['isvalidinput',['../classRType_1_1NumberInput.html#a346765d8a447f6c243a3332570c6f93f',1,'RType::NumberInput::isValidInput()'],['../classRType_1_1TextInput.html#af4b7c90e5e91884acce822fb1279947d',1,'RType::TextInput::isValidInput()']]],
+  ['iview_12',['IView',['../classRType_1_1IView.html',1,'RType']]]
 ];

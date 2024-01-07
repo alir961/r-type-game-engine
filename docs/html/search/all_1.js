@@ -12,7 +12,6 @@ var searchData=
   ['agraphicentity_9',['AGraphicEntity',['../classRType_1_1AGraphicEntity.html',1,'RType']]],
   ['ainputbox_10',['ainputbox',['../classRType_1_1AInputBox.html',1,'RType::AInputBox'],['../classRType_1_1AInputBox.html#aa67d21576fb4f4534701349858b96368',1,'RType::AInputBox::AInputBox()']]],
   ['ametricsmodule_11',['AMetricsModule',['../classRType_1_1AMetricsModule.html',1,'RType']]],
-  ['animationclock_12',['animationClock',['../classRType_1_1ClientViewport.html#a5dcafb09c6f452e604bf578929a2a43a',1,'RType::ClientViewport']]],
-  ['arguments_13',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]],
-  ['assignai_14',['AssignAI',['../classRType_1_1AAIModule.html#a4c542efe4972cee9a566fa80e9149553',1,'RType::AAIModule']]]
+  ['arguments_12',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]],
+  ['assignai_13',['AssignAI',['../classRType_1_1AAIModule.html#a4c542efe4972cee9a566fa80e9149553',1,'RType::AAIModule']]]
 ];
