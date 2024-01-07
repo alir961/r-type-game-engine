@@ -24,8 +24,8 @@ void RType::UDPServer::handleReceive(std::size_t bytesReceived) {
     const MessageBuffer &buffer = _adapter.getMessageBuffer();
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
     const Message receiveMessage = Message::deserialize(receivedData);
-
     auto handlerIt = _handlers.find(receiveMessage.type);
+
     if (handlerIt != _handlers.end())
         handlerIt->second(receiveMessage);
     else
@@ -51,22 +51,13 @@ RType::UDPServer::~UDPServer() {
 
 void RType::UDPServer::handleConnectMessage(const RType::Message &) {
     int sessionId = _sessions.setNewSession();
-    const std::string messageData = std::format("connect {} ok", sessionId);
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::CONNECT_CALLBACK)
-            .setData(messageData)
-            .build();
-    const std::vector<std::byte> binaryData = response.serialize();
 
-    std::cout << "New connection!\n";
-    _adapter.sendData(asio::buffer(binaryData));
+    std::cout << "New connection! SessionId: " << sessionId << "!\n";
+    sendMessage(MessageType::CONNECT_CALLBACK, std::format("connect {} ok", sessionId));
 }
 
 void RType::UDPServer::handleUnknownMessageType(const RType::Message &) {
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::UNKNOWN)
-            .setData("Unknown Message!")
-            .build();
-    const std::vector<std::byte> binaryData = response.serialize();
-    _adapter.sendData(asio::buffer(binaryData));
+    std::cout << "Unknown Message!\n";
 }
 
 void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receiveMessage) {
@@ -75,11 +66,63 @@ void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receive
     int sessionID = std::stoi(splitMessage[1]);
     std::string playerName = splitMessage[2];
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
     session->setPlayerName(playerName);
-    std::cout << "PlayerName: " << sessionID << " " << playerName << "\n";
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
-            .setData(std::format("player {}", sessionID))
+    session->setPlayerEntity(createPlayerEntity());
+    sendMessage(MessageType::PLAYER_NAME, std::format("player {}", sessionID));
+}
+
+void RType::UDPServer::sendMessage(MessageType type, const std::string_view &data) {
+    const RType::Message response = RType::NetworkMessageBuilder(type)
+            .setData(data)
             .build();
     const std::vector<std::byte> binaryData = response.serialize();
     _adapter.sendData(asio::buffer(binaryData));
+}
+
+void RType::UDPServer::handleMoveLeftMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Left!\n";
+}
+
+void RType::UDPServer::handleMoveRightMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Right!\n";
+}
+
+void RType::UDPServer::handleMoveDownMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Down!\n";
+}
+
+void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
+
+    std::cout << session->getPlayerName() << ": Move Up!\n";
+}
+
+RType::EntityPtr RType::UDPServer::createPlayerEntity() {
+    EntityPtr playerEntity = _entityManager.createEntity();
+
+    playerEntity->addComponent<SpeedComponent>(10);
+    playerEntity->addComponent<HealthComponent>(100);
+    playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
+    playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
+    playerEntity->addComponent<PlayerComponent>(true);
+    return playerEntity;
 }

@@ -9,6 +9,7 @@
 
 #include <engine/network/UDPAdapter.hpp>
 #include <engine/tools/Split.hpp>
+#include <engine/ecs/EntityManager.hpp>
 #include <iostream>
 #include "SessionManager.hpp"
 
@@ -28,15 +29,24 @@ namespace RType {
 
         void handleReceive(std::size_t bytesReceived);
 
+        void sendMessage(MessageType type, const std::string_view &data);
+
+        EntityPtr createPlayerEntity();
+
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
         SessionManager _sessions;
+        EntityManager _entityManager;
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
 
-        void handleConnectMessage(const Message& message);
-        void handleUnknownMessageType(const Message& message);
-        void handlePlayerNameMessageType(const Message& message);
+        void handleConnectMessage(const Message& receiveMessage);
+        void handleUnknownMessageType(const Message& receiveMessage);
+        void handlePlayerNameMessageType(const Message& receiveMessage);
+        void handleMoveLeftMessageType(const Message& receiveMessage);
+        void handleMoveRightMessageType(const Message& receiveMessage);
+        void handleMoveDownMessageType(const Message& receiveMessage);
+        void handleMoveUpMessageType(const Message& receiveMessage);
     };
 
 }
