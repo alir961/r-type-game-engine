@@ -15,12 +15,12 @@ namespace RType {
 
     class Arguments {
     private:
-        u_int16_t _port;
+        uint16_t _port;
 
     public:
-        explicit Arguments(u_int16_t port) : _port(port) {};
+        explicit Arguments(uint16_t port) : _port(port) {};
 
-        [[nodiscard]] u_int16_t getPort() const {
+        [[nodiscard]] uint16_t getPort() const {
             return _port;
         };
 
@@ -29,7 +29,7 @@ namespace RType {
                 throw RType::ConfigurationException("Missing port number");
             try {
                 const auto args = std::span(argv, count);
-                const auto port = static_cast<u_int16_t>(parseToUnsignedLong(args[1]));
+                const auto port = static_cast<uint16_t>(parseToUnsignedLong(args[1]));
 
                 return Arguments(port);
             } catch (ServerException &) {

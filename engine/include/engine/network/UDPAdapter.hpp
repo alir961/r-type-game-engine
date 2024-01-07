@@ -9,6 +9,7 @@
 
 #include <string>
 #include <asio.hpp>
+#include <functional>
 #include "NetworkMessage.hpp"
 
 using UDP = asio::ip::udp;
