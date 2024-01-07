@@ -38,6 +38,10 @@ RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &e
     _handlers[MessageType::CONNECT] = [this](const Message& msg) {handleConnectMessage(msg);};
     _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
     _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameMessageType(msg);};
+    _handlers[MessageType::MOVE_LEFT] = [this](const Message& msg) {handleMoveLeftMessageType(msg);};
+    _handlers[MessageType::MOVE_RIGHT] = [this](const Message& msg) {handleMoveRightMessageType(msg);};
+    _handlers[MessageType::MOVE_DOWN] = [this](const Message& msg) {handleMoveDownMessageType(msg);};
+    _handlers[MessageType::MOVE_UP] = [this](const Message& msg) {handleMoveUpMessageType(msg);};
     startReceive();
 }
 
@@ -68,8 +72,7 @@ void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receive
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
     session->setPlayerName(playerName);
-    session->setPlayerEntity(createPlayerEntity());
-    sendMessage(MessageType::PLAYER_NAME, std::format("player {}", sessionID));
+    session->setPlayerEntity(createPlayerEntity(sessionID));
 }
 
 void RType::UDPServer::sendMessage(MessageType type, const std::string_view &data) {
@@ -116,13 +119,15 @@ void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMess
     std::cout << session->getPlayerName() << ": Move Up!\n";
 }
 
-RType::EntityPtr RType::UDPServer::createPlayerEntity() {
+RType::EntityPtr RType::UDPServer::createPlayerEntity(int sessionID) {
     EntityPtr playerEntity = _entityManager.createEntity();
+    std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2", sessionID);
 
     playerEntity->addComponent<SpeedComponent>(10);
     playerEntity->addComponent<HealthComponent>(100);
     playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
     playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
     playerEntity->addComponent<PlayerComponent>(true);
+    sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
 }

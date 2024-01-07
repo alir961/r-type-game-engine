@@ -66,15 +66,35 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
     const std::vector<std::byte> binaryData = response.serialize();
 
     _adapter->sendData(asio::buffer(binaryData));
-    std::cout << "Connection ID: " << connectionId << "\n";
+    _clientID = connectionId;
 }
 
 void RType::UDPClient::handlePlayerNameCallbackMessageType(const RType::Message &receiveMessage) {
-    std::cout << "playerName callback: " << receiveMessage.toString() << "\n";
+    _messageQueue.emplace_back(receiveMessage.toString());
 }
 
 void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::UNKNOWN] = [](const Message &) { std::cout << "Unknown message!\n"; };
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
+}
+
+std::string RType::UDPClient::getLastMessage() {
+    std::lock_guard<std::mutex> lock(_queueMutex);
+
+    if (!_messageQueue.empty()) {
+        std::string message = _messageQueue.front();
+        _messageQueue.erase(_messageQueue.begin());
+        return message;
+    } else {
+        return "";
+    }
+}
+
+void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_view &data) {
+    const RType::Message response = RType::NetworkMessageBuilder(type)
+            .setData(data)
+            .build();
+    const std::vector<std::byte> binaryData = response.serialize();
+    _adapter->sendData(asio::buffer(binaryData));
 }

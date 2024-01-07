@@ -9,7 +9,7 @@
 
 #include "views/IView.hpp"
 #include "UDPClient.hpp"
-#include "../../engine/include/engine/modules/ModuleProvider.hpp"
+#include <engine/modules/ModuleProvider.hpp>
 #include <SFML/System/Clock.hpp>
 #include <engine/Logger.hpp>
 #include <engine/ecs/EntityManager.hpp>
@@ -52,6 +52,9 @@ namespace RType {
      * @brief Represents the main game view handling graphics, input, and entities.
      */
     class ClientViewport {
+
+        using MessageHandlerFunction = std::function<void(const std::vector<std::string> &)>;
+
     private:
         sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
         ViewState _viewState = ViewState::LOGIN;                          /**< Current state of the game view. */
@@ -62,6 +65,9 @@ namespace RType {
         sf::Event event{};
         IGraphicalModule *_graphicalModule;
         ModuleProvider _provider = ModuleProvider();
+        std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
+        EntityManager _entityManager;
+        GraphicEntityPtr _playerEntity;
 
         /**
          * @brief Private method to handle drawing operations.
@@ -78,7 +84,7 @@ namespace RType {
          * @brief Private method to handle input for a specific graphic _entity.
          * @param entity The graphic entity to handle input for.
          */
-        void handleInput(const GraphicEntityPtr &entity) const;
+        void handleInput() const;
 
         /**
          * @brief Private method to handle basic input.
@@ -89,7 +95,7 @@ namespace RType {
          * @brief Private method to launch the SFML window and test keyboard input for a specific _entity.
          * @param entity The graphic entities to test with keyboard input.
          */
-        void launchWindow(const GraphicEntityPtr &entity);
+        void launchWindow();
 
     public:
         /**
@@ -146,6 +152,12 @@ namespace RType {
             _client = std::make_shared<RType::UDPClient>(hostname, port, username);
             //ioContext.run();
         }
+
+        void handleMessageFromServer();
+
+        void setHandlers();
+
+        void newPlayer(const std::vector<std::string> &splitMessage);
     };
 }
 

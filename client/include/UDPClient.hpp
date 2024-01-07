@@ -37,6 +37,11 @@ namespace RType {
          */
         void startReceive();
 
+        std::string getLastMessage();
+
+        void sendMessage(MessageType type, const std::string_view &data);
+        int getClientID() {return _clientID;};
+
     private:
         /**
          * @brief Sets up the message handlers for different message types.
@@ -56,6 +61,9 @@ namespace RType {
         UDPAdapterPtr _adapter; ///< The UDP adapter for handling send/receive operations.
         RType::Thread _thread = RType::Thread(); ///< Thread for asynchronous operations.
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers; ///< Map of message handlers.
+        std::vector<std::string> _messageQueue;
+        std::mutex _queueMutex;
+        int _clientID;
 
         /**
          * @brief Handles the connection callback message.
@@ -68,6 +76,7 @@ namespace RType {
          * @param receiveMessage The received message.
          */
         void handlePlayerNameCallbackMessageType(const Message& receiveMessage);
+
     };
 
     /**

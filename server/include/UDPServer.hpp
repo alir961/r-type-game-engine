@@ -31,7 +31,7 @@ namespace RType {
 
         void sendMessage(MessageType type, const std::string_view &data);
 
-        EntityPtr createPlayerEntity();
+        EntityPtr createPlayerEntity(int sessionID);
 
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
