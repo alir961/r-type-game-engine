@@ -128,7 +128,7 @@ sf::Event RType::ClientViewport::getEvent() const {
 }
 
 void RType::ClientViewport::connectToServer(const std::string &hostname, int port, std::string username) {
-    _client = std::make_shared<RType::UDPClient>(hostname, port, username);
+    _client = std::make_shared<RType::UDPClient>(hostname, port, username, _window.getSize().x, _window.getSize().y);
 }
 
 void RType::ClientViewport::closeConnectionToServer() {
