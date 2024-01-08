@@ -70,6 +70,7 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
 }
 
 void RType::UDPClient::handlePlayerNameCallbackMessageType(const RType::Message &receiveMessage) {
+    std::lock_guard<std::mutex> lock(_queueMutex);
     _messageQueue.emplace_back(receiveMessage.toString());
 }
 
@@ -77,6 +78,10 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::UNKNOWN] = [](const Message &) { std::cout << "Unknown message!\n"; };
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
+    _handlers[MessageType::MOVE_LEFT] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
+    _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
+    _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
+    _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
 }
 
 std::string RType::UDPClient::getLastMessage() {
@@ -97,4 +102,24 @@ void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_vi
             .build();
     const std::vector<std::byte> binaryData = response.serialize();
     _adapter->sendData(asio::buffer(binaryData));
+}
+
+void RType::UDPClient::handleMoveLeftCallbackMessageType(const RType::Message &receiveMessage) {
+    std::lock_guard<std::mutex> lock(_queueMutex);
+    _messageQueue.emplace_back(receiveMessage.toString());
+}
+
+void RType::UDPClient::handleMoveRightCallbackMessageType(const RType::Message &receiveMessage) {
+    std::lock_guard<std::mutex> lock(_queueMutex);
+    _messageQueue.emplace_back(receiveMessage.toString());
+}
+
+void RType::UDPClient::handleMoveDownCallbackMessageType(const RType::Message &receiveMessage) {
+    std::lock_guard<std::mutex> lock(_queueMutex);
+    _messageQueue.emplace_back(receiveMessage.toString());
+}
+
+void RType::UDPClient::handleMoveUpCallbackMessageType(const RType::Message &receiveMessage) {
+    std::lock_guard<std::mutex> lock(_queueMutex);
+    _messageQueue.emplace_back(receiveMessage.toString());
 }

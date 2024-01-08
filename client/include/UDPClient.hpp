@@ -77,6 +77,30 @@ namespace RType {
          */
         void handlePlayerNameCallbackMessageType(const Message& receiveMessage);
 
+        /**
+         * @brief Handles the move left callback message.
+         * @param receiveMessage The received message.
+         */
+        void handleMoveLeftCallbackMessageType(const Message& receiveMessage);
+
+        /**
+         * @brief Handles the move right callback message.
+         * @param receiveMessage The received message.
+         */
+        void handleMoveRightCallbackMessageType(const Message& receiveMessage);
+
+        /**
+         * @brief Handles the move down callback message.
+         * @param receiveMessage The received message.
+         */
+        void handleMoveDownCallbackMessageType(const Message& receiveMessage);
+
+        /**
+         * @brief Handles the move up callback message.
+         * @param receiveMessage The received message.
+         */
+        void handleMoveUpCallbackMessageType(const Message& receiveMessage);
+
     };
 
     /**

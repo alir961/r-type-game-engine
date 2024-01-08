@@ -158,6 +158,10 @@ namespace RType {
         void setHandlers();
 
         void newPlayer(const std::vector<std::string> &splitMessage);
+        void moveLeft(const std::vector<std::string> &splitMessage);
+        void moveRight(const std::vector<std::string> &splitMessage);
+        void moveDown(const std::vector<std::string> &splitMessage);
+        void moveUp(const std::vector<std::string> &splitMessage);
     };
 }
 
