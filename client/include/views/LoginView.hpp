@@ -40,10 +40,12 @@ namespace RType {
          * @brief Handles user input for the menu.
          */
         void handleInput() {
-            _loginButton.executeIfClicked([this] {
-                _viewport.connectToServer("127.0.0.1", _portBoxInput.getValue(), _userNameBoxInput.getValue());
-                _viewport.setView(ViewState::LOADSCREEN);
-            });
+            if (_portBoxInput.getValue() != '\0'  && _userNameBoxInput.getValue() != "") {
+                _loginButton.executeIfClicked([this] {
+                    _viewport.connectToServer("127.0.0.1", _portBoxInput.getValue(), _userNameBoxInput.getValue());
+                    _viewport.setView(ViewState::MENU);
+                });
+            }
         }
 
         /**
