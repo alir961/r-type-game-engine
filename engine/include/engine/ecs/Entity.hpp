@@ -10,12 +10,20 @@
 #include <iostream>
 #include <unordered_map>
 #include <memory>
+#include <vector>
 
 namespace RType {
 
     /**
     * @brief Entity class representing an object in the system.
     */
+
+    enum class Direction {
+        LEFT,
+        RIGHT,
+        DOWN,
+        UP,
+    };
     class Entity {
     public:
         /**
@@ -81,6 +89,7 @@ namespace RType {
                     &typeid(HealthComponent),
                     &typeid(PositionComponent),
                     &typeid(SizeComponent),
+                    &typeid(SizeRectComponent),
                     &typeid(PlayerComponent)
             };
             for (const auto *type : componentTypes) {
@@ -113,6 +122,20 @@ namespace RType {
         */
         ~Entity() = default;
 
+        bool move(Direction direction, const std::vector<std::shared_ptr<Entity>> &entities,  float windowsWidth, float windowsHeight) {
+            switch (direction) {
+                case Direction::LEFT:
+                    return moveLeft(entities);
+                case Direction::RIGHT:
+                    return moveRight(entities, windowsWidth);
+                case Direction::DOWN:
+                    return moveDown(entities, windowsHeight);
+                case Direction::UP:
+                    return moveUp(entities);
+            }
+            return false;
+        };
+
     private:
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the _entity. */
 
@@ -127,6 +150,8 @@ namespace RType {
                 return ComponentType::Size;
             } else if constexpr (std::is_same_v<T, DamageComponent>) {
                 return ComponentType::Damage;
+            } else if constexpr (std::is_same_v<T, SizeRectComponent>) {
+                return ComponentType::SizeRect;
             } else if constexpr (std::is_same_v<T, HealthComponent>) {
                 return ComponentType::Health;
             } else if constexpr (std::is_same_v<T, PlayerComponent>) {
@@ -137,7 +162,87 @@ namespace RType {
                 return ComponentType::Speed;
             }
         }
+
+        bool hit(const std::shared_ptr<Entity> &entity) {
+            const auto& [thisX, thisY] = getComponent<PositionComponent>()->getPositions();
+            const auto& [thisWidth, thisHeight] = getComponent<SizeComponent>()->getSize();
+            const auto& [thisRectWidth, thisRectHeight] = getComponent<SizeRectComponent>()->getSize();
+            float thisActualWidth = thisWidth * thisRectWidth;
+            float thisActualHeight = thisHeight * thisRectHeight;
+            const auto& [entityX, entityY] = entity->getComponent<PositionComponent>()->getPositions();
+            const auto& [entityWidth, entityHeight] = entity->getComponent<SizeComponent>()->getSize();
+            const auto& [entityRectWidth, entityRectHeight] = entity->getComponent<SizeRectComponent>()->getSize();
+            float entityActualWidth = entityWidth * entityRectWidth;
+            float entityActualHeight = entityHeight * entityRectHeight;
+
+            if (this == entity.get()) {
+                return false;
+            }
+            return (thisX < entityX + entityActualWidth &&
+                    thisX + thisActualWidth > entityX &&
+                    thisY < entityY + entityActualHeight &&
+                    thisY + thisActualHeight > entityY);
+        }
+
+
+        bool hits(const std::vector<std::shared_ptr<Entity>>& entities) {
+            for (const auto& entity : entities) {
+                if (hit(entity)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool moveLeft(const std::vector<std::shared_ptr<Entity>> &entities) {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+
+            if (x - speed < 0 || hits(entities))
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x - speed, y));
+            return true;
+        };
+
+        bool moveRight(const std::vector<std::shared_ptr<Entity>> &entities, float windowsWidth) {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            float size = getComponent<SizeComponent>()->getSize().second;
+            float rect = getComponent<SizeRectComponent>()->getSize().second;
+            float playerSize = size * rect;
+            float playerX = x + playerSize;
+
+            if (playerX + speed > windowsWidth || hits(entities))
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x + speed, y));
+            return true;
+        };
+
+        bool moveDown(const std::vector<std::shared_ptr<Entity>> &entities, float windowsHeight) {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            float size = getComponent<SizeComponent>()->getSize().second;
+            float rect = getComponent<SizeRectComponent>()->getSize().second;
+            float playerSize = size * rect;
+            float playerY = y + playerSize;
+
+            if (playerY + speed > windowsHeight || hits(entities))
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x, y + speed));
+            return true;
+        };
+
+        bool moveUp(const std::vector<std::shared_ptr<Entity>> &entities) {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+
+            if (y - speed < 0 || hits(entities))
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x, y - speed));
+            return true;
+        };
     };
 
     using EntityPtr = std::shared_ptr<Entity>;
+
 }

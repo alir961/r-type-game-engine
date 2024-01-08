@@ -33,9 +33,9 @@ void RType::UDPClient::handleReceive(std::size_t bytesReceived) {
     startReceive();
 }
 
-RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string username) :
+RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string username, float windowWidth, float windowHeight) :
         _username(std::move(username)),
-        _socket(UDP::socket(_context, UDP::endpoint(UDP::v4(), 0))) {
+        _socket(UDP::socket(_context, UDP::endpoint(UDP::v4(), 0))), _windowWidth(windowWidth), _windowHeight(windowHeight) {
     const asio::ip::address &serverAddress = asio::ip::address::from_string(hostname);
 
     _endpoint = UDP::endpoint(serverAddress, static_cast<uint16_t>(port));
@@ -45,7 +45,7 @@ RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string u
 
     _thread.run([this, hostname, port]() {
         const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::CONNECT)
-                .setData("")
+                .setData(std::format("connect {} {}\n", _windowWidth, _windowHeight))
                 .build();
 
         std::cout << "Try connecting to " << hostname << ":" << port << "\n";
@@ -84,21 +84,15 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
     _clientID = connectionId;
 }
 
-void RType::UDPClient::handlePlayerNameCallbackMessageType(const RType::Message &receiveMessage) {
-    const std::scoped_lock lock(_queueMutex);
-
-    _messageQueue.emplace_back(receiveMessage.toString());
-}
-
 void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::UNKNOWN] = [](const Message &) { std::cout << "Unknown message!\n"; };
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
+    _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::MOVE_LEFT] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::DISCONNECT] = [this](const Message &) { _stop = true; };
-    _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
-    _handlers[MessageType::MOVE_LEFT] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
-    _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
-    _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
-    _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
 }
 
 std::string RType::UDPClient::getLastMessage() {
@@ -121,26 +115,7 @@ void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_vi
     _adapter->sendData(asio::buffer(binaryData));
 }
 
-void RType::UDPClient::handleMoveLeftCallbackMessageType(const RType::Message &receiveMessage) {
-    const std::scoped_lock lock(_queueMutex);
-
-    _messageQueue.emplace_back(receiveMessage.toString());
-}
-
-void RType::UDPClient::handleMoveRightCallbackMessageType(const RType::Message &receiveMessage) {
-    const std::scoped_lock lock(_queueMutex);
-
-    _messageQueue.emplace_back(receiveMessage.toString());
-}
-
-void RType::UDPClient::handleMoveDownCallbackMessageType(const RType::Message &receiveMessage) {
-    const std::scoped_lock lock(_queueMutex);
-
-    _messageQueue.emplace_back(receiveMessage.toString());
-}
-
-void RType::UDPClient::handleMoveUpCallbackMessageType(const RType::Message &receiveMessage) {
-    const std::scoped_lock lock(_queueMutex);
-
+void RType::UDPClient::addMessageQueue(const RType::Message &receiveMessage) {
+    std::lock_guard<std::mutex> lock(_queueMutex);
     _messageQueue.emplace_back(receiveMessage.toString());
 }

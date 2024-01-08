@@ -19,6 +19,7 @@ void RType::ClientViewport::handleInput() const {
         _client->sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {}\n", _client->getClientID()));
     };
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+
         _client->sendMessage(MessageType::MOVE_LEFT, std::format("move_left {}\n", _client->getClientID()));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -127,7 +128,7 @@ sf::Event RType::ClientViewport::getEvent() const {
 }
 
 void RType::ClientViewport::connectToServer(const std::string &hostname, int port, std::string username) {
-    _client = std::make_shared<RType::UDPClient>(hostname, port, username);
+    _client = std::make_shared<RType::UDPClient>(hostname, port, username, _window.getSize().x, _window.getSize().y);
 }
 
 void RType::ClientViewport::closeConnectionToServer() {
@@ -181,6 +182,8 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     int positionY = std::stoi(splitMessage[8]);
     float sizeX = std::stof(splitMessage[10]);
     float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
     auto starshipEntity = _entityManager.createEntity();
     std::shared_ptr<RType::GraphicEntity> graphicStarship;
 
@@ -188,6 +191,7 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     starshipEntity->addComponent<RType::HealthComponent>(health);
     starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
     starshipEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    starshipEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     starshipEntity->addComponent<RType::PlayerComponent>(true);
     if (starshipEntity->hasBaseComponents()) {
         graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
@@ -221,7 +225,7 @@ void RType::ClientViewport::moveRight(const std::vector<std::string> &splitMessa
     sf::Sprite sprite = _playerEntity->getSprite();
     EntityPtr gameEntity = _playerEntity->getEntity();
     int sessionID = std::stoi(splitMessage[1]);
-    std::string status = splitMessage[2];
+    const std::string &status = splitMessage[2];
 
     if (status == "ok")
         _playerEntity->moveRight(sprite, gameEntity);
@@ -233,7 +237,7 @@ void RType::ClientViewport::moveDown(const std::vector<std::string> &splitMessag
     sf::Sprite sprite = _playerEntity->getSprite();
     EntityPtr gameEntity = _playerEntity->getEntity();
     int sessionID = std::stoi(splitMessage[1]);
-    std::string status = splitMessage[2];
+    const std::string &status = splitMessage[2];
 
     if (status == "ok")
         _playerEntity->moveDown(sprite, gameEntity);
@@ -245,10 +249,11 @@ void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage)
     sf::Sprite sprite = _playerEntity->getSprite();
     EntityPtr gameEntity = _playerEntity->getEntity();
     int sessionID = std::stoi(splitMessage[1]);
-    std::string status = splitMessage[2];
+    const std::string &status = splitMessage[2];
 
     if (status == "ok")
         _playerEntity->moveUp(sprite, gameEntity);
     else
         setView(ViewState::DEAD);
 }
+
