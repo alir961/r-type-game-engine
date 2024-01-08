@@ -38,6 +38,7 @@ namespace RType {
         MOVE_RIGHT,
         MOVE_DOWN,
         MOVE_UP,
+        SHOOT,
     };
 
     /**

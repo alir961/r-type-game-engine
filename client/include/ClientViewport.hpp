@@ -170,6 +170,7 @@ namespace RType {
         void moveRight(const std::vector<std::string> &splitMessage);
         void moveDown(const std::vector<std::string> &splitMessage);
         void moveUp(const std::vector<std::string> &splitMessage);
+        void shoot(const std::vector<std::string> &splitMessage);
     };
 }
 

@@ -21,7 +21,6 @@ void RType::ClientViewport::handleInput() const {
         _client->sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {}\n", _client->getClientID()));
     };
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-
         _client->sendMessage(MessageType::MOVE_LEFT, std::format("move_left {}\n", _client->getClientID()));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -29,6 +28,9 @@ void RType::ClientViewport::handleInput() const {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         _client->sendMessage(MessageType::MOVE_DOWN, std::format("move_down {}\n", _client->getClientID()));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        _client->sendMessage(MessageType::SHOOT, std::format("shoot {}\n", _client->getClientID()));
     }
 }
 
@@ -214,6 +216,7 @@ void RType::ClientViewport::setHandlers() {
     _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage); };
     _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage); };
     _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage); };
+    _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
 }
 
 void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
@@ -260,3 +263,6 @@ void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage)
         setView(ViewState::DEAD);
 }
 
+void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
+
+}
