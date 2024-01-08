@@ -81,6 +81,7 @@ namespace RType {
                     &typeid(HealthComponent),
                     &typeid(PositionComponent),
                     &typeid(SizeComponent),
+                    &typeid(SizeRectComponent),
                     &typeid(PlayerComponent)
             };
             for (const auto *type : componentTypes) {
@@ -127,6 +128,8 @@ namespace RType {
                 return ComponentType::Size;
             } else if constexpr (std::is_same_v<T, DamageComponent>) {
                 return ComponentType::Damage;
+            } else if constexpr (std::is_same_v<T, SizeRectComponent>) {
+                return ComponentType::SizeRect;
             } else if constexpr (std::is_same_v<T, HealthComponent>) {
                 return ComponentType::Health;
             } else if constexpr (std::is_same_v<T, PlayerComponent>) {
@@ -137,7 +140,12 @@ namespace RType {
                 return ComponentType::Speed;
             }
         }
+
+        bool hits(const std::shared_ptr<Entity> &object) {
+            return false;
+        };
     };
 
     using EntityPtr = std::shared_ptr<Entity>;
+
 }

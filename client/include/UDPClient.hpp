@@ -30,7 +30,7 @@ namespace RType {
          * @param port The port number for communication.
          * @param username The username associated with the client.
          */
-        UDPClient(const std::string &hostname, int port, std::string username);
+        UDPClient(const std::string &hostname, int port, std::string username, float windowWidth, float windowHeight);
 
         ~UDPClient();
 
@@ -71,7 +71,8 @@ namespace RType {
         int _clientID = -1;
         bool _connected = false;
         bool _stop = false;
-
+        float _windowWidth;
+        float _windowHeight;
         /**
          * @brief Handles the connection callback message.
          * @param receiveMessage The received message.

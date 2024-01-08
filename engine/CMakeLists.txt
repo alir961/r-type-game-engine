@@ -4,6 +4,7 @@ set(HEADER_FILES
         include/engine/tools/Split.hpp
         include/engine/tools/SafeQueue.hpp
         include/engine/ecs/component/SizeComponent.hpp
+        include/engine/ecs/component/SizeRectComponent.hpp
         include/engine/ecs/component/DamageComponent.hpp
         include/engine/ecs/component/HealthComponent.hpp
         include/engine/ecs/component/PlayerComponent.hpp

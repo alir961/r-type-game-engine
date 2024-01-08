@@ -33,9 +33,9 @@ void RType::UDPClient::handleReceive(std::size_t bytesReceived) {
     startReceive();
 }
 
-RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string username) :
+RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string username, float windowWidth, float windowHeight) :
         _username(std::move(username)),
-        _socket(UDP::socket(_context, UDP::endpoint(UDP::v4(), 0))) {
+        _socket(UDP::socket(_context, UDP::endpoint(UDP::v4(), 0))), _windowWidth(windowWidth), _windowHeight(windowHeight) {
     const asio::ip::address &serverAddress = asio::ip::address::from_string(hostname);
 
     _endpoint = UDP::endpoint(serverAddress, static_cast<uint16_t>(port));
@@ -45,7 +45,7 @@ RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string u
 
     _thread.run([this, hostname, port]() {
         const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::CONNECT)
-                .setData("")
+                .setData(std::format("connect {} {}\n", _windowWidth, _windowHeight))
                 .build();
 
         std::cout << "Try connecting to " << hostname << ":" << port << "\n";

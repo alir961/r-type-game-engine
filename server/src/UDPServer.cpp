@@ -54,10 +54,17 @@ RType::UDPServer::~UDPServer() {
     }
 }
 
-void RType::UDPServer::handleConnectMessage(const RType::Message &) {
+void RType::UDPServer::handleConnectMessage(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
     int sessionId = _sessions.setNewSession();
+    float windowWidth = std::stof(splitMessage[1]);
+    float windowHeight = std::stof(splitMessage[2]);
+    std::shared_ptr<Client> session = _sessions.getClientSession(sessionId);
 
-    std::cout << "New connection! SessionId: " << sessionId << "!\n";
+    session->setWindowWidth(windowWidth);
+    session->setWindowHeight(windowHeight);
+    std::cout << "New connection! SessionId: " << sessionId << " width: " << session->getWindowWidth() << " height: " << session->getWindowHeight() << "!\n";
     sendMessage(MessageType::CONNECT_CALLBACK, std::format("connect {} ok", sessionId));
 }
 
@@ -122,12 +129,13 @@ void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMess
 
 RType::EntityPtr RType::UDPServer::createPlayerEntity(int sessionID) {
     EntityPtr playerEntity = _entityManager.createEntity();
-    std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2", sessionID);
+    std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
 
     playerEntity->addComponent<SpeedComponent>(10);
     playerEntity->addComponent<HealthComponent>(100);
     playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
     playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
+    playerEntity->addComponent<SizeRectComponent>(33.0f, 15.0f);
     playerEntity->addComponent<PlayerComponent>(true);
     sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
