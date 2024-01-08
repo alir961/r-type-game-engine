@@ -93,7 +93,9 @@ void RType::UDPServer::sendMessage(MessageType type, const std::string_view &dat
 
 RType::EntityPtr RType::UDPServer::createPlayerEntity(int sessionID) {
     EntityPtr playerEntity = _entityManager.createEntity();
+    EntityPtr playerEntityTmp = _entityManager.createEntity();
     std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
+    std::string messageTmp = std::format("player 11 speed 10 health 100 position 700 30 size 2 2 rect 33 15");
 
     playerEntity->addComponent<SpeedComponent>(10);
     playerEntity->addComponent<HealthComponent>(100);
@@ -101,7 +103,14 @@ RType::EntityPtr RType::UDPServer::createPlayerEntity(int sessionID) {
     playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
     playerEntity->addComponent<SizeRectComponent>(33.0f, 15.0f);
     playerEntity->addComponent<PlayerComponent>(true);
+    playerEntityTmp->addComponent<SpeedComponent>(10);
+    playerEntityTmp->addComponent<HealthComponent>(100);
+    playerEntityTmp->addComponent<PositionComponent>(std::make_pair(700, 30));
+    playerEntityTmp->addComponent<SizeComponent>(2.0f, 2.0f);
+    playerEntityTmp->addComponent<SizeRectComponent>(33.0f, 15.0f);
+    playerEntityTmp->addComponent<PlayerComponent>(false);
     sendMessage(MessageType::PLAYER_NAME, message);
+    sendMessage(MessageType::PLAYER_NAME, messageTmp);
     return playerEntity;
 }
 
@@ -111,7 +120,7 @@ void RType::UDPServer::handleMove(const RType::Message &receiveMessage) {
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
     EntityPtr entity = session->getEntity();
-    bool move = entity->move(getDirection(receiveMessage.type), session->getWindowWidth(), session->getWindowHeight());
+    bool move = entity->move(getDirection(receiveMessage.type), _entityManager.getEntities(), session->getWindowWidth(), session->getWindowHeight());
     std::string status = (move) ? "ok" : "ko";
     sendMessage(receiveMessage.type, std::format("{} {} {}\n", splitMessage[0], sessionID, status));
 }

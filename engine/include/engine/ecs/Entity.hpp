@@ -10,6 +10,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <memory>
+#include <vector>
 
 namespace RType {
 
@@ -121,16 +122,16 @@ namespace RType {
         */
         ~Entity() = default;
 
-        bool move(Direction direction, float windowsWidth, float windowsHeight) {
+        bool move(Direction direction, const std::vector<std::shared_ptr<Entity>> &entities,  float windowsWidth, float windowsHeight) {
             switch (direction) {
                 case Direction::LEFT:
-                    return moveLeft();
+                    return moveLeft(entities);
                 case Direction::RIGHT:
-                    return moveRight(windowsWidth);
+                    return moveRight(entities, windowsWidth);
                 case Direction::DOWN:
-                    return moveDown(windowsHeight);
+                    return moveDown(entities, windowsHeight);
                 case Direction::UP:
-                    return moveUp();
+                    return moveUp(entities);
             }
             return false;
         };
@@ -162,21 +163,48 @@ namespace RType {
             }
         }
 
-        bool hits() {
-            return false;
-        };
+        bool hit(const std::shared_ptr<Entity> &entity) {
+            const auto& [thisX, thisY] = getComponent<PositionComponent>()->getPositions();
+            const auto& [thisWidth, thisHeight] = getComponent<SizeComponent>()->getSize();
+            const auto& [thisRectWidth, thisRectHeight] = getComponent<SizeRectComponent>()->getSize();
+            float thisActualWidth = thisWidth * thisRectWidth;
+            float thisActualHeight = thisHeight * thisRectHeight;
+            const auto& [entityX, entityY] = entity->getComponent<PositionComponent>()->getPositions();
+            const auto& [entityWidth, entityHeight] = entity->getComponent<SizeComponent>()->getSize();
+            const auto& [entityRectWidth, entityRectHeight] = entity->getComponent<SizeRectComponent>()->getSize();
+            float entityActualWidth = entityWidth * entityRectWidth;
+            float entityActualHeight = entityHeight * entityRectHeight;
 
-        bool moveLeft() {
+            if (this == entity.get()) {
+                return false;
+            }
+            return (thisX < entityX + entityActualWidth &&
+                    thisX + thisActualWidth > entityX &&
+                    thisY < entityY + entityActualHeight &&
+                    thisY + thisActualHeight > entityY);
+        }
+
+
+        bool hits(const std::vector<std::shared_ptr<Entity>>& entities) {
+            for (const auto& entity : entities) {
+                if (hit(entity)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool moveLeft(const std::vector<std::shared_ptr<Entity>> &entities) {
             auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
             const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
 
-            if (x - speed < 0 || hits())
+            if (x - speed < 0 || hits(entities))
                 return false;
             getComponent<PositionComponent>()->setPositions(std::make_pair(x - speed, y));
             return true;
         };
 
-        bool moveRight(float windowsWidth) {
+        bool moveRight(const std::vector<std::shared_ptr<Entity>> &entities, float windowsWidth) {
             auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
             const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
             float size = getComponent<SizeComponent>()->getSize().second;
@@ -184,13 +212,13 @@ namespace RType {
             float playerSize = size * rect;
             float playerX = x + playerSize;
 
-            if (playerX + speed > windowsWidth || hits())
+            if (playerX + speed > windowsWidth || hits(entities))
                 return false;
             getComponent<PositionComponent>()->setPositions(std::make_pair(x + speed, y));
             return true;
         };
 
-        bool moveDown(float windowsHeight) {
+        bool moveDown(const std::vector<std::shared_ptr<Entity>> &entities, float windowsHeight) {
             auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
             const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
             float size = getComponent<SizeComponent>()->getSize().second;
@@ -198,17 +226,17 @@ namespace RType {
             float playerSize = size * rect;
             float playerY = y + playerSize;
 
-            if (playerY + speed > windowsHeight || hits())
+            if (playerY + speed > windowsHeight || hits(entities))
                 return false;
             getComponent<PositionComponent>()->setPositions(std::make_pair(x, y + speed));
             return true;
         };
 
-        bool moveUp() {
+        bool moveUp(const std::vector<std::shared_ptr<Entity>> &entities) {
             auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
             const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
 
-            if (y - speed < 0 || hits())
+            if (y - speed < 0 || hits(entities))
                 return false;
             getComponent<PositionComponent>()->setPositions(std::make_pair(x, y - speed));
             return true;

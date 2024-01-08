@@ -59,6 +59,9 @@ namespace RType {
         */
         ~EntityManager() = default;
 
+
+        std::vector<EntityPtr> getEntities() {return _entities;};
+
     private:
         std::vector<EntityPtr> _entities; /**< Vector to store entities managed by the EntityManager. */
     };
