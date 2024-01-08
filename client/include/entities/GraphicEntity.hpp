@@ -9,6 +9,8 @@
 #include "AGraphicEntity.hpp"
 #include <memory>
 #include "../resources/ResourceManager.hpp"
+#include "src/engine/modules/AnimationModule.hpp"
+
 
 namespace RType {
     /**
@@ -20,8 +22,9 @@ namespace RType {
          * @brief Construct a new Graphic Entity object.
          * @param entity Reference to the ECS _entity associated with this graphic _entity.
          * @param path Path to the texture file for this graphic _entity.
+         * @param animationModule Pointer to the Animation Module.
          */
-        explicit GraphicEntity(EntityPtr &entity, const std::string path, const std::string entityName);
+        explicit GraphicEntity(EntityPtr &entity, const std::string path, const std::string entityName, AnimationModule *animationModule);
 
         /**
          * @brief Update the graphic _entity based on the state of the ECS _entity.
@@ -56,5 +59,6 @@ namespace RType {
         float _animationTime; /**< Animation time accumulator. */
         float _animationSpeed; /**< Speed of the animation. */
         ResourceManager _resourceManager; /**< Resource Manager instance. */
+        AnimationModule* _animationModule;  /**< Animation Module instance. */
     };
 }
