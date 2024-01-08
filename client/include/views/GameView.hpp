@@ -28,9 +28,9 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        GameView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
-            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider),
-              _playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, "PlayerName"),
+        GameView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider, std::string userName)
+            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider), _userName(userName),
+              _playerNameText(window, sf::Color::Cyan, 20, 10.0f, 10.0f, ""),
               _scoreText(window, sf::Color::Cyan, 20, window.getSize().x - 200.0f, 10.0f, ""),
               _healthBarText(window, sf::Color::Cyan, 20, 10.0f, 40.0f, ""),
               _background(window, {"client/assets/background/1.png",
@@ -64,6 +64,7 @@ namespace RType {
 
                 _healthBarText.setText("Health " + std::to_string(health));
                 _scoreText.setText("Score " + std::to_string(score));
+                _playerNameText.setText(_userName);
             } else
                 _healthBarText.setText("Player playerEntity not found");
 
@@ -81,5 +82,6 @@ namespace RType {
         Background _background;
         sf::Clock _clock;
         ModuleProvider &_provider;
+        std::string _userName;
     };
 }

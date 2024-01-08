@@ -54,6 +54,8 @@ namespace RType {
 
         [[nodiscard]] bool getConnected() const { return _connected; };
 
+        [[nodiscard]] std::string getUsername() const { return _username; };
+
     private:
         /**
          * @brief Sets up the message handlers for different message types.
