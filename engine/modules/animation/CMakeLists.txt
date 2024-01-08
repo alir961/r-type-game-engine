@@ -2,6 +2,7 @@ add_library(animation_module MODULE
         AnimationModule.cpp
 )
 
+# Set the output directory for the module library
 set_target_properties(animation_module PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
