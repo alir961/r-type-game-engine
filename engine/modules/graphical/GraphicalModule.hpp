@@ -39,7 +39,7 @@ namespace RType {
          * @brief Draw a text like a pro in SFML.
          * @param window, text The window where to draw, the text we want to display.
          */
-        void drawTextPro(sf::RenderWindow &window, const std::string &colorName, unsigned int fontSize, float x, float y, const std::string &fontPath, const std::string &initialText) override;
+        void drawTextPro(sf::RenderWindow &window, const std::string &colorName, unsigned int fontSize, float x, float y, const std::string &initialText) override;
 
         /**
          * @brief Draw a sprite like a pro in SFMl.

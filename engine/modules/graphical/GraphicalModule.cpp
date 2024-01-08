@@ -37,13 +37,14 @@ void RType::GraphicalModule::drawRect(sf::RenderWindow &window, sf::RectangleSha
     window.draw(rect);
 }
 
-void RType::GraphicalModule::drawTextPro(sf::RenderWindow &window, const std::string &colorName, unsigned int fontSize, float x, float y, const std::string &fontPath, const std::string &initialText) {
+void RType::GraphicalModule::drawTextPro(sf::RenderWindow &window, const std::string &colorName, unsigned int fontSize, float x, float y, const std::string &initialText) {
     sf::Text text;
     text.setCharacterSize(fontSize);
     text.setPosition(x, y);
     text.setString(initialText);
     sf::Color textColor = getColorFromString(colorName);
     text.setFillColor(textColor);
+    std::string fontPath = "client/assets/ka1.ttf";
     if (!fontPath.empty()) {
         sf::Font font;
         font.loadFromFile(fontPath);

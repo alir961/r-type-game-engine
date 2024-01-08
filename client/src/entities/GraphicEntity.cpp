@@ -11,7 +11,8 @@
 RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string& path, const std::string& entityName)
     : _entity(entity), AGraphicEntity(entityName) {
       _resourceManager.loadTexture(entityName, path);
-
+      auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
+      _sprite.setScale(entitySize.first, entitySize.second);
 }
 
 void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationModule) {
