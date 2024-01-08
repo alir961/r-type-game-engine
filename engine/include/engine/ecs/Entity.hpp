@@ -16,6 +16,13 @@ namespace RType {
     /**
     * @brief Entity class representing an object in the system.
     */
+
+    enum class Direction {
+        LEFT,
+        RIGHT,
+        DOWN,
+        UP,
+    };
     class Entity {
     public:
         /**
@@ -114,6 +121,20 @@ namespace RType {
         */
         ~Entity() = default;
 
+        bool move(Direction direction, float windowsWidth, float windowsHeight) {
+            switch (direction) {
+                case Direction::LEFT:
+                    return moveLeft();
+                case Direction::RIGHT:
+                    return moveRight(windowsWidth);
+                case Direction::DOWN:
+                    return moveDown(windowsHeight);
+                case Direction::UP:
+                    return moveUp();
+            }
+            return false;
+        };
+
     private:
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the _entity. */
 
@@ -141,8 +162,56 @@ namespace RType {
             }
         }
 
-        bool hits(const std::shared_ptr<Entity> &object) {
+        bool hits() {
             return false;
+        };
+
+        bool moveLeft() {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+
+            if (x - speed < 0 || hits())
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x - speed, y));
+            return true;
+        };
+
+        bool moveRight(float windowsWidth) {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            float size = getComponent<SizeComponent>()->getSize().second;
+            float rect = getComponent<SizeRectComponent>()->getSize().second;
+            float playerSize = size * rect;
+            float playerX = x + playerSize;
+
+            if (playerX + speed > windowsWidth || hits())
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x + speed, y));
+            return true;
+        };
+
+        bool moveDown(float windowsHeight) {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            float size = getComponent<SizeComponent>()->getSize().second;
+            float rect = getComponent<SizeRectComponent>()->getSize().second;
+            float playerSize = size * rect;
+            float playerY = y + playerSize;
+
+            if (playerY + speed > windowsHeight || hits())
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x, y + speed));
+            return true;
+        };
+
+        bool moveUp() {
+            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
+            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+
+            if (y - speed < 0 || hits())
+                return false;
+            getComponent<PositionComponent>()->setPositions(std::make_pair(x, y - speed));
+            return true;
         };
     };
 

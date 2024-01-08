@@ -111,6 +111,21 @@ void RType::UDPServer::handleMove(const RType::Message &receiveMessage) {
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
     EntityPtr entity = session->getEntity();
+    bool move = entity->move(getDirection(receiveMessage.type), session->getWindowWidth(), session->getWindowHeight());
+    std::string status = (move) ? "ok" : "ko";
+    sendMessage(receiveMessage.type, std::format("{} {} {}\n", splitMessage[0], sessionID, status));
+}
 
-    sendMessage(receiveMessage.type, std::format("{} {} ok\n", splitMessage[0], sessionID));
+RType::Direction RType::UDPServer::getDirection(RType::MessageType messageType) {
+    switch (messageType) {
+        case MessageType::MOVE_LEFT:
+            return Direction::LEFT;
+        case MessageType::MOVE_RIGHT:
+            return Direction::RIGHT;
+        case MessageType::MOVE_DOWN:
+            return Direction::DOWN;
+        case MessageType::MOVE_UP:
+            return Direction::UP;
+    }
+    return Direction::RIGHT;
 }

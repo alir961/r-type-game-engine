@@ -44,6 +44,8 @@ namespace RType {
         void handleUnknownMessageType(const Message& receiveMessage);
         void handlePlayerNameMessageType(const Message& receiveMessage);
         void handleMove(const Message& receiveMessage);
+
+        Direction getDirection(MessageType messageType);
     };
 
 }
