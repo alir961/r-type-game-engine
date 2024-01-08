@@ -35,5 +35,7 @@ namespace RType {
         [[nodiscard]] float getWindowWidth() const {return _windowWidth;};
 
         [[nodiscard]] float getWindowHeight() const {return _windowHeight;};
+
+        [[nodiscard]] EntityPtr getEntity() const {return _playerEntity;};
     };
 }

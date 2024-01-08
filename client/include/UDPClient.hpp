@@ -73,6 +73,7 @@ namespace RType {
         bool _stop = false;
         float _windowWidth;
         float _windowHeight;
+
         /**
          * @brief Handles the connection callback message.
          * @param receiveMessage The received message.
@@ -80,34 +81,10 @@ namespace RType {
         void handleConnectCallbackMessage(const Message &receiveMessage);
 
         /**
-         * @brief Handles the player name callback message.
-         * @param receiveMessage The received message.
-         */
-        void handlePlayerNameCallbackMessageType(const Message &receiveMessage);
-
-        /**
-         * @brief Handles the move left callback message.
-         * @param receiveMessage The received message.
-         */
-        void handleMoveLeftCallbackMessageType(const Message &receiveMessage);
-
-        /**
-         * @brief Handles the move right callback message.
-         * @param receiveMessage The received message.
-         */
-        void handleMoveRightCallbackMessageType(const Message &receiveMessage);
-
-        /**
-         * @brief Handles the move down callback message.
-         * @param receiveMessage The received message.
-         */
-        void handleMoveDownCallbackMessageType(const Message &receiveMessage);
-
-        /**
          * @brief Handles the move up callback message.
          * @param receiveMessage The received message.
          */
-        void handleMoveUpCallbackMessageType(const Message &receiveMessage);
+        void addMessageQueue(const Message& receiveMessage);
 
     };
 
