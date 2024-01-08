@@ -17,6 +17,7 @@ void RType::UDPClient::startReceive() {
         } else std::cerr << "Error receiving message: " << error.message() << "\n";
     };
 
+    if (_stop) return;
     _adapter->receiveMessage(receiveData);
 }
 
@@ -24,12 +25,11 @@ void RType::UDPClient::handleReceive(std::size_t bytesReceived) {
     const MessageBuffer &buffer = _adapter->getMessageBuffer();
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
     const Message receiveMessage = Message::deserialize(receivedData);
-    auto handlerIt = _handlers.find(receiveMessage.type);
 
-    if (handlerIt != _handlers.end()) {
-        std::cout << "Handle message: " << receiveMessage.toString() << "\n";
-        handlerIt->second(receiveMessage);
-    } else std::cout << "Unknown message!\n";
+    if (_handlers.contains(receiveMessage.type))
+        _handlers[receiveMessage.type](receiveMessage);
+    else std::cout << "Unknown message!\n";
+    if (_stop) return;
     startReceive();
 }
 
@@ -43,7 +43,7 @@ RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string u
 
     setupHandlers();
 
-    _thread.run([this](const std::string &hostname, int port) {
+    _thread.run([this, hostname, port]() {
         const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::CONNECT)
                 .setData("")
                 .build();
@@ -52,7 +52,22 @@ RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string u
         _adapter->sendData(message);
         startReceive();
         _context.run();
-    }, hostname, port);
+    });
+}
+
+RType::UDPClient::~UDPClient() {
+    const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::DISCONNECT)
+            .setData("")
+            .build();
+
+    try {
+        _stop = true;
+        _adapter->sendData(message);
+        _thread.wait();
+        _socket.close();
+    } catch (const std::exception &e) {
+        std::cerr << "Unable to close UDP client: " << e.what() << "\n";
+    }
 }
 
 void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiveMessage) {
@@ -70,13 +85,15 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
 }
 
 void RType::UDPClient::handlePlayerNameCallbackMessageType(const RType::Message &receiveMessage) {
-    std::lock_guard<std::mutex> lock(_queueMutex);
+    const std::scoped_lock lock(_queueMutex);
+
     _messageQueue.emplace_back(receiveMessage.toString());
 }
 
 void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::UNKNOWN] = [](const Message &) { std::cout << "Unknown message!\n"; };
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
+    _handlers[MessageType::DISCONNECT] = [this](const Message &) { _stop = true; };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
     _handlers[MessageType::MOVE_LEFT] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
     _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { handlePlayerNameCallbackMessageType(msg); };
@@ -85,15 +102,14 @@ void RType::UDPClient::setupHandlers() {
 }
 
 std::string RType::UDPClient::getLastMessage() {
-    std::lock_guard<std::mutex> lock(_queueMutex);
+    const std::scoped_lock lock(_queueMutex);
 
     if (!_messageQueue.empty()) {
         std::string message = _messageQueue.front();
         _messageQueue.erase(_messageQueue.begin());
         return message;
-    } else {
-        return "";
     }
+    return "";
 }
 
 void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_view &data) {
@@ -101,25 +117,30 @@ void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_vi
             .setData(data)
             .build();
     const std::vector<std::byte> binaryData = response.serialize();
+
     _adapter->sendData(asio::buffer(binaryData));
 }
 
 void RType::UDPClient::handleMoveLeftCallbackMessageType(const RType::Message &receiveMessage) {
-    std::lock_guard<std::mutex> lock(_queueMutex);
+    const std::scoped_lock lock(_queueMutex);
+
     _messageQueue.emplace_back(receiveMessage.toString());
 }
 
 void RType::UDPClient::handleMoveRightCallbackMessageType(const RType::Message &receiveMessage) {
-    std::lock_guard<std::mutex> lock(_queueMutex);
+    const std::scoped_lock lock(_queueMutex);
+
     _messageQueue.emplace_back(receiveMessage.toString());
 }
 
 void RType::UDPClient::handleMoveDownCallbackMessageType(const RType::Message &receiveMessage) {
-    std::lock_guard<std::mutex> lock(_queueMutex);
+    const std::scoped_lock lock(_queueMutex);
+
     _messageQueue.emplace_back(receiveMessage.toString());
 }
 
 void RType::UDPClient::handleMoveUpCallbackMessageType(const RType::Message &receiveMessage) {
-    std::lock_guard<std::mutex> lock(_queueMutex);
+    const std::scoped_lock lock(_queueMutex);
+
     _messageQueue.emplace_back(receiveMessage.toString());
 }

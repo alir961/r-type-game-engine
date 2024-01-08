@@ -49,6 +49,7 @@ namespace RType {
                     _viewport.setView(ViewState::OPTIONS);
                 } else if (_quitBox.getActive()) {
                     std::cout << "Quit Game!\n";
+                    _viewport.closeConnectionToServer();
                     _window.close();
                 }
             }

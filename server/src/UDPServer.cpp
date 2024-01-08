@@ -36,6 +36,7 @@ RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &e
         _socket(io_context, endpoint),
         _adapter(_socket, _remoteEndpoint) {
     _handlers[MessageType::CONNECT] = [this](const Message& msg) {handleConnectMessage(msg);};
+    _handlers[MessageType::DISCONNECT] = [this](const Message& ) {sendMessage(MessageType::DISCONNECT, "");};
     _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
     _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameMessageType(msg);};
     _handlers[MessageType::MOVE_LEFT] = [this](const Message& msg) {handleMoveLeftMessageType(msg);};

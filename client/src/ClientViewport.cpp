@@ -108,9 +108,30 @@ void RType::ClientViewport::setView(ViewState state) {
     _viewState = state;
 }
 
-void RType::ClientViewport::addGraphicEntity(std::shared_ptr<AGraphicEntity> entity) {
+void RType::ClientViewport::addGraphicEntity(const GraphicEntityPtr &entity) {
     _graphicEntities.push_back(entity);
-    std::cout << "Added entity with name: " << entity->getEntityName() << std::endl;
+    std::cout << "Added entity with name: " << entity->getEntityName() << "\n";
+}
+
+RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntityByName(const std::string &name) const {
+    for (const auto &entity: _graphicEntities) {
+        if (entity->getEntityName() == name)
+            return entity;
+    }
+    std::cerr << "Unable to find entity " << name << "\n";
+    return nullptr;
+}
+
+sf::Event RType::ClientViewport::getEvent() const {
+    return event;
+}
+
+void RType::ClientViewport::connectToServer(const std::string &hostname, int port, std::string username) {
+    _client = std::make_shared<RType::UDPClient>(hostname, port, username);
+}
+
+void RType::ClientViewport::closeConnectionToServer() {
+    _client = nullptr;
 }
 
 void RType::ClientViewport::updateEntities(float deltaTime) {
@@ -177,11 +198,11 @@ void RType::ClientViewport::handleMessageFromServer() {
 }
 
 void RType::ClientViewport::setHandlers() {
-    _handlers["player"] = [this](const std::vector<std::string> &splitMessage) { newPlayer(splitMessage);};
-    _handlers["move_left"] = [this](const std::vector<std::string> &splitMessage) { moveLeft(splitMessage);};
-    _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage);};
-    _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage);};
-    _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage);};
+    _handlers["player"] = [this](const std::vector<std::string> &splitMessage) { newPlayer(splitMessage); };
+    _handlers["move_left"] = [this](const std::vector<std::string> &splitMessage) { moveLeft(splitMessage); };
+    _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage); };
+    _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage); };
+    _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage); };
 }
 
 void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {

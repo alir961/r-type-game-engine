@@ -124,34 +124,31 @@ namespace RType {
          * @brief Method to add a graphic _entity to the game.
          * @param entity The graphic _entity to be added.
          */
-        void addGraphicEntity(GraphicEntityPtr entity);
+        void addGraphicEntity(const GraphicEntityPtr &entity);
 
         /**
          * @brief Method to retrieve a graphic entity by name
          * @param name The entity name
          * @return Find entity or nullptr
          */
-        GraphicEntityPtr getGraphicEntityByName(const std::string &name) const {
-            for (const auto &entity: _graphicEntities) {
-                if (entity->getEntityName() == name)
-                    return entity;
-            }
-            std::cerr << "Unable tu find entity " << name << "\n";
-            return nullptr;
-        }
+        GraphicEntityPtr getGraphicEntityByName(const std::string &name) const;
 
         /**
          * Retrieve current SFML event
          * @return The event
          */
-        [[nodiscard]] sf::Event getEvent() const {
-            return event;
-        }
+        [[nodiscard]] sf::Event getEvent() const;
 
-        void connectToServer(const std::string& hostname, int port, std::string username) {
-            _client = std::make_shared<RType::UDPClient>(hostname, port, username);
-            //ioContext.run();
-        }
+        /**
+         * Try connecting to the game server
+         *
+         * @param hostname Server hostname
+         * @param port Server port
+         * @param username Player username
+         */
+        void connectToServer(const std::string& hostname, int port, std::string username);
+
+        void closeConnectionToServer();
 
         void handleMessageFromServer();
 

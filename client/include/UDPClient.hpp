@@ -17,7 +17,7 @@ namespace RType {
     /**
      * @brief Type alias for a message handler function.
      */
-    using MessageHandlerFunction = std::function<void(const Message&)>;
+    using MessageHandlerFunction = std::function<void(const Message &)>;
 
     /**
      * @brief Class representing a UDP client for communication.
@@ -32,6 +32,8 @@ namespace RType {
          */
         UDPClient(const std::string &hostname, int port, std::string username);
 
+        ~UDPClient();
+
         /**
          * @brief Initiates the process to start receiving messages.
          */
@@ -40,7 +42,10 @@ namespace RType {
         std::string getLastMessage();
 
         void sendMessage(MessageType type, const std::string_view &data);
-        int getClientID() {return _clientID;};
+
+        [[nodiscard]] int getClientID() const { return _clientID; };
+
+        [[nodiscard]] bool isConnected() const { return _connected; };
 
     private:
         /**
@@ -63,43 +68,45 @@ namespace RType {
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         std::vector<std::string> _messageQueue;
         std::mutex _queueMutex;
-        int _clientID;
+        int _clientID = -1;
+        bool _connected = false;
+        bool _stop = false;
 
         /**
          * @brief Handles the connection callback message.
          * @param receiveMessage The received message.
          */
-        void handleConnectCallbackMessage(const Message& receiveMessage);
+        void handleConnectCallbackMessage(const Message &receiveMessage);
 
         /**
          * @brief Handles the player name callback message.
          * @param receiveMessage The received message.
          */
-        void handlePlayerNameCallbackMessageType(const Message& receiveMessage);
+        void handlePlayerNameCallbackMessageType(const Message &receiveMessage);
 
         /**
          * @brief Handles the move left callback message.
          * @param receiveMessage The received message.
          */
-        void handleMoveLeftCallbackMessageType(const Message& receiveMessage);
+        void handleMoveLeftCallbackMessageType(const Message &receiveMessage);
 
         /**
          * @brief Handles the move right callback message.
          * @param receiveMessage The received message.
          */
-        void handleMoveRightCallbackMessageType(const Message& receiveMessage);
+        void handleMoveRightCallbackMessageType(const Message &receiveMessage);
 
         /**
          * @brief Handles the move down callback message.
          * @param receiveMessage The received message.
          */
-        void handleMoveDownCallbackMessageType(const Message& receiveMessage);
+        void handleMoveDownCallbackMessageType(const Message &receiveMessage);
 
         /**
          * @brief Handles the move up callback message.
          * @param receiveMessage The received message.
          */
-        void handleMoveUpCallbackMessageType(const Message& receiveMessage);
+        void handleMoveUpCallbackMessageType(const Message &receiveMessage);
 
     };
 
