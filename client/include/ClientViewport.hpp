@@ -9,6 +9,7 @@
 
 #include "views/IView.hpp"
 #include "UDPClient.hpp"
+#include <engine/modules/animation/IAnimationModule.hpp>
 #include <engine/modules/ModuleProvider.hpp>
 #include <SFML/System/Clock.hpp>
 #include <engine/Logger.hpp>
@@ -27,6 +28,7 @@ namespace RType {
     class GameView;
     class LoginView;
     class GraphicalModule;
+    class AnimationModule;
 
     constexpr uint32_t WINDOW_WIDTH = 1920;
     constexpr uint32_t WINDOW_HEIGHT = 1080;
@@ -64,6 +66,7 @@ namespace RType {
         UDPClientPtr _client;
         sf::Event event{};
         IGraphicalModule *_graphicalModule;
+        IAnimationModule *_animationModule;
         ModuleProvider _provider = ModuleProvider();
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;

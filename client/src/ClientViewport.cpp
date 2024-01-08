@@ -6,10 +6,12 @@
 */
 
 #include "../include/ClientViewport.hpp"
+#include "engine/modules/animation/IAnimationModule.hpp"
 
 RType::ClientViewport::ClientViewport() {
     _window.setFramerateLimit(WINDOW_FPS);
     _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
+    _animationModule = _provider.loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
     _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
     setHandlers();
 }

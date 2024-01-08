@@ -28,7 +28,7 @@ set(HEADER_FILES
         include/engine/modules/ModuleLoader.hpp
         include/engine/modules/IGraphicalModule.hpp
         include/engine/modules/ModuleProvider.hpp
-        include/engine/modules/animations/AnimationModule.hpp
+        include/engine/modules/animation/IAnimationModule.hpp
 )
 
 set(SOURCE_FILES
