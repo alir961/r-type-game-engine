@@ -11,18 +11,22 @@ RType::ClientViewport::ClientViewport() {
     _window.setFramerateLimit(WINDOW_FPS);
     _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
     _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+    setHandlers();
 }
 
-void RType::ClientViewport::handleInput(const GraphicEntityPtr &entity) const {
-    sf::Sprite sprite = entity->getSprite();
-    EntityPtr gameEntity = entity->getEntity();
-
-    if (_viewState != ViewState::GAME)
-        return;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) entity->moveRight(sprite, gameEntity);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) entity->moveLeft(sprite, gameEntity);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) entity->moveUp(sprite, gameEntity);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) entity->moveDown(sprite, gameEntity);
+void RType::ClientViewport::handleInput() const {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        _client->sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {}\n", _client->getClientID()));
+    };
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        _client->sendMessage(MessageType::MOVE_LEFT, std::format("move_left {}\n", _client->getClientID()));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        _client->sendMessage(MessageType::MOVE_UP, std::format("move_up {}\n", _client->getClientID()));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        _client->sendMessage(MessageType::MOVE_DOWN, std::format("move_down {}\n", _client->getClientID()));
+    }
 }
 
 void RType::ClientViewport::basicInput() {
@@ -48,7 +52,7 @@ void RType::ClientViewport::basicInput() {
     }
 }
 
-void RType::ClientViewport::launchWindow(const GraphicEntityPtr &entity) {
+void RType::ClientViewport::launchWindow() {
     const float fixedTimeStep = 1.F / WINDOW_FPS;
     float accumulatedTime = 0.F;
 
@@ -60,8 +64,11 @@ void RType::ClientViewport::launchWindow(const GraphicEntityPtr &entity) {
             }
             basicInput();
         }
-        handleInput(entity);
-
+        if (_viewState == ViewState::GAME) {
+            handleMessageFromServer();
+            handleInput();
+        }
+        _selectedView->update();
         accumulatedTime += _animationClock.restart().asSeconds();
         while (accumulatedTime >= fixedTimeStep) {
             updateEntities(fixedTimeStep);
@@ -121,24 +128,106 @@ void RType::ClientViewport::draw() {
 
 int RType::ClientViewport::start() {
     try {
-        RType::EntityManager entityManager;
-
-        auto starshipEntity = entityManager.createEntity();
-        starshipEntity->addComponent<RType::SpeedComponent>(10);
-        starshipEntity->addComponent<RType::HealthComponent>(100);
-        starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(300, 30));
-        starshipEntity->addComponent<RType::SizeComponent>(2.0f, 2.0f);
-        starshipEntity->addComponent<RType::PlayerComponent>(true);
-
-        std::shared_ptr<RType::GraphicEntity> graphicStarship;
-        if (starshipEntity->hasBaseComponents()) {
-            graphicStarship = RType::GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
-            addGraphicEntity(graphicStarship);
-            logInformation("Starting game view...");
-            launchWindow(graphicStarship);
-        }
+        logInformation("Starting game view...");
+        launchWindow();
     } catch (const std::exception &e) {
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
+}
+
+void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int speed = std::stoi(splitMessage[3]);
+    int health = std::stoi(splitMessage[5]);
+    int positionX = std::stoi(splitMessage[7]);
+    int positionY = std::stoi(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    auto starshipEntity = _entityManager.createEntity();
+    std::shared_ptr<RType::GraphicEntity> graphicStarship;
+
+    starshipEntity->addComponent<RType::SpeedComponent>(speed);
+    starshipEntity->addComponent<RType::HealthComponent>(health);
+    starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    starshipEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    starshipEntity->addComponent<RType::PlayerComponent>(true);
+    if (starshipEntity->hasBaseComponents()) {
+        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
+        if (sessionID == _client->getClientID())
+            _playerEntity = graphicStarship;
+        addGraphicEntity(graphicStarship);
+    }
+}
+
+void RType::ClientViewport::handleMessageFromServer() {
+    std::string message = _client->getLastMessage();
+    std::vector<std::string> splitMessage;
+
+    if (message == "") return;
+    splitMessage = Split::split(message, " \n");
+    auto handlerIt = _handlers.find(splitMessage[0]);
+
+    if (handlerIt != _handlers.end()) {
+        std::cout << "Handle message: " << message << "\n";
+        handlerIt->second(splitMessage);
+    } else {
+        std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
+    }
+}
+
+void RType::ClientViewport::setHandlers() {
+    _handlers["player"] = [this](const std::vector<std::string> &splitMessage) { newPlayer(splitMessage);};
+    _handlers["move_left"] = [this](const std::vector<std::string> &splitMessage) { moveLeft(splitMessage);};
+    _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage);};
+    _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage);};
+    _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage);};
+}
+
+void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
+    sf::Sprite sprite = _playerEntity->getSprite();
+    EntityPtr gameEntity = _playerEntity->getEntity();
+    int sessionID = std::stoi(splitMessage[1]);
+    std::string status = splitMessage[2];
+
+    if (status == "ok")
+        _playerEntity->moveLeft(sprite, gameEntity);
+    else
+        setView(ViewState::DEAD);
+}
+
+void RType::ClientViewport::moveRight(const std::vector<std::string> &splitMessage) {
+    sf::Sprite sprite = _playerEntity->getSprite();
+    EntityPtr gameEntity = _playerEntity->getEntity();
+    int sessionID = std::stoi(splitMessage[1]);
+    std::string status = splitMessage[2];
+
+    if (status == "ok")
+        _playerEntity->moveRight(sprite, gameEntity);
+    else
+        setView(ViewState::DEAD);
+}
+
+void RType::ClientViewport::moveDown(const std::vector<std::string> &splitMessage) {
+    sf::Sprite sprite = _playerEntity->getSprite();
+    EntityPtr gameEntity = _playerEntity->getEntity();
+    int sessionID = std::stoi(splitMessage[1]);
+    std::string status = splitMessage[2];
+
+    if (status == "ok")
+        _playerEntity->moveDown(sprite, gameEntity);
+    else
+        setView(ViewState::DEAD);
+}
+
+void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage) {
+    sf::Sprite sprite = _playerEntity->getSprite();
+    EntityPtr gameEntity = _playerEntity->getEntity();
+    int sessionID = std::stoi(splitMessage[1]);
+    std::string status = splitMessage[2];
+
+    if (status == "ok")
+        _playerEntity->moveUp(sprite, gameEntity);
+    else
+        setView(ViewState::DEAD);
 }

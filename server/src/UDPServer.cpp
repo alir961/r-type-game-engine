@@ -38,6 +38,10 @@ RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &e
     _handlers[MessageType::CONNECT] = [this](const Message& msg) {handleConnectMessage(msg);};
     _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
     _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameMessageType(msg);};
+    _handlers[MessageType::MOVE_LEFT] = [this](const Message& msg) {handleMoveLeftMessageType(msg);};
+    _handlers[MessageType::MOVE_RIGHT] = [this](const Message& msg) {handleMoveRightMessageType(msg);};
+    _handlers[MessageType::MOVE_DOWN] = [this](const Message& msg) {handleMoveDownMessageType(msg);};
+    _handlers[MessageType::MOVE_UP] = [this](const Message& msg) {handleMoveUpMessageType(msg);};
     startReceive();
 }
 
@@ -68,8 +72,7 @@ void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receive
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
     session->setPlayerName(playerName);
-    session->setPlayerEntity(createPlayerEntity());
-    sendMessage(MessageType::PLAYER_NAME, std::format("player {}", sessionID));
+    session->setPlayerEntity(createPlayerEntity(sessionID));
 }
 
 void RType::UDPServer::sendMessage(MessageType type, const std::string_view &data) {
@@ -86,7 +89,7 @@ void RType::UDPServer::handleMoveLeftMessageType(const RType::Message &receiveMe
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
-    std::cout << session->getPlayerName() << ": Move Left!\n";
+    sendMessage(MessageType::MOVE_LEFT, std::format("move_left {} ok\n", sessionID));
 }
 
 void RType::UDPServer::handleMoveRightMessageType(const RType::Message &receiveMessage) {
@@ -95,7 +98,7 @@ void RType::UDPServer::handleMoveRightMessageType(const RType::Message &receiveM
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
-    std::cout << session->getPlayerName() << ": Move Right!\n";
+    sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {} ok\n", sessionID));
 }
 
 void RType::UDPServer::handleMoveDownMessageType(const RType::Message &receiveMessage) {
@@ -104,7 +107,7 @@ void RType::UDPServer::handleMoveDownMessageType(const RType::Message &receiveMe
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
-    std::cout << session->getPlayerName() << ": Move Down!\n";
+    sendMessage(MessageType::MOVE_DOWN, std::format("move_down {} ok\n", sessionID));
 }
 
 void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMessage) {
@@ -113,16 +116,18 @@ void RType::UDPServer::handleMoveUpMessageType(const RType::Message &receiveMess
     int sessionID = std::stoi(splitMessage[1]);
     std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
 
-    std::cout << session->getPlayerName() << ": Move Up!\n";
+    sendMessage(MessageType::MOVE_DOWN, std::format("move_up {} ok\n", sessionID));
 }
 
-RType::EntityPtr RType::UDPServer::createPlayerEntity() {
+RType::EntityPtr RType::UDPServer::createPlayerEntity(int sessionID) {
     EntityPtr playerEntity = _entityManager.createEntity();
+    std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2", sessionID);
 
     playerEntity->addComponent<SpeedComponent>(10);
     playerEntity->addComponent<HealthComponent>(100);
     playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
     playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
     playerEntity->addComponent<PlayerComponent>(true);
+    sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
 }
