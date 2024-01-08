@@ -148,11 +148,17 @@ namespace RType {
          */
         void connectToServer(const std::string& hostname, int port, std::string username);
 
+        /**
+         * Destroy network connection and wait thread
+         */
         void closeConnectionToServer();
 
-        void handleMessageFromServer();
-
+        /**
+         * Assign each MessageType to a corresponding action
+         */
         void setHandlers();
+
+        void handleMessageFromServer();
 
         void newPlayer(const std::vector<std::string> &splitMessage);
         void moveLeft(const std::vector<std::string> &splitMessage);

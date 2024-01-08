@@ -157,6 +157,22 @@ int RType::ClientViewport::start() {
     return EXIT_SUCCESS;
 }
 
+void RType::ClientViewport::handleMessageFromServer() {
+    std::string message = _client->getLastMessage();
+    std::vector<std::string> splitMessage;
+
+    if (message == "") return;
+    splitMessage = Split::split(message, " \n");
+    auto handlerIt = _handlers.find(splitMessage[0]);
+
+    if (handlerIt != _handlers.end()) {
+        std::cout << "Handle message: " << message << "\n";
+        handlerIt->second(splitMessage);
+    } else {
+        std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
+    }
+}
+
 void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessage) {
     int sessionID = std::stoi(splitMessage[1]);
     int speed = std::stoi(splitMessage[3]);
@@ -178,22 +194,6 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
         if (sessionID == _client->getClientID())
             _playerEntity = graphicStarship;
         addGraphicEntity(graphicStarship);
-    }
-}
-
-void RType::ClientViewport::handleMessageFromServer() {
-    std::string message = _client->getLastMessage();
-    std::vector<std::string> splitMessage;
-
-    if (message == "") return;
-    splitMessage = Split::split(message, " \n");
-    auto handlerIt = _handlers.find(splitMessage[0]);
-
-    if (handlerIt != _handlers.end()) {
-        std::cout << "Handle message: " << message << "\n";
-        handlerIt->second(splitMessage);
-    } else {
-        std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
     }
 }
 

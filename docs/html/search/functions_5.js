@@ -13,7 +13,7 @@ var searchData=
   ['getevent_10',['getEvent',['../classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0',1,'RType::ClientViewport']]],
   ['getfont_11',['getfont',['../classRType_1_1TextBox.html#a4f121f0982e9212407bcbbeb7abead69',1,'RType::TextBox::getFont()'],['../classRType_1_1ResourceManager.html#afa8c2eb0fb0b20baa40243f244757cfe',1,'RType::ResourceManager::getFont()']]],
   ['getfps_12',['GetFPS',['../classRType_1_1AMetricsModule.html#a7e8d4563316ce9b3553598d0f92c4eb6',1,'RType::AMetricsModule']]],
-  ['getgraphicentitybyname_13',['getGraphicEntityByName',['../classRType_1_1ClientViewport.html#ac8add3f1d7feb3f4659edadf3ebb48bf',1,'RType::ClientViewport']]],
+  ['getgraphicentitybyname_13',['getGraphicEntityByName',['../classRType_1_1ClientViewport.html#ac20bcba899c7dd8e95c4ed958dccd32e',1,'RType::ClientViewport']]],
   ['gethealth_14',['getHealth',['../classRType_1_1HealthComponent.html#a5e78aaefcb1c1772b14d597a4f3904bd',1,'RType::HealthComponent']]],
   ['gethistory_15',['getHistory',['../classRType_1_1ConsoleModule.html#a29f424e3b669690849519bf0ec463acf',1,'RType::ConsoleModule']]],
   ['getinput_16',['getInput',['../classRType_1_1ConsoleModule.html#a1f5e319d13b676b050cf7dcdaddc8384',1,'RType::ConsoleModule']]],
