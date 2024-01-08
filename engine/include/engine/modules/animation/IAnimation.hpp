@@ -8,8 +8,8 @@
 #pragma once
 
 namespace RType {
-    class Animation {
+    class IAnimation {
     public:
-        Animation() = default;
+        IAnimation() = default;
     };;
 }

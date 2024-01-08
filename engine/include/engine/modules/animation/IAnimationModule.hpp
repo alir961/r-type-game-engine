@@ -11,7 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "engine/ecs/Entity.hpp"
-#include "Animation.hpp"
+#include "IAnimation.hpp"
 
 namespace RType {
 
@@ -20,6 +20,6 @@ namespace RType {
         void load() override = 0;
         void unload() override = 0;
 
-        virtual void addAnimation(const std::string &entityName, const std::shared_ptr<Animation> &animation) = 0;
+        virtual void addAnimation(const std::string &entityName, const std::shared_ptr<IAnimation> &animation) = 0;
     };
 }

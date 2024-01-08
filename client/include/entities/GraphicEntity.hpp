@@ -20,7 +20,7 @@ namespace RType {
          * @brief Construct a new Graphic Entity object.
          * @param entity Reference to the ECS _entity associated with this graphic _entity.
          * @param path Path to the texture file for this graphic _entity.
-         * @param animationModule Pointer to the Animation Module.
+         * @param animationModule Pointer to the IAnimation Module.
          */
         explicit GraphicEntity(EntityPtr &entity, const std::string &path, const std::string &entityName);
 
@@ -54,7 +54,7 @@ namespace RType {
         EntityPtr _entity; /**< Reference to the ECS _entity. */
         sf::Sprite _sprite; /**< Sprite of the graphical _entity. */
         sf::IntRect _currentFrame; /**< Current frame of the graphical _entity. */
-        float _animationTime; /**< Animation time accumulator. */
+        float _animationTime; /**< IAnimation time accumulator. */
         float _animationSpeed; /**< Speed of the animation. */
         ResourceManager _resourceManager; /**< Resource Manager instance. */
     };

@@ -11,7 +11,7 @@
 #include <map>
 #include <vector>
 #include "engine/modules/animation/IAnimationModule.hpp"
-#include "engine/modules/animation/Animation.hpp"
+#include "engine/modules/animation/IAnimation.hpp"
 
 namespace RType {
     class AnimationModule :  public IAnimationModule {
@@ -21,9 +21,9 @@ namespace RType {
 
         AnimationModule() = default;
 
-        void addAnimation(const std::string &entityName, const std::shared_ptr<Animation> &animation) override;
+        void addAnimation(const std::string &entityName, const std::shared_ptr<IAnimation> &animation) override;
     private:
-        std::map<std::string, std::shared_ptr<Animation>> _animations;
+        std::map<std::string, std::shared_ptr<IAnimation>> _animations;
     };
 
 }

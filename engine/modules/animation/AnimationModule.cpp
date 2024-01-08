@@ -25,7 +25,7 @@ void RType::AnimationModule::unload() {
     std::cout << "Unload AnimationModule...\n";
 }
 
-void RType::AnimationModule::addAnimation(const std::string &entityName, const std::shared_ptr<Animation> &animation) {
+void RType::AnimationModule::addAnimation(const std::string &entityName, const std::shared_ptr<IAnimation> &animation) {
     _animations.try_emplace(entityName, animation);
 }
 
