@@ -42,8 +42,9 @@ namespace RType {
                     frame.left = 101;
                     break;
             }
+            setCurrentFrame(frame);
+            return getCurrentFrame();
         }
-    };
     private:
         Coordinates _currentFrame;
     };
