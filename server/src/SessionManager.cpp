@@ -14,8 +14,7 @@ RType::Session RType::SessionManager::getClientSession(int sessionId) {
     return session->second;
 }
 
-int RType::SessionManager::setNewSession() {
+int RType::SessionManager::getNextSessionId() {
     _sessionMap[_lastSessionID] = std::make_shared<Client>();
-    _lastSessionID += 1;
-    return _lastSessionID - 1;
+    return (_lastSessionID++);
 }

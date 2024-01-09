@@ -12,40 +12,29 @@
 #include <engine/ecs/EntityManager.hpp>
 #include <iostream>
 #include "SessionManager.hpp"
+#include "network/MessageParser.hpp"
+#include "game/EntityFactory.hpp"
 
 namespace RType {
 
     class UDPServer {
     public:
-
         UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint);
 
         ~UDPServer();
 
-        using MessageHandlerFunction = std::function<void(const Message&)>;
-
     private:
-        void startReceive();
-
-        void handleReceive(std::size_t bytesReceived);
-
-        void sendMessage(MessageType type, const std::string_view &data);
-
-        EntityPtr createPlayerEntity(int sessionID);
-
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
         SessionManager _sessions;
         EntityManager _entityManager;
-        std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
+        MessageParser _parser = MessageParser(&_sessions);
+        EntityFactory _factory = EntityFactory(&_entityManager);
 
-        void handleConnectMessage(const Message& receiveMessage);
-        void handleUnknownMessageType(const Message& receiveMessage);
-        void handlePlayerNameMessageType(const Message& receiveMessage);
-        void handleMove(const Message& receiveMessage);
+        void startReceive();
 
-        Direction getDirection(MessageType messageType);
+        void handleReceive(std::size_t bytesReceived);
     };
 
 }

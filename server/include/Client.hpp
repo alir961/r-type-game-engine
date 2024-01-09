@@ -12,6 +12,7 @@
 #include <engine/ecs/Entity.hpp>
 
 namespace RType {
+
     class Client {
     private:
         std::string _playerName;
@@ -38,4 +39,5 @@ namespace RType {
 
         [[nodiscard]] EntityPtr getEntity() const {return _playerEntity;};
     };
+
 }

@@ -21,11 +21,11 @@ namespace RType {
     private:
         std::map<int, Session> _sessionMap;
         int _lastSessionID = 0;
+
     public:
         SessionManager() = default;
 
-        void setLastSessionID(int sessionID) {_lastSessionID = sessionID;};
-        int setNewSession();
+        int getNextSessionId();
 
         Session getClientSession(int sessionId);
     };
