@@ -103,10 +103,10 @@ void RType::MessageParser::handleShoot(const RType::Message &receiveMessage) {
 
 RType::EntityPtr RType::MessageParser::createBulletEntity(int sessionID) {
     const std::string message = std::format("shoot {} speed 10 damage 20 ok", sessionID);
-    EntityPtr playerEntity = _game->getFactory().createBullet();
+    EntityPtr bulletEntity = _game->getFactory().createBullet();
 
-    sendMessage(MessageType::PLAYER_NAME, message);
-    return playerEntity;
+    sendMessage(MessageType::SHOOT, message);
+    return bulletEntity;
 }
 
 RType::Direction RType::MessageParser::getDirection(RType::MessageType type) {

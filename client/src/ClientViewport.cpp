@@ -275,7 +275,7 @@ void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) 
     bulletEntity->addComponent<RType::DamageComponent>(damage);
     bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(_playerEntity->getEntity()->getComponent<PositionComponent>()->getPositions().first, _playerEntity->getEntity()->getComponent<PositionComponent>()->getPositions().second));
     bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
-    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet5.gif", "playerBullet");
+    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet5.gif", "playerStarship");
     addGraphicEntity(graphicBullet);
     sf::Sprite sprite = graphicBullet->getSprite();
     EntityPtr gameEntity = graphicBullet->getEntity();
