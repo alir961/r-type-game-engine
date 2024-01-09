@@ -265,5 +265,20 @@ void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage)
 }
 
 void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
+    auto bulletEntity = _entityManager.createEntity();
+    std::shared_ptr<RType::GraphicEntity> graphicBullet;
+    int speed = std::stoi(splitMessage[3]);
+    int damage = std::stoi(splitMessage[5]);
+    std::string status = splitMessage[6];
 
+    bulletEntity->addComponent<RType::SpeedComponent>(speed);
+    bulletEntity->addComponent<RType::DamageComponent>(damage);
+    bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(_playerEntity->getEntity()->getComponent<PositionComponent>()->getPositions().first, _playerEntity->getEntity()->getComponent<PositionComponent>()->getPositions().second));
+    bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet5.gif", "playerBullet");
+    addGraphicEntity(graphicBullet);
+    sf::Sprite sprite = graphicBullet->getSprite();
+    EntityPtr gameEntity = graphicBullet->getEntity();
+    if (status == "ok")
+        graphicBullet->moveRight(sprite, gameEntity);
 }
