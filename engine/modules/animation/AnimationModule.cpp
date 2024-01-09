@@ -25,6 +25,7 @@ void RType::AnimationModule::load() {
     addAnimation("greenPlayer");
     addAnimation("redPlayer");
     addAnimation("bluePlayer");
+    addAnimation("bulletPlayer");
 }
 
 void RType::AnimationModule::unload() {

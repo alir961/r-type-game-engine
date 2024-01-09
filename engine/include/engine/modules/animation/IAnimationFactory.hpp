@@ -25,6 +25,8 @@ namespace RType {
                 return std::make_shared<PlayerAnimation>(0, 53);
             if (entityName == "bluePlayer")
                 return std::make_shared<PlayerAnimation>(0, 70);
+            if (entityName == "bulletPlayer")
+                return std::make_shared<PlayerAnimation>(101, 118);
             return std::make_shared<PlayerAnimation>(0, 19);
         }
     };
