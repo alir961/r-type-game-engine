@@ -23,7 +23,7 @@ namespace RType {
         AnimationModule() = default;
 
         void addAnimation(const std::string &entityName) override;
-        sf::FloatRect update(const std::string &entityName, float deltaTime) override;
+        sf::FloatRect update(const std::string &entityName) override;
     private:
         std::map<std::string, std::shared_ptr<IAnimation>> _animations;
     };

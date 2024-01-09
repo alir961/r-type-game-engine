@@ -37,10 +37,10 @@ void RType::AnimationModule::addAnimation(const std::string &entityName) {
     _animations.try_emplace(entityName, animation);
 }
 
-sf::FloatRect RType::AnimationModule::update(const std::string &entityName, float deltaTime) {
+sf::FloatRect RType::AnimationModule::update(const std::string &entityName) {
     auto animIter = _animations.find(entityName);
     if (animIter != _animations.end())
-        return animIter->second->update(deltaTime);
+        return animIter->second->update();
     return {};
 }
 

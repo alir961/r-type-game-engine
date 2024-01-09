@@ -12,6 +12,6 @@ namespace RType {
     public:
         virtual ~IAnimation() = default;
 
-        virtual sf::FloatRect update(float deltaTime) = 0;
+        virtual sf::FloatRect update() = 0;
     };;
 }

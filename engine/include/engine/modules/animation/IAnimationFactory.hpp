@@ -18,14 +18,14 @@ namespace RType {
             if (entityName == "turquoisePlayer")
                 return std::make_shared<PlayerAnimation>(0, 0);
             if (entityName == "purplePlayer")
-                return std::make_shared<PlayerAnimation>(0, PLAYER_HEIGHT * 1);
+                return std::make_shared<PlayerAnimation>(0, 19);
             if (entityName == "greenPlayer")
-                return std::make_shared<PlayerAnimation>(0, PLAYER_HEIGHT * 2);
+                return std::make_shared<PlayerAnimation>(0, 36);
             if (entityName == "redPlayer")
-                return std::make_shared<PlayerAnimation>(0, PLAYER_HEIGHT * 3);
+                return std::make_shared<PlayerAnimation>(0, 53);
             if (entityName == "bluePlayer")
-                return std::make_shared<PlayerAnimation>(0, PLAYER_HEIGHT * 4);
-            return std::make_shared<PlayerAnimation>(0, 0);
+                return std::make_shared<PlayerAnimation>(0, 70);
+            return std::make_shared<PlayerAnimation>(0, 19);
         }
     };
 }

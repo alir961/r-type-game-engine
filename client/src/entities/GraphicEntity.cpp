@@ -16,9 +16,15 @@ RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string& path, 
 
 void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationModule) {
     auto position = _entity->getComponent<PositionComponent>();
-    auto rect = static_cast<sf::IntRect>(animationModule->update(getEntityName(), deltaTime));
+    sf::IntRect rect;
 
-    _sprite.setTextureRect(rect);
+    _animationTime += deltaTime;
+    if (_animationTime >= _animationSpeed) {
+        rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
+        _sprite.setTextureRect(rect);
+        _animationTime = 0.0f;
+
+    }
     if (position) {
         _sprite.setPosition(float(position->getPositions().first),
                             float(position->getPositions().second));
@@ -31,7 +37,7 @@ void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *grap
 
 void RType::GraphicEntity::loadSprite(RType::IAnimationModule *animationModule) {
     auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
-    auto rect = static_cast<sf::IntRect>(animationModule->update(getEntityName(), 0));
+    auto rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
 
     _sprite.setTexture(_resourceManager.getTexture(getEntityName()));
     _sprite.setTextureRect(rect);

@@ -54,6 +54,8 @@ namespace RType {
     private:
         EntityPtr _entity; /**< Reference to the ECS _entity. */
         sf::Sprite _sprite; /**< Sprite of the graphical _entity. */
+        float _animationTime = 0.0F; /**< Animation time accumulator. */
+        float _animationSpeed = 0.1F; /**< Speed of the animation. */
         ResourceManager _resourceManager; /**< Resource Manager instance. */
     };
 }
