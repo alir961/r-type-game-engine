@@ -6,6 +6,7 @@
 */
 
 #pragma once
+
 #include "Entity.hpp"
 #include <iostream>
 #include <vector>
@@ -19,6 +20,16 @@ namespace RType {
     */
     class EntityManager {
     public:
+        /**
+        * @brief Constructor for the EntityManager.
+        */
+        EntityManager() = default;
+
+        /**
+        * @brief Destructor for the EntityManager, cleaning up all associated entities.
+        */
+        ~EntityManager() = default;
+
         /**
         * @brief Create a new _entity and add it to the EntityManager.
         * @return Shared pointer to the created _entity.
@@ -35,32 +46,21 @@ namespace RType {
         */
         void destroyEntity(EntityPtr entity) {
             auto it = std::find(_entities.begin(), _entities.end(), entity);
-            if (it != _entities.end()) {
+
+            if (it != _entities.end())
                 _entities.erase(it);
-            }
         }
 
         /**
         * @brief Update all entities in the EntityManager.
         */
-        void updateEntities() {
+        void updateEntities() const {
             for (const auto &entity: _entities) {
                 entity->updateComponents();
             }
         }
 
-        /**
-        * @brief Constructor for the EntityManager.
-        */
-        EntityManager() = default;
-
-        /**
-        * @brief Destructor for the EntityManager, cleaning up all associated entities.
-        */
-        ~EntityManager() = default;
-
-
-        std::vector<EntityPtr> getEntities() {return _entities;};
+        [[nodiscard]] std::vector<EntityPtr> getEntities() const { return _entities; };
 
     private:
         std::vector<EntityPtr> _entities; /**< Vector to store entities managed by the EntityManager. */

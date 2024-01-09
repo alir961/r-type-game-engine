@@ -8,8 +8,8 @@
 #include "../include/UDPServer.hpp"
 #include <engine/network/NetworkMessage.hpp>
 
-RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint) :
-        _socket(io_context, endpoint),
+RType::UDPServer::UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint) :
+        _socket(ioContext, endpoint),
         _adapter(_socket, _remoteEndpoint) {
     startReceive();
 }

@@ -10,6 +10,7 @@
 #include "engine/network/NetworkMessage.hpp"
 #include "engine/network/UDPAdapter.hpp"
 #include "../SessionManager.hpp"
+#include "../game/GameLogic.hpp"
 
 namespace RType {
 
@@ -19,6 +20,8 @@ namespace RType {
     private:
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
         SessionManager *_sessions;
+        GameLogic *_game;
+        UDPAdapter *_adapter;
 
         void handleConnectMessage(const Message &receiveMessage);
 
@@ -26,20 +29,16 @@ namespace RType {
 
         void handlePlayerNameMessageType(const Message &receiveMessage);
 
-        void handleMoveLeftMessageType(const Message &receiveMessage);
-
-        void handleMoveRightMessageType(const Message &receiveMessage);
-
-        void handleMoveDownMessageType(const Message &receiveMessage);
-
-        void handleMoveUpMessageType(const Message &receiveMessage);
+        void handleMove(const Message &receiveMessage);
 
         void sendMessage(MessageType type, const std::string_view &data);
 
         EntityPtr createPlayerEntity(int sessionID);
 
+        static Direction getDirection(MessageType type);
+
     public:
-        explicit MessageParser(SessionManager *sessions);
+        explicit MessageParser(SessionManager *sessions, GameLogic *game, UDPAdapter *adapter);
 
         void parseMessage(const MessageBuffer &buffer, std::size_t bytesReceived);
     };

@@ -9,56 +9,30 @@
 #include "../../include/SessionManager.hpp"
 #include "engine/tools/Split.hpp"
 
-RType::MessageParser::MessageParser(SessionManager *sessions) : _sessions(sessions) {
-    _handlers[MessageType::CONNECT] = [this](const Message& msg) {handleConnectMessage(msg);};
-    _handlers[MessageType::DISCONNECT] = [this](const Message& ) {sendMessage(MessageType::DISCONNECT, "");};
-    _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
-    _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameMessageType(msg);};
-    _handlers[MessageType::MOVE_LEFT] = [this](const Message& msg) {handleMoveLeftMessageType(msg);};
-    _handlers[MessageType::MOVE_RIGHT] = [this](const Message& msg) {handleMoveRightMessageType(msg);};
-    _handlers[MessageType::MOVE_DOWN] = [this](const Message& msg) {handleMoveDownMessageType(msg);};
-    _handlers[MessageType::MOVE_UP] = [this](const Message& msg) {handleMoveUpMessageType(msg);};
+RType::MessageParser::MessageParser(SessionManager *sessions, GameLogic *game, UDPAdapter *adapter) :
+        _sessions(sessions),
+        _game(game),
+        _adapter(adapter) {
+    _handlers[MessageType::CONNECT] = [this](const Message &msg) { handleConnectMessage(msg); };
+    _handlers[MessageType::DISCONNECT] = [this](const Message &) { sendMessage(MessageType::DISCONNECT, ""); };
+    _handlers[MessageType::UNKNOWN] = [this](const Message &msg) { handleUnknownMessageType(msg); };
+    _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { handlePlayerNameMessageType(msg); };
+    _handlers[MessageType::MOVE_LEFT] = [this](const Message &msg) { handleMove(msg); };
+    _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { handleMove(msg); };
+    _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { handleMove(msg); };
+    _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handleMove(msg); };
 }
 
-void RType::MessageParser::handleMoveLeftMessageType(const RType::Message &receiveMessage) {
-    const std::string message = receiveMessage.toString();
+void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
     std::vector<std::string> splitMessage = Split::split(message, " \n");
-    int sessionID = std::stoi(splitMessage[1]);
-    const RType::Session session = _sessions->getClientSession(sessionID);
-
-    sendMessage(MessageType::MOVE_LEFT, std::format("move_left {} ok\n", sessionID));
-}
-
-void RType::MessageParser::handleMoveRightMessageType(const RType::Message &receiveMessage) {
-    const std::string message = receiveMessage.toString();
-    std::vector<std::string> splitMessage = Split::split(message, " \n");
-    int sessionID = std::stoi(splitMessage[1]);
-    const RType::Session session = _sessions->getClientSession(sessionID);
-
-    sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {} ok\n", sessionID));
-}
-
-void RType::MessageParser::handleMoveDownMessageType(const RType::Message &receiveMessage) {
-    const std::string message = receiveMessage.toString();
-    std::vector<std::string> splitMessage = Split::split(message, " \n");
-    int sessionID = std::stoi(splitMessage[1]);
-    const RType::Session session = _sessions->getClientSession(sessionID);
-
-    sendMessage(MessageType::MOVE_DOWN, std::format("move_down {} ok\n", sessionID));
-}
-
-void RType::MessageParser::handleMoveUpMessageType(const RType::Message &receiveMessage) {
-    const std::string message = receiveMessage.toString();
-    std::vector<std::string> splitMessage = Split::split(message, " \n");
-    int sessionID = std::stoi(splitMessage[1]);
-    const RType::Session session = _sessions->getClientSession(sessionID);
-
-    sendMessage(MessageType::MOVE_DOWN, std::format("move_up {} ok\n", sessionID));
-}
-
-void RType::MessageParser::handleConnectMessage(const RType::Message &) {
     int sessionId = _sessions->getNextSessionId();
+    float windowWidth = std::stof(splitMessage[1]);
+    float windowHeight = std::stof(splitMessage[2]);
+    std::shared_ptr<Client> session = _sessions->getClientSession(sessionId);
 
+    session->setWindowWidth(windowWidth);
+    session->setWindowHeight(windowHeight);
     std::cout << "New connection! SessionId: " << sessionId << "!\n";
     sendMessage(MessageType::CONNECT_CALLBACK, std::format("connect {} ok", sessionId));
 }
@@ -78,6 +52,18 @@ void RType::MessageParser::handlePlayerNameMessageType(const RType::Message &rec
     session->setPlayerEntity(createPlayerEntity(sessionID));
 }
 
+void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    Session session = _sessions->getClientSession(sessionID);
+    EntityPtr entity = session->getEntity();
+    bool move = entity->move(getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
+    std::string status = (move ? "ok" : "ko");
+
+    sendMessage(receiveMessage.type, std::format("{} {} {}\n", splitMessage[0], sessionID, status));
+}
+
 void RType::MessageParser::parseMessage(const RType::MessageBuffer &buffer, std::size_t bytesReceived) {
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
     const Message receiveMessage = Message::deserialize(receivedData);
@@ -91,17 +77,33 @@ void RType::MessageParser::parseMessage(const RType::MessageBuffer &buffer, std:
 
 void RType::MessageParser::sendMessage(MessageType type, const std::string_view &data) {
     const RType::Message response = RType::NetworkMessageBuilder(type)
-        .setData(data)
-        .build();
+            .setData(data)
+            .build();
     const std::vector<std::byte> binaryData = response.serialize();
 
-    _adapter.sendData(asio::buffer(binaryData));
+    _adapter->sendData(asio::buffer(binaryData));
 }
 
 RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
-    const std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2", sessionID);
-    EntityPtr playerEntity = _factory.createDefaultPlayer();
+    const std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
+    EntityPtr playerEntity = _game->getFactory().createDefaultPlayer();
 
     sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
+}
+
+RType::Direction RType::MessageParser::getDirection(RType::MessageType type) {
+    using enum RType::Direction;
+    switch (type) {
+        case RType::MessageType::MOVE_LEFT:
+            return LEFT;
+        case RType::MessageType::MOVE_RIGHT:
+            return RIGHT;
+        case RType::MessageType::MOVE_DOWN:
+            return DOWN;
+        case RType::MessageType::MOVE_UP:
+            return UP;
+        default:
+            return RIGHT;
+    }
 }

@@ -14,12 +14,13 @@
 #include "SessionManager.hpp"
 #include "network/MessageParser.hpp"
 #include "game/EntityFactory.hpp"
+#include "game/GameLogic.hpp"
 
 namespace RType {
 
     class UDPServer {
     public:
-        UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint);
+        UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint);
 
         ~UDPServer();
 
@@ -28,9 +29,8 @@ namespace RType {
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
         SessionManager _sessions;
-        EntityManager _entityManager;
-        MessageParser _parser = MessageParser(&_sessions);
-        EntityFactory _factory = EntityFactory(&_entityManager);
+        GameLogic _game;
+        MessageParser _parser = MessageParser(&_sessions, &_game, &_adapter);
 
         void startReceive();
 

@@ -27,6 +27,7 @@ namespace RType {
             playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
             playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
             playerEntity->addComponent<PlayerComponent>(true);
+            playerEntity->addComponent<SizeRectComponent>(33.0f, 15.0f);
             return playerEntity;
         }
     };

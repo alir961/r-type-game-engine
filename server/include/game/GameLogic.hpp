@@ -8,18 +8,25 @@
 #pragma once
 
 #include "../SessionManager.hpp"
+#include "engine/ecs/EntityManager.hpp"
+#include "EntityFactory.hpp"
 
 namespace RType {
 
     class GameLogic {
     private:
-
+        EntityManager _entityManager;
+        EntityFactory _factory = EntityFactory(&_entityManager);
 
     public:
-        EntityPtr createPlayerEntity(int sessionID) {
-            EntityPtr playerEntity = _factory.createDefaultPlayer();
+        explicit GameLogic() = default;
 
-            return playerEntity;
+        [[nodiscard]] EntityManager &getEntityManager() {
+            return _entityManager;
+        }
+
+        [[nodiscard]] EntityFactory &getFactory() {
+            return _factory;
         }
     };
 
