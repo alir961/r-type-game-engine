@@ -161,19 +161,19 @@ int RType::ClientViewport::start() {
 }
 
 void RType::ClientViewport::handleMessageFromServer() {
-    std::string message = _client->getLastMessage();
-    std::vector<std::string> splitMessage;
+    auto handleMessage = [this](const std::string &message) {
+        std::vector<std::string> splitMessage;
 
-    if (message == "") return;
-    splitMessage = Split::split(message, " \n");
-    auto handlerIt = _handlers.find(splitMessage[0]);
+        if (message.empty()) return;
+        splitMessage = Split::split(message, " \n");
 
-    if (handlerIt != _handlers.end()) {
-        std::cout << "Handle message: " << message << "\n";
-        handlerIt->second(splitMessage);
-    } else {
-        std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
-    }
+        if (_handlers.contains(splitMessage[0]))
+            _handlers[splitMessage[0]](splitMessage);
+        else std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
+    };
+
+    for (const auto &message : _client->pullQueue())
+        handleMessage(message);
 }
 
 void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessage) {
@@ -215,7 +215,6 @@ void RType::ClientViewport::setHandlers() {
 void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
     sf::Sprite sprite = _playerEntity->getSprite();
     EntityPtr gameEntity = _playerEntity->getEntity();
-    int sessionID = std::stoi(splitMessage[1]);
     std::string status = splitMessage[2];
 
     if (status == "ok")
@@ -227,7 +226,6 @@ void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessag
 void RType::ClientViewport::moveRight(const std::vector<std::string> &splitMessage) {
     sf::Sprite sprite = _playerEntity->getSprite();
     EntityPtr gameEntity = _playerEntity->getEntity();
-    int sessionID = std::stoi(splitMessage[1]);
     const std::string &status = splitMessage[2];
 
     if (status == "ok")
@@ -239,7 +237,6 @@ void RType::ClientViewport::moveRight(const std::vector<std::string> &splitMessa
 void RType::ClientViewport::moveDown(const std::vector<std::string> &splitMessage) {
     sf::Sprite sprite = _playerEntity->getSprite();
     EntityPtr gameEntity = _playerEntity->getEntity();
-    int sessionID = std::stoi(splitMessage[1]);
     const std::string &status = splitMessage[2];
 
     if (status == "ok")
@@ -251,7 +248,6 @@ void RType::ClientViewport::moveDown(const std::vector<std::string> &splitMessag
 void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage) {
     sf::Sprite sprite = _playerEntity->getSprite();
     EntityPtr gameEntity = _playerEntity->getEntity();
-    int sessionID = std::stoi(splitMessage[1]);
     const std::string &status = splitMessage[2];
 
     if (status == "ok")

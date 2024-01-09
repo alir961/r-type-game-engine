@@ -10,12 +10,11 @@
 RType::Session RType::SessionManager::getClientSession(int sessionId) {
     auto session = _sessionMap.find(sessionId);
     if (session == _sessionMap.end())
-        return {};
+        return nullptr;
     return session->second;
 }
 
-int RType::SessionManager::setNewSession() {
+int RType::SessionManager::getNextSessionId() {
     _sessionMap[_lastSessionID] = std::make_shared<Client>();
-    _lastSessionID += 1;
-    return _lastSessionID - 1;
+    return (_lastSessionID++);
 }

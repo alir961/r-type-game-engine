@@ -8,41 +8,9 @@
 #include "../include/UDPServer.hpp"
 #include <engine/network/NetworkMessage.hpp>
 
-void RType::UDPServer::startReceive() {
-    auto receiveData = [this](const asio::error_code &error, std::size_t bytes_received) {
-        std::cout << "Receive " << bytes_received << "bytes!\n";
-        if (!error)
-            handleReceive(bytes_received);
-        else std::cerr << "Error receiving message: " << error.message() << "\n";
-        startReceive();
-    };
-
-    _adapter.receiveMessage(receiveData);
-}
-
-void RType::UDPServer::handleReceive(std::size_t bytesReceived) {
-    const MessageBuffer &buffer = _adapter.getMessageBuffer();
-    const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
-    const Message receiveMessage = Message::deserialize(receivedData);
-    auto handlerIt = _handlers.find(receiveMessage.type);
-
-    if (handlerIt != _handlers.end())
-        handlerIt->second(receiveMessage);
-    else
-        handleUnknownMessageType(receiveMessage);
-}
-
-RType::UDPServer::UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint) :
-        _socket(io_context, endpoint),
+RType::UDPServer::UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint) :
+        _socket(ioContext, endpoint),
         _adapter(_socket, _remoteEndpoint) {
-    _handlers[MessageType::CONNECT] = [this](const Message& msg) {handleConnectMessage(msg);};
-    _handlers[MessageType::DISCONNECT] = [this](const Message& ) {sendMessage(MessageType::DISCONNECT, "");};
-    _handlers[MessageType::UNKNOWN] = [this](const Message& msg) {handleUnknownMessageType(msg);};
-    _handlers[MessageType::PLAYER_NAME] = [this](const Message& msg) {handlePlayerNameMessageType(msg);};
-    _handlers[MessageType::MOVE_LEFT] = [this](const Message& msg) {handleMove(msg);};
-    _handlers[MessageType::MOVE_RIGHT] = [this](const Message& msg) {handleMove(msg);};
-    _handlers[MessageType::MOVE_DOWN] = [this](const Message& msg) {handleMove(msg);};
-    _handlers[MessageType::MOVE_UP] = [this](const Message& msg) {handleMove(msg);};
     startReceive();
 }
 
@@ -54,87 +22,19 @@ RType::UDPServer::~UDPServer() {
     }
 }
 
-void RType::UDPServer::handleConnectMessage(const RType::Message &receiveMessage) {
-    std::string message = receiveMessage.toString();
-    std::vector<std::string> splitMessage = Split::split(message, " \n");
-    int sessionId = _sessions.setNewSession();
-    float windowWidth = std::stof(splitMessage[1]);
-    float windowHeight = std::stof(splitMessage[2]);
-    std::shared_ptr<Client> session = _sessions.getClientSession(sessionId);
+void RType::UDPServer::startReceive() {
+    auto receiveData = [this](const asio::error_code &error, std::size_t bytes_received) {
+        if (!error)
+            handleReceive(bytes_received);
+        else std::cerr << "Error receiving message: " << error.message() << "\n";
+        startReceive();
+    };
 
-    session->setWindowWidth(windowWidth);
-    session->setWindowHeight(windowHeight);
-    std::cout << "New connection! SessionId: " << sessionId << " width: " << session->getWindowWidth() << " height: " << session->getWindowHeight() << "!\n";
-    sendMessage(MessageType::CONNECT_CALLBACK, std::format("connect {} ok", sessionId));
+    _adapter.receiveMessage(receiveData);
 }
 
-void RType::UDPServer::handleUnknownMessageType(const RType::Message &) {
-    std::cout << "Unknown Message!\n";
-}
+void RType::UDPServer::handleReceive(std::size_t bytesReceived) {
+    const MessageBuffer &buffer = _adapter.getMessageBuffer();
 
-void RType::UDPServer::handlePlayerNameMessageType(const RType::Message &receiveMessage) {
-    std::string message = receiveMessage.toString();
-    std::vector<std::string> splitMessage = Split::split(message, " \n");
-    int sessionID = std::stoi(splitMessage[1]);
-    std::string playerName = splitMessage[2];
-    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
-
-    session->setPlayerName(playerName);
-    session->setPlayerEntity(createPlayerEntity(sessionID));
-}
-
-void RType::UDPServer::sendMessage(MessageType type, const std::string_view &data) {
-    const RType::Message response = RType::NetworkMessageBuilder(type)
-            .setData(data)
-            .build();
-    const std::vector<std::byte> binaryData = response.serialize();
-    _adapter.sendData(asio::buffer(binaryData));
-}
-
-RType::EntityPtr RType::UDPServer::createPlayerEntity(int sessionID) {
-    EntityPtr playerEntity = _entityManager.createEntity();
-    EntityPtr playerEntityTmp = _entityManager.createEntity();
-    std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
-    std::string messageTmp = std::format("player 11 speed 10 health 100 position 700 30 size 2 2 rect 33 15");
-
-    playerEntity->addComponent<SpeedComponent>(10);
-    playerEntity->addComponent<HealthComponent>(100);
-    playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
-    playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
-    playerEntity->addComponent<SizeRectComponent>(33.0f, 15.0f);
-    playerEntity->addComponent<PlayerComponent>(true);
-    playerEntityTmp->addComponent<SpeedComponent>(10);
-    playerEntityTmp->addComponent<HealthComponent>(100);
-    playerEntityTmp->addComponent<PositionComponent>(std::make_pair(700, 30));
-    playerEntityTmp->addComponent<SizeComponent>(2.0f, 2.0f);
-    playerEntityTmp->addComponent<SizeRectComponent>(33.0f, 15.0f);
-    playerEntityTmp->addComponent<PlayerComponent>(false);
-    sendMessage(MessageType::PLAYER_NAME, message);
-    sendMessage(MessageType::PLAYER_NAME, messageTmp);
-    return playerEntity;
-}
-
-void RType::UDPServer::handleMove(const RType::Message &receiveMessage) {
-    std::string message = receiveMessage.toString();
-    std::vector<std::string> splitMessage = Split::split(message, " \n");
-    int sessionID = std::stoi(splitMessage[1]);
-    std::shared_ptr<Client> session = _sessions.getClientSession(sessionID);
-    EntityPtr entity = session->getEntity();
-    bool move = entity->move(getDirection(receiveMessage.type), _entityManager.getEntities(), session->getWindowWidth(), session->getWindowHeight());
-    std::string status = (move) ? "ok" : "ko";
-    sendMessage(receiveMessage.type, std::format("{} {} {}\n", splitMessage[0], sessionID, status));
-}
-
-RType::Direction RType::UDPServer::getDirection(RType::MessageType messageType) {
-    switch (messageType) {
-        case MessageType::MOVE_LEFT:
-            return Direction::LEFT;
-        case MessageType::MOVE_RIGHT:
-            return Direction::RIGHT;
-        case MessageType::MOVE_DOWN:
-            return Direction::DOWN;
-        case MessageType::MOVE_UP:
-            return Direction::UP;
-    }
-    return Direction::RIGHT;
+    _parser.parseMessage(buffer, bytesReceived);
 }

@@ -39,7 +39,14 @@ namespace RType {
          */
         void startReceive();
 
+        /**
+         * Retrieve last message from queue
+         *
+         * @return Last message or empty string
+         */
         std::string getLastMessage();
+
+        std::vector<std::string> pullQueue();
 
         void sendMessage(MessageType type, const std::string_view &data);
 

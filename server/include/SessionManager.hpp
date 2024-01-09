@@ -15,18 +15,30 @@
 
 namespace RType {
 
-    using Session = std::shared_ptr<Client>;
-
     class SessionManager {
     private:
         std::map<int, Session> _sessionMap;
         int _lastSessionID = 0;
+
     public:
+        /**
+         * Instantiate default SessionManager
+         */
         SessionManager() = default;
 
-        void setLastSessionID(int sessionID) {_lastSessionID = sessionID;};
-        int setNewSession();
+        /**
+         * Retrieve a free ID for the session
+         *
+         * @return The session ID
+         */
+        [[nodiscard]] int getNextSessionId();
 
+        /**
+         * Retrieve a Session associated with an ID
+         *
+         * @param sessionId The session ID
+         * @return The session if find or nullptr
+         */
         Session getClientSession(int sessionId);
     };
 }

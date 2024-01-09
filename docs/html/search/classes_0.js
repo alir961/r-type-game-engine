@@ -8,5 +8,7 @@ var searchData=
   ['agraphicentity_5',['AGraphicEntity',['../classRType_1_1AGraphicEntity.html',1,'RType']]],
   ['ainputbox_6',['AInputBox',['../classRType_1_1AInputBox.html',1,'RType']]],
   ['ametricsmodule_7',['AMetricsModule',['../classRType_1_1AMetricsModule.html',1,'RType']]],
-  ['arguments_8',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]]
+  ['animation_8',['Animation',['../classRType_1_1Animation.html',1,'RType']]],
+  ['animationmodule_9',['AnimationModule',['../classRType_1_1AnimationModule.html',1,'RType']]],
+  ['arguments_10',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]]
 ];

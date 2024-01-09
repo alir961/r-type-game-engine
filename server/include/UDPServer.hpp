@@ -12,40 +12,45 @@
 #include <engine/ecs/EntityManager.hpp>
 #include <iostream>
 #include "SessionManager.hpp"
+#include "network/MessageParser.hpp"
+#include "game/EntityFactory.hpp"
+#include "game/GameLogic.hpp"
 
 namespace RType {
 
     class UDPServer {
     public:
+        /**
+         * Setup an UDP server that allow clients connection
+         *
+         * @param ioContext The context of the server
+         * @param endpoint The connection endpoint to the server
+         */
+        UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint);
 
-        UDPServer(asio::io_context &io_context, const UDP::endpoint &endpoint);
-
+        /**
+         * Stop the server and close the socket
+         */
         ~UDPServer();
 
-        using MessageHandlerFunction = std::function<void(const Message&)>;
-
     private:
-        void startReceive();
-
-        void handleReceive(std::size_t bytesReceived);
-
-        void sendMessage(MessageType type, const std::string_view &data);
-
-        EntityPtr createPlayerEntity(int sessionID);
-
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
-        SessionManager _sessions;
-        EntityManager _entityManager;
-        std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
+        GameLogic _game;
+        MessageParser _parser = MessageParser(&_game, &_adapter);
 
-        void handleConnectMessage(const Message& receiveMessage);
-        void handleUnknownMessageType(const Message& receiveMessage);
-        void handlePlayerNameMessageType(const Message& receiveMessage);
-        void handleMove(const Message& receiveMessage);
+        /**
+         * Start receive data from clients
+         */
+        void startReceive();
 
-        Direction getDirection(MessageType messageType);
+        /**
+         * Parse the received buffer data
+         *
+         * @param bytesReceived The number of bytes received
+         */
+        void handleReceive(std::size_t bytesReceived);
     };
 
 }

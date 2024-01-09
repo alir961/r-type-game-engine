@@ -18,7 +18,11 @@ set(SOURCE_FILES
         src/compression/HuffmanAlgorithm.cpp
         src/BinaryEncoder.cpp
         src/SessionManager.cpp
-        src/Client.cpp)
+        src/Client.cpp
+        include/game/GameLogic.hpp
+        include/network/MessageParser.hpp
+        src/network/MessageParser.cpp
+        include/game/EntityFactory.hpp)
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 

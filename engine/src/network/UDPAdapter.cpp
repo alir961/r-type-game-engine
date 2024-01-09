@@ -11,7 +11,7 @@
 void RType::UDPAdapter::errorFunction(const asio::error_code &error, std::size_t bytes_send) {
     if (error)
         std::cerr << "Error sending data: " << error.message() << "\n";
-    else std::cout << "UDPAdapter: " << bytes_send << "bytes send!\n";
+    //else std::cout << "UDPAdapter: " << bytes_send << "bytes send!\n";
 }
 
 void RType::UDPAdapter::sendData(const std::string &data) {
