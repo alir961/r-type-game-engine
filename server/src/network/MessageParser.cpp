@@ -9,10 +9,10 @@
 #include "../../include/SessionManager.hpp"
 #include "engine/tools/Split.hpp"
 
-RType::MessageParser::MessageParser(SessionManager *sessions, GameLogic *game, UDPAdapter *adapter) :
-        _sessions(sessions),
+RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
         _game(game),
-        _adapter(adapter) {
+        _adapter(adapter),
+        _sessions(&game->getSessionManager()) {
     _handlers[MessageType::CONNECT] = [this](const Message &msg) { handleConnectMessage(msg); };
     _handlers[MessageType::DISCONNECT] = [this](const Message &) { sendMessage(MessageType::DISCONNECT, ""); };
     _handlers[MessageType::UNKNOWN] = [this](const Message &msg) { handleUnknownMessageType(msg); };

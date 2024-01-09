@@ -11,7 +11,6 @@
 
 void RType::UDPClient::startReceive() {
     auto receiveData = [this](const asio::error_code &error, std::size_t bytes_received) {
-        std::cout << "Receive " << bytes_received << "bytes!\n";
         if (!error) {
             handleReceive(bytes_received);
         } else std::cerr << "Error receiving message: " << error.message() << "\n";

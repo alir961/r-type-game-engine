@@ -15,11 +15,16 @@ namespace RType {
 
     class GameLogic {
     private:
+        SessionManager _sessionManager;
         EntityManager _entityManager;
         EntityFactory _factory = EntityFactory(&_entityManager);
 
     public:
         explicit GameLogic() = default;
+
+        [[nodiscard]] SessionManager &getSessionManager() {
+            return _sessionManager;
+        }
 
         [[nodiscard]] EntityManager &getEntityManager() {
             return _entityManager;

@@ -19,9 +19,9 @@ namespace RType {
     class MessageParser {
     private:
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers;
-        SessionManager *_sessions;
         GameLogic *_game;
         UDPAdapter *_adapter;
+        SessionManager *_sessions;
 
         void handleConnectMessage(const Message &receiveMessage);
 
@@ -38,7 +38,7 @@ namespace RType {
         static Direction getDirection(MessageType type);
 
     public:
-        explicit MessageParser(SessionManager *sessions, GameLogic *game, UDPAdapter *adapter);
+        explicit MessageParser(GameLogic *game, UDPAdapter *adapter);
 
         void parseMessage(const MessageBuffer &buffer, std::size_t bytesReceived);
     };

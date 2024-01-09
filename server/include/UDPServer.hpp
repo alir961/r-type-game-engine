@@ -28,9 +28,8 @@ namespace RType {
         UDP::socket _socket;
         UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
-        SessionManager _sessions;
         GameLogic _game;
-        MessageParser _parser = MessageParser(&_sessions, &_game, &_adapter);
+        MessageParser _parser = MessageParser(&_game, &_adapter);
 
         void startReceive();
 
