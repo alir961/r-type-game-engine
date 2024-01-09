@@ -48,7 +48,7 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> graphicEntities) override {
-            const GraphicEntityPtr player = _viewport.getGraphicEntityByName("playerStarship");
+            const GraphicEntityPtr player = getPlayerEntity();
             const EntityPtr &playerEntity = player->getEntity();
             const float deltaTime = _clock.restart().asSeconds();
 
@@ -73,6 +73,7 @@ namespace RType {
             }
         }
 
+
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         TextBox _playerNameText; /**< Player Name Text. */
@@ -83,5 +84,6 @@ namespace RType {
         sf::Clock _clock;
         ModuleProvider &_provider;
         std::string _userName;
+
     };
 }

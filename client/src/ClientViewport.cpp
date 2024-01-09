@@ -114,6 +114,7 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule, _provider);
             break;
     }
+    _selectedView->setPlayerEntity(_playerEntity);
     _viewState = state;
 }
 
@@ -203,10 +204,12 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     starshipEntity->addComponent<RType::PlayerComponent>(true);
     starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(_client->getUsername());
     if (starshipEntity->hasBaseComponents()) {
-        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
+        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","turquoisePlayer");
         graphicStarship->loadSprite(_animationModule);
-        if (sessionID == _client->getClientID())
+        if (sessionID == _client->getClientID()) {
             _playerEntity = graphicStarship;
+            _selectedView->setPlayerEntity(graphicStarship);
+        }
         addGraphicEntity(graphicStarship);
     }
 }
