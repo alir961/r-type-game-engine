@@ -40,4 +40,6 @@ namespace RType {
         [[nodiscard]] EntityPtr getEntity() const {return _playerEntity;};
     };
 
+    using Session = std::shared_ptr<Client>;
+
 }

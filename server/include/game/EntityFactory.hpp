@@ -17,8 +17,18 @@ namespace RType {
         EntityManager *_manager;
 
     public:
+        /**
+         * Initialize an EntityFactory to instantiate entities
+         *
+         * @param manager The responsible manager for entities
+         */
         explicit EntityFactory(EntityManager *manager) : _manager(manager) {};
 
+        /**
+         * Instantiate a default player with default components
+         *
+         * @return A shared pointer to the created player
+         */
         [[nodiscard]] EntityPtr createDefaultPlayer() {
             EntityPtr playerEntity = _manager->createEntity();
 

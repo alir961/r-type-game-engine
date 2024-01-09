@@ -38,8 +38,20 @@ namespace RType {
         static Direction getDirection(MessageType type);
 
     public:
+        /**
+         * Initialize a basic message parser that handle reactions to message
+         *
+         * @param game The game object
+         * @param adapter The server UDP adapter
+         */
         explicit MessageParser(GameLogic *game, UDPAdapter *adapter);
 
+        /**
+         * Parse a MessageBuffer and execute to corresponding reaction
+         *
+         * @param buffer The buffer to parse
+         * @param bytesReceived The number of bytes received in the buffer
+         */
         void parseMessage(const MessageBuffer &buffer, std::size_t bytesReceived);
     };
 

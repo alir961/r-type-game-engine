@@ -10,7 +10,7 @@
 RType::Session RType::SessionManager::getClientSession(int sessionId) {
     auto session = _sessionMap.find(sessionId);
     if (session == _sessionMap.end())
-        return {};
+        return nullptr;
     return session->second;
 }
 

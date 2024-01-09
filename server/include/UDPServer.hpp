@@ -20,8 +20,17 @@ namespace RType {
 
     class UDPServer {
     public:
+        /**
+         * Setup an UDP server that allow clients connection
+         *
+         * @param ioContext The context of the server
+         * @param endpoint The connection endpoint to the server
+         */
         UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint);
 
+        /**
+         * Stop the server and close the socket
+         */
         ~UDPServer();
 
     private:
@@ -31,8 +40,16 @@ namespace RType {
         GameLogic _game;
         MessageParser _parser = MessageParser(&_game, &_adapter);
 
+        /**
+         * Start receive data from clients
+         */
         void startReceive();
 
+        /**
+         * Parse the received buffer data
+         *
+         * @param bytesReceived The number of bytes received
+         */
         void handleReceive(std::size_t bytesReceived);
     };
 
