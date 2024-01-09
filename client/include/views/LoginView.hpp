@@ -29,8 +29,8 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        LoginView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider, bool isConnected)
-                : _viewport(gameView), _window(window), _graphicalModule(graphicalModule), _provider(provider), _isConnected(isConnected),
+        LoginView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
+                : _viewport(gameView), _window(window), _graphicalModule(graphicalModule), _provider(provider),
               _portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
               _userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "Username"),
               _portBoxInput(window, 800.0f, 340.0f),
@@ -42,7 +42,7 @@ namespace RType {
         void handleInput() {
             _loginButton.executeIfClicked([this] {
                 _viewport.connectToServer("127.0.0.1", _portBoxInput.getValue(), _userNameBoxInput.getValue());
-                _viewport.setView(ViewState::MENU);
+                _viewport.setView(ViewState::LOADSCREEN);
             });
         }
 
@@ -78,7 +78,6 @@ namespace RType {
         LoginButton _loginButton = LoginButton(_window, 800, 500, "Login"); /**< Button for Log-in the game. */
         IGraphicalModule *_graphicalModule;
         ModuleProvider &_provider;
-        bool _isConnected;
 
         /**
          * @brief Checks if the left mouse button is clicked.

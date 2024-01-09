@@ -52,7 +52,7 @@ namespace RType {
 
         [[nodiscard]] int getClientID() const { return _clientID; };
 
-        [[nodiscard]] bool isConnected() const { return _connected; };
+        [[nodiscard]] bool getConnected() const { return _connected; };
 
     private:
         /**

@@ -81,6 +81,7 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
 
     _adapter->sendData(asio::buffer(binaryData));
     _clientID = connectionId;
+    _connected = true;
 }
 
 void RType::UDPClient::setupHandlers() {
