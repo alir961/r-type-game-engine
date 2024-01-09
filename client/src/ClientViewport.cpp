@@ -12,7 +12,7 @@ RType::ClientViewport::ClientViewport() {
     _window.setFramerateLimit(WINDOW_FPS);
     _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
     _animationModule = _provider.loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
-    _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+    _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider, _client->isConnected());
     setHandlers();
 }
 
@@ -102,7 +102,7 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::LOGIN:
-            _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider, _client->isConnected());
             break;
         case ViewState::WIN:
             _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule, _provider);
