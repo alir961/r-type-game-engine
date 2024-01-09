@@ -43,6 +43,9 @@ namespace RType {
             _score = score;
         }
 
+        /**
+        * @brief Set the username.
+        */
         void setUserName(std::string username) {
             _username = username;
         }
@@ -54,6 +57,9 @@ namespace RType {
             std::cout << "Component update\n";
         }
 
+        /**
+        * @brief Get the username.
+        */
         [[nodiscard]] std::string getUserName() const {
             if (_isPlayer)
                 return _username;
