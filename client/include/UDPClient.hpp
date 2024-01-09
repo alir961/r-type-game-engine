@@ -94,13 +94,6 @@ namespace RType {
          * @param receiveMessage The received message.
          */
         void addMessageQueue(const Message& receiveMessage);
-
-        /**
-         * @brief Handles the shoot callback message.
-         * @param receiveMessage The received message.
-         */
-        void handlePlayerShootCallbackMessageType(const Message &receiveMessage);
-
     };
 
     /**

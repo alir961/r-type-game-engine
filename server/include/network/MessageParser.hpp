@@ -33,7 +33,11 @@ namespace RType {
 
         void sendMessage(MessageType type, const std::string_view &data);
 
+        void handleShoot(const RType::Message &receiveMessage);
+
         EntityPtr createPlayerEntity(int sessionID);
+
+        EntityPtr createBulletEntity(int sessionID);
 
         static Direction getDirection(MessageType type);
 

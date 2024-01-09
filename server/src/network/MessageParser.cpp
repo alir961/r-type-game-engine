@@ -21,6 +21,7 @@ RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
     _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handleMove(msg); };
+    _handlers[MessageType::SHOOT] = [this](const Message &msg) { handleShoot(msg); };
 }
 
 void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMessage) {
@@ -87,6 +88,22 @@ void RType::MessageParser::sendMessage(MessageType type, const std::string_view 
 RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
     const std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
     EntityPtr playerEntity = _game->getFactory().createDefaultPlayer();
+
+    sendMessage(MessageType::PLAYER_NAME, message);
+    return playerEntity;
+}
+
+void RType::MessageParser::handleShoot(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+
+    createBulletEntity(sessionID);
+}
+
+RType::EntityPtr RType::MessageParser::createBulletEntity(int sessionID) {
+    const std::string message = std::format("shoot {} speed 10 damage 20 ok", sessionID);
+    EntityPtr playerEntity = _game->getFactory().createBullet();
 
     sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
