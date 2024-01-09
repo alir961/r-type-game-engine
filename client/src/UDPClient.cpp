@@ -105,6 +105,17 @@ std::string RType::UDPClient::getLastMessage() {
     return "";
 }
 
+std::vector<std::string> RType::UDPClient::pullQueue() {
+    std::vector<std::string> messages;
+    std::string message = getLastMessage();
+
+    do {
+        messages.push_back(message);
+        message = getLastMessage();
+    } while (!message.empty());
+    return messages;
+}
+
 void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_view &data) {
     const RType::Message response = RType::NetworkMessageBuilder(type)
             .setData(data)
@@ -115,6 +126,7 @@ void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_vi
 }
 
 void RType::UDPClient::addMessageQueue(const RType::Message &receiveMessage) {
-    std::lock_guard<std::mutex> lock(_queueMutex);
-    _messageQueue.emplace_back(receiveMessage.toString());
+    const std::scoped_lock lock(_queueMutex);
+
+    _messageQueue.push_back(receiveMessage.toString());
 }

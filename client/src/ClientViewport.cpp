@@ -161,15 +161,19 @@ int RType::ClientViewport::start() {
 }
 
 void RType::ClientViewport::handleMessageFromServer() {
-    const std::string message = _client->getLastMessage();
-    std::vector<std::string> splitMessage;
+    auto handleMessage = [this](const std::string &message) {
+        std::vector<std::string> splitMessage;
 
-    if (message.empty()) return;
-    splitMessage = Split::split(message, " \n");
+        if (message.empty()) return;
+        splitMessage = Split::split(message, " \n");
 
-    if (_handlers.contains(splitMessage[0]))
-        _handlers[splitMessage[0]](splitMessage);
-    else std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
+        if (_handlers.contains(splitMessage[0]))
+            _handlers[splitMessage[0]](splitMessage);
+        else std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
+    };
+
+    for (const auto &message : _client->pullQueue())
+        handleMessage(message);
 }
 
 void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessage) {
