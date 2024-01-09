@@ -42,7 +42,7 @@ void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *grap
         text.setPosition(_entity->getComponent<PositionComponent>()->getPositions().first, _entity->getComponent<PositionComponent>()->getPositions().second - (_entity->getComponent<SizeComponent>()->getSize().second + 15));
         text.setString(_entity->getComponent<PlayerComponent>()->getUserName());
         text.setFillColor(sf::Color::Cyan);
-        window.draw(text);
+        graphicalModule->drawText(window, text);
     }
 }
 
