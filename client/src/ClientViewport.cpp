@@ -29,6 +29,9 @@ void RType::ClientViewport::handleInput() const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         _client->sendMessage(MessageType::MOVE_DOWN, std::format("move_down {}\n", _client->getClientID()));
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+        _client->sendMessage(MessageType::PLAYER_COLOR, std::format("color {}\n", _client->getClientID()));
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         _client->sendMessage(MessageType::SHOOT, std::format("shoot {}\n", _client->getClientID()));
     }
@@ -220,6 +223,7 @@ void RType::ClientViewport::setHandlers() {
     _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage); };
     _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage); };
     _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage); };
+    _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
     _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
 }
 
@@ -267,6 +271,11 @@ void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage)
         setView(ViewState::DEAD);
 }
 
+void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
+    std::string color = splitMessage[2];
+
+    _playerEntity->setEntityName(color + "Player");
+}
 void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
     auto bulletEntity = _entityManager.createEntity();
     std::shared_ptr<RType::GraphicEntity> graphicBullet;

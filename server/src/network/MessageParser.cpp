@@ -22,6 +22,7 @@ RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
     _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::SHOOT] = [this](const Message &msg) { handleShoot(msg); };
+    _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { handlePlayerColor(msg); };
 }
 
 void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMessage) {
@@ -123,4 +124,18 @@ RType::Direction RType::MessageParser::getDirection(RType::MessageType type) {
         default:
             return RIGHT;
     }
+}
+
+void RType::MessageParser::handlePlayerColor(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    Session session = _sessions->getClientSession(sessionID);
+
+    session->setNextColor();
+    sendMessage(MessageType::PLAYER_COLOR, std::format("color {} {}\n", sessionID, session->getColor()));
+}
+
+RType::SessionManager *RType::MessageParser::getSessionManager() {
+    return _sessions;
 }

@@ -29,6 +29,8 @@ namespace RType {
 
         void handlePlayerNameMessageType(const Message &receiveMessage);
 
+        void handlePlayerColor(const Message &receiveMessage);
+
         void handleMove(const Message &receiveMessage);
 
         void sendMessage(MessageType type, const std::string_view &data);
@@ -57,6 +59,8 @@ namespace RType {
          * @param bytesReceived The number of bytes received in the buffer
          */
         void parseMessage(const MessageBuffer &buffer, std::size_t bytesReceived);
+
+        SessionManager *getSessionManager();
     };
 
 }

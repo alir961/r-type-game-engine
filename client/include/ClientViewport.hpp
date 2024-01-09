@@ -171,6 +171,7 @@ namespace RType {
         void moveDown(const std::vector<std::string> &splitMessage);
         void moveUp(const std::vector<std::string> &splitMessage);
         void shoot(const std::vector<std::string> &splitMessage);
+        void changePlayerColor(const std::vector<std::string> &splitMessage);
     };
 }
 
