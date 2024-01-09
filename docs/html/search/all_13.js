@@ -7,5 +7,6 @@ var searchData=
   ['_7eidrawable_4',['~IDrawable',['../classRType_1_1IDrawable.html#a8d1771e2231eedaea5ed58c7ac684680',1,'RType::IDrawable']]],
   ['_7eigamemodule_5',['~IGameModule',['../classRType_1_1IGameModule.html#aa85212ae09e51ef5217dec3fe32bdda8',1,'RType::IGameModule']]],
   ['_7emoduleloader_6',['~ModuleLoader',['../classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23',1,'RType::ModuleLoader']]],
-  ['_7emoduleprovider_7',['~ModuleProvider',['../classRType_1_1ModuleProvider.html#a23f1f4a7146a94e47e40d9436106a4b9',1,'RType::ModuleProvider']]]
+  ['_7emoduleprovider_7',['~ModuleProvider',['../classRType_1_1ModuleProvider.html#a23f1f4a7146a94e47e40d9436106a4b9',1,'RType::ModuleProvider']]],
+  ['_7eudpserver_8',['~UDPServer',['../classRType_1_1UDPServer.html#aab118d7ef6b9628cbed5df758dd6e52c',1,'RType::UDPServer']]]
 ];

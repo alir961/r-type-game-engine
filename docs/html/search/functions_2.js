@@ -6,5 +6,6 @@ var searchData=
   ['closeconnectiontoserver_3',['closeConnectionToServer',['../classRType_1_1ClientViewport.html#a27d30595186c9e3f564e8c89a9a7685b',1,'RType::ClientViewport']]],
   ['configurationexception_4',['ConfigurationException',['../classRType_1_1ConfigurationException.html#ab133e78880cf883e94d59cfd016383bf',1,'RType::ConfigurationException']]],
   ['connecttoserver_5',['connectToServer',['../classRType_1_1ClientViewport.html#ae14a3cf170f2d95e1c776a614a12d304',1,'RType::ClientViewport']]],
-  ['createentity_6',['createEntity',['../classRType_1_1EntityManager.html#ac479f78caeecdf2008b291c693eb99e1',1,'RType::EntityManager']]]
+  ['createdefaultplayer_6',['createDefaultPlayer',['../classRType_1_1EntityFactory.html#acf1e2a1c94267163a9f6ca532744f6d7',1,'RType::EntityFactory']]],
+  ['createentity_7',['createEntity',['../classRType_1_1EntityManager.html#ac479f78caeecdf2008b291c693eb99e1',1,'RType::EntityManager']]]
 ];
