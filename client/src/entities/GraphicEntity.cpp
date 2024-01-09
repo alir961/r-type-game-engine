@@ -6,36 +6,40 @@
 */
 
 #include "../../include/entities/GraphicEntity.hpp"
+#include "../../../engine/modules/animation/AnimationModule.hpp"
 
-RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string path, const std::string entityName)
-    : _entity(entity), _animationTime(0.0f), _animationSpeed(0.1f), AGraphicEntity(entityName) {
-    _resourceManager.loadTexture(entityName, path);
-    _sprite.setTexture(_resourceManager.getTexture(entityName));
-    _currentFrame = sf::IntRect(0, 0, 33, 15);
-    _sprite.setTextureRect(_currentFrame);
-    auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
-    _sprite.setScale(entitySize.first, entitySize.second);
+RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string& path, const std::string& entityName)
+    : _entity(entity), AGraphicEntity(entityName) {
+      _resourceManager.loadTexture(entityName, path);
+
 }
 
-void RType::GraphicEntity::update(float deltaTime) {
+void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationModule) {
+    auto position = _entity->getComponent<PositionComponent>();
+    sf::IntRect rect;
+
     _animationTime += deltaTime;
     if (_animationTime >= _animationSpeed) {
-        if (_currentFrame.left >= _sprite.getTexture()->getSize().x - 33) {
-            _currentFrame.left = 0;
-        }
-        _sprite.setTextureRect(_currentFrame);
+        rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
+        _sprite.setTextureRect(rect);
         _animationTime = 0.0f;
-        _currentFrame.left += 33;
 
     }
-
-    auto position = _entity->getComponent<PositionComponent>();
     if (position) {
         _sprite.setPosition(float(position->getPositions().first),
-                           float(position->getPositions().second));
+                            float(position->getPositions().second));
     }
 }
 
 void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) {
     graphicalModule->drawSprite(window, _sprite);
+}
+
+void RType::GraphicEntity::loadSprite(RType::IAnimationModule *animationModule) {
+    auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
+    auto rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
+
+    _sprite.setTexture(_resourceManager.getTexture(getEntityName()));
+    _sprite.setTextureRect(rect);
+    _sprite.setScale(entitySize.first, entitySize.second);
 }

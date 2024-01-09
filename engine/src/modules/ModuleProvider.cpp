@@ -1,4 +1,4 @@
-/*
+/*/home/joan/delivery/rtype/client/include/ClientViewport.hpp:68:9:
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
@@ -12,6 +12,7 @@ RType::ModuleProvider::ModuleProvider() {
         return std::make_shared<ModuleLoader<IModule>>(std::string(path));
     };
 
+    _loaders.emplace(ModuleType::ANIMATION, initLoader(MODULE_ANIMATION_PATH));
     _loaders.emplace(ModuleType::GRAPHICAL, initLoader(MODULE_GRAPHICAL_PATH));
     _loaders.emplace(ModuleType::SOUND, initLoader(MODULE_SOUND_PATH));
     _loaders.emplace(ModuleType::PARTICLE, initLoader(MODULE_PARTICLE_PATH));

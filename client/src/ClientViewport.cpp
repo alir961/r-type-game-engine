@@ -6,10 +6,12 @@
 */
 
 #include "../include/ClientViewport.hpp"
+#include "engine/modules/animation/IAnimationModule.hpp"
 
 RType::ClientViewport::ClientViewport() {
     _window.setFramerateLimit(WINDOW_FPS);
     _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
+    _animationModule = _provider.loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
     _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
     setHandlers();
 }
@@ -137,7 +139,7 @@ void RType::ClientViewport::closeConnectionToServer() {
 
 void RType::ClientViewport::updateEntities(float deltaTime) {
     for (const auto &entity: _graphicEntities) {
-        entity->update(deltaTime);
+        entity->update(deltaTime, _animationModule);
         _selectedView->update();
     }
 }
@@ -195,6 +197,7 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     starshipEntity->addComponent<RType::PlayerComponent>(true);
     if (starshipEntity->hasBaseComponents()) {
         graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
+        graphicStarship->loadSprite(_animationModule);
         if (sessionID == _client->getClientID())
             _playerEntity = graphicStarship;
         addGraphicEntity(graphicStarship);

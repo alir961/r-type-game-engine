@@ -28,6 +28,11 @@ set(HEADER_FILES
         include/engine/modules/ModuleLoader.hpp
         include/engine/modules/IGraphicalModule.hpp
         include/engine/modules/ModuleProvider.hpp
+        include/engine/modules/animation/IAnimationModule.hpp
+        include/engine/modules/animation/IAnimation.hpp
+        include/engine/modules/animation/Animation.hpp
+        include/engine/modules/animation/PlayerAnimation.hpp
+        include/engine/modules/animation/IAnimationFactory.hpp
 )
 
 set(SOURCE_FILES
@@ -46,6 +51,7 @@ add_library(engine STATIC ${SOURCE_FILES})
 
 set_property(TARGET engine PROPERTY POSITION_INDEPENDENT_CODE ON)
 
+add_subdirectory(modules/animation)
 add_subdirectory(modules/sound)
 add_subdirectory(modules/console)
 add_subdirectory(modules/particle)

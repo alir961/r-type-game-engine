@@ -9,6 +9,7 @@
 #include "engine/ecs/Entity.hpp"
 #include "engine/ecs/component/PositionComponent.hpp"
 #include "engine/modules/IGraphicalModule.hpp"
+#include "engine/modules/animation/IAnimationModule.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace RType {
@@ -23,7 +24,7 @@ namespace RType {
         * @brief Update the graphic _entity based on the game state
         * @param deltaTime Time since last update
         */
-        virtual void update(float deltaTime) = 0;
+        virtual void update(float deltaTime, IAnimationModule *animationModule) = 0;
 
         /**
         * @brief Draw the graphic _entity to the provided window

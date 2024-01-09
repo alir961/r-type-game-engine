@@ -18,6 +18,10 @@ namespace RType {
     template<typename T>
     using ModuleLoaderPtr = std::shared_ptr<ModuleLoader<T>>;
 
+    /**
+     * @brief Enum representing the different types of modules.
+     */
+    constexpr std::string_view MODULE_ANIMATION_PATH = "build/out/engine/modules/animation/libanimation_module.so";
     constexpr std::string_view MODULE_GRAPHICAL_PATH = "build/out/engine/modules/graphical/libgraphical_module.so";
     constexpr std::string_view MODULE_SOUND_PATH = "build/out/engine/modules/sound/libsound_module.so";
     constexpr std::string_view MODULE_PARTICLE_PATH = "build/out/engine/modules/particle/libparticle_module.so";
