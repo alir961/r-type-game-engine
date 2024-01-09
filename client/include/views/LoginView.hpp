@@ -42,7 +42,7 @@ namespace RType {
         void handleInput() {
             _loginButton.executeIfClicked([this] {
                 _viewport.connectToServer("127.0.0.1", _portBoxInput.getValue(), _userNameBoxInput.getValue());
-                _viewport.setView(ViewState::MENU);
+                _viewport.setView(ViewState::LOADSCREEN);
             });
         }
 

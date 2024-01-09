@@ -63,6 +63,7 @@ void RType::ClientViewport::launchWindow() {
         while (_window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 _window.close();
+                closeConnectionToServer();
                 return;
             }
             basicInput();
@@ -103,6 +104,9 @@ void RType::ClientViewport::setView(ViewState state) {
             break;
         case ViewState::LOGIN:
             _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+            break;
+        case ViewState::LOADSCREEN:
+            _selectedView = std::make_shared<LoadView>(_window, *this, _graphicalModule, _client);
             break;
         case ViewState::WIN:
             _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule, _provider);
