@@ -201,6 +201,7 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     starshipEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
     starshipEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     starshipEntity->addComponent<RType::PlayerComponent>(true);
+    starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(_client->getUsername());
     if (starshipEntity->hasBaseComponents()) {
         graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
         graphicStarship->loadSprite(_animationModule);

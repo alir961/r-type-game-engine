@@ -57,5 +57,6 @@ namespace RType {
         float _animationTime = 0.0F; /**< Animation time accumulator. */
         float _animationSpeed = 0.1F; /**< Speed of the animation. */
         ResourceManager _resourceManager; /**< Resource Manager instance. */
+        sf::Font _font;
     };
 }
