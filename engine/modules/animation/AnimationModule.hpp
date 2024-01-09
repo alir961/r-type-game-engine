@@ -12,6 +12,7 @@
 #include <vector>
 #include "engine/modules/animation/IAnimationModule.hpp"
 #include "engine/modules/animation/IAnimation.hpp"
+#include "engine/modules/animation/IAnimationFactory.hpp"
 
 namespace RType {
     class AnimationModule :  public IAnimationModule {
@@ -21,7 +22,8 @@ namespace RType {
 
         AnimationModule() = default;
 
-        void addAnimation(const std::string &entityName, const std::shared_ptr<IAnimation> &animation) override;
+        void addAnimation(const std::string &entityName) override;
+        sf::FloatRect update(const std::string &entityName, float deltaTime) override;
     private:
         std::map<std::string, std::shared_ptr<IAnimation>> _animations;
     };

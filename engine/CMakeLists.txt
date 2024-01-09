@@ -29,6 +29,10 @@ set(HEADER_FILES
         include/engine/modules/IGraphicalModule.hpp
         include/engine/modules/ModuleProvider.hpp
         include/engine/modules/animation/IAnimationModule.hpp
+        include/engine/modules/animation/IAnimation.hpp
+        include/engine/modules/animation/Animation.hpp
+        include/engine/modules/animation/PlayerAnimation.hpp
+        include/engine/modules/animation/IAnimationFactory.hpp
 )
 
 set(SOURCE_FILES

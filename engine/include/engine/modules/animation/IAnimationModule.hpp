@@ -20,6 +20,7 @@ namespace RType {
         void load() override = 0;
         void unload() override = 0;
 
-        virtual void addAnimation(const std::string &entityName, const std::shared_ptr<IAnimation> &animation) = 0;
+        virtual void addAnimation(const std::string &entityName) = 0;
+        virtual sf::FloatRect update(const std::string &entityName, float deltaTime) = 0;
     };
 }

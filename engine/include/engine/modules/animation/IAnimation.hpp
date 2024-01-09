@@ -10,6 +10,8 @@
 namespace RType {
     class IAnimation {
     public:
-        IAnimation() = default;
+        virtual ~IAnimation() = default;
+
+        virtual sf::FloatRect update(float deltaTime) = 0;
     };;
 }

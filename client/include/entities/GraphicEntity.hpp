@@ -28,7 +28,7 @@ namespace RType {
          * @brief Update the graphic _entity based on the state of the ECS _entity.
          * @param deltaTime Time since last update.
          */
-        void update(float deltaTime) override;
+        void update(float deltaTime, IAnimationModule *animationModule) override;
 
         /**
          * @brief Draw the graphic _entity to the provided window.
@@ -36,6 +36,7 @@ namespace RType {
          */
         void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) override;
 
+        void loadSprite(IAnimationModule *animationModule);
         /**
          * @brief get Entity.
          */
@@ -53,9 +54,6 @@ namespace RType {
     private:
         EntityPtr _entity; /**< Reference to the ECS _entity. */
         sf::Sprite _sprite; /**< Sprite of the graphical _entity. */
-        sf::IntRect _currentFrame; /**< Current frame of the graphical _entity. */
-        float _animationTime; /**< IAnimation time accumulator. */
-        float _animationSpeed; /**< Speed of the animation. */
         ResourceManager _resourceManager; /**< Resource Manager instance. */
     };
 }
