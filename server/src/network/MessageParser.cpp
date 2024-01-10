@@ -112,10 +112,10 @@ bool RType::MessageParser::createBulletPlayerEntity(int sessionID) {
     Session session = _sessions->getClientSession(sessionID);
     EntityPtr player = session->getEntity();
     bool shoot = player->canShoot(_game->getEntityManager().getEntities(), std::format("bulletPlayer {}", sessionID));
-    auto [playerX, playerY] = player->getComponent<PositionComponent>().get()->getPositions();
-    float playerSizeX = player->getComponent<SizeComponent>().get()->getSize().first;
-    float playerRectX = player->getComponent<SizeRectComponent>().get()->getSize().first;
-    float playerRectY = player->getComponent<SizeRectComponent>().get()->getSize().second;
+    auto [playerX, playerY] = player->getComponent<PositionComponent>()->getPositions();
+    float playerSizeX = player->getComponent<SizeComponent>()->getSize().first;
+    float playerRectX = player->getComponent<SizeRectComponent>()->getSize().first;
+    float playerRectY = player->getComponent<SizeRectComponent>()->getSize().second;
     float startX = playerX + (playerRectX * playerSizeX);
     float startY = playerY + playerRectY;
     EntityPtr bulletEntity;

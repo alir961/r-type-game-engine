@@ -319,7 +319,7 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
     EntityPtr entity = _entityManager.getEntity(entityName);
     GraphicEntityPtr graphicEntity = getGraphicEntityByName(entityName);
 
-    if (graphicEntity == _playerEntity) {
+    if (entityName == _playerEntity->getEntity()->getEntityName()) {
         setView(ViewState::DEAD);
         return;
     }
