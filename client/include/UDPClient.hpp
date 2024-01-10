@@ -50,7 +50,15 @@ namespace RType {
 
         void sendMessage(MessageType type, const std::string_view &data);
 
+        void setHealth(int health) {_health = health;};
+
+        void setScore(int score) {_score = score;};
+
         [[nodiscard]] int getClientID() const { return _clientID; };
+
+        [[nodiscard]] int getScore() const { return _score; };
+
+        [[nodiscard]] int getHealth() const { return _health; };
 
         [[nodiscard]] bool getConnected() const { return _connected; };
 
@@ -82,6 +90,8 @@ namespace RType {
         bool _stop = false;
         float _windowWidth;
         float _windowHeight;
+        int _health = 0;
+        int _score = 0;
 
         /**
          * @brief Handles the connection callback message.

@@ -60,10 +60,11 @@ void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
     int sessionID = std::stoi(splitMessage[1]);
     Session session = _sessions->getClientSession(sessionID);
     EntityPtr entity = session->getEntity();
-    bool move = entity->move(getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
-    std::string status = (move ? "ok" : "ko");
+    std::string status = "ok";
 
+    entity->move(getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
     sendMessage(receiveMessage.type, std::format("{} {} {}\n", splitMessage[0], sessionID, status));
+    checkEntitiesStatus();
 }
 
 void RType::MessageParser::parseMessage(const RType::MessageBuffer &buffer, std::size_t bytesReceived) {
@@ -90,7 +91,7 @@ RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
     const std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
     EntityPtr playerEntity = _game->getFactory().createDefaultPlayer();
 
-    playerEntity->setEntityName(std::format("turquoisePlayer {}", sessionID));
+    playerEntity->setEntityName(std::format("turquoisePlayer {}\n", sessionID));
     sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
 }
@@ -110,15 +111,14 @@ bool RType::MessageParser::createBulletPlayerEntity(int sessionID) {
     const std::string messageFailure = std::format("shoot {} ko\n", sessionID);
     Session session = _sessions->getClientSession(sessionID);
     EntityPtr player = session->getEntity();
-    bool shoot = player->canShoot(_game->getEntityManager().getEntities(), std::format("bulletPlayer"));
-    auto [playerX, playerY] = player->getComponent<PositionComponent>().get()->getPositions();
-    float playerSizeX = player->getComponent<SizeComponent>().get()->getSize().first;
-    float playerRectX = player->getComponent<SizeRectComponent>().get()->getSize().first;
-    float playerRectY = player->getComponent<SizeRectComponent>().get()->getSize().second;
+    bool shoot = player->canShoot(_game->getEntityManager().getEntities(), std::format("bulletPlayer {}", sessionID));
+    auto [playerX, playerY] = player->getComponent<PositionComponent>()->getPositions();
+    float playerSizeX = player->getComponent<SizeComponent>()->getSize().first;
+    float playerRectX = player->getComponent<SizeRectComponent>()->getSize().first;
+    float playerRectY = player->getComponent<SizeRectComponent>()->getSize().second;
     float startX = playerX + (playerRectX * playerSizeX);
     float startY = playerY + playerRectY;
     EntityPtr bulletEntity;
-
 
     if (shoot) {
         bulletEntity = _game->getFactory().createBulletPlayer(startX, startY);
@@ -156,4 +156,18 @@ void RType::MessageParser::handlePlayerColor(const RType::Message &receiveMessag
 
 RType::SessionManager *RType::MessageParser::getSessionManager() {
     return _sessions;
+}
+
+void RType::MessageParser::checkEntitiesStatus() {
+    auto entities = _game->getEntityManager().getEntities();
+    std::vector<EntityPtr> toDestroy;
+
+    for (auto &entity: entities) {
+        if (entity->getDeathStatus()) {
+            toDestroy.emplace_back(entity);
+            sendMessage(MessageType::DEATH, std::format("death {}\n", entity->getEntityName()));
+        }
+    }
+    for (auto &entity: toDestroy)
+        _game->getEntityManager().destroyEntity(entity);
 }

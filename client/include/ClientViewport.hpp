@@ -72,7 +72,10 @@ namespace RType {
         ModuleProvider _provider = ModuleProvider();
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;
-        GraphicEntityPtr _playerEntity;
+        GraphicEntityPtr _playerEntity = nullptr;
+
+        GraphicEntityPtr getGraphicEntity(const std::string &entityName);
+        void destroyGraphicEntity(GraphicEntityPtr entity);
 
         /**
          * @brief Private method to handle drawing operations.
@@ -171,6 +174,7 @@ namespace RType {
         void moveDown(const std::vector<std::string> &splitMessage);
         void moveUp(const std::vector<std::string> &splitMessage);
         void shoot(const std::vector<std::string> &splitMessage);
+        void death(const std::vector<std::string> &splitMessage);
         void changePlayerColor(const std::vector<std::string> &splitMessage);
     };
 }
