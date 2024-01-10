@@ -8,6 +8,7 @@
 #pragma once
 
 #include "PlayerAnimation.hpp"
+#include "PlayerBulletAnimation.hpp"
 #include <iostream>
 #include <memory>
 
@@ -25,6 +26,8 @@ namespace RType {
                 return std::make_shared<PlayerAnimation>(0, 53);
             if (entityName == "bluePlayer")
                 return std::make_shared<PlayerAnimation>(0, 70);
+            if (entityName == "bulletPlayer")
+                return std::make_shared<PlayerBulletAnimation>(101, 118);
             return std::make_shared<PlayerAnimation>(0, 19);
         }
     };

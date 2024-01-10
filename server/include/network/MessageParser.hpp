@@ -29,11 +29,17 @@ namespace RType {
 
         void handlePlayerNameMessageType(const Message &receiveMessage);
 
+        void handlePlayerColor(const Message &receiveMessage);
+
         void handleMove(const Message &receiveMessage);
 
         void sendMessage(MessageType type, const std::string_view &data);
 
+        void handleShoot(const RType::Message &receiveMessage);
+
         EntityPtr createPlayerEntity(int sessionID);
+
+        bool createBulletPlayerEntity(int sessionID);
 
         static Direction getDirection(MessageType type);
 
@@ -53,6 +59,8 @@ namespace RType {
          * @param bytesReceived The number of bytes received in the buffer
          */
         void parseMessage(const MessageBuffer &buffer, std::size_t bytesReceived);
+
+        SessionManager *getSessionManager();
     };
 
 }

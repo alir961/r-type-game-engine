@@ -34,10 +34,12 @@ namespace RType {
         DISCONNECT,
         CONFIRMATION,
         PLAYER_NAME,
+        PLAYER_COLOR,
         MOVE_LEFT,
         MOVE_RIGHT,
         MOVE_DOWN,
         MOVE_UP,
+        SHOOT,
     };
 
     /**

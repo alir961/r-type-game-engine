@@ -62,8 +62,8 @@ namespace RType {
          * @param window The SFML RenderWindow on which to draw entities.
          * @param entities A vector of shared pointers to AGraphicEntity objects.
          */
-        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> entities) override {
-            const GraphicEntityPtr player = _viewport.getGraphicEntityByName("playerStarship");
+        void draw(sf::RenderWindow &, std::vector<GraphicEntityPtr> ) override {
+            const GraphicEntityPtr player = getPlayerEntity();
             const EntityPtr entity = player->getEntity();
 
             _backgroundRect.draw(_graphicalModule);

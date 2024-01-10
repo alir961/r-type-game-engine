@@ -15,7 +15,7 @@ namespace RType {
     */
     class AGraphicEntity : public IGraphicEntity {
     private:
-        const std::string _entityName; /**< Entity name. */
+        std::string _entityName; /**< Entity name. */
 
     public:
         explicit AGraphicEntity(std::string entityName) : _entityName(std::move(entityName)) {}
@@ -68,6 +68,8 @@ namespace RType {
         [[nodiscard]] std::string getEntityName() const {
             return _entityName;
         }
+
+        void setEntityName(const std::string &entityName) {_entityName = entityName;};
 
         ~AGraphicEntity() override = default;
     };

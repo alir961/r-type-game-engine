@@ -21,7 +21,6 @@ void RType::ClientViewport::handleInput() const {
         _client->sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {}\n", _client->getClientID()));
     };
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-
         _client->sendMessage(MessageType::MOVE_LEFT, std::format("move_left {}\n", _client->getClientID()));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -29,6 +28,12 @@ void RType::ClientViewport::handleInput() const {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         _client->sendMessage(MessageType::MOVE_DOWN, std::format("move_down {}\n", _client->getClientID()));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+        _client->sendMessage(MessageType::PLAYER_COLOR, std::format("color {}\n", _client->getClientID()));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        _client->sendMessage(MessageType::SHOOT, std::format("shoot {}\n", _client->getClientID()));
     }
 }
 
@@ -94,7 +99,7 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider, true);
             break;
         case ViewState::GAME:
-            _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule, _provider, _client->getUsername());
             break;
         case ViewState::PAUSE:
             _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
@@ -112,6 +117,7 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule, _provider);
             break;
     }
+    _selectedView->setPlayerEntity(_playerEntity);
     _viewState = state;
 }
 
@@ -199,11 +205,14 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     starshipEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
     starshipEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     starshipEntity->addComponent<RType::PlayerComponent>(true);
+    starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(_client->getUsername());
     if (starshipEntity->hasBaseComponents()) {
-        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","playerStarship");
+        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","turquoisePlayer");
         graphicStarship->loadSprite(_animationModule);
-        if (sessionID == _client->getClientID())
+        if (sessionID == _client->getClientID()) {
             _playerEntity = graphicStarship;
+            _selectedView->setPlayerEntity(graphicStarship);
+        }
         addGraphicEntity(graphicStarship);
     }
 }
@@ -214,6 +223,8 @@ void RType::ClientViewport::setHandlers() {
     _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage); };
     _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage); };
     _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage); };
+    _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
+    _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
 }
 
 void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
@@ -260,3 +271,32 @@ void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage)
         setView(ViewState::DEAD);
 }
 
+void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
+    std::string color = splitMessage[2];
+
+    _playerEntity->setEntityName(color + "Player");
+}
+void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
+    if (splitMessage.size() == 3) return;
+    auto bulletEntity = _entityManager.createEntity();
+    std::shared_ptr<RType::GraphicEntity> graphicBullet;
+    int speed = std::stoi(splitMessage[3]);
+    int damage = std::stoi(splitMessage[5]);
+    int positionX = std::stoi(splitMessage[7]);
+    int positionY = std::stoi(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    std::string status = splitMessage[15];
+
+    bulletEntity->addComponent<RType::SpeedComponent>(speed);
+    bulletEntity->addComponent<RType::DamageComponent>(damage);
+    bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    bulletEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    bulletEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
+    bulletEntity->addComponent<RType::PlayerComponent>(false);
+    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
+    addGraphicEntity(graphicBullet);
+    graphicBullet->loadSprite(_animationModule);
+}

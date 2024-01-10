@@ -11,7 +11,9 @@
 RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string& path, const std::string& entityName)
     : _entity(entity), AGraphicEntity(entityName) {
       _resourceManager.loadTexture(entityName, path);
-
+      auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
+      _sprite.setScale(entitySize.first, entitySize.second);
+      _font.loadFromFile("client/assets/ka1.ttf");
 }
 
 void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationModule) {
@@ -33,6 +35,15 @@ void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationMo
 
 void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) {
     graphicalModule->drawSprite(window, _sprite);
+    if (_entity->getComponent<PlayerComponent>()->getIsPlayer()) {
+        sf::Text text;
+        text.setFont(_font);
+        text.setCharacterSize(15);
+        text.setPosition(_entity->getComponent<PositionComponent>()->getPositions().first, _entity->getComponent<PositionComponent>()->getPositions().second - (_entity->getComponent<SizeComponent>()->getSize().second + 15));
+        text.setString(_entity->getComponent<PlayerComponent>()->getUserName());
+        text.setFillColor(sf::Color::Cyan);
+        graphicalModule->drawText(window, text);
+    }
 }
 
 void RType::GraphicEntity::loadSprite(RType::IAnimationModule *animationModule) {

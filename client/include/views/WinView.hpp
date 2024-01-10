@@ -63,7 +63,7 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> graphicEntities) override {
-            const GraphicEntityPtr player = _viewport.getGraphicEntityByName("playerStarship");
+            const GraphicEntityPtr player = getPlayerEntity();
             const EntityPtr entity = player->getEntity();
 
             _backgroundRect.draw(_graphicalModule);

@@ -24,6 +24,13 @@ namespace RType {
          * @param entities A vector of shared pointers to AGraphicEntity objects to be drawn.
          */
         void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> entities) override = 0;
+
+        void setPlayerEntity(const GraphicEntityPtr &playerEntity) {_playerEntity = playerEntity;};
+
+        GraphicEntityPtr getPlayerEntity() {return _playerEntity;};
+
+    private:
+        GraphicEntityPtr _playerEntity = nullptr;
     };
 
 }

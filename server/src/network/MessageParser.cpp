@@ -21,6 +21,8 @@ RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
     _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handleMove(msg); };
+    _handlers[MessageType::SHOOT] = [this](const Message &msg) { handleShoot(msg); };
+    _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { handlePlayerColor(msg); };
 }
 
 void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMessage) {
@@ -88,8 +90,42 @@ RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
     const std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
     EntityPtr playerEntity = _game->getFactory().createDefaultPlayer();
 
+    playerEntity->setEntityName(std::format("turquoisePlayer {}", sessionID));
     sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
+}
+
+void RType::MessageParser::handleShoot(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    bool shoot = createBulletPlayerEntity(sessionID);
+
+    if (!shoot)
+        sendMessage(MessageType::SHOOT, std::format("shoot {} ko\n", sessionID));
+}
+
+bool RType::MessageParser::createBulletPlayerEntity(int sessionID) {
+    const std::string message;
+    const std::string messageFailure = std::format("shoot {} ko\n", sessionID);
+    Session session = _sessions->getClientSession(sessionID);
+    EntityPtr player = session->getEntity();
+    bool shoot = player->canShoot(_game->getEntityManager().getEntities(), std::format("bulletPlayer"));
+    auto [playerX, playerY] = player->getComponent<PositionComponent>().get()->getPositions();
+    float playerSizeX = player->getComponent<SizeComponent>().get()->getSize().first;
+    float playerRectX = player->getComponent<SizeRectComponent>().get()->getSize().first;
+    float playerRectY = player->getComponent<SizeRectComponent>().get()->getSize().second;
+    float startX = playerX + (playerRectX * playerSizeX);
+    float startY = playerY + playerRectY;
+    EntityPtr bulletEntity;
+
+
+    if (shoot) {
+        bulletEntity = _game->getFactory().createBulletPlayer(startX, startY);
+        bulletEntity->setEntityName(std::format("bulletPlayer {}", sessionID));
+        sendMessage(MessageType::SHOOT, std::format("shoot {} speed 10 damage 20 position {} {} size 1 1 rect 14 14 ok\n", sessionID, startX, startY));
+    }
+    return shoot;
 }
 
 RType::Direction RType::MessageParser::getDirection(RType::MessageType type) {
@@ -106,4 +142,18 @@ RType::Direction RType::MessageParser::getDirection(RType::MessageType type) {
         default:
             return RIGHT;
     }
+}
+
+void RType::MessageParser::handlePlayerColor(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    Session session = _sessions->getClientSession(sessionID);
+
+    session->setNextColor();
+    sendMessage(MessageType::PLAYER_COLOR, std::format("color {} {}\n", sessionID, session->getColor()));
+}
+
+RType::SessionManager *RType::MessageParser::getSessionManager() {
+    return _sessions;
 }

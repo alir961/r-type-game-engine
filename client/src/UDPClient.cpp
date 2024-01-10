@@ -92,7 +92,9 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::DISCONNECT] = [this](const Message &) { _stop = true; };
+    _handlers[MessageType::SHOOT] = [this](const Message &msg) { addMessageQueue(msg); };
 }
 
 std::string RType::UDPClient::getLastMessage() {

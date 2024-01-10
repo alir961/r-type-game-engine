@@ -7,6 +7,7 @@
 
 #pragma once
 #include "./component/ComponentType.hpp"
+#include "engine/tools/Split.hpp"
 #include <iostream>
 #include <unordered_map>
 #include <memory>
@@ -136,8 +137,19 @@ namespace RType {
             return false;
         };
 
+        bool canShoot(const std::vector<std::shared_ptr<Entity>> &entities, const std::string &name) {
+            if (getEntity(entities, name) == nullptr)
+                return true;
+            return false;
+        }
+
+        void setEntityName(const std::string &name) {_entityName = name;};
+
+        std::string getEntityName() {return _entityName;};
+
     private:
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the _entity. */
+        std::string _entityName;
 
         /**
         * @brief Get the component type enum value for a specific component type.
@@ -209,10 +221,10 @@ namespace RType {
             const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
             float size = getComponent<SizeComponent>()->getSize().second;
             float rect = getComponent<SizeRectComponent>()->getSize().second;
-            float playerSize = size * rect;
-            float playerX = x + playerSize;
+            float entitySize = size * rect;
+            float entityX = x + entitySize;
 
-            if (playerX + speed > windowsWidth || hits(entities))
+            if (entityX + speed > windowsWidth || hits(entities))
                 return false;
             getComponent<PositionComponent>()->setPositions(std::make_pair(x + speed, y));
             return true;
@@ -223,10 +235,10 @@ namespace RType {
             const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
             float size = getComponent<SizeComponent>()->getSize().second;
             float rect = getComponent<SizeRectComponent>()->getSize().second;
-            float playerSize = size * rect;
-            float playerY = y + playerSize;
+            float entitySize = size * rect;
+            float entityY = y + entitySize;
 
-            if (playerY + speed > windowsHeight || hits(entities))
+            if (entityY + speed > windowsHeight || hits(entities))
                 return false;
             getComponent<PositionComponent>()->setPositions(std::make_pair(x, y + speed));
             return true;
@@ -241,6 +253,19 @@ namespace RType {
             getComponent<PositionComponent>()->setPositions(std::make_pair(x, y - speed));
             return true;
         };
+
+        std::shared_ptr<Entity> getEntity(const std::vector<std::shared_ptr<Entity>> &entities, const std::string &name) {
+            std::string id = Split::split(_entityName, " ")[1];
+
+            for (const auto& entity : entities) {
+                const std::vector<std::string> splitName = Split::split(entity->getEntityName(), " ");
+
+                if (splitName[0] == name && id == splitName[1])
+                    return entity;
+            }
+            return nullptr;
+        }
+        
     };
 
     using EntityPtr = std::shared_ptr<Entity>;

@@ -44,14 +44,31 @@ namespace RType {
         }
 
         /**
+        * @brief Set the username.
+        */
+        void setUserName(std::string username) {
+            _username = username;
+        }
+
+        /**
         * @brief Update the component.
         */
         void update() override {
             std::cout << "Component update\n";
         }
 
+        /**
+        * @brief Get the username.
+        */
+        [[nodiscard]] std::string getUserName() const {
+            if (_isPlayer)
+                return _username;
+            return "";
+        }
+
     private:
         bool _isPlayer; /**< Flag indicating if the _entity is controlled by a player. */
         int _score = 0; /**< Int indicating the _entity score. */
+        std::string _username;
     };
 }

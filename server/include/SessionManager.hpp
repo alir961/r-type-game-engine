@@ -10,8 +10,9 @@
 #include <iostream>
 #include <map>
 #include <memory>
-#include <engine/network/UDPAdapter.hpp>
+#include <iostream>
 #include "Client.hpp"
+#include <engine/network/UDPAdapter.hpp>
 
 namespace RType {
 
