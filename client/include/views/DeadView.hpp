@@ -28,8 +28,8 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        DeadView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
-            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider),
+        DeadView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider, EntityPtr player)
+            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider), _player(player),
               _backgroundRect(window, sf::Vector2f(((((window.getSize().x - 450) / 2))), ((window.getSize().y - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f),
               _loseText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Lose!"),
               _hpText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 115, ""),
@@ -63,8 +63,7 @@ namespace RType {
          * @param entities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(sf::RenderWindow &, std::vector<GraphicEntityPtr> ) override {
-            const GraphicEntityPtr player = getPlayerEntity();
-            const EntityPtr entity = player->getEntity();
+            const EntityPtr entity = (_player != nullptr) ? _player : nullptr;
 
             _backgroundRect.draw(_graphicalModule);
             _loseText.draw(_graphicalModule);
@@ -73,7 +72,7 @@ namespace RType {
             _exitText.draw(_graphicalModule);
             handleInput();
 
-            if (player != nullptr && entity->getComponent<PlayerComponent>()) {
+            if (_player != nullptr && entity->getComponent<PlayerComponent>()) {
                 const int health = entity->getComponent<HealthComponent>()->getHealth();
                 const int score = entity->getComponent<PlayerComponent>()->getScore();
 
@@ -92,6 +91,7 @@ namespace RType {
         TextBox _exitText; /**< Exit Text. */
         IGraphicalModule *_graphicalModule;
         ModuleProvider &_provider;
+        EntityPtr _player;
 
         static bool isMouseClicked() {
             return sf::Mouse::isButtonPressed(sf::Mouse::Left);

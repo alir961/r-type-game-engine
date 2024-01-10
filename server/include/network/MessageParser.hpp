@@ -43,6 +43,8 @@ namespace RType {
 
         static Direction getDirection(MessageType type);
 
+        void checkEntitiesStatus();
+
     public:
         /**
          * Initialize a basic message parser that handle reactions to message

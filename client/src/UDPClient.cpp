@@ -95,10 +95,11 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::DISCONNECT] = [this](const Message &) { _stop = true; };
     _handlers[MessageType::SHOOT] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::DEATH] = [this](const Message &msg) { addMessageQueue(msg); };
 }
 
 std::string RType::UDPClient::getLastMessage() {
-    const std::scoped_lock lock(_queueMutex);
+    const std::lock_guard lock(_queueMutex);
 
     if (!_messageQueue.empty()) {
         std::string message = _messageQueue.front();

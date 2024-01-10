@@ -40,6 +40,14 @@ namespace RType {
             return entity;
         }
 
+        EntityPtr getEntity(const std::string &entityName) {
+            for (auto &entity : _entities) {
+                if (entity->getEntityName() == entityName)
+                    return entity;
+            }
+            return nullptr;
+        }
+
         /**
         * @brief Destroy an _entity and remove it from the EntityManager.
         * @param entity Shared pointer to the _entity to destroy.

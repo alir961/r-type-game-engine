@@ -105,7 +105,10 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::DEAD:
-            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule, _provider, _playerEntity->getEntity());
+            _entityManager.destroyEntity(_playerEntity->getEntity());
+            destroyGraphicEntity(_playerEntity);
+            _playerEntity = nullptr;
             break;
         case ViewState::LOGIN:
             _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
@@ -128,7 +131,7 @@ void RType::ClientViewport::addGraphicEntity(const GraphicEntityPtr &entity) {
 
 RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntityByName(const std::string &name) const {
     for (const auto &entity: _graphicEntities) {
-        if (entity->getEntityName() == name)
+        if (entity->getEntity()->getEntityName() == name)
             return entity;
     }
     std::cerr << "Unable to find entity " << name << "\n";
@@ -206,6 +209,7 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     starshipEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     starshipEntity->addComponent<RType::PlayerComponent>(true);
     starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(_client->getUsername());
+    starshipEntity->setEntityName(std::format("turquoisePlayer {}", sessionID));
     if (starshipEntity->hasBaseComponents()) {
         graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","turquoisePlayer");
         graphicStarship->loadSprite(_animationModule);
@@ -225,6 +229,7 @@ void RType::ClientViewport::setHandlers() {
     _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage); };
     _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
     _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
+    _handlers["death"] = [this](const std::vector<std::string> &splitMessage) { death(splitMessage); };
 }
 
 void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
@@ -272,14 +277,21 @@ void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage)
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
     std::string color = splitMessage[2];
 
+    _playerEntity->getEntity()->setEntityName(std::format("{}Player {}", color, sessionID));
     _playerEntity->setEntityName(color + "Player");
 }
 void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
-    if (splitMessage.size() == 3) return;
+    for (auto &str : splitMessage) {
+        std::cout << str <<" ";
+    }
+    std::cout << "\n";
+    if (splitMessage.size() < 3) return;
     auto bulletEntity = _entityManager.createEntity();
     std::shared_ptr<RType::GraphicEntity> graphicBullet;
+    int sessionID = std::stoi(splitMessage[1]);
     int speed = std::stoi(splitMessage[3]);
     int damage = std::stoi(splitMessage[5]);
     int positionX = std::stoi(splitMessage[7]);
@@ -296,7 +308,37 @@ void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) 
     bulletEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
     bulletEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     bulletEntity->addComponent<RType::PlayerComponent>(false);
+    bulletEntity->setEntityName(std::format("bulletPlayer {}", sessionID));
     graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
     addGraphicEntity(graphicBullet);
     graphicBullet->loadSprite(_animationModule);
+}
+
+void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) {
+    std::string entityName = splitMessage[1] + " " + splitMessage[2];
+    EntityPtr entity = _entityManager.getEntity(entityName);
+    GraphicEntityPtr graphicEntity = getGraphicEntityByName(entityName);
+
+    if (graphicEntity == _playerEntity) {
+        setView(ViewState::DEAD);
+        return;
+    }
+    destroyGraphicEntity(graphicEntity);
+    _entityManager.destroyEntity(entity);
+    std::cout << std::format("death {}\n", entityName);
+}
+
+RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntity(const std::string &entityName) {
+    for (auto &graphicEntity: _graphicEntities) {
+        if (graphicEntity->getEntity()->getEntityName() == entityName)
+            return graphicEntity;
+    }
+    return nullptr;
+}
+
+void RType::ClientViewport::destroyGraphicEntity(RType::GraphicEntityPtr entity) {
+    auto it = std::find(_graphicEntities.begin(), _graphicEntities.end(), entity);
+
+    if (it != _graphicEntities.end())
+        _graphicEntities.erase(it);
 }

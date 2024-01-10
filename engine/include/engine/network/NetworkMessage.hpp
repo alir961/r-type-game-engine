@@ -40,6 +40,7 @@ namespace RType {
         MOVE_DOWN,
         MOVE_UP,
         SHOOT,
+        DEATH,
     };
 
     /**
