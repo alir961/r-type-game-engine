@@ -46,13 +46,14 @@ namespace RType {
          *
          * @return A shared pointer to the created player
          */
-        [[nodiscard]] EntityPtr createBullet() {
+        [[nodiscard]] EntityPtr createBulletPlayer(float startX, float startY) {
             EntityPtr bulletEntity = _manager->createEntity();
 
             bulletEntity->addComponent<RType::SpeedComponent>(10);
             bulletEntity->addComponent<RType::DamageComponent>(20);
-            bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(0, 0));
+            bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
             bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+            bulletEntity->addComponent<SizeRectComponent>(14.0f, 14.0f);
             return bulletEntity;
         }
     };

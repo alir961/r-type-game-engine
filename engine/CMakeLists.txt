@@ -32,6 +32,7 @@ set(HEADER_FILES
         include/engine/modules/animation/IAnimation.hpp
         include/engine/modules/animation/Animation.hpp
         include/engine/modules/animation/PlayerAnimation.hpp
+        include/engine/modules/animation/PlayerBulletAnimation.hpp
         include/engine/modules/animation/IAnimationFactory.hpp
 )
 

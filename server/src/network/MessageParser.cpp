@@ -90,6 +90,7 @@ RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
     const std::string message = std::format("player {} speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
     EntityPtr playerEntity = _game->getFactory().createDefaultPlayer();
 
+    playerEntity->setEntityName(std::format("turquoisePlayer {}", sessionID));
     sendMessage(MessageType::PLAYER_NAME, message);
     return playerEntity;
 }
@@ -98,16 +99,33 @@ void RType::MessageParser::handleShoot(const RType::Message &receiveMessage) {
     std::string message = receiveMessage.toString();
     std::vector<std::string> splitMessage = Split::split(message, " \n");
     int sessionID = std::stoi(splitMessage[1]);
+    bool shoot = createBulletPlayerEntity(sessionID);
 
-    createBulletEntity(sessionID);
+    if (!shoot)
+        sendMessage(MessageType::SHOOT, std::format("shoot {} ko\n", sessionID));
 }
 
-RType::EntityPtr RType::MessageParser::createBulletEntity(int sessionID) {
-    const std::string message = std::format("shoot {} speed 10 damage 20 ok", sessionID);
-    EntityPtr bulletEntity = _game->getFactory().createBullet();
+bool RType::MessageParser::createBulletPlayerEntity(int sessionID) {
+    const std::string message;
+    const std::string messageFailure = std::format("shoot {} ko\n", sessionID);
+    Session session = _sessions->getClientSession(sessionID);
+    EntityPtr player = session->getEntity();
+    bool shoot = player->canShoot(_game->getEntityManager().getEntities(), std::format("bulletPlayer"));
+    auto [playerX, playerY] = player->getComponent<PositionComponent>().get()->getPositions();
+    float playerSizeX = player->getComponent<SizeComponent>().get()->getSize().first;
+    float playerRectX = player->getComponent<SizeRectComponent>().get()->getSize().first;
+    float playerRectY = player->getComponent<SizeRectComponent>().get()->getSize().second;
+    float startX = playerX + (playerRectX * playerSizeX);
+    float startY = playerY + playerRectY;
+    EntityPtr bulletEntity;
 
-    sendMessage(MessageType::SHOOT, message);
-    return bulletEntity;
+
+    if (shoot) {
+        bulletEntity = _game->getFactory().createBulletPlayer(startX, startY);
+        bulletEntity->setEntityName(std::format("bulletPlayer {}", sessionID));
+        sendMessage(MessageType::SHOOT, std::format("shoot {} speed 10 damage 20 position {} {} size 1 1 rect 14 14 ok\n", sessionID, startX, startY));
+    }
+    return shoot;
 }
 
 RType::Direction RType::MessageParser::getDirection(RType::MessageType type) {

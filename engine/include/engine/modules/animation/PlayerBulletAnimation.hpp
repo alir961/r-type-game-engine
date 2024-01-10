@@ -12,7 +12,8 @@
 namespace RType {
     const float PBULLET_WIDTH = 14.0F;
     const float PBULLET_HEIGHT = 14.0F;
-    const enum class Coordinates {
+
+    enum class Coordinates {
         FRAME0 = 101,
         FRAME1 = 118,
         FRAME2 = 135,
@@ -46,6 +47,6 @@ namespace RType {
             return getCurrentFrame();
         }
     private:
-        Coordinates _currentFrame;
+        Coordinates _currentFrame = Coordinates::FRAME3;
     };
 }

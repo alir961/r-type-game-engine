@@ -277,21 +277,26 @@ void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &sp
     _playerEntity->setEntityName(color + "Player");
 }
 void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
+    if (splitMessage.size() == 3) return;
     auto bulletEntity = _entityManager.createEntity();
     std::shared_ptr<RType::GraphicEntity> graphicBullet;
     int speed = std::stoi(splitMessage[3]);
     int damage = std::stoi(splitMessage[5]);
-    std::string status = splitMessage[6];
+    int positionX = std::stoi(splitMessage[7]);
+    int positionY = std::stoi(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    std::string status = splitMessage[15];
 
     bulletEntity->addComponent<RType::SpeedComponent>(speed);
     bulletEntity->addComponent<RType::DamageComponent>(damage);
-    bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(_playerEntity->getEntity()->getComponent<PositionComponent>()->getPositions().first, _playerEntity->getEntity()->getComponent<PositionComponent>()->getPositions().second));
-    bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+    bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    bulletEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    bulletEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     bulletEntity->addComponent<RType::PlayerComponent>(false);
-    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet5.gif", "playerStarship");
+    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
     addGraphicEntity(graphicBullet);
-    sf::Sprite sprite = graphicBullet->getSprite();
-    EntityPtr gameEntity = graphicBullet->getEntity();
-    if (status == "ok")
-        graphicBullet->moveRight(sprite, gameEntity);
+    graphicBullet->loadSprite(_animationModule);
 }

@@ -39,7 +39,7 @@ namespace RType {
 
         EntityPtr createPlayerEntity(int sessionID);
 
-        EntityPtr createBulletEntity(int sessionID);
+        bool createBulletPlayerEntity(int sessionID);
 
         static Direction getDirection(MessageType type);
 
