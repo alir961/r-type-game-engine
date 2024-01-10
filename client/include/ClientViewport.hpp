@@ -72,7 +72,7 @@ namespace RType {
         ModuleProvider _provider = ModuleProvider();
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;
-        GraphicEntityPtr _playerEntity;
+        GraphicEntityPtr _playerEntity = nullptr;
 
         GraphicEntityPtr getGraphicEntity(const std::string &entityName);
         void destroyGraphicEntity(GraphicEntityPtr entity);

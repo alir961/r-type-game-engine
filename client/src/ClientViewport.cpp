@@ -105,10 +105,7 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::DEAD:
-            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule, _provider, _playerEntity->getEntity());
-            _entityManager.destroyEntity(_playerEntity->getEntity());
-            destroyGraphicEntity(_playerEntity);
-            _playerEntity = nullptr;
+            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule, _provider, _client->getHealth(), _client->getScore());
             break;
         case ViewState::LOGIN:
             _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
@@ -216,6 +213,8 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
         if (sessionID == _client->getClientID()) {
             _playerEntity = graphicStarship;
             _selectedView->setPlayerEntity(graphicStarship);
+            _client->setHealth(starshipEntity->getComponent<HealthComponent>()->getHealth());
+            _client->setScore(starshipEntity->getComponent<PlayerComponent>()->getScore());
         }
         addGraphicEntity(graphicStarship);
     }
@@ -319,7 +318,9 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
     EntityPtr entity = _entityManager.getEntity(entityName);
     GraphicEntityPtr graphicEntity = getGraphicEntityByName(entityName);
 
-    if (entityName == _playerEntity->getEntity()->getEntityName()) {
+    if (_playerEntity == nullptr)
+        setView(ViewState::DEAD);
+    if (entityName == std::format("{} {}", _playerEntity->getEntityName(), _client->getClientID())) {
         setView(ViewState::DEAD);
         return;
     }
