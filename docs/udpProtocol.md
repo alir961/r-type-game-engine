@@ -12,7 +12,7 @@
 6. [Client Implementation](#6-client-implementation)
    6.1. [UDPClient Class](#61-udpclient-class)
    6.2. [Message Sending](#62-message-sending)
-   6.3. [Message Handling (Client)](#63-message-handling-client)
+   6.3. [Message Handling](#63-message-handling-client)
 7. [Best Practices](#7-best-practices)
 8. [Security Considerations](#8-security-considerations)
 9. [Troubleshooting](#9-troubleshooting)
