@@ -1,0 +1,7 @@
+<map id="RType::SizeRectComponent" name="RType::SizeRectComponent">
+<area shape="rect" id="Node000001" title="Base class for collision component." alt="" coords="5,153,188,178"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1AComponent.html" title="Base abstract for component." alt="" coords="27,79,166,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,120,99,152,94,152,94,120"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IComponent.html" title="Base interface for component." alt="" coords="29,5,164,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,46,99,79,94,79,94,46"/>
+</map>

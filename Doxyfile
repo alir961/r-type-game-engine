@@ -42,6 +42,9 @@ INLINE_INHERITED_MEMB  = YES
 # EXTRACT_STATIC        = YES
 # HIDE_UNDOC_MEMBERS    = YES
 
+HAVE_DOT                = YES
+CLASS_DIAGRAMS          = YES
+
 # Example configuration for specifying the order of classes in the documentation
 # You can customize this based on your desired order
 # USE_CLASS_DIAGRAMS    = YES

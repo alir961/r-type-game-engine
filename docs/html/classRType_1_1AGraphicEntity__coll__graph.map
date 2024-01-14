@@ -1,0 +1,5 @@
+<map id="RType::AGraphicEntity" name="RType::AGraphicEntity">
+<area shape="rect" id="Node000001" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="5,79,156,105"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="8,5,153,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,46,83,79,78,79,78,46"/>
+</map>
