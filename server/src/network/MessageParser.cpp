@@ -7,6 +7,7 @@
 
 #include "../../include/network/MessageParser.hpp"
 #include "../../include/SessionManager.hpp"
+#include "engine/ecs/component/SizeRectComponent.hpp"
 #include "engine/tools/Split.hpp"
 
 RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
@@ -35,6 +36,10 @@ void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMes
 
     session->setWindowWidth(windowWidth);
     session->setWindowHeight(windowHeight);
+    if (_sessions->getWindowWidth() < windowWidth)
+        _sessions->setWindowWidth(windowWidth);
+    if (_sessions->getWindowHeight() < windowHeight)
+        _sessions->setWindowHeight(windowHeight);
     std::cout << "New connection! SessionId: " << sessionId << "!\n";
     sendMessage(MessageType::CONNECT_CALLBACK, std::format("connect {} ok", sessionId));
 }
@@ -111,7 +116,7 @@ bool RType::MessageParser::createBulletPlayerEntity(int sessionID) {
     const std::string messageFailure = std::format("shoot {} ko\n", sessionID);
     Session session = _sessions->getClientSession(sessionID);
     EntityPtr player = session->getEntity();
-    bool shoot = player->canShoot(_game->getEntityManager().getEntities(), std::format("bulletPlayer {}", sessionID));
+    bool shoot = player->canShoot(_game->getEntityManager().getEntities(), "bulletPlayer");
     auto [playerX, playerY] = player->getComponent<PositionComponent>()->getPositions();
     float playerSizeX = player->getComponent<SizeComponent>()->getSize().first;
     float playerRectX = player->getComponent<SizeRectComponent>()->getSize().first;

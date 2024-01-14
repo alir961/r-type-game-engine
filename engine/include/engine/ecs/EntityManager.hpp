@@ -62,13 +62,13 @@ namespace RType {
         /**
         * @brief Update all entities in the EntityManager.
         */
-        void updateEntities() const {
+        void updateEntities() {
             for (const auto &entity: _entities) {
                 entity->updateComponents();
             }
         }
 
-        [[nodiscard]] std::vector<EntityPtr> getEntities() const { return _entities; };
+        [[nodiscard]] std::vector<EntityPtr> getEntities() { return _entities; };
 
     private:
         std::vector<EntityPtr> _entities; /**< Vector to store entities managed by the EntityManager. */

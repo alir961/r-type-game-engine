@@ -229,6 +229,7 @@ void RType::ClientViewport::setHandlers() {
     _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
     _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
     _handlers["death"] = [this](const std::vector<std::string> &splitMessage) { death(splitMessage); };
+    _handlers["move"] = [this](const std::vector<std::string> &splitMessage) { movePlayerBullet(splitMessage); };
 }
 
 void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
@@ -342,4 +343,10 @@ void RType::ClientViewport::destroyGraphicEntity(RType::GraphicEntityPtr entity)
 
     if (it != _graphicEntities.end())
         _graphicEntities.erase(it);
+}
+
+void RType::ClientViewport::movePlayerBullet(const std::vector<std::string> &splitMessage) {
+    sf::Sprite sprite = getGraphicEntityByName(splitMessage[1] + " " + splitMessage[2])->getSprite();
+    EntityPtr gameEntity = getGraphicEntityByName(splitMessage[1] + " " + splitMessage[2])->getEntity();
+    _playerEntity->moveRight(sprite, gameEntity);
 }

@@ -41,6 +41,7 @@ namespace RType {
         MOVE_UP,
         SHOOT,
         DEATH,
+        MOVE_PLAYER_BULLET,
     };
 
     /**
