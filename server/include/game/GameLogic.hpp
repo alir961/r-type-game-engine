@@ -10,20 +10,33 @@
 #include "../SessionManager.hpp"
 #include "engine/ecs/EntityManager.hpp"
 #include "EntityFactory.hpp"
+#include "engine/tools/Thread.hpp"
 
 namespace RType {
 
+    constexpr int TICK_PER_SECOND = 60;
+    constexpr int EPSILON_TIME_MS = 1000 / TICK_PER_SECOND;
+
     class GameLogic {
     private:
+        UDPAdapter *_adapter;
         SessionManager _sessionManager;
         EntityManager _entityManager;
         EntityFactory _factory = EntityFactory(&_entityManager);
+        Thread _thread;
+        int _tickNumber;
+
+        void serverLoopIterate();
+
+        void moveBulletPlayer();
+
+        void sendMessage(MessageType type, const std::string_view &data);
 
     public:
         /**
          * Initialize a default GameLogic
          */
-        explicit GameLogic() = default;
+        GameLogic(RType::UDPAdapter *adapter);
 
         /**
          * Retrieve the current sessions manager
@@ -51,6 +64,8 @@ namespace RType {
         [[nodiscard]] EntityFactory &getFactory() {
             return _factory;
         }
+
+        [[nodiscard]] bool isStopped();
     };
 
 }

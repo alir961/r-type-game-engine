@@ -20,7 +20,8 @@ namespace RType {
     private:
         std::map<int, Session> _sessionMap;
         int _lastSessionID = 0;
-
+        float _windowWidth;
+        float _windowHeight;
     public:
         /**
          * Instantiate default SessionManager
@@ -41,5 +42,14 @@ namespace RType {
          * @return The session if find or nullptr
          */
         Session getClientSession(int sessionId);
+
+        void setWindowWidth(const float &windowWidth) {_windowWidth = windowWidth;};
+
+        void setWindowHeight(const float &windowHeight) {_windowHeight = windowHeight;};
+
+        [[nodiscard]] float getWindowWidth() const {return _windowWidth;};
+
+        [[nodiscard]] float getWindowHeight() const {return _windowHeight;};
+
     };
 }

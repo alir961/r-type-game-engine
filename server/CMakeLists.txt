@@ -8,6 +8,7 @@ set(HEADER_FILES
         include/compression/RLEAlgorithm.hpp
         include/compression/IDataCompression.hpp
         include/Client.hpp
+        include/game/GameLogic.hpp
         include/SessionManager.hpp)
 
 set(SOURCE_FILES
@@ -19,9 +20,9 @@ set(SOURCE_FILES
         src/BinaryEncoder.cpp
         src/SessionManager.cpp
         src/Client.cpp
-        include/game/GameLogic.hpp
         include/network/MessageParser.hpp
         src/network/MessageParser.cpp
+        src/game/GameLogic.cpp
         include/game/EntityFactory.hpp)
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

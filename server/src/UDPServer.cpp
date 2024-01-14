@@ -10,7 +10,8 @@
 
 RType::UDPServer::UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint) :
         _socket(ioContext, endpoint),
-        _adapter(_socket, _remoteEndpoint) {
+        _adapter(_socket, _remoteEndpoint),
+        _game(&_adapter) {
     startReceive();
 }
 
