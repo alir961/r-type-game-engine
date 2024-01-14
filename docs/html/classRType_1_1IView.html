@@ -77,6 +77,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRType_1_1IView-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RType::IView Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -87,14 +88,15 @@ Inheritance diagram for RType::IView:</div>
  <div class="center">
   <img src="classRType_1_1IView.png" usemap="#RType::IView_map" alt=""/>
   <map id="RType::IView_map" name="RType::IView_map">
-<area href="classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="RType::IDrawable" shape="rect" coords="405,0,530,24"/>
-<area href="classRType_1_1DeadView.html" title="Represents a state where entities are not drawn." alt="RType::DeadView" shape="rect" coords="0,112,125,136"/>
-<area href="classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="RType::GameView" shape="rect" coords="135,112,260,136"/>
-<area href="classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="RType::LoginView" shape="rect" coords="270,112,395,136"/>
-<area href="classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="RType::MenuView" shape="rect" coords="405,112,530,136"/>
-<area href="classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="RType::OptionsView" shape="rect" coords="540,112,665,136"/>
-<area href="classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="RType::PauseView" shape="rect" coords="675,112,800,136"/>
-<area href="classRType_1_1WinView.html" title="Represents a state where entities are not drawn." alt="RType::WinView" shape="rect" coords="810,112,935,136"/>
+<area href="classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="RType::IDrawable" shape="rect" coords="0,0,125,24"/>
+<area href="classRType_1_1DeadView.html" title="Represents a state where entities are not drawn." alt="RType::DeadView" shape="rect" coords="135,112,260,136"/>
+<area href="classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="RType::GameView" shape="rect" coords="135,168,260,192"/>
+<area href="classRType_1_1LoadView.html" alt="RType::LoadView" shape="rect" coords="135,224,260,248"/>
+<area href="classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="RType::LoginView" shape="rect" coords="135,280,260,304"/>
+<area href="classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="RType::MenuView" shape="rect" coords="135,336,260,360"/>
+<area href="classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="RType::OptionsView" shape="rect" coords="135,392,260,416"/>
+<area href="classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="RType::PauseView" shape="rect" coords="135,448,260,472"/>
+<area href="classRType_1_1WinView.html" title="Represents a state where entities are not drawn." alt="RType::WinView" shape="rect" coords="135,504,260,528"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -106,6 +108,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a31935d64339edb04fa7ced738a240072" id="r_a31935d64339edb04fa7ced738a240072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31935d64339edb04fa7ced738a240072">draw</a> (sf::RenderWindow &amp;window, std::vector&lt; GraphicEntityPtr &gt; entities) override=0</td></tr>
 <tr class="memdesc:a31935d64339edb04fa7ced738a240072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function for drawing objects on an SFML RenderWindow.  <br /></td></tr>
 <tr class="separator:a31935d64339edb04fa7ced738a240072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a591f5bd070378fe2daffe1cc32f1c02f" id="r_a591f5bd070378fe2daffe1cc32f1c02f"><td class="memItemLeft" align="right" valign="top"><a id="a591f5bd070378fe2daffe1cc32f1c02f" name="a591f5bd070378fe2daffe1cc32f1c02f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayerEntity</b> (const GraphicEntityPtr &amp;playerEntity)</td></tr>
+<tr class="separator:a591f5bd070378fe2daffe1cc32f1c02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508c70ec9a94df5c2d3fea26078977b1" id="r_a508c70ec9a94df5c2d3fea26078977b1"><td class="memItemLeft" align="right" valign="top"><a id="a508c70ec9a94df5c2d3fea26078977b1" name="a508c70ec9a94df5c2d3fea26078977b1"></a>
+GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayerEntity</b> ()</td></tr>
+<tr class="separator:a508c70ec9a94df5c2d3fea26078977b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aa28182338e24130b8c865eff81c06188" id="r_aa28182338e24130b8c865eff81c06188"><td class="memItemLeft" align="right" valign="top"><a id="aa28182338e24130b8c865eff81c06188" name="aa28182338e24130b8c865eff81c06188"></a>
+GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEntity</b> = nullptr</td></tr>
+<tr class="separator:aa28182338e24130b8c865eff81c06188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a31935d64339edb04fa7ced738a240072" name="a31935d64339edb04fa7ced738a240072"></a>
@@ -146,7 +160,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classRType_1_1IDrawable.html#af1fa08f3efecd0a6b0472dca57087a11">RType::IDrawable</a>.</p>
 
-<p>Implemented in <a class="el" href="classRType_1_1DeadView.html#aca2730cb44e1a38feb4a286163c6cb1e">RType::DeadView</a>, <a class="el" href="classRType_1_1LoginView.html#a35386ee296d947aa252dfd4b04eeae53">RType::LoginView</a>, <a class="el" href="classRType_1_1GameView.html#a5698654504a04c5cac62dc35e8d8e762">RType::GameView</a>, <a class="el" href="classRType_1_1WinView.html#a86bd1355616bf65a4094a005e39e03c7">RType::WinView</a>, <a class="el" href="classRType_1_1MenuView.html#acb015c2a1fe6c6648311c87a3c1af16f">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#aa051060408c5198ac15b71081568f2b0">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#adf12497e30cfb6ca41f5df1aa069d22b">RType::PauseView</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1DeadView.html#aa1feb6d3af444f4598c028f191cfec66">RType::DeadView</a>, <a class="el" href="classRType_1_1LoadView.html#a506f6b5ba4bb68e6415481cd08df6f88">RType::LoadView</a>, <a class="el" href="classRType_1_1LoginView.html#a35386ee296d947aa252dfd4b04eeae53">RType::LoginView</a>, <a class="el" href="classRType_1_1GameView.html#a5698654504a04c5cac62dc35e8d8e762">RType::GameView</a>, <a class="el" href="classRType_1_1WinView.html#a86bd1355616bf65a4094a005e39e03c7">RType::WinView</a>, <a class="el" href="classRType_1_1MenuView.html#acb015c2a1fe6c6648311c87a3c1af16f">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#aa051060408c5198ac15b71081568f2b0">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#adf12497e30cfb6ca41f5df1aa069d22b">RType::PauseView</a>.</p>
 
 </div>
 </div>
@@ -175,7 +189,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Pure virtual function for update graphical object for next render. </p>
 
-<p>Implemented in <a class="el" href="classRType_1_1WinView.html#a015582c320b1bb60143f321e1c9a650b">RType::WinView</a>, <a class="el" href="classRType_1_1DeadView.html#a4f89d75e1aea0b63dfa00a9402f2b04b">RType::DeadView</a>, <a class="el" href="classRType_1_1GameView.html#a63452c08818d8fd86301a4e27c354de5">RType::GameView</a>, <a class="el" href="classRType_1_1LoginView.html#a7b2ca5867cd514f51ed210e5f7cbe7c3">RType::LoginView</a>, <a class="el" href="classRType_1_1MenuView.html#a6ff80a405c1ad4e3dd76689878a6a1e4">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#af29d5ab5737646f92a72c1327360ef25">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#a7b1f0e7b2ac7d2a40f433fb7a817d2f6">RType::PauseView</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1WinView.html#a015582c320b1bb60143f321e1c9a650b">RType::WinView</a>, <a class="el" href="classRType_1_1DeadView.html#a4f89d75e1aea0b63dfa00a9402f2b04b">RType::DeadView</a>, <a class="el" href="classRType_1_1GameView.html#a63452c08818d8fd86301a4e27c354de5">RType::GameView</a>, <a class="el" href="classRType_1_1LoadView.html#a9b7f391d9509546b46f16842c54105fe">RType::LoadView</a>, <a class="el" href="classRType_1_1LoginView.html#a7b2ca5867cd514f51ed210e5f7cbe7c3">RType::LoginView</a>, <a class="el" href="classRType_1_1MenuView.html#a6ff80a405c1ad4e3dd76689878a6a1e4">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#af29d5ab5737646f92a72c1327360ef25">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#a7b1f0e7b2ac7d2a40f433fb7a817d2f6">RType::PauseView</a>.</p>
 
 </div>
 </div>

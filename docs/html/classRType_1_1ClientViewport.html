@@ -138,6 +138,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>moveDown</b> (const s
 <tr class="memitem:aa6c3e912c759a1c5de62c814903f3260" id="r_aa6c3e912c759a1c5de62c814903f3260"><td class="memItemLeft" align="right" valign="top"><a id="aa6c3e912c759a1c5de62c814903f3260" name="aa6c3e912c759a1c5de62c814903f3260"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>moveUp</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
 <tr class="separator:aa6c3e912c759a1c5de62c814903f3260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a379c2f756d9310697b82298c1fa7316d" id="r_a379c2f756d9310697b82298c1fa7316d"><td class="memItemLeft" align="right" valign="top"><a id="a379c2f756d9310697b82298c1fa7316d" name="a379c2f756d9310697b82298c1fa7316d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>shoot</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
+<tr class="separator:a379c2f756d9310697b82298c1fa7316d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00ebb3ab49e99add2ef3867de1769991" id="r_a00ebb3ab49e99add2ef3867de1769991"><td class="memItemLeft" align="right" valign="top"><a id="a00ebb3ab49e99add2ef3867de1769991" name="a00ebb3ab49e99add2ef3867de1769991"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>death</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
+<tr class="separator:a00ebb3ab49e99add2ef3867de1769991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83bbeb0d4b43b61855b12769a5d52c04" id="r_a83bbeb0d4b43b61855b12769a5d52c04"><td class="memItemLeft" align="right" valign="top"><a id="a83bbeb0d4b43b61855b12769a5d52c04" name="a83bbeb0d4b43b61855b12769a5d52c04"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>movePlayerBullet</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
+<tr class="separator:a83bbeb0d4b43b61855b12769a5d52c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7347e94d110245ed5d70a1da2862e38c" id="r_a7347e94d110245ed5d70a1da2862e38c"><td class="memItemLeft" align="right" valign="top"><a id="a7347e94d110245ed5d70a1da2862e38c" name="a7347e94d110245ed5d70a1da2862e38c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>changePlayerColor</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
+<tr class="separator:a7347e94d110245ed5d70a1da2862e38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
 Private Types</h2></td></tr>
@@ -147,6 +159,12 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>MessageHandlerFuncti
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a49fdb77f5197f1d534a7bfd7449d3acc" id="r_a49fdb77f5197f1d534a7bfd7449d3acc"><td class="memItemLeft" align="right" valign="top"><a id="a49fdb77f5197f1d534a7bfd7449d3acc" name="a49fdb77f5197f1d534a7bfd7449d3acc"></a>
+GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>getGraphicEntity</b> (const std::string &amp;entityName)</td></tr>
+<tr class="separator:a49fdb77f5197f1d534a7bfd7449d3acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c9237f8fc107636c49855d04a8874d6" id="r_a0c9237f8fc107636c49855d04a8874d6"><td class="memItemLeft" align="right" valign="top"><a id="a0c9237f8fc107636c49855d04a8874d6" name="a0c9237f8fc107636c49855d04a8874d6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyGraphicEntity</b> (GraphicEntityPtr entity)</td></tr>
+<tr class="separator:a0c9237f8fc107636c49855d04a8874d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afaea3cc026e1aa63de8183251dd54681" id="r_afaea3cc026e1aa63de8183251dd54681"><td class="memItemLeft" align="right" valign="top"><a id="afaea3cc026e1aa63de8183251dd54681" name="afaea3cc026e1aa63de8183251dd54681"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()</td></tr>
 <tr class="memdesc:afaea3cc026e1aa63de8183251dd54681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private method to handle drawing operations. <br /></td></tr>
@@ -202,7 +220,7 @@ std::unordered_map&lt; std::string, MessageHandlerFunction &gt;&#160;</td><td cl
 <a class="el" href="classRType_1_1EntityManager.html">EntityManager</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_entityManager</b></td></tr>
 <tr class="separator:a3173d122a332c37bdaac2efc5f456241"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6035eb2e797e147d0bc4cdf464762fc0" id="r_a6035eb2e797e147d0bc4cdf464762fc0"><td class="memItemLeft" align="right" valign="top"><a id="a6035eb2e797e147d0bc4cdf464762fc0" name="a6035eb2e797e147d0bc4cdf464762fc0"></a>
-GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEntity</b></td></tr>
+GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEntity</b> = nullptr</td></tr>
 <tr class="separator:a6035eb2e797e147d0bc4cdf464762fc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

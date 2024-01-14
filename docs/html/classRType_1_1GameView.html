@@ -100,15 +100,21 @@ Inheritance diagram for RType::GameView:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a969adb6557532dbb22e530fbac717e84" id="r_a969adb6557532dbb22e530fbac717e84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a969adb6557532dbb22e530fbac717e84">GameView</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1ClientViewport.html">ClientViewport</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule, <a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a> &amp;provider)</td></tr>
-<tr class="memdesc:a969adb6557532dbb22e530fbac717e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1GameView.html" title="Represents a state where entities are drawn.">GameView</a>.  <br /></td></tr>
-<tr class="separator:a969adb6557532dbb22e530fbac717e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2a17bda761614504cee22faec976af1" id="r_aa2a17bda761614504cee22faec976af1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2a17bda761614504cee22faec976af1">GameView</a> (sf::RenderWindow &amp;window, <a class="el" href="classRType_1_1ClientViewport.html">ClientViewport</a> &amp;gameView, <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *graphicalModule, <a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a> &amp;provider, std::string userName)</td></tr>
+<tr class="memdesc:aa2a17bda761614504cee22faec976af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classRType_1_1GameView.html" title="Represents a state where entities are drawn.">GameView</a>.  <br /></td></tr>
+<tr class="separator:aa2a17bda761614504cee22faec976af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63452c08818d8fd86301a4e27c354de5" id="r_a63452c08818d8fd86301a4e27c354de5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63452c08818d8fd86301a4e27c354de5">update</a> () override</td></tr>
 <tr class="memdesc:a63452c08818d8fd86301a4e27c354de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function for update graphical object for next render.  <br /></td></tr>
 <tr class="separator:a63452c08818d8fd86301a4e27c354de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5698654504a04c5cac62dc35e8d8e762" id="r_a5698654504a04c5cac62dc35e8d8e762"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5698654504a04c5cac62dc35e8d8e762">draw</a> (sf::RenderWindow &amp;window, std::vector&lt; GraphicEntityPtr &gt; graphicEntities) override</td></tr>
 <tr class="memdesc:a5698654504a04c5cac62dc35e8d8e762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws entities on the SFML RenderWindow.  <br /></td></tr>
 <tr class="separator:a5698654504a04c5cac62dc35e8d8e762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a591f5bd070378fe2daffe1cc32f1c02f" id="r_a591f5bd070378fe2daffe1cc32f1c02f"><td class="memItemLeft" align="right" valign="top"><a id="a591f5bd070378fe2daffe1cc32f1c02f" name="a591f5bd070378fe2daffe1cc32f1c02f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayerEntity</b> (const GraphicEntityPtr &amp;playerEntity)</td></tr>
+<tr class="separator:a591f5bd070378fe2daffe1cc32f1c02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508c70ec9a94df5c2d3fea26078977b1" id="r_a508c70ec9a94df5c2d3fea26078977b1"><td class="memItemLeft" align="right" valign="top"><a id="a508c70ec9a94df5c2d3fea26078977b1" name="a508c70ec9a94df5c2d3fea26078977b1"></a>
+GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayerEntity</b> ()</td></tr>
+<tr class="separator:a508c70ec9a94df5c2d3fea26078977b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -132,12 +138,18 @@ sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><b>_clock</b></td><
 <tr class="memitem:ad576da0375b5e67284717d78424ddc11" id="r_ad576da0375b5e67284717d78424ddc11"><td class="memItemLeft" align="right" valign="top"><a id="ad576da0375b5e67284717d78424ddc11" name="ad576da0375b5e67284717d78424ddc11"></a>
 <a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>_provider</b></td></tr>
 <tr class="separator:ad576da0375b5e67284717d78424ddc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554e18a38b41cef24bbc1e95736bdc1a" id="r_a554e18a38b41cef24bbc1e95736bdc1a"><td class="memItemLeft" align="right" valign="top"><a id="a554e18a38b41cef24bbc1e95736bdc1a" name="a554e18a38b41cef24bbc1e95736bdc1a"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_userName</b></td></tr>
+<tr class="separator:a554e18a38b41cef24bbc1e95736bdc1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa28182338e24130b8c865eff81c06188" id="r_aa28182338e24130b8c865eff81c06188"><td class="memItemLeft" align="right" valign="top"><a id="aa28182338e24130b8c865eff81c06188" name="aa28182338e24130b8c865eff81c06188"></a>
+GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEntity</b> = nullptr</td></tr>
+<tr class="separator:aa28182338e24130b8c865eff81c06188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a state where entities are drawn. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a969adb6557532dbb22e530fbac717e84" name="a969adb6557532dbb22e530fbac717e84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a969adb6557532dbb22e530fbac717e84">&#9670;&#160;</a></span>GameView()</h2>
+<a id="aa2a17bda761614504cee22faec976af1" name="aa2a17bda761614504cee22faec976af1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2a17bda761614504cee22faec976af1">&#9670;&#160;</a></span>GameView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +175,12 @@ sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><b>_clock</b></td><
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>provider</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>provider</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>userName</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

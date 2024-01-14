@@ -8,11 +8,12 @@ var searchData=
   ['playaudio_5',['PlayAudio',['../classRType_1_1AAudioModule.html#a8ff0f7c2f2ebf68f8de8af5501fc1d94',1,'RType::AAudioModule']]],
   ['playcinematic_6',['PlayCinematic',['../classRType_1_1ACinematicModule.html#a35d9e3c134352db9b2ebc8c8a411ba68',1,'RType::ACinematicModule']]],
   ['playeranimation_7',['PlayerAnimation',['../classRType_1_1PlayerAnimation.html',1,'RType']]],
-  ['playercomponent_8',['PlayerComponent',['../classRType_1_1PlayerComponent.html',1,'RType::PlayerComponent'],['../classRType_1_1PlayerComponent.html#acdd5edadac54f1d9d52d68a370c7f1dd',1,'RType::PlayerComponent::PlayerComponent()']]],
-  ['playloopsound_9',['playLoopSound',['../classRType_1_1SoundModule.html#a277beca1016e726990a4714bd17b0157',1,'RType::SoundModule']]],
-  ['playsound_10',['playSound',['../classRType_1_1SoundModule.html#a9401cd466b781695709aeb644f1a17cc',1,'RType::SoundModule']]],
-  ['pop_11',['pop',['../classRType_1_1SafeQueue.html#a49c9b1bfaadca85eb7b98ca7a1ef1231',1,'RType::SafeQueue']]],
-  ['positioncomponent_12',['PositionComponent',['../classRType_1_1PositionComponent.html',1,'RType::PositionComponent'],['../classRType_1_1PositionComponent.html#a53ab2067ab7daef5184abd594c24a99e',1,'RType::PositionComponent::PositionComponent()']]],
-  ['printconsole_13',['PrintConsole',['../classRType_1_1AConsoleModule.html#a4d9bc90303e2360418b53082b4c6fa31',1,'RType::AConsoleModule']]],
-  ['push_14',['push',['../classRType_1_1SafeQueue.html#a60d4f88aadca9d27d771f664e3274c16',1,'RType::SafeQueue']]]
+  ['playerbulletanimation_8',['PlayerBulletAnimation',['../classRType_1_1PlayerBulletAnimation.html',1,'RType']]],
+  ['playercomponent_9',['PlayerComponent',['../classRType_1_1PlayerComponent.html',1,'RType::PlayerComponent'],['../classRType_1_1PlayerComponent.html#acdd5edadac54f1d9d52d68a370c7f1dd',1,'RType::PlayerComponent::PlayerComponent()']]],
+  ['playloopsound_10',['playLoopSound',['../classRType_1_1SoundModule.html#a277beca1016e726990a4714bd17b0157',1,'RType::SoundModule']]],
+  ['playsound_11',['playSound',['../classRType_1_1SoundModule.html#a9401cd466b781695709aeb644f1a17cc',1,'RType::SoundModule']]],
+  ['pop_12',['pop',['../classRType_1_1SafeQueue.html#a49c9b1bfaadca85eb7b98ca7a1ef1231',1,'RType::SafeQueue']]],
+  ['positioncomponent_13',['PositionComponent',['../classRType_1_1PositionComponent.html',1,'RType::PositionComponent'],['../classRType_1_1PositionComponent.html#a53ab2067ab7daef5184abd594c24a99e',1,'RType::PositionComponent::PositionComponent()']]],
+  ['printconsole_14',['PrintConsole',['../classRType_1_1AConsoleModule.html#a4d9bc90303e2360418b53082b4c6fa31',1,'RType::AConsoleModule']]],
+  ['push_15',['push',['../classRType_1_1SafeQueue.html#a60d4f88aadca9d27d771f664e3274c16',1,'RType::SafeQueue']]]
 ];

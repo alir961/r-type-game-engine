@@ -91,6 +91,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a63432af5fd3ee8897f4551049a22c169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45314cd7668cdc3af57143c10529daef" id="r_a45314cd7668cdc3af57143c10529daef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45314cd7668cdc3af57143c10529daef">parseMessage</a> (const MessageBuffer &amp;buffer, std::size_t bytesReceived)</td></tr>
 <tr class="separator:a45314cd7668cdc3af57143c10529daef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a477b1de5b6ba355f27f2d056d31d09ab" id="r_a477b1de5b6ba355f27f2d056d31d09ab"><td class="memItemLeft" align="right" valign="top"><a id="a477b1de5b6ba355f27f2d056d31d09ab" name="a477b1de5b6ba355f27f2d056d31d09ab"></a>
+<a class="el" href="classRType_1_1SessionManager.html">SessionManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getSessionManager</b> ()</td></tr>
+<tr class="separator:a477b1de5b6ba355f27f2d056d31d09ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -103,15 +106,27 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>handleUnknownMessageT
 <tr class="memitem:a679828e876214ecdce4c07406cec88c1" id="r_a679828e876214ecdce4c07406cec88c1"><td class="memItemLeft" align="right" valign="top"><a id="a679828e876214ecdce4c07406cec88c1" name="a679828e876214ecdce4c07406cec88c1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>handlePlayerNameMessageType</b> (const <a class="el" href="structRType_1_1Message.html">Message</a> &amp;receiveMessage)</td></tr>
 <tr class="separator:a679828e876214ecdce4c07406cec88c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c3c0c65e59cac760ec35a53aee70a62" id="r_a4c3c0c65e59cac760ec35a53aee70a62"><td class="memItemLeft" align="right" valign="top"><a id="a4c3c0c65e59cac760ec35a53aee70a62" name="a4c3c0c65e59cac760ec35a53aee70a62"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>handlePlayerColor</b> (const <a class="el" href="structRType_1_1Message.html">Message</a> &amp;receiveMessage)</td></tr>
+<tr class="separator:a4c3c0c65e59cac760ec35a53aee70a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf0f8d815f179b3a2ec337df719277b2" id="r_abf0f8d815f179b3a2ec337df719277b2"><td class="memItemLeft" align="right" valign="top"><a id="abf0f8d815f179b3a2ec337df719277b2" name="abf0f8d815f179b3a2ec337df719277b2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>handleMove</b> (const <a class="el" href="structRType_1_1Message.html">Message</a> &amp;receiveMessage)</td></tr>
 <tr class="separator:abf0f8d815f179b3a2ec337df719277b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2eca1dfe0af59e36871130ef78b9c29b" id="r_a2eca1dfe0af59e36871130ef78b9c29b"><td class="memItemLeft" align="right" valign="top"><a id="a2eca1dfe0af59e36871130ef78b9c29b" name="a2eca1dfe0af59e36871130ef78b9c29b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendMessage</b> (MessageType type, const std::string_view &amp;data)</td></tr>
 <tr class="separator:a2eca1dfe0af59e36871130ef78b9c29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab70fe3165049cef202155e420b4f33bd" id="r_ab70fe3165049cef202155e420b4f33bd"><td class="memItemLeft" align="right" valign="top"><a id="ab70fe3165049cef202155e420b4f33bd" name="ab70fe3165049cef202155e420b4f33bd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>handleShoot</b> (const <a class="el" href="structRType_1_1Message.html">RType::Message</a> &amp;receiveMessage)</td></tr>
+<tr class="separator:ab70fe3165049cef202155e420b4f33bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1f19275e0d5e6e179777832a97a5dfd" id="r_aa1f19275e0d5e6e179777832a97a5dfd"><td class="memItemLeft" align="right" valign="top"><a id="aa1f19275e0d5e6e179777832a97a5dfd" name="aa1f19275e0d5e6e179777832a97a5dfd"></a>
 EntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>createPlayerEntity</b> (int sessionID)</td></tr>
 <tr class="separator:aa1f19275e0d5e6e179777832a97a5dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6f95050ae4be22b9b8c04d44eeadbe" id="r_aed6f95050ae4be22b9b8c04d44eeadbe"><td class="memItemLeft" align="right" valign="top"><a id="aed6f95050ae4be22b9b8c04d44eeadbe" name="aed6f95050ae4be22b9b8c04d44eeadbe"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>createBulletPlayerEntity</b> (int sessionID)</td></tr>
+<tr class="separator:aed6f95050ae4be22b9b8c04d44eeadbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace692e0827d6a03b420b98d28fac7164" id="r_ace692e0827d6a03b420b98d28fac7164"><td class="memItemLeft" align="right" valign="top"><a id="ace692e0827d6a03b420b98d28fac7164" name="ace692e0827d6a03b420b98d28fac7164"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>checkEntitiesStatus</b> ()</td></tr>
+<tr class="separator:ace692e0827d6a03b420b98d28fac7164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>

@@ -8,6 +8,7 @@ var searchData=
   ['configurationexception_5',['ConfigurationException',['../classRType_1_1ConfigurationException.html',1,'RType::ConfigurationException'],['../classRType_1_1ConfigurationException.html#ab133e78880cf883e94d59cfd016383bf',1,'RType::ConfigurationException::ConfigurationException()']]],
   ['connecttoserver_6',['connectToServer',['../classRType_1_1ClientViewport.html#ae14a3cf170f2d95e1c776a614a12d304',1,'RType::ClientViewport']]],
   ['consolemodule_7',['ConsoleModule',['../classRType_1_1ConsoleModule.html',1,'RType']]],
-  ['createdefaultplayer_8',['createDefaultPlayer',['../classRType_1_1EntityFactory.html#acf1e2a1c94267163a9f6ca532744f6d7',1,'RType::EntityFactory']]],
-  ['createentity_9',['createEntity',['../classRType_1_1EntityManager.html#ac479f78caeecdf2008b291c693eb99e1',1,'RType::EntityManager']]]
+  ['createbulletplayer_8',['createBulletPlayer',['../classRType_1_1EntityFactory.html#a329578bd40572ddbf2bc99f353011534',1,'RType::EntityFactory']]],
+  ['createdefaultplayer_9',['createDefaultPlayer',['../classRType_1_1EntityFactory.html#acf1e2a1c94267163a9f6ca532744f6d7',1,'RType::EntityFactory']]],
+  ['createentity_10',['createEntity',['../classRType_1_1EntityManager.html#ac479f78caeecdf2008b291c693eb99e1',1,'RType::EntityManager']]]
 ];

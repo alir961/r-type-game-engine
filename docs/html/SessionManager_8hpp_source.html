@@ -95,27 +95,38 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;engine/network/UDPAdapter.hpp&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;Client.hpp&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span>RType {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classRType_1_1SessionManager.html">   18</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1SessionManager.html">SessionManager</a> {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        std::map&lt;int, Session&gt; _sessionMap;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">int</span> _lastSessionID = 0;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classRType_1_1SessionManager.html#ac1401f355dd66a9372adc6da92084790">   27</a></span>        <a class="code hl_function" href="classRType_1_1SessionManager.html#ac1401f355dd66a9372adc6da92084790">SessionManager</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classRType_1_1SessionManager.html#aceb095211e3308e62d965e1fa0099dbc">getNextSessionId</a>();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        Session <a class="code hl_function" href="classRType_1_1SessionManager.html#ab803be799d673e55c7f3964804bc8e2b">getClientSession</a>(<span class="keywordtype">int</span> sessionId);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    };</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;engine/network/UDPAdapter.hpp&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>RType {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classRType_1_1SessionManager.html">   19</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1SessionManager.html">SessionManager</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        std::map&lt;int, Session&gt; _sessionMap;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">int</span> _lastSessionID = 0;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordtype">float</span> _windowWidth;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordtype">float</span> _windowHeight;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classRType_1_1SessionManager.html#ac1401f355dd66a9372adc6da92084790">   29</a></span>        <a class="code hl_function" href="classRType_1_1SessionManager.html#ac1401f355dd66a9372adc6da92084790">SessionManager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        [[nodiscard]] <span class="keywordtype">int</span> <a class="code hl_function" href="classRType_1_1SessionManager.html#aceb095211e3308e62d965e1fa0099dbc">getNextSessionId</a>();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        Session <a class="code hl_function" href="classRType_1_1SessionManager.html#ab803be799d673e55c7f3964804bc8e2b">getClientSession</a>(<span class="keywordtype">int</span> sessionId);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">void</span> setWindowWidth(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;windowWidth) {_windowWidth = windowWidth;};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordtype">void</span> setWindowHeight(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;windowHeight) {_windowHeight = windowHeight;};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        [[nodiscard]] <span class="keywordtype">float</span> getWindowWidth()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _windowWidth;};</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        [[nodiscard]] <span class="keywordtype">float</span> getWindowHeight()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _windowHeight;};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    };</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
-<div class="ttc" id="aclassRType_1_1SessionManager_html"><div class="ttname"><a href="classRType_1_1SessionManager.html">RType::SessionManager</a></div><div class="ttdef"><b>Definition</b> SessionManager.hpp:18</div></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="ttc" id="aclassRType_1_1SessionManager_html"><div class="ttname"><a href="classRType_1_1SessionManager.html">RType::SessionManager</a></div><div class="ttdef"><b>Definition</b> SessionManager.hpp:19</div></div>
 <div class="ttc" id="aclassRType_1_1SessionManager_html_ab803be799d673e55c7f3964804bc8e2b"><div class="ttname"><a href="classRType_1_1SessionManager.html#ab803be799d673e55c7f3964804bc8e2b">RType::SessionManager::getClientSession</a></div><div class="ttdeci">Session getClientSession(int sessionId)</div><div class="ttdef"><b>Definition</b> SessionManager.cpp:10</div></div>
 <div class="ttc" id="aclassRType_1_1SessionManager_html_ac1401f355dd66a9372adc6da92084790"><div class="ttname"><a href="classRType_1_1SessionManager.html#ac1401f355dd66a9372adc6da92084790">RType::SessionManager::SessionManager</a></div><div class="ttdeci">SessionManager()=default</div></div>
 <div class="ttc" id="aclassRType_1_1SessionManager_html_aceb095211e3308e62d965e1fa0099dbc"><div class="ttname"><a href="classRType_1_1SessionManager.html#aceb095211e3308e62d965e1fa0099dbc">RType::SessionManager::getNextSessionId</a></div><div class="ttdeci">int getNextSessionId()</div><div class="ttdef"><b>Definition</b> SessionManager.cpp:17</div></div>

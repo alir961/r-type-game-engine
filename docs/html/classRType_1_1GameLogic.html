@@ -77,6 +77,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRType_1_1GameLogic-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RType::GameLogic Class Reference</div></div>
@@ -85,17 +86,35 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a14512ab209e8552c92e7b21d8d97e06f" id="r_a14512ab209e8552c92e7b21d8d97e06f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14512ab209e8552c92e7b21d8d97e06f">GameLogic</a> ()=default</td></tr>
-<tr class="separator:a14512ab209e8552c92e7b21d8d97e06f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9484cc768424eb6a758e8fb493726ee1" id="r_a9484cc768424eb6a758e8fb493726ee1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9484cc768424eb6a758e8fb493726ee1">GameLogic</a> (<a class="el" href="classRType_1_1UDPAdapter.html">RType::UDPAdapter</a> *adapter)</td></tr>
+<tr class="separator:a9484cc768424eb6a758e8fb493726ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7bddfdbc68ba9ad515addab3a558925" id="r_aa7bddfdbc68ba9ad515addab3a558925"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1SessionManager.html">SessionManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7bddfdbc68ba9ad515addab3a558925">getSessionManager</a> ()</td></tr>
 <tr class="separator:aa7bddfdbc68ba9ad515addab3a558925"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2dad2d16e9f31d5381a482e0e499712" id="r_ae2dad2d16e9f31d5381a482e0e499712"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1EntityManager.html">EntityManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2dad2d16e9f31d5381a482e0e499712">getEntityManager</a> ()</td></tr>
 <tr class="separator:ae2dad2d16e9f31d5381a482e0e499712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac20654352462b85aca25c8d796973d79" id="r_ac20654352462b85aca25c8d796973d79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRType_1_1EntityFactory.html">EntityFactory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac20654352462b85aca25c8d796973d79">getFactory</a> ()</td></tr>
 <tr class="separator:ac20654352462b85aca25c8d796973d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45fcae01a103ab942ed730b7e45a2472" id="r_a45fcae01a103ab942ed730b7e45a2472"><td class="memItemLeft" align="right" valign="top"><a id="a45fcae01a103ab942ed730b7e45a2472" name="a45fcae01a103ab942ed730b7e45a2472"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isStopped</b> ()</td></tr>
+<tr class="separator:a45fcae01a103ab942ed730b7e45a2472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:abc4091965d4201adb8eda38055030449" id="r_abc4091965d4201adb8eda38055030449"><td class="memItemLeft" align="right" valign="top"><a id="abc4091965d4201adb8eda38055030449" name="abc4091965d4201adb8eda38055030449"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>serverLoopIterate</b> ()</td></tr>
+<tr class="separator:abc4091965d4201adb8eda38055030449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b5c233a49de91ea24c04bd1e620fe57" id="r_a9b5c233a49de91ea24c04bd1e620fe57"><td class="memItemLeft" align="right" valign="top"><a id="a9b5c233a49de91ea24c04bd1e620fe57" name="a9b5c233a49de91ea24c04bd1e620fe57"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>moveBulletPlayer</b> ()</td></tr>
+<tr class="separator:a9b5c233a49de91ea24c04bd1e620fe57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaec88c893e483e2325a76d2182855587" id="r_aaec88c893e483e2325a76d2182855587"><td class="memItemLeft" align="right" valign="top"><a id="aaec88c893e483e2325a76d2182855587" name="aaec88c893e483e2325a76d2182855587"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sendMessage</b> (MessageType type, const std::string_view &amp;data)</td></tr>
+<tr class="separator:aaec88c893e483e2325a76d2182855587"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a870bf33ea22280c421ecb4e09ea12791" id="r_a870bf33ea22280c421ecb4e09ea12791"><td class="memItemLeft" align="right" valign="top"><a id="a870bf33ea22280c421ecb4e09ea12791" name="a870bf33ea22280c421ecb4e09ea12791"></a>
+<a class="el" href="classRType_1_1UDPAdapter.html">UDPAdapter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_adapter</b></td></tr>
+<tr class="separator:a870bf33ea22280c421ecb4e09ea12791"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4484d475d9864ad9c04ebfcced65fcb5" id="r_a4484d475d9864ad9c04ebfcced65fcb5"><td class="memItemLeft" align="right" valign="top"><a id="a4484d475d9864ad9c04ebfcced65fcb5" name="a4484d475d9864ad9c04ebfcced65fcb5"></a>
 <a class="el" href="classRType_1_1SessionManager.html">SessionManager</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_sessionManager</b></td></tr>
 <tr class="separator:a4484d475d9864ad9c04ebfcced65fcb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -105,29 +124,27 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a811495103a3d2dec8243d87e1b8d5ed0" id="r_a811495103a3d2dec8243d87e1b8d5ed0"><td class="memItemLeft" align="right" valign="top"><a id="a811495103a3d2dec8243d87e1b8d5ed0" name="a811495103a3d2dec8243d87e1b8d5ed0"></a>
 <a class="el" href="classRType_1_1EntityFactory.html">EntityFactory</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_factory</b> = <a class="el" href="classRType_1_1EntityFactory.html">EntityFactory</a>(&amp;_entityManager)</td></tr>
 <tr class="separator:a811495103a3d2dec8243d87e1b8d5ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9de21ed4905e022a39058488730f0f3" id="r_ad9de21ed4905e022a39058488730f0f3"><td class="memItemLeft" align="right" valign="top"><a id="ad9de21ed4905e022a39058488730f0f3" name="ad9de21ed4905e022a39058488730f0f3"></a>
+<a class="el" href="classRType_1_1Thread.html">Thread</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_thread</b></td></tr>
+<tr class="separator:ad9de21ed4905e022a39058488730f0f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a269fd487788a673d8bf631c62b7cc25e" id="r_a269fd487788a673d8bf631c62b7cc25e"><td class="memItemLeft" align="right" valign="top"><a id="a269fd487788a673d8bf631c62b7cc25e" name="a269fd487788a673d8bf631c62b7cc25e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_tickNumber</b></td></tr>
+<tr class="separator:a269fd487788a673d8bf631c62b7cc25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a14512ab209e8552c92e7b21d8d97e06f" name="a14512ab209e8552c92e7b21d8d97e06f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14512ab209e8552c92e7b21d8d97e06f">&#9670;&#160;</a></span>GameLogic()</h2>
+<a id="a9484cc768424eb6a758e8fb493726ee1" name="a9484cc768424eb6a758e8fb493726ee1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9484cc768424eb6a758e8fb493726ee1">&#9670;&#160;</a></span>GameLogic()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">RType::GameLogic::GameLogic </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classRType_1_1UDPAdapter.html">RType::UDPAdapter</a> *</td>          <td class="paramname"><span class="paramname"><em>adapter</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Initialize a default <a class="el" href="classRType_1_1GameLogic.html">GameLogic</a> </p>
 
@@ -215,8 +232,9 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>server/include/game/<a class="el" href="GameLogic_8hpp_source.html">GameLogic.hpp</a></li>
+<li>server/src/game/<b>GameLogic.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
