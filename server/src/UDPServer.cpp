@@ -8,11 +8,11 @@
 #include "../include/UDPServer.hpp"
 #include <engine/network/NetworkMessage.hpp>
 
-RType::UDPServer::UDPServer(const std::string &address, uint16_t port) :
-        _adapter(address, port),
+RType::UDPServer::UDPServer(uint16_t port) :
+        _adapter("0.0.0.0", port),
         _game(&_adapter) {
     startReceive();
-    std::cout << "Starting server on " << address << ":" << port << "\n";
+    std::cout << "Starting server on " << "0.0.0.0" << ":" << port << "\n";
     _adapter.runContext();
 }
 

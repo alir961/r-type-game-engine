@@ -6,7 +6,7 @@
 static int startServer(int count, char **args) {
     try {
         const auto arguments = RType::Arguments::parseArguments(count, args);
-        const auto server = RType::UDPServer(arguments.getHostname(), arguments.getPort());
+        const auto server = RType::UDPServer(arguments.getPort());
 
         return 0;
     } catch (RType::ConfigurationException &) {

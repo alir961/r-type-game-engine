@@ -32,17 +32,19 @@ namespace RType {
         LoginView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
                 : _viewport(gameView), _window(window), _graphicalModule(graphicalModule), _provider(provider),
               _portBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 300.0f, "Port"),
-              _userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "Username"),
+              _userHostNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 400.0f, "HostName"),
+              _userNameBoxTitle(window, sf::Color::Cyan, 20, 800.0f, 500.0f, "Username"),
               _portBoxInput(window, 800.0f, 340.0f),
-              _userNameBoxInput(window, 800.0f, 440.0f) {}
+              _userHostNameBoxInput(window, 800.0f, 440.0f),
+              _userNameBoxInput(window, 800.0f, 540.0f) {}
 
         /**
          * @brief Handles user input for the menu.
          */
         void handleInput() {
-            if (_portBoxInput.getValue() != '\0'  && _userNameBoxInput.getValue() != "") {
+            if (_portBoxInput.getValue() != '\0'  && _userNameBoxInput.getValue() != "" && _userHostNameBoxInput.getValue() != "") {
                 _loginButton.executeIfClicked([this] {
-                    _viewport.connectToServer("192.168.1.98", _portBoxInput.getValue(), _userNameBoxInput.getValue());
+                    _viewport.connectToServer(_userHostNameBoxInput.getValue(), _portBoxInput.getValue(), _userNameBoxInput.getValue());
                     _viewport.setView(ViewState::LOADSCREEN);
                 });
             }
@@ -53,6 +55,7 @@ namespace RType {
          */
         void update() override {
             _portBoxInput.update(_viewport.getEvent());
+            _userHostNameBoxInput.update(_viewport.getEvent());
             _userNameBoxInput.update(_viewport.getEvent());
         }
 
@@ -63,8 +66,10 @@ namespace RType {
          */
         void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> entities) override {
             _portBoxTitle.draw(_graphicalModule);
+            _userHostNameBoxTitle.draw(_graphicalModule);
             _userNameBoxTitle.draw(_graphicalModule);
             _portBoxInput.draw(_graphicalModule);
+            _userHostNameBoxInput.draw(_graphicalModule);
             _userNameBoxInput.draw(_graphicalModule);
             _loginButton.draw(_graphicalModule);
             handleInput();
@@ -74,10 +79,12 @@ namespace RType {
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         sf::RenderWindow &_window; /**< The SFML RenderWindow. */
         TextBox _portBoxTitle; /**< TextBox for Port of the game server. */
+        TextBox _userHostNameBoxTitle; /**< TextBox for UserName options. */
         TextBox _userNameBoxTitle; /**< TextBox for UserName options. */
         NumberInput _portBoxInput; /**< TextBoxInput for Port of the game server. */
         TextInput _userNameBoxInput; /**< TextBoxInput for UserName options. */
-        LoginButton _loginButton = LoginButton(_window, 800, 500, "Login"); /**< Button for Log-in the game. */
+        TextInput _userHostNameBoxInput; /**< TextBoxInput for UserName options. */
+        LoginButton _loginButton = LoginButton(_window, 800, 600, "Login"); /**< Button for Log-in the game. */
         IGraphicalModule *_graphicalModule;
         ModuleProvider &_provider;
 

@@ -16,31 +16,26 @@ namespace RType {
 
     class Arguments {
     private:
-        std::string _hostname;
         uint16_t _port;
 
     public:
-        explicit Arguments(std::string hostname, uint16_t port) : _hostname(std::move(hostname)), _port(port) {};
+        explicit Arguments(uint16_t port) : _port(port) {};
 
         [[nodiscard]] uint16_t getPort() const {
             return _port;
         };
 
-        [[nodiscard]] std::string getHostname() const {
-            return _hostname;
-        };
 
         static Arguments parseArguments(int count, char **argv) {
-            if (count != 3)
-                throw RType::ConfigurationException("Missing port number or hostname");
+            if (count != 2)
+                throw RType::ConfigurationException("Missing port number");
             try {
                 const auto args = std::span(argv, count);
-                const auto hostname = std::string(args[1]);
-                const auto port = static_cast<uint16_t>(parseToUnsignedLong(args[2]));
+                const auto port = static_cast<uint16_t>(parseToUnsignedLong(args[1]));
 
-                return Arguments(hostname, port);
+                return Arguments(port);
             } catch (ServerException &) {
-                throw RType::ConfigurationException("Missing port number or hostname");
+                throw RType::ConfigurationException("Missing port number");
             }
         }
 
