@@ -114,6 +114,10 @@ namespace RType {
          * @return The message buffer.
          */
         [[nodiscard]] const MessageBuffer &getMessageBuffer() const;
+
+        void setServerEndpoint(const std::string &serverAddress, uint16_t serverPort) {
+            _remoteEndpoint = UDP::endpoint(asio::ip::make_address(serverAddress), serverPort);
+        }
     };
 
     using UDPAdapterPtr = std::shared_ptr<UDPAdapter>;

@@ -33,7 +33,8 @@ void RType::UDPClient::handleReceive(std::size_t bytesReceived) {
 }
 
 RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string username, float windowWidth, float windowHeight) :
-        _username(std::move(username)), _adapter(hostname, static_cast<uint16_t>(port)), _windowWidth(windowWidth), _windowHeight(windowHeight) {
+        _username(std::move(username)), _adapter("127.0.0.1", static_cast<uint16_t>(port)), _windowWidth(windowWidth), _windowHeight(windowHeight) {
+    _adapter.setServerEndpoint(hostname, static_cast<uint16_t>(port));
     setupHandlers();
 
     _thread.run([this, hostname, port]() {
