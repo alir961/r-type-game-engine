@@ -73,10 +73,10 @@ namespace RType {
         }
 
     private:
-        TextBox _titleBox = TextBox(sf::Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f,"R Type"); /**< TextBox for the game title. */
-        TextBox _startBox = TextBox(sf::Color::Cyan, 20, 100.0f, 200.0f,"Start"); /**< TextBox for starting the game. */
-        TextBox _optionsBox = TextBox(sf::Color::Cyan, 20, 100.0f, 250.0f,"Options"); /**< TextBox for accessing options. */
-        TextBox _quitBox = TextBox(sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit"); /**< TextBox for quitting the game. */
+        TextBox _titleBox = TextBox(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "R Type"); /**< TextBox for the game title. */
+        TextBox _startBox = TextBox(Color::Cyan, 20, 100.0f, 200.0f, "Start"); /**< TextBox for starting the game. */
+        TextBox _optionsBox = TextBox(Color::Cyan, 20, 100.0f, 250.0f, "Options"); /**< TextBox for accessing options. */
+        TextBox _quitBox = TextBox(Color::Cyan, 20, 100.0f, 300.0f, "Quit"); /**< TextBox for quitting the game. */
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
     };

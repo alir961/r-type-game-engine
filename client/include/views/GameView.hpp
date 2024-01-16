@@ -68,9 +68,9 @@ namespace RType {
 
 
     private:
-        TextBox _playerNameText = TextBox(sf::Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
-        TextBox _healthBarText = TextBox(sf::Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
-        TextBox _scoreText = TextBox(sf::Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
+        TextBox _playerNameText = TextBox(Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
+        TextBox _healthBarText = TextBox(Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
+        TextBox _scoreText = TextBox(Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
         Background _background = Background({"client/assets/background/1.png",
                                              "client/assets/background/2.png",
                                              "client/assets/background/3.png",

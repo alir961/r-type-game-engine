@@ -48,6 +48,8 @@ namespace RType {
          */
         TextComponent createText(const std::string &text) override;
 
+        RectShape createRectShape() override;
+
         /**
          * @brief Draw a sprite in SFMl.
          * @param window, sprite The window where to draw, the sprite we want to display.
@@ -83,7 +85,7 @@ namespace RType {
                          const std::string &fillColor, const std::string &texturePath) override;
 
         /**
-         * @brief Return the sf::Color corresponding to the colorName param.
+         * @brief Return the sf::RGB corresponding to the colorName param.
          * @param colorName The color we want to get into SFML.
          */
         sf::Color getColorFromString(const std::string &colorName) override;

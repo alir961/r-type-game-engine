@@ -67,8 +67,8 @@ namespace RType {
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        TextBox _quitBox = TextBox(sf::Color::Cyan, 20, 900.0f, 350.0f, "Quit"); /**< TextBox for quitting the game. */
-        TextBox _loadingText = TextBox(sf::Color::Magenta, 20, 250.0f, 300.0f, "Loading... if problem persist check server status and the port you provided and re launch"); /**< TextBox for Port of the game server. */
+        TextBox _quitBox = TextBox(Color::Cyan, 20, 900.0f, 350.0f, "Quit"); /**< TextBox for quitting the game. */
+        TextBox _loadingText = TextBox(Color::Magenta, 20, 250.0f, 300.0f, "Loading... if problem persist check server status and the port you provided and re launch"); /**< TextBox for Port of the game server. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         UDPClientPtr _client;
     };

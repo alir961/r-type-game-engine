@@ -27,8 +27,9 @@ namespace RType {
             font.loadFromFile("client/assets/ka1.ttf");
             text.setCharacterSize(_size);
             text.setPosition(sf::Vector2f(_position.first, _position.second));
-            text.setString(_text);
+            text.setString(_value);
             text.setFont(font);
+            text.setFillColor(sf::Color(_color.r, _color.g, _color.b, _color.a));
             _window->draw(text);
         }
     };

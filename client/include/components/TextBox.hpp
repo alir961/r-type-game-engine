@@ -17,11 +17,9 @@ namespace RType {
      */
     class TextBox {
     private:
-        sf::Color _textColor; /**< The color of the text. */
-        sf::FloatRect _inputBoxBounds; /**< The bounding box of the text box. */
-        bool _active; /**< Flag indicating whether the text box is currently active. */
-        bool _hover; /**< Flag indicating whether the mouse cursor is hovering over the text box. */
-        unsigned int _fontSize; /**< The size of the text. */
+        RectFloat _inputBoxBounds; /**< The bounding box of the text box. */
+        bool _active = false; /**< Flag indicating whether the text box is currently active. */
+        bool _hover = false; /**< Flag indicating whether the mouse cursor is hovering over the text box. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         TextComponent _text = _module->createText("");
 
@@ -30,7 +28,7 @@ namespace RType {
          */
         void updateText() {
             //_value.setString(_value.getString());
-            //_inputBoxBounds = _value.getGlobalBounds();
+            //_inputBoxBounds = _text->getGlobalBounds();
         }
 
     public:
@@ -41,13 +39,13 @@ namespace RType {
          * @param x The x-coordinate of the text box.
          * @param y The y-coordinate of the text box.
          */
-        TextBox(const sf::Color &textColor, unsigned int fontSize, float x, float y)
-            : _textColor(textColor), _active(false), _hover(false), _fontSize(fontSize) {
+        TextBox(const Color::RGB &textColor, unsigned int fontSize, float x, float y)
+                : _active(false), _hover(false) {
             _text->setSize(fontSize);
             _text->setPosition(Vector2f(x, y));
             _text->setFontPath("client/assets/ka1.ttf");
-            //_value.setFillColor(textColor);
-            updateText();
+            _text->setColor(textColor);
+            //updateText();
         }
 
         /**
@@ -58,14 +56,13 @@ namespace RType {
          * @param y The y-coordinate of the text box.
          * @param initialText The initial text to display in the text box.
          */
-        TextBox(const sf::Color &textColor, unsigned int fontSize, float x, float y, const std::string &initialText)
-                : _textColor(textColor), _active(false), _hover(false), _fontSize(fontSize) {
+        TextBox(const Color::RGB &textColor, unsigned int fontSize, float x, float y, const std::string &initialText) {
             _text->setText(initialText);
             _text->setSize(fontSize);
             _text->setPosition(Vector2f(x, y));
             _text->setFontPath("client/assets/ka1.ttf");
-            //_value.setFillColor(textColor);
-            updateText();
+            _text->setColor(textColor);
+            //updateText();
         }
 
         /**
@@ -73,25 +70,19 @@ namespace RType {
          */
         void handleInput() {
             const Vector2f mousePosition = _module->getMousePosition();
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                /*if (_inputBoxBounds.contains(mousePosition)) {
-                    _active = true;
-                } else {
-                    _active = false;
-                }*/
-            }
-            //_hover = _inputBoxBounds.contains(mousePosition);
+
+            if (_module->isMouseClicked())
+                _active = _inputBoxBounds.contains(mousePosition);
+            _hover = _inputBoxBounds.contains(mousePosition);
         }
 
         /**
          * @brief Updates the appearance of the text box based on its state.
          */
         void update() {
-            if (_hover) {
-                //_value.setFillColor(sf::Color::Cyan);
-            } else {
-                //_value.setFillColor(sf::Color::Magenta);
-            }
+            if (_hover)
+                _text->setColor(Color::Cyan);
+            else _text->setColor(Color::Magenta);
         }
 
         /**
@@ -99,14 +90,7 @@ namespace RType {
          */
         void draw() {
             _text->draw();
-        }
-
-        /**
-         * @brief Sets the activity state of the text box.
-         * @param active True to set the text box as active, false otherwise.
-         */
-        void setActive(bool active) {
-            _active = active;
+            //updateText();
         }
 
         /**
@@ -115,16 +99,6 @@ namespace RType {
          */
         bool isActive() const {
             return _active;
-        }
-
-        /**
-         * @brief Change the font size of the text.
-         * @param newSize The new font size.
-         */
-        void setFontSize(unsigned int newSize) {
-            _fontSize = newSize;
-            _text->setSize(_fontSize);
-            updateText();
         }
 
         /**

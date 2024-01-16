@@ -77,10 +77,10 @@ namespace RType {
         }
 
     private:
-        TextBox _title = TextBox(sf::Color::Cyan, 30, WINDOW_WIDTH / 2.0F, 50.0F, "Pause"); /**< TextBox for the title. */
-        TextBox _resume = TextBox(sf::Color::Cyan, 20, 500.0F, 195.0F, "Resume"); /**< TextBox for resume. */
-        TextBox _options = TextBox(sf::Color::Cyan, 20, 500.0F, 245.0F, "Options"); /**< TextBox to go options. */
-        TextBox _mainMenu = TextBox(sf::Color::Cyan, 20, 500.0F, 295.0F, "Exit To Main Menu"); /**< TextBox for the menu. */
+        TextBox _title = TextBox(Color::Cyan, 30, WINDOW_WIDTH / 2.0F, 50.0F, "Pause"); /**< TextBox for the title. */
+        TextBox _resume = TextBox(Color::Cyan, 20, 500.0F, 195.0F, "Resume"); /**< TextBox for resume. */
+        TextBox _options = TextBox(Color::Cyan, 20, 500.0F, 245.0F, "Options"); /**< TextBox to go options. */
+        TextBox _mainMenu = TextBox(Color::Cyan, 20, 500.0F, 295.0F, "Exit To Main Menu"); /**< TextBox for the menu. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
     };

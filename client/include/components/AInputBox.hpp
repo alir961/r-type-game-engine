@@ -29,16 +29,15 @@ namespace RType {
          * @param maxChars Maximum number of characters allowed in the input box.
          */
         explicit AInputBox(int x, int y, size_t maxChars)
-                : _x(x), _y(y), _maxChars(maxChars), _active(false) {
-            _rect.setSize(sf::Vector2f(280, 40));
-            _rect.setPosition(x, y);
-            _rect.setOutlineColor(sf::Color(200, 200, 200));
-            _rect.setOutlineThickness(1);
-            _rect.setFillColor(sf::Color::Transparent);
+                : _x(x), _y(y), _maxChars(maxChars) {
+            _box->setSize(Vector2f(280, 40));
+            _box->setPosition(Vector2f(x, y));
+            _box->setOutlineColor(Color::RGB{200, 200, 200, 255});
+            _box->setOutlineThickness(1);
+            _box->setBackgroundColor(Color::Transparent);
             _textDisplay->setSize(20);
             _textDisplay->setPosition(Vector2f(x + 5, y + 5));
             _textDisplay->setFontPath("client/assets/ka1.ttf");
-            //_textDisplay.setFillColor(sf::Color::White);
         }
 
         /**
@@ -57,10 +56,9 @@ namespace RType {
         /**
          * @brief Draw the input box on the SFML RenderWindow.
          */
-        void draw(IGraphicalModule *graphicalModule) const {
-            graphicalModule->drawRect(_rect);
+        void draw() const {
+            _box->draw();
             _textDisplay->draw();
-            //graphicalModule->drawText(_window, _textDisplay);
         }
 
         /**
@@ -69,7 +67,7 @@ namespace RType {
          */
         void setActive(bool active) {
             _active = active;
-            _rect.setOutlineColor(active ? sf::Color::Blue : sf::Color(200, 200, 200));
+            _box->setOutlineColor(active ? Color::Blue : Color::RGB{200, 200, 200, 255});
         }
 
         /**
@@ -84,10 +82,10 @@ namespace RType {
         float _x; /**< X-coordinate of the input box. */
         float _y; /**< Y-coordinate of the input box. */
         size_t _maxChars; /**< Maximum number of characters allowed in the input box. */
-        bool _active; /**< Activation state of the input box. */
+        bool _active = false; /**< Activation state of the input box. */
         std::string _text; /**< Text content of the input box. */
-        sf::RectangleShape _rect; /**< SFML RectangleShape representing the input box. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         TextComponent _textDisplay = _module->createText(""); /**< SFML Text displaying the text in the input box. */
+        RectShape _box = _module->createRectShape(); /**< SFML RectangleShape representing the input box. */
     };
 }

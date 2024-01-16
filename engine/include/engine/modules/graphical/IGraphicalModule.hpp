@@ -10,6 +10,7 @@
 #include "engine/modules/IModule.hpp"
 #include "Event.hpp"
 #include "AText.hpp"
+#include "ARectangle.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
@@ -42,6 +43,8 @@ namespace RType {
          * @param window, text The window where to draw, the text we want to display.
          */
         virtual TextComponent createText(const std::string &text) = 0;
+
+        virtual RectShape createRectShape() = 0;
 
         /**
          * @brief Draw a sprite in SFMl.
@@ -78,7 +81,7 @@ namespace RType {
                                  const std::string &fillColor, const std::string &texturePath) = 0;
 
         /**
-         * @brief Return the sf::Color corresponding to the colorName param.
+         * @brief Return the sf::RGB corresponding to the colorName param.
          * @param colorName The color we want to get into SFML.
          */
         virtual sf::Color getColorFromString(const std::string &colorName) = 0;

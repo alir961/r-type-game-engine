@@ -12,7 +12,10 @@ RType::ClientViewport::ClientViewport() {
     _graphicalModule = _provider->loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
     _animationModule = _provider->loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
     _graphicalModule->openWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "R-Type");
+    std::cout << "Done.\n";
+    std::cout << "Load login view [...]\n";
     _selectedView = std::make_shared<LoginView>(*this);
+    std::cout << "Done.\n";
     setHandlers();
 }
 
@@ -101,6 +104,7 @@ void RType::ClientViewport::launchWindow() {
         }
         draw();
     }
+    std::cout << "Exit loop\n";
 }
 
 void RType::ClientViewport::setView(ViewState state) {

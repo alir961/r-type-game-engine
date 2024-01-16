@@ -45,6 +45,8 @@ set(SOURCE_FILES
         src/modules/ModuleProvider.cpp
         include/engine/tools/Thread.hpp
         include/engine/modules/graphical/AText.hpp
+        include/engine/modules/graphical/ARectangle.hpp
+        include/engine/modules/graphical/DataCommon.hpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

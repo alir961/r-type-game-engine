@@ -40,7 +40,7 @@ namespace RType {
         void update(const sf::Event &event) override {
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-                setActive(_rect.getGlobalBounds().contains(mousePos));
+                //setActive(_box.getGlobalBounds().contains(mousePos));
             }
             if (_active) {
                 if (event.type == sf::Event::TextEntered && !_keyPressed) {

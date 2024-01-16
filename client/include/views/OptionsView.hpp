@@ -29,7 +29,7 @@ namespace RType {
          */
         OptionsView(ClientViewport &gameView, bool inGame = false)
             : _viewport(gameView), _inGame(inGame),
-              _back(sf::Color::Cyan, 20, 700.0f, 350.0f, "Go Back") {}
+              _back(Color::Cyan, 20, 700.0f, 350.0f, "Go Back") {}
 
         /**
          * @brief Handles user input for the options menu.
@@ -128,10 +128,10 @@ namespace RType {
         }
 
     private:
-        TextBox _title = TextBox(sf::Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "Options"); /**< TextBox for the title. */
-        TextBox _sound = TextBox(sf::Color::Cyan, 20, 700.0f, 250.0f, "Sound"); /**< Sound of the ClientViewport. */
-        TextBox _soundVolume = TextBox(sf::Color::Cyan, 20, 850.0f, 250.0f, "100"); /**< Game sound volume of the ClientViewport. */
-        TextBox _mainMenu = TextBox(sf::Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"); /**< TextBox for the menu. */
+        TextBox _title = TextBox(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "Options"); /**< TextBox for the title. */
+        TextBox _sound = TextBox(Color::Cyan, 20, 700.0f, 250.0f, "Sound"); /**< Sound of the ClientViewport. */
+        TextBox _soundVolume = TextBox(Color::Cyan, 20, 850.0f, 250.0f, "100"); /**< Game sound volume of the ClientViewport. */
+        TextBox _mainMenu = TextBox(Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"); /**< TextBox for the menu. */
         TextBox _back; /**< TextBox to go back. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         CheckBox _consoleModuleBox = CheckBox(WINDOW_WIDTH / 3.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Console");

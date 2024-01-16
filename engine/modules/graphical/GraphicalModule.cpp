@@ -7,6 +7,7 @@
 
 #include "GraphicalModule.hpp"
 #include "Text.hpp"
+#include "Rectangle.hpp"
 
 extern "C" {
 RType::IModule *initializeGraphicalModule() {
@@ -139,4 +140,8 @@ RType::Vector2f RType::GraphicalModule::getMousePosition() {
 
 bool RType::GraphicalModule::isMouseClicked() {
     return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+}
+
+RType::RectShape RType::GraphicalModule::createRectShape() {
+    return std::make_shared<RType::Rectangle>(_window);
 }
