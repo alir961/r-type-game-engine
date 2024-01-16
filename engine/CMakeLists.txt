@@ -26,7 +26,7 @@ set(HEADER_FILES
         include/engine/network/UDPAdapter.hpp
         include/engine/modules/IModule.hpp
         include/engine/modules/ModuleLoader.hpp
-        include/engine/modules/IGraphicalModule.hpp
+        include/engine/modules/graphical/IGraphicalModule.hpp
         include/engine/modules/ModuleProvider.hpp
         include/engine/modules/animation/IAnimationModule.hpp
         include/engine/modules/animation/IAnimation.hpp
@@ -44,6 +44,7 @@ set(SOURCE_FILES
         src/network/UDPAdapter.cpp
         src/modules/ModuleProvider.cpp
         include/engine/tools/Thread.hpp
+        include/engine/modules/graphical/AText.hpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

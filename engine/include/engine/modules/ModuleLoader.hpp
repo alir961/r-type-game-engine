@@ -23,8 +23,8 @@ namespace RType {
     class ModuleLoader {
     public:
         explicit ModuleLoader(const std::string &path);
-        ModuleLoader(ModuleLoader &&instance) noexcept = delete;
-        ModuleLoader(ModuleLoader &instance) = delete;
+        ModuleLoader(ModuleLoader &&_instance) noexcept = delete;
+        ModuleLoader(ModuleLoader &_instance) = delete;
         ~ModuleLoader();
 
         T *load();

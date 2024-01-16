@@ -34,7 +34,7 @@ void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationMo
 }
 
 void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) {
-    graphicalModule->drawSprite(window, _sprite);
+    graphicalModule->drawSprite(_sprite);
     if (_entity->getComponent<PlayerComponent>()->getIsPlayer()) {
         sf::Text text;
         text.setFont(_font);
@@ -42,7 +42,7 @@ void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *grap
         text.setPosition(_entity->getComponent<PositionComponent>()->getPositions().first, _entity->getComponent<PositionComponent>()->getPositions().second - (_entity->getComponent<SizeComponent>()->getSize().second + 15));
         text.setString(_entity->getComponent<PlayerComponent>()->getUserName());
         text.setFillColor(sf::Color::Cyan);
-        graphicalModule->drawText(window, text);
+        //graphicalModule->drawText(window, text);
     }
 }
 

@@ -12,6 +12,7 @@
 #include <iostream>
 
 namespace RType {
+
     /**
      * @class AInputBox
      * @brief Abstract base class for input boxes in the RType game.
@@ -27,18 +28,17 @@ namespace RType {
          * @param y Y-coordinate of the input box.
          * @param maxChars Maximum number of characters allowed in the input box.
          */
-        explicit AInputBox(sf::RenderWindow &window, int x, int y, size_t maxChars)
-            : _x(x), _y(y), _maxChars(maxChars), _active(false), _window(window) {
+        explicit AInputBox(int x, int y, size_t maxChars)
+                : _x(x), _y(y), _maxChars(maxChars), _active(false) {
             _rect.setSize(sf::Vector2f(280, 40));
             _rect.setPosition(x, y);
             _rect.setOutlineColor(sf::Color(200, 200, 200));
             _rect.setOutlineThickness(1);
             _rect.setFillColor(sf::Color::Transparent);
-            _font.loadFromFile("client/assets/ka1.ttf");
-            _textDisplay.setFont(_font);
-            _textDisplay.setCharacterSize(20);
-            _textDisplay.setPosition(x + 5, y + 5);
-            _textDisplay.setFillColor(sf::Color::White);
+            _textDisplay->setSize(20);
+            _textDisplay->setPosition(Vector2f(x + 5, y + 5));
+            _textDisplay->setFontPath("client/assets/ka1.ttf");
+            //_textDisplay.setFillColor(sf::Color::White);
         }
 
         /**
@@ -58,8 +58,9 @@ namespace RType {
          * @brief Draw the input box on the SFML RenderWindow.
          */
         void draw(IGraphicalModule *graphicalModule) const {
-            graphicalModule->drawRect(_window, _rect);
-            graphicalModule->drawText(_window, _textDisplay);
+            graphicalModule->drawRect(_rect);
+            _textDisplay->draw();
+            //graphicalModule->drawText(_window, _textDisplay);
         }
 
         /**
@@ -86,8 +87,7 @@ namespace RType {
         bool _active; /**< Activation state of the input box. */
         std::string _text; /**< Text content of the input box. */
         sf::RectangleShape _rect; /**< SFML RectangleShape representing the input box. */
-        sf::Text _textDisplay; /**< SFML Text displaying the text in the input box. */
-        sf::Font _font; /**< SFML Font for the text display. */
-        sf::RenderWindow &_window; /**< Reference to the SFML RenderWindow. */
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        TextComponent _textDisplay = _module->createText(""); /**< SFML Text displaying the text in the input box. */
     };
 }

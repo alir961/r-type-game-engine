@@ -6,9 +6,10 @@
 */
 
 #include "../../include/components/Background.hpp"
+#include "../../include/ClientViewport.hpp"
 
-RType::Background::Background(const sf::RenderWindow &window, const std::vector<std::string> &imagePaths,
-                              const std::vector<float> &speeds) : _speeds(speeds) {
+RType::Background::Background(const std::vector<std::string> &imagePaths, const std::vector<float> &speeds) :
+        _speeds(speeds) {
     for (const auto &path: imagePaths) {
         sf::Texture texture;
         texture.loadFromFile(path);
@@ -16,8 +17,8 @@ RType::Background::Background(const sf::RenderWindow &window, const std::vector<
     }
     for (const auto &texture: _textures) {
         sf::Sprite sprite(texture);
-        const float scaleX = static_cast<float>(window.getSize().x) / sprite.getGlobalBounds().width;
-        const float scaleY = static_cast<float>(window.getSize().y) / sprite.getGlobalBounds().height;
+        const float scaleX = static_cast<float>(WINDOW_WIDTH) / sprite.getGlobalBounds().width;
+        const float scaleY = static_cast<float>(WINDOW_HEIGHT) / sprite.getGlobalBounds().height;
 
         sprite.setScale(scaleX, scaleY);
         _sprites.push_back(sprite);
@@ -32,14 +33,14 @@ void RType::Background::update(float deltaTime) {
     }
 }
 
-void RType::Background::draw(sf::RenderWindow &window) {
+void RType::Background::draw() {
     for (const auto &sprite: _sprites) {
-        const sf::Vector2f newPosition = sprite.getPosition() + sf::Vector2f(window.getSize().x, 0.0F);
+        const sf::Vector2f newPosition = sprite.getPosition() + sf::Vector2f(WINDOW_WIDTH, 0.0F);
         sf::Sprite translatedSprite = sprite;
 
-        window.draw(sprite);
+        //window.draw(sprite);
         translatedSprite.setPosition(newPosition);
-        window.draw(translatedSprite);
+        //window.draw(translatedSprite);
     }
 
 }

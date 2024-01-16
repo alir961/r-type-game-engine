@@ -31,7 +31,6 @@ namespace RType {
 
     constexpr uint32_t WINDOW_WIDTH = 1920;
     constexpr uint32_t WINDOW_HEIGHT = 1080;
-    constexpr int WINDOW_FPS = 60;
 
     /**
      * @enum views
@@ -56,16 +55,15 @@ namespace RType {
         using MessageHandlerFunction = std::function<void(const std::vector<std::string> &)>;
 
     private:
-        sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
         ViewState _viewState = ViewState::LOGIN;                          /**< Current state of the game view. */
         sf::Clock _animationClock;                                         /**< Clock for managing animations and time-related operations. */
         std::vector<GraphicEntityPtr> _graphicEntities;                   /**< Vector of graphic entities in the game. */
         std::shared_ptr<IView> _selectedView;
         UDPClientPtr _client;
-        sf::Event event{};
+        sf::Event _event{};
         IGraphicalModule *_graphicalModule;
         IAnimationModule *_animationModule;
-        ModuleProvider _provider = ModuleProvider();
+        ModuleProviderPtr _provider = ModuleProvider::getInstance();
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;
         GraphicEntityPtr _playerEntity = nullptr;
@@ -138,8 +136,8 @@ namespace RType {
         GraphicEntityPtr getGraphicEntityByName(const std::string &name) const;
 
         /**
-         * Retrieve current SFML event
-         * @return The event
+         * Retrieve current SFML _event
+         * @return The _event
          */
         [[nodiscard]] sf::Event getEvent() const;
 

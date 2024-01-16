@@ -24,12 +24,7 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        MenuView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
-            : _window(window), _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
-              _titleBox(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "R Type"),
-              _startBox(window, sf::Color::Cyan, 20, 100.0f, 200.0f, "Start"),
-              _optionsBox(window, sf::Color::Cyan, 20, 100.0f, 250.0f, "Options"),
-              _quitBox(window, sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit") {}
+        explicit MenuView(ClientViewport &gameView) : _viewport(gameView) {}
 
         /**
          * @brief Handles user input for the menu.
@@ -40,17 +35,17 @@ namespace RType {
             _optionsBox.handleInput();
             _quitBox.handleInput();
 
-            if (isMouseClicked()) {
-                if (_startBox.getActive()) {
+            if (_module->isMouseClicked()) {
+                if (_startBox.isActive()) {
                     std::cout << "Start Game!\n";
                     _viewport.setView(ViewState::GAME);
-                } else if (_optionsBox.getActive()) {
+                } else if (_optionsBox.isActive()) {
                     std::cout << "Options Selected!\n";
                     _viewport.setView(ViewState::OPTIONS);
-                } else if (_quitBox.getActive()) {
+                } else if (_quitBox.isActive()) {
                     std::cout << "Quit Game!\n";
                     _viewport.closeConnectionToServer();
-                    _window.close();
+                    _module->close();
                 }
             }
         }
@@ -69,30 +64,20 @@ namespace RType {
          * @param window The SFML RenderWindow on which to draw the menu.
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
-        void draw(sf::RenderWindow& window, std::vector<GraphicEntityPtr>) override {
-            _titleBox.draw(_graphicalModule);
-            _startBox.draw(_graphicalModule);
-            _optionsBox.draw(_graphicalModule);
-            _quitBox.draw(_graphicalModule);
+        void draw(std::vector<GraphicEntityPtr>) override {
+            _titleBox.draw();
+            _startBox.draw();
+            _optionsBox.draw();
+            _quitBox.draw();
             handleInput();
         }
 
     private:
-        TextBox _titleBox; /**< TextBox for the game title. */
-        TextBox _startBox; /**< TextBox for starting the game. */
-        TextBox _optionsBox; /**< TextBox for accessing options. */
-        TextBox _quitBox; /**< TextBox for quitting the game. */
+        TextBox _titleBox = TextBox(sf::Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f,"R Type"); /**< TextBox for the game title. */
+        TextBox _startBox = TextBox(sf::Color::Cyan, 20, 100.0f, 200.0f,"Start"); /**< TextBox for starting the game. */
+        TextBox _optionsBox = TextBox(sf::Color::Cyan, 20, 100.0f, 250.0f,"Options"); /**< TextBox for accessing options. */
+        TextBox _quitBox = TextBox(sf::Color::Cyan, 20, 100.0f, 300.0f, "Quit"); /**< TextBox for quitting the game. */
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        sf::RenderWindow &_window; /**< The SFML RenderWindow. */
-        IGraphicalModule *_graphicalModule;
-        ModuleProvider &_provider;
-
-        /**
-         * @brief Checks if the left mouse button is clicked.
-         * @return True if the left mouse button is clicked, false otherwise.
-         */
-        bool isMouseClicked() const {
-            return sf::Mouse::isButtonPressed(sf::Mouse::Left);
-        }
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
     };
 }

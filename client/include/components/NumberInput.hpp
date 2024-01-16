@@ -10,6 +10,7 @@
 #include "AInputBox.hpp"
 
 namespace RType {
+
     /**
      * @class NumberInput
      * @brief Represents an input box for entering numbers.
@@ -24,8 +25,7 @@ namespace RType {
          * @param y Y-coordinate of the input box.
          * @param defaultValue Default value for the input box (optional, defaults to 0).
          */
-        NumberInput(sf::RenderWindow &window, int x, int y, int defaultValue = 0)
-            : AInputBox(window, x, y, 15) {
+        NumberInput(int x, int y, int defaultValue = 0) : AInputBox(x, y, 15) {
             if (defaultValue != 0)
                 _text = std::to_string(defaultValue);
             else
@@ -58,7 +58,7 @@ namespace RType {
             }
             if (event.type == sf::Event::KeyReleased || event.type == sf::Event::MouseButtonReleased) { _keyPressed = false; }
             if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Enter && _active) { std::cout << _text << std::endl; }
-            _textDisplay.setString(_text);
+            _textDisplay->setText(_text);
         }
 
         /**
@@ -81,4 +81,5 @@ namespace RType {
             return std::isdigit(inputChar) || inputChar == '.';
         }
     };
+
 }

@@ -9,10 +9,10 @@
 #include "engine/modules/animation/IAnimationModule.hpp"
 
 RType::ClientViewport::ClientViewport() {
-    _window.setFramerateLimit(WINDOW_FPS);
-    _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
-    _animationModule = _provider.loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
-    _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+    _graphicalModule = _provider->loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
+    _animationModule = _provider->loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
+    _graphicalModule->openWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "R-Type");
+    _selectedView = std::make_shared<LoginView>(*this);
     setHandlers();
 }
 
@@ -52,19 +52,23 @@ void RType::ClientViewport::handleInput() const {
 
 void RType::ClientViewport::basicInput() {
     if (_viewState == ViewState::OPTIONS) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
+        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::BackSpace) {
             std::cout << "Return key pressed in OPTIONS state" << std::endl;
             setView(ViewState::MENU);
         }
     } else if (_viewState == ViewState::GAME) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
             std::cout << "Escape key pressed in GAME state" << std::endl;
             setView(ViewState::PAUSE);
         }
     } else if (_viewState == ViewState::PAUSE) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
             std::cout << "Escape key pressed in GAME state" << std::endl;
             setView(ViewState::GAME);
+        }
+    } else if (_viewState == ViewState::WIN || _viewState == ViewState::DEAD) {
+        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
+            setView(ViewState::MENU);
         }
     }
 }
@@ -73,10 +77,10 @@ void RType::ClientViewport::launchWindow() {
     const float fixedTimeStep = 1.F / WINDOW_FPS;
     float accumulatedTime = 0.F;
 
-    while (_window.isOpen()) {
-        while (_window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                _window.close();
+    while (_graphicalModule->isOpen()) {
+        while (_graphicalModule->pollEvent(_event)) {
+            if (_event.type == sf::Event::Closed) {
+                _graphicalModule->close();
                 closeConnectionToServer();
                 return;
             }
@@ -103,28 +107,29 @@ void RType::ClientViewport::setView(ViewState state) {
     EntityPtr player;
     switch (state) {
         case ViewState::MENU:
-            _selectedView = std::make_shared<MenuView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<MenuView>(*this);
             break;
         case ViewState::OPTIONS:
-            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<OptionsView>(*this);
             break;
         case ViewState::OPTIONSGAME:
-            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider, true);
+            _selectedView = std::make_shared<OptionsView>(*this, true);
             break;
         case ViewState::GAME:
             char buffer[50];
-            _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule, _provider, _client->getUsername());
+
+            _selectedView = std::make_shared<GameView>(_client->getUsername());
             sprintf(buffer, "player %d %s\n", _client->getClientID(), _client->getUsername().c_str());
             _client->sendMessage(MessageType::PLAYER_NAME, buffer);
             break;
         case ViewState::PAUSE:
-            _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<PauseView>(*this);
             break;
         case ViewState::LOGIN:
-            _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<LoginView>(*this);
             break;
         case ViewState::LOADSCREEN:
-            _selectedView = std::make_shared<LoadView>(_window, *this, _graphicalModule, _client);
+            _selectedView = std::make_shared<LoadView>(*this, _client);
             break;
     }
     _selectedView->setPlayerEntity(_playerEntity);
@@ -145,12 +150,12 @@ RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntityByName(const std:
 }
 
 sf::Event RType::ClientViewport::getEvent() const {
-    return event;
+    return _event;
 }
 
 void RType::ClientViewport::connectToServer(const std::string &hostname, int port, std::string username) {
     std::cout << "Before try connecting to " << hostname << ":" << port << "\n";
-    _client = std::make_shared<RType::UDPClient>(hostname, port, username, _window.getSize().x, _window.getSize().y);
+    _client = std::make_shared<RType::UDPClient>(hostname, port, username, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void RType::ClientViewport::closeConnectionToServer() {
@@ -165,9 +170,9 @@ void RType::ClientViewport::updateEntities(float deltaTime) {
 }
 
 void RType::ClientViewport::draw() {
-    _window.clear();
-    _selectedView->draw(_window, _graphicEntities);
-    _window.display();
+    _graphicalModule->clear();
+    _selectedView->draw(_graphicEntities);
+    _graphicalModule->display();
 }
 
 int RType::ClientViewport::start() {

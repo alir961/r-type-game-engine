@@ -24,8 +24,7 @@ namespace RType {
          * @param y Y-coordinate of the input box.
          * @param defaultValue Default value for the input box (optional, defaults to an empty string).
          */
-        TextInput(sf::RenderWindow &window, int x, int y, const std::string &defaultValue = "")
-            : AInputBox(window, x, y, 15) {
+        TextInput(int x, int y, const std::string &defaultValue = "") : AInputBox(x, y, 15) {
             _text = defaultValue;
         }
 
@@ -55,7 +54,7 @@ namespace RType {
             }
             if (event.type == sf::Event::KeyReleased || event.type == sf::Event::MouseButtonReleased) { _keyPressed = false; }
             if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Enter && _active) { std::cout << _text << std::endl; }
-            _textDisplay.setString(_text);
+            _textDisplay->setText(_text);
         }
 
         /**

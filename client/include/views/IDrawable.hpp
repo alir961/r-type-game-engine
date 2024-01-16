@@ -25,7 +25,7 @@ namespace RType {
          * @param window The SFML RenderWindow on which to draw the objects.
          * @param entities A vector of shared pointers to AGraphicEntity objects to be drawn.
          */
-        virtual void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr>) = 0;
+        virtual void draw(std::vector<GraphicEntityPtr>) = 0;
 
         /**
          * @brief Virtual destructor for the IDrawable interface.

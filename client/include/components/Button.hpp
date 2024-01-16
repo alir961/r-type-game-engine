@@ -21,11 +21,12 @@ namespace RType {
     template<int width, int height>
     class Button {
     private:
-        sf::RenderWindow &_window; /**< The SFML RenderWindow where the text box will be drawn. */
         int _x; /**< X-coordinate of the button. */
         int _y; /**< Y-coordinate of the button. */
-        std::string _text; /**< Text displayed on the button. */
+        std::string _value; /**< Text displayed on the button. */
         sf::RectangleShape _rectangle; /**< SFML RectangleShape representing the button. */
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        TextComponent _text = _module->createText("");
 
     public:
         /**
@@ -34,27 +35,27 @@ namespace RType {
          * @param y The Y-coordinate of the button.
          * @param text The text to be displayed on the button.
          */
-        explicit Button(sf::RenderWindow &window, float x, float y, std::string text) : _window(window), _x(x), _y(y), _text(std::move(text)) {
+        Button(float x, float y, std::string text) : _x(x), _y(y), _value(std::move(text)) {
             _rectangle.setPosition(x, y);
             _rectangle.setSize(sf::Vector2f(static_cast<float>(width), static_cast<float>(height)));
+
+            _text->setSize(20);
+            _text->setText(_value);
+            _text->setFontPath("client/assets/ka1.ttf");
+            _text->setPosition(Vector2f(_x + 20, _y + 10));
+            //_text.setFillColor(sf::Color::White);
         }
 
         /**
          * @brief Draws the button on the SFML RenderWindow.
          */
         void draw(IGraphicalModule *graphicalModule) {
-            bool mouseOver = _rectangle.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(_window)));
+            const auto &[x, y] = _module->getMousePosition();
+            bool mouseOver = _rectangle.getGlobalBounds().contains(x, y);
 
             _rectangle.setFillColor(mouseOver ? sf::Color(200, 200, 200) : sf::Color(128, 128, 128));
-            graphicalModule->drawRect(_window, _rectangle);
-
-            sf::Font font;
-            if (font.loadFromFile("client/assets/ka1.ttf")) {
-                sf::Text buttonText(_text, font, 20);
-                buttonText.setPosition(_x + 20, _y + 10);
-                buttonText.setFillColor(sf::Color::White);
-                graphicalModule->drawText(_window, buttonText);
-            }
+            graphicalModule->drawRect(_rectangle);
+            _text->draw();
         }
 
         /**
@@ -62,8 +63,8 @@ namespace RType {
          * @param function The function to execute.
          */
         void executeIfClicked(std::function<void()> function) {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(_window);
-            bool mouseOver = _rectangle.getGlobalBounds().contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+            const auto &[x, y] = _module->getMousePosition();
+            bool mouseOver = _rectangle.getGlobalBounds().contains(x, y);
             bool mouseClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 
             if (mouseOver && mouseClick) {

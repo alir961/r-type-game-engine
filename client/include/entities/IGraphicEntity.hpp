@@ -8,7 +8,7 @@
 #pragma once
 #include "engine/ecs/Entity.hpp"
 #include "engine/ecs/component/PositionComponent.hpp"
-#include "engine/modules/IGraphicalModule.hpp"
+#include "engine/modules/graphical/IGraphicalModule.hpp"
 #include "engine/modules/animation/IAnimationModule.hpp"
 #include <SFML/Graphics.hpp>
 

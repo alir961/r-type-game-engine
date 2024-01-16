@@ -27,6 +27,10 @@ namespace RType {
     constexpr std::string_view MODULE_PARTICLE_PATH = "build/out/engine/modules/particle/libparticle_module.so";
     constexpr std::string_view MODULE_CONSOLE_PATH = "build/out/engine/modules/console/libconsole_module.so";
 
+    class ModuleProvider;
+
+    using ModuleProviderPtr = std::shared_ptr<ModuleProvider>;
+
     /**
      * @brief Class representing a module provider that manages loading and unloading of modules.
      */
@@ -80,6 +84,14 @@ namespace RType {
             IModule *moduleInstance = _modules[type];
 
             return dynamic_cast<T *>(moduleInstance);
+        }
+
+        static ModuleProviderPtr getInstance() {
+            static ModuleProviderPtr instance = nullptr;
+
+            if (instance == nullptr)
+                instance = std::make_shared<ModuleProvider>();
+            return instance;
         }
     };
 

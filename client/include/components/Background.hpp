@@ -15,10 +15,10 @@ namespace RType {
 
     class Background {
     public:
-        Background(const sf::RenderWindow &window, const std::vector<std::string>& imagePaths, const std::vector<float>& speeds);
+        Background(const std::vector<std::string>& imagePaths, const std::vector<float>& speeds);
 
         void update(float deltaTime);
-        void draw(sf::RenderWindow& window);
+        void draw();
 
     private:
         std::vector<sf::Texture> _textures;
