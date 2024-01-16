@@ -2,10 +2,12 @@ name: Build
 on:
   push:
     branches:
-      - '*'
+      - 'main'
+      - '3-build-project-with-github-actions'
   pull_request:
     branches:
-      - '*'
+      - 'main'
+      - '3-build-project-with-github-actions'
 jobs:
   build-project:
     name: Build Project
@@ -26,5 +28,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -D CMAKE_C_COMPILER="/bin/gcc" -D CMAKE_CXX_COMPILER="/bin/g++" -D CMAKE_CXX_COMPILER="/bin/make" -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake ..
+          cmake -D CMAKE_C_COMPILER="/bin/gcc" -D CMAKE_CXX_COMPILER="/bin/g++" -D CMAKE_MAKE_PROGRAM="/bin/make" -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake ..
           cmake --build .
