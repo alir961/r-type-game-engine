@@ -17,23 +17,36 @@ RType::ClientViewport::ClientViewport() {
 }
 
 void RType::ClientViewport::handleInput() const {
+    char buffer[100];
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        _client->sendMessage(MessageType::MOVE_RIGHT, std::format("move_right {}\n", _client->getClientID()));
-    };
+        sprintf(buffer, "move_right %d\n", _client->getClientID());
+        _client->sendMessage(MessageType::MOVE_RIGHT, buffer);
+    }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        _client->sendMessage(MessageType::MOVE_LEFT, std::format("move_left {}\n", _client->getClientID()));
+        sprintf(buffer, "move_left %d\n", _client->getClientID());
+        _client->sendMessage(MessageType::MOVE_LEFT, buffer);
     }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        _client->sendMessage(MessageType::MOVE_UP, std::format("move_up {}\n", _client->getClientID()));
+        sprintf(buffer, "move_up %d\n", _client->getClientID());
+        _client->sendMessage(MessageType::MOVE_UP, buffer);
     }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        _client->sendMessage(MessageType::MOVE_DOWN, std::format("move_down {}\n", _client->getClientID()));
+        sprintf(buffer, "move_down %d\n", _client->getClientID());
+        _client->sendMessage(MessageType::MOVE_DOWN, buffer);
     }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-        _client->sendMessage(MessageType::PLAYER_COLOR, std::format("color {}\n", _client->getClientID()));
+        sprintf(buffer, "color %d\n", _client->getClientID());
+        _client->sendMessage(MessageType::PLAYER_COLOR, buffer);
     }
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        _client->sendMessage(MessageType::SHOOT, std::format("shoot {}\n", _client->getClientID()));
+        sprintf(buffer, "shoot %d\n", _client->getClientID());
+        _client->sendMessage(MessageType::SHOOT, buffer);
     }
 }
 
@@ -206,8 +219,9 @@ void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessa
     starshipEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     starshipEntity->addComponent<RType::PlayerComponent>(true);
     starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(_client->getUsername());
-    starshipEntity->setEntityName(std::format("turquoisePlayer {}", sessionID));
-    if (starshipEntity->hasBaseComponents()) {
+    char buffer[100];
+    sprintf(buffer, "turquoisePlayer %d", sessionID);
+    starshipEntity->setEntityName(buffer);    if (starshipEntity->hasBaseComponents()) {
         graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","turquoisePlayer");
         graphicStarship->loadSprite(_animationModule);
         if (sessionID == _client->getClientID()) {
@@ -280,7 +294,9 @@ void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &sp
     int sessionID = std::stoi(splitMessage[1]);
     std::string color = splitMessage[2];
 
-    _playerEntity->getEntity()->setEntityName(std::format("{}Player {}", color, sessionID));
+    char buffer[100];
+    sprintf(buffer, "%sPlayer %d", color.c_str(), sessionID);
+    _playerEntity->getEntity()->setEntityName(buffer);
     _playerEntity->setEntityName(color + "Player");
 }
 void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
@@ -308,7 +324,9 @@ void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) 
     bulletEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
     bulletEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     bulletEntity->addComponent<RType::PlayerComponent>(false);
-    bulletEntity->setEntityName(std::format("bulletPlayer {}", sessionID));
+    char buffer[100];
+    sprintf(buffer, "bulletPlayer %d", sessionID);
+    bulletEntity->setEntityName(buffer);
     graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
     addGraphicEntity(graphicBullet);
     graphicBullet->loadSprite(_animationModule);
@@ -321,13 +339,15 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
 
     if (_playerEntity == nullptr)
         setView(ViewState::DEAD);
-    if (entityName == std::format("{} {}", _playerEntity->getEntityName(), _client->getClientID())) {
+    if (entityName == _playerEntity->getEntityName() + " " + std::to_string(_client->getClientID())) {
         setView(ViewState::DEAD);
         return;
     }
     destroyGraphicEntity(graphicEntity);
     _entityManager.destroyEntity(entity);
-    std::cout << std::format("death {}\n", entityName);
+    char buffer[100];
+    std::sprintf(buffer, "death %s", entityName.c_str());
+    std::cout << buffer << "\n";
 }
 
 RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntity(const std::string &entityName) {

@@ -44,7 +44,9 @@ void RType::GameLogic::moveBulletPlayer() {
         if (Split::split(entity->getEntityName(), " ")[0] == "bulletPlayer") {
             entity->move(Direction::RIGHT, _entityManager.getEntities(), _sessionManager.getWindowWidth(),
                          _sessionManager.getWindowHeight());
-            sendMessage(MessageType::MOVE_PLAYER_BULLET, std::format("move {}\n", entity->getEntityName()));
+            char buffer[100];
+            sprintf(buffer, "move %s\n", entity->getEntityName().c_str());
+            sendMessage(MessageType::MOVE_PLAYER_BULLET, buffer);
         }
     }
 }
