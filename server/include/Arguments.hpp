@@ -10,6 +10,7 @@
 #include "engine/tools/NumberUtilities.hpp"
 #include "engine/exception/ServerException.hpp"
 #include <span>
+#include <utility>
 
 namespace RType {
 
@@ -23,6 +24,7 @@ namespace RType {
         [[nodiscard]] uint16_t getPort() const {
             return _port;
         };
+
 
         static Arguments parseArguments(int count, char **argv) {
             if (count != 2)

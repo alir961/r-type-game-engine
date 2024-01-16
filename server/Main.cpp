@@ -5,13 +5,9 @@
 
 static int startServer(int count, char **args) {
     try {
-        asio::io_context ioContext;
         const auto arguments = RType::Arguments::parseArguments(count, args);
-        const UDP::endpoint endpoint(UDP::v4(), arguments.getPort());
-        const auto server = RType::UDPServer(ioContext, endpoint);
+        const auto server = RType::UDPServer(arguments.getPort());
 
-        std::cout << "Starting server on " << endpoint.address() << ":" << endpoint.port() << "\n";
-        ioContext.run();
         return 0;
     } catch (RType::ConfigurationException &) {
         std::cerr << "Usage: ./r-type_server <port>\n";

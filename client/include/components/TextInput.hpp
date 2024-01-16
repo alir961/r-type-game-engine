@@ -75,7 +75,7 @@ namespace RType {
          * @return True if the character is an alphabet letter, false otherwise.
          */
         bool isValidInput(char inputChar) const {
-            return std::isalpha(inputChar);
+            return std::isprint(inputChar);
         }
     };
 }

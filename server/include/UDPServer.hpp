@@ -26,7 +26,7 @@ namespace RType {
          * @param ioContext The context of the server
          * @param endpoint The connection endpoint to the server
          */
-        UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint);
+        UDPServer(uint16_t port);
 
         /**
          * Stop the server and close the socket
@@ -34,8 +34,6 @@ namespace RType {
         ~UDPServer();
 
     private:
-        UDP::socket _socket;
-        UDP::endpoint _remoteEndpoint;
         UDPAdapter _adapter;
         GameLogic _game;
         MessageParser _parser = MessageParser(&_game, &_adapter);

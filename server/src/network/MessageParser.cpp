@@ -90,9 +90,7 @@ void RType::MessageParser::sendMessage(MessageType type, const std::string_view 
     const RType::Message response = RType::NetworkMessageBuilder(type)
             .setData(data)
             .build();
-    const std::vector<std::byte> binaryData = response.serialize();
-
-    _adapter->sendData(asio::buffer(binaryData));
+    _adapter->sendData(response);
 }
 
 RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
