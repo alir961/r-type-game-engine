@@ -77,10 +77,7 @@ namespace RType {
         void handleReceive(std::size_t bytesReceived);
 
         std::string _username; ///< The username associated with the client.
-        asio::io_context _context; ///< The IO context for asynchronous operations.
-        UDP::endpoint _endpoint; ///< The endpoint for communication.
-        UDP::socket _socket; ///< The UDP socket for communication.
-        UDPAdapterPtr _adapter; ///< The UDP adapter for handling send/receive operations.
+        UDPAdapter _adapter;
         RType::Thread _thread = RType::Thread(); ///< Thread for asynchronous operations.
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         std::vector<std::string> _messageQueue;

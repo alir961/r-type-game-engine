@@ -55,7 +55,5 @@ void RType::GameLogic::sendMessage(RType::MessageType type, const std::string_vi
     const RType::Message response = RType::NetworkMessageBuilder(type)
             .setData(data)
             .build();
-    const std::vector<std::byte> binaryData = response.serialize();
-
-    _adapter->sendData(asio::buffer(binaryData));
+    _adapter->sendData(response);
 }

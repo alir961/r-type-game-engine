@@ -8,16 +8,17 @@
 #include "../include/UDPServer.hpp"
 #include <engine/network/NetworkMessage.hpp>
 
-RType::UDPServer::UDPServer(asio::io_context &ioContext, const UDP::endpoint &endpoint) :
-        _socket(ioContext, endpoint),
-        _adapter(_socket, _remoteEndpoint),
+RType::UDPServer::UDPServer(const std::string &address, uint16_t port) :
+        _adapter(address, port),
         _game(&_adapter) {
     startReceive();
+    std::cout << "Starting server on " << address << ":" << port << "\n";
+    _adapter.runContext();
 }
 
 RType::UDPServer::~UDPServer() {
     try {
-        _socket.close();
+        _adapter.closeSocket();
     } catch (std::exception &exception) {
         std::cerr << "Unable to close server socket: " << exception.what() << "\n";
     }
