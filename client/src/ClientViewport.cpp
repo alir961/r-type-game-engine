@@ -346,7 +346,27 @@ void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMe
 }
 
 void RType::ClientViewport::updateBulletPlayer(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int bulletID = std::stoi(splitMessage[2]);
+    int speed = std::stoi(splitMessage[4]);
+    int damage = std::stoi(splitMessage[6]);
+    int positionX = std::stoi(splitMessage[8]);
+    int positionY = std::stoi(splitMessage[9]);
+    float sizeX = std::stof(splitMessage[11]);
+    float sizeY = std::stof(splitMessage[12]);
+    float rectX = std::stof(splitMessage[14]);
+    float rectY = std::stof(splitMessage[15]);
+    char entityName[250];
+    EntityPtr bulletEntity;
 
+    sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
+    bulletEntity = getGraphicEntity(entityName)->getEntity();
+
+    bulletEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
+    bulletEntity->getComponent<RType::DamageComponent>()->setDamage(damage);
+    bulletEntity->getComponent<RType::PositionComponent>()->setPositions(std::make_pair(positionX, positionY));
+    bulletEntity->getComponent<RType::SizeComponent>()->setSize(sizeX, sizeY);
+    bulletEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
 }
 
 void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string> &splitMessage) {
