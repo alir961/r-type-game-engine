@@ -45,6 +45,8 @@ namespace RType {
 
         void checkEntitiesStatus();
 
+        void sendAllMessages(int sessionID);
+
     public:
         /**
          * Initialize a basic message parser that handle reactions to message

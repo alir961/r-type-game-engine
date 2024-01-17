@@ -9,7 +9,9 @@
 
 
 #include <iostream>
+#include <mutex>
 #include <engine/ecs/Entity.hpp>
+#include <engine/network/NetworkMessage.hpp>
 
 namespace RType {
 
@@ -20,6 +22,8 @@ namespace RType {
         float _windowWidth;
         float _windowHeight;
         std::string _color = "turquoise";
+        std::vector<Message> _messageQueue;
+        std::mutex _queueMutex;
 
     public:
         Client() = default;
@@ -31,6 +35,10 @@ namespace RType {
         void setWindowHeight(const float &windowHeight) {_windowHeight = windowHeight;};
 
         void setPlayerEntity(const EntityPtr &playerEntity) {_playerEntity = playerEntity;};
+
+        void addMessage(const Message &message);
+
+        Message getLastMessage();
 
         void setNextColor() {
             if (_color == "turquoise")

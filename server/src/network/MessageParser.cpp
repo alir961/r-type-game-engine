@@ -192,3 +192,13 @@ void RType::MessageParser::checkEntitiesStatus() {
     for (auto &entity: toDestroy)
         _game->getEntityManager().destroyEntity(entity);
 }
+
+void RType::MessageParser::sendAllMessages(int sessionID) {
+    Session client = _sessions->getClientSession(sessionID);
+    Message message = client->getLastMessage();
+
+    while (message.type != MessageType::UNKNOWN) {
+        _adapter->sendData(message);
+        message = client->getLastMessage();
+    }
+}

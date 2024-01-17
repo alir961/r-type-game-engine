@@ -49,6 +49,7 @@ namespace RType {
          * @param bytesReceived The number of bytes received
          */
         void handleReceive(std::size_t bytesReceived);
+
     };
 
 }
