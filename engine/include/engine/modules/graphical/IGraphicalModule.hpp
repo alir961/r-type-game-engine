@@ -19,6 +19,8 @@
 namespace RType {
 
     constexpr int WINDOW_FPS = 60;
+    constexpr uint32_t WINDOW_WIDTH = 1920;
+    constexpr uint32_t WINDOW_HEIGHT = 1080;
 
     class IGraphicalModule : public IModule {
     public:

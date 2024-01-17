@@ -29,9 +29,6 @@ namespace RType {
     class GraphicalModule;
     class AnimationModule;
 
-    constexpr uint32_t WINDOW_WIDTH = 1920;
-    constexpr uint32_t WINDOW_HEIGHT = 1080;
-
     /**
      * @enum views
      * @brief Enumeration representing different states of the game view.

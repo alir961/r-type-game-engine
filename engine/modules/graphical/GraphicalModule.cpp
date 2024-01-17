@@ -136,7 +136,7 @@ bool RType::GraphicalModule::pollEvent(sf::Event &event) {
 RType::Vector2f RType::GraphicalModule::getMousePosition() {
     const sf::Vector2i position = sf::Mouse::getPosition();
 
-    return {position.x, position.y};
+    return {position.x % WINDOW_WIDTH, position.y % WINDOW_HEIGHT};
 }
 
 bool RType::GraphicalModule::isMouseClicked() {
