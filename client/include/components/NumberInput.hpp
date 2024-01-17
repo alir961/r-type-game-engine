@@ -39,10 +39,11 @@ namespace RType {
          */
         void update(const sf::Event &event) override {
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-                //setActive(_box.getGlobalBounds().contains(mousePos));
+                Vector2f mousePosition = _module->getMousePosition();
+
+                setActive(_box->getGlobalBounds().contains(mousePosition));
             }
-            if (_active) {
+            if (isActive()) {
                 if (event.type == sf::Event::TextEntered && !_keyPressed) {
                     char inputChar = static_cast<char>(event.text.unicode);
                     if (inputChar == '\b') {
@@ -57,7 +58,7 @@ namespace RType {
                 }
             }
             if (event.type == sf::Event::KeyReleased || event.type == sf::Event::MouseButtonReleased) { _keyPressed = false; }
-            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Enter && _active) { std::cout << _text << std::endl; }
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Enter && isActive()) { std::cout << _text << std::endl; }
             _textDisplay->setText(_text);
         }
 

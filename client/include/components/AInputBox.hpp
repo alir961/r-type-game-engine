@@ -35,6 +35,7 @@ namespace RType {
             _box->setOutlineColor(Color::RGB{200, 200, 200, 255});
             _box->setOutlineThickness(1);
             _box->setBackgroundColor(Color::Transparent);
+            _textDisplay->setColor(Color::White);
             _textDisplay->setSize(20);
             _textDisplay->setPosition(Vector2f(x + 5, y + 5));
             _textDisplay->setFontPath("client/assets/ka1.ttf");
@@ -82,10 +83,12 @@ namespace RType {
         float _x; /**< X-coordinate of the input box. */
         float _y; /**< Y-coordinate of the input box. */
         size_t _maxChars; /**< Maximum number of characters allowed in the input box. */
-        bool _active = false; /**< Activation state of the input box. */
         std::string _text; /**< Text content of the input box. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         TextComponent _textDisplay = _module->createText(""); /**< SFML Text displaying the text in the input box. */
         RectShape _box = _module->createRectShape(); /**< SFML RectangleShape representing the input box. */
+
+    private:
+        bool _active = false; /**< Activation state of the input box. */
     };
 }

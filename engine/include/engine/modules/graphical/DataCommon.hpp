@@ -40,8 +40,8 @@ namespace RType {
             ColorComponent a;
         };
 
-        static const RGB Black{255, 255, 255, 255};   //!< Black predefined color
-        static const RGB White{0, 0, 0, 255};        //!< White predefined color
+        static const RGB Black{0, 0, 0, 255};   //!< Black predefined color
+        static const RGB White{255, 255, 255, 255};        //!< White predefined color
         static const RGB Red{255, 0, 0, 255};         //!< Red predefined color
         static const RGB Green{0, 255, 0, 255};       //!< Green predefined color
         static const RGB Blue{0, 0, 255, 255};        //!< Blue predefined color

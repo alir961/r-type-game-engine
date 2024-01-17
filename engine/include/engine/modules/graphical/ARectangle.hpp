@@ -22,13 +22,9 @@ namespace RType {
         float _outlineThickness = 0.0F;
 
     public:
-        ARectangle() {
-            std::cout << "Init rectangle\n";
-        };
+        ARectangle() = default;
 
-        virtual ~ARectangle() {
-            std::cout << "Destroy rectangle\n";
-        };
+        virtual ~ARectangle() = default;
 
         void setSize(const Vector2f &size) {
             _size = Vector2f(size.first, size.second);
