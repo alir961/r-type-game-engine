@@ -12,6 +12,8 @@
 #include "engine/modules/graphical/ASprite.hpp"
 #include "GraphicalModule.hpp"
 #include "engine/exception/ModuleException.hpp"
+#include "engine/modules/ModuleProvider.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
 
 namespace RType {
 
@@ -20,6 +22,7 @@ namespace RType {
         WindowPtr _window;
         sf::Texture _texture;
         sf::Sprite _sprite;
+        ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
 
     public:
         Sprite(WindowPtr window, std::string texturePath) : ASprite(std::move(texturePath)),
@@ -27,7 +30,7 @@ namespace RType {
             if (!_texture.loadFromFile(_texturePath))
                 throw ModuleException("Unable to load texture '" + _texturePath + "'");
             _sprite = sf::Sprite(_texture);
-            std::cout << "Sprite: Loaded " << _texturePath << "\n";
+            _logger->debug("Load sprite " + _texturePath);
         };
 
         void draw() override {

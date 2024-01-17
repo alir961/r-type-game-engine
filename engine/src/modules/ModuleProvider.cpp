@@ -17,6 +17,8 @@ RType::ModuleProvider::ModuleProvider() {
     _loaders.emplace(ModuleType::SOUND, initLoader(MODULE_SOUND_PATH));
     _loaders.emplace(ModuleType::PARTICLE, initLoader(MODULE_PARTICLE_PATH));
     _loaders.emplace(ModuleType::CONSOLE, initLoader(MODULE_CONSOLE_PATH));
+    _loaders.emplace(ModuleType::LOGGER, initLoader(MODULE_LOGGER_PATH));
+    _logger = loadAndGetModule<ILoggerModule>(ModuleType::LOGGER);
 }
 
 RType::ModuleProvider::~ModuleProvider() {
@@ -33,6 +35,10 @@ void RType::ModuleProvider::loadModule(RType::ModuleType type) {
         return;
     _modules.emplace(type, _loaders[type]->load());
     _modules[type]->load();
+    if (type == ModuleType::LOGGER)
+        _logger = get<ILoggerModule>(ModuleType::LOGGER);
+    if (_logger != nullptr)
+        _logger->info("Load module " + retrieveModuleName(type));
 }
 
 void RType::ModuleProvider::unloadModule(RType::ModuleType type) {
@@ -41,4 +47,29 @@ void RType::ModuleProvider::unloadModule(RType::ModuleType type) {
     _modules[type]->unload();
     _loaders[type]->unload();
     _modules.erase(type);
+    if (type == ModuleType::LOGGER)
+        _logger = nullptr;
+    if (_logger != nullptr)
+        _logger->info("Unload module " + retrieveModuleName(type));
 }
+
+std::string RType::ModuleProvider::retrieveModuleName(RType::ModuleType type) {
+    switch (type) {
+        case ModuleType::ANIMATION:
+            return "Animation";
+        case ModuleType::SOUND:
+            return "Sound";
+        case ModuleType::CONSOLE:
+            return "Console";
+        case ModuleType::PARTICLE:
+            return "Particle";
+        case ModuleType::GRAPHICAL:
+            return "Graphical";
+        case ModuleType::LOGGER:
+            return "Logger";
+        default:
+            return "Unknown";
+    }
+}
+
+

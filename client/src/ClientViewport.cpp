@@ -53,17 +53,17 @@ void RType::ClientViewport::handleInput() const {
 void RType::ClientViewport::basicInput() {
     if (_viewState == ViewState::OPTIONS) {
         if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::BackSpace) {
-            std::cout << "Return key pressed in OPTIONS state" << std::endl;
+            _logger->debug("Return key pressed in OPTIONS state");
             setView(ViewState::MENU);
         }
     } else if (_viewState == ViewState::GAME) {
         if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
-            std::cout << "Escape key pressed in GAME state" << std::endl;
+            _logger->debug("Return key pressed in GAME state");
             setView(ViewState::PAUSE);
         }
     } else if (_viewState == ViewState::PAUSE) {
         if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
-            std::cout << "Escape key pressed in GAME state" << std::endl;
+            _logger->debug("Return key pressed in PAUSE state");
             setView(ViewState::GAME);
         }
     } else if (_viewState == ViewState::WIN || _viewState == ViewState::DEAD) {
@@ -101,7 +101,7 @@ void RType::ClientViewport::launchWindow() {
         }
         draw();
     }
-    std::cout << "Exit loop\n";
+    _logger->info("Exit game");
 }
 
 void RType::ClientViewport::setView(ViewState state) {
@@ -139,7 +139,7 @@ void RType::ClientViewport::setView(ViewState state) {
 
 void RType::ClientViewport::addGraphicEntity(const GraphicEntityPtr &entity) {
     _graphicEntities.push_back(entity);
-    std::cout << "Added entity with name: " << entity->getEntityName() << "\n";
+    _logger->debug("Entity registered: " + entity->getEntityName());
 }
 
 RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntityByName(const std::string &name) const {
@@ -155,7 +155,7 @@ sf::Event RType::ClientViewport::getEvent() const {
 }
 
 void RType::ClientViewport::connectToServer(const std::string &hostname, int port, std::string username) {
-    std::cout << "Before try connecting to " << hostname << ":" << port << "\n";
+    _logger->warn("Connection attempt to server " + hostname + ":" + std::to_string(port));
     _client = std::make_shared<RType::UDPClient>(hostname, port, username, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
@@ -178,7 +178,7 @@ void RType::ClientViewport::draw() {
 
 int RType::ClientViewport::start() {
     try {
-        logInformation("Starting game view...");
+        _logger->info("Launching application [...]");
         launchWindow();
     } catch (const std::exception &e) {
         return EXIT_FAILURE;
@@ -195,7 +195,7 @@ void RType::ClientViewport::handleMessageFromServer() {
 
         if (_handlers.contains(splitMessage[0]))
             _handlers[splitMessage[0]](splitMessage);
-        else std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
+        else _logger->error("No handler found for message type: " + splitMessage[0]);
     };
 
     for (const auto &message : _client->pullQueue())

@@ -40,7 +40,7 @@ namespace RType {
             if (_client->getConnected())
                 _viewport.setView(ViewState::MENU);
             if (_quitBox.isClicked()) {
-                std::cout << "Quit Game!\n";
+                _logger->debug("Exit game from loading screen");
                 _viewport.closeConnectionToServer();
                 _module->close();
                 std::exit(0);

@@ -12,6 +12,7 @@
 #include <iostream>
 #include "ModuleLoader.hpp"
 #include "IModule.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
 
 namespace RType {
 
@@ -26,6 +27,7 @@ namespace RType {
     constexpr std::string_view MODULE_SOUND_PATH = "build/out/engine/modules/sound/libsound_module.so";
     constexpr std::string_view MODULE_PARTICLE_PATH = "build/out/engine/modules/particle/libparticle_module.so";
     constexpr std::string_view MODULE_CONSOLE_PATH = "build/out/engine/modules/console/libconsole_module.so";
+    constexpr std::string_view MODULE_LOGGER_PATH = "build/out/engine/modules/logger/liblogger_module.so";
 
     class ModuleProvider;
 
@@ -38,6 +40,9 @@ namespace RType {
     private:
         std::map<ModuleType, ModuleLoaderPtr<IModule>> _loaders;
         std::map<ModuleType, IModule *> _modules;
+        ILoggerModule *_logger = nullptr;
+
+        static std::string retrieveModuleName(ModuleType type);
 
     public:
         /**

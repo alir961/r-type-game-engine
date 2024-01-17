@@ -9,6 +9,7 @@
 
 #include "views/IView.hpp"
 #include "UDPClient.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
 #include <engine/modules/animation/IAnimationModule.hpp>
 #include <engine/modules/ModuleProvider.hpp>
 #include <SFML/System/Clock.hpp>
@@ -58,9 +59,10 @@ namespace RType {
         std::shared_ptr<IView> _selectedView;
         UDPClientPtr _client;
         sf::Event _event{};
+        ModuleProviderPtr _provider = ModuleProvider::getInstance();
         IGraphicalModule *_graphicalModule;
         IAnimationModule *_animationModule;
-        ModuleProviderPtr _provider = ModuleProvider::getInstance();
+        ILoggerModule *_logger = _provider->loadAndGetModule<ILoggerModule>(ModuleType::LOGGER);
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;
         GraphicEntityPtr _playerEntity = nullptr;

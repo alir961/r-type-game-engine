@@ -39,15 +39,15 @@ namespace RType {
 
             if (_module->isMouseClicked()) {
                 if (_mainMenu.isClicked()) {
-                    std::cout << "Exit To Main Menu!\n";
+                    _logger->debug("Return to menu from pause");
                     _viewport.setView(ViewState::MENU);
                 }
                 if (_resume.isClicked()) {
-                    std::cout << "Resume Game!\n";
+                    _logger->debug("Return to game from pause");
                     _viewport.setView(ViewState::GAME);
                 }
                 if (_options.isClicked()) {
-                    std::cout << "Resume Game!\n";
+                    _logger->debug("Open options from pause");
                     _viewport.setView(ViewState::OPTIONSGAME);
                 }
             }

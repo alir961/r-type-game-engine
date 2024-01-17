@@ -1,9 +1,5 @@
 add_library(graphical_module MODULE
         GraphicalModule.cpp
-        ../../include/engine/modules/graphical/Event.hpp
-        Text.hpp
-        Rectangle.hpp
-        Sprite.hpp
 )
 
 # Set the output directory for the module library
@@ -14,6 +10,9 @@ set_target_properties(graphical_module PROPERTIES
 install(
         FILES
         GraphicalModule.hpp
+        Text.hpp
+        Rectangle.hpp
+        Sprite.hpp
         DESTINATION
         include/graphical_module
 )

@@ -49,11 +49,11 @@ namespace RType {
 
             if (_module->isMouseClicked()) {
                 if (_mainMenu.isClicked()) {
-                    std::cout << "Exit To Main Menu!" << std::endl;
+                    _logger->debug("Go to main menu from options");
                     _viewport.setView(ViewState::MENU);
                 }
                 if (_inGame && _back.isClicked()) {
-                    std::cout << "Back to Pause" << std::endl;
+                    _logger->debug("Go to pause menu from options");
                     _viewport.setView(ViewState::PAUSE);
                 }
             }

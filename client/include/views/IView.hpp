@@ -8,6 +8,8 @@
 #pragma once
 
 #include "IDrawable.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
+#include "engine/modules/ModuleProvider.hpp"
 
 namespace RType {
 
@@ -28,6 +30,9 @@ namespace RType {
         void setPlayerEntity(const GraphicEntityPtr &playerEntity) {_playerEntity = playerEntity;};
 
         GraphicEntityPtr getPlayerEntity() {return _playerEntity;};
+
+    protected:
+        ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
 
     private:
         GraphicEntityPtr _playerEntity = nullptr;

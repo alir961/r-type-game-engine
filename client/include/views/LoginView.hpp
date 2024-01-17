@@ -68,7 +68,6 @@ namespace RType {
             _hostnameInput.draw();
             _usernameInput.draw();
             _loginButton.draw();
-            _sprite->draw();
             handleInput();
         }
 
@@ -82,6 +81,5 @@ namespace RType {
         TextInput _usernameInput = TextInput(800.0F, 540.0F); /**< TextBoxInput for Username options. */
         LoginButton _loginButton = LoginButton(800, 600, "Login"); /**< Button for Log-in the game. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
-        SpriteComponent _sprite = _module->createSprite("client/assets/logo.jpg");
     };
 }

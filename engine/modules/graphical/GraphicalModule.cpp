@@ -31,13 +31,9 @@ RType::TextComponent RType::GraphicalModule::createText(const std::string &text)
     return std::make_shared<RType::Text>(_window, text);
 }
 
-void RType::GraphicalModule::load() {
-    std::cout << "Load Graphical Module\n";
-}
+void RType::GraphicalModule::load() {}
 
-void RType::GraphicalModule::unload() {
-    std::cout << "Unload Graphical Module\n";
-}
+void RType::GraphicalModule::unload() {}
 
 void RType::GraphicalModule::drawSprite(sf::Sprite sprite) {
     //window.draw(sprite);

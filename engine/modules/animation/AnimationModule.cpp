@@ -18,7 +18,6 @@ void destroy(RType::AnimationModule *library) {
 }
 
 void RType::AnimationModule::load() {
-    std::cout << "Load Animation Module\n";
     addAnimation("turquoisePlayer");
     addAnimation("playerStarship");
     addAnimation("purplePlayer");

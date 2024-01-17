@@ -77,10 +77,10 @@ namespace RType {
                 _clickCoolDown.restart();
                 if (_active) {
                     loadCallback(_boxName);
-                    std::cout << _boxName << " Box set active!\n";
+                    _logger->debug(_boxName + " box set active");
                 } else {
                     unloadCallback(_boxName);
-                    std::cout << _boxName << " Box set inactive!\n";
+                    _logger->debug(_boxName + " box set inactive");
                 }
             }
         }
@@ -102,7 +102,9 @@ namespace RType {
         sf::Font _font;
         sf::Text _boxNameText;
         float _textSize;
-        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        ModuleProviderPtr provider = ModuleProvider::getInstance();
+        IGraphicalModule *_module = provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        ILoggerModule *_logger = provider->get<ILoggerModule>(ModuleType::LOGGER);
 
         /**
          * @brief Sets the appearance of the checkbox based on its current state.

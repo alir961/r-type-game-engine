@@ -30,7 +30,7 @@ namespace RType {
          * @param gameView The ClientViewport associated with the state.
          */
         explicit GameView(std::string username): _username(std::move(username)) {
-            std::cout << "Start game view for player '" << _username << "'\n";
+            _logger->info("Connected to server with user '" + _username + "'");
         }
 
         void update() override {

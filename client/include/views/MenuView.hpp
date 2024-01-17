@@ -37,13 +37,13 @@ namespace RType {
 
             if (_module->isMouseClicked()) {
                 if (_startBox.isClicked()) {
-                    std::cout << "Start Game!\n";
+                    _logger->debug("Start game from menu");
                     _viewport.setView(ViewState::GAME);
                 } else if (_optionsBox.isClicked()) {
-                    std::cout << "Options Selected!\n";
+                    _logger->debug("Go to options from menu");
                     _viewport.setView(ViewState::OPTIONS);
                 } else if (_quitBox.isClicked()) {
-                    std::cout << "Quit Game!\n";
+                    _logger->debug("Quit game from menu");
                     _viewport.closeConnectionToServer();
                     _module->close();
                 }
