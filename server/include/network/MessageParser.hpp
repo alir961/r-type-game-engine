@@ -37,6 +37,8 @@ namespace RType {
 
         void handleShoot(const RType::Message &receiveMessage);
 
+        void handleTick(const RType::Message &receiveMessage);
+
         EntityPtr createPlayerEntity(int sessionID);
 
         bool createBulletPlayerEntity(int sessionID);
@@ -46,6 +48,8 @@ namespace RType {
         void checkEntitiesStatus();
 
         void sendAllMessages(int sessionID);
+
+        void addMessageClients(int sessionID, MessageType type, const std::string_view &data);
 
     public:
         /**

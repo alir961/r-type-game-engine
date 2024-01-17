@@ -87,8 +87,11 @@ void RType::ClientViewport::launchWindow() {
             basicInput();
         }
         if (_viewState == ViewState::GAME) {
+            char buffer[100];
             handleMessageFromServer();
             handleInput();
+            sprintf(buffer, "tick %d\n", _client->getClientID());
+            _client->sendMessage(MessageType::TICK, buffer);
         }
         _selectedView->update();
         accumulatedTime += _animationClock.restart().asSeconds();

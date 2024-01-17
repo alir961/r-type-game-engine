@@ -24,6 +24,7 @@ RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
     _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::SHOOT] = [this](const Message &msg) { handleShoot(msg); };
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { handlePlayerColor(msg); };
+    _handlers[MessageType::TICK] = [this](const Message &msg) { handleTick(msg); };
 }
 
 void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMessage) {
@@ -58,6 +59,7 @@ void RType::MessageParser::handlePlayerNameMessageType(const RType::Message &rec
 
     session->setPlayerName(playerName);
     session->setPlayerEntity(createPlayerEntity(sessionID));
+    sendAllMessages(sessionID);
 }
 
 void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
@@ -68,6 +70,7 @@ void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
     EntityPtr entity = session->getEntity();
     std::string status = "ok";
 
+    sendAllMessages(sessionID);
     entity->move(getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
     char buffer[50];
     sprintf(buffer, "%s %d %s\n", splitMessage[0].c_str(), sessionID, status.c_str());
@@ -103,6 +106,7 @@ RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
     sprintf(buffer, "turquoisePlayer %d\n", sessionID);
     playerEntity->setEntityName(buffer);
     sendMessage(MessageType::PLAYER_NAME, message);
+    addMessageClients(sessionID, MessageType::PLAYER_NAME, message);
     return playerEntity;
 }
 
@@ -110,9 +114,9 @@ void RType::MessageParser::handleShoot(const RType::Message &receiveMessage) {
     std::string message = receiveMessage.toString();
     std::vector <std::string> splitMessage = Split::split(message, " \n");
     int sessionID = std::stoi(splitMessage[1]);
-    bool shoot = createBulletPlayerEntity(sessionID);
 
-    if (!shoot) {
+    sendAllMessages(sessionID);
+    if (!createBulletPlayerEntity(sessionID)) {
         char buffer[50];
         sprintf(buffer, "shoot %d ko\n", sessionID);
         sendMessage(MessageType::SHOOT, buffer);
@@ -140,7 +144,7 @@ bool RType::MessageParser::createBulletPlayerEntity(int sessionID) {
         char bulletName[100];
         sprintf(bulletName, "bulletPlayer %d", sessionID);
         bulletEntity->setEntityName(bulletName);
-        char buffer[100];
+        char buffer[200];
         sprintf(buffer, "shoot %d speed 10 damage 20 position %.2f %.2f size 1 1 rect 14 14 ok\n", sessionID, startX, startY);
         sendMessage(MessageType::SHOOT, buffer);    }
     return shoot;
@@ -168,6 +172,7 @@ void RType::MessageParser::handlePlayerColor(const RType::Message &receiveMessag
     int sessionID = std::stoi(splitMessage[1]);
     Session session = _sessions->getClientSession(sessionID);
 
+    sendAllMessages(sessionID);
     session->setNextColor();
     char buffer[50];
     sprintf(buffer, "color %d %s\n", sessionID, session->getColor().c_str());
@@ -197,8 +202,25 @@ void RType::MessageParser::sendAllMessages(int sessionID) {
     Session client = _sessions->getClientSession(sessionID);
     Message message = client->getLastMessage();
 
-    while (message.type != MessageType::UNKNOWN) {
+    while (message.type != MessageType::NULLDATA) {
         _adapter->sendData(message);
         message = client->getLastMessage();
     }
+}
+
+void RType::MessageParser::addMessageClients(int sessionID, MessageType type, const std::string_view &data) {
+    for (auto &client : _sessions->getSessions()) {
+        if (client.first != sessionID && client.second != nullptr)
+            client.second->addMessage(NetworkMessageBuilder(type)
+                                              .setData(data)
+                                              .build());
+    }
+}
+
+void RType::MessageParser::handleTick(const RType::Message &receiveMessage) {
+    const std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    const int sessionID = std::stoi(splitMessage[1]);
+
+    sendAllMessages(sessionID);
 }

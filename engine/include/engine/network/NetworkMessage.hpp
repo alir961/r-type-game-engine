@@ -29,6 +29,7 @@ namespace RType {
      */
     enum class MessageType {
         UNKNOWN = 0,
+        NULLDATA,
         CONNECT,
         CONNECT_CALLBACK,
         DISCONNECT,
@@ -42,6 +43,7 @@ namespace RType {
         SHOOT,
         DEATH,
         MOVE_PLAYER_BULLET,
+        TICK,
     };
 
     /**

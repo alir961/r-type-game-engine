@@ -21,7 +21,7 @@ RType::Message RType::Client::getLastMessage() {
         _messageQueue.erase(_messageQueue.begin());
         return message;
     }
-    return NetworkMessageBuilder(MessageType::UNKNOWN)
+    return NetworkMessageBuilder(MessageType::NULLDATA)
             .setData("")
             .build();
 }
