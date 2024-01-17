@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cmake -S . -B build/out -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake && clear && make -C build/out
+cmake -S . -B build/out -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake && clear && cmake --build build/out -j 6
 exit_code=$?
 
 if [ $? -eq 0 ]; then
