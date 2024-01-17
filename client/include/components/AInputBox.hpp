@@ -79,6 +79,8 @@ namespace RType {
             return _active;
         }
 
+        virtual void setText(std::string value) = 0;
+
     protected:
         float _x; /**< X-coordinate of the input box. */
         float _y; /**< Y-coordinate of the input box. */

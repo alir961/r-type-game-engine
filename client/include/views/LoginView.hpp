@@ -29,7 +29,10 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        explicit LoginView(ClientViewport &gameView) : _viewport(gameView) {}
+        explicit LoginView(ClientViewport &gameView) : _viewport(gameView) {
+            _portBoxInput.setText("9000");
+            _hostnameInput.setText("192.168.1.98");
+        }
 
         /**
          * @brief Handles user input for the menu.

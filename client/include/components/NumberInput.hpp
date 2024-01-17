@@ -70,6 +70,11 @@ namespace RType {
             return std::atoi(_text.c_str());
         }
 
+        void setText(std::string value) override {
+            _text = value;
+            _textDisplay->setText(value);
+        }
+
     private:
         bool _keyPressed{false}; /**< Flag indicating if a key is pressed. */
 
