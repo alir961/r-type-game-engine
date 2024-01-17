@@ -86,15 +86,10 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::UNKNOWN] = [](const Message &) { std::cout << "Unknown message!\n"; };
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { addMessageQueue(msg); };
-    _handlers[MessageType::MOVE_LEFT] = [this](const Message &msg) { addMessageQueue(msg); };
-    _handlers[MessageType::MOVE_RIGHT] = [this](const Message &msg) { addMessageQueue(msg); };
-    _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { addMessageQueue(msg); };
-    _handlers[MessageType::MOVE_DOWN] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::DISCONNECT] = [this](const Message &) { _stop = true; };
-    _handlers[MessageType::SHOOT] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::BULLET_PLAYER] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::DEATH] = [this](const Message &msg) { addMessageQueue(msg); };
-    _handlers[MessageType::MOVE_PLAYER_BULLET] = [this](const Message &msg) { addMessageQueue(msg); };
 }
 
 std::string RType::UDPClient::getLastMessage() {

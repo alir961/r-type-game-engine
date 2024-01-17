@@ -127,21 +127,19 @@ namespace RType {
             switch (direction) {
                 case Direction::LEFT:
                     moveLeft(entities);
+                    break;
                 case Direction::RIGHT:
                     moveRight(entities, windowsWidth);
+                    break;
                 case Direction::DOWN:
                     moveDown(entities, windowsHeight);
+                    break;
                 case Direction::UP:
                     moveUp(entities);
+                    break;
             }
             return false;
         };
-
-        bool canShoot(const std::vector<std::shared_ptr<Entity>> &entities, const std::string &name) {
-            if (getEntity(entities, name) == nullptr)
-                return true;
-            return false;
-        }
 
         void setEntityName(const std::string &name) {_entityName = name;};
 

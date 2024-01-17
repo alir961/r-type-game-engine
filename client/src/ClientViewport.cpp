@@ -45,7 +45,7 @@ void RType::ClientViewport::handleInput() const {
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        sprintf(buffer, "shoot %d\n", _client->getClientID());
+        sprintf(buffer, "bulletPlayer %d\n", _client->getClientID());
         _client->sendMessage(MessageType::SHOOT, buffer);
     }
 }
@@ -206,9 +206,8 @@ void RType::ClientViewport::handleMessageFromServer() {
 void RType::ClientViewport::setHandlers() {
     _handlers["player"] = [this](const std::vector<std::string> &splitMessage) { player(splitMessage); };
     _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
-    _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
+    _handlers["bulletPlayer"] = [this](const std::vector<std::string> &splitMessage) { bulletPlayer(splitMessage); };
     _handlers["death"] = [this](const std::vector<std::string> &splitMessage) { death(splitMessage); };
-    _handlers["move"] = [this](const std::vector<std::string> &splitMessage) { movePlayerBullet(splitMessage); };
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
@@ -218,38 +217,6 @@ void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &sp
     char buffer[100];
     sprintf(buffer, "%sPlayer %d", color.c_str(), sessionID);
     _playerEntity->getEntity()->setEntityName(buffer);
-}
-void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
-    for (auto &str : splitMessage) {
-        std::cout << str <<" ";
-    }
-    std::cout << "\n";
-    if (splitMessage.size() < 3) return;
-    auto bulletEntity = _entityManager.createEntity();
-    std::shared_ptr<RType::GraphicEntity> graphicBullet;
-    int sessionID = std::stoi(splitMessage[1]);
-    int speed = std::stoi(splitMessage[3]);
-    int damage = std::stoi(splitMessage[5]);
-    int positionX = std::stoi(splitMessage[7]);
-    int positionY = std::stoi(splitMessage[8]);
-    float sizeX = std::stof(splitMessage[10]);
-    float sizeY = std::stof(splitMessage[11]);
-    float rectX = std::stof(splitMessage[13]);
-    float rectY = std::stof(splitMessage[14]);
-    std::string status = splitMessage[15];
-
-    bulletEntity->addComponent<RType::SpeedComponent>(speed);
-    bulletEntity->addComponent<RType::DamageComponent>(damage);
-    bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
-    bulletEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
-    bulletEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
-    bulletEntity->addComponent<RType::PlayerComponent>(false);
-    char buffer[100];
-    sprintf(buffer, "bulletPlayer %d", sessionID);
-    bulletEntity->setEntityName(buffer);
-    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
-    addGraphicEntity(graphicBullet);
-    graphicBullet->loadSprite(_animationModule);
 }
 
 void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) {
@@ -285,12 +252,6 @@ void RType::ClientViewport::destroyGraphicEntity(RType::GraphicEntityPtr entity)
         _graphicEntities.erase(it);
 }
 
-void RType::ClientViewport::movePlayerBullet(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = getGraphicEntityByName(splitMessage[1] + " " + splitMessage[2])->getSprite();
-    EntityPtr gameEntity = getGraphicEntityByName(splitMessage[1] + " " + splitMessage[2])->getEntity();
-    _playerEntity->moveRight(sprite, gameEntity);
-}
-
 void RType::ClientViewport::player(const std::vector<std::string> &splitMessage) {
     int sessionID = std::stoi(splitMessage[1]);
     std::string color =splitMessage[16];
@@ -300,6 +261,18 @@ void RType::ClientViewport::player(const std::vector<std::string> &splitMessage)
         createNewPlayer(splitMessage);
     else
         updatePlayer(splitMessage);
+}
+
+void RType::ClientViewport::bulletPlayer(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int bulletID = std::stoi(splitMessage[2]);
+    std::string entityName = splitMessage[0];
+    GraphicEntityPtr entity = getGraphicEntityByName(entityName + " " + std::to_string(sessionID) + " " + std::to_string(bulletID));
+
+    if (entity == nullptr)
+        createNewBulletPlayer(splitMessage);
+    else
+        updateBulletPlayer(splitMessage);
 }
 
 void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &splitMessage) {
@@ -363,4 +336,56 @@ void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMe
     starshipEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
     starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(name);
     starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
+}
+
+void RType::ClientViewport::updateBulletPlayer(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int bulletID = std::stoi(splitMessage[2]);
+    int speed = std::stoi(splitMessage[4]);
+    int damage = std::stoi(splitMessage[6]);
+    int positionX = std::stoi(splitMessage[8]);
+    int positionY = std::stoi(splitMessage[9]);
+    float sizeX = std::stof(splitMessage[11]);
+    float sizeY = std::stof(splitMessage[12]);
+    float rectX = std::stof(splitMessage[14]);
+    float rectY = std::stof(splitMessage[15]);
+    char entityName[250];
+    EntityPtr bulletEntity;
+
+    sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
+    bulletEntity = getGraphicEntity(entityName)->getEntity();
+
+    bulletEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
+    bulletEntity->getComponent<RType::DamageComponent>()->setDamage(damage);
+    bulletEntity->getComponent<RType::PositionComponent>()->setPositions(std::make_pair(positionX, positionY));
+    bulletEntity->getComponent<RType::SizeComponent>()->setSize(sizeX, sizeY);
+    bulletEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
+}
+
+void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string> &splitMessage) {
+    auto bulletEntity = _entityManager.createEntity();
+    std::shared_ptr<RType::GraphicEntity> graphicBullet;
+    int sessionID = std::stoi(splitMessage[1]);
+    int bulletID = std::stoi(splitMessage[2]);
+    int speed = std::stoi(splitMessage[4]);
+    int damage = std::stoi(splitMessage[6]);
+    int positionX = std::stoi(splitMessage[8]);
+    int positionY = std::stoi(splitMessage[9]);
+    float sizeX = std::stof(splitMessage[11]);
+    float sizeY = std::stof(splitMessage[12]);
+    float rectX = std::stof(splitMessage[14]);
+    float rectY = std::stof(splitMessage[15]);
+    char entityName[250];
+
+    bulletEntity->addComponent<RType::SpeedComponent>(speed);
+    bulletEntity->addComponent<RType::DamageComponent>(damage);
+    bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    bulletEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    bulletEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
+    bulletEntity->addComponent<RType::PlayerComponent>(false);
+    sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
+    bulletEntity->setEntityName(entityName);
+    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
+    addGraphicEntity(graphicBullet);
+    graphicBullet->loadSprite(_animationModule);
 }
