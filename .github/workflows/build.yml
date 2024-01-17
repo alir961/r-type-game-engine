@@ -36,19 +36,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-project
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4.1.1
-
-      - name: Set Email and Name
-        run: | 
-          git config --global user.email "ali.raad@epitech.eu"
-          git config --global user.name "alir961"
-      - name: Set Release Tag
-        run: git tag -a "Development" -m "Development Release"
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+      - uses: actions/checkout@master
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.5
         with:
-          files: ./*
-          tag_name: "Development"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          type: 'zip'
+          filename: 'R-Type-Release.zip'
+      - name: Upload Release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          artifacts: "R-Type-Release.zip"
+          tag: "Development"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
