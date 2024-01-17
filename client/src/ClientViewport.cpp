@@ -301,7 +301,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
     auto starshipEntity = _entityManager.createEntity();
-    std::shared_ptr<RType::GraphicEntity> graphicStarship;
+    //std::shared_ptr<RType::GraphicEntity> graphicStarship;
 
 
     starshipEntity->addComponent<RType::SpeedComponent>(speed);
@@ -313,7 +313,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(name);
     starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
     starshipEntity->setEntityName(color + " " + std::to_string(sessionID));
-    if (starshipEntity->hasBaseComponents()) {
+    /*if (starshipEntity->hasBaseComponents()) {
         graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif", color);
         graphicStarship->loadSprite(_animationModule);
         if (sessionID == _client->getClientID()) {
@@ -323,7 +323,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
             _client->setScore(starshipEntity->getComponent<PlayerComponent>()->getScore());
         }
         addGraphicEntity(graphicStarship);
-    }
+    }*/
 }
 
 void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMessage) {

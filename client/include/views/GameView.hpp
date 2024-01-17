@@ -29,9 +29,15 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        explicit GameView(std::string username): _username(std::move(username)) {}
+        explicit GameView(std::string username): _username(std::move(username)) {
+            std::cout << "Start game view for player '" << _username << "'\n";
+        }
 
-        void update() override {}
+        void update() override {
+            const float deltaTime = _clock.restart().asSeconds();
+
+            _background.update(deltaTime);
+        }
 
         /**
          * @brief Draws entities on the SFML RenderWindow.
@@ -43,7 +49,6 @@ namespace RType {
             const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();*/
             const float deltaTime = _clock.restart().asSeconds();
 
-            _background.update(deltaTime);
             _background.draw();
             //_playerNameText.draw();
             //_healthBarText.draw();
@@ -68,9 +73,9 @@ namespace RType {
 
 
     private:
-        ClickableText _playerNameText = ClickableText(Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
-        ClickableText _healthBarText = ClickableText(Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
-        ClickableText _scoreText = ClickableText(Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
+        //ClickableText _playerNameText = ClickableText(Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
+        //ClickableText _healthBarText = ClickableText(Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
+        //ClickableText _scoreText = ClickableText(Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
         Background _background = Background({"client/assets/background/1.png",
                                              "client/assets/background/2.png",
                                              "client/assets/background/3.png",

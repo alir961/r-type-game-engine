@@ -75,7 +75,7 @@ namespace RType {
          */
         void setActive(bool active) {
             _active = active;
-            _box->setOutlineColor(active ? Color::Blue : Color::RGB{200, 200, 200, 255});
+            _box->setOutlineColor(active ? Color::Cyan : Color::RGB{200, 200, 200, 255});
         }
 
         /**

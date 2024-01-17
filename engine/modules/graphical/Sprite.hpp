@@ -18,23 +18,24 @@ namespace RType {
     class Sprite : public ASprite {
     private:
         WindowPtr _window;
+        sf::Texture _texture;
+        sf::Sprite _sprite;
 
     public:
         Sprite(WindowPtr window, std::string texturePath) : ASprite(std::move(texturePath)),
-                                                            _window(std::move(window)) {};
+                                                            _window(std::move(window)) {
+            if (!_texture.loadFromFile(_texturePath))
+                throw ModuleException("Unable to load texture '" + _texturePath + "'");
+            _sprite = sf::Sprite(_texture);
+            std::cout << "Sprite: Loaded " << _texturePath << "\n";
+        };
 
         void draw() override {
-            sf::Texture texture;
-            sf::Sprite sprite;
-
-            if (!texture.loadFromFile(_texturePath))
-                throw ModuleException("Unable to load texture '" + _texturePath + "'");
-            sprite = sf::Sprite(texture);
-            sprite.setPosition(_position.first, _position.second);
-            sprite.setScale(sf::Vector2f(_scale.first, _scale.second));
-            sprite.setOrigin(sf::Vector2f(_origin.first, _origin.second));
-            sprite.setRotation(_rotation);
-            _window->draw(sprite);
+            _sprite.setPosition(_position.first, _position.second);
+            _sprite.setScale(sf::Vector2f(_scale.first, _scale.second));
+            _sprite.setOrigin(sf::Vector2f(_origin.first, _origin.second));
+            _sprite.setRotation(_rotation);
+            _window->draw(_sprite);
         }
 
         RectFloat getGlobalBounds() override {

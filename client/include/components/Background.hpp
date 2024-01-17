@@ -26,6 +26,7 @@ namespace RType {
     private:
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         std::vector<SpriteComponent> _sprites;
+        std::vector<SpriteComponent> _translatedSprites;
         std::vector<float> _speeds;
     };
 
