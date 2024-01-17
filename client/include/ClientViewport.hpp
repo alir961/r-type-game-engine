@@ -169,10 +169,6 @@ namespace RType {
         void handleMessageFromServer();
 
         void player(const std::vector<std::string> &splitMessage);
-        void moveLeft(const std::vector<std::string> &splitMessage);
-        void moveRight(const std::vector<std::string> &splitMessage);
-        void moveDown(const std::vector<std::string> &splitMessage);
-        void moveUp(const std::vector<std::string> &splitMessage);
         void shoot(const std::vector<std::string> &splitMessage);
         void death(const std::vector<std::string> &splitMessage);
         void movePlayerBullet(const std::vector<std::string> &splitMessage);

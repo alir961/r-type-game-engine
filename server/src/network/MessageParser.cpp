@@ -73,9 +73,7 @@ void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
 
     sendAllMessages(sessionID);
     entity->move(getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
-    char buffer[50];
-    sprintf(buffer, "%s %d %s\n", splitMessage[0].c_str(), sessionID, status.c_str());
-    sendMessage(receiveMessage.type, buffer);
+    sendPlayerDetails(entity);
     checkEntitiesStatus();
 }
 

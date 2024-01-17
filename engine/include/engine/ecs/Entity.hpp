@@ -282,8 +282,8 @@ namespace RType {
         };
 
         void moveDown(const std::vector<std::shared_ptr<Entity>> &entities, float windowsHeight) {
-            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            auto speed = getComponent<SpeedComponent>()->getSpeed();
+            auto [x, y] = getComponent<PositionComponent>()->getPositions();
             float size = getComponent<SizeComponent>()->getSize().second;
             float rect = getComponent<SizeRectComponent>()->getSize().second;
             float entitySize = size * rect;

@@ -205,58 +205,10 @@ void RType::ClientViewport::handleMessageFromServer() {
 
 void RType::ClientViewport::setHandlers() {
     _handlers["player"] = [this](const std::vector<std::string> &splitMessage) { player(splitMessage); };
-    _handlers["move_left"] = [this](const std::vector<std::string> &splitMessage) { moveLeft(splitMessage); };
-    _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage); };
-    _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage); };
-    _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage); };
     _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
     _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
     _handlers["death"] = [this](const std::vector<std::string> &splitMessage) { death(splitMessage); };
     _handlers["move"] = [this](const std::vector<std::string> &splitMessage) { movePlayerBullet(splitMessage); };
-}
-
-void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    std::string status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveLeft(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
-}
-
-void RType::ClientViewport::moveRight(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    const std::string &status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveRight(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
-}
-
-void RType::ClientViewport::moveDown(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    const std::string &status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveDown(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
-}
-
-void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    const std::string &status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveUp(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
