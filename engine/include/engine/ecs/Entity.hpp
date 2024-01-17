@@ -127,12 +127,16 @@ namespace RType {
             switch (direction) {
                 case Direction::LEFT:
                     moveLeft(entities);
+                    break;
                 case Direction::RIGHT:
                     moveRight(entities, windowsWidth);
+                    break;
                 case Direction::DOWN:
                     moveDown(entities, windowsHeight);
+                    break;
                 case Direction::UP:
                     moveUp(entities);
+                    break;
             }
             return false;
         };
