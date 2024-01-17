@@ -52,7 +52,14 @@ namespace RType {
          * events related to the input box.
          * @param event SFML Event to be processed.
          */
-        virtual void update(const sf::Event &event) = 0;
+        void update(const sf::Event &event) {
+            checkIfActive(event);
+            if (event.type == sf::Event::KeyReleased || event.type == sf::Event::MouseButtonReleased)
+                _keyPressed = false;
+            if (!_keyPressed)
+                appendInput(event);
+            _textDisplay->setText(_text);
+        }
 
         /**
          * @brief Draw the input box on the SFML RenderWindow.
@@ -85,12 +92,41 @@ namespace RType {
         float _x; /**< X-coordinate of the input box. */
         float _y; /**< Y-coordinate of the input box. */
         size_t _maxChars; /**< Maximum number of characters allowed in the input box. */
-        std::string _text; /**< Text content of the input box. */
+        std::string _text = ""; /**< Text content of the input box. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         TextComponent _textDisplay = _module->createText(""); /**< SFML Text displaying the text in the input box. */
         RectShape _box = _module->createRectShape(); /**< SFML RectangleShape representing the input box. */
+        bool _keyPressed = false;
+
+        void checkIfActive(const sf::Event &event) {
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                const Vector2f mousePosition = _module->getMousePosition();
+
+                setActive(_box->getGlobalBounds().contains(mousePosition));
+            }
+        }
+
+        void appendInput(const sf::Event &event) {
+            if (!isActive())
+                return;
+            if (event.type != sf::Event::TextEntered)
+                return;
+            auto inputChar = static_cast<char>(event.text.unicode);
+
+            if (inputChar == '\b') {
+                if (_text.empty())
+                    return;
+                _text.pop_back();
+                _keyPressed = true;
+            } else if (isValidInput(inputChar) && _text.size() < _maxChars) {
+                _text += std::tolower(inputChar);
+                _keyPressed = true;
+            }
+        }
 
     private:
         bool _active = false; /**< Activation state of the input box. */
+
+        [[nodiscard]] virtual bool isValidInput(char character) = 0;
     };
 }

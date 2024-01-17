@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <utility>
+
 #include "DataCommon.hpp"
 
 namespace RType {
@@ -22,9 +24,11 @@ namespace RType {
     public:
         AText() = default;
 
-        AText(std::string text) : _value(text) {};
+        explicit AText(std::string text) : _value(std::move(text)) {};
 
-        void setText(const std::string &text) {
+        virtual ~AText() = default;
+
+        void setText(const std::string_view &text) {
             _value = text;
         }
 
@@ -40,7 +44,7 @@ namespace RType {
             _color = color;
         }
 
-        void setFontPath(const std::string &fontPath) {
+        void setFontPath(const std::string_view &fontPath) {
             _fontPath = fontPath;
         }
 

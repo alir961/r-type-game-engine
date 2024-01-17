@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <utility>
+
 #include "engine/modules/graphical/AText.hpp"
 
 namespace RType {
@@ -16,11 +18,11 @@ namespace RType {
         WindowPtr _window;
 
     public:
-        Text(WindowPtr window) : AText(), _window(window) {};
+        explicit Text(WindowPtr window) : _window(std::move(window)) {};
 
-        Text(WindowPtr window, const std::string &text) : AText(text), _window(window) {};
+        Text(WindowPtr window, const std::string &text) : AText(text), _window(std::move(window)) {};
 
-        void draw() {
+        void draw() override {
             sf::Font font;
             sf::Text text = sf::Text();
 
