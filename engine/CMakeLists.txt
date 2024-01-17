@@ -47,6 +47,7 @@ set(SOURCE_FILES
         include/engine/modules/graphical/AText.hpp
         include/engine/modules/graphical/ARectangle.hpp
         include/engine/modules/graphical/DataCommon.hpp
+        include/engine/modules/graphical/ASprite.hpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

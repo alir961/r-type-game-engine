@@ -8,6 +8,7 @@
 #include "GraphicalModule.hpp"
 #include "Text.hpp"
 #include "Rectangle.hpp"
+#include "Sprite.hpp"
 
 extern "C" {
 RType::IModule *initializeGraphicalModule() {
@@ -144,4 +145,8 @@ bool RType::GraphicalModule::isMouseClicked() {
 
 RType::RectShape RType::GraphicalModule::createRectShape() {
     return std::make_shared<RType::Rectangle>(_window);
+}
+
+RType::SpriteComponent RType::GraphicalModule::createSprite(const std::string &texturePath) {
+    return std::make_shared<RType::Sprite>(_window, texturePath);
 }

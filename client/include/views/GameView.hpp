@@ -29,7 +29,7 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        GameView(std::string username): _username(std::move(username)) {}
+        explicit GameView(std::string username): _username(std::move(username)) {}
 
         void update() override {}
 
@@ -39,17 +39,17 @@ namespace RType {
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(std::vector<GraphicEntityPtr> graphicEntities) override {
-            const GraphicEntityPtr player = getPlayerEntity();
-            const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();
+            /*const GraphicEntityPtr player = getPlayerEntity();
+            const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();*/
             const float deltaTime = _clock.restart().asSeconds();
 
             _background.update(deltaTime);
             _background.draw();
-            _playerNameText.draw();
-            _healthBarText.draw();
-            _scoreText.draw();
+            //_playerNameText.draw();
+            //_healthBarText.draw();
+            //_scoreText.draw();
 
-            if (player != nullptr && playerEntity->getComponent<PlayerComponent>()) {
+            /*if (player != nullptr && playerEntity->getComponent<PlayerComponent>()) {
                 const int health = playerEntity->getComponent<HealthComponent>()->getHealth();
                 const int score = playerEntity->getComponent<PlayerComponent>()->getScore();
 
@@ -59,7 +59,7 @@ namespace RType {
             } else {
                 _healthBarText.setText("Health " + std::to_string(0));
                 _scoreText.setText("Score " + std::to_string(0));
-            }
+            }*/
 
             /*for (auto &entity: graphicEntities) {
                 entity->draw();

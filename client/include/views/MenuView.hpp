@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../../../engine/modules/graphical/GraphicalModule.hpp"
+#include "engine/modules/graphical/IGraphicalModule.hpp"
 #include "../components/ClickableText.hpp"
 #include "IView.hpp"
 

@@ -3,6 +3,7 @@ add_library(graphical_module MODULE
         ../../include/engine/modules/graphical/Event.hpp
         Text.hpp
         Rectangle.hpp
+        Sprite.hpp
 )
 
 # Set the output directory for the module library

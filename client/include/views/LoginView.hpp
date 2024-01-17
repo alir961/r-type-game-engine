@@ -31,7 +31,7 @@ namespace RType {
          */
         explicit LoginView(ClientViewport &gameView) : _viewport(gameView) {
             _portBoxInput.setText("9000");
-            _hostnameInput.setText("192.168.1.98");
+            _hostnameInput.setText("0.0.0.0");
         }
 
         /**

@@ -11,11 +11,14 @@
 #include "Event.hpp"
 #include "AText.hpp"
 #include "ARectangle.hpp"
+#include "ASprite.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 
 namespace RType {
+
+    constexpr int WINDOW_FPS = 60;
 
     class IGraphicalModule : public IModule {
     public:
@@ -45,6 +48,8 @@ namespace RType {
         virtual TextComponent createText(const std::string &text) = 0;
 
         virtual RectShape createRectShape() = 0;
+
+        virtual SpriteComponent createSprite(const std::string &texturePath) = 0;
 
         /**
          * @brief Draw a sprite in SFMl.

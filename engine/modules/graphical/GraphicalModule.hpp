@@ -14,8 +14,6 @@
 
 namespace RType {
 
-    constexpr int WINDOW_FPS = 60;
-
     using WindowPtr = std::shared_ptr<sf::RenderWindow>;
 
     class GraphicalModule : public IGraphicalModule {
@@ -49,6 +47,8 @@ namespace RType {
         TextComponent createText(const std::string &text) override;
 
         RectShape createRectShape() override;
+
+        SpriteComponent createSprite(const std::string &texturePath) override;
 
         /**
          * @brief Draw a sprite in SFMl.
