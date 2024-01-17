@@ -87,8 +87,11 @@ void RType::ClientViewport::launchWindow() {
             basicInput();
         }
         if (_viewState == ViewState::GAME) {
+            char buffer[100];
             handleMessageFromServer();
             handleInput();
+            sprintf(buffer, "tick %d\n", _client->getClientID());
+            _client->sendMessage(MessageType::TICK, buffer);
         }
         _selectedView->update();
         accumulatedTime += _animationClock.restart().asSeconds();
@@ -200,95 +203,12 @@ void RType::ClientViewport::handleMessageFromServer() {
         handleMessage(message);
 }
 
-void RType::ClientViewport::newPlayer(const std::vector<std::string> &splitMessage) {
-    int sessionID = std::stoi(splitMessage[1]);
-    int speed = std::stoi(splitMessage[3]);
-    int health = std::stoi(splitMessage[5]);
-    int positionX = std::stoi(splitMessage[7]);
-    int positionY = std::stoi(splitMessage[8]);
-    float sizeX = std::stof(splitMessage[10]);
-    float sizeY = std::stof(splitMessage[11]);
-    float rectX = std::stof(splitMessage[13]);
-    float rectY = std::stof(splitMessage[14]);
-    auto starshipEntity = _entityManager.createEntity();
-    std::shared_ptr<RType::GraphicEntity> graphicStarship;
-
-    starshipEntity->addComponent<RType::SpeedComponent>(speed);
-    starshipEntity->addComponent<RType::HealthComponent>(health);
-    starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
-    starshipEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
-    starshipEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
-    starshipEntity->addComponent<RType::PlayerComponent>(true);
-    starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(_client->getUsername());
-    char buffer[100];
-    sprintf(buffer, "turquoisePlayer %d", sessionID);
-    starshipEntity->setEntityName(buffer);    if (starshipEntity->hasBaseComponents()) {
-        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif","turquoisePlayer");
-        graphicStarship->loadSprite(_animationModule);
-        if (sessionID == _client->getClientID()) {
-            _playerEntity = graphicStarship;
-            _selectedView->setPlayerEntity(graphicStarship);
-            _client->setHealth(starshipEntity->getComponent<HealthComponent>()->getHealth());
-            _client->setScore(starshipEntity->getComponent<PlayerComponent>()->getScore());
-        }
-        addGraphicEntity(graphicStarship);
-    }
-}
-
 void RType::ClientViewport::setHandlers() {
-    _handlers["player"] = [this](const std::vector<std::string> &splitMessage) { newPlayer(splitMessage); };
-    _handlers["move_left"] = [this](const std::vector<std::string> &splitMessage) { moveLeft(splitMessage); };
-    _handlers["move_right"] = [this](const std::vector<std::string> &splitMessage) { moveRight(splitMessage); };
-    _handlers["move_up"] = [this](const std::vector<std::string> &splitMessage) { moveUp(splitMessage); };
-    _handlers["move_down"] = [this](const std::vector<std::string> &splitMessage) { moveDown(splitMessage); };
+    _handlers["player"] = [this](const std::vector<std::string> &splitMessage) { player(splitMessage); };
     _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
     _handlers["shoot"] = [this](const std::vector<std::string> &splitMessage) { shoot(splitMessage); };
     _handlers["death"] = [this](const std::vector<std::string> &splitMessage) { death(splitMessage); };
     _handlers["move"] = [this](const std::vector<std::string> &splitMessage) { movePlayerBullet(splitMessage); };
-}
-
-void RType::ClientViewport::moveLeft(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    std::string status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveLeft(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
-}
-
-void RType::ClientViewport::moveRight(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    const std::string &status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveRight(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
-}
-
-void RType::ClientViewport::moveDown(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    const std::string &status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveDown(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
-}
-
-void RType::ClientViewport::moveUp(const std::vector<std::string> &splitMessage) {
-    sf::Sprite sprite = _playerEntity->getSprite();
-    EntityPtr gameEntity = _playerEntity->getEntity();
-    const std::string &status = splitMessage[2];
-
-    if (status == "ok")
-        _playerEntity->moveUp(sprite, gameEntity);
-    else
-        setView(ViewState::DEAD);
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
@@ -298,7 +218,6 @@ void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &sp
     char buffer[100];
     sprintf(buffer, "%sPlayer %d", color.c_str(), sessionID);
     _playerEntity->getEntity()->setEntityName(buffer);
-    _playerEntity->setEntityName(color + "Player");
 }
 void RType::ClientViewport::shoot(const std::vector<std::string> &splitMessage) {
     for (auto &str : splitMessage) {
@@ -370,4 +289,78 @@ void RType::ClientViewport::movePlayerBullet(const std::vector<std::string> &spl
     sf::Sprite sprite = getGraphicEntityByName(splitMessage[1] + " " + splitMessage[2])->getSprite();
     EntityPtr gameEntity = getGraphicEntityByName(splitMessage[1] + " " + splitMessage[2])->getEntity();
     _playerEntity->moveRight(sprite, gameEntity);
+}
+
+void RType::ClientViewport::player(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    std::string color =splitMessage[16];
+    GraphicEntityPtr entity = getGraphicEntityByName(color + " " + std::to_string(sessionID));
+
+    if (entity == nullptr)
+        createNewPlayer(splitMessage);
+    else
+        updatePlayer(splitMessage);
+}
+
+void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int speed = std::stoi(splitMessage[3]);
+    int health = std::stoi(splitMessage[5]);
+    int positionX = std::stoi(splitMessage[7]);
+    int positionY = std::stoi(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    std::string color =splitMessage[16];
+    std::string name = splitMessage[18];
+    int score = std::stoi(splitMessage[20]);
+    auto starshipEntity = _entityManager.createEntity();
+    std::shared_ptr<RType::GraphicEntity> graphicStarship;
+
+
+    starshipEntity->addComponent<RType::SpeedComponent>(speed);
+    starshipEntity->addComponent<RType::HealthComponent>(health);
+    starshipEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    starshipEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    starshipEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
+    starshipEntity->addComponent<RType::PlayerComponent>(true);
+    starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(name);
+    starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
+    starshipEntity->setEntityName(color + " " + std::to_string(sessionID));
+    if (starshipEntity->hasBaseComponents()) {
+        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif", color);
+        graphicStarship->loadSprite(_animationModule);
+        if (sessionID == _client->getClientID()) {
+            _playerEntity = graphicStarship;
+            _selectedView->setPlayerEntity(graphicStarship);
+            _client->setHealth(starshipEntity->getComponent<HealthComponent>()->getHealth());
+            _client->setScore(starshipEntity->getComponent<PlayerComponent>()->getScore());
+        }
+        addGraphicEntity(graphicStarship);
+    }
+}
+
+void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int speed = std::stoi(splitMessage[3]);
+    int health = std::stoi(splitMessage[5]);
+    int positionX = std::stoi(splitMessage[7]);
+    int positionY = std::stoi(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    std::string color =splitMessage[16];
+    std::string name = splitMessage[18];
+    int score = std::stoi(splitMessage[20]);
+    EntityPtr starshipEntity = getGraphicEntity(color + " " + std::to_string(sessionID))->getEntity();
+
+    starshipEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
+    starshipEntity->getComponent<RType::HealthComponent>()->setHealth(health);
+    starshipEntity->getComponent<RType::PositionComponent>()->setPositions(std::make_pair(positionX, positionY));
+    starshipEntity->getComponent<RType::SizeComponent>()->setSize(sizeX, sizeY);
+    starshipEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
+    starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(name);
+    starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
 }

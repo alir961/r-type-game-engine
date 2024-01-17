@@ -24,6 +24,7 @@ RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
     _handlers[MessageType::MOVE_UP] = [this](const Message &msg) { handleMove(msg); };
     _handlers[MessageType::SHOOT] = [this](const Message &msg) { handleShoot(msg); };
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { handlePlayerColor(msg); };
+    _handlers[MessageType::TICK] = [this](const Message &msg) { handleTick(msg); };
 }
 
 void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMessage) {
@@ -57,7 +58,9 @@ void RType::MessageParser::handlePlayerNameMessageType(const RType::Message &rec
     const RType::Session session = _sessions->getClientSession(sessionID);
 
     session->setPlayerName(playerName);
-    session->setPlayerEntity(createPlayerEntity(sessionID));
+    session->setPlayerEntity(createPlayerEntity(sessionID, session));
+    sendAllMessages(sessionID);
+    sendAllEntities(sessionID);
 }
 
 void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
@@ -68,10 +71,9 @@ void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
     EntityPtr entity = session->getEntity();
     std::string status = "ok";
 
+    sendAllMessages(sessionID);
     entity->move(getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
-    char buffer[50];
-    sprintf(buffer, "%s %d %s\n", splitMessage[0].c_str(), sessionID, status.c_str());
-    sendMessage(receiveMessage.type, buffer);
+    sendPlayerDetails(entity);
     checkEntitiesStatus();
 }
 
@@ -93,16 +95,13 @@ void RType::MessageParser::sendMessage(MessageType type, const std::string_view 
     _adapter->sendData(response);
 }
 
-RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID) {
-    char id[100];
-    sprintf(id, "player %d speed 10 health 100 position 300 30 size 2 2 rect 33 15", sessionID);
-    const std::string message(id);
-    EntityPtr playerEntity = _game->getFactory().createDefaultPlayer();
-
+RType::EntityPtr RType::MessageParser::createPlayerEntity(int sessionID, const Session &session) {
+    EntityPtr playerEntity = _game->getFactory().createDefaultPlayer(session->getPlayerName());
     char buffer[50];
+
     sprintf(buffer, "turquoisePlayer %d\n", sessionID);
     playerEntity->setEntityName(buffer);
-    sendMessage(MessageType::PLAYER_NAME, message);
+    sendPlayerDetails(playerEntity);
     return playerEntity;
 }
 
@@ -110,9 +109,9 @@ void RType::MessageParser::handleShoot(const RType::Message &receiveMessage) {
     std::string message = receiveMessage.toString();
     std::vector <std::string> splitMessage = Split::split(message, " \n");
     int sessionID = std::stoi(splitMessage[1]);
-    bool shoot = createBulletPlayerEntity(sessionID);
 
-    if (!shoot) {
+    sendAllMessages(sessionID);
+    if (!createBulletPlayerEntity(sessionID)) {
         char buffer[50];
         sprintf(buffer, "shoot %d ko\n", sessionID);
         sendMessage(MessageType::SHOOT, buffer);
@@ -140,7 +139,7 @@ bool RType::MessageParser::createBulletPlayerEntity(int sessionID) {
         char bulletName[100];
         sprintf(bulletName, "bulletPlayer %d", sessionID);
         bulletEntity->setEntityName(bulletName);
-        char buffer[100];
+        char buffer[200];
         sprintf(buffer, "shoot %d speed 10 damage 20 position %.2f %.2f size 1 1 rect 14 14 ok\n", sessionID, startX, startY);
         sendMessage(MessageType::SHOOT, buffer);    }
     return shoot;
@@ -168,10 +167,15 @@ void RType::MessageParser::handlePlayerColor(const RType::Message &receiveMessag
     int sessionID = std::stoi(splitMessage[1]);
     Session session = _sessions->getClientSession(sessionID);
 
+    sendAllMessages(sessionID);
     session->setNextColor();
+    char entityName[50];
+    sprintf(entityName, "%sPlayer %d", session->getColor().c_str(), sessionID);
+    session->getEntity()->setEntityName(entityName);
     char buffer[50];
     sprintf(buffer, "color %d %s\n", sessionID, session->getColor().c_str());
-    sendMessage(MessageType::PLAYER_COLOR, buffer);}
+    sendMessage(MessageType::PLAYER_COLOR, buffer);
+}
 
 RType::SessionManager *RType::MessageParser::getSessionManager() {
     return _sessions;
@@ -191,4 +195,75 @@ void RType::MessageParser::checkEntitiesStatus() {
     }
     for (auto &entity: toDestroy)
         _game->getEntityManager().destroyEntity(entity);
+}
+
+void RType::MessageParser::sendAllMessages(int sessionID) {
+    Session client = _sessions->getClientSession(sessionID);
+    Message message = client->getLastMessage();
+
+    while (message.type != MessageType::NULLDATA) {
+        _adapter->sendData(message);
+        message = client->getLastMessage();
+    }
+}
+
+void RType::MessageParser::addMessageClients(int sessionID, MessageType type, const std::string_view &data) {
+    for (auto &client : _sessions->getSessions()) {
+        if (client.first != sessionID && client.second != nullptr)
+            client.second->addMessage(NetworkMessageBuilder(type)
+                                              .setData(data)
+                                              .build());
+    }
+}
+
+void RType::MessageParser::handleTick(const RType::Message &receiveMessage) {
+    const std::string message = receiveMessage.toString();
+    std::vector<std::string> splitMessage = Split::split(message, " \n");
+    const int sessionID = std::stoi(splitMessage[1]);
+
+    sendAllMessages(sessionID);
+}
+
+void RType::MessageParser::sendAllEntities(int sessionID) {
+    Session client = _sessions->getClientSession(sessionID);
+
+    for (auto &entity : _game->getEntityManager().getEntities())
+        sendMessageFromEntity(entity);
+}
+
+void RType::MessageParser::sendMessageFromEntity(const RType::EntityPtr& entity) {
+    std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
+
+    if (entityName[0] == "turquoisePlayer" || entityName[0] == "purplePlayer" || entityName[0] == "greenPlayer" || entityName[0] == "redPlayer" || entityName[0] == "bluePlayer")
+        sendPlayerDetails(entity);
+    if (entityName[0] == "bulletPlayer")
+        std::cout << "todo\n";
+}
+
+void RType::MessageParser::sendPlayerDetails(const RType::EntityPtr& entity) {
+    char id[250];
+    std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
+    int speed = entity->getComponent<SpeedComponent>()->getSpeed();
+    int health = entity->getComponent<HealthComponent>()->getHealth();
+    auto [playerX, playerY] = entity->getComponent<PositionComponent>()->getPositions();
+    auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
+    auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
+    std::string playerName = entity->getComponent<PlayerComponent>()->getUserName();
+    int score = entity->getComponent<PlayerComponent>()->getScore();
+
+    sprintf(id, "player %s speed %d health %d position %d %d size %f %f rect %f %f color %s name %s score %d\n",
+            entityName[1].c_str(),
+            speed,
+            health,
+            playerX,
+            playerY,
+            sizeX,
+            sizeY,
+            sizeRectX,
+            sizeRectY,
+            entityName[0].c_str(),
+            playerName.c_str(),
+            score);
+    sendMessage(MessageType::PLAYER_NAME, id);
+    addMessageClients(std::stoi(entityName[1]), MessageType::PLAYER_NAME, id);
 }

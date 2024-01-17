@@ -29,7 +29,7 @@ namespace RType {
          *
          * @return A shared pointer to the created player
          */
-        [[nodiscard]] EntityPtr createDefaultPlayer() {
+        [[nodiscard]] EntityPtr createDefaultPlayer(const std::string &playerName) {
             EntityPtr playerEntity = _manager->createEntity();
 
             playerEntity->addComponent<SpeedComponent>(10);
@@ -38,6 +38,8 @@ namespace RType {
             playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
             playerEntity->addComponent<PlayerComponent>(true);
             playerEntity->addComponent<SizeRectComponent>(33.0f, 15.0f);
+            playerEntity->getComponent<PlayerComponent>()->setUserName(playerName);
+            playerEntity->getComponent<PlayerComponent>()->setScore(0);
             return playerEntity;
         }
 
