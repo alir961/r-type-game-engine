@@ -141,12 +141,6 @@ namespace RType {
             return false;
         };
 
-        bool canShoot(const std::vector<std::shared_ptr<Entity>> &entities, const std::string &name) {
-            if (getEntity(entities, name) == nullptr)
-                return true;
-            return false;
-        }
-
         void setEntityName(const std::string &name) {_entityName = name;};
 
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> getComponents() {return _components;};

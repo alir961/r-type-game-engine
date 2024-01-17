@@ -25,3 +25,7 @@ RType::Message RType::Client::getLastMessage() {
             .setData("")
             .build();
 }
+
+int RType::Client::getNextBulletID() {
+    return (_lastBulletID++);
+}

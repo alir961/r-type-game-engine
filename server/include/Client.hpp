@@ -24,6 +24,7 @@ namespace RType {
         std::string _color = "turquoise";
         std::vector<Message> _messageQueue;
         std::mutex _queueMutex;
+        int _lastBulletID = 0;
 
     public:
         Client() = default;
@@ -61,7 +62,9 @@ namespace RType {
 
         [[nodiscard]] float getWindowHeight() const {return _windowHeight;};
 
-        [[nodiscard]] EntityPtr getEntity() const {return _playerEntity;};
+        [[nodiscard]] EntityPtr getEntity() const {return _playerEntity;}
+
+        [[nodiscard]] int getNextBulletID();
     };
 
     using Session = std::shared_ptr<Client>;

@@ -41,6 +41,7 @@ namespace RType {
         MOVE_DOWN,
         MOVE_UP,
         SHOOT,
+        BULLET_PLAYER,
         DEATH,
         MOVE_PLAYER_BULLET,
         TICK,
