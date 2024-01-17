@@ -8,7 +8,7 @@
 #pragma once
 
 #include "IView.hpp"
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "../components/Background.hpp"
 #include <iostream>
 #include <string>
@@ -68,9 +68,9 @@ namespace RType {
 
 
     private:
-        TextBox _playerNameText = TextBox(Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
-        TextBox _healthBarText = TextBox(Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
-        TextBox _scoreText = TextBox(Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
+        ClickableText _playerNameText = ClickableText(Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
+        ClickableText _healthBarText = ClickableText(Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
+        ClickableText _scoreText = ClickableText(Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
         Background _background = Background({"client/assets/background/1.png",
                                              "client/assets/background/2.png",
                                              "client/assets/background/3.png",

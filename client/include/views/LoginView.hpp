@@ -8,7 +8,7 @@
 #pragma once
 
 #include "IView.hpp"
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "../components/NumberInput.hpp"
 #include "../components/TextInput.hpp"
 #include "../components/Button.hpp"
@@ -73,9 +73,9 @@ namespace RType {
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        TextBox _portBoxTitle = TextBox(Color::Cyan, 20, 800.0F, 300.0F, "Port"); /**< TextBox for Port of the game server. */
-        TextBox _hostnameTitle = TextBox(Color::Cyan, 20, 800.0F, 400.0F, "Hostname"); /**< TextBox for Username options. */
-        TextBox _usernameTitle = TextBox(Color::Cyan, 20, 800.0f, 500.0f, "Username"); /**< TextBox for Hostname options. */
+        ClickableText _portBoxTitle = ClickableText(Color::Cyan, 20, 800.0F, 300.0F, "Port"); /**< ClickableText for Port of the game server. */
+        ClickableText _hostnameTitle = ClickableText(Color::Cyan, 20, 800.0F, 400.0F, "Hostname"); /**< ClickableText for Username options. */
+        ClickableText _usernameTitle = ClickableText(Color::Cyan, 20, 800.0f, 500.0f, "Username"); /**< ClickableText for Hostname options. */
         NumberInput _portBoxInput = NumberInput(800.0F, 340.0F); /**< TextBoxInput for Port of the game server. */
         TextInput _hostnameInput = TextInput(800.0f, 440.0f); /**< TextBoxInput for Hostname options. */
         TextInput _usernameInput = TextInput(800.0F, 540.0F); /**< TextBoxInput for Username options. */

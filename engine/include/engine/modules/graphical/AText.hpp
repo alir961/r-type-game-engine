@@ -50,7 +50,7 @@ namespace RType {
 
         virtual void draw() = 0;
 
-        //virtual RectFloat getGlobalBounds() = 0;
+        virtual RectFloat getGlobalBounds() = 0;
     };
 
     using TextComponent = std::shared_ptr<AText>;

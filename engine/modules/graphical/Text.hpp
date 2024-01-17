@@ -34,6 +34,27 @@ namespace RType {
             text.setFillColor(sf::Color(_color.r, _color.g, _color.b, _color.a));
             _window->draw(text);
         }
+
+        RectFloat getGlobalBounds() override {
+            sf::Font font;
+            sf::Text text = sf::Text();
+            sf::FloatRect bounds;
+
+            font.loadFromFile("client/assets/ka1.ttf");
+            text.setCharacterSize(_size);
+            text.setPosition(sf::Vector2f(_position.first, _position.second));
+            text.setString(_value);
+            text.setFont(font);
+            text.setFillColor(sf::Color(_color.r, _color.g, _color.b, _color.a));
+            bounds = text.getGlobalBounds();
+
+            return (RectFloat) {
+                    .left = bounds.left,
+                    .top = bounds.top,
+                    .width = bounds.width,
+                    .height = bounds.height,
+            };
+        }
     };
 
 }

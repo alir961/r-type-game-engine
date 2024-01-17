@@ -8,7 +8,7 @@
 #pragma once
 
 #include "../../../engine/modules/graphical/GraphicalModule.hpp"
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -36,13 +36,13 @@ namespace RType {
             _quitBox.handleInput();
 
             if (_module->isMouseClicked()) {
-                if (_startBox.isActive()) {
+                if (_startBox.isClicked()) {
                     std::cout << "Start Game!\n";
                     _viewport.setView(ViewState::GAME);
-                } else if (_optionsBox.isActive()) {
+                } else if (_optionsBox.isClicked()) {
                     std::cout << "Options Selected!\n";
                     _viewport.setView(ViewState::OPTIONS);
-                } else if (_quitBox.isActive()) {
+                } else if (_quitBox.isClicked()) {
                     std::cout << "Quit Game!\n";
                     _viewport.closeConnectionToServer();
                     _module->close();
@@ -73,10 +73,10 @@ namespace RType {
         }
 
     private:
-        TextBox _titleBox = TextBox(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "R Type"); /**< TextBox for the game title. */
-        TextBox _startBox = TextBox(Color::Cyan, 20, 100.0f, 200.0f, "Start"); /**< TextBox for starting the game. */
-        TextBox _optionsBox = TextBox(Color::Cyan, 20, 100.0f, 250.0f, "Options"); /**< TextBox for accessing options. */
-        TextBox _quitBox = TextBox(Color::Cyan, 20, 100.0f, 300.0f, "Quit"); /**< TextBox for quitting the game. */
+        ClickableText _titleBox = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "R Type"); /**< ClickableText for the game title. */
+        ClickableText _startBox = ClickableText(Color::Cyan, 20, 100.0f, 200.0f, "Start"); /**< ClickableText for starting the game. */
+        ClickableText _optionsBox = ClickableText(Color::Cyan, 20, 100.0f, 250.0f, "Options"); /**< ClickableText for accessing options. */
+        ClickableText _quitBox = ClickableText(Color::Cyan, 20, 100.0f, 300.0f, "Quit"); /**< ClickableText for quitting the game. */
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
     };

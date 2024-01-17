@@ -12,57 +12,46 @@
 namespace RType {
 
     /**
-     * @class TextBox
+     * @class ClickableText
      * @brief Represents a graphical text box for displaying and interacting with text.
      */
-    class TextBox {
+    class ClickableText {
     private:
         RectFloat _inputBoxBounds; /**< The bounding box of the text box. */
-        bool _active = false; /**< Flag indicating whether the text box is currently active. */
+        bool _clicked = false; /**< Flag indicating whether the text box is currently active. */
         bool _hover = false; /**< Flag indicating whether the mouse cursor is hovering over the text box. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         TextComponent _text = _module->createText("");
 
-        /**
-         * @brief Updates the text content of the text box.
-         */
-        void updateText() {
-            //_value.setString(_value.getString());
-            //_inputBoxBounds = _text->getGlobalBounds();
-        }
-
     public:
         /**
-         * @brief Constructor for TextBox.
+         * @brief Constructor for ClickableText.
          * @param textColor The color of the text.
          * @param fontSize The size of the text.
          * @param x The x-coordinate of the text box.
          * @param y The y-coordinate of the text box.
          */
-        TextBox(const Color::RGB &textColor, unsigned int fontSize, float x, float y)
-                : _active(false), _hover(false) {
+        ClickableText(const Color::RGB &textColor, unsigned int fontSize, float x, float y) {
             _text->setSize(fontSize);
             _text->setPosition(Vector2f(x, y));
             _text->setFontPath("client/assets/ka1.ttf");
             _text->setColor(textColor);
-            //updateText();
         }
 
         /**
-         * @brief Constructor for TextBox.
+         * @brief Constructor for ClickableText.
          * @param textColor The color of the text.
          * @param fontSize The size of the text.
          * @param x The x-coordinate of the text box.
          * @param y The y-coordinate of the text box.
          * @param initialText The initial text to display in the text box.
          */
-        TextBox(const Color::RGB &textColor, unsigned int fontSize, float x, float y, const std::string &initialText) {
+        ClickableText(const Color::RGB &textColor, unsigned int fontSize, float x, float y, const std::string &initialText) {
             _text->setText(initialText);
             _text->setSize(fontSize);
             _text->setPosition(Vector2f(x, y));
             _text->setFontPath("client/assets/ka1.ttf");
             _text->setColor(textColor);
-            //updateText();
         }
 
         /**
@@ -71,9 +60,9 @@ namespace RType {
         void handleInput() {
             const Vector2f mousePosition = _module->getMousePosition();
 
+            _hover = _text->getGlobalBounds().contains(mousePosition);
             if (_module->isMouseClicked())
-                _active = _inputBoxBounds.contains(mousePosition);
-            _hover = _inputBoxBounds.contains(mousePosition);
+                _clicked = _hover;
         }
 
         /**
@@ -90,23 +79,22 @@ namespace RType {
          */
         void draw() {
             _text->draw();
-            //updateText();
         }
 
         /**
          * @brief Gets the current activity state of the text box.
          * @return True if the text box is active, false otherwise.
          */
-        bool isActive() const {
-            return _active;
+        [[nodiscard]] bool isClicked() const {
+            return _clicked;
         }
 
         /**
          * @brief Change the text.
-         * @param newText The new text.
+         * @param value The new text.
          */
-        void setText(std::string newText) {
-            _text->setText(newText);
+        void setText(const std::string & value) {
+            _text->setText(value);
         }
     };
 

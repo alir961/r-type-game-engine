@@ -10,7 +10,7 @@
 #include <utility>
 
 #include "IView.hpp"
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "../components/NumberInput.hpp"
 #include "../components/TextInput.hpp"
 #include "../components/Button.hpp"
@@ -39,7 +39,7 @@ namespace RType {
             _quitBox.handleInput();
             if (_client->getConnected())
                 _viewport.setView(ViewState::MENU);
-            if (_quitBox.isActive()) {
+            if (_quitBox.isClicked()) {
                 std::cout << "Quit Game!\n";
                 _viewport.closeConnectionToServer();
                 _module->close();
@@ -67,8 +67,8 @@ namespace RType {
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        TextBox _quitBox = TextBox(Color::Cyan, 20, 900.0f, 350.0f, "Quit"); /**< TextBox for quitting the game. */
-        TextBox _loadingText = TextBox(Color::Magenta, 20, 250.0f, 300.0f, "Loading... if problem persist check server status and the port you provided and re launch"); /**< TextBox for Port of the game server. */
+        ClickableText _quitBox = ClickableText(Color::Cyan, 20, 900.0f, 350.0f, "Quit"); /**< ClickableText for quitting the game. */
+        ClickableText _loadingText = ClickableText(Color::Magenta, 20, 250.0f, 300.0f, "Loading... if problem persist check server status and the port you provided and re launch"); /**< ClickableText for Port of the game server. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         UDPClientPtr _client;
     };

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -38,15 +38,15 @@ namespace RType {
             _options.handleInput();
 
             if (_module->isMouseClicked()) {
-                if (_mainMenu.isActive()) {
+                if (_mainMenu.isClicked()) {
                     std::cout << "Exit To Main Menu!\n";
                     _viewport.setView(ViewState::MENU);
                 }
-                if (_resume.isActive()) {
+                if (_resume.isClicked()) {
                     std::cout << "Resume Game!\n";
                     _viewport.setView(ViewState::GAME);
                 }
-                if (_options.isActive()) {
+                if (_options.isClicked()) {
                     std::cout << "Resume Game!\n";
                     _viewport.setView(ViewState::OPTIONSGAME);
                 }
@@ -77,10 +77,10 @@ namespace RType {
         }
 
     private:
-        TextBox _title = TextBox(Color::Cyan, 30, WINDOW_WIDTH / 2.0F, 50.0F, "Pause"); /**< TextBox for the title. */
-        TextBox _resume = TextBox(Color::Cyan, 20, 500.0F, 195.0F, "Resume"); /**< TextBox for resume. */
-        TextBox _options = TextBox(Color::Cyan, 20, 500.0F, 245.0F, "Options"); /**< TextBox to go options. */
-        TextBox _mainMenu = TextBox(Color::Cyan, 20, 500.0F, 295.0F, "Exit To Main Menu"); /**< TextBox for the menu. */
+        ClickableText _title = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0F, 50.0F, "Pause"); /**< ClickableText for the title. */
+        ClickableText _resume = ClickableText(Color::Cyan, 20, 500.0F, 195.0F, "Resume"); /**< ClickableText for resume. */
+        ClickableText _options = ClickableText(Color::Cyan, 20, 500.0F, 245.0F, "Options"); /**< ClickableText to go options. */
+        ClickableText _mainMenu = ClickableText(Color::Cyan, 20, 500.0F, 295.0F, "Exit To Main Menu"); /**< ClickableText for the menu. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
     };

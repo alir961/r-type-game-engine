@@ -8,7 +8,7 @@
 #pragma once
 
 #include "../components/CheckBox.hpp"
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -48,11 +48,11 @@ namespace RType {
                                     [this](std::string moduleName) { unloadModule(moduleName);});
 
             if (_module->isMouseClicked()) {
-                if (_mainMenu.isActive()) {
+                if (_mainMenu.isClicked()) {
                     std::cout << "Exit To Main Menu!" << std::endl;
                     _viewport.setView(ViewState::MENU);
                 }
-                if (_inGame && _back.isActive()) {
+                if (_inGame && _back.isClicked()) {
                     std::cout << "Back to Pause" << std::endl;
                     _viewport.setView(ViewState::PAUSE);
                 }
@@ -128,11 +128,11 @@ namespace RType {
         }
 
     private:
-        TextBox _title = TextBox(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "Options"); /**< TextBox for the title. */
-        TextBox _sound = TextBox(Color::Cyan, 20, 700.0f, 250.0f, "Sound"); /**< Sound of the ClientViewport. */
-        TextBox _soundVolume = TextBox(Color::Cyan, 20, 850.0f, 250.0f, "100"); /**< Game sound volume of the ClientViewport. */
-        TextBox _mainMenu = TextBox(Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"); /**< TextBox for the menu. */
-        TextBox _back; /**< TextBox to go back. */
+        ClickableText _title = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "Options"); /**< ClickableText for the title. */
+        ClickableText _sound = ClickableText(Color::Cyan, 20, 700.0f, 250.0f, "Sound"); /**< Sound of the ClientViewport. */
+        ClickableText _soundVolume = ClickableText(Color::Cyan, 20, 850.0f, 250.0f, "100"); /**< Game sound volume of the ClientViewport. */
+        ClickableText _mainMenu = ClickableText(Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"); /**< ClickableText for the menu. */
+        ClickableText _back; /**< ClickableText to go back. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
         CheckBox _consoleModuleBox = CheckBox(WINDOW_WIDTH / 3.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Console");
         CheckBox _particleModuleBox = CheckBox(WINDOW_WIDTH / 3.0f + 200.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Particle");
