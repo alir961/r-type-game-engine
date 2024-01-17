@@ -1,3 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1NetworkMessageBuilder.html" title="Builder class for constructing network messages." alt="" coords="5,5,212,31"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IDataCompression.html" title=" " alt="" coords="5,55,177,80"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1HuffmanAlgorithm.html" title=" " alt="" coords="225,5,393,31"/>
+<area shape="poly" id="edge16_Node000000_Node000001" title=" " alt="" coords="165,48,248,29,249,34,166,53"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1LZ4Algorithm.html" title=" " alt="" coords="238,55,380,80"/>
+<area shape="poly" id="edge17_Node000000_Node000002" title=" " alt="" coords="192,65,237,65,237,70,192,70"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1RLEAlgorithm.html" title=" " alt="" coords="237,104,381,130"/>
+<area shape="poly" id="edge18_Node000000_Node000003" title=" " alt="" coords="166,82,249,101,248,106,165,87"/>
 </map>

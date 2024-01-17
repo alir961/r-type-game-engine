@@ -94,18 +94,16 @@ Collaboration diagram for RType::ClientViewport:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRType_1_1ClientViewport__coll__graph.png" border="0" usemap="#aRType_1_1ClientViewport_coll__map" alt="Collaboration graph"/></div>
 <map name="aRType_1_1ClientViewport_coll__map" id="aRType_1_1ClientViewport_coll__map">
-<area shape="rect" title="Represents the main game view handling graphics, input, and entities." alt="" coords="489,81,638,107"/>
-<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="167,5,332,31"/>
-<area shape="poly" title=" " alt="" coords="348,29,466,54,533,78,531,83,465,59,347,34"/>
-<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="5,31,116,56"/>
-<area shape="poly" title=" " alt="" coords="131,31,166,27,167,32,132,37"/>
-<area shape="rect" href="classRType_1_1IAnimationModule.html" title=" " alt="" coords="165,55,333,80"/>
-<area shape="poly" title=" " alt="" coords="131,50,165,54,164,59,131,55"/>
-<area shape="poly" title=" " alt="" coords="349,73,489,85,489,91,348,79"/>
-<area shape="rect" href="classRType_1_1ModuleProvider.html" title="Class representing a module provider that manages loading and unloading of modules." alt="" coords="172,104,326,130"/>
-<area shape="poly" title=" " alt="" coords="342,117,403,116,465,112,507,105,508,110,466,117,403,122,342,122"/>
-<area shape="rect" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system." alt="" coords="176,153,322,179"/>
-<area shape="poly" title=" " alt="" coords="337,159,400,151,465,137,504,122,538,105,540,110,506,127,466,142,401,157,338,164"/>
+<area shape="rect" title="Represents the main game view handling graphics, input, and entities." alt="" coords="205,169,353,195"/>
+<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="5,80,171,106"/>
+<area shape="poly" title=" " alt="" coords="119,113,170,143,234,166,232,171,168,147,116,117"/>
+<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="128,5,238,31"/>
+<area shape="poly" title=" " alt="" coords="157,43,105,82,102,78,153,38"/>
+<area shape="rect" href="classRType_1_1IAnimationModule.html" title=" " alt="" coords="195,80,363,106"/>
+<area shape="poly" title=" " alt="" coords="212,38,265,78,262,82,209,43"/>
+<area shape="poly" title=" " alt="" coords="281,122,281,169,276,169,276,122"/>
+<area shape="rect" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system." alt="" coords="387,80,533,106"/>
+<area shape="poly" title=" " alt="" coords="437,118,393,147,331,171,329,166,391,143,434,114"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -204,9 +202,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>basicInput</b> ()</td
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a73b82de765a8e5ef2aa3de6d9021ff4b" id="r_a73b82de765a8e5ef2aa3de6d9021ff4b"><td class="memItemLeft" align="right" valign="top"><a id="a73b82de765a8e5ef2aa3de6d9021ff4b" name="a73b82de765a8e5ef2aa3de6d9021ff4b"></a>
-sf::RenderWindow&#160;</td><td class="memItemRight" valign="bottom"><b>_window</b> = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), &quot;R-Type&quot;)</td></tr>
-<tr class="separator:a73b82de765a8e5ef2aa3de6d9021ff4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0218ef78c66038b4442d1da1f3db403b" id="r_a0218ef78c66038b4442d1da1f3db403b"><td class="memItemLeft" align="right" valign="top">ViewState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0218ef78c66038b4442d1da1f3db403b">_viewState</a> = ViewState::LOGIN</td></tr>
 <tr class="separator:a0218ef78c66038b4442d1da1f3db403b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26f32662a4ea8c9bdd6ec45c30b601f7" id="r_a26f32662a4ea8c9bdd6ec45c30b601f7"><td class="memItemLeft" align="right" valign="top">sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26f32662a4ea8c9bdd6ec45c30b601f7">_animationClock</a></td></tr>
@@ -219,18 +214,18 @@ std::shared_ptr&lt; <a class="el" href="classRType_1_1IView.html">IView</a> &gt;
 <tr class="memitem:a3ce4330b03d80708fdc3250e1664c70f" id="r_a3ce4330b03d80708fdc3250e1664c70f"><td class="memItemLeft" align="right" valign="top"><a id="a3ce4330b03d80708fdc3250e1664c70f" name="a3ce4330b03d80708fdc3250e1664c70f"></a>
 UDPClientPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_client</b></td></tr>
 <tr class="separator:a3ce4330b03d80708fdc3250e1664c70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b9d52c9f1d28264aea8309fff81e152" id="r_a3b9d52c9f1d28264aea8309fff81e152"><td class="memItemLeft" align="right" valign="top"><a id="a3b9d52c9f1d28264aea8309fff81e152" name="a3b9d52c9f1d28264aea8309fff81e152"></a>
-sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>event</b> {}</td></tr>
-<tr class="separator:a3b9d52c9f1d28264aea8309fff81e152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a306135a43b0cfc9d19acbfa2ce4041e3" id="r_a306135a43b0cfc9d19acbfa2ce4041e3"><td class="memItemLeft" align="right" valign="top"><a id="a306135a43b0cfc9d19acbfa2ce4041e3" name="a306135a43b0cfc9d19acbfa2ce4041e3"></a>
+sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>_event</b> {}</td></tr>
+<tr class="separator:a306135a43b0cfc9d19acbfa2ce4041e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a524662edaeeba93c936bc87028c2ace2" id="r_a524662edaeeba93c936bc87028c2ace2"><td class="memItemLeft" align="right" valign="top"><a id="a524662edaeeba93c936bc87028c2ace2" name="a524662edaeeba93c936bc87028c2ace2"></a>
 <a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
 <tr class="separator:a524662edaeeba93c936bc87028c2ace2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82c4adebc495b7578318699963e7ef61" id="r_a82c4adebc495b7578318699963e7ef61"><td class="memItemLeft" align="right" valign="top"><a id="a82c4adebc495b7578318699963e7ef61" name="a82c4adebc495b7578318699963e7ef61"></a>
 <a class="el" href="classRType_1_1IAnimationModule.html">IAnimationModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_animationModule</b></td></tr>
 <tr class="separator:a82c4adebc495b7578318699963e7ef61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac05a77edeb8182474c3794ff26244c56" id="r_ac05a77edeb8182474c3794ff26244c56"><td class="memItemLeft" align="right" valign="top"><a id="ac05a77edeb8182474c3794ff26244c56" name="ac05a77edeb8182474c3794ff26244c56"></a>
-<a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_provider</b> = <a class="el" href="classRType_1_1ModuleProvider.html">ModuleProvider</a>()</td></tr>
-<tr class="separator:ac05a77edeb8182474c3794ff26244c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d0c4441563cee43bac4d34275d0bd1" id="r_a79d0c4441563cee43bac4d34275d0bd1"><td class="memItemLeft" align="right" valign="top"><a id="a79d0c4441563cee43bac4d34275d0bd1" name="a79d0c4441563cee43bac4d34275d0bd1"></a>
+ModuleProviderPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_provider</b> = ModuleProvider::getInstance()</td></tr>
+<tr class="separator:a79d0c4441563cee43bac4d34275d0bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02a3157e6b3170609150c01621336480" id="r_a02a3157e6b3170609150c01621336480"><td class="memItemLeft" align="right" valign="top"><a id="a02a3157e6b3170609150c01621336480" name="a02a3157e6b3170609150c01621336480"></a>
 std::unordered_map&lt; std::string, MessageHandlerFunction &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_handlers</b></td></tr>
 <tr class="memdesc:a02a3157e6b3170609150c01621336480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of message handlers. <br /></td></tr>
@@ -337,7 +332,7 @@ GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEn
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Retrieve current SFML event </p><dl class="section return"><dt>Returns</dt><dd>The event </dd></dl>
+<p>Retrieve current SFML _event </p><dl class="section return"><dt>Returns</dt><dd>The _event </dd></dl>
 
 </div>
 </div>

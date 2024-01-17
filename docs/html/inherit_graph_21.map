@@ -1,7 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="5,5,151,31"/>
-<area shape="rect" id="Node000001" href="$classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="199,5,349,31"/>
-<area shape="poly" id="edge31_Node000000_Node000001" title=" " alt="" coords="166,16,199,16,199,21,166,21"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1GraphicEntity.html" title="Graphic Entity class from the abstract AGraphicEntity." alt="" coords="397,5,538,31"/>
-<area shape="poly" id="edge32_Node000001_Node000002" title=" " alt="" coords="365,16,397,16,397,21,365,21"/>
+<area shape="rect" id="Node000000" href="$structRType_1_1Event_1_1TextEvent.html" title="Text _event parameters (TextEntered)" alt="" coords="5,5,167,31"/>
 </map>

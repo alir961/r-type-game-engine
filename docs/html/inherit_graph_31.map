@@ -1,3 +1,17 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1SafeQueue.html" title=" " alt="" coords="5,5,165,31"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IModule.html" title=" " alt="" coords="5,104,116,130"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1ConsoleModule.html" title=" " alt="" coords="171,5,325,31"/>
+<area shape="poly" id="edge35_Node000000_Node000001" title=" " alt="" coords="87,91,121,65,162,40,189,29,191,34,165,45,124,69,90,96"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1IAnimationModule.html" title=" " alt="" coords="164,55,332,80"/>
+<area shape="poly" id="edge36_Node000000_Node000002" title=" " alt="" coords="126,97,195,78,197,84,128,102"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="165,104,331,130"/>
+<area shape="poly" id="edge38_Node000000_Node000004" title=" " alt="" coords="131,114,165,114,165,120,131,120"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1ParticleModule.html" title=" " alt="" coords="173,153,323,179"/>
+<area shape="poly" id="edge40_Node000000_Node000006" title=" " alt="" coords="128,132,197,150,195,155,126,137"/>
+<area shape="rect" id="Node000007" href="$classRType_1_1SoundModule.html" title=" " alt="" coords="176,203,320,228"/>
+<area shape="poly" id="edge41_Node000000_Node000007" title=" " alt="" coords="90,138,124,165,165,189,191,200,189,205,162,194,121,169,87,142"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1AnimationModule.html" title=" " alt="" coords="380,55,544,80"/>
+<area shape="poly" id="edge37_Node000002_Node000003" title=" " alt="" coords="347,65,379,65,379,70,347,70"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1GraphicalModule.html" title=" " alt="" coords="382,104,543,130"/>
+<area shape="poly" id="edge39_Node000004_Node000005" title=" " alt="" coords="346,114,381,114,381,120,346,120"/>
 </map>

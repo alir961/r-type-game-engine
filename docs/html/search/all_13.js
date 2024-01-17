@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['_7eainputbox_0',['~AInputBox',['../classRType_1_1AInputBox.html#a1fab067553d52d545d24c139c1bb8d5f',1,'RType::AInputBox']]],
-  ['_7eclientviewport_1',['~ClientViewport',['../classRType_1_1ClientViewport.html#ad5ae42eed4503439a6d3ae7d06f5e15f',1,'RType::ClientViewport']]],
-  ['_7eentity_2',['~Entity',['../classRType_1_1Entity.html#a06eb13461d762f875b3961e8a66b980e',1,'RType::Entity']]],
-  ['_7eentitymanager_3',['~EntityManager',['../classRType_1_1EntityManager.html#adf12e9191ee27b4d778148b95e91d5a8',1,'RType::EntityManager']]],
-  ['_7eidrawable_4',['~IDrawable',['../classRType_1_1IDrawable.html#a8d1771e2231eedaea5ed58c7ac684680',1,'RType::IDrawable']]],
-  ['_7eigamemodule_5',['~IGameModule',['../classRType_1_1IGameModule.html#aa85212ae09e51ef5217dec3fe32bdda8',1,'RType::IGameModule']]],
-  ['_7emoduleloader_6',['~ModuleLoader',['../classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23',1,'RType::ModuleLoader']]],
-  ['_7emoduleprovider_7',['~ModuleProvider',['../classRType_1_1ModuleProvider.html#a23f1f4a7146a94e47e40d9436106a4b9',1,'RType::ModuleProvider']]],
-  ['_7eudpserver_8',['~UDPServer',['../classRType_1_1UDPServer.html#aab118d7ef6b9628cbed5df758dd6e52c',1,'RType::UDPServer']]]
+  ['wait_0',['wait',['../classRType_1_1Thread.html#ace3ca059d020cdc05387587a34a61b71',1,'RType::Thread']]],
+  ['what_1',['what',['../classRType_1_1ConfigurationException.html#a98c227584c7fd593bf1de5c98cba613f',1,'RType::ConfigurationException::what()'],['../classRType_1_1ModuleException.html#ad0c364f86892db67185b6be84f188861',1,'RType::ModuleException::what()'],['../classRType_1_1NetworkException.html#a236a8bc15606d7ea1f53c657876afbaf',1,'RType::NetworkException::what()'],['../classRType_1_1ServerException.html#a8c26617bc78a601f5ec814b7812c13d1',1,'RType::ServerException::what()'],['../classRType_1_1ThreadException.html#a404dc02c48d2feda4f7460a858ed45de',1,'RType::ThreadException::what()']]],
+  ['width_2',['width',['../structRType_1_1Event_1_1SizeEvent.html#ab4ff300210d89bef70802cca90e95252',1,'RType::Event::SizeEvent']]],
+  ['winview_3',['WinView',['../classRType_1_1WinView.html',1,'RType::WinView'],['../classRType_1_1WinView.html#a0c1048ab67086823b3aca5d5ce213b80',1,'RType::WinView::WinView()']]]
 ];

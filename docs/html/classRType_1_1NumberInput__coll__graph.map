@@ -1,5 +1,9 @@
 <map id="RType::NumberInput" name="RType::NumberInput">
-<area shape="rect" id="Node000001" title="Represents an input box for entering numbers." alt="" coords="5,79,145,105"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game. This class provides a base for implementing in..." alt="" coords="13,5,137,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,46,78,79,72,79,72,46"/>
+<area shape="rect" id="Node000001" title="Represents an input box for entering numbers." alt="" coords="18,244,158,270"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game. This class provides a base for implementing in..." alt="" coords="26,169,150,195"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,210,91,244,85,244,85,210"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="5,80,171,106"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,122,91,169,85,169,85,122"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1IModule.html" title=" " alt="" coords="33,5,143,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="91,46,91,80,85,80,85,46"/>
 </map>

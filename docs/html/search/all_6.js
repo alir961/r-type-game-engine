@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['gamelogic_0',['GameLogic',['../classRType_1_1GameLogic.html',1,'RType::GameLogic'],['../classRType_1_1GameLogic.html#a9484cc768424eb6a758e8fb493726ee1',1,'RType::GameLogic::GameLogic()']]],
-  ['gameview_1',['GameView',['../classRType_1_1GameView.html',1,'RType::GameView'],['../classRType_1_1GameView.html#aa2a17bda761614504cee22faec976af1',1,'RType::GameView::GameView()']]],
-  ['get_2',['get',['../classRType_1_1ModuleProvider.html#a33256e84b9a71cefa6842e1db3b91965',1,'RType::ModuleProvider']]],
-  ['getactive_3',['getActive',['../classRType_1_1TextBox.html#abc171d7cfaea01e10a0fe7393e4f36c5',1,'RType::TextBox']]],
+  ['gainedfocus_0',['GainedFocus',['../classRType_1_1Event.html#abe2c331ed3a62428b4166e06a655723daa71a6b59ce71bdedf9f115c1710ccdcc',1,'RType::Event']]],
+  ['gamelogic_1',['GameLogic',['../classRType_1_1GameLogic.html',1,'RType::GameLogic'],['../classRType_1_1GameLogic.html#a9484cc768424eb6a758e8fb493726ee1',1,'RType::GameLogic::GameLogic()']]],
+  ['gameview_2',['GameView',['../classRType_1_1GameView.html',1,'RType::GameView'],['../classRType_1_1GameView.html#ab4d920be92086a6bb1f6c2e85e62dd5d',1,'RType::GameView::GameView()']]],
+  ['get_3',['get',['../classRType_1_1ModuleProvider.html#a33256e84b9a71cefa6842e1db3b91965',1,'RType::ModuleProvider']]],
   ['getclientsession_4',['getClientSession',['../classRType_1_1SessionManager.html#ab803be799d673e55c7f3964804bc8e2b',1,'RType::SessionManager']]],
   ['getcolorfromstring_5',['getColorFromString',['../classRType_1_1IGraphicalModule.html#a22266f85b2f4b72b4bf5c50a0c03e88e',1,'RType::IGraphicalModule::getColorFromString()'],['../classRType_1_1GraphicalModule.html#afe702d525ba571bd6fec268852997516',1,'RType::GraphicalModule::getColorFromString()']]],
   ['getcomponent_6',['getComponent',['../classRType_1_1Entity.html#a0af143cde95786b2a05195d61a20ea13',1,'RType::Entity']]],
@@ -15,7 +15,7 @@ var searchData=
   ['getentityname_12',['getEntityName',['../classRType_1_1AGraphicEntity.html#a9c27a07c52e6d93bc8772fbccd93bd8c',1,'RType::AGraphicEntity']]],
   ['getevent_13',['getEvent',['../classRType_1_1ClientViewport.html#abf0a23f520b2d35d21ae07a2c043ede0',1,'RType::ClientViewport']]],
   ['getfactory_14',['getFactory',['../classRType_1_1GameLogic.html#ac20654352462b85aca25c8d796973d79',1,'RType::GameLogic']]],
-  ['getfont_15',['getFont',['../classRType_1_1TextBox.html#a4f121f0982e9212407bcbbeb7abead69',1,'RType::TextBox::getFont()'],['../classRType_1_1ResourceManager.html#afa8c2eb0fb0b20baa40243f244757cfe',1,'RType::ResourceManager::getFont()']]],
+  ['getfont_15',['getFont',['../classRType_1_1ResourceManager.html#afa8c2eb0fb0b20baa40243f244757cfe',1,'RType::ResourceManager']]],
   ['getfps_16',['GetFPS',['../classRType_1_1AMetricsModule.html#a7e8d4563316ce9b3553598d0f92c4eb6',1,'RType::AMetricsModule']]],
   ['getgraphicentitybyname_17',['getGraphicEntityByName',['../classRType_1_1ClientViewport.html#ac20bcba899c7dd8e95c4ed958dccd32e',1,'RType::ClientViewport']]],
   ['gethealth_18',['getHealth',['../classRType_1_1HealthComponent.html#a5e78aaefcb1c1772b14d597a4f3904bd',1,'RType::HealthComponent']]],

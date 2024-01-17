@@ -1,0 +1,9 @@
+<map id="RType::TextBox" name="RType::TextBox">
+<area shape="rect" id="Node000001" title="Represents a graphical text box for displaying and interacting with text." alt="" coords="85,169,196,195"/>
+<area shape="rect" id="Node000002" href="$structRType_1_1RectFloat.html" title=" " alt="" coords="5,80,126,106"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,120,85,143,98,156,114,166,111,171,95,160,81,147,69,122"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="150,80,315,106"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,119,189,147,159,171,156,166,185,143,211,116"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1IModule.html" title=" " alt="" coords="177,5,287,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="235,46,235,80,230,80,230,46"/>
+</map>

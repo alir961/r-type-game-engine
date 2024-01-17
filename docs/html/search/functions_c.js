@@ -1,7 +1,7 @@
 var searchData=
 [
   ['parsemessage_0',['parseMessage',['../classRType_1_1MessageParser.html#a45314cd7668cdc3af57143c10529daef',1,'RType::MessageParser']]],
-  ['pauseview_1',['PauseView',['../classRType_1_1PauseView.html#abf845f45a9287a679b8ac054bd643dd8',1,'RType::PauseView']]],
+  ['pauseview_1',['PauseView',['../classRType_1_1PauseView.html#a5630280ff66f7f1990d4aba3e8a5236d',1,'RType::PauseView']]],
   ['playallsounds_2',['playAllSounds',['../classRType_1_1SoundModule.html#ab71dfca021cde228402c9bd5b3ac1f05',1,'RType::SoundModule']]],
   ['playaudio_3',['PlayAudio',['../classRType_1_1AAudioModule.html#a8ff0f7c2f2ebf68f8de8af5501fc1d94',1,'RType::AAudioModule']]],
   ['playcinematic_4',['PlayCinematic',['../classRType_1_1ACinematicModule.html#a35d9e3c134352db9b2ebc8c8a411ba68',1,'RType::ACinematicModule']]],
