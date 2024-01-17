@@ -35,9 +35,8 @@ namespace RType {
         template<typename T>
         std::shared_ptr<T> getComponent() const {
             auto component = _components.find(getComponentType<T>());
-            if (component != _components.end()) {
+            if (component != _components.end())
                 return std::dynamic_pointer_cast<T>(component->second);
-            }
             return nullptr;
         }
 
@@ -222,12 +221,12 @@ namespace RType {
         }
 
         bool hit(const std::shared_ptr<Entity> &entity) {
-            const auto& [thisX, thisY] = getComponent<PositionComponent>()->getPositions();
+            const auto& [thisX, thisY] = getComponent<PositionComponent>()->getPosition();
             const auto& [thisWidth, thisHeight] = getComponent<SizeComponent>()->getSize();
             const auto& [thisRectWidth, thisRectHeight] = getComponent<SizeRectComponent>()->getSize();
             float thisActualWidth = thisWidth * thisRectWidth;
             float thisActualHeight = thisHeight * thisRectHeight;
-            const auto& [entityX, entityY] = entity->getComponent<PositionComponent>()->getPositions();
+            const auto& [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
             const auto& [entityWidth, entityHeight] = entity->getComponent<SizeComponent>()->getSize();
             const auto& [entityRectWidth, entityRectHeight] = entity->getComponent<SizeRectComponent>()->getSize();
             float entityActualWidth = entityWidth * entityRectWidth;
@@ -257,7 +256,7 @@ namespace RType {
 
         void moveLeft(const std::vector<std::shared_ptr<Entity>> &entities) {
             auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            const auto &[x, y] = getComponent<PositionComponent>()->getPosition();
 
             if (x - speed < 0)
                 setDeathStatus();
@@ -267,7 +266,7 @@ namespace RType {
 
         void moveRight(const std::vector<std::shared_ptr<Entity>> &entities, float windowsWidth) {
             auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            const auto &[x, y] = getComponent<PositionComponent>()->getPosition();
             float size = getComponent<SizeComponent>()->getSize().second;
             float rect = getComponent<SizeRectComponent>()->getSize().second;
             float entitySize = size * rect;
@@ -281,7 +280,7 @@ namespace RType {
 
         void moveDown(const std::vector<std::shared_ptr<Entity>> &entities, float windowsHeight) {
             auto speed = getComponent<SpeedComponent>()->getSpeed();
-            auto [x, y] = getComponent<PositionComponent>()->getPositions();
+            auto [x, y] = getComponent<PositionComponent>()->getPosition();
             float size = getComponent<SizeComponent>()->getSize().second;
             float rect = getComponent<SizeRectComponent>()->getSize().second;
             float entitySize = size * rect;
@@ -295,7 +294,7 @@ namespace RType {
 
         void moveUp(const std::vector<std::shared_ptr<Entity>> &entities) {
             auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
+            const auto &[x, y] = getComponent<PositionComponent>()->getPosition();
 
             if (y - speed < 0)
                 setDeathStatus();

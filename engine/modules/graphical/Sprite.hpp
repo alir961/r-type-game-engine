@@ -34,6 +34,8 @@ namespace RType {
         };
 
         void draw() override {
+            if (_rectangle.width != -1.0F && _rectangle.height != -1.0F)
+                _sprite.setTextureRect(sf::IntRect(_rectangle.left, _rectangle.top, _rectangle.width, _rectangle.height));
             _sprite.setPosition(_position.first, _position.second);
             _sprite.setScale(sf::Vector2f(_scale.first, _scale.second));
             _sprite.setOrigin(sf::Vector2f(_origin.first, _origin.second));

@@ -67,7 +67,6 @@ namespace RType {
         EntityManager _entityManager;
         GraphicEntityPtr _playerEntity = nullptr;
 
-        GraphicEntityPtr getGraphicEntity(const std::string &entityName);
         void destroyGraphicEntity(GraphicEntityPtr entity);
 
         /**

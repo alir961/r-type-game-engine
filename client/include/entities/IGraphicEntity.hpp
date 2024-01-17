@@ -31,5 +31,33 @@ namespace RType {
         * @param window The window to draw the _entity on
         */
         virtual void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) = 0;
+
+        /**
+        * @brief Draw the graphic _entity to the provided window
+        * @param sprite The _playerSprite to move
+        * @param entity The _entity to move
+        */
+        virtual void moveLeft() = 0;
+
+        /**
+        * @brief Draw the graphic _entity to the provided window
+        * @param sprite The _playerSprite to move
+        * @param entity The _entity to move
+        */
+        virtual void moveRight() = 0;
+
+        /**
+        * @brief Draw the graphic _entity to the provided window
+        * @param sprite The _playerSprite to move
+        * @param entity The _entity to move
+        */
+        virtual void moveUp() = 0;
+
+        /**
+        * @brief Draw the graphic _entity to the provided window
+        * @param sprite The _playerSprite to move
+        * @param entity The _entity to move
+        */
+        virtual void moveDown() = 0;
     };
 }

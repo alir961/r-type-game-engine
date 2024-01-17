@@ -6,15 +6,26 @@
 */
 
 #pragma once
+
 #include "AGraphicEntity.hpp"
-#include <memory>
 #include "../resources/ResourceManager.hpp"
+#include "engine/modules/ModuleProvider.hpp"
+#include <memory>
 
 namespace RType {
+
     /**
      * @brief Graphic Entity class from the abstract AGraphicEntity.
      */
     class GraphicEntity : public AGraphicEntity {
+    private:
+        EntityPtr _entity; /**< Reference to the ECS _entity. */
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        TextComponent _playerName = _module->createText("");
+        SpriteComponent _playerSprite = _module->createSprite("client/assets/sprites/r-typesheet42.gif"); /**< Sprite of the graphical _entity. */
+        float _animationTime = 0.0F; /**< Animation time accumulator. */
+        float _animationSpeed = 0.1F; /**< Speed of the animation. */
+
     public:
         /**
          * @brief Construct a new Graphic Entity object.
@@ -22,7 +33,7 @@ namespace RType {
          * @param path Path to the texture file for this graphic _entity.
          * @param animationModule Pointer to the IAnimation Module.
          */
-        explicit GraphicEntity(EntityPtr &entity, const std::string &path, const std::string &entityName);
+        explicit GraphicEntity(EntityPtr &entity, const std::string &entityName);
 
         /**
          * @brief Update the graphic _entity based on the state of the ECS _entity.
@@ -36,7 +47,16 @@ namespace RType {
          */
         void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) override;
 
+        void moveLeft() override;
+
+        void moveRight() override;
+
+        void moveUp() override;
+
+        void moveDown() override;
+
         void loadSprite(IAnimationModule *animationModule);
+
         /**
          * @brief get Entity.
          */
@@ -44,19 +64,9 @@ namespace RType {
             return _entity;
         }
 
-        /**
-         * @brief get Sprite.
-         */
-        sf::Sprite getSprite() override {
-            return _sprite;
+        SpriteComponent getSprite() override {
+            return _playerSprite;
         }
-
-    private:
-        EntityPtr _entity; /**< Reference to the ECS _entity. */
-        sf::Sprite _sprite; /**< Sprite of the graphical _entity. */
-        float _animationTime = 0.0F; /**< Animation time accumulator. */
-        float _animationSpeed = 0.1F; /**< Speed of the animation. */
-        ResourceManager _resourceManager; /**< Resource Manager _instance. */
-        sf::Font _font;
     };
+
 }

@@ -198,7 +198,7 @@ void RType::ClientViewport::handleMessageFromServer() {
         else _logger->error("No handler found for message type: " + splitMessage[0]);
     };
 
-    for (const auto &message : _client->pullQueue())
+    for (const auto &message: _client->pullQueue())
         handleMessage(message);
 }
 
@@ -249,14 +249,6 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
     std::cout << buffer << "\n";
 }
 
-RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntity(const std::string &entityName) {
-    for (auto &graphicEntity: _graphicEntities) {
-        if (graphicEntity->getEntity()->getEntityName() == entityName)
-            return graphicEntity;
-    }
-    return nullptr;
-}
-
 void RType::ClientViewport::destroyGraphicEntity(RType::GraphicEntityPtr entity) {
     auto it = std::find(_graphicEntities.begin(), _graphicEntities.end(), entity);
 
@@ -266,7 +258,7 @@ void RType::ClientViewport::destroyGraphicEntity(RType::GraphicEntityPtr entity)
 
 void RType::ClientViewport::player(const std::vector<std::string> &splitMessage) {
     int sessionID = std::stoi(splitMessage[1]);
-    std::string color =splitMessage[16];
+    std::string color = splitMessage[16];
     GraphicEntityPtr entity = getGraphicEntityByName(color + " " + std::to_string(sessionID));
 
     if (entity == nullptr)
@@ -297,7 +289,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     float sizeY = std::stof(splitMessage[11]);
     float rectX = std::stof(splitMessage[13]);
     float rectY = std::stof(splitMessage[14]);
-    std::string color =splitMessage[16];
+    std::string color = splitMessage[16];
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
     auto starshipEntity = _entityManager.createEntity();
@@ -336,10 +328,10 @@ void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMe
     float sizeY = std::stof(splitMessage[11]);
     float rectX = std::stof(splitMessage[13]);
     float rectY = std::stof(splitMessage[14]);
-    std::string color =splitMessage[16];
+    std::string color = splitMessage[16];
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
-    EntityPtr starshipEntity = getGraphicEntity(color + " " + std::to_string(sessionID))->getEntity();
+    EntityPtr starshipEntity = getGraphicEntityByName(color + " " + std::to_string(sessionID))->getEntity();
 
     starshipEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
     starshipEntity->getComponent<RType::HealthComponent>()->setHealth(health);
@@ -365,7 +357,7 @@ void RType::ClientViewport::updateBulletPlayer(const std::vector<std::string> &s
     EntityPtr bulletEntity;
 
     sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
-    bulletEntity = getGraphicEntity(entityName)->getEntity();
+    bulletEntity = getGraphicEntityByName(entityName)->getEntity();
 
     bulletEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
     bulletEntity->getComponent<RType::DamageComponent>()->setDamage(damage);

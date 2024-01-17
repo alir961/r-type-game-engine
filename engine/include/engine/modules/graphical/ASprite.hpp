@@ -19,6 +19,7 @@ namespace RType {
         Vector2f _position = Vector2f(0.0F, 0.0F);
         Vector2f _scale = Vector2f(1.0F, 1.0F);
         Vector2f _origin = Vector2f(0.0F, 0.0F);
+        RectFloat _rectangle = RectFloat{0.0F, 0.0F, -1.0F, -1.0F};
         float _rotation = 0.0F;
 
     public:
@@ -49,6 +50,10 @@ namespace RType {
 
         void setRotation(float rotation) {
             _rotation = rotation;
+        }
+
+        void setRectangle(const RectFloat &rectangle) {
+            _rectangle = rectangle;
         }
 
         virtual void draw() = 0;

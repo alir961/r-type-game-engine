@@ -8,49 +8,74 @@
 #include "../../include/entities/GraphicEntity.hpp"
 #include "../../../engine/modules/animation/AnimationModule.hpp"
 
-RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string& path, const std::string& entityName)
-    : _entity(entity), AGraphicEntity(entityName) {
-      _resourceManager.loadTexture(entityName, path);
-      auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
-      _sprite.setScale(entitySize.first, entitySize.second);
-      _font.loadFromFile("client/assets/ka1.ttf");
+RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string &entityName) : AGraphicEntity(entityName),
+                                                                                        _entity(entity) {
+    auto playerSize = _entity->getComponent<SizeComponent>()->getSize();
+    const Vector2f &playerPosition = _entity->getComponent<PositionComponent>()->getPosition();
+
+    _playerSprite->setRectangle(RectFloat{0.0F, 0.0F, 33.0F, 15.0F});
+    _playerSprite->setScale(Vector2f(playerSize.first, playerSize.second));
+    _playerName->setText(_entity->getComponent<PlayerComponent>()->getUsername());
+    _playerName->setSize(15);
+    _playerName->setPosition(Vector2f(playerPosition.first, playerPosition.second - (playerSize.second + 15)));
+    _playerName->setColor(Color::Cyan);
 }
 
 void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationModule) {
-    auto position = _entity->getComponent<PositionComponent>();
-    sf::IntRect rect;
+    auto positionComponent = _entity->getComponent<PositionComponent>();
+    //sf::IntRect rect;
 
     _animationTime += deltaTime;
     if (_animationTime >= _animationSpeed) {
-        rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
-        _sprite.setTextureRect(rect);
+        //rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
+        //_playerSprite.setTextureRect(rect);
         _animationTime = 0.0f;
-
     }
-    if (position) {
-        _sprite.setPosition(float(position->getPositions().first),
-                            float(position->getPositions().second));
-    }
+    if (positionComponent != nullptr) _playerSprite->setPosition(positionComponent->getPosition());
 }
 
 void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) {
-    graphicalModule->drawSprite(_sprite);
-    if (_entity->getComponent<PlayerComponent>()->getIsPlayer()) {
-        sf::Text text;
-        text.setFont(_font);
-        text.setCharacterSize(15);
-        text.setPosition(_entity->getComponent<PositionComponent>()->getPositions().first, _entity->getComponent<PositionComponent>()->getPositions().second - (_entity->getComponent<SizeComponent>()->getSize().second + 15));
-        text.setString(_entity->getComponent<PlayerComponent>()->getUserName());
-        text.setFillColor(sf::Color::Cyan);
-        //graphicalModule->drawText(window, text);
-    }
+    _playerSprite->draw();
+    if (_entity->getComponent<PlayerComponent>()->getIsPlayer())
+        _playerName->draw();
 }
 
 void RType::GraphicEntity::loadSprite(RType::IAnimationModule *animationModule) {
     auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
-    auto rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
+    //auto rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
 
-    _sprite.setTexture(_resourceManager.getTexture(getEntityName()));
-    _sprite.setTextureRect(rect);
-    _sprite.setScale(entitySize.first, entitySize.second);
+    //_playerSprite.setTextureRect(rect);
+    _playerSprite->setScale(Vector2f(entitySize.first, entitySize.second));
+}
+
+void RType::GraphicEntity::moveLeft() {
+    auto speed = static_cast<float>(_entity->getComponent<SpeedComponent>()->getSpeed());
+    const auto &[x, y] = _entity->getComponent<PositionComponent>()->getPosition();
+
+    getSprite()->move(-speed, 0.0F);
+    _entity->getComponent<PositionComponent>()->setPositions(Vector2f(x - speed, y));
+}
+
+void RType::GraphicEntity::moveRight() {
+    auto speed = static_cast<float>(_entity->getComponent<SpeedComponent>()->getSpeed());
+    const auto &[x, y] = _entity->getComponent<PositionComponent>()->getPosition();
+
+    getSprite()->move(speed, 0.0F);
+    _entity->getComponent<PositionComponent>()->setPositions(Vector2f(x + speed, y));
+}
+
+void RType::GraphicEntity::moveUp() {
+    auto speed = static_cast<float>(_entity->getComponent<SpeedComponent>()->getSpeed());
+    const auto &[x, y] = _entity->getComponent<PositionComponent>()->getPosition();
+
+    getSprite()->move(0.0F, -speed);
+    _entity->getComponent<PositionComponent>()->setPositions(Vector2f(x, y - speed));
+}
+
+void RType::GraphicEntity::moveDown() {
+    auto speed = static_cast<float>(_entity->getComponent<SpeedComponent>()->getSpeed());
+    const auto &[x, y] = _entity->getComponent<PositionComponent>()->getPosition();
+
+    getSprite()->move(0.0F, speed);
+    _entity->getComponent<PositionComponent>()->setPositions(Vector2f(x, y + speed));
 }
