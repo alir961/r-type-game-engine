@@ -169,13 +169,15 @@ namespace RType {
         void handleMessageFromServer();
 
         void player(const std::vector<std::string> &splitMessage);
-        void shoot(const std::vector<std::string> &splitMessage);
+        void bulletPlayer(const std::vector<std::string> &splitMessage);
         void death(const std::vector<std::string> &splitMessage);
         void movePlayerBullet(const std::vector<std::string> &splitMessage);
         void changePlayerColor(const std::vector<std::string> &splitMessage);
 
         void createNewPlayer(const std::vector<std::string> &splitMessage);
         void updatePlayer(const std::vector<std::string> &splitMessage);
+        void createNewBulletPlayer(const std::vector<std::string> &splitMessage);
+        void updateBulletPlayer(const std::vector<std::string> &splitMessage);
     };
 }
 
