@@ -52,13 +52,12 @@ RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string u
 }
 
 RType::UDPClient::~UDPClient() {
-    const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::DISCONNECT)
-            .setData("")
-            .build();
+    char buffer[100];
+    std::sprintf(buffer, "disconnect %d\n", getClientID());
 
     try {
         _stop = true;
-        _adapter.sendData(message);
+        sendMessage(MessageType::DISCONNECT, buffer);
         _thread.wait();
         _adapter.closeSocket();
     } catch (const std::exception &e) {
@@ -70,14 +69,7 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
     const std::string message = receiveMessage.toString();
     std::vector<std::string> splitMessage = Split::split(message, " \n");
     int connectionId = std::stoi(splitMessage[1]);
-    char buffer[50];
-    sprintf(buffer, "player %d %s\n", connectionId, _username.c_str());
-    const std::string messageData = buffer;
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
-            .setData(messageData)
-            .build();
 
-    _adapter.sendData(response);
     _clientID = connectionId;
     _connected = true;
 }
@@ -87,7 +79,7 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { addMessageQueue(msg); };
-    _handlers[MessageType::DISCONNECT] = [this](const Message &) { _stop = true; };
+    _handlers[MessageType::DISCONNECT] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::BULLET_PLAYER] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::DEATH] = [this](const Message &msg) { addMessageQueue(msg); };
 }

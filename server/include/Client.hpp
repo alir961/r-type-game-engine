@@ -18,7 +18,7 @@ namespace RType {
     class Client {
     private:
         std::string _playerName;
-        EntityPtr  _playerEntity;
+        EntityPtr  _playerEntity = nullptr;
         float _windowWidth;
         float _windowHeight;
         std::string _color = "turquoise";

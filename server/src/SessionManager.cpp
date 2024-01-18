@@ -18,3 +18,7 @@ int RType::SessionManager::getNextSessionId() {
     _sessionMap[_lastSessionID] = std::make_shared<Client>();
     return (_lastSessionID++);
 }
+
+void RType::SessionManager::deleteSession(int sessionID) {
+    _sessionMap[sessionID] = nullptr;
+}
