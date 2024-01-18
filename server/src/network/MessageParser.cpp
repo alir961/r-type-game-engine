@@ -136,8 +136,10 @@ void RType::MessageParser::handleDisconnect(const RType::Message &receiveMessage
 
     if (playerEntity == nullptr)
         sendMessage(MessageType::DISCONNECT, "disconnect\n");
-    else
+    else {
         sendMessage(MessageType::DISCONNECT, "disconnect " + playerEntity->getEntityName() + "\n");
+        _game->addMessageClients(sessionID, MessageType::DISCONNECT, "disconnect " + playerEntity->getEntityName() + "\n");
+    }
     _game->getEntityManager().destroyEntity(playerEntity);
     _sessions->deleteSession(sessionID);
     std::cout << "SessionID " + std::to_string(sessionID) + " disconnected!\n";

@@ -79,7 +79,7 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { addMessageQueue(msg); };
-    _handlers[MessageType::DISCONNECT] = [this](const Message &) { _stop = true; };
+    _handlers[MessageType::DISCONNECT] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::BULLET_PLAYER] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::DEATH] = [this](const Message &msg) { addMessageQueue(msg); };
 }

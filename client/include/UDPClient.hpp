@@ -101,6 +101,8 @@ namespace RType {
          * @param receiveMessage The received message.
          */
         void addMessageQueue(const Message& receiveMessage);
+
+        void handleDeconnection(const Message& receiveMessage);
     };
 
     /**

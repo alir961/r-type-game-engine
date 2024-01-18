@@ -201,6 +201,7 @@ void RType::ClientViewport::setHandlers() {
     _handlers["color"] = [this](const std::vector<std::string> &splitMessage) { changePlayerColor(splitMessage); };
     _handlers["bulletPlayer"] = [this](const std::vector<std::string> &splitMessage) { bulletPlayer(splitMessage); };
     _handlers["death"] = [this](const std::vector<std::string> &splitMessage) { death(splitMessage); };
+    _handlers["disconnect"] = [this](const std::vector<std::string> &splitMessage) { disconnect(splitMessage); };
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
@@ -393,4 +394,19 @@ void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string>
     graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
     addGraphicEntity(graphicBullet);
     graphicBullet->loadSprite(_animationModule);
+}
+
+void RType::ClientViewport::disconnect(const std::vector<std::string> &splitMessage) {
+    if (splitMessage.size() == 1) return;
+    std::string entityName = splitMessage[1] + " " + splitMessage[2];
+    GraphicEntityPtr graphicEntity = getGraphicEntityByName(entityName);
+    EntityPtr entity;
+
+    if (graphicEntity == nullptr) return;
+    entity = graphicEntity->getEntity();
+    destroyGraphicEntity(graphicEntity);
+    _entityManager.destroyEntity(entity);
+    char buffer[100];
+    std::sprintf(buffer, "disconnect %s", entityName.c_str());
+    std::cout << buffer << "\n";
 }
