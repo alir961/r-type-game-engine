@@ -49,7 +49,7 @@ namespace RType {
          */
         void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> graphicEntities) override {
             const GraphicEntityPtr player = getPlayerEntity();
-            const EntityPtr &playerEntity = player->getEntity();
+            const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();
             const float deltaTime = _clock.restart().asSeconds();
 
             _background.update(deltaTime);
@@ -65,8 +65,10 @@ namespace RType {
                 _healthBarText.setText("Health " + std::to_string(health));
                 _scoreText.setText("Score " + std::to_string(score));
                 _playerNameText.setText(_userName);
-            } else
-                _healthBarText.setText("Player playerEntity not found");
+            } else {
+                _healthBarText.setText("Health " + std::to_string(0));
+                _scoreText.setText("Score " + std::to_string(0));
+            }
 
             for (auto &entity: graphicEntities) {
                 entity->draw(window, _graphicalModule);

@@ -70,14 +70,7 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
     const std::string message = receiveMessage.toString();
     std::vector<std::string> splitMessage = Split::split(message, " \n");
     int connectionId = std::stoi(splitMessage[1]);
-    char buffer[50];
-    sprintf(buffer, "player %d %s\n", connectionId, _username.c_str());
-    const std::string messageData = buffer;
-    const RType::Message response = RType::NetworkMessageBuilder(MessageType::PLAYER_NAME)
-            .setData(messageData)
-            .build();
 
-    _adapter.sendData(response);
     _clientID = connectionId;
     _connected = true;
 }

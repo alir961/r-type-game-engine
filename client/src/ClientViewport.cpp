@@ -115,7 +115,10 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider, true);
             break;
         case ViewState::GAME:
+            char buffer[50];
             _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule, _provider, _client->getUsername());
+            sprintf(buffer, "player %d %s\n", _client->getClientID(), _client->getUsername().c_str());
+            _client->sendMessage(MessageType::PLAYER_NAME, buffer);
             break;
         case ViewState::PAUSE:
             _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
