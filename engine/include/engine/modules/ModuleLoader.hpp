@@ -16,7 +16,7 @@
 namespace RType {
 
     enum class ModuleType {
-        SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN
+        SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN, ANIMATION
     };
 
     template<typename T>

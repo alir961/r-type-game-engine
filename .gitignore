@@ -21,4 +21,6 @@ vgcore.*
 *.gcov
 
 cmake-build-debug/
+cmake-build-debug-event-trace/
+cmake-build-debug-visual-studio/
 vcpkg_installed/

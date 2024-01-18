@@ -47,10 +47,16 @@ namespace RType {
         TICK,
     };
 
+#ifdef __linux__
+#define ALIGN_ATTRIBUTE __attribute__((aligned(ALIGN_SIZE)))
+#elif _WIN32
+#define ALIGN_ATTRIBUTE __declspec(align(ALIGN_SIZE))
+#endif
+
     /**
      * @brief Represents a network message with a specified type and data.
      */
-    struct Message {
+    struct ALIGN_ATTRIBUTE Message {
         MessageType type = MessageType::UNKNOWN;
         std::array<char, DATA_SIZE> data = std::array<char, DATA_SIZE>();
 
@@ -72,7 +78,9 @@ namespace RType {
         * @return The deserialized Message structure.
         */
         static Message deserialize(const std::vector<std::byte> &data);
-    } __attribute__((aligned(ALIGN_SIZE)));
+    };
+
+#undef ALIGN_ATTRIBUTE
 
     /**
      * @brief Builder class for constructing network messages.
