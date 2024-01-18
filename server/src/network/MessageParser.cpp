@@ -13,7 +13,6 @@ RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
         _adapter(adapter),
         _sessions(&game->getSessionManager()) {
     _handlers[MessageType::CONNECT] = [this](const Message &msg) { handleConnectMessage(msg); };
-    _handlers[MessageType::DISCONNECT] = [this](const Message &) { sendMessage(MessageType::DISCONNECT, ""); };
     _handlers[MessageType::UNKNOWN] = [this](const Message &msg) { handleUnknownMessageType(msg); };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { handlePlayerNameMessageType(msg); };
     _handlers[MessageType::MOVE_LEFT] = [this](const Message &msg) { handleMove(msg); };
@@ -23,6 +22,7 @@ RType::MessageParser::MessageParser(GameLogic *game, UDPAdapter *adapter) :
     _handlers[MessageType::SHOOT] = [this](const Message &msg) { handlePlayerShoot(msg); };
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { handlePlayerColor(msg); };
     _handlers[MessageType::TICK] = [this](const Message &msg) { handleTick(msg); };
+    _handlers[MessageType::DISCONNECT] = [this](const Message &msg) { handleDisconnect(msg); };
 }
 
 void RType::MessageParser::handleConnectMessage(const RType::Message &receiveMessage) {
@@ -56,7 +56,8 @@ void RType::MessageParser::handlePlayerNameMessageType(const RType::Message &rec
     const RType::Session session = _sessions->getClientSession(sessionID);
 
     session->setPlayerName(playerName);
-    session->setPlayerEntity(_game->createPlayerEntity(sessionID, session));
+    if (session->getEntity() == nullptr)
+        session->setPlayerEntity(_game->createPlayerEntity(sessionID, session));
     _game->sendAllMessages(sessionID);
     _game->sendAllEntities(sessionID);
 }
@@ -68,10 +69,12 @@ void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
     Session session = _sessions->getClientSession(sessionID);
     EntityPtr entity = session->getEntity();
 
+    if (entity == nullptr)
+        return;
     _game->sendAllMessages(sessionID);
     entity->move(_game->getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
     _game->sendPlayerDetails(entity);
-    _game->checkEntitiesStatus();
+    _game->checkEntitiesStatus(session);
 }
 
 void RType::MessageParser::parseMessage(const RType::MessageBuffer &buffer, std::size_t bytesReceived) {
@@ -125,3 +128,17 @@ void RType::MessageParser::handlePlayerShoot(const RType::Message &receiveMessag
     _game->createBulletPlayerEntity(sessionID);
 }
 
+void RType::MessageParser::handleDisconnect(const RType::Message &receiveMessage) {
+    std::string message = receiveMessage.toString();
+    std::vector <std::string> splitMessage = Split::split(message, " \n");
+    int sessionID = std::stoi(splitMessage[1]);
+    EntityPtr playerEntity = _sessions->getClientSession(sessionID)->getEntity();
+
+    if (playerEntity == nullptr)
+        sendMessage(MessageType::DISCONNECT, "disconnect\n");
+    else
+        sendMessage(MessageType::DISCONNECT, "disconnect " + playerEntity->getEntityName() + "\n");
+    _game->getEntityManager().destroyEntity(playerEntity);
+    _sessions->deleteSession(sessionID);
+    std::cout << "SessionID " + std::to_string(sessionID) + " disconnected!\n";
+}

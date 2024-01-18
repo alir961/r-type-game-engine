@@ -43,6 +43,8 @@ namespace RType {
          */
         Session getClientSession(int sessionId);
 
+        void deleteSession(int sessionID);
+
         void setWindowWidth(const float &windowWidth) {_windowWidth = windowWidth;};
 
         void setWindowHeight(const float &windowHeight) {_windowHeight = windowHeight;};

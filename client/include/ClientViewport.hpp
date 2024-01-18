@@ -23,8 +23,6 @@ namespace RType {
     class MenuView;
     class OptionsView;
     class PauseView;
-    class DeadView;
-    class WinView;
     class GameView;
     class LoginView;
     class LoadView;
@@ -44,11 +42,9 @@ namespace RType {
         OPTIONS = 1,  /**< Options menu state. */
         GAME = 2,     /**< In-game state. */
         PAUSE = 3,    /**< Pause state. */
-        DEAD = 4,     /**< Game over state. */
-        LOGIN = 5,     /**< Game over state. */
-        WIN = 6,      /**< Won game state. */
-        OPTIONSGAME = 7,
-        LOADSCREEN = 8
+        LOGIN = 4,     /**< Game over state. */
+        OPTIONSGAME = 5,
+        LOADSCREEN = 6,
     };
 
     /**
@@ -183,8 +179,6 @@ namespace RType {
 #include "views/MenuView.hpp"
 #include "views/OptionsView.hpp"
 #include "views/PauseView.hpp"
-#include "views/DeadView.hpp"
-#include "views/WinView.hpp"
 #include "views/GameView.hpp"
 #include "views/LoginView.hpp"
 #include "views/LoadView.hpp"

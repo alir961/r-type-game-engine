@@ -73,7 +73,7 @@ namespace RType {
 
         static Direction getDirection(MessageType type);
 
-        void checkEntitiesStatus();
+        void checkEntitiesStatus(Session session);
 
         void sendAllMessages(int sessionID);
 

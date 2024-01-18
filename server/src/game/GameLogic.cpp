@@ -45,7 +45,7 @@ void RType::GameLogic::moveBulletPlayer() {
             entity->move(Direction::RIGHT, _entityManager.getEntities(), _sessionManager.getWindowWidth(),
                          _sessionManager.getWindowHeight());
             sendBulletPlayerDetails(entity);
-            checkEntitiesStatus();
+            checkEntitiesStatus(nullptr);
         }
     }
 }
@@ -71,6 +71,7 @@ void RType::GameLogic::createBulletPlayerEntity(int sessionID) {
     const std::string message;
     Session session = _sessionManager.getClientSession(sessionID);
     EntityPtr player = session->getEntity();
+    if (player == nullptr) return;
     auto [playerX, playerY] = player->getComponent<PositionComponent>()->getPositions();
     float playerSizeX = player->getComponent<SizeComponent>()->getSize().first;
     float playerRectX = player->getComponent<SizeRectComponent>()->getSize().first;
@@ -102,12 +103,14 @@ RType::Direction RType::GameLogic::getDirection(RType::MessageType type) {
     }
 }
 
-void RType::GameLogic::checkEntitiesStatus() {
+void RType::GameLogic::checkEntitiesStatus(Session session) {
     auto entities = getEntityManager().getEntities();
     std::vector<EntityPtr> toDestroy;
 
     for (auto &entity: entities) {
         if (entity->getDeathStatus()) {
+            if (session != nullptr && session->getEntity() == entity)
+                session->setPlayerEntity(nullptr);
             toDestroy.emplace_back(entity);
             char buffer[100];
             sprintf(buffer, "death %s\n", entity->getEntityName().c_str());

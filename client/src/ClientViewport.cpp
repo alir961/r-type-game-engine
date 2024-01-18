@@ -66,10 +66,6 @@ void RType::ClientViewport::basicInput() {
             std::cout << "Escape key pressed in GAME state" << std::endl;
             setView(ViewState::GAME);
         }
-    } else if (_viewState == ViewState::WIN || _viewState == ViewState::DEAD) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-            setView(ViewState::MENU);
-        }
     }
 }
 
@@ -104,6 +100,7 @@ void RType::ClientViewport::launchWindow() {
 }
 
 void RType::ClientViewport::setView(ViewState state) {
+    EntityPtr player;
     switch (state) {
         case ViewState::MENU:
             _selectedView = std::make_shared<MenuView>(_window, *this, _graphicalModule, _provider);
@@ -123,17 +120,11 @@ void RType::ClientViewport::setView(ViewState state) {
         case ViewState::PAUSE:
             _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
             break;
-        case ViewState::DEAD:
-            _selectedView = std::make_shared<DeadView>(_window, *this, _graphicalModule, _provider, _client->getHealth(), _client->getScore());
-            break;
         case ViewState::LOGIN:
             _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
             break;
         case ViewState::LOADSCREEN:
             _selectedView = std::make_shared<LoadView>(_window, *this, _graphicalModule, _client);
-            break;
-        case ViewState::WIN:
-            _selectedView = std::make_shared<WinView>(_window, *this, _graphicalModule, _provider);
             break;
     }
     _selectedView->setPlayerEntity(_playerEntity);
@@ -235,11 +226,14 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
     graphicEntity = getGraphicEntityByName(entityName);
     if (graphicEntity == nullptr) return;
     entity = graphicEntity->getEntity();
-    if (_playerEntity == nullptr)
-        setView(ViewState::DEAD);
-    if (entityName == _playerEntity->getEntity()->getEntityName()) {
-        setView(ViewState::DEAD);
+    if (_playerEntity == nullptr) {
+        setView(ViewState::MENU);
         return;
+    }
+    if (entityName == _playerEntity->getEntity()->getEntityName()) {
+        _client->setHealth(_playerEntity->getEntity()->getComponent<HealthComponent>()->getHealth());
+        _client->setScore(_playerEntity->getEntity()->getComponent<PlayerComponent>()->getScore());
+        setView(ViewState::MENU);
     }
     destroyGraphicEntity(graphicEntity);
     _entityManager.destroyEntity(entity);

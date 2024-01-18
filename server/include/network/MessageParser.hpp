@@ -37,6 +37,8 @@ namespace RType {
 
         void handleTick(const RType::Message &receiveMessage);
 
+        void handleDisconnect(const RType::Message &receiveMessage);
+
         void sendMessage(MessageType type, const std::string_view &data);
 
     public:

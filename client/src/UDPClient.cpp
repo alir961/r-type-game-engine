@@ -52,13 +52,12 @@ RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string u
 }
 
 RType::UDPClient::~UDPClient() {
-    const RType::Message message = RType::NetworkMessageBuilder(RType::MessageType::DISCONNECT)
-            .setData("")
-            .build();
+    char buffer[100];
+    std::sprintf(buffer, "disconnect %d\n", getClientID());
 
     try {
         _stop = true;
-        _adapter.sendData(message);
+        sendMessage(MessageType::DISCONNECT, buffer);
         _thread.wait();
         _adapter.closeSocket();
     } catch (const std::exception &e) {
