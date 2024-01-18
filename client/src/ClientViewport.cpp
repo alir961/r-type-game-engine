@@ -147,7 +147,6 @@ RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntityByName(const std:
         if (entity->getEntity()->getEntityName() == name)
             return entity;
     }
-    std::cerr << "Unable to find entity " << name << "\n";
     return nullptr;
 }
 
@@ -220,13 +219,22 @@ void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &sp
 }
 
 void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) {
-    std::string entityName = splitMessage[1] + " " + splitMessage[2];
-    EntityPtr entity = _entityManager.getEntity(entityName);
-    GraphicEntityPtr graphicEntity = getGraphicEntityByName(entityName);
+    int index = 0;
+    std::string entityName = splitMessage[1];
+    EntityPtr entity;
+    GraphicEntityPtr graphicEntity;
 
+    for (auto &split: splitMessage) {
+        if (index != 0 && index != 1)
+            entityName += " " + split;
+        index++;
+    }
+    graphicEntity = getGraphicEntityByName(entityName);
+    if (graphicEntity == nullptr) return;
+    entity = graphicEntity->getEntity();
     if (_playerEntity == nullptr)
         setView(ViewState::DEAD);
-    if (entityName == _playerEntity->getEntityName() + " " + std::to_string(_client->getClientID())) {
+    if (entityName == _playerEntity->getEntity()->getEntityName()) {
         setView(ViewState::DEAD);
         return;
     }
