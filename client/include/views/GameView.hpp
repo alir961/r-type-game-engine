@@ -66,9 +66,9 @@ namespace RType {
                 _scoreText.setText("Score " + std::to_string(0));
             }*/
 
-            /*for (auto &entity: graphicEntities) {
-                entity->draw();
-            }*/
+            for (auto &entity: graphicEntities) {
+                entity->getSprite()->draw();
+            }
         }
 
 

@@ -66,10 +66,6 @@ void RType::ClientViewport::basicInput() {
             _logger->debug("Return key pressed in PAUSE state");
             setView(ViewState::GAME);
         }
-    } else if (_viewState == ViewState::WIN || _viewState == ViewState::DEAD) {
-        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
-            setView(ViewState::MENU);
-        }
     }
 }
 
@@ -293,7 +289,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
     auto starshipEntity = _entityManager.createEntity();
-    //std::shared_ptr<RType::GraphicEntity> graphicStarship;
+    std::shared_ptr<RType::GraphicEntity> graphicStarship;
 
 
     starshipEntity->addComponent<RType::SpeedComponent>(speed);
@@ -305,8 +301,8 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(name);
     starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
     starshipEntity->setEntityName(color + " " + std::to_string(sessionID));
-    /*if (starshipEntity->hasBaseComponents()) {
-        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif", color);
+    if (starshipEntity->hasBaseComponents()) {
+        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity, color);
         graphicStarship->loadSprite(_animationModule);
         if (sessionID == _client->getClientID()) {
             _playerEntity = graphicStarship;
@@ -315,7 +311,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
             _client->setScore(starshipEntity->getComponent<PlayerComponent>()->getScore());
         }
         addGraphicEntity(graphicStarship);
-    }*/
+    }
 }
 
 void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMessage) {
@@ -389,7 +385,7 @@ void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string>
     bulletEntity->addComponent<RType::PlayerComponent>(false);
     sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
     bulletEntity->setEntityName(entityName);
-    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
+    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "bulletPlayer");
     addGraphicEntity(graphicBullet);
     graphicBullet->loadSprite(_animationModule);
 }

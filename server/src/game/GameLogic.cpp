@@ -72,7 +72,7 @@ void RType::GameLogic::createBulletPlayerEntity(int sessionID) {
     Session session = _sessionManager.getClientSession(sessionID);
     EntityPtr player = session->getEntity();
     if (player == nullptr) return;
-    auto [playerX, playerY] = player->getComponent<PositionComponent>()->getPositions();
+    auto [playerX, playerY] = player->getComponent<PositionComponent>()->getPosition();
     float playerSizeX = player->getComponent<SizeComponent>()->getSize().first;
     float playerRectX = player->getComponent<SizeRectComponent>()->getSize().first;
     float playerRectY = player->getComponent<SizeRectComponent>()->getSize().second;
@@ -161,10 +161,10 @@ void RType::GameLogic::sendPlayerDetails(const RType::EntityPtr &entity) {
     std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
     int speed = entity->getComponent<SpeedComponent>()->getSpeed();
     int health = entity->getComponent<HealthComponent>()->getHealth();
-    auto [playerX, playerY] = entity->getComponent<PositionComponent>()->getPositions();
+    auto [playerX, playerY] = entity->getComponent<PositionComponent>()->getPosition();
     auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
     auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
-    std::string playerName = entity->getComponent<PlayerComponent>()->getUserName();
+    std::string playerName = entity->getComponent<PlayerComponent>()->getUsername();
     int score = entity->getComponent<PlayerComponent>()->getScore();
 
     sprintf(details, "player %s speed %d health %d position %d %d size %f %f rect %f %f color %s name %s score %d\n",
@@ -189,7 +189,7 @@ void RType::GameLogic::sendBulletPlayerDetails(const RType::EntityPtr &entity) {
     std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
     int speed = entity->getComponent<SpeedComponent>()->getSpeed();
     int damage = entity->getComponent<DamageComponent>()->getDamage();
-    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPositions();
+    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
     auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
     auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
 
