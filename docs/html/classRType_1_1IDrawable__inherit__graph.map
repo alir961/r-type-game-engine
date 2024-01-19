@@ -1,21 +1,17 @@
 <map id="RType::IDrawable" name="RType::IDrawable">
-<area shape="rect" id="Node000001" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,179,128,204"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1IView.html" title=" " alt="" coords="176,179,273,204"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,189,175,189,175,194,144,194"/>
-<area shape="rect" id="Node000003" href="$classRType_1_1DeadView.html" title="Represents a state where entities are not drawn." alt="" coords="329,5,452,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,163,266,102,290,69,319,40,337,29,340,34,323,44,294,72,271,104,239,166"/>
-<area shape="rect" id="Node000004" href="$classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="" coords="326,55,454,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="242,165,276,126,320,89,340,79,343,83,322,94,279,130,246,168"/>
-<area shape="rect" id="Node000005" href="$classRType_1_1LoadView.html" title=" " alt="" coords="329,104,451,130"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="261,168,320,138,347,128,349,133,322,143,263,173"/>
-<area shape="rect" id="Node000006" href="$classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="" coords="328,153,453,179"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="288,179,326,173,327,178,289,184"/>
-<area shape="rect" id="Node000007" href="$classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="" coords="328,203,453,228"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="289,198,327,204,326,209,288,203"/>
-<area shape="rect" id="Node000008" href="$classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="" coords="321,252,459,278"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="263,210,322,238,349,249,347,254,320,243,261,214"/>
-<area shape="rect" id="Node000009" href="$classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="" coords="325,301,455,327"/>
-<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="246,215,280,252,322,288,343,298,341,303,320,292,276,256,242,218"/>
-<area shape="rect" id="Node000010" href="$classRType_1_1WinView.html" title="Represents a state where entities are not drawn." alt="" coords="333,351,448,376"/>
-<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="239,217,271,278,294,310,323,337,340,348,337,352,319,342,290,313,266,281,234,220"/>
+<area shape="rect" id="Node000001" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,132,131,159"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1IView.html" title=" " alt="" coords="179,132,278,159"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,143,178,143,178,148,146,148"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="" coords="331,5,461,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="247,118,280,79,325,42,347,30,349,35,327,46,284,83,251,121"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1LoadView.html" title=" " alt="" coords="335,56,458,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="266,122,325,92,353,81,355,86,327,97,268,127"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="" coords="333,107,459,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="293,133,332,127,333,132,293,138"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="" coords="333,157,460,184"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="293,152,333,158,332,164,293,158"/>
+<area shape="rect" id="Node000007" href="$classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="" coords="326,208,466,235"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="268,164,327,194,355,205,353,210,325,198,266,169"/>
+<area shape="rect" id="Node000008" href="$classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="" coords="330,259,462,285"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="251,169,284,208,327,244,349,256,347,260,325,249,280,212,247,173"/>
 </map>

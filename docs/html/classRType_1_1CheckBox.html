@@ -94,11 +94,14 @@ Collaboration diagram for RType::CheckBox:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRType_1_1CheckBox__coll__graph.png" border="0" usemap="#aRType_1_1CheckBox_coll__map" alt="Collaboration graph"/></div>
 <map name="aRType_1_1CheckBox_coll__map" id="aRType_1_1CheckBox_coll__map">
-<area shape="rect" title="Represents a graphical checkbox with active and inactive states." alt="" coords="26,169,150,195"/>
-<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="5,80,171,106"/>
-<area shape="poly" title=" " alt="" coords="91,122,91,169,85,169,85,122"/>
-<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="33,5,143,31"/>
-<area shape="poly" title=" " alt="" coords="91,46,91,80,85,80,85,46"/>
+<area shape="rect" title="Represents a graphical checkbox with active and inactive states." alt="" coords="116,172,243,199"/>
+<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="5,81,173,108"/>
+<area shape="poly" title=" " alt="" coords="115,117,169,170,165,173,111,121"/>
+<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="124,5,236,32"/>
+<area shape="poly" title=" " alt="" coords="154,44,106,83,102,79,151,40"/>
+<area shape="rect" href="classRType_1_1ILoggerModule.html" title=" " alt="" coords="197,81,349,108"/>
+<area shape="poly" title=" " alt="" coords="209,39,259,79,256,83,205,44"/>
+<area shape="poly" title=" " alt="" coords="251,121,195,173,191,169,247,117"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -173,9 +176,15 @@ sf::Text&#160;</td><td class="memItemRight" valign="bottom"><b>_boxNameText</b><
 <tr class="memitem:ad8a20bd6172d2cefdaf070026e21054b" id="r_ad8a20bd6172d2cefdaf070026e21054b"><td class="memItemLeft" align="right" valign="top"><a id="ad8a20bd6172d2cefdaf070026e21054b" name="ad8a20bd6172d2cefdaf070026e21054b"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>_textSize</b></td></tr>
 <tr class="separator:ad8a20bd6172d2cefdaf070026e21054b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b717b01702524144e559be117762a7f" id="r_a0b717b01702524144e559be117762a7f"><td class="memItemLeft" align="right" valign="top"><a id="a0b717b01702524144e559be117762a7f" name="a0b717b01702524144e559be117762a7f"></a>
+ModuleProviderPtr&#160;</td><td class="memItemRight" valign="bottom"><b>provider</b> = ModuleProvider::getInstance()</td></tr>
+<tr class="separator:a0b717b01702524144e559be117762a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ff5fc75c5cf3a66a4ee5fbf015959eb" id="r_a3ff5fc75c5cf3a66a4ee5fbf015959eb"><td class="memItemLeft" align="right" valign="top"><a id="a3ff5fc75c5cf3a66a4ee5fbf015959eb" name="a3ff5fc75c5cf3a66a4ee5fbf015959eb"></a>
-<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_module</b> = ModuleProvider::getInstance()-&gt;get&lt;<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a>&gt;(ModuleType::GRAPHICAL)</td></tr>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_module</b> = provider-&gt;get&lt;<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a>&gt;(ModuleType::GRAPHICAL)</td></tr>
 <tr class="separator:a3ff5fc75c5cf3a66a4ee5fbf015959eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7caabd588224e80b7fd9a6ad1300bd4" id="r_ac7caabd588224e80b7fd9a6ad1300bd4"><td class="memItemLeft" align="right" valign="top"><a id="ac7caabd588224e80b7fd9a6ad1300bd4" name="ac7caabd588224e80b7fd9a6ad1300bd4"></a>
+<a class="el" href="classRType_1_1ILoggerModule.html">ILoggerModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_logger</b> = provider-&gt;get&lt;<a class="el" href="classRType_1_1ILoggerModule.html">ILoggerModule</a>&gt;(ModuleType::LOGGER)</td></tr>
+<tr class="separator:ac7caabd588224e80b7fd9a6ad1300bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a graphical checkbox with active and inactive states. </p>

@@ -18,6 +18,7 @@ var searchData=
   ['animationmodule_15',['AnimationModule',['../classRType_1_1AnimationModule.html',1,'RType']]],
   ['arectangle_16',['ARectangle',['../classRType_1_1ARectangle.html',1,'RType']]],
   ['arguments_17',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]],
-  ['assignai_18',['AssignAI',['../classRType_1_1AAIModule.html#a4c542efe4972cee9a566fa80e9149553',1,'RType::AAIModule']]],
-  ['atext_19',['AText',['../classRType_1_1AText.html',1,'RType']]]
+  ['asprite_18',['ASprite',['../classRType_1_1ASprite.html',1,'RType']]],
+  ['assignai_19',['AssignAI',['../classRType_1_1AAIModule.html#a4c542efe4972cee9a566fa80e9149553',1,'RType::AAIModule']]],
+  ['atext_20',['AText',['../classRType_1_1AText.html',1,'RType']]]
 ];

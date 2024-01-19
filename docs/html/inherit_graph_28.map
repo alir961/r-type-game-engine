@@ -1,21 +1,19 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,179,128,204"/>
-<area shape="rect" id="Node000001" href="$classRType_1_1IView.html" title=" " alt="" coords="176,179,273,204"/>
-<area shape="poly" id="edge19_Node000000_Node000001" title=" " alt="" coords="144,189,175,189,175,194,144,194"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1DeadView.html" title="Represents a state where entities are not drawn." alt="" coords="329,5,452,31"/>
-<area shape="poly" id="edge20_Node000001_Node000002" title=" " alt="" coords="234,163,266,102,290,69,319,40,337,29,340,34,323,44,294,72,271,104,239,166"/>
-<area shape="rect" id="Node000003" href="$classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="" coords="326,55,454,80"/>
-<area shape="poly" id="edge21_Node000001_Node000003" title=" " alt="" coords="242,165,276,126,320,89,340,79,343,83,322,94,279,130,246,168"/>
-<area shape="rect" id="Node000004" href="$classRType_1_1LoadView.html" title=" " alt="" coords="329,104,451,130"/>
-<area shape="poly" id="edge22_Node000001_Node000004" title=" " alt="" coords="261,168,320,138,347,128,349,133,322,143,263,173"/>
-<area shape="rect" id="Node000005" href="$classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="" coords="328,153,453,179"/>
-<area shape="poly" id="edge23_Node000001_Node000005" title=" " alt="" coords="288,179,326,173,327,178,289,184"/>
-<area shape="rect" id="Node000006" href="$classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="" coords="328,203,453,228"/>
-<area shape="poly" id="edge24_Node000001_Node000006" title=" " alt="" coords="289,198,327,204,326,209,288,203"/>
-<area shape="rect" id="Node000007" href="$classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="" coords="321,252,459,278"/>
-<area shape="poly" id="edge25_Node000001_Node000007" title=" " alt="" coords="263,210,322,238,349,249,347,254,320,243,261,214"/>
-<area shape="rect" id="Node000008" href="$classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="" coords="325,301,455,327"/>
-<area shape="poly" id="edge26_Node000001_Node000008" title=" " alt="" coords="246,215,280,252,322,288,343,298,341,303,320,292,276,256,242,218"/>
-<area shape="rect" id="Node000009" href="$classRType_1_1WinView.html" title="Represents a state where entities are not drawn." alt="" coords="333,351,448,376"/>
-<area shape="poly" id="edge27_Node000001_Node000009" title=" " alt="" coords="239,217,271,278,294,310,323,337,340,348,337,352,319,342,290,313,266,281,234,220"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IComponent.html" title="Base interface for component." alt="" coords="5,157,143,184"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1AComponent.html" title="Base abstract for component." alt="" coords="191,157,333,184"/>
+<area shape="poly" id="edge9_Node000000_Node000001" title=" " alt="" coords="159,168,190,168,190,173,159,173"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1DamageComponent.html" title="Base class for damage component." alt="" coords="384,5,566,32"/>
+<area shape="poly" id="edge10_Node000001_Node000002" title=" " alt="" coords="279,143,321,91,348,65,380,42,404,30,407,35,382,46,352,69,324,95,283,146"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1HealthComponent.html" title="Base class for health component." alt="" coords="389,56,560,83"/>
+<area shape="poly" id="edge11_Node000001_Node000003" title=" " alt="" coords="292,145,332,118,380,92,411,81,413,86,382,97,335,122,295,150"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1PlayerComponent.html" title="Base class for player component." alt="" coords="390,107,560,133"/>
+<area shape="poly" id="edge12_Node000001_Node000004" title=" " alt="" coords="335,150,415,131,416,137,337,156"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1PositionComponent.html" title="Base class for position component." alt="" coords="385,157,565,184"/>
+<area shape="poly" id="edge13_Node000001_Node000005" title=" " alt="" coords="348,168,384,168,384,173,348,173"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1SizeComponent.html" title="Base class for collision component." alt="" coords="395,208,554,235"/>
+<area shape="poly" id="edge14_Node000001_Node000006" title=" " alt="" coords="337,186,416,205,415,210,335,191"/>
+<area shape="rect" id="Node000007" href="$classRType_1_1SizeRectComponent.html" title="Base class for collision component." alt="" coords="381,259,568,285"/>
+<area shape="poly" id="edge15_Node000001_Node000007" title=" " alt="" coords="295,192,335,219,382,244,413,256,411,261,380,249,332,223,292,196"/>
+<area shape="rect" id="Node000008" href="$classRType_1_1SpeedComponent.html" title="Base class for speed component." alt="" coords="390,309,560,336"/>
+<area shape="poly" id="edge16_Node000001_Node000008" title=" " alt="" coords="283,195,324,246,352,273,382,295,407,306,404,311,380,300,348,277,321,250,279,198"/>
 </map>

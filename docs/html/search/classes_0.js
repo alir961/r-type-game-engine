@@ -12,5 +12,6 @@ var searchData=
   ['animationmodule_9',['AnimationModule',['../classRType_1_1AnimationModule.html',1,'RType']]],
   ['arectangle_10',['ARectangle',['../classRType_1_1ARectangle.html',1,'RType']]],
   ['arguments_11',['Arguments',['../classRType_1_1Arguments.html',1,'RType']]],
-  ['atext_12',['AText',['../classRType_1_1AText.html',1,'RType']]]
+  ['asprite_12',['ASprite',['../classRType_1_1ASprite.html',1,'RType']]],
+  ['atext_13',['AText',['../classRType_1_1AText.html',1,'RType']]]
 ];
