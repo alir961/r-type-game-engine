@@ -47,7 +47,7 @@ namespace RType {
         void draw(std::vector<GraphicEntityPtr> graphicEntities) override {
             /*const GraphicEntityPtr player = getPlayerEntity();
             const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();*/
-            const float deltaTime = _clock.restart().asSeconds();
+            //const float deltaTime = _clock.restart().asSeconds();
 
             _background.draw();
             //_playerNameText.draw();
@@ -66,9 +66,8 @@ namespace RType {
                 _scoreText.setText("Score " + std::to_string(0));
             }*/
 
-            for (auto &entity: graphicEntities) {
-                entity->getSprite()->draw();
-            }
+            for (const auto &entity : graphicEntities)
+                entity->draw();
         }
 
 

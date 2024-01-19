@@ -167,7 +167,7 @@ void RType::GameLogic::sendPlayerDetails(const RType::EntityPtr &entity) {
     std::string playerName = entity->getComponent<PlayerComponent>()->getUsername();
     int score = entity->getComponent<PlayerComponent>()->getScore();
 
-    sprintf(details, "player %s speed %d health %d position %d %d size %f %f rect %f %f color %s name %s score %d\n",
+    sprintf(details, "player %s speed %d health %d position %.1f %.1f size %.1f %.1f rect %.1f %.1f color %s name %s score %d\n",
             entityName[1].c_str(),
             speed,
             health,
@@ -193,7 +193,7 @@ void RType::GameLogic::sendBulletPlayerDetails(const RType::EntityPtr &entity) {
     auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
     auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
 
-    sprintf(details, "%s %s %s speed %d damage %d position %d %d size %f %f rect %f %f\n",
+    sprintf(details, "%s %s %s speed %d damage %d position %.1f %.1f size %.1f %.1f rect %.1f %.1f\n",
             entityName[0].c_str(),
             entityName[1].c_str(),
             entityName[2].c_str(),

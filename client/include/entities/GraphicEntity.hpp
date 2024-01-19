@@ -39,13 +39,13 @@ namespace RType {
          * @brief Update the graphic _entity based on the state of the ECS _entity.
          * @param deltaTime Time since last update.
          */
-        void update(float deltaTime, IAnimationModule *animationModule) override;
+        void update(float deltaTime) override;
 
         /**
          * @brief Draw the graphic _entity to the provided window.
          * @param window The window to draw the _entity on.
          */
-        void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) override;
+        void draw() override;
 
         void moveLeft() override;
 
@@ -54,8 +54,6 @@ namespace RType {
         void moveUp() override;
 
         void moveDown() override;
-
-        void loadSprite(IAnimationModule *animationModule);
 
         /**
          * @brief get Entity.

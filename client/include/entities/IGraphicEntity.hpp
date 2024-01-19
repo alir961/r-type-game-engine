@@ -24,13 +24,13 @@ namespace RType {
         * @brief Update the graphic _entity based on the game state
         * @param deltaTime Time since last update
         */
-        virtual void update(float deltaTime, IAnimationModule *animationModule) = 0;
+        virtual void update(float deltaTime) = 0;
 
         /**
         * @brief Draw the graphic _entity to the provided window
         * @param window The window to draw the _entity on
         */
-        virtual void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) = 0;
+        virtual void draw() = 0;
 
         /**
         * @brief Draw the graphic _entity to the provided window

@@ -28,7 +28,6 @@ void RType::AnimationModule::load() {
 }
 
 void RType::AnimationModule::unload() {
-    std::cout << "Unload AnimationModule...\n";
 }
 
 void RType::AnimationModule::addAnimation(const std::string &entityName) {

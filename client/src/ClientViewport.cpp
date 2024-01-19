@@ -71,7 +71,7 @@ void RType::ClientViewport::basicInput() {
 
 void RType::ClientViewport::launchWindow() {
     const float fixedTimeStep = 1.F / WINDOW_FPS;
-    float accumulatedTime = 0.F;
+    //float accumulatedTime = 0.F;
 
     while (_graphicalModule->isOpen()) {
         while (_graphicalModule->pollEvent(_event)) {
@@ -89,12 +89,14 @@ void RType::ClientViewport::launchWindow() {
             sprintf(buffer, "tick %d\n", _client->getClientID());
             _client->sendMessage(MessageType::TICK, buffer);
         }
+        for (const auto &entity: _graphicEntities)
+            entity->update(0);
         _selectedView->update();
-        accumulatedTime += _animationClock.restart().asSeconds();
-        while (accumulatedTime >= fixedTimeStep) {
-            updateEntities(fixedTimeStep);
-            accumulatedTime -= fixedTimeStep;
-        }
+        //accumulatedTime += _animationClock.restart().asSeconds();
+        //while (accumulatedTime >= fixedTimeStep) {
+        //    updateEntities(fixedTimeStep);
+        //    accumulatedTime -= fixedTimeStep;
+        //}
         draw();
     }
     _logger->info("Exit game");
@@ -161,7 +163,7 @@ void RType::ClientViewport::closeConnectionToServer() {
 
 void RType::ClientViewport::updateEntities(float deltaTime) {
     for (const auto &entity: _graphicEntities) {
-        entity->update(deltaTime, _animationModule);
+        entity->update(deltaTime);
         _selectedView->update();
     }
 }
@@ -303,7 +305,6 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     starshipEntity->setEntityName(color + " " + std::to_string(sessionID));
     if (starshipEntity->hasBaseComponents()) {
         graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity, color);
-        graphicStarship->loadSprite(_animationModule);
         if (sessionID == _client->getClientID()) {
             _playerEntity = graphicStarship;
             _selectedView->setPlayerEntity(graphicStarship);
@@ -387,7 +388,6 @@ void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string>
     bulletEntity->setEntityName(entityName);
     graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "bulletPlayer");
     addGraphicEntity(graphicBullet);
-    graphicBullet->loadSprite(_animationModule);
 }
 
 void RType::ClientViewport::disconnect(const std::vector<std::string> &splitMessage) {

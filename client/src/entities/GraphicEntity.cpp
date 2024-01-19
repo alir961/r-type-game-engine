@@ -21,8 +21,9 @@ RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string &entity
     _playerName->setColor(Color::Cyan);
 }
 
-void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationModule) {
+void RType::GraphicEntity::update(float deltaTime) {
     auto positionComponent = _entity->getComponent<PositionComponent>();
+    auto sizeComponent = _entity->getComponent<SizeComponent>();
     //sf::IntRect rect;
 
     _animationTime += deltaTime;
@@ -31,21 +32,19 @@ void RType::GraphicEntity::update(float deltaTime, IAnimationModule *animationMo
         //_playerSprite.setTextureRect(rect);
         _animationTime = 0.0f;
     }
-    if (positionComponent != nullptr) _playerSprite->setPosition(positionComponent->getPosition());
+    if (positionComponent != nullptr && sizeComponent != nullptr) {
+        auto playerSize = sizeComponent->getSize();
+        const Vector2f &playerPosition = positionComponent->getPosition();
+
+        _playerSprite->setPosition(positionComponent->getPosition());
+        _playerName->setPosition(Vector2f(playerPosition.first, playerPosition.second - (playerSize.second + 15)));
+    }
 }
 
-void RType::GraphicEntity::draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) {
+void RType::GraphicEntity::draw() {
     _playerSprite->draw();
     if (_entity->getComponent<PlayerComponent>()->getIsPlayer())
         _playerName->draw();
-}
-
-void RType::GraphicEntity::loadSprite(RType::IAnimationModule *animationModule) {
-    auto entitySize = _entity->getComponent<SizeComponent>()->getSize();
-    //auto rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
-
-    //_playerSprite.setTextureRect(rect);
-    _playerSprite->setScale(Vector2f(entitySize.first, entitySize.second));
 }
 
 void RType::GraphicEntity::moveLeft() {
