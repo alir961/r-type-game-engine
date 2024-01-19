@@ -26,7 +26,7 @@ namespace RType {
         [[nodiscard]] virtual EntityPtr getEntity() = 0;
 
         /**
-        * @brief Return the _playerSprite of the graphical _entity
+        * @brief Return the _entitySprite of the graphical _entity
         */
         [[nodiscard]] virtual SpriteComponent getSprite() = 0;
 

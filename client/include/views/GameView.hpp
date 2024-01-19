@@ -34,27 +34,12 @@ namespace RType {
         }
 
         void update() override {
+            const GraphicEntityPtr player = getPlayerEntity();
+            const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();
             const float deltaTime = _clock.restart().asSeconds();
 
             _background.update(deltaTime);
-        }
-
-        /**
-         * @brief Draws entities on the SFML RenderWindow.
-         * @param window The SFML RenderWindow on which to draw entities.
-         * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
-         */
-        void draw(std::vector<GraphicEntityPtr> graphicEntities) override {
-            /*const GraphicEntityPtr player = getPlayerEntity();
-            const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();*/
-            //const float deltaTime = _clock.restart().asSeconds();
-
-            _background.draw();
-            //_playerNameText.draw();
-            //_healthBarText.draw();
-            //_scoreText.draw();
-
-            /*if (player != nullptr && playerEntity->getComponent<PlayerComponent>()) {
+            if (player != nullptr && playerEntity->getComponent<PlayerComponent>()) {
                 const int health = playerEntity->getComponent<HealthComponent>()->getHealth();
                 const int score = playerEntity->getComponent<PlayerComponent>()->getScore();
 
@@ -64,7 +49,21 @@ namespace RType {
             } else {
                 _healthBarText.setText("Health " + std::to_string(0));
                 _scoreText.setText("Score " + std::to_string(0));
-            }*/
+            }
+        }
+
+        /**
+         * @brief Draws entities on the SFML RenderWindow.
+         * @param window The SFML RenderWindow on which to draw entities.
+         * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
+         */
+        void draw(std::vector<GraphicEntityPtr> graphicEntities) override {
+            const GraphicEntityPtr player = getPlayerEntity();
+
+            _background.draw();
+            _playerNameText.draw();
+            _healthBarText.draw();
+            _scoreText.draw();
 
             for (const auto &entity : graphicEntities)
                 entity->draw();
@@ -72,9 +71,9 @@ namespace RType {
 
 
     private:
-        //ClickableText _playerNameText = ClickableText(Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
-        //ClickableText _healthBarText = ClickableText(Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
-        //ClickableText _scoreText = ClickableText(Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
+        ClickableText _playerNameText = ClickableText(Color::Cyan, 20, 10.0f, 10.0f, ""); /**< Player Name Text. */
+        ClickableText _healthBarText = ClickableText(Color::Cyan, 20, 10.0f, 40.0f, ""); /**< Health Text. */
+        ClickableText _scoreText = ClickableText(Color::Cyan, 20, WINDOW_WIDTH - 200.0f, 10.0f, ""); /**< Score Text. */
         Background _background = Background({"client/assets/background/1.png",
                                              "client/assets/background/2.png",
                                              "client/assets/background/3.png",

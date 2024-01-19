@@ -21,8 +21,8 @@ namespace RType {
     private:
         EntityPtr _entity; /**< Reference to the ECS _entity. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
-        TextComponent _playerName = _module->createText("");
-        SpriteComponent _playerSprite = _module->createSprite("client/assets/sprites/r-typesheet42.gif"); /**< Sprite of the graphical _entity. */
+        TextComponent _entityNameText = _module->createText("");
+        SpriteComponent _entitySprite; /**< Sprite of the graphical _entity. */
         float _animationTime = 0.0F; /**< Animation time accumulator. */
         float _animationSpeed = 0.1F; /**< Speed of the animation. */
 
@@ -33,7 +33,7 @@ namespace RType {
          * @param path Path to the texture file for this graphic _entity.
          * @param animationModule Pointer to the IAnimation Module.
          */
-        explicit GraphicEntity(EntityPtr &entity, const std::string &entityName);
+        explicit GraphicEntity(EntityPtr &entity, const std::string &path, const std::string &entityName);
 
         /**
          * @brief Update the graphic _entity based on the state of the ECS _entity.
@@ -63,7 +63,7 @@ namespace RType {
         }
 
         SpriteComponent getSprite() override {
-            return _playerSprite;
+            return _entitySprite;
         }
     };
 

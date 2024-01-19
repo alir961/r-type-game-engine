@@ -8,17 +8,21 @@
 #include "../../include/entities/GraphicEntity.hpp"
 #include "../../../engine/modules/animation/AnimationModule.hpp"
 
-RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string &entityName) : AGraphicEntity(entityName),
+RType::GraphicEntity::GraphicEntity(EntityPtr &entity, const std::string &path, const std::string &entityName) : AGraphicEntity(entityName),
                                                                                         _entity(entity) {
-    auto playerSize = _entity->getComponent<SizeComponent>()->getSize();
-    const Vector2f &playerPosition = _entity->getComponent<PositionComponent>()->getPosition();
+    const auto &size = _entity->getComponent<SizeComponent>()->getSize();
+    const auto &position = _entity->getComponent<PositionComponent>()->getPosition();
+    const auto &rect = _entity->getComponent<SizeRectComponent>()->getSize();
 
-    _playerSprite->setRectangle(RectFloat{0.0F, 0.0F, 33.0F, 15.0F});
-    _playerSprite->setScale(Vector2f(playerSize.first, playerSize.second));
-    _playerName->setText(_entity->getComponent<PlayerComponent>()->getUsername());
-    _playerName->setSize(15);
-    _playerName->setPosition(Vector2f(playerPosition.first, playerPosition.second - (playerSize.second + 15)));
-    _playerName->setColor(Color::Cyan);
+    _entitySprite = _module->createSprite(path);
+    if (entityName.starts_with("bullet"))
+        _entitySprite->setRectangle(RectFloat{101.0F, 118.0F, rect.first, rect.second});
+    else _entitySprite->setRectangle(RectFloat{0.0F, 0.0F, 33.0F, 15.0F});
+    _entitySprite->setScale(Vector2f(size.first, size.second));
+    _entityNameText->setText(_entity->getComponent<PlayerComponent>()->getUsername());
+    _entityNameText->setSize(15);
+    _entityNameText->setPosition(Vector2f(position.first, position.second - (size.second + 15)));
+    _entityNameText->setColor(Color::Cyan);
 }
 
 void RType::GraphicEntity::update(float deltaTime) {
@@ -29,22 +33,22 @@ void RType::GraphicEntity::update(float deltaTime) {
     _animationTime += deltaTime;
     if (_animationTime >= _animationSpeed) {
         //rect = static_cast<sf::IntRect>(animationModule->update(getEntityName()));
-        //_playerSprite.setTextureRect(rect);
+        //_entitySprite.setTextureRect(rect);
         _animationTime = 0.0f;
     }
     if (positionComponent != nullptr && sizeComponent != nullptr) {
-        auto playerSize = sizeComponent->getSize();
-        const Vector2f &playerPosition = positionComponent->getPosition();
+        const auto &size = sizeComponent->getSize();
+        const auto &position = positionComponent->getPosition();
 
-        _playerSprite->setPosition(positionComponent->getPosition());
-        _playerName->setPosition(Vector2f(playerPosition.first, playerPosition.second - (playerSize.second + 15)));
+        _entitySprite->setPosition(positionComponent->getPosition());
+        _entityNameText->setPosition(Vector2f(position.first, position.second - (size.second + 15)));
     }
 }
 
 void RType::GraphicEntity::draw() {
-    _playerSprite->draw();
+    _entitySprite->draw();
     if (_entity->getComponent<PlayerComponent>()->getIsPlayer())
-        _playerName->draw();
+        _entityNameText->draw();
 }
 
 void RType::GraphicEntity::moveLeft() {

@@ -291,7 +291,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
     auto starshipEntity = _entityManager.createEntity();
-    std::shared_ptr<RType::GraphicEntity> graphicStarship;
+    GraphicEntityPtr graphicStarship;
 
 
     starshipEntity->addComponent<RType::SpeedComponent>(speed);
@@ -304,7 +304,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
     starshipEntity->setEntityName(color + " " + std::to_string(sessionID));
     if (starshipEntity->hasBaseComponents()) {
-        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity, color);
+        graphicStarship = GraphicEntityFactory::createStarship(starshipEntity, color);
         if (sessionID == _client->getClientID()) {
             _playerEntity = graphicStarship;
             _selectedView->setPlayerEntity(graphicStarship);
@@ -364,8 +364,8 @@ void RType::ClientViewport::updateBulletPlayer(const std::vector<std::string> &s
 }
 
 void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string> &splitMessage) {
+    GraphicEntityPtr graphicBullet;
     auto bulletEntity = _entityManager.createEntity();
-    std::shared_ptr<RType::GraphicEntity> graphicBullet;
     int sessionID = std::stoi(splitMessage[1]);
     int bulletID = std::stoi(splitMessage[2]);
     int speed = std::stoi(splitMessage[4]);
@@ -386,7 +386,7 @@ void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string>
     bulletEntity->addComponent<RType::PlayerComponent>(false);
     sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
     bulletEntity->setEntityName(entityName);
-    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "bulletPlayer");
+    graphicBullet = GraphicEntityFactory::createBullet(bulletEntity, "bulletPlayer");
     addGraphicEntity(graphicBullet);
 }
 

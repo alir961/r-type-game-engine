@@ -7,8 +7,12 @@ namespace RType {
     */
     class GraphicEntityFactory {
     public:
-        static std::shared_ptr<GraphicEntity> createGraphicEntity(EntityPtr &entity, const std::string entityName) {
-            return std::make_shared<GraphicEntity>(entity, entityName);
+        static GraphicEntityPtr createStarship(EntityPtr &entity, const std::string entityName) {
+            return std::make_shared<GraphicEntity>(entity, "client/assets/sprites/r-typesheet42.gif", entityName);
+        }
+
+        static GraphicEntityPtr createBullet(EntityPtr &entity, const std::string entityName) {
+            return std::make_shared<GraphicEntity>(entity, "client/assets/sprites/r-typesheet2.gif", entityName);
         }
     };
 }
