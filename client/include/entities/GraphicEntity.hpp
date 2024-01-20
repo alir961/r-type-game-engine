@@ -8,7 +8,6 @@
 #pragma once
 
 #include "AGraphicEntity.hpp"
-#include "../resources/ResourceManager.hpp"
 #include "engine/modules/ModuleProvider.hpp"
 #include <memory>
 
