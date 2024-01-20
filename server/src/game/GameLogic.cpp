@@ -235,11 +235,11 @@ void RType::GameLogic::sendMonsterDetails(const RType::EntityPtr &entity) {
     std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
     int speed = entity->getComponent<SpeedComponent>()->getSpeed();
     int health = entity->getComponent<HealthComponent>()->getHealth();
-    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPositions();
+    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
     auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
     auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
 
-    sprintf(details, "monster %s speed %d health %d position %d %d dsize %f %f rect %f %f\n",
+    sprintf(details, "monster %s speed %d health %d position %.1f %.1f size %.1f %.1f rect %.1f %.1f\n",
             entityName[1].c_str(),
             speed,
             health,
@@ -255,7 +255,7 @@ void RType::GameLogic::sendMonsterDetails(const RType::EntityPtr &entity) {
 void RType::GameLogic::moveMonsters() {
     for (auto &entity: _entityManager.getEntities()) {
         if (Split::split(entity->getEntityName(), " ")[0] == "monster") {
-            auto [currentX, currentY] = entity->getComponent<PositionComponent>()->getPositions();
+            auto [currentX, currentY] = entity->getComponent<PositionComponent>()->getPosition();
             Direction moveDirection;
             int randomDirection = rand() % 3;
 
