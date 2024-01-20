@@ -20,7 +20,9 @@ namespace RType {
     class GraphicEntity : public AGraphicEntity {
     private:
         EntityPtr _entity; /**< Reference to the ECS _entity. */
-        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        ModuleProviderPtr _provider = ModuleProvider::getInstance();
+        IGraphicalModule *_module = _provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        IAnimationModule *_animation = _provider->get<IAnimationModule>(ModuleType::ANIMATION);
         TextComponent _entityNameText = _module->createText("");
         SpriteComponent _entitySprite; /**< Sprite of the graphical _entity. */
         float _animationTime = 0.0F; /**< Animation time accumulator. */
@@ -33,7 +35,7 @@ namespace RType {
          * @param path Path to the texture file for this graphic _entity.
          * @param animationModule Pointer to the IAnimation Module.
          */
-        explicit GraphicEntity(EntityPtr &entity, const std::string &path, const std::string &entityName);
+        explicit GraphicEntity(EntityPtr entity, const std::string &path, const std::string &entityName);
 
         /**
          * @brief Update the graphic _entity based on the state of the ECS _entity.

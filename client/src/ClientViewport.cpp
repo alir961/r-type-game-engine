@@ -71,7 +71,6 @@ void RType::ClientViewport::basicInput() {
 
 void RType::ClientViewport::launchWindow() {
     const float fixedTimeStep = 1.F / WINDOW_FPS;
-    //float accumulatedTime = 0.F;
 
     while (_graphicalModule->isOpen()) {
         while (_graphicalModule->pollEvent(_event)) {
@@ -91,19 +90,14 @@ void RType::ClientViewport::launchWindow() {
         }
         for (const auto &entity: _graphicEntities)
             entity->update(0);
+        updateEntities(fixedTimeStep);
         _selectedView->update();
-        //accumulatedTime += _animationClock.restart().asSeconds();
-        //while (accumulatedTime >= fixedTimeStep) {
-        //    updateEntities(fixedTimeStep);
-        //    accumulatedTime -= fixedTimeStep;
-        //}
         draw();
     }
     _logger->info("Exit game");
 }
 
 void RType::ClientViewport::setView(ViewState state) {
-    EntityPtr player;
     switch (state) {
         case ViewState::MENU:
             _selectedView = std::make_shared<MenuView>(*this);
@@ -162,10 +156,8 @@ void RType::ClientViewport::closeConnectionToServer() {
 }
 
 void RType::ClientViewport::updateEntities(float deltaTime) {
-    for (const auto &entity: _graphicEntities) {
+    for (const auto &entity: _graphicEntities)
         entity->update(deltaTime);
-        _selectedView->update();
-    }
 }
 
 void RType::ClientViewport::draw() {
