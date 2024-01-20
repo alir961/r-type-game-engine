@@ -1,0 +1,9 @@
+<map id="RType::ClickableText" name="RType::ClickableText">
+<area shape="rect" id="Node000001" title="Represents a graphical text box for displaying and interacting with text." alt="" coords="62,172,208,199"/>
+<area shape="rect" id="Node000002" href="$structRType_1_1RectFloat.html" title=" " alt="" coords="5,81,129,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,122,87,146,113,169,110,173,83,150,70,124"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="153,81,320,108"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,122,193,150,159,174,156,169,189,146,216,118"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1IModule.html" title=" " alt="" coords="180,5,293,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="239,47,239,81,234,81,234,47"/>
+</map>

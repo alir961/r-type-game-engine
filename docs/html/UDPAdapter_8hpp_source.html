@@ -112,48 +112,62 @@ $(function() { codefold.init(0); });
 <div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classRType_1_1UDPAdapter.html">   42</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1UDPAdapter.html">UDPAdapter</a> {</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        UDP::socket &amp;_socket;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        UDP::endpoint &amp;_remoteEndpoint;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        DataBuffer _dataBuffer{};</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        MessageBuffer _messageBuffer{};</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aaf80cea5ab64afe8fedcd118f6f0371f">errorFunction</a>(<span class="keyword">const</span> asio::error_code &amp;error, std::size_t);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classRType_1_1UDPAdapter.html#aac126383e3e67b37b9dc49a35687d27c">   63</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aac126383e3e67b37b9dc49a35687d27c">UDPAdapter</a>(UDP::socket &amp;socket, UDP::endpoint &amp;endpoint) :</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                _socket(socket), _remoteEndpoint(endpoint) {}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        asio::io_context _ioContext;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        UDP::socket _socket;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        UDP::endpoint _remoteEndpoint;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        DataBuffer _dataBuffer{};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        MessageBuffer _messageBuffer{};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aaf80cea5ab64afe8fedcd118f6f0371f">errorFunction</a>(<span class="keyword">const</span> asio::error_code &amp;error, std::size_t);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">void</span> closeSocket() {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            _socket.close();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">void</span> runContext() {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            _ioContext.run();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classRType_1_1UDPAdapter.html#ae9ba805337a2594b8720ea7318ef4442">   73</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#ae9ba805337a2594b8720ea7318ef4442">UDPAdapter</a>(<span class="keyword">const</span> std::string &amp;address, uint16_t port) : _socket(_ioContext, UDP::endpoint(asio::ip::make_address(address), port)) {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
 </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b">sendData</a>(<span class="keyword">const</span> std::string &amp;data);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b">sendData</a>(<span class="keyword">const</span> asio::const_buffer &amp;data);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b">sendData</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structRType_1_1Message.html">Message</a> &amp;message);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#a9cd3c8e5e27b49ebdabe220ad3290821">receiveData</a>(ReceiveCallback callback);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#a391a8b2bc0c649433f0543d7f94f948a">receiveMessage</a>(ReceiveCallback callback);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        [[nodiscard]] <span class="keyword">const</span> DataBuffer &amp;<a class="code hl_function" href="classRType_1_1UDPAdapter.html#aadedbf91393829ac83b0e264ff5f9a82">getDataBuffer</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        [[nodiscard]] <span class="keyword">const</span> MessageBuffer &amp;<a class="code hl_function" href="classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed">getMessageBuffer</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    };</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b">sendData</a>(<span class="keyword">const</span> std::string &amp;data);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b">sendData</a>(<span class="keyword">const</span> asio::const_buffer &amp;data);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b">sendData</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structRType_1_1Message.html">Message</a> &amp;message);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#a9cd3c8e5e27b49ebdabe220ad3290821">receiveData</a>(ReceiveCallback callback);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1UDPAdapter.html#a391a8b2bc0c649433f0543d7f94f948a">receiveMessage</a>(ReceiveCallback callback);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        [[nodiscard]] <span class="keyword">const</span> DataBuffer &amp;<a class="code hl_function" href="classRType_1_1UDPAdapter.html#aadedbf91393829ac83b0e264ff5f9a82">getDataBuffer</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        [[nodiscard]] <span class="keyword">const</span> MessageBuffer &amp;<a class="code hl_function" href="classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed">getMessageBuffer</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordtype">void</span> setServerEndpoint(<span class="keyword">const</span> std::string &amp;serverAddress, uint16_t serverPort) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            _remoteEndpoint = UDP::endpoint(asio::ip::make_address(serverAddress), serverPort);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    };</div>
 </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">using </span>UDPAdapterPtr = std::shared_ptr&lt;UDPAdapter&gt;;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">using </span>UDPAdapterPtr = std::shared_ptr&lt;UDPAdapter&gt;;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
 <div class="ttc" id="aclassRType_1_1UDPAdapter_html"><div class="ttname"><a href="classRType_1_1UDPAdapter.html">RType::UDPAdapter</a></div><div class="ttdoc">Represents a UDP adapter for handling communication over UDP.</div><div class="ttdef"><b>Definition</b> UDPAdapter.hpp:42</div></div>
 <div class="ttc" id="aclassRType_1_1UDPAdapter_html_a34387a2f2d2e244a94bd933915d115ed"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#a34387a2f2d2e244a94bd933915d115ed">RType::UDPAdapter::getMessageBuffer</a></div><div class="ttdeci">const MessageBuffer &amp; getMessageBuffer() const</div><div class="ttdoc">Gets the current message buffer.</div><div class="ttdef"><b>Definition</b> UDPAdapter.cpp:45</div></div>
 <div class="ttc" id="aclassRType_1_1UDPAdapter_html_a391a8b2bc0c649433f0543d7f94f948a"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#a391a8b2bc0c649433f0543d7f94f948a">RType::UDPAdapter::receiveMessage</a></div><div class="ttdeci">void receiveMessage(ReceiveCallback callback)</div><div class="ttdoc">Receives a message asynchronously and invokes the callback upon completion.</div><div class="ttdef"><b>Definition</b> UDPAdapter.cpp:37</div></div>
 <div class="ttc" id="aclassRType_1_1UDPAdapter_html_a9cd3c8e5e27b49ebdabe220ad3290821"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#a9cd3c8e5e27b49ebdabe220ad3290821">RType::UDPAdapter::receiveData</a></div><div class="ttdeci">void receiveData(ReceiveCallback callback)</div><div class="ttdoc">Receives data asynchronously and invokes the callback upon completion.</div><div class="ttdef"><b>Definition</b> UDPAdapter.cpp:31</div></div>
 <div class="ttc" id="aclassRType_1_1UDPAdapter_html_aa9ff0bc2d1bb3ddd448aeb86c0af017b"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#aa9ff0bc2d1bb3ddd448aeb86c0af017b">RType::UDPAdapter::sendData</a></div><div class="ttdeci">void sendData(const std::string &amp;data)</div><div class="ttdoc">Sends string data over the UDP connection.</div><div class="ttdef"><b>Definition</b> UDPAdapter.cpp:17</div></div>
-<div class="ttc" id="aclassRType_1_1UDPAdapter_html_aac126383e3e67b37b9dc49a35687d27c"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#aac126383e3e67b37b9dc49a35687d27c">RType::UDPAdapter::UDPAdapter</a></div><div class="ttdeci">UDPAdapter(UDP::socket &amp;socket, UDP::endpoint &amp;endpoint)</div><div class="ttdoc">Constructor for UDPAdapter.</div><div class="ttdef"><b>Definition</b> UDPAdapter.hpp:63</div></div>
 <div class="ttc" id="aclassRType_1_1UDPAdapter_html_aadedbf91393829ac83b0e264ff5f9a82"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#aadedbf91393829ac83b0e264ff5f9a82">RType::UDPAdapter::getDataBuffer</a></div><div class="ttdeci">const DataBuffer &amp; getDataBuffer() const</div><div class="ttdoc">Gets the current data buffer.</div><div class="ttdef"><b>Definition</b> UDPAdapter.cpp:41</div></div>
 <div class="ttc" id="aclassRType_1_1UDPAdapter_html_aaf80cea5ab64afe8fedcd118f6f0371f"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#aaf80cea5ab64afe8fedcd118f6f0371f">RType::UDPAdapter::errorFunction</a></div><div class="ttdeci">static void errorFunction(const asio::error_code &amp;error, std::size_t)</div><div class="ttdoc">Static error handling function for asynchronous operations.</div><div class="ttdef"><b>Definition</b> UDPAdapter.cpp:11</div></div>
-<div class="ttc" id="astructRType_1_1Message_html"><div class="ttname"><a href="structRType_1_1Message.html">RType::Message</a></div><div class="ttdoc">Represents a network message with a specified type and data.</div><div class="ttdef"><b>Definition</b> NetworkMessage.hpp:50</div></div>
+<div class="ttc" id="aclassRType_1_1UDPAdapter_html_ae9ba805337a2594b8720ea7318ef4442"><div class="ttname"><a href="classRType_1_1UDPAdapter.html#ae9ba805337a2594b8720ea7318ef4442">RType::UDPAdapter::UDPAdapter</a></div><div class="ttdeci">UDPAdapter(const std::string &amp;address, uint16_t port)</div><div class="ttdoc">Constructor for UDPAdapter.</div><div class="ttdef"><b>Definition</b> UDPAdapter.hpp:73</div></div>
+<div class="ttc" id="astructRType_1_1Message_html"><div class="ttname"><a href="structRType_1_1Message.html">RType::Message</a></div><div class="ttdoc">Represents a network message with a specified type and data.</div><div class="ttdef"><b>Definition</b> NetworkMessage.hpp:59</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

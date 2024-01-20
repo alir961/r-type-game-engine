@@ -27,7 +27,7 @@ void RType::UDPClient::handleReceive(std::size_t bytesReceived) {
 
     if (_handlers.contains(receiveMessage.type))
         _handlers[receiveMessage.type](receiveMessage);
-    else std::cout << "Unknown message!\n";
+    else _logger->warn("Unknown message: '" + receiveMessage.toString() + "'");
     if (_stop) return;
     startReceive();
 }
@@ -44,7 +44,6 @@ RType::UDPClient::UDPClient(const std::string &hostname, int port, std::string u
                 .setData(buffer)
                 .build();
 
-        std::cout << "Try connecting to " << hostname << ":" << port << "\n";
         _adapter.sendData(message);
         startReceive();
         _adapter.runContext();
@@ -61,7 +60,7 @@ RType::UDPClient::~UDPClient() {
         _thread.wait();
         _adapter.closeSocket();
     } catch (const std::exception &e) {
-        std::cerr << "Unable to close UDP client: " << e.what() << "\n";
+        _logger->error("Unable to close UDP client: " + std::string(e.what()));
     }
 }
 
@@ -75,7 +74,7 @@ void RType::UDPClient::handleConnectCallbackMessage(const RType::Message &receiv
 }
 
 void RType::UDPClient::setupHandlers() {
-    _handlers[MessageType::UNKNOWN] = [](const Message &) { std::cout << "Unknown message!\n"; };
+    _handlers[MessageType::UNKNOWN] = [this](const Message &) { _logger->warn("Unknown message"); };
     _handlers[MessageType::CONNECT_CALLBACK] = [this](const Message &msg) { handleConnectCallbackMessage(msg); };
     _handlers[MessageType::PLAYER_NAME] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::PLAYER_COLOR] = [this](const Message &msg) { addMessageQueue(msg); };

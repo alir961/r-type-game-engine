@@ -23,12 +23,12 @@ namespace RType {
         /**
         * @brief Return the _entity of the graphical _entity
         */
-        virtual EntityPtr getEntity() = 0;
+        [[nodiscard]] virtual EntityPtr getEntity() = 0;
 
         /**
-        * @brief Return the _sprite of the graphical _entity
+        * @brief Return the _entitySprite of the graphical _entity
         */
-        virtual sf::Sprite getSprite() = 0;
+        [[nodiscard]] virtual SpriteComponent getSprite() = 0;
 
         /**
         * @brief Return the name of the graphical _entity
@@ -36,10 +36,6 @@ namespace RType {
         [[nodiscard]] std::string getEntityName() const {
             return _entityName;
         }
-
-        void setEntityName(const std::string &entityName) {_entityName = entityName;};
-
-        ~AGraphicEntity() override = default;
     };
 
     using GraphicEntityPtr = std::shared_ptr<AGraphicEntity>;

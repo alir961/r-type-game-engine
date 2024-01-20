@@ -40,7 +40,7 @@ namespace RType {
          * @brief Draws the rectangle on the associated SFML RenderWindow.
          */
         void draw(IGraphicalModule *graphicalModule) {
-            graphicalModule->drawRect(_window, _rectangle);
+            graphicalModule->drawRect(_rectangle);
         }
 
         /**

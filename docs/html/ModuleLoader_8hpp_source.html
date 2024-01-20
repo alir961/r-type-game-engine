@@ -101,15 +101,15 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span>RType {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">enum class</span> ModuleType {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN, ANIMATION</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    };</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">class </span>ModuleLoader {</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a>(<span class="keyword">const</span> std::string &amp;path);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a>(<a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a> &amp;&amp;instance) <span class="keyword">noexcept</span> = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a>(<a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a> &amp;instance) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a>(<a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a> &amp;&amp;_instance) <span class="keyword">noexcept</span> = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a>(<a class="code hl_function" href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">ModuleLoader</a> &amp;_instance) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_function" href="classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23">~ModuleLoader</a>();</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        T *<a class="code hl_function" href="classRType_1_1ModuleLoader.html#a2c0557978d4faa7f7cc77cf311478e36">load</a>();</div>
@@ -236,7 +236,7 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="keyword">namespace </span>RType {</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keyword">enum class</span> ModuleType {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        ANIMATION, SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        ANIMATION, SOUND, CONSOLE, PARTICLE, GRAPHICAL, LOGGER, UNKNOWN</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    };</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
@@ -313,71 +313,69 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            loadedModule = callConstructor(<span class="stringliteral">&quot;initializeParticleModule&quot;</span>);</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keywordflow">if</span> (_type == ModuleType::GRAPHICAL)</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            loadedModule = callConstructor(<span class="stringliteral">&quot;initializeGraphicalModule&quot;</span>);</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">if</span> (loadedModule == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <span class="keywordflow">throw</span> <a class="code hl_class" href="classRType_1_1ModuleException.html">ModuleException</a>(<span class="stringliteral">&quot;Invalid loadedModule provided&quot;</span>);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        _module = loadedModule;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <span class="keywordflow">return</span> loadedModule;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">if</span> (_type == ModuleType::LOGGER)</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            loadedModule = callConstructor(<span class="stringliteral">&quot;initializeLoggerModule&quot;</span>);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">if</span> (loadedModule == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">throw</span> <a class="code hl_class" href="classRType_1_1ModuleException.html">ModuleException</a>(<span class="stringliteral">&quot;Invalid loadedModule provided&quot;</span>);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        _module = loadedModule;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">return</span> loadedModule;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    }</div>
 </div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00260" data-start="{" data-end="}">
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno"><a class="line" href="classRType_1_1ModuleLoader.html#a513ead21fadd0d5f1573861035cf5b1b">  260</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ModuleLoader.html#a513ead21fadd0d5f1573861035cf5b1b">ModuleLoader&lt;T&gt;::unload</a>() {</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        void (*destroyLibrary)(T *) = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordflow">if</span> (_module == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        <span class="keywordflow">if</span> (_handle == <span class="keyword">nullptr</span>) <span class="keywordflow">throw</span> <a class="code hl_class" href="classRType_1_1ModuleException.html">ModuleException</a>(<span class="stringliteral">&quot;No library loaded&quot;</span>);</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        *(<span class="keywordtype">void</span> **) (&amp;destroyLibrary) = dlsym(_handle, <span class="stringliteral">&quot;destroy&quot;</span>);</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        destroyLibrary(_module);</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        _module = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    }</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00262" data-start="{" data-end="}">
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="classRType_1_1ModuleLoader.html#a513ead21fadd0d5f1573861035cf5b1b">  262</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1ModuleLoader.html#a513ead21fadd0d5f1573861035cf5b1b">ModuleLoader&lt;T&gt;::unload</a>() {</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        void (*destroyLibrary)(T *) = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keywordflow">if</span> (_module == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        <span class="keywordflow">if</span> (_handle == <span class="keyword">nullptr</span>) <span class="keywordflow">throw</span> <a class="code hl_class" href="classRType_1_1ModuleException.html">ModuleException</a>(<span class="stringliteral">&quot;No library loaded&quot;</span>);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        *(<span class="keywordtype">void</span> **) (&amp;destroyLibrary) = dlsym(_handle, <span class="stringliteral">&quot;destroy&quot;</span>);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        destroyLibrary(_module);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        _module = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    }</div>
 </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00271" data-start="{" data-end="}">
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23">  271</a></span>    <a class="code hl_function" href="classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23">ModuleLoader&lt;T&gt;::~ModuleLoader</a>() {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">if</span> (_handle != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            dlclose(_handle);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    }</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00273" data-start="{" data-end="}">
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23">  273</a></span>    <a class="code hl_function" href="classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23">ModuleLoader&lt;T&gt;::~ModuleLoader</a>() {</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="keywordflow">if</span> (_handle != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            dlclose(_handle);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    }</div>
 </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00277" data-start="{" data-end="}">
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee">  277</a></span>    ModuleType <a class="code hl_function" href="classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee">ModuleLoader&lt;T&gt;::getModuleType</a>(<span class="keyword">const</span> std::string &amp;path, <span class="keywordtype">void</span> *existingHandle) {</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordtype">void</span> *handle = (existingHandle == <span class="keyword">nullptr</span> ? dlopen(path.c_str(), RTLD_LAZY) : existingHandle);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">if</span> (handle == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <span class="keywordflow">return</span> ModuleType::UNKNOWN;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeSoundModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>            <span class="keywordflow">return</span> ModuleType::SOUND;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00279" data-start="{" data-end="}">
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee">  279</a></span>    ModuleType <a class="code hl_function" href="classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee">ModuleLoader&lt;T&gt;::getModuleType</a>(<span class="keyword">const</span> std::string &amp;path, <span class="keywordtype">void</span> *existingHandle) {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordtype">void</span> *handle = (existingHandle == <span class="keyword">nullptr</span> ? dlopen(path.c_str(), RTLD_LAZY) : existingHandle);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="keywordflow">if</span> (handle == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            <span class="keywordflow">return</span> ModuleType::UNKNOWN;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeSoundModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            <span class="keywordflow">return</span> ModuleType::SOUND;</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeConsoleModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            <span class="keywordflow">return</span> ModuleType::CONSOLE;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeParticleModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            <span class="keywordflow">return</span> ModuleType::PARTICLE;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeGraphicalModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            <span class="keywordflow">return</span> ModuleType::GRAPHICAL;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeAnimationModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            <span class="keywordflow">return</span> ModuleType::ANIMATION;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="keywordflow">return</span> ModuleType::UNKNOWN;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeParticleModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>            <span class="keywordflow">return</span> ModuleType::PARTICLE;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeGraphicalModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            <span class="keywordflow">return</span> ModuleType::GRAPHICAL;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeAnimationModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            <span class="keywordflow">return</span> ModuleType::ANIMATION;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <span class="keywordflow">if</span> (dlsym(handle, <span class="stringliteral">&quot;initializeLoggerModule&quot;</span>) != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>            <span class="keywordflow">return</span> ModuleType::LOGGER;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        <span class="keywordflow">return</span> ModuleType::UNKNOWN;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    }</div>
 </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>}</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>}</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassRType_1_1ModuleException_html"><div class="ttname"><a href="classRType_1_1ModuleException.html">RType::ModuleException</a></div><div class="ttdef"><b>Definition</b> ModuleException.hpp:15</div></div>
 <div class="ttc" id="aclassRType_1_1ModuleLoader_html"><div class="ttname"><a href="classRType_1_1ModuleLoader.html">RType::ModuleLoader</a></div><div class="ttdoc">Template class for dynamically loading and managing modules.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:162</div></div>
 <div class="ttc" id="aclassRType_1_1ModuleLoader_html_a1cf150c07803981b0036b4042c8f8a79"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#a1cf150c07803981b0036b4042c8f8a79">RType::ModuleLoader::callConstructor</a></div><div class="ttdeci">T * callConstructor(const std::string &amp;functionName) const</div><div class="ttdoc">Calls the constructor function with the specified name in the loaded module.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:210</div></div>
 <div class="ttc" id="aclassRType_1_1ModuleLoader_html_a2c0557978d4faa7f7cc77cf311478e36"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#a2c0557978d4faa7f7cc77cf311478e36">RType::ModuleLoader::load</a></div><div class="ttdeci">T * load()</div><div class="ttdoc">Loads the module and returns a pointer to the instantiated object of type T.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:240</div></div>
-<div class="ttc" id="aclassRType_1_1ModuleLoader_html_a513ead21fadd0d5f1573861035cf5b1b"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#a513ead21fadd0d5f1573861035cf5b1b">RType::ModuleLoader::unload</a></div><div class="ttdeci">void unload()</div><div class="ttdoc">Unloads the module.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:260</div></div>
+<div class="ttc" id="aclassRType_1_1ModuleLoader_html_a513ead21fadd0d5f1573861035cf5b1b"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#a513ead21fadd0d5f1573861035cf5b1b">RType::ModuleLoader::unload</a></div><div class="ttdeci">void unload()</div><div class="ttdoc">Unloads the module.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:262</div></div>
 <div class="ttc" id="aclassRType_1_1ModuleLoader_html_ab81507eead54ead03dfd894830cea3c0"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#ab81507eead54ead03dfd894830cea3c0">RType::ModuleLoader::ModuleLoader</a></div><div class="ttdeci">ModuleLoader(const std::string &amp;path)</div><div class="ttdoc">Explicit constructor to initialize the ModuleLoader with the specified path.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:226</div></div>
-<div class="ttc" id="aclassRType_1_1ModuleLoader_html_acb55a9409f4c3c6b48b03b7e08b97e23"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23">RType::ModuleLoader::~ModuleLoader</a></div><div class="ttdeci">~ModuleLoader()</div><div class="ttdoc">Destructor to unload the module and release resources.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:271</div></div>
-<div class="ttc" id="aclassRType_1_1ModuleLoader_html_ade72abf961a35faca94e539afcd8c9ee"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee">RType::ModuleLoader::getModuleType</a></div><div class="ttdeci">static ModuleType getModuleType(const std::string &amp;path, void *existingHandle=nullptr)</div><div class="ttdoc">Static method to get the module type based on the provided path.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:277</div></div>
+<div class="ttc" id="aclassRType_1_1ModuleLoader_html_acb55a9409f4c3c6b48b03b7e08b97e23"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#acb55a9409f4c3c6b48b03b7e08b97e23">RType::ModuleLoader::~ModuleLoader</a></div><div class="ttdeci">~ModuleLoader()</div><div class="ttdoc">Destructor to unload the module and release resources.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:273</div></div>
+<div class="ttc" id="aclassRType_1_1ModuleLoader_html_ade72abf961a35faca94e539afcd8c9ee"><div class="ttname"><a href="classRType_1_1ModuleLoader.html#ade72abf961a35faca94e539afcd8c9ee">RType::ModuleLoader::getModuleType</a></div><div class="ttdeci">static ModuleType getModuleType(const std::string &amp;path, void *existingHandle=nullptr)</div><div class="ttdoc">Static method to get the module type based on the provided path.</div><div class="ttdef"><b>Definition</b> ModuleLoader.hpp:279</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

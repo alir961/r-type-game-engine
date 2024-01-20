@@ -1,24 +1,28 @@
 <map id="RType::PauseView" name="RType::PauseView">
-<area shape="rect" id="Node000001" title="Represents the pause menu state in the game." alt="" coords="756,133,886,159"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1IView.html" title=" " alt="" coords="515,5,612,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="628,17,681,27,733,46,760,66,783,89,814,131,810,135,778,92,756,70,730,51,679,32,627,23"/>
-<area shape="rect" id="Node000003" href="$classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="188,5,310,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="326,16,515,16,515,21,326,21"/>
-<area shape="rect" id="Node000004" href="$classRType_1_1TextBox.html" title="Represents a graphical text box for displaying and interacting with text." alt="" coords="508,81,619,107"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="635,105,732,125,757,130,756,135,731,130,634,110"/>
-<area shape="rect" id="Node000005" href="$classRType_1_1ClientViewport.html" title="Represents the main game view handling graphics, input, and entities." alt="" coords="489,213,638,239"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="632,206,731,177,786,157,788,162,733,182,633,211"/>
-<area shape="rect" id="Node000006" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="167,164,332,190"/>
-<area shape="poly" id="edge11_Node000001_Node000006" title=" " alt="" coords="347,169,755,147,755,152,347,174"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="348,189,466,208,489,211,488,217,465,213,347,194"/>
-<area shape="rect" id="Node000007" href="$classRType_1_1IModule.html" title=" " alt="" coords="5,215,116,240"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="125,208,198,188,200,193,126,213"/>
-<area shape="rect" id="Node000008" href="$classRType_1_1IAnimationModule.html" title=" " alt="" coords="165,263,333,288"/>
-<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="130,242,197,260,195,265,128,247"/>
-<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="348,261,465,244,501,237,502,242,466,249,349,266"/>
-<area shape="rect" id="Node000009" href="$classRType_1_1ModuleProvider.html" title="Class representing a module provider that manages loading and unloading of modules." alt="" coords="172,329,326,355"/>
-<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="341,335,402,330,465,320,553,299,637,264,685,238,732,208,801,157,805,162,735,213,688,242,639,269,555,304,466,325,403,335,342,341"/>
-<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="332,323,398,305,464,281,507,260,542,237,545,242,509,264,466,286,399,310,334,328"/>
-<area shape="rect" id="Node000010" href="$classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system." alt="" coords="176,213,322,239"/>
-<area shape="poly" id="edge10_Node000005_Node000010" title=" " alt="" coords="338,224,489,224,489,229,338,229"/>
+<area shape="rect" id="Node000001" title="Represents the pause menu state in the game." alt="" coords="765,204,897,231"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1IView.html" title=" " alt="" coords="520,41,620,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="629,71,685,95,742,127,788,166,821,202,817,206,784,170,739,132,683,100,627,76"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="190,5,315,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="330,21,471,35,520,43,519,48,470,40,330,26"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1ILoggerModule.html" title=" " alt="" coords="177,84,328,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="343,83,520,59,520,64,344,88"/>
+<area shape="rect" id="Node000009" href="$classRType_1_1ClientViewport.html" title="Represents the main game view handling graphics, input, and entities." alt="" coords="494,287,646,313"/>
+<area shape="poly" id="edge13_Node000009_Node000004" title=" " alt="" coords="344,102,420,115,451,125,472,138,484,154,489,171,487,203,484,235,487,250,496,266,519,284,516,288,492,270,482,252,478,235,481,202,484,171,479,157,469,142,449,130,419,121,343,108"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1IModule.html" title=" " alt="" coords="5,225,118,252"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="78,211,114,165,139,141,166,120,189,109,192,114,168,125,142,145,118,168,82,214"/>
+<area shape="rect" id="Node000008" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="169,225,336,252"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="133,236,168,236,168,241,133,241"/>
+<area shape="rect" id="Node000010" href="$classRType_1_1IAnimationModule.html" title=" " alt="" coords="167,289,337,316"/>
+<area shape="poly" id="edge12_Node000010_Node000005" title=" " alt="" coords="119,255,211,286,209,291,117,260"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1ClickableText.html" title="Represents a graphical text box for displaying and interacting with text." alt="" coords="497,172,643,199"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="659,193,764,207,764,212,658,199"/>
+<area shape="rect" id="Node000007" href="$structRType_1_1RectFloat.html" title=" " alt="" coords="191,135,314,161"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="329,154,497,174,497,179,329,160"/>
+<area shape="poly" id="edge15_Node000001_Node000008" title=" " alt="" coords="351,234,646,224,764,218,764,224,646,229,351,239"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="350,220,496,195,497,200,351,225"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="306,255,362,271,429,283,494,291,493,296,429,288,361,276,304,260"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="661,290,701,283,740,271,779,251,811,229,814,233,782,256,742,276,702,288,662,295"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="346,316,362,317,416,321,470,317,509,311,510,317,471,323,416,326,361,323,346,321"/>
+<area shape="rect" id="Node000011" href="$classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system." alt="" coords="177,355,327,381"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="342,362,405,355,470,341,508,328,542,311,545,316,510,333,471,347,406,360,343,367"/>
 </map>

@@ -1,3 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1SafeQueue.html" title=" " alt="" coords="5,5,165,31"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IGameModule.html" title="Interface class for game module." alt="" coords="5,107,153,133"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1AAIModule.html" title="Abstract class representing an AI module for the game." alt="" coords="224,5,354,32"/>
+<area shape="poly" id="edge27_Node000000_Node000001" title=" " alt="" coords="109,95,151,68,200,42,230,30,232,35,202,46,154,72,112,100"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1AAudioModule.html" title="Abstract class representing an audio module for the game." alt="" coords="214,56,364,83"/>
+<area shape="poly" id="edge28_Node000000_Node000002" title=" " alt="" coords="152,100,230,81,231,86,153,105"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1ACinematicModule.html" title="Abstract class representing a cinematic module for the game." alt="" coords="201,107,377,133"/>
+<area shape="poly" id="edge29_Node000000_Node000003" title=" " alt="" coords="168,117,200,117,200,123,168,123"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1AConsoleModule.html" title="Abstract class representing a console module for the game." alt="" coords="206,157,372,184"/>
+<area shape="poly" id="edge30_Node000000_Node000004" title=" " alt="" coords="153,135,231,154,230,159,152,140"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1AMetricsModule.html" title="Abstract class representing a metrics module for the game." alt="" coords="209,208,369,235"/>
+<area shape="poly" id="edge31_Node000000_Node000005" title=" " alt="" coords="112,140,154,168,202,194,232,205,230,210,200,198,151,172,109,145"/>
 </map>

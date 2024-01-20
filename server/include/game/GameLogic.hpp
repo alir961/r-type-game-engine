@@ -41,7 +41,7 @@ namespace RType {
         /**
          * Retrieve the current sessions manager
          *
-         * @return Reference to SessionManager instance
+         * @return Reference to SessionManager _instance
          */
         [[nodiscard]] SessionManager &getSessionManager() {
             return _sessionManager;
@@ -50,7 +50,7 @@ namespace RType {
         /**
          * Retrieve the current entities manager
          *
-         * @return Reference to EntityManager instance
+         * @return Reference to EntityManager _instance
          */
         [[nodiscard]] EntityManager &getEntityManager() {
             return _entityManager;
@@ -59,7 +59,7 @@ namespace RType {
         /**
          * Retrieve the current entity factory
          *
-         * @return Reference to EntityFactory instance
+         * @return Reference to EntityFactory _instance
          */
         [[nodiscard]] EntityFactory &getFactory() {
             return _factory;

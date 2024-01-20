@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -26,12 +26,7 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
          */
-        PauseView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider)
-            : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider),
-              _title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Pause"),
-              _resume(window, sf::Color::Cyan, 20, 500.0f, 195.0f, "Resume"),
-              _options(window, sf::Color::Cyan, 20, 500.0f, 245.0f, "Options"),
-              _mainMenu(window, sf::Color::Cyan, 20, 500.0f, 295.0f, "Exit To Main Menu") {}
+        explicit PauseView(ClientViewport &gameView) : _viewport(gameView) {}
 
         /**
          * @brief Handles user input for the pause menu.
@@ -42,17 +37,17 @@ namespace RType {
             _resume.handleInput();
             _options.handleInput();
 
-            if (isMouseClicked()) {
-                if (_mainMenu.getActive()) {
-                    std::cout << "Exit To Main Menu!" << std::endl;
+            if (_module->isMouseClicked()) {
+                if (_mainMenu.isClicked()) {
+                    _logger->debug("Return to menu from pause");
                     _viewport.setView(ViewState::MENU);
                 }
-                if (_resume.getActive()) {
-                    std::cout << "Resume Game!" << std::endl;
+                if (_resume.isClicked()) {
+                    _logger->debug("Return to game from pause");
                     _viewport.setView(ViewState::GAME);
                 }
-                if (_options.getActive()) {
-                    std::cout << "Resume Game!" << std::endl;
+                if (_options.isClicked()) {
+                    _logger->debug("Open options from pause");
                     _viewport.setView(ViewState::OPTIONSGAME);
                 }
             }
@@ -73,30 +68,20 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param entities A vector of shared pointers to graphic entities.
          */
-        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr>) override {
-            _title.draw(_graphicalModule);
-            _mainMenu.draw(_graphicalModule);
-            _resume.draw(_graphicalModule);
-            _options.draw(_graphicalModule);
+        void draw(std::vector<GraphicEntityPtr>) override {
+            _title.draw();
+            _mainMenu.draw();
+            _resume.draw();
+            _options.draw();
             handleInput();
         }
 
     private:
-        TextBox _title; /**< TextBox for the title. */
-        TextBox _mainMenu; /**< TextBox for the menu. */
-        TextBox _resume; /**< TextBox for resume. */
-        TextBox _options; /**< TextBox to go options. */
+        ClickableText _title = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0F, 50.0F, "Pause"); /**< ClickableText for the title. */
+        ClickableText _resume = ClickableText(Color::Cyan, 20, 500.0F, 195.0F, "Resume"); /**< ClickableText for resume. */
+        ClickableText _options = ClickableText(Color::Cyan, 20, 500.0F, 245.0F, "Options"); /**< ClickableText to go options. */
+        ClickableText _mainMenu = ClickableText(Color::Cyan, 20, 500.0F, 295.0F, "Exit To Main Menu"); /**< ClickableText for the menu. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
-        IGraphicalModule *_graphicalModule;
-        ModuleProvider &_provider;
-
-        /**
-         * @brief Checks if the left mouse button is clicked.
-         *
-         * @return True if the left mouse button is clicked, false otherwise.
-         */
-        bool isMouseClicked() const {
-            return sf::Mouse::isButtonPressed(sf::Mouse::Left);
-        }
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
     };
 }

@@ -115,17 +115,21 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        Session <a class="code hl_function" href="classRType_1_1SessionManager.html#ab803be799d673e55c7f3964804bc8e2b">getClientSession</a>(<span class="keywordtype">int</span> sessionId);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">void</span> setWindowWidth(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;windowWidth) {_windowWidth = windowWidth;};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">void</span> deleteSession(<span class="keywordtype">int</span> sessionID);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordtype">void</span> setWindowHeight(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;windowHeight) {_windowHeight = windowHeight;};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordtype">void</span> setWindowWidth(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;windowWidth) {_windowWidth = windowWidth;};</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        [[nodiscard]] <span class="keywordtype">float</span> getWindowWidth()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _windowWidth;};</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">void</span> setWindowHeight(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;windowHeight) {_windowHeight = windowHeight;};</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        [[nodiscard]] <span class="keywordtype">float</span> getWindowHeight()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _windowHeight;};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        [[nodiscard]] std::map&lt;int, Session&gt; getSessions() {<span class="keywordflow">return</span> _sessionMap;};</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    };</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        [[nodiscard]] <span class="keywordtype">float</span> getWindowWidth()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _windowWidth;};</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        [[nodiscard]] <span class="keywordtype">float</span> getWindowHeight()<span class="keyword"> const </span>{<span class="keywordflow">return</span> _windowHeight;};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    };</div>
 </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
 <div class="ttc" id="aclassRType_1_1SessionManager_html"><div class="ttname"><a href="classRType_1_1SessionManager.html">RType::SessionManager</a></div><div class="ttdef"><b>Definition</b> SessionManager.hpp:19</div></div>
 <div class="ttc" id="aclassRType_1_1SessionManager_html_ab803be799d673e55c7f3964804bc8e2b"><div class="ttname"><a href="classRType_1_1SessionManager.html#ab803be799d673e55c7f3964804bc8e2b">RType::SessionManager::getClientSession</a></div><div class="ttdeci">Session getClientSession(int sessionId)</div><div class="ttdef"><b>Definition</b> SessionManager.cpp:10</div></div>
 <div class="ttc" id="aclassRType_1_1SessionManager_html_ac1401f355dd66a9372adc6da92084790"><div class="ttname"><a href="classRType_1_1SessionManager.html#ac1401f355dd66a9372adc6da92084790">RType::SessionManager::SessionManager</a></div><div class="ttdeci">SessionManager()=default</div></div>

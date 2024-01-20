@@ -23,8 +23,8 @@ namespace RType {
     class ModuleLoader {
     public:
         explicit ModuleLoader(const std::string &path);
-        ModuleLoader(ModuleLoader &&instance) noexcept = delete;
-        ModuleLoader(ModuleLoader &instance) = delete;
+        ModuleLoader(ModuleLoader &&_instance) noexcept = delete;
+        ModuleLoader(ModuleLoader &_instance) = delete;
         ~ModuleLoader();
 
         T *load();
@@ -151,7 +151,7 @@ namespace RType {
 namespace RType {
 
     enum class ModuleType {
-        ANIMATION, SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN
+        ANIMATION, SOUND, CONSOLE, PARTICLE, GRAPHICAL, LOGGER, UNKNOWN
     };
 
     /**
@@ -250,6 +250,8 @@ namespace RType {
             loadedModule = callConstructor("initializeParticleModule");
         if (_type == ModuleType::GRAPHICAL)
             loadedModule = callConstructor("initializeGraphicalModule");
+        if (_type == ModuleType::LOGGER)
+            loadedModule = callConstructor("initializeLoggerModule");
         if (loadedModule == nullptr)
             throw ModuleException("Invalid loadedModule provided");
         _module = loadedModule;
@@ -279,22 +281,18 @@ namespace RType {
 
         if (handle == nullptr)
             return ModuleType::UNKNOWN;
-
         if (dlsym(handle, "initializeSoundModule") != nullptr)
             return ModuleType::SOUND;
-
         if (dlsym(handle, "initializeConsoleModule") != nullptr)
             return ModuleType::CONSOLE;
-
         if (dlsym(handle, "initializeParticleModule") != nullptr)
             return ModuleType::PARTICLE;
-
         if (dlsym(handle, "initializeGraphicalModule") != nullptr)
             return ModuleType::GRAPHICAL;
-
         if (dlsym(handle, "initializeAnimationModule") != nullptr)
             return ModuleType::ANIMATION;
-
+        if (dlsym(handle, "initializeLoggerModule") != nullptr)
+            return ModuleType::LOGGER;
         return ModuleType::UNKNOWN;
     }
 

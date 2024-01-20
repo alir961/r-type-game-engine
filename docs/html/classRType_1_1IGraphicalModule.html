@@ -110,31 +110,96 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a36ee72bafb8597146b226e072d6b7692"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bccf63c0db93bd808b649bfd413838e" id="r_a7bccf63c0db93bd808b649bfd413838e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7bccf63c0db93bd808b649bfd413838e">unload</a> ()=0</td></tr>
 <tr class="separator:a7bccf63c0db93bd808b649bfd413838e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb608edc7b7770a51b7f46b1c6fdbabd" id="r_adb608edc7b7770a51b7f46b1c6fdbabd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb608edc7b7770a51b7f46b1c6fdbabd">drawText</a> (sf::RenderWindow &amp;window, sf::Text text)=0</td></tr>
-<tr class="memdesc:adb608edc7b7770a51b7f46b1c6fdbabd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a text in SFML.  <br /></td></tr>
-<tr class="separator:adb608edc7b7770a51b7f46b1c6fdbabd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80f2e13a962f933de92d869c7af338c2" id="r_a80f2e13a962f933de92d869c7af338c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80f2e13a962f933de92d869c7af338c2">drawSprite</a> (sf::RenderWindow &amp;window, sf::Sprite sprite)=0</td></tr>
-<tr class="memdesc:a80f2e13a962f933de92d869c7af338c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite in SFMl.  <br /></td></tr>
-<tr class="separator:a80f2e13a962f933de92d869c7af338c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abea2408238f4a93d67689e580cbef436" id="r_abea2408238f4a93d67689e580cbef436"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abea2408238f4a93d67689e580cbef436">drawRect</a> (sf::RenderWindow &amp;window, sf::RectangleShape rect)=0</td></tr>
-<tr class="memdesc:abea2408238f4a93d67689e580cbef436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite in SFMl.  <br /></td></tr>
-<tr class="separator:abea2408238f4a93d67689e580cbef436"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9349cce0c13838a8793eb3b0e9ffae4" id="r_ab9349cce0c13838a8793eb3b0e9ffae4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9349cce0c13838a8793eb3b0e9ffae4">drawTextPro</a> (sf::RenderWindow &amp;window, const std::string &amp;colorName, unsigned int fontSize, float x, float y, const std::string &amp;initialText)=0</td></tr>
-<tr class="memdesc:ab9349cce0c13838a8793eb3b0e9ffae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a text like a pro in SFML.  <br /></td></tr>
-<tr class="separator:ab9349cce0c13838a8793eb3b0e9ffae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee17db74011e3ae6b24936238a83940e" id="r_aee17db74011e3ae6b24936238a83940e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee17db74011e3ae6b24936238a83940e">drawSpritePro</a> (sf::RenderWindow &amp;window, float spriteScaleX, float spriteScaleY, float x, float y, const std::string &amp;texturePath)=0</td></tr>
-<tr class="memdesc:aee17db74011e3ae6b24936238a83940e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite like a pro in SFMl.  <br /></td></tr>
-<tr class="separator:aee17db74011e3ae6b24936238a83940e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee3d73733a87aff76dbd623d025c523a" id="r_aee3d73733a87aff76dbd623d025c523a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee3d73733a87aff76dbd623d025c523a">drawRectPro</a> (sf::RenderWindow &amp;window, float rectSizeX, float rectSizeY, float x, float y, float outlineThickness, const std::string &amp;lineColor, const std::string &amp;fillColor, const std::string &amp;texturePath)=0</td></tr>
-<tr class="memdesc:aee3d73733a87aff76dbd623d025c523a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite like a pro in SFMl.  <br /></td></tr>
-<tr class="separator:aee3d73733a87aff76dbd623d025c523a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e7e91473984ce7c1e7ecfdbad87aec0" id="r_a4e7e91473984ce7c1e7ecfdbad87aec0"><td class="memItemLeft" align="right" valign="top"><a id="a4e7e91473984ce7c1e7ecfdbad87aec0" name="a4e7e91473984ce7c1e7ecfdbad87aec0"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>openWindow</b> (uint32_t width, uint32_t height, std::string title)=0</td></tr>
+<tr class="separator:a4e7e91473984ce7c1e7ecfdbad87aec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3eb5c37847f439d524e0daf6f3a9854" id="r_aa3eb5c37847f439d524e0daf6f3a9854"><td class="memItemLeft" align="right" valign="top"><a id="aa3eb5c37847f439d524e0daf6f3a9854" name="aa3eb5c37847f439d524e0daf6f3a9854"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()=0</td></tr>
+<tr class="separator:aa3eb5c37847f439d524e0daf6f3a9854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26a72fb1359213e2c5670e95abcc9683" id="r_a26a72fb1359213e2c5670e95abcc9683"><td class="memItemLeft" align="right" valign="top"><a id="a26a72fb1359213e2c5670e95abcc9683" name="a26a72fb1359213e2c5670e95abcc9683"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOpen</b> ()=0</td></tr>
+<tr class="separator:a26a72fb1359213e2c5670e95abcc9683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90d52daec923a091cf87c6ad05256ab3" id="r_a90d52daec923a091cf87c6ad05256ab3"><td class="memItemLeft" align="right" valign="top"><a id="a90d52daec923a091cf87c6ad05256ab3" name="a90d52daec923a091cf87c6ad05256ab3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()=0</td></tr>
+<tr class="separator:a90d52daec923a091cf87c6ad05256ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45169998b82ace04ef59cf75f9ddecac" id="r_a45169998b82ace04ef59cf75f9ddecac"><td class="memItemLeft" align="right" valign="top"><a id="a45169998b82ace04ef59cf75f9ddecac" name="a45169998b82ace04ef59cf75f9ddecac"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>display</b> ()=0</td></tr>
+<tr class="separator:a45169998b82ace04ef59cf75f9ddecac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7022e4a2a95cd15aeba124dd6e9adcf" id="r_ad7022e4a2a95cd15aeba124dd6e9adcf"><td class="memItemLeft" align="right" valign="top"><a id="ad7022e4a2a95cd15aeba124dd6e9adcf" name="ad7022e4a2a95cd15aeba124dd6e9adcf"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>pollEvent</b> (sf::Event &amp;event)=0</td></tr>
+<tr class="separator:ad7022e4a2a95cd15aeba124dd6e9adcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eacb4d784d83892fd8fb4c9a6a089e2" id="r_a8eacb4d784d83892fd8fb4c9a6a089e2"><td class="memItemLeft" align="right" valign="top"><a id="a8eacb4d784d83892fd8fb4c9a6a089e2" name="a8eacb4d784d83892fd8fb4c9a6a089e2"></a>
+virtual Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getMousePosition</b> ()=0</td></tr>
+<tr class="separator:a8eacb4d784d83892fd8fb4c9a6a089e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae563de87dd5507a00b63f624bfb6af55" id="r_ae563de87dd5507a00b63f624bfb6af55"><td class="memItemLeft" align="right" valign="top"><a id="ae563de87dd5507a00b63f624bfb6af55" name="ae563de87dd5507a00b63f624bfb6af55"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isMouseClicked</b> ()=0</td></tr>
+<tr class="separator:ae563de87dd5507a00b63f624bfb6af55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4d91f0b140b1f5d77563d8db733567" id="r_a4d4d91f0b140b1f5d77563d8db733567"><td class="memItemLeft" align="right" valign="top">virtual TextComponent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d4d91f0b140b1f5d77563d8db733567">createText</a> (const std::string &amp;text)=0</td></tr>
+<tr class="memdesc:a4d4d91f0b140b1f5d77563d8db733567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a text in SFML.  <br /></td></tr>
+<tr class="separator:a4d4d91f0b140b1f5d77563d8db733567"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab561cf56cc67498bfdc7fd2e997e28f1" id="r_ab561cf56cc67498bfdc7fd2e997e28f1"><td class="memItemLeft" align="right" valign="top"><a id="ab561cf56cc67498bfdc7fd2e997e28f1" name="ab561cf56cc67498bfdc7fd2e997e28f1"></a>
+virtual RectShape&#160;</td><td class="memItemRight" valign="bottom"><b>createRectShape</b> ()=0</td></tr>
+<tr class="separator:ab561cf56cc67498bfdc7fd2e997e28f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33df70b092d59f7cf9a0d85722ac1427" id="r_a33df70b092d59f7cf9a0d85722ac1427"><td class="memItemLeft" align="right" valign="top"><a id="a33df70b092d59f7cf9a0d85722ac1427" name="a33df70b092d59f7cf9a0d85722ac1427"></a>
+virtual SpriteComponent&#160;</td><td class="memItemRight" valign="bottom"><b>createSprite</b> (const std::string &amp;texturePath)=0</td></tr>
+<tr class="separator:a33df70b092d59f7cf9a0d85722ac1427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84e4a26881e9f28bedd6b1359df212f7" id="r_a84e4a26881e9f28bedd6b1359df212f7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84e4a26881e9f28bedd6b1359df212f7">drawSprite</a> (sf::Sprite sprite)=0</td></tr>
+<tr class="memdesc:a84e4a26881e9f28bedd6b1359df212f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite in SFMl.  <br /></td></tr>
+<tr class="separator:a84e4a26881e9f28bedd6b1359df212f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be356ca963074f8394fcaebb7155878" id="r_a9be356ca963074f8394fcaebb7155878"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9be356ca963074f8394fcaebb7155878">drawRect</a> (sf::RectangleShape rect)=0</td></tr>
+<tr class="memdesc:a9be356ca963074f8394fcaebb7155878"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite in SFMl.  <br /></td></tr>
+<tr class="separator:a9be356ca963074f8394fcaebb7155878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68530e9ddb6fc9a51112f28a14440797" id="r_a68530e9ddb6fc9a51112f28a14440797"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68530e9ddb6fc9a51112f28a14440797">drawTextPro</a> (const std::string &amp;colorName, unsigned int fontSize, float x, float y, const std::string &amp;initialText)=0</td></tr>
+<tr class="memdesc:a68530e9ddb6fc9a51112f28a14440797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a text like a pro in SFML.  <br /></td></tr>
+<tr class="separator:a68530e9ddb6fc9a51112f28a14440797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac5b8f1457aa8602ba0acb51e1921aa3" id="r_aac5b8f1457aa8602ba0acb51e1921aa3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac5b8f1457aa8602ba0acb51e1921aa3">drawSpritePro</a> (float spriteScaleX, float spriteScaleY, float x, float y, const std::string &amp;texturePath)=0</td></tr>
+<tr class="memdesc:aac5b8f1457aa8602ba0acb51e1921aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite like a pro in SFMl.  <br /></td></tr>
+<tr class="separator:aac5b8f1457aa8602ba0acb51e1921aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087b7130c072397a39c9a308b0825a8a" id="r_a087b7130c072397a39c9a308b0825a8a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a087b7130c072397a39c9a308b0825a8a">drawRectPro</a> (float rectSizeX, float rectSizeY, float x, float y, float outlineThickness, const std::string &amp;lineColor, const std::string &amp;fillColor, const std::string &amp;texturePath)=0</td></tr>
+<tr class="memdesc:a087b7130c072397a39c9a308b0825a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a sprite like a pro in SFMl.  <br /></td></tr>
+<tr class="separator:a087b7130c072397a39c9a308b0825a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22266f85b2f4b72b4bf5c50a0c03e88e" id="r_a22266f85b2f4b72b4bf5c50a0c03e88e"><td class="memItemLeft" align="right" valign="top">virtual sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22266f85b2f4b72b4bf5c50a0c03e88e">getColorFromString</a> (const std::string &amp;colorName)=0</td></tr>
-<tr class="memdesc:a22266f85b2f4b72b4bf5c50a0c03e88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sf::Color corresponding to the colorName param.  <br /></td></tr>
+<tr class="memdesc:a22266f85b2f4b72b4bf5c50a0c03e88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sf::RGB corresponding to the colorName param.  <br /></td></tr>
 <tr class="separator:a22266f85b2f4b72b4bf5c50a0c03e88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="abea2408238f4a93d67689e580cbef436" name="abea2408238f4a93d67689e580cbef436"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abea2408238f4a93d67689e580cbef436">&#9670;&#160;</a></span>drawRect()</h2>
+<a id="a4d4d91f0b140b1f5d77563d8db733567" name="a4d4d91f0b140b1f5d77563d8db733567"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4d91f0b140b1f5d77563d8db733567">&#9670;&#160;</a></span>createText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual TextComponent RType::IGraphicalModule::createText </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>text</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Draw a text in SFML. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window,text</td><td>The window where to draw, the text we want to display. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#a69dc5a7e48f55e3821d86f827c0958c2">RType::GraphicalModule</a>.</p>
+
+</div>
+</div>
+<a id="a9be356ca963074f8394fcaebb7155878" name="a9be356ca963074f8394fcaebb7155878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9be356ca963074f8394fcaebb7155878">&#9670;&#160;</a></span>drawRect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,12 +210,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void RType::IGraphicalModule::drawRect </td>
           <td>(</td>
-          <td class="paramtype">sf::RenderWindow &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">sf::RectangleShape</td>          <td class="paramname"><span class="paramname"><em>rect</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">sf::RectangleShape</td>          <td class="paramname"><span class="paramname"><em>rect</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -168,12 +229,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#aba06732cdfba0d103760fb0fd23e9d58">RType::GraphicalModule</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#ab2045aefbea51cbb19d401b1e9795b5e">RType::GraphicalModule</a>.</p>
 
 </div>
 </div>
-<a id="aee3d73733a87aff76dbd623d025c523a" name="aee3d73733a87aff76dbd623d025c523a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee3d73733a87aff76dbd623d025c523a">&#9670;&#160;</a></span>drawRectPro()</h2>
+<a id="a087b7130c072397a39c9a308b0825a8a" name="a087b7130c072397a39c9a308b0825a8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087b7130c072397a39c9a308b0825a8a">&#9670;&#160;</a></span>drawRectPro()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,11 +245,6 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void RType::IGraphicalModule::drawRectPro </td>
           <td>(</td>
-          <td class="paramtype">sf::RenderWindow &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>rectSizeX</em>, </span></td>
         </tr>
         <tr>
@@ -242,12 +298,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#afef9338bf7213923f7e2f2cbd296ec5c">RType::GraphicalModule</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#ac7a109c96587d6a8f847a9f6fe773416">RType::GraphicalModule</a>.</p>
 
 </div>
 </div>
-<a id="a80f2e13a962f933de92d869c7af338c2" name="a80f2e13a962f933de92d869c7af338c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80f2e13a962f933de92d869c7af338c2">&#9670;&#160;</a></span>drawSprite()</h2>
+<a id="a84e4a26881e9f28bedd6b1359df212f7" name="a84e4a26881e9f28bedd6b1359df212f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84e4a26881e9f28bedd6b1359df212f7">&#9670;&#160;</a></span>drawSprite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,12 +314,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void RType::IGraphicalModule::drawSprite </td>
           <td>(</td>
-          <td class="paramtype">sf::RenderWindow &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">sf::Sprite</td>          <td class="paramname"><span class="paramname"><em>sprite</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">sf::Sprite</td>          <td class="paramname"><span class="paramname"><em>sprite</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -281,12 +333,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#aa2fba7a0f1a7a2756a6399efdbb73b66">RType::GraphicalModule</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#aceb41883edf7253a2707b6cab5e7db02">RType::GraphicalModule</a>.</p>
 
 </div>
 </div>
-<a id="aee17db74011e3ae6b24936238a83940e" name="aee17db74011e3ae6b24936238a83940e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee17db74011e3ae6b24936238a83940e">&#9670;&#160;</a></span>drawSpritePro()</h2>
+<a id="aac5b8f1457aa8602ba0acb51e1921aa3" name="aac5b8f1457aa8602ba0acb51e1921aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac5b8f1457aa8602ba0acb51e1921aa3">&#9670;&#160;</a></span>drawSpritePro()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,11 +349,6 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void RType::IGraphicalModule::drawSpritePro </td>
           <td>(</td>
-          <td class="paramtype">sf::RenderWindow &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>spriteScaleX</em>, </span></td>
         </tr>
         <tr>
@@ -340,51 +387,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#ae42ecf1d38ac7d8a9ecb9f6a436fe58d">RType::GraphicalModule</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#a29b3b83ff54676be525dfb994fb1732b">RType::GraphicalModule</a>.</p>
 
 </div>
 </div>
-<a id="adb608edc7b7770a51b7f46b1c6fdbabd" name="adb608edc7b7770a51b7f46b1c6fdbabd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb608edc7b7770a51b7f46b1c6fdbabd">&#9670;&#160;</a></span>drawText()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void RType::IGraphicalModule::drawText </td>
-          <td>(</td>
-          <td class="paramtype">sf::RenderWindow &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Text</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Draw a text in SFML. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">window,text</td><td>The window where to draw, the text we want to display. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#a146fb30b248d36f0b27e9385c196f497">RType::GraphicalModule</a>.</p>
-
-</div>
-</div>
-<a id="ab9349cce0c13838a8793eb3b0e9ffae4" name="ab9349cce0c13838a8793eb3b0e9ffae4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9349cce0c13838a8793eb3b0e9ffae4">&#9670;&#160;</a></span>drawTextPro()</h2>
+<a id="a68530e9ddb6fc9a51112f28a14440797" name="a68530e9ddb6fc9a51112f28a14440797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68530e9ddb6fc9a51112f28a14440797">&#9670;&#160;</a></span>drawTextPro()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,11 +403,6 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void RType::IGraphicalModule::drawTextPro </td>
           <td>(</td>
-          <td class="paramtype">sf::RenderWindow &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>colorName</em>, </span></td>
         </tr>
         <tr>
@@ -438,7 +441,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#ab4e8430e926ae4553f61586320777bb3">RType::GraphicalModule</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1GraphicalModule.html#ae6d21837538f9088226ab11faeef7db4">RType::GraphicalModule</a>.</p>
 
 </div>
 </div>
@@ -465,7 +468,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return the sf::Color corresponding to the colorName param. </p>
+<p>Return the sf::RGB corresponding to the colorName param. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">colorName</td><td>The color we want to get into SFML. </td></tr>
@@ -532,7 +535,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>engine/include/engine/modules/<a class="el" href="IGraphicalModule_8hpp_source.html">IGraphicalModule.hpp</a></li>
+<li>engine/include/engine/modules/graphical/<a class="el" href="IGraphicalModule_8hpp_source.html">IGraphicalModule.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

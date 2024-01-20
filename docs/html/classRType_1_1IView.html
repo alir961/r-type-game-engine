@@ -77,6 +77,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRType_1_1IView-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RType::IView Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
@@ -87,25 +88,21 @@ Inheritance diagram for RType::IView:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRType_1_1IView__inherit__graph.png" border="0" usemap="#aRType_1_1IView_inherit__map" alt="Inheritance graph"/></div>
 <map name="aRType_1_1IView_inherit__map" id="aRType_1_1IView_inherit__map">
-<area shape="rect" title=" " alt="" coords="176,179,273,204"/>
-<area shape="rect" href="classRType_1_1DeadView.html" title="Represents a state where entities are not drawn." alt="" coords="329,5,452,31"/>
-<area shape="poly" title=" " alt="" coords="234,163,266,102,290,69,319,40,337,29,340,34,323,44,294,72,271,104,239,166"/>
-<area shape="rect" href="classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="" coords="326,55,454,80"/>
-<area shape="poly" title=" " alt="" coords="242,165,276,126,320,89,340,79,343,83,322,94,279,130,246,168"/>
-<area shape="rect" href="classRType_1_1LoadView.html" title=" " alt="" coords="329,104,451,130"/>
-<area shape="poly" title=" " alt="" coords="261,168,320,138,347,128,349,133,322,143,263,173"/>
-<area shape="rect" href="classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="" coords="328,153,453,179"/>
-<area shape="poly" title=" " alt="" coords="288,179,326,173,327,178,289,184"/>
-<area shape="rect" href="classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="" coords="328,203,453,228"/>
-<area shape="poly" title=" " alt="" coords="289,198,327,204,326,209,288,203"/>
-<area shape="rect" href="classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="" coords="321,252,459,278"/>
-<area shape="poly" title=" " alt="" coords="263,210,322,238,349,249,347,254,320,243,261,214"/>
-<area shape="rect" href="classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="" coords="325,301,455,327"/>
-<area shape="poly" title=" " alt="" coords="246,215,280,252,322,288,343,298,341,303,320,292,276,256,242,218"/>
-<area shape="rect" href="classRType_1_1WinView.html" title="Represents a state where entities are not drawn." alt="" coords="333,351,448,376"/>
-<area shape="poly" title=" " alt="" coords="239,217,271,278,294,310,323,337,340,348,337,352,319,342,290,313,266,281,234,220"/>
-<area shape="rect" href="classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,179,128,204"/>
-<area shape="poly" title=" " alt="" coords="144,189,175,189,175,194,144,194"/>
+<area shape="rect" title=" " alt="" coords="179,132,278,159"/>
+<area shape="rect" href="classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="" coords="331,5,461,32"/>
+<area shape="poly" title=" " alt="" coords="247,118,280,79,325,42,347,30,349,35,327,46,284,83,251,121"/>
+<area shape="rect" href="classRType_1_1LoadView.html" title=" " alt="" coords="335,56,458,83"/>
+<area shape="poly" title=" " alt="" coords="266,122,325,92,353,81,355,86,327,97,268,127"/>
+<area shape="rect" href="classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="" coords="333,107,459,133"/>
+<area shape="poly" title=" " alt="" coords="293,133,332,127,333,132,293,138"/>
+<area shape="rect" href="classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="" coords="333,157,460,184"/>
+<area shape="poly" title=" " alt="" coords="293,152,333,158,332,164,293,158"/>
+<area shape="rect" href="classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="" coords="326,208,466,235"/>
+<area shape="poly" title=" " alt="" coords="268,164,327,194,355,205,353,210,325,198,266,169"/>
+<area shape="rect" href="classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="" coords="330,259,462,285"/>
+<area shape="poly" title=" " alt="" coords="251,169,284,208,327,244,349,256,347,260,325,249,280,212,247,173"/>
+<area shape="rect" href="classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,132,131,159"/>
+<area shape="poly" title=" " alt="" coords="146,143,178,143,178,148,146,148"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -113,9 +110,13 @@ Collaboration diagram for RType::IView:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRType_1_1IView__coll__graph.png" border="0" usemap="#aRType_1_1IView_coll__map" alt="Collaboration graph"/></div>
 <map name="aRType_1_1IView_coll__map" id="aRType_1_1IView_coll__map">
-<area shape="rect" title=" " alt="" coords="18,79,115,105"/>
-<area shape="rect" href="classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,5,128,31"/>
-<area shape="poly" title=" " alt="" coords="69,46,69,79,64,79,64,46"/>
+<area shape="rect" title=" " alt="" coords="40,172,139,199"/>
+<area shape="rect" href="classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,81,131,108"/>
+<area shape="poly" title=" " alt="" coords="77,123,89,171,84,172,72,124"/>
+<area shape="rect" href="classRType_1_1ILoggerModule.html" title=" " alt="" coords="155,81,306,108"/>
+<area shape="poly" title=" " alt="" coords="199,119,111,174,108,169,196,114"/>
+<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="175,5,287,32"/>
+<area shape="poly" title=" " alt="" coords="233,47,233,81,228,81,228,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -124,15 +125,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a551f11c34d107bd6e16b1d33edd682d5" id="r_a551f11c34d107bd6e16b1d33edd682d5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a551f11c34d107bd6e16b1d33edd682d5">update</a> ()=0</td></tr>
 <tr class="memdesc:a551f11c34d107bd6e16b1d33edd682d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function for update graphical object for next render.  <br /></td></tr>
 <tr class="separator:a551f11c34d107bd6e16b1d33edd682d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31935d64339edb04fa7ced738a240072" id="r_a31935d64339edb04fa7ced738a240072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31935d64339edb04fa7ced738a240072">draw</a> (sf::RenderWindow &amp;window, std::vector&lt; GraphicEntityPtr &gt; entities) override=0</td></tr>
-<tr class="memdesc:a31935d64339edb04fa7ced738a240072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function for drawing objects on an SFML RenderWindow.  <br /></td></tr>
-<tr class="separator:a31935d64339edb04fa7ced738a240072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45abf36d19a937efc1b9e3215a9cbdfc" id="r_a45abf36d19a937efc1b9e3215a9cbdfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45abf36d19a937efc1b9e3215a9cbdfc">draw</a> (std::vector&lt; GraphicEntityPtr &gt; entities) override=0</td></tr>
+<tr class="memdesc:a45abf36d19a937efc1b9e3215a9cbdfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function for drawing objects on an SFML RenderWindow.  <br /></td></tr>
+<tr class="separator:a45abf36d19a937efc1b9e3215a9cbdfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a591f5bd070378fe2daffe1cc32f1c02f" id="r_a591f5bd070378fe2daffe1cc32f1c02f"><td class="memItemLeft" align="right" valign="top"><a id="a591f5bd070378fe2daffe1cc32f1c02f" name="a591f5bd070378fe2daffe1cc32f1c02f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayerEntity</b> (const GraphicEntityPtr &amp;playerEntity)</td></tr>
 <tr class="separator:a591f5bd070378fe2daffe1cc32f1c02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a508c70ec9a94df5c2d3fea26078977b1" id="r_a508c70ec9a94df5c2d3fea26078977b1"><td class="memItemLeft" align="right" valign="top"><a id="a508c70ec9a94df5c2d3fea26078977b1" name="a508c70ec9a94df5c2d3fea26078977b1"></a>
 GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayerEntity</b> ()</td></tr>
 <tr class="separator:a508c70ec9a94df5c2d3fea26078977b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a61421ee4d26f36f4cc5f8477fc18f78f" id="r_a61421ee4d26f36f4cc5f8477fc18f78f"><td class="memItemLeft" align="right" valign="top"><a id="a61421ee4d26f36f4cc5f8477fc18f78f" name="a61421ee4d26f36f4cc5f8477fc18f78f"></a>
+<a class="el" href="classRType_1_1ILoggerModule.html">ILoggerModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_logger</b> = ModuleProvider::getInstance()-&gt;get&lt;<a class="el" href="classRType_1_1ILoggerModule.html">ILoggerModule</a>&gt;(ModuleType::LOGGER)</td></tr>
+<tr class="separator:a61421ee4d26f36f4cc5f8477fc18f78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -141,8 +148,8 @@ GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEn
 <tr class="separator:aa28182338e24130b8c865eff81c06188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a31935d64339edb04fa7ced738a240072" name="a31935d64339edb04fa7ced738a240072"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31935d64339edb04fa7ced738a240072">&#9670;&#160;</a></span>draw()</h2>
+<a id="a45abf36d19a937efc1b9e3215a9cbdfc" name="a45abf36d19a937efc1b9e3215a9cbdfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45abf36d19a937efc1b9e3215a9cbdfc">&#9670;&#160;</a></span>draw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,12 +160,8 @@ GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEn
         <tr>
           <td class="memname">void RType::IView::draw </td>
           <td>(</td>
-          <td class="paramtype">sf::RenderWindow &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">std::vector&lt; GraphicEntityPtr &gt;</td>          <td class="paramname"><span class="paramname"><em>entities</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::vector&lt; GraphicEntityPtr &gt;</td>          <td class="paramname"><span class="paramname"><em>entities</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -177,9 +180,9 @@ GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEn
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classRType_1_1IDrawable.html#af1fa08f3efecd0a6b0472dca57087a11">RType::IDrawable</a>.</p>
+<p>Implements <a class="el" href="classRType_1_1IDrawable.html#a53022b99a6e30704d03c1ef79859b7f3">RType::IDrawable</a>.</p>
 
-<p>Implemented in <a class="el" href="classRType_1_1DeadView.html#aa1feb6d3af444f4598c028f191cfec66">RType::DeadView</a>, <a class="el" href="classRType_1_1LoadView.html#a506f6b5ba4bb68e6415481cd08df6f88">RType::LoadView</a>, <a class="el" href="classRType_1_1LoginView.html#a35386ee296d947aa252dfd4b04eeae53">RType::LoginView</a>, <a class="el" href="classRType_1_1GameView.html#a5698654504a04c5cac62dc35e8d8e762">RType::GameView</a>, <a class="el" href="classRType_1_1WinView.html#a86bd1355616bf65a4094a005e39e03c7">RType::WinView</a>, <a class="el" href="classRType_1_1MenuView.html#acb015c2a1fe6c6648311c87a3c1af16f">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#aa051060408c5198ac15b71081568f2b0">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#adf12497e30cfb6ca41f5df1aa069d22b">RType::PauseView</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1LoginView.html#a4aacfb205b81f13f5980875ca00729be">RType::LoginView</a>, <a class="el" href="classRType_1_1GameView.html#ae68b2fbba96231ad2c502edbfd4b4e3b">RType::GameView</a>, <a class="el" href="classRType_1_1LoadView.html#a0e1580daf710d2a52b8fd07ed041bc7c">RType::LoadView</a>, <a class="el" href="classRType_1_1MenuView.html#aacc37fd76e55b8da46ef63e588dfadce">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#a9e692a5f8d1c8793ba5bd3662e18d335">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#a13cc275b33aa5d432c844559f16ef097">RType::PauseView</a>.</p>
 
 </div>
 </div>
@@ -208,7 +211,7 @@ GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEn
 
 <p>Pure virtual function for update graphical object for next render. </p>
 
-<p>Implemented in <a class="el" href="classRType_1_1WinView.html#a015582c320b1bb60143f321e1c9a650b">RType::WinView</a>, <a class="el" href="classRType_1_1DeadView.html#a4f89d75e1aea0b63dfa00a9402f2b04b">RType::DeadView</a>, <a class="el" href="classRType_1_1GameView.html#a63452c08818d8fd86301a4e27c354de5">RType::GameView</a>, <a class="el" href="classRType_1_1LoadView.html#a9b7f391d9509546b46f16842c54105fe">RType::LoadView</a>, <a class="el" href="classRType_1_1LoginView.html#a7b2ca5867cd514f51ed210e5f7cbe7c3">RType::LoginView</a>, <a class="el" href="classRType_1_1MenuView.html#a6ff80a405c1ad4e3dd76689878a6a1e4">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#af29d5ab5737646f92a72c1327360ef25">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#a7b1f0e7b2ac7d2a40f433fb7a817d2f6">RType::PauseView</a>.</p>
+<p>Implemented in <a class="el" href="classRType_1_1GameView.html#a63452c08818d8fd86301a4e27c354de5">RType::GameView</a>, <a class="el" href="classRType_1_1LoadView.html#a9b7f391d9509546b46f16842c54105fe">RType::LoadView</a>, <a class="el" href="classRType_1_1LoginView.html#a7b2ca5867cd514f51ed210e5f7cbe7c3">RType::LoginView</a>, <a class="el" href="classRType_1_1MenuView.html#a6ff80a405c1ad4e3dd76689878a6a1e4">RType::MenuView</a>, <a class="el" href="classRType_1_1OptionsView.html#af29d5ab5737646f92a72c1327360ef25">RType::OptionsView</a>, and <a class="el" href="classRType_1_1PauseView.html#a7b1f0e7b2ac7d2a40f433fb7a817d2f6">RType::PauseView</a>.</p>
 
 </div>
 </div>

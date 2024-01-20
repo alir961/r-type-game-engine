@@ -1,3 +1,21 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structRType_1_1SoundDetails.html" title=" " alt="" coords="5,5,147,31"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IModule.html" title=" " alt="" coords="5,132,118,159"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1ConsoleModule.html" title=" " alt="" coords="173,5,329,32"/>
+<area shape="poly" id="edge34_Node000000_Node000001" title=" " alt="" coords="81,118,117,79,164,42,189,30,191,35,167,46,120,83,84,122"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1IAnimationModule.html" title=" " alt="" coords="166,56,336,83"/>
+<area shape="poly" id="edge35_Node000000_Node000002" title=" " alt="" coords="101,122,165,92,198,81,199,86,167,97,103,127"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="167,107,335,133"/>
+<area shape="poly" id="edge37_Node000000_Node000004" title=" " alt="" coords="133,133,166,129,167,134,133,138"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1ILoggerModule.html" title=" " alt="" coords="175,157,327,184"/>
+<area shape="poly" id="edge39_Node000000_Node000006" title=" " alt="" coords="133,152,175,158,174,163,133,157"/>
+<area shape="rect" id="Node000008" href="$classRType_1_1ParticleModule.html" title=" " alt="" coords="175,208,327,235"/>
+<area shape="poly" id="edge41_Node000000_Node000008" title=" " alt="" coords="103,164,167,194,199,205,198,210,165,198,101,169"/>
+<area shape="rect" id="Node000009" href="$classRType_1_1SoundModule.html" title=" " alt="" coords="178,259,324,285"/>
+<area shape="poly" id="edge42_Node000000_Node000009" title=" " alt="" coords="84,169,120,208,167,244,191,256,189,260,164,249,117,212,81,173"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1AnimationModule.html" title=" " alt="" coords="384,56,550,83"/>
+<area shape="poly" id="edge36_Node000002_Node000003" title=" " alt="" coords="352,67,383,67,383,72,352,72"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1GraphicalModule.html" title=" " alt="" coords="386,107,549,133"/>
+<area shape="poly" id="edge38_Node000004_Node000005" title=" " alt="" coords="350,117,385,117,385,123,350,123"/>
+<area shape="rect" id="Node000007" href="$classRType_1_1LoggerModule.html" title=" " alt="" coords="394,157,541,184"/>
+<area shape="poly" id="edge40_Node000006_Node000007" title=" " alt="" coords="342,168,393,168,393,173,342,173"/>
 </map>

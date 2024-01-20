@@ -1,3 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1RectBox.html" title="Represents a graphical rectangle box." alt="" coords="5,5,119,31"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IDataCompression.html" title=" " alt="" coords="5,56,181,83"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1HuffmanAlgorithm.html" title=" " alt="" coords="229,5,399,32"/>
+<area shape="poly" id="edge17_Node000000_Node000001" title=" " alt="" coords="169,49,252,30,253,35,170,55"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1LZ4Algorithm.html" title=" " alt="" coords="242,56,386,83"/>
+<area shape="poly" id="edge18_Node000000_Node000002" title=" " alt="" coords="196,67,242,67,242,72,196,72"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1RLEAlgorithm.html" title=" " alt="" coords="240,107,388,133"/>
+<area shape="poly" id="edge19_Node000000_Node000003" title=" " alt="" coords="170,84,253,103,252,109,169,89"/>
 </map>

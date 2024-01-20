@@ -1,26 +1,22 @@
 <map id="RType::GameView" name="RType::GameView">
-<area shape="rect" id="Node000001" title="Represents a state where entities are drawn." alt="" coords="787,229,915,255"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1IView.html" title=" " alt="" coords="515,47,612,72"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="628,74,696,99,731,117,764,137,790,159,812,184,843,227,839,230,808,187,786,163,761,142,729,121,694,104,626,79"/>
-<area shape="rect" id="Node000003" href="$classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="188,5,310,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="327,26,515,51,514,56,326,31"/>
-<area shape="rect" id="Node000004" href="$classRType_1_1ClientViewport.html" title="Represents the main game view handling graphics, input, and entities." alt="" coords="489,137,638,163"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="654,154,709,164,764,181,804,203,836,227,832,231,801,207,762,186,708,169,653,160"/>
-<area shape="rect" id="Node000005" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="167,153,332,179"/>
-<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="347,174,540,196,763,225,786,228,786,234,762,230,539,201,347,179"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="347,160,465,155,489,153,489,158,465,160,347,165"/>
-<area shape="rect" id="Node000006" href="$classRType_1_1IModule.html" title=" " alt="" coords="5,129,116,155"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="132,148,166,153,166,158,131,154"/>
-<area shape="rect" id="Node000007" href="$classRType_1_1IAnimationModule.html" title=" " alt="" coords="165,104,333,130"/>
-<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="131,130,164,126,165,131,131,135"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="349,125,489,140,489,145,348,130"/>
-<area shape="rect" id="Node000008" href="$classRType_1_1ModuleProvider.html" title="Class representing a module provider that manages loading and unloading of modules." alt="" coords="172,245,326,271"/>
-<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="342,253,786,241,786,247,342,258"/>
-<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="302,237,464,181,523,161,524,166,466,186,304,242"/>
-<area shape="rect" id="Node000009" href="$classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system." alt="" coords="176,55,322,80"/>
-<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="338,77,401,90,466,106,536,134,534,139,465,111,400,95,337,82"/>
-<area shape="rect" id="Node000010" href="$classRType_1_1TextBox.html" title="Represents a graphical text box for displaying and interacting with text." alt="" coords="508,333,619,359"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="635,357,698,358,731,353,761,342,789,324,811,300,841,254,845,257,816,303,792,328,764,347,732,358,699,363,635,362"/>
-<area shape="rect" id="Node000011" href="$classRType_1_1Background.html" title=" " alt="" coords="497,383,630,408"/>
-<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="646,403,705,399,734,391,761,379,793,351,817,317,833,282,843,255,848,256,838,284,821,319,797,355,764,383,736,396,706,404,646,408"/>
+<area shape="rect" id="Node000001" title="Represents a state where entities are drawn." alt="" coords="466,295,596,321"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1IView.html" title=" " alt="" coords="181,172,280,199"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="277,202,500,292,498,297,275,207"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,81,131,108"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,114,209,169,206,174,103,118"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1ILoggerModule.html" title=" " alt="" coords="155,81,306,108"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="233,124,233,171,228,171,228,124"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1IModule.html" title=" " alt="" coords="349,5,462,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="362,41,261,83,259,78,360,36"/>
+<area shape="rect" id="Node000008" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="498,81,665,108"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="450,36,552,78,550,83,448,41"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1ClickableText.html" title="Represents a graphical text box for displaying and interacting with text." alt="" coords="397,172,542,199"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="466,214,466,242,474,269,485,282,499,292,496,296,481,286,469,272,460,243,461,214"/>
+<area shape="rect" id="Node000007" href="$structRType_1_1RectFloat.html" title=" " alt="" coords="330,81,454,108"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="383,123,382,136,386,147,398,160,414,169,412,174,395,164,381,149,377,136,378,123"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="589,123,593,192,589,233,576,272,566,286,554,296,550,292,562,282,571,269,583,232,588,192,584,123"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="545,118,522,134,482,173,478,170,519,130,542,114"/>
+<area shape="rect" id="Node000009" href="$classRType_1_1Background.html" title=" " alt="" coords="670,172,805,199"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="618,114,716,169,714,174,616,118"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="709,210,612,273,563,297,560,292,609,268,707,206"/>
 </map>

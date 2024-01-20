@@ -18,13 +18,9 @@ void destroy(RType::ConsoleModule *library) {
 }
 }
 
-void RType::ConsoleModule::load() {
-    std::cout << "Load Console Module\n";
-}
+void RType::ConsoleModule::load() {}
 
-void RType::ConsoleModule::unload() {
-    std::cout << "Unload Console Module\n";
-}
+void RType::ConsoleModule::unload() {}
 
 void RType::ConsoleModule::addToHistory(const std::string &message) {
     _history.push_back(message);

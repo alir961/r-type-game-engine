@@ -11,6 +11,8 @@
 #include <engine/tools/Split.hpp>
 #include <iostream>
 #include "engine/tools/Thread.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
+#include "engine/modules/ModuleProvider.hpp"
 
 namespace RType {
 
@@ -82,6 +84,7 @@ namespace RType {
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         std::vector<std::string> _messageQueue;
         std::mutex _queueMutex;
+        ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
         int _clientID = -1;
         bool _connected = false;
         bool _stop = false;

@@ -91,45 +91,48 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">*/</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;./AComponent.hpp&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>RType {</div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html">   16</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1PositionComponent.html">PositionComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classRType_1_1AComponent.html">AComponent</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a53ab2067ab7daef5184abd594c24a99e">   22</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1PositionComponent.html#a53ab2067ab7daef5184abd594c24a99e">PositionComponent</a>(std::pair&lt;int, int&gt; position) : <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a4107f8efd1334c4834df3665d3aa0cf3">_position</a>(std::move(position)) {}</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a79d41c6736459035e36d6a04a9de489b">   28</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1PositionComponent.html#a79d41c6736459035e36d6a04a9de489b">setPositions</a>(std::pair&lt;int, int&gt; position) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a4107f8efd1334c4834df3665d3aa0cf3">_position</a> = position;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        }</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;./AComponent.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;../../modules/graphical/DataCommon.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span>RType {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html">   19</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classRType_1_1PositionComponent.html">PositionComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classRType_1_1AComponent.html">AComponent</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a7ae9683ef775007a3772a9bd3f2b0200">   25</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classRType_1_1PositionComponent.html#a7ae9683ef775007a3772a9bd3f2b0200">PositionComponent</a>(Vector2f position) : <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a9377f1a02b137cd7ad1d5d33309649fa">_position</a>(std::move(position)) {}</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a338ec619a8cd7e32b5d79831a9a12e5a">   31</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1PositionComponent.html#a338ec619a8cd7e32b5d79831a9a12e5a">setPositions</a>(Vector2f position) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a9377f1a02b137cd7ad1d5d33309649fa">_position</a> = position;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        }</div>
 </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a28b4a122706197d9617e0ceb2e6925c9">   36</a></span>        [[nodiscard]] std::pair&lt;int, int&gt; <a class="code hl_function" href="classRType_1_1PositionComponent.html#a28b4a122706197d9617e0ceb2e6925c9">getPositions</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a4107f8efd1334c4834df3665d3aa0cf3">_position</a>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a6047da34e5fc93bc83f31174073f06f6">   39</a></span>        [[nodiscard]] Vector2f <a class="code hl_function" href="classRType_1_1PositionComponent.html#a6047da34e5fc93bc83f31174073f06f6">getPosition</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a9377f1a02b137cd7ad1d5d33309649fa">_position</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        }</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a32982da9d25ec087d29736be71e8c695">   43</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1PositionComponent.html#a32982da9d25ec087d29736be71e8c695">update</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a32982da9d25ec087d29736be71e8c695">   46</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRType_1_1PositionComponent.html#a32982da9d25ec087d29736be71e8c695">update</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Component update\n&quot;</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        }</div>
 </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a4107f8efd1334c4834df3665d3aa0cf3">   48</a></span>        std::pair&lt;int, int&gt; <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a4107f8efd1334c4834df3665d3aa0cf3">_position</a>; </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    };</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classRType_1_1PositionComponent.html#a9377f1a02b137cd7ad1d5d33309649fa">   51</a></span>        Vector2f <a class="code hl_variable" href="classRType_1_1PositionComponent.html#a9377f1a02b137cd7ad1d5d33309649fa">_position</a> = Vector2f(0.0F, 0.0F); </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    };</div>
 </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
 <div class="ttc" id="aclassRType_1_1AComponent_html"><div class="ttname"><a href="classRType_1_1AComponent.html">RType::AComponent</a></div><div class="ttdoc">Base abstract for component.</div><div class="ttdef"><b>Definition</b> AComponent.hpp:16</div></div>
-<div class="ttc" id="aclassRType_1_1PositionComponent_html"><div class="ttname"><a href="classRType_1_1PositionComponent.html">RType::PositionComponent</a></div><div class="ttdoc">Base class for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:16</div></div>
-<div class="ttc" id="aclassRType_1_1PositionComponent_html_a28b4a122706197d9617e0ceb2e6925c9"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a28b4a122706197d9617e0ceb2e6925c9">RType::PositionComponent::getPositions</a></div><div class="ttdeci">std::pair&lt; int, int &gt; getPositions() const</div><div class="ttdoc">Get the position of the _entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:36</div></div>
-<div class="ttc" id="aclassRType_1_1PositionComponent_html_a32982da9d25ec087d29736be71e8c695"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a32982da9d25ec087d29736be71e8c695">RType::PositionComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:43</div></div>
-<div class="ttc" id="aclassRType_1_1PositionComponent_html_a4107f8efd1334c4834df3665d3aa0cf3"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a4107f8efd1334c4834df3665d3aa0cf3">RType::PositionComponent::_position</a></div><div class="ttdeci">std::pair&lt; int, int &gt; _position</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:48</div></div>
-<div class="ttc" id="aclassRType_1_1PositionComponent_html_a53ab2067ab7daef5184abd594c24a99e"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a53ab2067ab7daef5184abd594c24a99e">RType::PositionComponent::PositionComponent</a></div><div class="ttdeci">PositionComponent(std::pair&lt; int, int &gt; position)</div><div class="ttdoc">Base constructor for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:22</div></div>
-<div class="ttc" id="aclassRType_1_1PositionComponent_html_a79d41c6736459035e36d6a04a9de489b"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a79d41c6736459035e36d6a04a9de489b">RType::PositionComponent::setPositions</a></div><div class="ttdeci">void setPositions(std::pair&lt; int, int &gt; position)</div><div class="ttdoc">Set the position of the _entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:28</div></div>
+<div class="ttc" id="aclassRType_1_1PositionComponent_html"><div class="ttname"><a href="classRType_1_1PositionComponent.html">RType::PositionComponent</a></div><div class="ttdoc">Base class for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:19</div></div>
+<div class="ttc" id="aclassRType_1_1PositionComponent_html_a32982da9d25ec087d29736be71e8c695"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a32982da9d25ec087d29736be71e8c695">RType::PositionComponent::update</a></div><div class="ttdeci">void update() override</div><div class="ttdoc">Update the component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:46</div></div>
+<div class="ttc" id="aclassRType_1_1PositionComponent_html_a338ec619a8cd7e32b5d79831a9a12e5a"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a338ec619a8cd7e32b5d79831a9a12e5a">RType::PositionComponent::setPositions</a></div><div class="ttdeci">void setPositions(Vector2f position)</div><div class="ttdoc">Set the position of the _entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:31</div></div>
+<div class="ttc" id="aclassRType_1_1PositionComponent_html_a6047da34e5fc93bc83f31174073f06f6"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a6047da34e5fc93bc83f31174073f06f6">RType::PositionComponent::getPosition</a></div><div class="ttdeci">Vector2f getPosition() const</div><div class="ttdoc">Get the position of the _entity.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:39</div></div>
+<div class="ttc" id="aclassRType_1_1PositionComponent_html_a7ae9683ef775007a3772a9bd3f2b0200"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a7ae9683ef775007a3772a9bd3f2b0200">RType::PositionComponent::PositionComponent</a></div><div class="ttdeci">PositionComponent(Vector2f position)</div><div class="ttdoc">Base constructor for position component.</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:25</div></div>
+<div class="ttc" id="aclassRType_1_1PositionComponent_html_a9377f1a02b137cd7ad1d5d33309649fa"><div class="ttname"><a href="classRType_1_1PositionComponent.html#a9377f1a02b137cd7ad1d5d33309649fa">RType::PositionComponent::_position</a></div><div class="ttdeci">Vector2f _position</div><div class="ttdef"><b>Definition</b> PositionComponent.hpp:51</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

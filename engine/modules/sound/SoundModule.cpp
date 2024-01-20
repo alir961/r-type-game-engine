@@ -19,13 +19,9 @@ void destroy(RType::SoundModule *library) {
 }
 }
 
-void RType::SoundModule::load() {
-    std::cout << "Load Sound Module\n";
-}
+void RType::SoundModule::load() {}
 
-void RType::SoundModule::unload() {
-    std::cout << "Unload Sound Module\n";
-}
+void RType::SoundModule::unload() {}
 
 void RType::SoundModule::loadSound(int soundId, const std::string &soundPath, float volume) {
     if (!_soundBuffers.contains(soundId))

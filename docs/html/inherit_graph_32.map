@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1SessionManager.html" title=" " alt="" coords="5,5,167,31"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="5,5,155,32"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="203,5,357,32"/>
+<area shape="poly" id="edge32_Node000000_Node000001" title=" " alt="" coords="171,16,202,16,202,21,171,21"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1GraphicEntity.html" title="Graphic Entity class from the abstract AGraphicEntity." alt="" coords="405,5,550,32"/>
+<area shape="poly" id="edge33_Node000001_Node000002" title=" " alt="" coords="372,16,405,16,405,21,372,21"/>
 </map>

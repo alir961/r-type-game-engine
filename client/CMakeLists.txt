@@ -1,9 +1,9 @@
 set(SOURCE_FILES
         Main.cpp
         src/ClientViewport.cpp
+        src/UDPClient.cpp
         src/entities/GraphicEntity.cpp
         src/components/Background.cpp
-        src/UDPClient.cpp
 )
 
 #set(CMAKE_CXX_CLANG_TIDY "clang-tidy")

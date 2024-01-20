@@ -6,15 +6,27 @@
 */
 
 #pragma once
+
 #include "AGraphicEntity.hpp"
+#include "engine/modules/ModuleProvider.hpp"
 #include <memory>
-#include "../resources/ResourceManager.hpp"
 
 namespace RType {
+
     /**
      * @brief Graphic Entity class from the abstract AGraphicEntity.
      */
     class GraphicEntity : public AGraphicEntity {
+    private:
+        EntityPtr _entity; /**< Reference to the ECS _entity. */
+        ModuleProviderPtr _provider = ModuleProvider::getInstance();
+        IGraphicalModule *_module = _provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        IAnimationModule *_animation = _provider->loadAndGetModule<IAnimationModule>(ModuleType::ANIMATION);
+        TextComponent _entityNameText = _module->createText("");
+        SpriteComponent _entitySprite; /**< Sprite of the graphical _entity. */
+        float _animationTime = 0.0F; /**< Animation time accumulator. */
+        float _animationSpeed = 0.1F; /**< Speed of the animation. */
+
     public:
         /**
          * @brief Construct a new Graphic Entity object.
@@ -22,21 +34,28 @@ namespace RType {
          * @param path Path to the texture file for this graphic _entity.
          * @param animationModule Pointer to the IAnimation Module.
          */
-        explicit GraphicEntity(EntityPtr &entity, const std::string &path, const std::string &entityName);
+        explicit GraphicEntity(EntityPtr entity, const std::string &path, const std::string &entityName);
 
         /**
          * @brief Update the graphic _entity based on the state of the ECS _entity.
          * @param deltaTime Time since last update.
          */
-        void update(float deltaTime, IAnimationModule *animationModule) override;
+        void update(float deltaTime) override;
 
         /**
          * @brief Draw the graphic _entity to the provided window.
          * @param window The window to draw the _entity on.
          */
-        void draw(sf::RenderWindow &window, IGraphicalModule *graphicalModule) override;
+        void draw() override;
 
-        void loadSprite(IAnimationModule *animationModule);
+        void moveLeft() override;
+
+        void moveRight() override;
+
+        void moveUp() override;
+
+        void moveDown() override;
+
         /**
          * @brief get Entity.
          */
@@ -44,19 +63,9 @@ namespace RType {
             return _entity;
         }
 
-        /**
-         * @brief get Sprite.
-         */
-        sf::Sprite getSprite() override {
-            return _sprite;
+        SpriteComponent getSprite() override {
+            return _entitySprite;
         }
-
-    private:
-        EntityPtr _entity; /**< Reference to the ECS _entity. */
-        sf::Sprite _sprite; /**< Sprite of the graphical _entity. */
-        float _animationTime = 0.0F; /**< Animation time accumulator. */
-        float _animationSpeed = 0.1F; /**< Speed of the animation. */
-        ResourceManager _resourceManager; /**< Resource Manager instance. */
-        sf::Font _font;
     };
+
 }

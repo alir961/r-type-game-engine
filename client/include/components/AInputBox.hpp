@@ -12,6 +12,7 @@
 #include <iostream>
 
 namespace RType {
+
     /**
      * @class AInputBox
      * @brief Abstract base class for input boxes in the RType game.
@@ -27,18 +28,17 @@ namespace RType {
          * @param y Y-coordinate of the input box.
          * @param maxChars Maximum number of characters allowed in the input box.
          */
-        explicit AInputBox(sf::RenderWindow &window, int x, int y, size_t maxChars)
-            : _x(x), _y(y), _maxChars(maxChars), _active(false), _window(window) {
-            _rect.setSize(sf::Vector2f(280, 40));
-            _rect.setPosition(x, y);
-            _rect.setOutlineColor(sf::Color(200, 200, 200));
-            _rect.setOutlineThickness(1);
-            _rect.setFillColor(sf::Color::Transparent);
-            _font.loadFromFile("client/assets/ka1.ttf");
-            _textDisplay.setFont(_font);
-            _textDisplay.setCharacterSize(20);
-            _textDisplay.setPosition(x + 5, y + 5);
-            _textDisplay.setFillColor(sf::Color::White);
+        explicit AInputBox(int x, int y, size_t maxChars)
+                : _x(x), _y(y), _maxChars(maxChars) {
+            _box->setSize(Vector2f(280, 40));
+            _box->setPosition(Vector2f(x, y));
+            _box->setOutlineColor(Color::RGB{200, 200, 200, 255});
+            _box->setOutlineThickness(1);
+            _box->setBackgroundColor(Color::Transparent);
+            _textDisplay->setColor(Color::White);
+            _textDisplay->setSize(20);
+            _textDisplay->setPosition(Vector2f(x + 5, y + 5));
+            _textDisplay->setFontPath("client/assets/ka1.ttf");
         }
 
         /**
@@ -52,14 +52,21 @@ namespace RType {
          * events related to the input box.
          * @param event SFML Event to be processed.
          */
-        virtual void update(const sf::Event &event) = 0;
+        void update(const sf::Event &event) {
+            checkIfActive(event);
+            if (event.type == sf::Event::KeyReleased || event.type == sf::Event::MouseButtonReleased)
+                _keyPressed = false;
+            if (!_keyPressed)
+                appendInput(event);
+            _textDisplay->setText(_text);
+        }
 
         /**
          * @brief Draw the input box on the SFML RenderWindow.
          */
-        void draw(IGraphicalModule *graphicalModule) const {
-            graphicalModule->drawRect(_window, _rect);
-            graphicalModule->drawText(_window, _textDisplay);
+        void draw() const {
+            _box->draw();
+            _textDisplay->draw();
         }
 
         /**
@@ -68,7 +75,7 @@ namespace RType {
          */
         void setActive(bool active) {
             _active = active;
-            _rect.setOutlineColor(active ? sf::Color::Blue : sf::Color(200, 200, 200));
+            _box->setOutlineColor(active ? Color::Cyan : Color::RGB{200, 200, 200, 255});
         }
 
         /**
@@ -79,15 +86,47 @@ namespace RType {
             return _active;
         }
 
+        virtual void setText(std::string value) = 0;
+
     protected:
         float _x; /**< X-coordinate of the input box. */
         float _y; /**< Y-coordinate of the input box. */
         size_t _maxChars; /**< Maximum number of characters allowed in the input box. */
-        bool _active; /**< Activation state of the input box. */
-        std::string _text; /**< Text content of the input box. */
-        sf::RectangleShape _rect; /**< SFML RectangleShape representing the input box. */
-        sf::Text _textDisplay; /**< SFML Text displaying the text in the input box. */
-        sf::Font _font; /**< SFML Font for the text display. */
-        sf::RenderWindow &_window; /**< Reference to the SFML RenderWindow. */
+        std::string _text = ""; /**< Text content of the input box. */
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        TextComponent _textDisplay = _module->createText(""); /**< SFML Text displaying the text in the input box. */
+        RectShape _box = _module->createRectShape(); /**< SFML RectangleShape representing the input box. */
+        bool _keyPressed = false;
+
+        void checkIfActive(const sf::Event &event) {
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                const Vector2f mousePosition = _module->getMousePosition();
+
+                setActive(_box->getGlobalBounds().contains(mousePosition));
+            }
+        }
+
+        void appendInput(const sf::Event &event) {
+            if (!isActive())
+                return;
+            if (event.type != sf::Event::TextEntered)
+                return;
+            auto inputChar = static_cast<char>(event.text.unicode);
+
+            if (inputChar == '\b') {
+                if (_text.empty())
+                    return;
+                _text.pop_back();
+                _keyPressed = true;
+            } else if (isValidInput(inputChar) && _text.size() < _maxChars) {
+                _text += std::tolower(inputChar);
+                _keyPressed = true;
+            }
+        }
+
+    private:
+        bool _active = false; /**< Activation state of the input box. */
+
+        [[nodiscard]] virtual bool isValidInput(char character) = 0;
     };
 }

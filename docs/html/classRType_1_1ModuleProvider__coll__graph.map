@@ -1,0 +1,7 @@
+<map id="RType::ModuleProvider" name="RType::ModuleProvider">
+<area shape="rect" id="Node000001" title="Class representing a module provider that manages loading and unloading of modules." alt="" coords="5,172,162,199"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1ILoggerModule.html" title=" " alt="" coords="8,81,159,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,124,86,171,81,171,81,124"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IModule.html" title=" " alt="" coords="27,5,140,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="86,47,86,81,81,81,81,47"/>
+</map>

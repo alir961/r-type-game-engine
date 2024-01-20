@@ -1,5 +1,11 @@
 <map id="RType::UDPClient" name="RType::UDPClient">
-<area shape="rect" id="Node000001" title="Class representing a UDP client for communication." alt="" coords="5,94,131,120"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1Thread.html" title=" " alt="" coords="16,5,120,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,47,71,94,65,94,65,47"/>
+<area shape="rect" id="Node000001" title="Class representing a UDP client for communication." alt="" coords="157,172,286,199"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1UDPAdapter.html" title="Represents a UDP adapter for handling communication over UDP." alt="" coords="5,81,145,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,114,202,169,199,174,108,119"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1Thread.html" title=" " alt="" coords="169,81,275,108"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,124,224,171,219,171,219,124"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1ILoggerModule.html" title=" " alt="" coords="299,81,451,108"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="341,118,245,174,242,169,339,114"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1IModule.html" title=" " alt="" coords="319,5,431,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="378,47,378,81,372,81,372,47"/>
 </map>

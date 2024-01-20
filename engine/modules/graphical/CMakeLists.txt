@@ -10,6 +10,9 @@ set_target_properties(graphical_module PROPERTIES
 install(
         FILES
         GraphicalModule.hpp
+        Text.hpp
+        Rectangle.hpp
+        Sprite.hpp
         DESTINATION
         include/graphical_module
 )

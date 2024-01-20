@@ -9,6 +9,7 @@ var searchData=
   ['igamemodule_6',['IGameModule',['../classRType_1_1IGameModule.html',1,'RType']]],
   ['igraphicalmodule_7',['IGraphicalModule',['../classRType_1_1IGraphicalModule.html',1,'RType']]],
   ['igraphicentity_8',['IGraphicEntity',['../classRType_1_1IGraphicEntity.html',1,'RType']]],
-  ['imodule_9',['IModule',['../classRType_1_1IModule.html',1,'RType']]],
-  ['iview_10',['IView',['../classRType_1_1IView.html',1,'RType']]]
+  ['iloggermodule_9',['ILoggerModule',['../classRType_1_1ILoggerModule.html',1,'RType']]],
+  ['imodule_10',['IModule',['../classRType_1_1IModule.html',1,'RType']]],
+  ['iview_11',['IView',['../classRType_1_1IView.html',1,'RType']]]
 ];

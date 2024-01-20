@@ -1,3 +1,17 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classRType_1_1ResourceManager.html" title="Classe pour gérer les resources comme les textures et les sons." alt="" coords="5,5,175,31"/>
+<area shape="rect" id="Node000000" href="$classRType_1_1IDrawable.html" title="Interface for objects that can be drawn on an SFML RenderWindow." alt="" coords="5,132,131,159"/>
+<area shape="rect" id="Node000001" href="$classRType_1_1IView.html" title=" " alt="" coords="179,132,278,159"/>
+<area shape="poly" id="edge20_Node000000_Node000001" title=" " alt="" coords="146,143,178,143,178,148,146,148"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1GameView.html" title="Represents a state where entities are drawn." alt="" coords="331,5,461,32"/>
+<area shape="poly" id="edge21_Node000001_Node000002" title=" " alt="" coords="247,118,280,79,325,42,347,30,349,35,327,46,284,83,251,121"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1LoadView.html" title=" " alt="" coords="335,56,458,83"/>
+<area shape="poly" id="edge22_Node000001_Node000003" title=" " alt="" coords="266,122,325,92,353,81,355,86,327,97,268,127"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1LoginView.html" title="Represents a login state with input box for user interaction." alt="" coords="333,107,459,133"/>
+<area shape="poly" id="edge23_Node000001_Node000004" title=" " alt="" coords="293,133,332,127,333,132,293,138"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1MenuView.html" title="Represents a state with a menu for user interaction." alt="" coords="333,157,460,184"/>
+<area shape="poly" id="edge24_Node000001_Node000005" title=" " alt="" coords="293,152,333,158,332,164,293,158"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1OptionsView.html" title="Represents the options menu state in the game." alt="" coords="326,208,466,235"/>
+<area shape="poly" id="edge25_Node000001_Node000006" title=" " alt="" coords="268,164,327,194,355,205,353,210,325,198,266,169"/>
+<area shape="rect" id="Node000007" href="$classRType_1_1PauseView.html" title="Represents the pause menu state in the game." alt="" coords="330,259,462,285"/>
+<area shape="poly" id="edge26_Node000001_Node000007" title=" " alt="" coords="251,169,284,208,327,244,349,256,347,260,325,249,280,212,247,173"/>
 </map>

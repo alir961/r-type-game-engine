@@ -9,14 +9,12 @@
 #include "engine/modules/animation/IAnimationModule.hpp"
 
 RType::ClientViewport::ClientViewport() {
-    _window.setFramerateLimit(WINDOW_FPS);
-    _graphicalModule = _provider.loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
-    _animationModule = _provider.loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
-    _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+    _graphicalModule->openWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "R-Type");
+    _selectedView = std::make_shared<LoginView>(*this);
     setHandlers();
 }
 
-void RType::ClientViewport::handleInput() const {
+void RType::ClientViewport::handleGameInput() const {
     char buffer[100];
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -52,18 +50,18 @@ void RType::ClientViewport::handleInput() const {
 
 void RType::ClientViewport::basicInput() {
     if (_viewState == ViewState::OPTIONS) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
-            std::cout << "Return key pressed in OPTIONS state" << std::endl;
+        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::BackSpace) {
+            _logger->debug("Return key pressed in OPTIONS state");
             setView(ViewState::MENU);
         }
     } else if (_viewState == ViewState::GAME) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-            std::cout << "Escape key pressed in GAME state" << std::endl;
+        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
+            _logger->debug("Return key pressed in GAME state");
             setView(ViewState::PAUSE);
         }
     } else if (_viewState == ViewState::PAUSE) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-            std::cout << "Escape key pressed in GAME state" << std::endl;
+        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
+            _logger->debug("Return key pressed in PAUSE state");
             setView(ViewState::GAME);
         }
     }
@@ -71,12 +69,11 @@ void RType::ClientViewport::basicInput() {
 
 void RType::ClientViewport::launchWindow() {
     const float fixedTimeStep = 1.F / WINDOW_FPS;
-    float accumulatedTime = 0.F;
 
-    while (_window.isOpen()) {
-        while (_window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                _window.close();
+    while (_graphicalModule->isOpen()) {
+        while (_graphicalModule->pollEvent(_event)) {
+            if (_event.type == sf::Event::Closed) {
+                _graphicalModule->close();
                 closeConnectionToServer();
                 return;
             }
@@ -85,46 +82,43 @@ void RType::ClientViewport::launchWindow() {
         if (_viewState == ViewState::GAME) {
             char buffer[100];
             handleMessageFromServer();
-            handleInput();
+            handleGameInput();
             sprintf(buffer, "tick %d\n", _client->getClientID());
             _client->sendMessage(MessageType::TICK, buffer);
         }
+        updateEntities(fixedTimeStep);
         _selectedView->update();
-        accumulatedTime += _animationClock.restart().asSeconds();
-        while (accumulatedTime >= fixedTimeStep) {
-            updateEntities(fixedTimeStep);
-            accumulatedTime -= fixedTimeStep;
-        }
         draw();
     }
+    _logger->info("Exit game");
 }
 
 void RType::ClientViewport::setView(ViewState state) {
-    EntityPtr player;
     switch (state) {
         case ViewState::MENU:
-            _selectedView = std::make_shared<MenuView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<MenuView>(*this);
             break;
         case ViewState::OPTIONS:
-            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<OptionsView>(*this);
             break;
         case ViewState::OPTIONSGAME:
-            _selectedView = std::make_shared<OptionsView>(_window, *this, _graphicalModule, _provider, true);
+            _selectedView = std::make_shared<OptionsView>(*this, true);
             break;
         case ViewState::GAME:
             char buffer[50];
-            _selectedView = std::make_shared<GameView>(_window, *this, _graphicalModule, _provider, _client->getUsername());
+
+            _selectedView = std::make_shared<GameView>(_client->getUsername());
             sprintf(buffer, "player %d %s\n", _client->getClientID(), _client->getUsername().c_str());
             _client->sendMessage(MessageType::PLAYER_NAME, buffer);
             break;
         case ViewState::PAUSE:
-            _selectedView = std::make_shared<PauseView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<PauseView>(*this);
             break;
         case ViewState::LOGIN:
-            _selectedView = std::make_shared<LoginView>(_window, *this, _graphicalModule, _provider);
+            _selectedView = std::make_shared<LoginView>(*this);
             break;
         case ViewState::LOADSCREEN:
-            _selectedView = std::make_shared<LoadView>(_window, *this, _graphicalModule, _client);
+            _selectedView = std::make_shared<LoadView>(*this, _client);
             break;
     }
     _selectedView->setPlayerEntity(_playerEntity);
@@ -133,7 +127,7 @@ void RType::ClientViewport::setView(ViewState state) {
 
 void RType::ClientViewport::addGraphicEntity(const GraphicEntityPtr &entity) {
     _graphicEntities.push_back(entity);
-    std::cout << "Added entity with name: " << entity->getEntityName() << "\n";
+    _logger->debug("Entity registered: " + entity->getEntityName());
 }
 
 RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntityByName(const std::string &name) const {
@@ -145,12 +139,12 @@ RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntityByName(const std:
 }
 
 sf::Event RType::ClientViewport::getEvent() const {
-    return event;
+    return _event;
 }
 
 void RType::ClientViewport::connectToServer(const std::string &hostname, int port, std::string username) {
-    std::cout << "Before try connecting to " << hostname << ":" << port << "\n";
-    _client = std::make_shared<RType::UDPClient>(hostname, port, username, _window.getSize().x, _window.getSize().y);
+    _logger->warn("Connection attempt to server " + hostname + ":" + std::to_string(port));
+    _client = std::make_shared<RType::UDPClient>(hostname, port, username, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void RType::ClientViewport::closeConnectionToServer() {
@@ -158,21 +152,19 @@ void RType::ClientViewport::closeConnectionToServer() {
 }
 
 void RType::ClientViewport::updateEntities(float deltaTime) {
-    for (const auto &entity: _graphicEntities) {
-        entity->update(deltaTime, _animationModule);
-        _selectedView->update();
-    }
+    for (const auto &entity: _graphicEntities)
+        entity->update(deltaTime);
 }
 
 void RType::ClientViewport::draw() {
-    _window.clear();
-    _selectedView->draw(_window, _graphicEntities);
-    _window.display();
+    _graphicalModule->clear();
+    _selectedView->draw(_graphicEntities);
+    _graphicalModule->display();
 }
 
 int RType::ClientViewport::start() {
     try {
-        logInformation("Starting game view...");
+        _logger->info("Launching application [...]");
         launchWindow();
     } catch (const std::exception &e) {
         return EXIT_FAILURE;
@@ -189,10 +181,10 @@ void RType::ClientViewport::handleMessageFromServer() {
 
         if (_handlers.contains(splitMessage[0]))
             _handlers[splitMessage[0]](splitMessage);
-        else std::cerr << "No handler found for message type: " << splitMessage[0] << "\n";
+        else _logger->error("No handler found for message type: " + splitMessage[0]);
     };
 
-    for (const auto &message : _client->pullQueue())
+    for (const auto &message: _client->pullQueue())
         handleMessage(message);
 }
 
@@ -243,14 +235,6 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
     std::cout << buffer << "\n";
 }
 
-RType::GraphicEntityPtr RType::ClientViewport::getGraphicEntity(const std::string &entityName) {
-    for (auto &graphicEntity: _graphicEntities) {
-        if (graphicEntity->getEntity()->getEntityName() == entityName)
-            return graphicEntity;
-    }
-    return nullptr;
-}
-
 void RType::ClientViewport::destroyGraphicEntity(RType::GraphicEntityPtr entity) {
     auto it = std::find(_graphicEntities.begin(), _graphicEntities.end(), entity);
 
@@ -260,7 +244,7 @@ void RType::ClientViewport::destroyGraphicEntity(RType::GraphicEntityPtr entity)
 
 void RType::ClientViewport::player(const std::vector<std::string> &splitMessage) {
     int sessionID = std::stoi(splitMessage[1]);
-    std::string color =splitMessage[16];
+    std::string color = splitMessage[16];
     GraphicEntityPtr entity = getGraphicEntityByName(color + " " + std::to_string(sessionID));
 
     if (entity == nullptr)
@@ -291,11 +275,11 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     float sizeY = std::stof(splitMessage[11]);
     float rectX = std::stof(splitMessage[13]);
     float rectY = std::stof(splitMessage[14]);
-    std::string color =splitMessage[16];
+    std::string color = splitMessage[16];
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
     auto starshipEntity = _entityManager.createEntity();
-    std::shared_ptr<RType::GraphicEntity> graphicStarship;
+    GraphicEntityPtr graphicStarship;
 
 
     starshipEntity->addComponent<RType::SpeedComponent>(speed);
@@ -308,8 +292,7 @@ void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &spli
     starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
     starshipEntity->setEntityName(color + " " + std::to_string(sessionID));
     if (starshipEntity->hasBaseComponents()) {
-        graphicStarship = GraphicEntityFactory::createGraphicEntity(starshipEntity,"client/assets/sprites/r-typesheet42.gif", color);
-        graphicStarship->loadSprite(_animationModule);
+        graphicStarship = GraphicEntityFactory::createStarship(starshipEntity, color);
         if (sessionID == _client->getClientID()) {
             _playerEntity = graphicStarship;
             _selectedView->setPlayerEntity(graphicStarship);
@@ -330,10 +313,10 @@ void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMe
     float sizeY = std::stof(splitMessage[11]);
     float rectX = std::stof(splitMessage[13]);
     float rectY = std::stof(splitMessage[14]);
-    std::string color =splitMessage[16];
+    std::string color = splitMessage[16];
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
-    EntityPtr starshipEntity = getGraphicEntity(color + " " + std::to_string(sessionID))->getEntity();
+    EntityPtr starshipEntity = getGraphicEntityByName(color + " " + std::to_string(sessionID))->getEntity();
 
     starshipEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
     starshipEntity->getComponent<RType::HealthComponent>()->setHealth(health);
@@ -359,7 +342,7 @@ void RType::ClientViewport::updateBulletPlayer(const std::vector<std::string> &s
     EntityPtr bulletEntity;
 
     sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
-    bulletEntity = getGraphicEntity(entityName)->getEntity();
+    bulletEntity = getGraphicEntityByName(entityName)->getEntity();
 
     bulletEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
     bulletEntity->getComponent<RType::DamageComponent>()->setDamage(damage);
@@ -369,8 +352,8 @@ void RType::ClientViewport::updateBulletPlayer(const std::vector<std::string> &s
 }
 
 void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string> &splitMessage) {
+    GraphicEntityPtr graphicBullet;
     auto bulletEntity = _entityManager.createEntity();
-    std::shared_ptr<RType::GraphicEntity> graphicBullet;
     int sessionID = std::stoi(splitMessage[1]);
     int bulletID = std::stoi(splitMessage[2]);
     int speed = std::stoi(splitMessage[4]);
@@ -391,9 +374,8 @@ void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string>
     bulletEntity->addComponent<RType::PlayerComponent>(false);
     sprintf(entityName, "bulletPlayer %d %d", sessionID, bulletID);
     bulletEntity->setEntityName(entityName);
-    graphicBullet = GraphicEntityFactory::createGraphicEntity(bulletEntity, "client/assets/sprites/r-typesheet2.gif", "bulletPlayer");
+    graphicBullet = GraphicEntityFactory::createBullet(bulletEntity, "bulletPlayer");
     addGraphicEntity(graphicBullet);
-    graphicBullet->loadSprite(_animationModule);
 }
 
 void RType::ClientViewport::disconnect(const std::vector<std::string> &splitMessage) {

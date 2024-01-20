@@ -9,7 +9,11 @@ set_target_properties(animation_module PROPERTIES
 
 install(
         FILES
+        AAnimation.hpp
         AnimationModule.hpp
+        AnimationFactory.hpp
+        entity/PlayerAnimation.hpp
+        entity/BulletAnimation.hpp
         DESTINATION
         include/animation_module
 )
