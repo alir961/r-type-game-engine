@@ -28,7 +28,10 @@ void RType::GameLogic::serverLoopIterate() {
 
     std::this_thread::sleep_for(std::chrono::milliseconds(EPSILON_TIME_MS));
     _tickNumber++;
-    moveBulletPlayer();
+    if (_tickNumber % (5 * TICK_PER_SECOND) == 0)
+        createMonsterEntity();
+    movePlayerBullets();
+    moveMonsters();
     serverLoopIterate();
 }
 
@@ -39,7 +42,7 @@ bool RType::GameLogic::isStopped() {
     return _stop;
 }
 
-void RType::GameLogic::moveBulletPlayer() {
+void RType::GameLogic::movePlayerBullets() {
     for (auto &entity: _entityManager.getEntities()) {
         if (Split::split(entity->getEntityName(), " ")[0] == "bulletPlayer") {
             entity->move(Direction::RIGHT, _entityManager.getEntities(), _sessionManager.getWindowWidth(),
@@ -145,6 +148,8 @@ void RType::GameLogic::sendMessageFromEntity(const RType::EntityPtr &entity) {
         sendPlayerDetails(entity);
     if (entityName[0] == "bulletPlayer")
         sendBulletPlayerDetails(entity);
+    if (entityName[0] == "monster")
+        sendMonsterDetails(entity);
 }
 
 void RType::GameLogic::addMessageClients(int sessionID, RType::MessageType type, const std::string_view &data) {
@@ -207,4 +212,67 @@ void RType::GameLogic::sendBulletPlayerDetails(const RType::EntityPtr &entity) {
             sizeRectY);
     sendMessage(MessageType::BULLET_PLAYER, details);
     addMessageClients(std::stoi(entityName[1]), MessageType::BULLET_PLAYER, details);
+}
+void RType::GameLogic::createMonsterEntity() {
+    float startX = _sessionManager.getWindowWidth();
+    int startY = rand() % (static_cast<int>(_sessionManager.getWindowHeight()) - 34);
+    EntityPtr monsterEntity = getFactory().createMonster(startX, static_cast<float>(startY));
+    char buffer[50];
+
+    sprintf(buffer, "monster %d\n", getNextMonsterID());
+    monsterEntity->setEntityName(buffer);
+    sendMonsterDetails(monsterEntity);
+}
+
+int RType::GameLogic::getNextMonsterID() {
+    if (_lastMonsterID == 100)
+        _lastMonsterID = 0;
+    return (_lastMonsterID++);
+}
+
+void RType::GameLogic::sendMonsterDetails(const RType::EntityPtr &entity) {
+    char details[250];
+    std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
+    int speed = entity->getComponent<SpeedComponent>()->getSpeed();
+    int health = entity->getComponent<HealthComponent>()->getHealth();
+    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
+    auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
+    auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
+
+    sprintf(details, "monster %s speed %d health %d position %.1f %.1f size %.1f %.1f rect %.1f %.1f\n",
+            entityName[1].c_str(),
+            speed,
+            health,
+            entityX,
+            entityY,
+            sizeX,
+            sizeY,
+            sizeRectX,
+            sizeRectY);
+    addMessageClients(-1, MessageType::MONSTER, details);
+}
+
+void RType::GameLogic::moveMonsters() {
+    for (auto &entity: _entityManager.getEntities()) {
+        if (Split::split(entity->getEntityName(), " ")[0] == "monster") {
+            auto [currentX, currentY] = entity->getComponent<PositionComponent>()->getPosition();
+            Direction moveDirection;
+            int randomDirection = rand() % 3;
+
+            if (randomDirection == 0)
+                moveDirection = Direction::LEFT;
+            else if (randomDirection == 1)
+                moveDirection = Direction::UP;
+            else
+                moveDirection = Direction::DOWN;
+            if ((moveDirection == Direction::UP && currentY <= 0) ||
+                (moveDirection == Direction::DOWN && currentY >= _sessionManager.getWindowHeight() - 32)) {
+                moveDirection = Direction::LEFT;
+            }
+            entity->move(moveDirection, _entityManager.getEntities(), _sessionManager.getWindowWidth(),
+                         _sessionManager.getWindowHeight());
+            sendMonsterDetails(entity);
+            checkEntitiesStatus(nullptr);
+        }
+    }
 }

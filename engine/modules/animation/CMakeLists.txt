@@ -14,6 +14,7 @@ install(
         AnimationFactory.hpp
         entity/PlayerAnimation.hpp
         entity/BulletAnimation.hpp
+        entity/MonsterAnimation.hpp
         DESTINATION
         include/animation_module
 )

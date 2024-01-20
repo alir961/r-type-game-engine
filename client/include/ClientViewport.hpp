@@ -161,6 +161,7 @@ namespace RType {
 
         void player(const std::vector<std::string> &splitMessage);
         void bulletPlayer(const std::vector<std::string> &splitMessage);
+        void monster(const std::vector<std::string> &splitMessage);
         void death(const std::vector<std::string> &splitMessage);
         void disconnect(const std::vector<std::string> &splitMessage);
         void changePlayerColor(const std::vector<std::string> &splitMessage);
@@ -169,6 +170,8 @@ namespace RType {
         void updatePlayer(const std::vector<std::string> &splitMessage);
         void createNewBulletPlayer(const std::vector<std::string> &splitMessage);
         void updateBulletPlayer(const std::vector<std::string> &splitMessage);
+        void createNewMonster(const std::vector<std::string> &splitMessage);
+        void updateMonster(const std::vector<std::string> &splitMessage);
     };
 }
 

@@ -33,7 +33,6 @@ namespace RType {
         CONNECT,
         CONNECT_CALLBACK,
         DISCONNECT,
-        CONFIRMATION,
         PLAYER_NAME,
         PLAYER_COLOR,
         MOVE_LEFT,
@@ -43,8 +42,8 @@ namespace RType {
         SHOOT,
         BULLET_PLAYER,
         DEATH,
-        MOVE_PLAYER_BULLET,
         TICK,
+        MONSTER,
     };
 
 #ifdef __linux__
