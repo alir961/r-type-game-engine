@@ -8,8 +8,6 @@
 #pragma once
 
 #include "../entities/AGraphicEntity.hpp"
-#include "../ClientViewport.hpp"
-#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace RType {

@@ -21,7 +21,7 @@ namespace RType {
         EntityPtr _entity; /**< Reference to the ECS _entity. */
         ModuleProviderPtr _provider = ModuleProvider::getInstance();
         IGraphicalModule *_module = _provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);
-        IAnimationModule *_animation = _provider->get<IAnimationModule>(ModuleType::ANIMATION);
+        IAnimationModule *_animation = _provider->loadAndGetModule<IAnimationModule>(ModuleType::ANIMATION);
         TextComponent _entityNameText = _module->createText("");
         SpriteComponent _entitySprite; /**< Sprite of the graphical _entity. */
         float _animationTime = 0.0F; /**< Animation time accumulator. */

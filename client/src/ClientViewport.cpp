@@ -9,14 +9,12 @@
 #include "engine/modules/animation/IAnimationModule.hpp"
 
 RType::ClientViewport::ClientViewport() {
-    _graphicalModule = _provider->loadAndGetModule<RType::IGraphicalModule>(RType::ModuleType::GRAPHICAL);
-    _animationModule = _provider->loadAndGetModule<RType::IAnimationModule>(RType::ModuleType::ANIMATION);
     _graphicalModule->openWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "R-Type");
     _selectedView = std::make_shared<LoginView>(*this);
     setHandlers();
 }
 
-void RType::ClientViewport::handleInput() const {
+void RType::ClientViewport::handleGameInput() const {
     char buffer[100];
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -84,12 +82,10 @@ void RType::ClientViewport::launchWindow() {
         if (_viewState == ViewState::GAME) {
             char buffer[100];
             handleMessageFromServer();
-            handleInput();
+            handleGameInput();
             sprintf(buffer, "tick %d\n", _client->getClientID());
             _client->sendMessage(MessageType::TICK, buffer);
         }
-        for (const auto &entity: _graphicEntities)
-            entity->update(0);
         updateEntities(fixedTimeStep);
         _selectedView->update();
         draw();

@@ -60,8 +60,7 @@ namespace RType {
         UDPClientPtr _client;
         sf::Event _event{};
         ModuleProviderPtr _provider = ModuleProvider::getInstance();
-        IGraphicalModule *_graphicalModule;
-        IAnimationModule *_animationModule;
+        IGraphicalModule *_graphicalModule = _provider->loadAndGetModule<IGraphicalModule>(ModuleType::GRAPHICAL);
         ILoggerModule *_logger = _provider->loadAndGetModule<ILoggerModule>(ModuleType::LOGGER);
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;
@@ -84,7 +83,7 @@ namespace RType {
          * @brief Private method to handle input for a specific graphic _entity.
          * @param entity The graphic entity to handle input for.
          */
-        void handleInput() const;
+        void handleGameInput() const;
 
         /**
          * @brief Private method to handle basic input.

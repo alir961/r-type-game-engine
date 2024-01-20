@@ -27,9 +27,9 @@ namespace RType {
          */
         void draw(std::vector<GraphicEntityPtr> entities) override = 0;
 
-        void setPlayerEntity(const GraphicEntityPtr &playerEntity) {_playerEntity = playerEntity;};
+        void setPlayerEntity(const GraphicEntityPtr &playerEntity) { _playerEntity = playerEntity; };
 
-        GraphicEntityPtr getPlayerEntity() {return _playerEntity;};
+        [[nodiscard]] GraphicEntityPtr getPlayerEntity() const { return _playerEntity; };
 
     protected:
         ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
@@ -37,5 +37,7 @@ namespace RType {
     private:
         GraphicEntityPtr _playerEntity = nullptr;
     };
+
+    using ClientView = std::shared_ptr<IView>;
 
 }
