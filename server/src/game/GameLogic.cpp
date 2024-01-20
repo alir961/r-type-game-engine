@@ -215,7 +215,7 @@ void RType::GameLogic::sendBulletPlayerDetails(const RType::EntityPtr &entity) {
 }
 void RType::GameLogic::createMonsterEntity() {
     float startX = _sessionManager.getWindowWidth();
-    int startY = rand() % (static_cast<int>(_sessionManager.getWindowWidth()) - 32);
+    int startY = rand() % (static_cast<int>(_sessionManager.getWindowHeight()) - 34);
     EntityPtr monsterEntity = getFactory().createMonster(startX, static_cast<float>(startY));
     char buffer[50];
 

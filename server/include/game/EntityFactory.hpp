@@ -67,11 +67,11 @@ namespace RType {
         [[nodiscard]] EntityPtr createMonster(float startX, float startY) {
             EntityPtr monsterEntity = _manager->createEntity();
 
-            monsterEntity->addComponent<RType::SpeedComponent>(5);
-            monsterEntity->addComponent<RType::HealthComponent>(1000);
+            monsterEntity->addComponent<RType::SpeedComponent>(2);
+            monsterEntity->addComponent<RType::HealthComponent>(500);
             monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
             monsterEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
-            monsterEntity->addComponent<SizeRectComponent>(32.0f, 32.0f);
+            monsterEntity->addComponent<SizeRectComponent>(33.0f, 33.0f);
             return monsterEntity;
         }
     };

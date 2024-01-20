@@ -194,6 +194,7 @@ void RType::ClientViewport::setHandlers() {
     _handlers["bulletPlayer"] = [this](const std::vector<std::string> &splitMessage) { bulletPlayer(splitMessage); };
     _handlers["death"] = [this](const std::vector<std::string> &splitMessage) { death(splitMessage); };
     _handlers["disconnect"] = [this](const std::vector<std::string> &splitMessage) { disconnect(splitMessage); };
+    _handlers["monster"] = [this](const std::vector<std::string> &splitMessage) { monster(splitMessage); };
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
@@ -263,6 +264,17 @@ void RType::ClientViewport::bulletPlayer(const std::vector<std::string> &splitMe
         createNewBulletPlayer(splitMessage);
     else
         updateBulletPlayer(splitMessage);
+}
+
+
+void RType::ClientViewport::monster(const std::vector<std::string> &splitMessage) {
+    int monsterID = std::stoi(splitMessage[1]);
+    GraphicEntityPtr entity = getGraphicEntityByName("monster " + std::to_string(monsterID));
+
+    if (entity == nullptr)
+        createNewMonster(splitMessage);
+    else
+        updateMonster(splitMessage);
 }
 
 void RType::ClientViewport::createNewPlayer(const std::vector<std::string> &splitMessage) {
@@ -392,3 +404,53 @@ void RType::ClientViewport::disconnect(const std::vector<std::string> &splitMess
     std::sprintf(buffer, "disconnect %s", entityName.c_str());
     std::cout << buffer << "\n";
 }
+
+void RType::ClientViewport::createNewMonster(const std::vector<std::string> &splitMessage) {
+    int monsterID = std::stoi(splitMessage[1]);
+    int speed = std::stoi(splitMessage[3]);
+    int damage = std::stoi(splitMessage[5]);
+    float positionX = std::stof(splitMessage[7]);
+    float positionY = std::stof(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    auto monsterEntity = _entityManager.createEntity();
+    char entityName[250];
+    GraphicEntityPtr graphicMonster;
+
+    sprintf(entityName, "monster %d", monsterID);
+    monsterEntity->addComponent<RType::SpeedComponent>(speed);
+    monsterEntity->addComponent<RType::DamageComponent>(damage);
+    monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    monsterEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    monsterEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
+    monsterEntity->addComponent<RType::PlayerComponent>(false);
+    monsterEntity->setEntityName(entityName);
+    graphicMonster = GraphicEntityFactory::createMonster(monsterEntity, "monster");
+    addGraphicEntity(graphicMonster);
+}
+
+void RType::ClientViewport::updateMonster(const std::vector<std::string> &splitMessage) {
+    int monsterID = std::stoi(splitMessage[1]);
+    int speed = std::stoi(splitMessage[3]);
+    int damage = std::stoi(splitMessage[5]);
+    float positionX = std::stof(splitMessage[7]);
+    float positionY = std::stof(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    char entityName[250];
+    EntityPtr monsterEntity;
+
+    sprintf(entityName, "monster %d", monsterID);
+    monsterEntity = getGraphicEntityByName(entityName)->getEntity();
+
+    monsterEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
+    monsterEntity->getComponent<RType::DamageComponent>()->setDamage(damage);
+    monsterEntity->getComponent<RType::PositionComponent>()->setPositions(std::make_pair(positionX, positionY));
+    monsterEntity->getComponent<RType::SizeComponent>()->setSize(sizeX, sizeY);
+    monsterEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
+}
+
