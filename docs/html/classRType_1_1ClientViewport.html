@@ -94,19 +94,16 @@ Collaboration diagram for RType::ClientViewport:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRType_1_1ClientViewport__coll__graph.png" border="0" usemap="#aRType_1_1ClientViewport_coll__map" alt="Collaboration graph"/></div>
 <map name="aRType_1_1ClientViewport_coll__map" id="aRType_1_1ClientViewport_coll__map">
-<area shape="rect" title="Represents the main game view handling graphics, input, and entities." alt="" coords="494,83,646,109"/>
-<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="169,5,336,32"/>
-<area shape="poly" title=" " alt="" coords="351,30,471,56,537,80,535,85,470,61,350,35"/>
-<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="5,56,118,83"/>
-<area shape="poly" title=" " alt="" coords="129,49,198,30,200,35,130,54"/>
-<area shape="rect" href="classRType_1_1IAnimationModule.html" title=" " alt="" coords="167,56,337,83"/>
-<area shape="poly" title=" " alt="" coords="133,67,167,67,167,72,133,72"/>
-<area shape="rect" href="classRType_1_1ILoggerModule.html" title=" " alt="" coords="177,107,328,133"/>
-<area shape="poly" title=" " alt="" coords="130,85,200,103,198,109,129,90"/>
-<area shape="poly" title=" " alt="" coords="353,75,494,87,494,92,353,80"/>
-<area shape="poly" title=" " alt="" coords="343,119,470,113,509,107,510,113,471,119,344,125"/>
-<area shape="rect" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system." alt="" coords="177,157,327,184"/>
-<area shape="poly" title=" " alt="" coords="342,163,406,155,470,140,509,125,544,108,546,112,511,130,471,145,407,160,343,168"/>
+<area shape="rect" title="Represents the main game view handling graphics, input, and entities." alt="" coords="195,169,344,195"/>
+<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="5,80,171,106"/>
+<area shape="poly" title=" " alt="" coords="115,113,161,143,223,166,221,171,159,147,113,118"/>
+<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="122,5,233,31"/>
+<area shape="poly" title=" " alt="" coords="153,43,104,82,101,78,149,39"/>
+<area shape="rect" href="classRType_1_1ILoggerModule.html" title=" " alt="" coords="194,80,345,106"/>
+<area shape="poly" title=" " alt="" coords="206,39,256,78,253,82,203,43"/>
+<area shape="poly" title=" " alt="" coords="272,122,272,169,267,169,267,122"/>
+<area shape="rect" href="classRType_1_1EntityManager.html" title="EntityManager class responsible for managing entities in the system." alt="" coords="368,80,515,106"/>
+<area shape="poly" title=" " alt="" coords="405,116,295,171,292,166,402,111"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -149,6 +146,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>player</b> (const std
 <tr class="memitem:a0d5d052612a2e3247295fd54bf4f47c7" id="r_a0d5d052612a2e3247295fd54bf4f47c7"><td class="memItemLeft" align="right" valign="top"><a id="a0d5d052612a2e3247295fd54bf4f47c7" name="a0d5d052612a2e3247295fd54bf4f47c7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>bulletPlayer</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
 <tr class="separator:a0d5d052612a2e3247295fd54bf4f47c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac228d722c848288c1103143adaff93ca" id="r_ac228d722c848288c1103143adaff93ca"><td class="memItemLeft" align="right" valign="top"><a id="ac228d722c848288c1103143adaff93ca" name="ac228d722c848288c1103143adaff93ca"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>monster</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
+<tr class="separator:ac228d722c848288c1103143adaff93ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00ebb3ab49e99add2ef3867de1769991" id="r_a00ebb3ab49e99add2ef3867de1769991"><td class="memItemLeft" align="right" valign="top"><a id="a00ebb3ab49e99add2ef3867de1769991" name="a00ebb3ab49e99add2ef3867de1769991"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>death</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
 <tr class="separator:a00ebb3ab49e99add2ef3867de1769991"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,6 +170,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>createNewBulletPlayer
 <tr class="memitem:a13772602b67bb379f6bf95f5d4d44e6e" id="r_a13772602b67bb379f6bf95f5d4d44e6e"><td class="memItemLeft" align="right" valign="top"><a id="a13772602b67bb379f6bf95f5d4d44e6e" name="a13772602b67bb379f6bf95f5d4d44e6e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBulletPlayer</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
 <tr class="separator:a13772602b67bb379f6bf95f5d4d44e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71d752bade120bc578efb4d4027e5473" id="r_a71d752bade120bc578efb4d4027e5473"><td class="memItemLeft" align="right" valign="top"><a id="a71d752bade120bc578efb4d4027e5473" name="a71d752bade120bc578efb4d4027e5473"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>createNewMonster</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
+<tr class="separator:a71d752bade120bc578efb4d4027e5473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad875a3cf4d8b2a0fa4ef206b4c87fa06" id="r_ad875a3cf4d8b2a0fa4ef206b4c87fa06"><td class="memItemLeft" align="right" valign="top"><a id="ad875a3cf4d8b2a0fa4ef206b4c87fa06" name="ad875a3cf4d8b2a0fa4ef206b4c87fa06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateMonster</b> (const std::vector&lt; std::string &gt; &amp;splitMessage)</td></tr>
+<tr class="separator:ad875a3cf4d8b2a0fa4ef206b4c87fa06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
 Private Types</h2></td></tr>
@@ -189,9 +195,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()</td></tr>
 <tr class="memitem:a4091ba25cb2faa30d51e2af7ec2652bb" id="r_a4091ba25cb2faa30d51e2af7ec2652bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4091ba25cb2faa30d51e2af7ec2652bb">updateEntities</a> (float deltaTime)</td></tr>
 <tr class="memdesc:a4091ba25cb2faa30d51e2af7ec2652bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private method to update entities based on elapsed time.  <br /></td></tr>
 <tr class="separator:a4091ba25cb2faa30d51e2af7ec2652bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae600a2f9e654e6b5ce81aa9f70877431" id="r_ae600a2f9e654e6b5ce81aa9f70877431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae600a2f9e654e6b5ce81aa9f70877431">handleInput</a> () const</td></tr>
-<tr class="memdesc:ae600a2f9e654e6b5ce81aa9f70877431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private method to handle input for a specific graphic _entity.  <br /></td></tr>
-<tr class="separator:ae600a2f9e654e6b5ce81aa9f70877431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8768517867743b0b3cd07dc571bfbbf" id="r_ae8768517867743b0b3cd07dc571bfbbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8768517867743b0b3cd07dc571bfbbf">handleGameInput</a> () const</td></tr>
+<tr class="memdesc:ae8768517867743b0b3cd07dc571bfbbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private method to handle input for a specific graphic _entity.  <br /></td></tr>
+<tr class="separator:ae8768517867743b0b3cd07dc571bfbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae96a9e1f293d8dc588ff7d4a570870ac" id="r_ae96a9e1f293d8dc588ff7d4a570870ac"><td class="memItemLeft" align="right" valign="top"><a id="ae96a9e1f293d8dc588ff7d4a570870ac" name="ae96a9e1f293d8dc588ff7d4a570870ac"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>basicInput</b> ()</td></tr>
 <tr class="memdesc:ae96a9e1f293d8dc588ff7d4a570870ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private method to handle basic input. <br /></td></tr>
@@ -221,11 +227,8 @@ sf::Event&#160;</td><td class="memItemRight" valign="bottom"><b>_event</b> {}</t
 ModuleProviderPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_provider</b> = ModuleProvider::getInstance()</td></tr>
 <tr class="separator:a79d0c4441563cee43bac4d34275d0bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a524662edaeeba93c936bc87028c2ace2" id="r_a524662edaeeba93c936bc87028c2ace2"><td class="memItemLeft" align="right" valign="top"><a id="a524662edaeeba93c936bc87028c2ace2" name="a524662edaeeba93c936bc87028c2ace2"></a>
-<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b></td></tr>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_graphicalModule</b> = _provider-&gt;loadAndGetModule&lt;<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a>&gt;(ModuleType::GRAPHICAL)</td></tr>
 <tr class="separator:a524662edaeeba93c936bc87028c2ace2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82c4adebc495b7578318699963e7ef61" id="r_a82c4adebc495b7578318699963e7ef61"><td class="memItemLeft" align="right" valign="top"><a id="a82c4adebc495b7578318699963e7ef61" name="a82c4adebc495b7578318699963e7ef61"></a>
-<a class="el" href="classRType_1_1IAnimationModule.html">IAnimationModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_animationModule</b></td></tr>
-<tr class="separator:a82c4adebc495b7578318699963e7ef61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42952780666dde2780f6c2ca486eb8b6" id="r_a42952780666dde2780f6c2ca486eb8b6"><td class="memItemLeft" align="right" valign="top"><a id="a42952780666dde2780f6c2ca486eb8b6" name="a42952780666dde2780f6c2ca486eb8b6"></a>
 <a class="el" href="classRType_1_1ILoggerModule.html">ILoggerModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_logger</b> = _provider-&gt;loadAndGetModule&lt;<a class="el" href="classRType_1_1ILoggerModule.html">ILoggerModule</a>&gt;(ModuleType::LOGGER)</td></tr>
 <tr class="separator:a42952780666dde2780f6c2ca486eb8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -365,8 +368,8 @@ GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEn
 
 </div>
 </div>
-<a id="ae600a2f9e654e6b5ce81aa9f70877431" name="ae600a2f9e654e6b5ce81aa9f70877431"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae600a2f9e654e6b5ce81aa9f70877431">&#9670;&#160;</a></span>handleInput()</h2>
+<a id="ae8768517867743b0b3cd07dc571bfbbf" name="ae8768517867743b0b3cd07dc571bfbbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8768517867743b0b3cd07dc571bfbbf">&#9670;&#160;</a></span>handleGameInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,7 +378,7 @@ GraphicEntityPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_playerEn
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void RType::ClientViewport::handleInput </td>
+          <td class="memname">void RType::ClientViewport::handleGameInput </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>

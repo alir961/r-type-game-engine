@@ -104,23 +104,26 @@ Collaboration diagram for RType::GraphicEntity:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRType_1_1GraphicEntity__coll__graph.png" border="0" usemap="#aRType_1_1GraphicEntity_coll__map" alt="Collaboration graph"/></div>
 <map name="aRType_1_1GraphicEntity_coll__map" id="aRType_1_1GraphicEntity_coll__map">
-<area shape="rect" title="Graphic Entity class from the abstract AGraphicEntity." alt="" coords="102,172,247,199"/>
-<area shape="rect" href="classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="5,81,160,108"/>
-<area shape="poly" title=" " alt="" coords="109,117,163,169,159,173,105,121"/>
-<area shape="rect" href="classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="8,5,157,32"/>
-<area shape="poly" title=" " alt="" coords="85,47,85,81,80,81,80,47"/>
-<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="184,81,352,108"/>
-<area shape="poly" title=" " alt="" coords="246,121,190,173,186,169,242,117"/>
-<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="212,5,324,32"/>
-<area shape="poly" title=" " alt="" coords="271,47,271,81,265,81,265,47"/>
+<area shape="rect" title="Graphic Entity class from the abstract AGraphicEntity." alt="" coords="191,169,333,195"/>
+<area shape="rect" href="classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="5,80,156,106"/>
+<area shape="poly" title=" " alt="" coords="121,111,238,166,235,171,119,116"/>
+<area shape="rect" href="classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="8,5,153,31"/>
+<area shape="poly" title=" " alt="" coords="83,46,83,80,78,80,78,46"/>
+<area shape="rect" href="classRType_1_1IGraphicalModule.html" title=" " alt="" coords="179,80,345,106"/>
+<area shape="poly" title=" " alt="" coords="265,122,265,169,259,169,259,122"/>
+<area shape="rect" href="classRType_1_1IModule.html" title=" " alt="" coords="301,5,412,31"/>
+<area shape="poly" title=" " alt="" coords="331,43,279,82,276,78,327,38"/>
+<area shape="rect" href="classRType_1_1IAnimationModule.html" title=" " alt="" coords="368,80,537,106"/>
+<area shape="poly" title=" " alt="" coords="386,38,439,78,435,82,383,43"/>
+<area shape="poly" title=" " alt="" coords="413,115,290,171,288,166,411,110"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a79d4921ab226e7e129a72edc8e781062" id="r_a79d4921ab226e7e129a72edc8e781062"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79d4921ab226e7e129a72edc8e781062">GraphicEntity</a> (EntityPtr &amp;entity, const std::string &amp;path, const std::string &amp;entityName)</td></tr>
-<tr class="memdesc:a79d4921ab226e7e129a72edc8e781062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Graphic <a class="el" href="classRType_1_1Entity.html">Entity</a> object.  <br /></td></tr>
-<tr class="separator:a79d4921ab226e7e129a72edc8e781062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c62ff299e5ea845a3341d0914e30ce" id="r_a17c62ff299e5ea845a3341d0914e30ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17c62ff299e5ea845a3341d0914e30ce">GraphicEntity</a> (EntityPtr entity, const std::string &amp;path, const std::string &amp;entityName)</td></tr>
+<tr class="memdesc:a17c62ff299e5ea845a3341d0914e30ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Graphic <a class="el" href="classRType_1_1Entity.html">Entity</a> object.  <br /></td></tr>
+<tr class="separator:a17c62ff299e5ea845a3341d0914e30ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e8c92f4b8b63739d3ee43d086b200bd" id="r_a4e8c92f4b8b63739d3ee43d086b200bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e8c92f4b8b63739d3ee43d086b200bd">update</a> (float deltaTime) override</td></tr>
 <tr class="memdesc:a4e8c92f4b8b63739d3ee43d086b200bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the graphic _entity based on the state of the ECS _entity.  <br /></td></tr>
 <tr class="separator:a4e8c92f4b8b63739d3ee43d086b200bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,9 +157,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getEntityName<
 Private Attributes</h2></td></tr>
 <tr class="memitem:a59ae0e2efc6750acd18cb23f22fb9904" id="r_a59ae0e2efc6750acd18cb23f22fb9904"><td class="memItemLeft" align="right" valign="top">EntityPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59ae0e2efc6750acd18cb23f22fb9904">_entity</a></td></tr>
 <tr class="separator:a59ae0e2efc6750acd18cb23f22fb9904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc9c252e86ed331b58bb9bbb98dfb1e2" id="r_acc9c252e86ed331b58bb9bbb98dfb1e2"><td class="memItemLeft" align="right" valign="top"><a id="acc9c252e86ed331b58bb9bbb98dfb1e2" name="acc9c252e86ed331b58bb9bbb98dfb1e2"></a>
+ModuleProviderPtr&#160;</td><td class="memItemRight" valign="bottom"><b>_provider</b> = ModuleProvider::getInstance()</td></tr>
+<tr class="separator:acc9c252e86ed331b58bb9bbb98dfb1e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88db7c76988755185e2db154194c5ba9" id="r_a88db7c76988755185e2db154194c5ba9"><td class="memItemLeft" align="right" valign="top"><a id="a88db7c76988755185e2db154194c5ba9" name="a88db7c76988755185e2db154194c5ba9"></a>
-<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_module</b> = ModuleProvider::getInstance()-&gt;get&lt;<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a>&gt;(ModuleType::GRAPHICAL)</td></tr>
+<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_module</b> = _provider-&gt;get&lt;<a class="el" href="classRType_1_1IGraphicalModule.html">IGraphicalModule</a>&gt;(ModuleType::GRAPHICAL)</td></tr>
 <tr class="separator:a88db7c76988755185e2db154194c5ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a555b76611a83779fb656c7cb75da3beb" id="r_a555b76611a83779fb656c7cb75da3beb"><td class="memItemLeft" align="right" valign="top"><a id="a555b76611a83779fb656c7cb75da3beb" name="a555b76611a83779fb656c7cb75da3beb"></a>
+<a class="el" href="classRType_1_1IAnimationModule.html">IAnimationModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_animation</b> = _provider-&gt;loadAndGetModule&lt;<a class="el" href="classRType_1_1IAnimationModule.html">IAnimationModule</a>&gt;(ModuleType::ANIMATION)</td></tr>
+<tr class="separator:a555b76611a83779fb656c7cb75da3beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a676ed5cc82f0d903084fee7f1e8c1e8d" id="r_a676ed5cc82f0d903084fee7f1e8c1e8d"><td class="memItemLeft" align="right" valign="top"><a id="a676ed5cc82f0d903084fee7f1e8c1e8d" name="a676ed5cc82f0d903084fee7f1e8c1e8d"></a>
 TextComponent&#160;</td><td class="memItemRight" valign="bottom"><b>_entityNameText</b> = _module-&gt;createText(&quot;&quot;)</td></tr>
 <tr class="separator:a676ed5cc82f0d903084fee7f1e8c1e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,8 +181,8 @@ TextComponent&#160;</td><td class="memItemRight" valign="bottom"><b>_entityNameT
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Graphic <a class="el" href="classRType_1_1Entity.html">Entity</a> class from the abstract <a class="el" href="classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity.">AGraphicEntity</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a79d4921ab226e7e129a72edc8e781062" name="a79d4921ab226e7e129a72edc8e781062"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79d4921ab226e7e129a72edc8e781062">&#9670;&#160;</a></span>GraphicEntity()</h2>
+<a id="a17c62ff299e5ea845a3341d0914e30ce" name="a17c62ff299e5ea845a3341d0914e30ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17c62ff299e5ea845a3341d0914e30ce">&#9670;&#160;</a></span>GraphicEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +193,7 @@ TextComponent&#160;</td><td class="memItemRight" valign="bottom"><b>_entityNameT
         <tr>
           <td class="memname">RType::GraphicEntity::GraphicEntity </td>
           <td>(</td>
-          <td class="paramtype">EntityPtr &amp;</td>          <td class="paramname"><span class="paramname"><em>entity</em>, </span></td>
+          <td class="paramtype">EntityPtr</td>          <td class="paramname"><span class="paramname"><em>entity</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -532,7 +541,7 @@ TextComponent&#160;</td><td class="memItemRight" valign="bottom"><b>_entityNameT
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classRType_1_1Animation.html">Animation</a> time accumulator. </p>
+<p>Animation time accumulator. </p>
 
 </div>
 </div>

@@ -1,11 +1,14 @@
 <map id="RType::GraphicEntity" name="RType::GraphicEntity">
-<area shape="rect" id="Node000001" title="Graphic Entity class from the abstract AGraphicEntity." alt="" coords="102,172,247,199"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="5,81,160,108"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,117,163,169,159,173,105,121"/>
-<area shape="rect" id="Node000003" href="$classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="8,5,157,32"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="85,47,85,81,80,81,80,47"/>
-<area shape="rect" id="Node000004" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="184,81,352,108"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="246,121,190,173,186,169,242,117"/>
-<area shape="rect" id="Node000005" href="$classRType_1_1IModule.html" title=" " alt="" coords="212,5,324,32"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="271,47,271,81,265,81,265,47"/>
+<area shape="rect" id="Node000001" title="Graphic Entity class from the abstract AGraphicEntity." alt="" coords="191,169,333,195"/>
+<area shape="rect" id="Node000002" href="$classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="5,80,156,106"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,111,238,166,235,171,119,116"/>
+<area shape="rect" id="Node000003" href="$classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="8,5,153,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,46,83,80,78,80,78,46"/>
+<area shape="rect" id="Node000004" href="$classRType_1_1IGraphicalModule.html" title=" " alt="" coords="179,80,345,106"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="265,122,265,169,259,169,259,122"/>
+<area shape="rect" id="Node000005" href="$classRType_1_1IModule.html" title=" " alt="" coords="301,5,412,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="331,43,279,82,276,78,327,38"/>
+<area shape="rect" id="Node000006" href="$classRType_1_1IAnimationModule.html" title=" " alt="" coords="368,80,537,106"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="386,38,439,78,435,82,383,43"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="413,115,290,171,288,166,411,110"/>
 </map>

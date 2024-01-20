@@ -21,7 +21,6 @@
 <a href="GraphicEntity_8hpp_source.html"/>
 <a href="GraphicEntityFactory_8hpp_source.html"/>
 <a href="IGraphicEntity_8hpp_source.html"/>
-<a href="ResourceManager_8hpp_source.html"/>
 <a href="UDPClient_8hpp_source.html"/>
 <a href="DeadView_8hpp_source.html"/>
 <a href="GameView_8hpp_source.html"/>
@@ -56,12 +55,8 @@
 <a href="ServerException_8hpp_source.html"/>
 <a href="ThreadException_8hpp_source.html"/>
 <a href="Logger_8hpp_source.html"/>
-<a href="Animation_8hpp_source.html"/>
 <a href="IAnimation_8hpp_source.html"/>
-<a href="IAnimationFactory_8hpp_source.html"/>
 <a href="IAnimationModule_8hpp_source.html"/>
-<a href="PlayerAnimation_8hpp_source.html"/>
-<a href="PlayerBulletAnimation_8hpp_source.html"/>
 <a href="ARectangle_8hpp_source.html"/>
 <a href="ASprite_8hpp_source.html"/>
 <a href="AText_8hpp_source.html"/>
@@ -78,7 +73,12 @@
 <a href="SafeQueue_8hpp_source.html"/>
 <a href="Split_8hpp_source.html"/>
 <a href="Thread_8hpp_source.html"/>
+<a href="AAnimation_8hpp_source.html"/>
+<a href="AnimationFactory_8hpp_source.html"/>
 <a href="AnimationModule_8hpp_source.html"/>
+<a href="BulletAnimation_8hpp_source.html"/>
+<a href="MonsterAnimation_8hpp_source.html"/>
+<a href="PlayerAnimation_8hpp_source.html"/>
 <a href="ConsoleModule_8hpp_source.html"/>
 <a href="GraphicalModule_8hpp_source.html"/>
 <a href="Rectangle_8hpp_source.html"/>
@@ -102,6 +102,8 @@
 <a href="UDPServer_8hpp_source.html"/>
 <a href="classRType_1_1AAIModule.html"/>
 <a href="classRType_1_1AAIModule-members.html"/>
+<a href="classRType_1_1AAnimation.html"/>
+<a href="classRType_1_1AAnimation-members.html"/>
 <a href="classRType_1_1AAudioModule.html"/>
 <a href="classRType_1_1AAudioModule-members.html"/>
 <a href="classRType_1_1ACinematicModule.html"/>
@@ -116,8 +118,8 @@
 <a href="classRType_1_1AInputBox-members.html"/>
 <a href="classRType_1_1AMetricsModule.html"/>
 <a href="classRType_1_1AMetricsModule-members.html"/>
-<a href="classRType_1_1Animation.html"/>
-<a href="classRType_1_1Animation-members.html"/>
+<a href="classRType_1_1AnimationFactory.html"/>
+<a href="classRType_1_1AnimationFactory-members.html"/>
 <a href="classRType_1_1AnimationModule.html"/>
 <a href="classRType_1_1AnimationModule-members.html"/>
 <a href="classRType_1_1ARectangle.html"/>
@@ -132,6 +134,8 @@
 <a href="classRType_1_1Background-members.html"/>
 <a href="classRType_1_1BinaryEncoder.html"/>
 <a href="classRType_1_1BinaryEncoder-members.html"/>
+<a href="classRType_1_1BulletAnimation.html"/>
+<a href="classRType_1_1BulletAnimation-members.html"/>
 <a href="classRType_1_1Button.html"/>
 <a href="classRType_1_1Button-members.html"/>
 <a href="classRType_1_1CheckBox.html"/>
@@ -184,8 +188,6 @@
 <a href="classRType_1_1HuffmanAlgorithm-members.html"/>
 <a href="classRType_1_1IAnimation.html"/>
 <a href="classRType_1_1IAnimation-members.html"/>
-<a href="classRType_1_1IAnimationFactory.html"/>
-<a href="classRType_1_1IAnimationFactory-members.html"/>
 <a href="classRType_1_1IAnimationModule.html"/>
 <a href="classRType_1_1IAnimationModule-members.html"/>
 <a href="classRType_1_1IComponent.html"/>
@@ -226,6 +228,8 @@
 <a href="classRType_1_1ModuleLoader-members.html"/>
 <a href="classRType_1_1ModuleProvider.html"/>
 <a href="classRType_1_1ModuleProvider-members.html"/>
+<a href="classRType_1_1MonsterAnimation.html"/>
+<a href="classRType_1_1MonsterAnimation-members.html"/>
 <a href="classRType_1_1NetworkException.html"/>
 <a href="classRType_1_1NetworkException-members.html"/>
 <a href="classRType_1_1NetworkMessageBuilder.html"/>
@@ -242,8 +246,6 @@
 <a href="classRType_1_1PauseView-members.html"/>
 <a href="classRType_1_1PlayerAnimation.html"/>
 <a href="classRType_1_1PlayerAnimation-members.html"/>
-<a href="classRType_1_1PlayerBulletAnimation.html"/>
-<a href="classRType_1_1PlayerBulletAnimation-members.html"/>
 <a href="classRType_1_1PlayerComponent.html"/>
 <a href="classRType_1_1PlayerComponent-members.html"/>
 <a href="classRType_1_1PositionComponent.html"/>
@@ -254,8 +256,6 @@
 <a href="classRType_1_1RectBox-members.html"/>
 <a href="structRType_1_1RectFloat.html"/>
 <a href="structRType_1_1RectFloat-members.html"/>
-<a href="classRType_1_1ResourceManager.html"/>
-<a href="classRType_1_1ResourceManager-members.html"/>
 <a href="classRType_1_1RLEAlgorithm.html"/>
 <a href="classRType_1_1RLEAlgorithm-members.html"/>
 <a href="classRType_1_1SafeQueue.html"/>
@@ -309,6 +309,7 @@
 <a href="dir_b166f286d1e560dbaaaaf478c7d4daf6.html"/>
 <a href="dir_81121ac000ec64917cda1d9462c7a037.html"/>
 <a href="dir_b125bada083d2c0e418336aaa312ef4f.html"/>
+<a href="dir_9640168e1677653d4469bca50a515cca.html"/>
 <a href="dir_aa36d3f3c7c5c6f8b7f6656bbe51143f.html"/>
 <a href="dir_db6db1e275cd7aaa0232e4d7c3384cfc.html"/>
 <a href="dir_1064180001fdb2b8dbc0f4de48046bed.html"/>
@@ -329,7 +330,6 @@
 <a href="dir_0346015b1db974678e6812415440d6e3.html"/>
 <a href="dir_397fa73e171488c98ac03fb367a882d4.html"/>
 <a href="dir_a511d0b774d50178644709cc05acf412.html"/>
-<a href="dir_4e6eea431210fd638ec5bfb46a29749e.html"/>
 <a href="dir_41e1742e44e2de38b3bc91f993fed282.html"/>
 <a href="dir_386749226d37a01ad370271066850d72.html"/>
 <a href="dir_b565d458ba0ce2faccd0ea2cd60c04eb.html"/>

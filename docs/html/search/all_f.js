@@ -7,8 +7,7 @@ var searchData=
   ['rectfloat_4',['RectFloat',['../structRType_1_1RectFloat.html',1,'RType']]],
   ['removecomponent_5',['removeComponent',['../classRType_1_1Entity.html#a2f28f0f9f5c440aafe9e72c52f95afb0',1,'RType::Entity']]],
   ['resized_6',['Resized',['../classRType_1_1Event.html#abe2c331ed3a62428b4166e06a655723da389854de1b8bf7bca9ac3fdc08a344a3',1,'RType::Event']]],
-  ['resourcemanager_7',['ResourceManager',['../classRType_1_1ResourceManager.html',1,'RType']]],
-  ['rgb_8',['RGB',['../structRType_1_1Color_1_1RGB.html',1,'RType::Color']]],
-  ['rlealgorithm_9',['RLEAlgorithm',['../classRType_1_1RLEAlgorithm.html',1,'RType']]],
-  ['run_10',['run',['../classRType_1_1Thread.html#a86bdbff76269d0b01b51cbe3e0b10e91',1,'RType::Thread']]]
+  ['rgb_7',['RGB',['../structRType_1_1Color_1_1RGB.html',1,'RType::Color']]],
+  ['rlealgorithm_8',['RLEAlgorithm',['../classRType_1_1RLEAlgorithm.html',1,'RType']]],
+  ['run_9',['run',['../classRType_1_1Thread.html#a86bdbff76269d0b01b51cbe3e0b10e91',1,'RType::Thread']]]
 ];

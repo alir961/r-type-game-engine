@@ -144,6 +144,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sendPlayerDetails</b>
 <tr class="memitem:acd0562f43061fa351d9e26ccb38f3f99" id="r_acd0562f43061fa351d9e26ccb38f3f99"><td class="memItemLeft" align="right" valign="top"><a id="acd0562f43061fa351d9e26ccb38f3f99" name="acd0562f43061fa351d9e26ccb38f3f99"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendBulletPlayerDetails</b> (const EntityPtr &amp;entity)</td></tr>
 <tr class="separator:acd0562f43061fa351d9e26ccb38f3f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13d8c14281fad7be92f2ba56a02a8a78" id="r_a13d8c14281fad7be92f2ba56a02a8a78"><td class="memItemLeft" align="right" valign="top"><a id="a13d8c14281fad7be92f2ba56a02a8a78" name="a13d8c14281fad7be92f2ba56a02a8a78"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sendMonsterDetails</b> (const EntityPtr &amp;entity)</td></tr>
+<tr class="separator:a13d8c14281fad7be92f2ba56a02a8a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab25ad8438b6be44d0d64b85a5b66fabb" id="r_ab25ad8438b6be44d0d64b85a5b66fabb"><td class="memItemLeft" align="right" valign="top"><a id="ab25ad8438b6be44d0d64b85a5b66fabb" name="ab25ad8438b6be44d0d64b85a5b66fabb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>createMonsterEntity</b> ()</td></tr>
+<tr class="separator:ab25ad8438b6be44d0d64b85a5b66fabb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab14a49c9f6e194b84ab40ed3570c8400" id="r_ab14a49c9f6e194b84ab40ed3570c8400"><td class="memItemLeft" align="right" valign="top"><a id="ab14a49c9f6e194b84ab40ed3570c8400" name="ab14a49c9f6e194b84ab40ed3570c8400"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getNextMonsterID</b> ()</td></tr>
+<tr class="separator:ab14a49c9f6e194b84ab40ed3570c8400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -156,9 +165,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:abc4091965d4201adb8eda38055030449" id="r_abc4091965d4201adb8eda38055030449"><td class="memItemLeft" align="right" valign="top"><a id="abc4091965d4201adb8eda38055030449" name="abc4091965d4201adb8eda38055030449"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>serverLoopIterate</b> ()</td></tr>
 <tr class="separator:abc4091965d4201adb8eda38055030449"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b5c233a49de91ea24c04bd1e620fe57" id="r_a9b5c233a49de91ea24c04bd1e620fe57"><td class="memItemLeft" align="right" valign="top"><a id="a9b5c233a49de91ea24c04bd1e620fe57" name="a9b5c233a49de91ea24c04bd1e620fe57"></a>
+<tr class="memitem:a50b105233723949b8af8e93de84cad43" id="r_a50b105233723949b8af8e93de84cad43"><td class="memItemLeft" align="right" valign="top"><a id="a50b105233723949b8af8e93de84cad43" name="a50b105233723949b8af8e93de84cad43"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>movePlayerBullets</b> ()</td></tr>
-<tr class="separator:a9b5c233a49de91ea24c04bd1e620fe57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a50b105233723949b8af8e93de84cad43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcaa335ec8b3fe1ef430d885891d6f62" id="r_adcaa335ec8b3fe1ef430d885891d6f62"><td class="memItemLeft" align="right" valign="top"><a id="adcaa335ec8b3fe1ef430d885891d6f62" name="adcaa335ec8b3fe1ef430d885891d6f62"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>moveMonsters</b> ()</td></tr>
+<tr class="separator:adcaa335ec8b3fe1ef430d885891d6f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaec88c893e483e2325a76d2182855587" id="r_aaec88c893e483e2325a76d2182855587"><td class="memItemLeft" align="right" valign="top"><a id="aaec88c893e483e2325a76d2182855587" name="aaec88c893e483e2325a76d2182855587"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendMessage</b> (MessageType type, const std::string_view &amp;data)</td></tr>
 <tr class="separator:aaec88c893e483e2325a76d2182855587"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +195,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a269fd487788a673d8bf631c62b7cc25e" id="r_a269fd487788a673d8bf631c62b7cc25e"><td class="memItemLeft" align="right" valign="top"><a id="a269fd487788a673d8bf631c62b7cc25e" name="a269fd487788a673d8bf631c62b7cc25e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_tickNumber</b></td></tr>
 <tr class="separator:a269fd487788a673d8bf631c62b7cc25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a799b4909bd79545e5e416cb1e4164bcd" id="r_a799b4909bd79545e5e416cb1e4164bcd"><td class="memItemLeft" align="right" valign="top"><a id="a799b4909bd79545e5e416cb1e4164bcd" name="a799b4909bd79545e5e416cb1e4164bcd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_lastMonsterID</b> = 0</td></tr>
+<tr class="separator:a799b4909bd79545e5e416cb1e4164bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9484cc768424eb6a758e8fb493726ee1" name="a9484cc768424eb6a758e8fb493726ee1"></a>
