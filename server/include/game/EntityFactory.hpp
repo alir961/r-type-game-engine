@@ -58,6 +58,22 @@ namespace RType {
             bulletEntity->addComponent<SizeRectComponent>(14.0f, 14.0f);
             return bulletEntity;
         }
+
+        /**
+         * Instantiate a default monster with default components
+         *
+         * @return A shared pointer to the created ùonster
+         */
+        [[nodiscard]] EntityPtr createMonster(float startX, float startY) {
+            EntityPtr monsterEntity = _manager->createEntity();
+
+            monsterEntity->addComponent<RType::SpeedComponent>(5);
+            monsterEntity->addComponent<RType::HealthComponent>(1000);
+            monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
+            monsterEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+            monsterEntity->addComponent<SizeRectComponent>(32.0f, 32.0f);
+            return monsterEntity;
+        }
     };
 
 }

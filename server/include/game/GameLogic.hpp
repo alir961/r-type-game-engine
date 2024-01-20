@@ -25,10 +25,13 @@ namespace RType {
         EntityFactory _factory = EntityFactory(&_entityManager);
         Thread _thread;
         int _tickNumber;
+        int _lastMonsterID = 0;
 
         void serverLoopIterate();
 
-        void moveBulletPlayer();
+        void movePlayerBullets();
+
+        void moveMonsters();
 
         void sendMessage(MessageType type, const std::string_view &data);
 
@@ -86,6 +89,12 @@ namespace RType {
         void sendPlayerDetails(const EntityPtr& entity);
 
         void sendBulletPlayerDetails(const EntityPtr& entity);
+
+        void sendMonsterDetails(const EntityPtr& entity);
+
+        void createMonsterEntity();
+
+        int getNextMonsterID();
     };
 
 }
