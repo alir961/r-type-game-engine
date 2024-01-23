@@ -92,7 +92,11 @@ namespace RType {
 
         void sendMonsterDetails(const EntityPtr& entity);
 
+        void sendStaticEntityDetails(const EntityPtr& entity);
+
         void createMonsterEntity();
+
+        void createStaticEntity(int staticID, float startX, float startY);
 
         int getNextMonsterID();
     };

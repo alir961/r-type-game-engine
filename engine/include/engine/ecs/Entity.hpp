@@ -153,10 +153,14 @@ namespace RType {
                 setDeathStatus();
             else
                 healthComponent->setHealth(health - damage);
+            if (hasPlayerComponent()) {
+                auto playerComponent = getComponent<PlayerComponent>();
+                playerComponent->setScore(playerComponent->getScore() + damage);
+            }
         }
 
         void setDamageEntity(const std::shared_ptr<Entity> &entity) {
-            if (hasHealthComponent(entity))
+            if (hasHealthComponent())
                 putDamage(entity);
             else
                 setDeathStatus();
@@ -167,6 +171,30 @@ namespace RType {
             for (const auto &pair : entity->getComponents()) {
                 const std::type_info &currentType = typeid(*(pair.second));
                 if (currentType == typeid(HealthComponent)) {
+                    hasComponent = true;
+                    break;
+                }
+            }
+            return hasComponent;
+        }
+
+        bool hasHealthComponent() {
+            bool hasComponent = false;
+            for (const auto &pair : getComponents()) {
+                const std::type_info &currentType = typeid(*(pair.second));
+                if (currentType == typeid(HealthComponent)) {
+                    hasComponent = true;
+                    break;
+                }
+            }
+            return hasComponent;
+        }
+
+        bool hasPlayerComponent() {
+            bool hasComponent = false;
+            for (const auto &pair : getComponents()) {
+                const std::type_info &currentType = typeid(*(pair.second));
+                if (currentType == typeid(PlayerComponent)) {
                     hasComponent = true;
                     break;
                 }
@@ -246,8 +274,8 @@ namespace RType {
             for (const auto& entity : entities) {
                 if (hit(entity)) {
                     if (hasDamageComponent(entity)) {
-                        entity->setDeathStatus();
                         setDamageEntity(entity);
+                        entity->setDeathStatus();
                     } else
                         setDeathStatus();
                 }

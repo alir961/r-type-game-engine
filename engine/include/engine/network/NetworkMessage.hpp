@@ -44,6 +44,7 @@ namespace RType {
         DEATH,
         TICK,
         MONSTER,
+        STATIC,
     };
 
 #ifdef __linux__

@@ -52,7 +52,7 @@ namespace RType {
             EntityPtr bulletEntity = _manager->createEntity();
 
             bulletEntity->addComponent<RType::SpeedComponent>(10);
-            bulletEntity->addComponent<RType::DamageComponent>(20);
+            bulletEntity->addComponent<RType::DamageComponent>(150);
             bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
             bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
             bulletEntity->addComponent<SizeRectComponent>(14.0f, 14.0f);
@@ -72,6 +72,19 @@ namespace RType {
             monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
             monsterEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
             monsterEntity->addComponent<SizeRectComponent>(33.0f, 33.0f);
+            return monsterEntity;
+        }
+        /**
+         * Instantiate a default static entity with default components
+         *
+         * @return A shared pointer to the created static entity
+         */
+        [[nodiscard]] EntityPtr createStatic(float startX, float startY) {
+            EntityPtr monsterEntity = _manager->createEntity();
+
+            monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
+            monsterEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+            monsterEntity->addComponent<SizeRectComponent>(122.0f, 122.0f);
             return monsterEntity;
         }
     };

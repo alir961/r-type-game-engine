@@ -19,7 +19,9 @@ void stopServer(int) {
 
 RType::GameLogic::GameLogic(RType::UDPAdapter *adapter) : _adapter(adapter) {
     signal(SIGINT, &stopServer);
-
+    createStaticEntity(0, 1420, 420);
+    createStaticEntity(1, 420, 024);
+    createStaticEntity(2, 666, 666);
     _thread.run([this]() { serverLoopIterate(); });
 }
 
@@ -150,6 +152,8 @@ void RType::GameLogic::sendMessageFromEntity(const RType::EntityPtr &entity) {
         sendBulletPlayerDetails(entity);
     if (entityName[0] == "monster")
         sendMonsterDetails(entity);
+    if (entityName[0] == "static")
+        sendStaticEntityDetails(entity);
 }
 
 void RType::GameLogic::addMessageClients(int sessionID, RType::MessageType type, const std::string_view &data) {
@@ -275,4 +279,31 @@ void RType::GameLogic::moveMonsters() {
             checkEntitiesStatus(nullptr);
         }
     }
+}
+
+void RType::GameLogic::sendStaticEntityDetails(const RType::EntityPtr &entity) {
+    char details[250];
+    std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
+    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
+    auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
+    auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
+
+    sprintf(details, "static %s position %.1f %.1f size %.1f %.1f rect %.1f %.1f\n",
+            entityName[1].c_str(),
+            entityX,
+            entityY,
+            sizeX,
+            sizeY,
+            sizeRectX,
+            sizeRectY);
+    addMessageClients(-1, MessageType::STATIC, details);
+}
+
+void RType::GameLogic::createStaticEntity(int staticID, float startX, float startY) {
+    EntityPtr staticEntity = getFactory().createStatic(startX, startY);
+    char buffer[50];
+
+    sprintf(buffer, "static %d\n", staticID);
+    staticEntity->setEntityName(buffer);
+    sendStaticEntityDetails(staticEntity);
 }
