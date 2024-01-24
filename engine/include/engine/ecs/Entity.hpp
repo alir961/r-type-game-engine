@@ -144,20 +144,35 @@ namespace RType {
 
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> getComponents() {return _components;};
 
-        void putDamage(const std::shared_ptr<Entity> &entity) {
+        std::shared_ptr<Entity> getPlayerEntity(const std::vector<std::shared_ptr<Entity>> &entities, int playerID) {
+            for (const auto& entity : entities) {
+                std::vector<std::string> entityName = Split::split(entity->getEntityName(), " \n");
+                if (playerID == std::stoi(entityName[1]) && hasPlayerComponent(entity))
+                    return entity;
+            }
+            return nullptr;
+        }
+
+        void putDamage(const std::shared_ptr<Entity> &entity, const std::vector<std::shared_ptr<Entity>> &entities) {
             auto healthComponent = getComponent<HealthComponent>();
             int health = healthComponent->getHealth();
             int damage = entity->getComponent<DamageComponent>().get()->getDamage();
+            auto player = getPlayerEntity(entities, std::stoi(Split::split(entity->getEntityName(), " \n")[1]));
+
 
             if (health - damage <= 0)
                 setDeathStatus();
             else
                 healthComponent->setHealth(health - damage);
+            if (player == nullptr)
+                return;
+            auto playerComponent = player->getComponent<PlayerComponent>();
+            playerComponent->setScore(playerComponent->getScore() + damage);
         }
 
-        void setDamageEntity(const std::shared_ptr<Entity> &entity) {
-            if (hasHealthComponent(entity))
-                putDamage(entity);
+        void setDamageEntity(const std::shared_ptr<Entity> &entity, const std::vector<std::shared_ptr<Entity>> &entities) {
+            if (hasHealthComponent())
+                putDamage(entity, entities);
             else
                 setDeathStatus();
         }
@@ -167,6 +182,30 @@ namespace RType {
             for (const auto &pair : entity->getComponents()) {
                 const std::type_info &currentType = typeid(*(pair.second));
                 if (currentType == typeid(HealthComponent)) {
+                    hasComponent = true;
+                    break;
+                }
+            }
+            return hasComponent;
+        }
+
+        bool hasHealthComponent() {
+            bool hasComponent = false;
+            for (const auto &pair : getComponents()) {
+                const std::type_info &currentType = typeid(*(pair.second));
+                if (currentType == typeid(HealthComponent)) {
+                    hasComponent = true;
+                    break;
+                }
+            }
+            return hasComponent;
+        }
+
+        bool hasPlayerComponent(const std::shared_ptr<Entity> &entity) {
+            bool hasComponent = false;
+            for (const auto &pair : entity->getComponents()) {
+                const std::type_info &currentType = typeid(*(pair.second));
+                if (currentType == typeid(PlayerComponent)) {
                     hasComponent = true;
                     break;
                 }
@@ -246,10 +285,12 @@ namespace RType {
             for (const auto& entity : entities) {
                 if (hit(entity)) {
                     if (hasDamageComponent(entity)) {
+                        setDamageEntity(entity, entities);
                         entity->setDeathStatus();
-                        setDamageEntity(entity);
-                    } else
+                    } else {
                         setDeathStatus();
+                        entity->setDeathStatus();
+                    }
                 }
             }
         }

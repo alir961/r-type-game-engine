@@ -10,6 +10,7 @@
 #include "entity/PlayerAnimation.hpp"
 #include "entity/BulletAnimation.hpp"
 #include "entity/MonsterAnimation.hpp"
+#include "entity/StaticAnimation.hpp"
 #include <iostream>
 #include <memory>
 
@@ -23,6 +24,8 @@ namespace RType {
     constexpr int BULLET_X = 101;
     constexpr int BULLET_Y = 118;
     constexpr int MONSTER_Y = 67;
+    constexpr int STATIC_X = 14;
+    constexpr int STATIC_Y = 66;
 
     class AnimationFactory {
     public:
@@ -41,6 +44,8 @@ namespace RType {
                 return createBullet();
             if (entityName == "monster")
                 return createMonster();
+            if (entityName == "static")
+                return createStatic();
             return createPlayer(TURQUOISE_Y);
         }
 
@@ -52,8 +57,13 @@ namespace RType {
         static AnimationPtr createBullet() {
             return std::make_shared<BulletAnimation>(BULLET_X, BULLET_Y);
         }
+
         static AnimationPtr createMonster() {
             return std::make_shared<MonsterAnimation>(0, MONSTER_Y);
+        }
+
+        static AnimationPtr createStatic() {
+            return std::make_shared<StaticAnimation>(STATIC_X, STATIC_Y);
         }
     };
 

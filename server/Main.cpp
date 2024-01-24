@@ -2,6 +2,7 @@
 #include "include/Arguments.hpp"
 #include "include/UDPServer.hpp"
 #include <iostream>
+#include <stdlib.h>
 
 static int startServer(int count, char **args) {
     try {
@@ -16,5 +17,7 @@ static int startServer(int count, char **args) {
 }
 
 int main(int count, char **args) {
+    srand(time(nullptr));
+
     return startServer(count, args);
 }
