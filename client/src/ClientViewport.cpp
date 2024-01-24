@@ -338,6 +338,10 @@ void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMe
     starshipEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
     starshipEntity->getComponent<RType::PlayerComponent>()->setUserName(name);
     starshipEntity->getComponent<RType::PlayerComponent>()->setScore(score);
+    if (sessionID == _client->getClientID()) {
+        _client->setScore(score);
+        _client->setHealth(health);
+    }
 }
 
 void RType::ClientViewport::updateBulletPlayer(const std::vector<std::string> &splitMessage) {
