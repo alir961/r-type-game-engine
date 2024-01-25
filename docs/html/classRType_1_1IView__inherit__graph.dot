@@ -1,0 +1,25 @@
+digraph "RType::IView"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="RType::IView",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="RType::IDrawable",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classRType_1_1IDrawable.html",tooltip="Interface for objects that can be drawn on an SFML RenderWindow."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="RType::GameView",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classRType_1_1GameView.html",tooltip="Represents a state where entities are drawn."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="RType::LoadView",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$classRType_1_1LoadView.html",tooltip=" "];
+  Node1 -> Node5 [id="edge4_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="RType::LoginView",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classRType_1_1LoginView.html",tooltip="Represents a login state with input box for user interaction."];
+  Node1 -> Node6 [id="edge5_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="RType::MenuView",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classRType_1_1MenuView.html",tooltip="Represents a state with a menu for user interaction."];
+  Node1 -> Node7 [id="edge6_Node000001_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="RType::OptionsView",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classRType_1_1OptionsView.html",tooltip="Represents the options menu state in the game."];
+  Node1 -> Node8 [id="edge7_Node000001_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="RType::PauseView",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classRType_1_1PauseView.html",tooltip="Represents the pause menu state in the game."];
+  Node1 -> Node9 [id="edge8_Node000001_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="RType::WinDeadView",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$classRType_1_1WinDeadView.html",tooltip=" "];
+}

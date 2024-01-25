@@ -17,5 +17,6 @@ var searchData=
   ['createdefaultplayer_14',['createDefaultPlayer',['../classRType_1_1EntityFactory.html#a06fe885d1e7b74e41e08555e60cd6492',1,'RType::EntityFactory']]],
   ['createentity_15',['createEntity',['../classRType_1_1EntityManager.html#ac479f78caeecdf2008b291c693eb99e1',1,'RType::EntityManager']]],
   ['createmonster_16',['createMonster',['../classRType_1_1EntityFactory.html#ab5aa6ea71af5835826f4ccb1f31fdeb7',1,'RType::EntityFactory']]],
-  ['createtext_17',['createText',['../classRType_1_1IGraphicalModule.html#a4d4d91f0b140b1f5d77563d8db733567',1,'RType::IGraphicalModule::createText()'],['../classRType_1_1GraphicalModule.html#a69dc5a7e48f55e3821d86f827c0958c2',1,'RType::GraphicalModule::createText()']]]
+  ['createstatic_17',['createStatic',['../classRType_1_1EntityFactory.html#a54e28e747df8e33ea93700d2089fd164',1,'RType::EntityFactory']]],
+  ['createtext_18',['createText',['../classRType_1_1IGraphicalModule.html#a4d4d91f0b140b1f5d77563d8db733567',1,'RType::IGraphicalModule::createText()'],['../classRType_1_1GraphicalModule.html#a69dc5a7e48f55e3821d86f827c0958c2',1,'RType::GraphicalModule::createText()']]]
 ];

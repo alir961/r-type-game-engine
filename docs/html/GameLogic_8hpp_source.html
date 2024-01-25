@@ -166,13 +166,17 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordtype">void</span> sendMonsterDetails(<span class="keyword">const</span> EntityPtr&amp; entity);</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordtype">void</span> createMonsterEntity();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordtype">void</span> sendStaticEntityDetails(<span class="keyword">const</span> EntityPtr&amp; entity);</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordtype">int</span> getNextMonsterID();</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    };</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordtype">void</span> createMonsterEntity();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordtype">void</span> createStaticEntity(<span class="keywordtype">int</span> staticID, <span class="keywordtype">float</span> startX, <span class="keywordtype">float</span> startY);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordtype">int</span> getNextMonsterID();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    };</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
 <div class="ttc" id="aclassRType_1_1EntityFactory_html"><div class="ttname"><a href="classRType_1_1EntityFactory.html">RType::EntityFactory</a></div><div class="ttdef"><b>Definition</b> EntityFactory.hpp:15</div></div>
 <div class="ttc" id="aclassRType_1_1EntityManager_html"><div class="ttname"><a href="classRType_1_1EntityManager.html">RType::EntityManager</a></div><div class="ttdoc">EntityManager class responsible for managing entities in the system.</div><div class="ttdef"><b>Definition</b> EntityManager.hpp:21</div></div>
 <div class="ttc" id="aclassRType_1_1GameLogic_html"><div class="ttname"><a href="classRType_1_1GameLogic.html">RType::GameLogic</a></div><div class="ttdef"><b>Definition</b> GameLogic.hpp:20</div></div>
