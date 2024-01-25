@@ -27,7 +27,7 @@ namespace RType {
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        WinDeadView(ClientViewport &gameView, std::string winOrLose) : _viewport(gameView), _winOrLose(winOrLose) {}
+        WinDeadView(ClientViewport &gameView) : _viewport(gameView) {}
 
         /**
          * @brief Handles user input for the menu.
@@ -54,7 +54,6 @@ namespace RType {
                 const int score = playerEntity->getComponent<PlayerComponent>()->getScore();
                 _scoreText.setText("Score " + std::to_string(score));
             }
-            _loseWinText.setText(_winOrLose);
             _exitText.update();
         }
 
@@ -73,7 +72,7 @@ namespace RType {
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        ClickableText _loseWinText = ClickableText(Color::Magenta, 30, ((WINDOW_WIDTH - 450) / 2) + 150, ((WINDOW_HEIGHT - 400) / 2) + 15, "");
+        ClickableText _loseWinText = ClickableText(Color::Magenta, 30, ((WINDOW_WIDTH - 450) / 2) + 150, ((WINDOW_HEIGHT - 400) / 2) + 15, "You are Dead !");
         ClickableText _hpText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 115, "Health 0");
         ClickableText _scoreText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 215, "");
         ClickableText _exitText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 315, "Exit");

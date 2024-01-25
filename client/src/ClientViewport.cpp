@@ -120,11 +120,8 @@ void RType::ClientViewport::setView(ViewState state) {
         case ViewState::LOADSCREEN:
             _selectedView = std::make_shared<LoadView>(*this, _client);
             break;
-        case ViewState::WIN:
-            _selectedView = std::make_shared<WinDeadView>(*this, "You Win!");
-            break;
         case ViewState::DEAD:
-            _selectedView = std::make_shared<WinDeadView>(*this, "You Loose!");
+            _selectedView = std::make_shared<WinDeadView>(*this);
             break;
     }
     _selectedView->setPlayerEntity(_playerEntity);
