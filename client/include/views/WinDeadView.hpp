@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include "../components/RectBox.hpp"
 #include "../components/ClickableText.hpp"
 #include "IView.hpp"
 #include <iostream>
@@ -52,10 +51,7 @@ namespace RType {
             const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();
 
             if (player != nullptr && playerEntity->getComponent<PlayerComponent>()) {
-                const int health = playerEntity->getComponent<HealthComponent>()->getHealth();
                 const int score = playerEntity->getComponent<PlayerComponent>()->getScore();
-
-                _hpText.setText("Health " + std::to_string(health));
                 _scoreText.setText("Score " + std::to_string(score));
             }
             _loseWinText.setText(_winOrLose);
@@ -68,7 +64,6 @@ namespace RType {
          * @param entities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(std::vector<GraphicEntityPtr> entities) override {
-            _backgroundRect.draw(_module);
             _loseWinText.draw();
             _hpText.draw();
             _scoreText.draw();
@@ -78,9 +73,8 @@ namespace RType {
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        RectBox _backgroundRect = RectBox(sf::Vector2f(((WINDOW_WIDTH - 450) / 2), ((WINDOW_HEIGHT - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f);
         ClickableText _loseWinText = ClickableText(Color::Magenta, 30, ((WINDOW_WIDTH - 450) / 2) + 150, ((WINDOW_HEIGHT - 400) / 2) + 15, "");
-        ClickableText _hpText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 115, "");
+        ClickableText _hpText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 115, "Health 0");
         ClickableText _scoreText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 215, "");
         ClickableText _exitText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 315, "Exit");
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
