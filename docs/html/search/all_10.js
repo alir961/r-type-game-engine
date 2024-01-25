@@ -39,10 +39,11 @@ var searchData=
   ['sprite_36',['Sprite',['../classRType_1_1Sprite.html',1,'RType']]],
   ['start_37',['start',['../classRType_1_1ClientViewport.html#a8d364360069113963b337decefdf2fb6',1,'RType::ClientViewport']]],
   ['startreceive_38',['startReceive',['../classRType_1_1UDPClient.html#a9c660a9e03a0923c56d41410fa05cdbb',1,'RType::UDPClient::startReceive()'],['../classRType_1_1UDPServer.html#a5f8a998ba7ad7b4493da9a0466fd99e6',1,'RType::UDPServer::startReceive()']]],
-  ['stopallaudio_39',['StopAllAudio',['../classRType_1_1AAudioModule.html#a1df6796b08f6f4b865281ebcb9660b42',1,'RType::AAudioModule']]],
-  ['stopallsounds_40',['stopAllSounds',['../classRType_1_1SoundModule.html#a107f7772ea2a2de44eb18a675426a178',1,'RType::SoundModule']]],
-  ['stopaudio_41',['StopAudio',['../classRType_1_1AAudioModule.html#a0db2cdee64925ac0ed0c5e77aad8723b',1,'RType::AAudioModule']]],
-  ['stopsound_42',['stopSound',['../classRType_1_1SoundModule.html#aff4b5dabc88588bd15adf51f015e09ef',1,'RType::SoundModule']]],
-  ['stringtomoduletype_43',['stringToModuleType',['../classRType_1_1OptionsView.html#aa7d89ca6ec32a10e8293a62c806da259',1,'RType::OptionsView']]],
-  ['system_44',['system',['../structRType_1_1Event_1_1KeyEvent.html#ac0a1b578fa4345be2244cf1c91e9e5dc',1,'RType::Event::KeyEvent']]]
+  ['staticanimation_39',['StaticAnimation',['../classRType_1_1StaticAnimation.html',1,'RType']]],
+  ['stopallaudio_40',['StopAllAudio',['../classRType_1_1AAudioModule.html#a1df6796b08f6f4b865281ebcb9660b42',1,'RType::AAudioModule']]],
+  ['stopallsounds_41',['stopAllSounds',['../classRType_1_1SoundModule.html#a107f7772ea2a2de44eb18a675426a178',1,'RType::SoundModule']]],
+  ['stopaudio_42',['StopAudio',['../classRType_1_1AAudioModule.html#a0db2cdee64925ac0ed0c5e77aad8723b',1,'RType::AAudioModule']]],
+  ['stopsound_43',['stopSound',['../classRType_1_1SoundModule.html#aff4b5dabc88588bd15adf51f015e09ef',1,'RType::SoundModule']]],
+  ['stringtomoduletype_44',['stringToModuleType',['../classRType_1_1OptionsView.html#aa7d89ca6ec32a10e8293a62c806da259',1,'RType::OptionsView']]],
+  ['system_45',['system',['../structRType_1_1Event_1_1KeyEvent.html#ac0a1b578fa4345be2244cf1c91e9e5dc',1,'RType::Event::KeyEvent']]]
 ];

@@ -27,6 +27,7 @@ namespace RType {
     class GameView;
     class LoginView;
     class LoadView;
+    class DeadView;
     class GraphicalModule;
     class AnimationModule;
 
@@ -42,6 +43,7 @@ namespace RType {
         LOGIN = 4,     /**< Game over state. */
         OPTIONSGAME = 5,
         LOADSCREEN = 6,
+        DEAD = 7,
     };
 
     /**
@@ -184,4 +186,5 @@ namespace RType {
 #include "views/GameView.hpp"
 #include "views/LoginView.hpp"
 #include "views/LoadView.hpp"
+#include "views/DeadView.hpp"
 #include "entities/GraphicEntityFactory.hpp"

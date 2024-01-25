@@ -120,6 +120,9 @@ void RType::ClientViewport::setView(ViewState state) {
         case ViewState::LOADSCREEN:
             _selectedView = std::make_shared<LoadView>(*this, _client);
             break;
+        case ViewState::DEAD:
+            _selectedView = std::make_shared<WinDeadView>(*this);
+            break;
     }
     _selectedView->setPlayerEntity(_playerEntity);
     _viewState = state;
@@ -222,13 +225,13 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
     if (graphicEntity == nullptr) return;
     entity = graphicEntity->getEntity();
     if (_playerEntity == nullptr) {
-        setView(ViewState::MENU);
+        setView(ViewState::DEAD);
         return;
     }
     if (entityName == _playerEntity->getEntity()->getEntityName()) {
         _client->setHealth(_playerEntity->getEntity()->getComponent<HealthComponent>()->getHealth());
         _client->setScore(_playerEntity->getEntity()->getComponent<PlayerComponent>()->getScore());
-        setView(ViewState::MENU);
+        setView(ViewState::DEAD);
     }
     destroyGraphicEntity(graphicEntity);
     _entityManager.destroyEntity(entity);

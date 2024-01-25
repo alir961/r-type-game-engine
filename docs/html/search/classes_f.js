@@ -10,5 +10,6 @@ var searchData=
   ['soundmodule_7',['SoundModule',['../classRType_1_1SoundModule.html',1,'RType']]],
   ['speedcomponent_8',['SpeedComponent',['../classRType_1_1SpeedComponent.html',1,'RType']]],
   ['split_9',['Split',['../classRType_1_1Split.html',1,'RType']]],
-  ['sprite_10',['Sprite',['../classRType_1_1Sprite.html',1,'RType']]]
+  ['sprite_10',['Sprite',['../classRType_1_1Sprite.html',1,'RType']]],
+  ['staticanimation_11',['StaticAnimation',['../classRType_1_1StaticAnimation.html',1,'RType']]]
 ];

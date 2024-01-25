@@ -24,10 +24,10 @@ namespace RType {
          * @param outlineColor The color of the outline of the rectangle.
          * @param outlineThickness The thickness of the outline of the rectangle.
          */
-        RectBox(sf::RenderWindow &window, const sf::Vector2f &position, const sf::Vector2f &size,
+        RectBox(const sf::Vector2f &position, const sf::Vector2f &size,
                 const sf::Color &fillColor = sf::Color::White, const sf::Color &outlineColor = sf::Color::Black,
                 float outlineThickness = 0.0f)
-            : _window(window), _position(position), _size(size), _fillColor(fillColor),
+            : _position(position), _size(size), _fillColor(fillColor),
               _outlineColor(outlineColor), _outlineThickness(outlineThickness) {
             _rectangle.setPosition(position);
             _rectangle.setSize(size);
@@ -89,7 +89,6 @@ namespace RType {
         }
 
     private:
-        sf::RenderWindow &_window; /**< The SFML RenderWindow where the rectangle box will be drawn. */
         sf::Vector2f _position; /**< The position of the top-left corner of the rectangle. */
         sf::Vector2f _size; /**< The size of the rectangle. */
         sf::Color _fillColor; /**< The color to fill the rectangle. */
