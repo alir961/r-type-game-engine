@@ -429,12 +429,15 @@ void RType::GameLogic::putDamage(RType::EntityPtr entityPtr, RType::EntityPtr en
 
     if (health - damage <= 0)
         entityPtr->setDeathStatus();
-    else
+    else {
         healthComponent->setHealth(health - damage);
+        sendMessageFromEntity(entityPtr);
+    }
     if (player == nullptr)
         return;
     auto playerComponent = player->getComponent<PlayerComponent>();
     playerComponent->setScore(playerComponent->getScore() + damage);
+    sendPlayerDetails(player);
 }
 
 RType::EntityPtr RType::GameLogic::getPlayerEntity(int playerID) {
