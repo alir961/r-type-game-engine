@@ -26,6 +26,7 @@ namespace RType {
         SpriteComponent _entitySprite; /**< Sprite of the graphical _entity. */
         float _animationTime = 0.0F; /**< Animation time accumulator. */
         float _animationSpeed = 0.1F; /**< Speed of the animation. */
+        int _initialHealth = 0;
 
     public:
         /**
@@ -55,6 +56,8 @@ namespace RType {
         void moveUp() override;
 
         void moveDown() override;
+
+        void drawHealthBar();
 
         /**
          * @brief get Entity.

@@ -76,7 +76,7 @@ namespace RType {
 
         static Direction getDirection(MessageType type);
 
-        void checkEntitiesStatus(Session session);
+        void checkEntitiesStatus();
 
         void sendAllMessages(int sessionID);
 
@@ -99,6 +99,28 @@ namespace RType {
         void createStaticEntity(int staticID, float startX, float startY);
 
         int getNextMonsterID();
+
+        bool move(Direction direction, EntityPtr entity);
+
+        void moveLeft(EntityPtr entity);
+
+        void moveRight(EntityPtr entity);
+
+        void moveDown(EntityPtr entity);
+
+        void moveUp(EntityPtr entity);
+
+        void checkHits(EntityPtr entityPtr);
+
+        bool hit(EntityPtr entityPtr, EntityPtr entity);
+
+        void setDamageEntity(EntityPtr entityPtr, EntityPtr entity);
+
+        void putDamage(EntityPtr entityPtr, EntityPtr entity);
+
+        EntityPtr getPlayerEntity(int playerID);
+
+        void checkEntitySessions(EntityPtr entity);
     };
 
 }

@@ -416,7 +416,7 @@ void RType::ClientViewport::disconnect(const std::vector<std::string> &splitMess
 void RType::ClientViewport::createNewMonster(const std::vector<std::string> &splitMessage) {
     int monsterID = std::stoi(splitMessage[1]);
     int speed = std::stoi(splitMessage[3]);
-    int damage = std::stoi(splitMessage[5]);
+    int health = std::stoi(splitMessage[5]);
     float positionX = std::stof(splitMessage[7]);
     float positionY = std::stof(splitMessage[8]);
     float sizeX = std::stof(splitMessage[10]);
@@ -429,7 +429,7 @@ void RType::ClientViewport::createNewMonster(const std::vector<std::string> &spl
 
     sprintf(entityName, "monster %d", monsterID);
     monsterEntity->addComponent<RType::SpeedComponent>(speed);
-    monsterEntity->addComponent<RType::DamageComponent>(damage);
+    monsterEntity->addComponent<RType::HealthComponent>(health);
     monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
     monsterEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
     monsterEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
@@ -442,7 +442,7 @@ void RType::ClientViewport::createNewMonster(const std::vector<std::string> &spl
 void RType::ClientViewport::updateMonster(const std::vector<std::string> &splitMessage) {
     int monsterID = std::stoi(splitMessage[1]);
     int speed = std::stoi(splitMessage[3]);
-    int damage = std::stoi(splitMessage[5]);
+    int health = std::stoi(splitMessage[5]);
     float positionX = std::stof(splitMessage[7]);
     float positionY = std::stof(splitMessage[8]);
     float sizeX = std::stof(splitMessage[10]);
@@ -456,7 +456,7 @@ void RType::ClientViewport::updateMonster(const std::vector<std::string> &splitM
     monsterEntity = getGraphicEntityByName(entityName)->getEntity();
 
     monsterEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
-    monsterEntity->getComponent<RType::DamageComponent>()->setDamage(damage);
+    monsterEntity->getComponent<RType::HealthComponent>()->setHealth(health);
     monsterEntity->getComponent<RType::PositionComponent>()->setPositions(std::make_pair(positionX, positionY));
     monsterEntity->getComponent<RType::SizeComponent>()->setSize(sizeX, sizeY);
     monsterEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
