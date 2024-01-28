@@ -103,7 +103,10 @@ sf::Color RType::GraphicalModule::getColorFromString(const std::string &colorNam
             {"cyan",    sf::Color::Cyan},
             {"magenta", sf::Color::Magenta},
             {"yellow",  sf::Color::Yellow},
+            {"orange",  sf::Color(255, 165, 0)},
+            {"gray",    sf::Color(128, 128, 128)},
     };
+
     auto it = colorMap.find(lowercaseColorName);
     return (it != colorMap.end()) ? it->second : sf::Color::White;
 }

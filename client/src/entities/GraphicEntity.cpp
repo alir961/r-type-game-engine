@@ -17,6 +17,8 @@ RType::GraphicEntity::GraphicEntity(EntityPtr entity, const std::string &path, c
     const auto &[posX, posY] = _entity->getComponent<PositionComponent>()->getPosition();
     const auto &[rectX, rectY] = _entity->getComponent<SizeRectComponent>()->getSize();
 
+    if (_entity->hasHealthComponent())
+        _initialHealth = _entity->getComponent<HealthComponent>()->getHealth();
     _entitySprite = _module->createSprite(path);
     if (entityName.starts_with("bullet"))
         _entitySprite->setRectangle(RectFloat{101.0F, 118.0F, rectX, rectY});
@@ -24,7 +26,7 @@ RType::GraphicEntity::GraphicEntity(EntityPtr entity, const std::string &path, c
     _entitySprite->setScale(Vector2f(sizeX, sizeY));
     _entityNameText->setText(_entity->getComponent<PlayerComponent>()->getUsername());
     _entityNameText->setSize(15);
-    _entityNameText->setPosition(Vector2f(posX, posY - (sizeY + 15)));
+    _entityNameText->setPosition(Vector2f(posX, posY - (sizeY + 12.5)));
     _entityNameText->setColor(Color::Cyan);
 }
 
@@ -44,12 +46,14 @@ void RType::GraphicEntity::update(float deltaTime) {
         const auto &[posX, posY] = positionComponent->getPosition();
 
         _entitySprite->setPosition(positionComponent->getPosition());
-        _entityNameText->setPosition(Vector2f(posX, posY - (sizeY + 15)));
+        _entityNameText->setPosition(Vector2f(posX, posY - (sizeY + 12.5)));
     }
 }
 
 void RType::GraphicEntity::draw() {
     _entitySprite->draw();
+    if (_entity->hasHealthComponent())
+        drawHealthBar();
     if (_entity->getComponent<PlayerComponent>()->getIsPlayer())
         _entityNameText->draw();
 }
@@ -84,4 +88,26 @@ void RType::GraphicEntity::moveDown() {
 
     getSprite()->move(0.0F, speed);
     _entity->getComponent<PositionComponent>()->setPositions(Vector2f(x, y + speed));
+}
+
+void RType::GraphicEntity::drawHealthBar() {
+    auto currentHealth = _entity->getComponent<HealthComponent>()->getHealth();
+    float healthRatio = static_cast<float>(currentHealth) / static_cast<float>(_initialHealth);
+    const auto &[posX, posY] = _entity->getComponent<PositionComponent>()->getPosition();
+    const auto &[sizeX, sizeY] = _entity->getComponent<SizeComponent>()->getSize();
+    const auto &[sizeRectX, sizeRectY] = _entity->getComponent<SizeRectComponent>()->getSize();
+    float barWidth = sizeX * sizeRectX * healthRatio;
+    float barHeight = 5;
+    float barPosX = posX;
+    float barPosY = posY - barHeight - 15;
+    std::string barColor;
+
+    if (healthRatio > 0.66f)
+        barColor = "Green";
+    else if (healthRatio > 0.33f)
+        barColor = "Orange";
+    else
+        barColor = "Red";
+    _module->drawRectPro(sizeX * sizeRectX, barHeight, barPosX, barPosY, 0.0f, "Transparent", "Gray", "");
+    _module->drawRectPro(barWidth, barHeight, barPosX, barPosY, 0.0f, "Transparent", barColor, "");
 }
