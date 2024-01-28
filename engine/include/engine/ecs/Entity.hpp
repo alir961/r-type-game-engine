@@ -167,7 +167,11 @@ namespace RType {
 
         bool getDeathStatus() {return _death;};
 
-        void setDeathStatus() {_death = true;};
+        void setDeathStatus() {
+            _death = true;
+            if (!hasDamageComponent() && !hasHealthComponent())
+                _death = false;
+        };
 
     private:
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the _entity. */
