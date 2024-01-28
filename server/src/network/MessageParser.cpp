@@ -72,9 +72,9 @@ void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
     if (entity == nullptr)
         return;
     _game->sendAllMessages(sessionID);
-    entity->move(_game->getDirection(receiveMessage.type), _game->getEntityManager().getEntities(), session->getWindowWidth(), session->getWindowHeight());
+    _game->move(_game->getDirection(receiveMessage.type), entity);
     _game->sendPlayerDetails(entity);
-    _game->checkEntitiesStatus(session);
+    _game->checkEntitiesStatus();
 }
 
 void RType::MessageParser::parseMessage(const RType::MessageBuffer &buffer, std::size_t bytesReceived) {

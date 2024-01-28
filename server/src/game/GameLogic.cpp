@@ -47,10 +47,9 @@ bool RType::GameLogic::isStopped() {
 void RType::GameLogic::movePlayerBullets() {
     for (auto &entity: _entityManager.getEntities()) {
         if (Split::split(entity->getEntityName(), " ")[0] == "bulletPlayer") {
-            entity->move(Direction::RIGHT, _entityManager.getEntities(), _sessionManager.getWindowWidth(),
-                         _sessionManager.getWindowHeight());
+            move(Direction::RIGHT, entity);
             sendBulletPlayerDetails(entity);
-            checkEntitiesStatus(nullptr);
+            checkEntitiesStatus();
         }
     }
 }
@@ -108,14 +107,20 @@ RType::Direction RType::GameLogic::getDirection(RType::MessageType type) {
     }
 }
 
-void RType::GameLogic::checkEntitiesStatus(Session session) {
+void RType::GameLogic::checkEntitySessions(RType::EntityPtr entity) {
+    for (auto &session : _sessionManager.getSessions()) {
+        if (session.second != nullptr && session.second->getEntity() == entity)
+            session.second->setPlayerEntity(nullptr);
+    }
+}
+
+void RType::GameLogic::checkEntitiesStatus() {
     auto entities = getEntityManager().getEntities();
     std::vector<EntityPtr> toDestroy;
 
     for (auto &entity: entities) {
         if (entity->getDeathStatus()) {
-            if (session != nullptr && session->getEntity() == entity)
-                session->setPlayerEntity(nullptr);
+            checkEntitySessions(entity);
             toDestroy.emplace_back(entity);
             char buffer[100];
             sprintf(buffer, "death %s\n", entity->getEntityName().c_str());
@@ -273,10 +278,9 @@ void RType::GameLogic::moveMonsters() {
                 (moveDirection == Direction::DOWN && currentY >= _sessionManager.getWindowHeight() - 32)) {
                 moveDirection = Direction::LEFT;
             }
-            entity->move(moveDirection, _entityManager.getEntities(), _sessionManager.getWindowWidth(),
-                         _sessionManager.getWindowHeight());
+            move(moveDirection, entity);
             sendMonsterDetails(entity);
-            checkEntitiesStatus(nullptr);
+            checkEntitiesStatus();
         }
     }
 }
@@ -307,3 +311,138 @@ void RType::GameLogic::createStaticEntity(int staticID, float startX, float star
     staticEntity->setEntityName(buffer);
     sendStaticEntityDetails(staticEntity);
 }
+
+bool RType::GameLogic::move(RType::Direction direction, EntityPtr entity) {
+    switch (direction) {
+        case Direction::LEFT:
+            moveLeft(entity);
+            break;
+        case Direction::RIGHT:
+            moveRight(entity);
+            break;
+        case Direction::DOWN:
+            moveDown(entity);
+            break;
+        case Direction::UP:
+            moveUp(entity);
+            break;
+    }
+    return false;
+}
+
+void RType::GameLogic::moveLeft(EntityPtr entity) {
+    auto speed = static_cast<float>(entity->getComponent<SpeedComponent>()->getSpeed());
+    const auto &[x, y] = entity->getComponent<PositionComponent>()->getPosition();
+
+    if (x - speed < 0)
+        entity->setDeathStatus();
+    checkHits(entity);
+    entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x - speed, y));
+}
+
+void RType::GameLogic::moveRight(RType::EntityPtr entity) {
+    auto speed = static_cast<float>(entity->getComponent<SpeedComponent>()->getSpeed());
+    const auto &[x, y] = entity->getComponent<PositionComponent>()->getPosition();
+    float size = entity->getComponent<SizeComponent>()->getSize().second;
+    float rect = entity->getComponent<SizeRectComponent>()->getSize().second;
+    float entitySize = size * rect;
+    float entityX = x + entitySize;
+
+    if (entityX + speed > _sessionManager.getWindowWidth())
+        entity->setDeathStatus();
+    checkHits(entity);
+    entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x + speed, y));
+}
+
+void RType::GameLogic::moveDown(RType::EntityPtr entity) {
+    auto speed = entity->getComponent<SpeedComponent>()->getSpeed();
+    auto [x, y] = entity->getComponent<PositionComponent>()->getPosition();
+    float size = entity->getComponent<SizeComponent>()->getSize().second;
+    float rect = entity->getComponent<SizeRectComponent>()->getSize().second;
+    float entitySize = size * rect;
+    float entityY = y + entitySize;
+
+    if (entityY + speed > _sessionManager.getWindowHeight())
+        entity->setDeathStatus();
+    checkHits(entity);
+    entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x, y + speed));
+}
+
+void RType::GameLogic::moveUp(RType::EntityPtr entity) {
+    auto speed = static_cast<float>(entity->getComponent<SpeedComponent>()->getSpeed());
+    const auto &[x, y] = entity->getComponent<PositionComponent>()->getPosition();
+
+    if (y - speed < 0)
+        entity->setDeathStatus();
+    checkHits(entity);
+    entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x, y - speed));
+}
+
+void RType::GameLogic::checkHits(RType::EntityPtr entityPtr) {
+    for (const auto& entity : _entityManager.getEntities()) {
+        if (hit(entityPtr, entity)) {
+            if (entity->hasDamageComponent()) {
+                setDamageEntity(entityPtr, entity);
+                entity->setDeathStatus();
+            } else {
+                entityPtr->setDeathStatus();
+                entity->setDeathStatus();
+            }
+        }
+    }
+}
+
+bool RType::GameLogic::hit(RType::EntityPtr entityPtr, EntityPtr entity) {
+    const auto& [thisX, thisY] = entityPtr->getComponent<PositionComponent>()->getPosition();
+    const auto& [thisWidth, thisHeight] = entityPtr->getComponent<SizeComponent>()->getSize();
+    const auto& [thisRectWidth, thisRectHeight] = entityPtr->getComponent<SizeRectComponent>()->getSize();
+    float thisActualWidth = thisWidth * thisRectWidth;
+    float thisActualHeight = thisHeight * thisRectHeight;
+    const auto& [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
+    const auto& [entityWidth, entityHeight] = entity->getComponent<SizeComponent>()->getSize();
+    const auto& [entityRectWidth, entityRectHeight] = entity->getComponent<SizeRectComponent>()->getSize();
+    float entityActualWidth = entityWidth * entityRectWidth;
+    float entityActualHeight = entityHeight * entityRectHeight;
+
+    if (entityPtr == entity) {
+        return false;
+    }
+    return (thisX < entityX + entityActualWidth &&
+            thisX + thisActualWidth > entityX &&
+            thisY < entityY + entityActualHeight &&
+            thisY + thisActualHeight > entityY);
+}
+
+void RType::GameLogic::setDamageEntity(RType::EntityPtr entityPtr, RType::EntityPtr entity) {
+    if (entityPtr->hasHealthComponent())
+        putDamage(entityPtr, entity);
+    else
+        entityPtr->setDeathStatus();
+}
+
+void RType::GameLogic::putDamage(RType::EntityPtr entityPtr, RType::EntityPtr entity) {
+    auto healthComponent = entityPtr->getComponent<HealthComponent>();
+    int health = healthComponent->getHealth();
+    int damage = entity->getComponent<DamageComponent>().get()->getDamage();
+    auto player = getPlayerEntity(std::stoi(Split::split(entity->getEntityName(), " \n")[1]));
+
+
+    if (health - damage <= 0)
+        entityPtr->setDeathStatus();
+    else
+        healthComponent->setHealth(health - damage);
+    if (player == nullptr)
+        return;
+    auto playerComponent = player->getComponent<PlayerComponent>();
+    playerComponent->setScore(playerComponent->getScore() + damage);
+}
+
+RType::EntityPtr RType::GameLogic::getPlayerEntity(int playerID) {
+    for (const auto& entity : _entityManager.getEntities()) {
+        std::vector<std::string> entityName = Split::split(entity->getEntityName(), " \n");
+        if (playerID == std::stoi(entityName[1]) && entity->hasPlayerComponent())
+            return entity;
+    }
+    return nullptr;
+}
+
