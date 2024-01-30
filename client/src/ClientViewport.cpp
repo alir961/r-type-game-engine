@@ -572,7 +572,7 @@ void RType::ClientViewport::createNewStarshipBullet(const std::vector<std::strin
     bulletEntity->addComponent<RType::PlayerComponent>(false);
     sprintf(entityName, "bulletStarship %d %d", sessionID, bulletID);
     bulletEntity->setEntityName(entityName);
-    graphicBullet = GraphicEntityFactory::createBullet(bulletEntity, "bulletPlayer");
+    graphicBullet = GraphicEntityFactory::createBulletStarship(bulletEntity, "bulletStarship");
     addGraphicEntity(graphicBullet);
 }
 

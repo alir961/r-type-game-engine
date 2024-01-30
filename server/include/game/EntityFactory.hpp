@@ -33,7 +33,7 @@ namespace RType {
             EntityPtr playerEntity = _manager->createEntity();
 
             playerEntity->addComponent<SpeedComponent>(10);
-            playerEntity->addComponent<HealthComponent>(1000);
+            playerEntity->addComponent<HealthComponent>(1420);
             playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
             playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
             playerEntity->addComponent<PlayerComponent>(true);
@@ -103,10 +103,10 @@ namespace RType {
             EntityPtr bulletEntity = _manager->createEntity();
 
             bulletEntity->addComponent<RType::SpeedComponent>(10);
-            bulletEntity->addComponent<RType::DamageComponent>(150);
+            bulletEntity->addComponent<RType::DamageComponent>(300);
             bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
             bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
-            bulletEntity->addComponent<SizeRectComponent>(14.0f, 14.0f);
+            bulletEntity->addComponent<SizeRectComponent>(32.0f, 28.0f);
             return bulletEntity;
         }
     };
