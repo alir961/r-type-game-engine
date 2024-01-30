@@ -32,7 +32,18 @@ void RType::GameLogic::serverLoopIterate() {
     _tickNumber++;
     if (_tickNumber % (5 * TICK_PER_SECOND) == 0)
         createMonsterEntity();
+    if (_tickNumber % (10 * TICK_PER_SECOND) == 0)
+        createStarshipEntity();
+    if (_tickNumber % (15 * TICK_PER_SECOND) == 0) {
+        for (auto &entity: _entityManager.getEntities()) {
+            if (Split::split(entity->getEntityName(), " ")[0] == "starship") {
+                createBulletStarshipEntity(entity);
+            }
+        }
+    }
     movePlayerBullets();
+    moveStarships();
+    moveStarshipsBullets();
     moveMonsters();
     serverLoopIterate();
 }
@@ -449,3 +460,117 @@ RType::EntityPtr RType::GameLogic::getPlayerEntity(int playerID) {
     return nullptr;
 }
 
+int RType::GameLogic::getNextStarshipID() {
+    return (_lastStarshipID++);
+}
+
+int RType::GameLogic::getNextBulletStarshipID(int starshipID) {
+    return _lastBulletStarship[starshipID]++;
+}
+
+void RType::GameLogic::createStarshipEntity() {
+    float startX = _sessionManager.getWindowWidth();
+    int startY = rand() % (static_cast<int>(_sessionManager.getWindowHeight()) - 34);
+    EntityPtr starshipEntity = getFactory().createStarship(startX, static_cast<float>(startY));
+    char buffer[50];
+
+    sprintf(buffer, "starship %d\n", getNextStarshipID());
+    starshipEntity->setEntityName(buffer);
+    sendStarshipDetails(starshipEntity);
+}
+
+void RType::GameLogic::createBulletStarshipEntity(EntityPtr entity) {
+    const std::string message;
+    if (entity == nullptr) return;
+    auto [playerX, playerY] = entity->getComponent<PositionComponent>()->getPosition();
+    float playerRectY = entity->getComponent<SizeRectComponent>()->getSize().second;
+    float startX = playerX - 15;
+    float startY = playerY + playerRectY;
+    EntityPtr bulletEntity;
+    char bulletName[200];
+
+    bulletEntity = getFactory().createBulletPlayer(startX, startY);
+    sprintf(bulletName, "%s %d", entity->getEntityName().c_str(), getNextBulletStarshipID(std::stoi(Split::split(entity->getEntityName(), " \n")[1])));
+    bulletEntity->setEntityName(bulletName);
+    sendBulletPlayerDetails(bulletEntity);
+}
+
+void RType::GameLogic::moveStarships() {
+    for (auto &entity: _entityManager.getEntities()) {
+        if (Split::split(entity->getEntityName(), " ")[0] == "starship") {
+            auto [currentX, currentY] = entity->getComponent<PositionComponent>()->getPosition();
+            Direction moveDirection;
+            int randomDirection = rand() % 3;
+
+            if (randomDirection == 0)
+                moveDirection = Direction::LEFT;
+            else if (randomDirection == 1)
+                moveDirection = Direction::UP;
+            else
+                moveDirection = Direction::DOWN;
+            if ((moveDirection == Direction::UP && currentY <= 0) ||
+                (moveDirection == Direction::DOWN && currentY >= _sessionManager.getWindowHeight() - 32)) {
+                moveDirection = Direction::LEFT;
+            }
+            move(moveDirection, entity);
+            sendStarshipDetails(entity);
+            checkEntitiesStatus();
+        }
+    }
+}
+
+void RType::GameLogic::moveStarshipsBullets() {
+    for (auto &entity: _entityManager.getEntities()) {
+        if (Split::split(entity->getEntityName(), " ")[0] == "bulletStarship") {
+            move(Direction::LEFT, entity);
+            sendBulletStarshipDetails(entity);
+            checkEntitiesStatus();
+        }
+    }
+}
+
+void RType::GameLogic::sendBulletStarshipDetails(const RType::EntityPtr &entity) {
+    char details[250];
+    std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
+    int speed = entity->getComponent<SpeedComponent>()->getSpeed();
+    int damage = entity->getComponent<DamageComponent>()->getDamage();
+    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
+    auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
+    auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
+
+    sprintf(details, "%s %s %s speed %d damage %d position %.1f %.1f size %.1f %.1f rect %.1f %.1f\n",
+            entityName[0].c_str(),
+            entityName[1].c_str(),
+            entityName[2].c_str(),
+            speed,
+            damage,
+            entityX,
+            entityY,
+            sizeX,
+            sizeY,
+            sizeRectX,
+            sizeRectY);
+    addMessageClients(-1, MessageType::BULLET_STARSHIP, details);
+}
+
+void RType::GameLogic::sendStarshipDetails(const RType::EntityPtr &entity) {
+    char details[250];
+    std::vector<std::string> entityName = Split::split(entity->getEntityName(), " ");
+    int speed = entity->getComponent<SpeedComponent>()->getSpeed();
+    int health = entity->getComponent<HealthComponent>()->getHealth();
+    auto [entityX, entityY] = entity->getComponent<PositionComponent>()->getPosition();
+    auto [sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
+    auto [sizeRectX, sizeRectY] = entity->getComponent<SizeRectComponent>()->getSize();
+
+    sprintf(details, "starship %s speed %d health %d position %.1f %.1f size %.1f %.1f rect %.1f %.1f\n",
+            entityName[1].c_str(),
+            speed,
+            health,
+            entityX,
+            entityY,
+            sizeX,
+            sizeY,
+            sizeRectX,
+            sizeRectY);
+    addMessageClients(-1, MessageType::STARSHIP, details);
+}

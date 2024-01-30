@@ -45,6 +45,8 @@ namespace RType {
         TICK,
         MONSTER,
         STATIC,
+        STARSHIP,
+        BULLET_STARSHIP,
     };
 
 #ifdef __linux__
