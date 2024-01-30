@@ -26,5 +26,9 @@ namespace RType {
         static GraphicEntityPtr createBulletStarship(EntityPtr &entity, const std::string entityName) {
             return std::make_shared<GraphicEntity>(entity, "client/assets/sprites/r-typesheet30a.gif", entityName);
         }
+
+        static GraphicEntityPtr createEnemyStarship(EntityPtr &entity, const std::string entityName) {
+            return std::make_shared<GraphicEntity>(entity, "client/assets/sprites/r-typesheet23.gif", entityName);
+        }
     };
 }

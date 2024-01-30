@@ -522,7 +522,7 @@ void RType::ClientViewport::createNewStarship(const std::vector<std::string> &sp
     monsterEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
     monsterEntity->addComponent<RType::PlayerComponent>(false);
     monsterEntity->setEntityName(entityName);
-    graphicMonster = GraphicEntityFactory::createStarship(monsterEntity, "turquoisePlayer");
+    graphicMonster = GraphicEntityFactory::createEnemyStarship(monsterEntity, "starship");
     addGraphicEntity(graphicMonster);
 }
 

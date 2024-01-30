@@ -19,9 +19,9 @@ void stopServer(int) {
 
 RType::GameLogic::GameLogic(RType::UDPAdapter *adapter) : _adapter(adapter) {
     signal(SIGINT, &stopServer);
-    createStaticEntity(0, 1420, 420);
-    createStaticEntity(1, 420, 024);
-    createStaticEntity(2, 666, 666);
+    createStaticEntity(0, 1420, 999);
+    createStaticEntity(1, 420, 420);
+    createStaticEntity(2, 666, 24);
     _thread.run([this]() { serverLoopIterate(); });
 }
 
@@ -30,11 +30,11 @@ void RType::GameLogic::serverLoopIterate() {
 
     std::this_thread::sleep_for(std::chrono::milliseconds(EPSILON_TIME_MS));
     _tickNumber++;
-    if (_tickNumber % (4 * TICK_PER_SECOND) == 0)
+    if (_tickNumber % (3 * TICK_PER_SECOND) == 0)
         createMonsterEntity();
     if (_tickNumber % (4 * TICK_PER_SECOND) == 0)
         createStarshipEntity();
-    if (_tickNumber % (1 * TICK_PER_SECOND) == 0) {
+    if (_tickNumber % (2 * TICK_PER_SECOND) == 0) {
         for (auto &entity: _entityManager.getEntities()) {
             if (Split::split(entity->getEntityName(), " \n")[0] == "starship") {
                 createBulletStarshipEntity(entity);
@@ -473,7 +473,7 @@ int RType::GameLogic::getNextBulletStarshipID(int starshipID) {
 
 void RType::GameLogic::createStarshipEntity() {
     float startX = _sessionManager.getWindowWidth();
-    int startY = rand() % (static_cast<int>(_sessionManager.getWindowHeight()) - 50);
+    int startY = rand() % (static_cast<int>(_sessionManager.getWindowHeight()) - 64);
     EntityPtr starshipEntity = getFactory().createStarship(startX, static_cast<float>(startY));
     char buffer[50];
 
@@ -486,9 +486,8 @@ void RType::GameLogic::createBulletStarshipEntity(EntityPtr entity) {
     const std::string message;
     if (entity == nullptr) return;
     auto [playerX, playerY] = entity->getComponent<PositionComponent>()->getPosition();
-    float playerRectY = entity->getComponent<SizeRectComponent>()->getSize().second;
-    float startX = playerX - 32;
-    float startY = playerY;
+    float startX = playerX - 64;
+    float startY = playerY + 7;
     EntityPtr bulletEntity;
     char bulletName[200];
     int entityID = std::stoi(Split::split(entity->getEntityName(), " \n")[1]);
