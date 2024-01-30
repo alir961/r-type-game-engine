@@ -28,6 +28,8 @@ void RType::AnimationModule::load() {
     addAnimation("bulletPlayer");
     addAnimation("monster");
     addAnimation("static");
+    addAnimation("bulletStarship");
+    addAnimation("starship");
 }
 
 void RType::AnimationModule::unload() {

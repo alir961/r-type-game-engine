@@ -26,6 +26,8 @@ namespace RType {
         Thread _thread;
         int _tickNumber;
         int _lastMonsterID = 0;
+        int _lastStarshipID = 0;
+        std::map<int, int> _lastBulletStarship;
 
         void serverLoopIterate();
 
@@ -90,6 +92,10 @@ namespace RType {
 
         void sendBulletPlayerDetails(const EntityPtr& entity);
 
+        void sendBulletStarshipDetails(const EntityPtr& entity);
+
+        void sendStarshipDetails(const EntityPtr& entity);
+
         void sendMonsterDetails(const EntityPtr& entity);
 
         void sendStaticEntityDetails(const EntityPtr& entity);
@@ -99,6 +105,10 @@ namespace RType {
         void createStaticEntity(int staticID, float startX, float startY);
 
         int getNextMonsterID();
+
+        int getNextStarshipID();
+
+        int getNextBulletStarshipID(int starshipID);
 
         bool move(Direction direction, EntityPtr entity);
 
@@ -121,6 +131,14 @@ namespace RType {
         EntityPtr getPlayerEntity(int playerID);
 
         void checkEntitySessions(EntityPtr entity);
+
+        void createStarshipEntity();
+
+        void createBulletStarshipEntity(EntityPtr entity);
+
+        void moveStarships();
+
+        void moveStarshipsBullets();
     };
 
 }
