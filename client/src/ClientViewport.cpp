@@ -199,6 +199,8 @@ void RType::ClientViewport::setHandlers() {
     _handlers["disconnect"] = [this](const std::vector<std::string> &splitMessage) { disconnect(splitMessage); };
     _handlers["monster"] = [this](const std::vector<std::string> &splitMessage) { monster(splitMessage); };
     _handlers["static"] = [this](const std::vector<std::string> &splitMessage) { staticEntity(splitMessage); };
+    _handlers["starship"] = [this](const std::vector<std::string> &splitMessage) { starship(splitMessage); };
+    _handlers["bulletStarship"] = [this](const std::vector<std::string> &splitMessage) { bulletStarship(splitMessage); };
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
@@ -498,3 +500,124 @@ void RType::ClientViewport::updateStatic(const std::vector<std::string> &splitMe
 
 }
 
+void RType::ClientViewport::createNewStarship(const std::vector<std::string> &splitMessage) {
+    int monsterID = std::stoi(splitMessage[1]);
+    int speed = std::stoi(splitMessage[3]);
+    int health = std::stoi(splitMessage[5]);
+    float positionX = std::stof(splitMessage[7]);
+    float positionY = std::stof(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    auto monsterEntity = _entityManager.createEntity();
+    char entityName[250];
+    GraphicEntityPtr graphicMonster;
+
+    sprintf(entityName, "starship %d", monsterID);
+    monsterEntity->addComponent<RType::SpeedComponent>(speed);
+    monsterEntity->addComponent<RType::HealthComponent>(health);
+    monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    monsterEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    monsterEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
+    monsterEntity->addComponent<RType::PlayerComponent>(false);
+    monsterEntity->setEntityName(entityName);
+    graphicMonster = GraphicEntityFactory::createStarship(monsterEntity, "turquoisePlayer");
+    addGraphicEntity(graphicMonster);
+}
+
+void RType::ClientViewport::updateStarship(const std::vector<std::string> &splitMessage) {
+    int monsterID = std::stoi(splitMessage[1]);
+    int speed = std::stoi(splitMessage[3]);
+    int health = std::stoi(splitMessage[5]);
+    float positionX = std::stof(splitMessage[7]);
+    float positionY = std::stof(splitMessage[8]);
+    float sizeX = std::stof(splitMessage[10]);
+    float sizeY = std::stof(splitMessage[11]);
+    float rectX = std::stof(splitMessage[13]);
+    float rectY = std::stof(splitMessage[14]);
+    char entityName[250];
+    EntityPtr monsterEntity;
+
+    sprintf(entityName, "starship %d", monsterID);
+    monsterEntity = getGraphicEntityByName(entityName)->getEntity();
+
+    monsterEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
+    monsterEntity->getComponent<RType::HealthComponent>()->setHealth(health);
+    monsterEntity->getComponent<RType::PositionComponent>()->setPositions(std::make_pair(positionX, positionY));
+    monsterEntity->getComponent<RType::SizeComponent>()->setSize(sizeX, sizeY);
+    monsterEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
+}
+
+void RType::ClientViewport::createNewStarshipBullet(const std::vector<std::string> &splitMessage) {
+    GraphicEntityPtr graphicBullet;
+    auto bulletEntity = _entityManager.createEntity();
+    int sessionID = std::stoi(splitMessage[1]);
+    int bulletID = std::stoi(splitMessage[2]);
+    int speed = std::stoi(splitMessage[4]);
+    int damage = std::stoi(splitMessage[6]);
+    int positionX = std::stoi(splitMessage[8]);
+    int positionY = std::stoi(splitMessage[9]);
+    float sizeX = std::stof(splitMessage[11]);
+    float sizeY = std::stof(splitMessage[12]);
+    float rectX = std::stof(splitMessage[14]);
+    float rectY = std::stof(splitMessage[15]);
+    char entityName[250];
+
+    bulletEntity->addComponent<RType::SpeedComponent>(speed);
+    bulletEntity->addComponent<RType::DamageComponent>(damage);
+    bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(positionX, positionY));
+    bulletEntity->addComponent<RType::SizeComponent>(sizeX, sizeY);
+    bulletEntity->addComponent<RType::SizeRectComponent>(rectX, rectY);
+    bulletEntity->addComponent<RType::PlayerComponent>(false);
+    sprintf(entityName, "bulletStarship %d %d", sessionID, bulletID);
+    bulletEntity->setEntityName(entityName);
+    graphicBullet = GraphicEntityFactory::createBullet(bulletEntity, "bulletPlayer");
+    addGraphicEntity(graphicBullet);
+}
+
+void RType::ClientViewport::updateStarshipBullet(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int bulletID = std::stoi(splitMessage[2]);
+    int speed = std::stoi(splitMessage[4]);
+    int damage = std::stoi(splitMessage[6]);
+    int positionX = std::stoi(splitMessage[8]);
+    int positionY = std::stoi(splitMessage[9]);
+    float sizeX = std::stof(splitMessage[11]);
+    float sizeY = std::stof(splitMessage[12]);
+    float rectX = std::stof(splitMessage[14]);
+    float rectY = std::stof(splitMessage[15]);
+    char entityName[250];
+    EntityPtr bulletEntity;
+
+    sprintf(entityName, "bulletStarship %d %d", sessionID, bulletID);
+    bulletEntity = getGraphicEntityByName(entityName)->getEntity();
+
+    bulletEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
+    bulletEntity->getComponent<RType::DamageComponent>()->setDamage(damage);
+    bulletEntity->getComponent<RType::PositionComponent>()->setPositions(std::make_pair(positionX, positionY));
+    bulletEntity->getComponent<RType::SizeComponent>()->setSize(sizeX, sizeY);
+    bulletEntity->getComponent<RType::SizeRectComponent>()->setSize(rectX, rectY);
+}
+
+void RType::ClientViewport::starship(const std::vector<std::string> &splitMessage) {
+    int monsterID = std::stoi(splitMessage[1]);
+    GraphicEntityPtr entity = getGraphicEntityByName("starship " + std::to_string(monsterID));
+
+    if (entity == nullptr)
+        createNewStarship(splitMessage);
+    else
+        updateStarship(splitMessage);
+}
+
+void RType::ClientViewport::bulletStarship(const std::vector<std::string> &splitMessage) {
+    int sessionID = std::stoi(splitMessage[1]);
+    int bulletID = std::stoi(splitMessage[2]);
+    std::string entityName = splitMessage[0];
+    GraphicEntityPtr entity = getGraphicEntityByName(entityName + " " + std::to_string(sessionID) + " " + std::to_string(bulletID));
+
+    if (entity == nullptr)
+        createNewStarshipBullet(splitMessage);
+    else
+        updateStarshipBullet(splitMessage);
+}

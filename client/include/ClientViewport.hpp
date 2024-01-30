@@ -165,6 +165,8 @@ namespace RType {
         void bulletPlayer(const std::vector<std::string> &splitMessage);
         void monster(const std::vector<std::string> &splitMessage);
         void staticEntity(const std::vector<std::string> &splitMessage);
+        void starship(const std::vector<std::string> &splitMessage);
+        void bulletStarship(const std::vector<std::string> &splitMessage);
         void death(const std::vector<std::string> &splitMessage);
         void disconnect(const std::vector<std::string> &splitMessage);
         void changePlayerColor(const std::vector<std::string> &splitMessage);
@@ -177,6 +179,10 @@ namespace RType {
         void updateMonster(const std::vector<std::string> &splitMessage);
         void createNewStatic(const std::vector<std::string> &splitMessage);
         void updateStatic(const std::vector<std::string> &splitMessage);
+        void createNewStarship(const std::vector<std::string> &splitMessage);
+        void updateStarship(const std::vector<std::string> &splitMessage);
+        void createNewStarshipBullet(const std::vector<std::string> &splitMessage);
+        void updateStarshipBullet(const std::vector<std::string> &splitMessage);
     };
 }
 

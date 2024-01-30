@@ -32,19 +32,19 @@ void RType::GameLogic::serverLoopIterate() {
     _tickNumber++;
     if (_tickNumber % (5 * TICK_PER_SECOND) == 0)
         createMonsterEntity();
-    if (_tickNumber % (10 * TICK_PER_SECOND) == 0)
+    if (_tickNumber % (7 * TICK_PER_SECOND) == 0)
         createStarshipEntity();
-    if (_tickNumber % (15 * TICK_PER_SECOND) == 0) {
+    if (_tickNumber % (9 * TICK_PER_SECOND) == 0) {
         for (auto &entity: _entityManager.getEntities()) {
-            if (Split::split(entity->getEntityName(), " ")[0] == "starship") {
+            if (Split::split(entity->getEntityName(), " \n")[0] == "starship") {
                 createBulletStarshipEntity(entity);
             }
         }
     }
     movePlayerBullets();
-    moveStarships();
     moveStarshipsBullets();
     moveMonsters();
+    moveStarships();
     serverLoopIterate();
 }
 
@@ -395,9 +395,12 @@ void RType::GameLogic::checkHits(RType::EntityPtr entityPtr) {
             if (entity->hasDamageComponent()) {
                 setDamageEntity(entityPtr, entity);
                 entity->setDeathStatus();
-            } else {
+            } else if (entityPtr->hasDamageComponent()) {
+                setDamageEntity(entity, entityPtr);
                 entityPtr->setDeathStatus();
+            } else {
                 entity->setDeathStatus();
+                entityPtr->setDeathStatus();
             }
         }
     }
@@ -465,12 +468,12 @@ int RType::GameLogic::getNextStarshipID() {
 }
 
 int RType::GameLogic::getNextBulletStarshipID(int starshipID) {
-    return _lastBulletStarship[starshipID]++;
+    return (_lastBulletStarship[starshipID]++);
 }
 
 void RType::GameLogic::createStarshipEntity() {
     float startX = _sessionManager.getWindowWidth();
-    int startY = rand() % (static_cast<int>(_sessionManager.getWindowHeight()) - 34);
+    int startY = rand() % (static_cast<int>(_sessionManager.getWindowHeight()) - 50);
     EntityPtr starshipEntity = getFactory().createStarship(startX, static_cast<float>(startY));
     char buffer[50];
 
@@ -488,9 +491,10 @@ void RType::GameLogic::createBulletStarshipEntity(EntityPtr entity) {
     float startY = playerY + playerRectY;
     EntityPtr bulletEntity;
     char bulletName[200];
+    int entityID = std::stoi(Split::split(entity->getEntityName(), " \n")[1]);
 
-    bulletEntity = getFactory().createBulletPlayer(startX, startY);
-    sprintf(bulletName, "%s %d", entity->getEntityName().c_str(), getNextBulletStarshipID(std::stoi(Split::split(entity->getEntityName(), " \n")[1])));
+    bulletEntity = getFactory().createBulletStarship(startX, startY);
+    sprintf(bulletName, "bulletStarship %d %d", entityID, getNextBulletStarshipID(entityID));
     bulletEntity->setEntityName(bulletName);
     sendBulletPlayerDetails(bulletEntity);
 }

@@ -83,6 +83,8 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::DEATH] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::MONSTER] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::STATIC] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::STARSHIP] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::BULLET_STARSHIP] = [this](const Message &msg) { addMessageQueue(msg); };
 }
 
 std::string RType::UDPClient::getLastMessage() {
