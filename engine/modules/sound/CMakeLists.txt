@@ -14,7 +14,19 @@ install(
         include/sound_module
 )
 
-find_package(SFML COMPONENTS audio CONFIG REQUIRED)
-target_link_libraries(sound_module LINK_PRIVATE sfml-audio)
+if (WIN32)
+    set(SFML_STATIC_LIBRARIES TRUE)
+    set(SFML_DIR C:/SFML/lib/cmake/SFML)
+    find_package(SFML COMPONENTS audio REQUIRED)
 
-target_link_libraries(sound_module PRIVATE engine)
+    include_directories(C:/SFML/include)
+    target_link_libraries(sound_module
+            sfml-audio
+            engine
+    )
+endif ()
+
+if (NOT WIN32)
+    find_package(SFML COMPONENTS audio CONFIG REQUIRED)
+    target_link_libraries(sound_module LINK_PRIVATE sfml-audio engine)
+endif()

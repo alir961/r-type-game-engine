@@ -20,47 +20,15 @@ namespace RType {
     public:
         explicit AGraphicEntity(std::string entityName) : _entityName(std::move(entityName)) {}
 
-        void moveLeft(sf::Sprite &sprite, EntityPtr &entity) override {
-            auto speed = static_cast<float>(entity->getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = entity->getComponent<PositionComponent>()->getPositions();
-
-            sprite.move(-speed, 0.0F);
-            entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x - speed, y));
-        }
-
-        void moveRight(sf::Sprite &sprite, EntityPtr &entity) override {
-            auto speed = static_cast<float>(entity->getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = entity->getComponent<PositionComponent>()->getPositions();
-            
-            sprite.move(speed, 0.0F);
-            entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x + speed, y));
-        }
-
-        void moveUp(sf::Sprite &sprite, EntityPtr &entity) override {
-            auto speed = static_cast<float>(entity->getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = entity->getComponent<PositionComponent>()->getPositions();
-            
-            sprite.move(0.0F, -speed);
-            entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x, y - speed));
-        }
-
-        void moveDown(sf::Sprite &sprite, EntityPtr &entity) override {
-            auto speed = static_cast<float>(entity->getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = entity->getComponent<PositionComponent>()->getPositions();
-            
-            sprite.move(0.0F, speed);
-            entity->getComponent<PositionComponent>()->setPositions(std::make_pair(x, y + speed));
-        }
-
         /**
         * @brief Return the _entity of the graphical _entity
         */
-        virtual EntityPtr getEntity() = 0;
+        [[nodiscard]] virtual EntityPtr getEntity() = 0;
 
         /**
-        * @brief Return the _sprite of the graphical _entity
+        * @brief Return the _entitySprite of the graphical _entity
         */
-        virtual sf::Sprite getSprite() = 0;
+        [[nodiscard]] virtual SpriteComponent getSprite() = 0;
 
         /**
         * @brief Return the name of the graphical _entity
@@ -68,10 +36,6 @@ namespace RType {
         [[nodiscard]] std::string getEntityName() const {
             return _entityName;
         }
-
-        void setEntityName(const std::string &entityName) {_entityName = entityName;};
-
-        ~AGraphicEntity() override = default;
     };
 
     using GraphicEntityPtr = std::shared_ptr<AGraphicEntity>;

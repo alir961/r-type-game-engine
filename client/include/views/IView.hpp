@@ -8,6 +8,8 @@
 #pragma once
 
 #include "IDrawable.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
+#include "engine/modules/ModuleProvider.hpp"
 
 namespace RType {
 
@@ -23,14 +25,19 @@ namespace RType {
          * @param window The SFML RenderWindow on which to draw the objects.
          * @param entities A vector of shared pointers to AGraphicEntity objects to be drawn.
          */
-        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr> entities) override = 0;
+        void draw(std::vector<GraphicEntityPtr> entities) override = 0;
 
-        void setPlayerEntity(const GraphicEntityPtr &playerEntity) {_playerEntity = playerEntity;};
+        void setPlayerEntity(const GraphicEntityPtr &playerEntity) { _playerEntity = playerEntity; };
 
-        GraphicEntityPtr getPlayerEntity() {return _playerEntity;};
+        [[nodiscard]] GraphicEntityPtr getPlayerEntity() const { return _playerEntity; };
+
+    protected:
+        ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
 
     private:
         GraphicEntityPtr _playerEntity = nullptr;
     };
+
+    using ClientView = std::shared_ptr<IView>;
 
 }

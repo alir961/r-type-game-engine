@@ -25,10 +25,15 @@ namespace RType {
         EntityFactory _factory = EntityFactory(&_entityManager);
         Thread _thread;
         int _tickNumber;
+        int _lastMonsterID = 0;
+        int _lastStarshipID = 0;
+        std::map<int, int> _lastBulletStarship;
 
         void serverLoopIterate();
 
-        void moveBulletPlayer();
+        void movePlayerBullets();
+
+        void moveMonsters();
 
         void sendMessage(MessageType type, const std::string_view &data);
 
@@ -41,7 +46,7 @@ namespace RType {
         /**
          * Retrieve the current sessions manager
          *
-         * @return Reference to SessionManager instance
+         * @return Reference to SessionManager _instance
          */
         [[nodiscard]] SessionManager &getSessionManager() {
             return _sessionManager;
@@ -50,7 +55,7 @@ namespace RType {
         /**
          * Retrieve the current entities manager
          *
-         * @return Reference to EntityManager instance
+         * @return Reference to EntityManager _instance
          */
         [[nodiscard]] EntityManager &getEntityManager() {
             return _entityManager;
@@ -59,13 +64,81 @@ namespace RType {
         /**
          * Retrieve the current entity factory
          *
-         * @return Reference to EntityFactory instance
+         * @return Reference to EntityFactory _instance
          */
         [[nodiscard]] EntityFactory &getFactory() {
             return _factory;
         }
 
         [[nodiscard]] bool isStopped();
+
+        EntityPtr createPlayerEntity(int sessionID, const Session &session);
+
+        void createBulletPlayerEntity(int sessionID);
+
+        static Direction getDirection(MessageType type);
+
+        void checkEntitiesStatus();
+
+        void sendAllMessages(int sessionID);
+
+        void sendAllEntities(int sessionID);
+
+        void sendMessageFromEntity(const EntityPtr& entity);
+
+        void addMessageClients(int sessionID, MessageType type, const std::string_view &data);
+
+        void sendPlayerDetails(const EntityPtr& entity);
+
+        void sendBulletPlayerDetails(const EntityPtr& entity);
+
+        void sendBulletStarshipDetails(const EntityPtr& entity);
+
+        void sendStarshipDetails(const EntityPtr& entity);
+
+        void sendMonsterDetails(const EntityPtr& entity);
+
+        void sendStaticEntityDetails(const EntityPtr& entity);
+
+        void createMonsterEntity();
+
+        void createStaticEntity(int staticID, float startX, float startY);
+
+        int getNextMonsterID();
+
+        int getNextStarshipID();
+
+        int getNextBulletStarshipID(int starshipID);
+
+        bool move(Direction direction, EntityPtr entity);
+
+        void moveLeft(EntityPtr entity);
+
+        void moveRight(EntityPtr entity);
+
+        void moveDown(EntityPtr entity);
+
+        void moveUp(EntityPtr entity);
+
+        void checkHits(EntityPtr entityPtr);
+
+        bool hit(EntityPtr entityPtr, EntityPtr entity);
+
+        void setDamageEntity(EntityPtr entityPtr, EntityPtr entity);
+
+        void putDamage(EntityPtr entityPtr, EntityPtr entity);
+
+        EntityPtr getPlayerEntity(int playerID);
+
+        void checkEntitySessions(EntityPtr entity);
+
+        void createStarshipEntity();
+
+        void createBulletStarshipEntity(EntityPtr entity);
+
+        void moveStarships();
+
+        void moveStarshipsBullets();
     };
 
 }

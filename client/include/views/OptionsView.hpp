@@ -8,7 +8,7 @@
 #pragma once
 
 #include "../components/CheckBox.hpp"
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -21,23 +21,15 @@ namespace RType {
      */
     class OptionsView : public IView {
     public:
-        using ModuleCallback = std::function<void(ModuleType)>;
         /**
          * @brief Constructs the OptionsView.
          *
          * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
          */
-        OptionsView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider, bool inGame = false)
-            : _graphicalModule(graphicalModule), _viewport(gameView), _provider(provider), _inGame(inGame),
-              _title(window, sf::Color::Cyan, 30, window.getSize().x / 2.0f, 50.0f, "Options"),
-              _sound(window, sf::Color::Cyan, 20, 700.0f, 250.0f, "Sound"),
-              _soundVolume(window, sf::Color::Cyan, 20, 850.0f, 250.0f, "100"),
-              _mainMenu(window, sf::Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"),
-              _consoleModuleBox(window, window.getSize().x / 3.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Console"),
-              _particleModuleBox(window, window.getSize().x / 3.0f + 200.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Particle"),
-              _soundModuleBox(window, window.getSize().x / 3.0f + 400.0f, window.getSize().y / 3.0f + 50.0f, 50.0f, 50.0f, "Sound"),
-              _back(window, sf::Color::Cyan, 20, 700.0f, 350.0f, "Go Back") {}
+        OptionsView(ClientViewport &gameView, bool inGame = false)
+            : _viewport(gameView), _inGame(inGame),
+              _back(Color::Cyan, 20, 700.0f, 350.0f, "Go Back") {}
 
         /**
          * @brief Handles user input for the options menu.
@@ -47,7 +39,7 @@ namespace RType {
             _sound.handleInput();
             _soundVolume.handleInput();
             _mainMenu.handleInput();
-            if (_inGame == true) _back.handleInput();
+            if (_inGame) _back.handleInput();
             _soundModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
                                     [this](std::string moduleName) { unloadModule(moduleName);});
             _particleModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
@@ -55,32 +47,36 @@ namespace RType {
             _consoleModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
                                     [this](std::string moduleName) { unloadModule(moduleName);});
 
-            if (isMouseClicked()) {
-                if (_mainMenu.getActive()) {
-                    std::cout << "Exit To Main Menu!" << std::endl;
+            if (_module->isMouseClicked()) {
+                if (_mainMenu.isClicked()) {
+                    _logger->debug("Go to main menu from options");
                     _viewport.setView(ViewState::MENU);
                 }
-                if (_inGame == true && _back.getActive()) {
-                    std::cout << "Back to Pause" << std::endl;
+                if (_inGame && _back.isClicked()) {
+                    _logger->debug("Go to pause menu from options");
                     _viewport.setView(ViewState::PAUSE);
                 }
             }
         }
 
-        void loadModule(std::string moduleName) {
-            if (stringToModuleType(moduleName) == ModuleType::SOUND) _soundModule = _provider.loadAndGetModule<RType::IModule>(RType::ModuleType::SOUND);
-            if (stringToModuleType(moduleName) == ModuleType::PARTICLE) _particleModule = _provider.loadAndGetModule<RType::IModule>(RType::ModuleType::PARTICLE);
-            if (stringToModuleType(moduleName) == ModuleType::CONSOLE) _consoleModule = _provider.loadAndGetModule<RType::IModule>(RType::ModuleType::CONSOLE);
+        void loadModule(const std::string &moduleName) {
+            const ModuleProviderPtr provider = ModuleProvider::getInstance();
+
+            if (stringToModuleType(moduleName) == ModuleType::SOUND) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::SOUND);
+            if (stringToModuleType(moduleName) == ModuleType::PARTICLE) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::PARTICLE);
+            if (stringToModuleType(moduleName) == ModuleType::CONSOLE) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::CONSOLE);
         }
 
         /**
          * @brief Unload the specified module.
          * @param moduleType The type of the module to unload.
          */
-        void unloadModule(std::string moduleName) {
-            if (stringToModuleType(moduleName) == ModuleType::SOUND) _provider.unloadModule(RType::ModuleType::SOUND);
-            if (stringToModuleType(moduleName) == ModuleType::PARTICLE) _provider.unloadModule(RType::ModuleType::PARTICLE);
-            if (stringToModuleType(moduleName) == ModuleType::CONSOLE) _provider.unloadModule(RType::ModuleType::CONSOLE);
+        void unloadModule(const std::string &moduleName) {
+            const ModuleProviderPtr provider = ModuleProvider::getInstance();
+
+            if (stringToModuleType(moduleName) == ModuleType::SOUND) provider->unloadModule(RType::ModuleType::SOUND);
+            if (stringToModuleType(moduleName) == ModuleType::PARTICLE) provider->unloadModule(RType::ModuleType::PARTICLE);
+            if (stringToModuleType(moduleName) == ModuleType::CONSOLE) provider->unloadModule(RType::ModuleType::CONSOLE);
         }
 
         /**
@@ -110,7 +106,7 @@ namespace RType {
          */
         void update() override {
             _mainMenu.update();
-            if (_inGame == true) _back.update();
+            if (_inGame) _back.update();
         }
 
         /**
@@ -119,42 +115,29 @@ namespace RType {
          * @param window Reference to the SFML render window.
          * @param entities A vector of shared pointers to graphic entities.
          */
-        void draw(sf::RenderWindow &window, std::vector<GraphicEntityPtr>) override {
-            _title.draw(_graphicalModule);
-            _sound.draw(_graphicalModule);
-            _soundVolume.draw(_graphicalModule);
-            _mainMenu.draw(_graphicalModule);
-            _consoleModuleBox.draw(_graphicalModule);
-            _particleModuleBox.draw(_graphicalModule);
-            _soundModuleBox.draw(_graphicalModule);
-            if (_inGame == true) _back.draw(_graphicalModule);
+        void draw(std::vector<GraphicEntityPtr>) override {
+            _title.draw();
+            _sound.draw();
+            _soundVolume.draw();
+            _mainMenu.draw();
+            _consoleModuleBox.draw(_module);
+            _particleModuleBox.draw(_module);
+            _soundModuleBox.draw(_module);
+            if (_inGame) _back.draw();
             handleInput();
         }
 
     private:
-        TextBox _title; /**< TextBox for the title. */
-        TextBox _sound; /**< Sound of the ClientViewport. */
-        TextBox _soundVolume; /**< Game sound volume of the ClientViewport. */
-        TextBox _mainMenu; /**< TextBox for the menu. */
-        TextBox _back; /**< TextBox to go back. */
+        ClickableText _title = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "Options"); /**< ClickableText for the title. */
+        ClickableText _sound = ClickableText(Color::Cyan, 20, 700.0f, 250.0f, "Sound"); /**< Sound of the ClientViewport. */
+        ClickableText _soundVolume = ClickableText(Color::Cyan, 20, 850.0f, 250.0f, "100"); /**< Game sound volume of the ClientViewport. */
+        ClickableText _mainMenu = ClickableText(Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"); /**< ClickableText for the menu. */
+        ClickableText _back; /**< ClickableText to go back. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
-        IGraphicalModule *_graphicalModule;
-        CheckBox _consoleModuleBox;
-        CheckBox _particleModuleBox;
-        CheckBox _soundModuleBox;
-        ModuleProvider &_provider;
-        IModule *_soundModule;
-        IModule *_particleModule;
-        IModule *_consoleModule;
+        CheckBox _consoleModuleBox = CheckBox(WINDOW_WIDTH / 3.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Console");
+        CheckBox _particleModuleBox = CheckBox(WINDOW_WIDTH / 3.0f + 200.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Particle");
+        CheckBox _soundModuleBox = CheckBox(WINDOW_WIDTH / 3.0f + 400.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Sound");
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         bool _inGame;
-
-        /**
-         * @brief Checks if the left mouse button is clicked.
-         *
-         * @return True if the left mouse button is clicked, false otherwise.
-         */
-        bool isMouseClicked() const {
-            return sf::Mouse::isButtonPressed(sf::Mouse::Left);
-        }
     };
 }

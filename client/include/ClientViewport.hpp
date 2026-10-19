@@ -9,6 +9,7 @@
 
 #include "views/IView.hpp"
 #include "UDPClient.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
 #include <engine/modules/animation/IAnimationModule.hpp>
 #include <engine/modules/ModuleProvider.hpp>
 #include <SFML/System/Clock.hpp>
@@ -23,17 +24,12 @@ namespace RType {
     class MenuView;
     class OptionsView;
     class PauseView;
-    class DeadView;
-    class WinView;
     class GameView;
     class LoginView;
     class LoadView;
+    class DeadView;
     class GraphicalModule;
     class AnimationModule;
-
-    constexpr uint32_t WINDOW_WIDTH = 1920;
-    constexpr uint32_t WINDOW_HEIGHT = 1080;
-    constexpr int WINDOW_FPS = 60;
 
     /**
      * @enum views
@@ -44,11 +40,10 @@ namespace RType {
         OPTIONS = 1,  /**< Options menu state. */
         GAME = 2,     /**< In-game state. */
         PAUSE = 3,    /**< Pause state. */
-        DEAD = 4,     /**< Game over state. */
-        LOGIN = 5,     /**< Game over state. */
-        WIN = 6,      /**< Won game state. */
-        OPTIONSGAME = 7,
-        LOADSCREEN = 8
+        LOGIN = 4,     /**< Game over state. */
+        OPTIONSGAME = 5,
+        LOADSCREEN = 6,
+        DEAD = 7,
     };
 
     /**
@@ -60,21 +55,19 @@ namespace RType {
         using MessageHandlerFunction = std::function<void(const std::vector<std::string> &)>;
 
     private:
-        sf::RenderWindow _window = sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
         ViewState _viewState = ViewState::LOGIN;                          /**< Current state of the game view. */
         sf::Clock _animationClock;                                         /**< Clock for managing animations and time-related operations. */
         std::vector<GraphicEntityPtr> _graphicEntities;                   /**< Vector of graphic entities in the game. */
         std::shared_ptr<IView> _selectedView;
         UDPClientPtr _client;
-        sf::Event event{};
-        IGraphicalModule *_graphicalModule;
-        IAnimationModule *_animationModule;
-        ModuleProvider _provider = ModuleProvider();
+        sf::Event _event{};
+        ModuleProviderPtr _provider = ModuleProvider::getInstance();
+        IGraphicalModule *_graphicalModule = _provider->loadAndGetModule<IGraphicalModule>(ModuleType::GRAPHICAL);
+        ILoggerModule *_logger = _provider->loadAndGetModule<ILoggerModule>(ModuleType::LOGGER);
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;
         GraphicEntityPtr _playerEntity = nullptr;
 
-        GraphicEntityPtr getGraphicEntity(const std::string &entityName);
         void destroyGraphicEntity(GraphicEntityPtr entity);
 
         /**
@@ -92,7 +85,7 @@ namespace RType {
          * @brief Private method to handle input for a specific graphic _entity.
          * @param entity The graphic entity to handle input for.
          */
-        void handleInput() const;
+        void handleGameInput() const;
 
         /**
          * @brief Private method to handle basic input.
@@ -142,8 +135,8 @@ namespace RType {
         GraphicEntityPtr getGraphicEntityByName(const std::string &name) const;
 
         /**
-         * Retrieve current SFML event
-         * @return The event
+         * Retrieve current SFML _event
+         * @return The _event
          */
         [[nodiscard]] sf::Event getEvent() const;
 
@@ -168,24 +161,36 @@ namespace RType {
 
         void handleMessageFromServer();
 
-        void newPlayer(const std::vector<std::string> &splitMessage);
-        void moveLeft(const std::vector<std::string> &splitMessage);
-        void moveRight(const std::vector<std::string> &splitMessage);
-        void moveDown(const std::vector<std::string> &splitMessage);
-        void moveUp(const std::vector<std::string> &splitMessage);
-        void shoot(const std::vector<std::string> &splitMessage);
+        void player(const std::vector<std::string> &splitMessage);
+        void bulletPlayer(const std::vector<std::string> &splitMessage);
+        void monster(const std::vector<std::string> &splitMessage);
+        void staticEntity(const std::vector<std::string> &splitMessage);
+        void starship(const std::vector<std::string> &splitMessage);
+        void bulletStarship(const std::vector<std::string> &splitMessage);
         void death(const std::vector<std::string> &splitMessage);
-        void movePlayerBullet(const std::vector<std::string> &splitMessage);
+        void disconnect(const std::vector<std::string> &splitMessage);
         void changePlayerColor(const std::vector<std::string> &splitMessage);
+
+        void createNewPlayer(const std::vector<std::string> &splitMessage);
+        void updatePlayer(const std::vector<std::string> &splitMessage);
+        void createNewBulletPlayer(const std::vector<std::string> &splitMessage);
+        void updateBulletPlayer(const std::vector<std::string> &splitMessage);
+        void createNewMonster(const std::vector<std::string> &splitMessage);
+        void updateMonster(const std::vector<std::string> &splitMessage);
+        void createNewStatic(const std::vector<std::string> &splitMessage);
+        void updateStatic(const std::vector<std::string> &splitMessage);
+        void createNewStarship(const std::vector<std::string> &splitMessage);
+        void updateStarship(const std::vector<std::string> &splitMessage);
+        void createNewStarshipBullet(const std::vector<std::string> &splitMessage);
+        void updateStarshipBullet(const std::vector<std::string> &splitMessage);
     };
 }
 
 #include "views/MenuView.hpp"
 #include "views/OptionsView.hpp"
 #include "views/PauseView.hpp"
-#include "views/DeadView.hpp"
-#include "views/WinView.hpp"
 #include "views/GameView.hpp"
 #include "views/LoginView.hpp"
 #include "views/LoadView.hpp"
+#include "views/DeadView.hpp"
 #include "entities/GraphicEntityFactory.hpp"

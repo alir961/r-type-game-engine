@@ -7,14 +7,16 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <map>
 #include <vector>
 #include "engine/modules/animation/IAnimationModule.hpp"
 #include "engine/modules/animation/IAnimation.hpp"
-#include "engine/modules/animation/IAnimationFactory.hpp"
+#include "AnimationFactory.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
+#include "engine/modules/ModuleProvider.hpp"
 
 namespace RType {
+
     class AnimationModule :  public IAnimationModule {
     public:
         void load() override;
@@ -23,9 +25,11 @@ namespace RType {
         AnimationModule() = default;
 
         void addAnimation(const std::string &entityName) override;
-        sf::FloatRect update(const std::string &entityName) override;
+        RectFloat update(const std::string &entityName) override;
+
     private:
-        std::map<std::string, std::shared_ptr<IAnimation>> _animations;
+        std::map<std::string, AnimationPtr> _animations;
+        ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
     };
 
 }

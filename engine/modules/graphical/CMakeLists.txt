@@ -10,12 +10,27 @@ set_target_properties(graphical_module PROPERTIES
 install(
         FILES
         GraphicalModule.hpp
+        Text.hpp
+        Rectangle.hpp
+        Sprite.hpp
         DESTINATION
         include/graphical_module
 )
 
+if (WIN32)
+    set(SFML_STATIC_LIBRARIES TRUE)
+    set(SFML_DIR C:/SFML/lib/cmake/SFML)
+    find_package(SFML COMPONENTS window graphics REQUIRED)
 
-find_package(SFML COMPONENTS window graphics CONFIG REQUIRED)
-target_link_libraries(graphical_module LINK_PRIVATE sfml-graphics sfml-window)
+    include_directories(C:/SFML/include)
+    target_link_libraries(graphical_module
+            sfml-graphics
+            sfml-window
+            engine
+    )
+endif ()
 
-target_link_libraries(graphical_module PRIVATE engine)
+if (NOT WIN32)
+    find_package(SFML COMPONENTS window graphics CONFIG REQUIRED)
+    target_link_libraries(graphical_module LINK_PRIVATE sfml-graphics sfml-window engine)
+endif()

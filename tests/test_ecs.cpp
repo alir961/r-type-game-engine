@@ -6,7 +6,7 @@ using namespace RType;
 
 namespace {
 
-    // Builds an entity with everything movement and collisions need.
+    // Builds an entity with the components a ship needs.
     EntityPtr makeShip(EntityManager &manager, const std::string &name, int x, int y, int health = 100) {
         EntityPtr entity = manager.createEntity();
         entity->setEntityName(name);
@@ -17,13 +17,6 @@ namespace {
         entity->addComponent<HealthComponent>(health);
         return entity;
     }
-
-    std::pair<int, int> position(const EntityPtr &entity) {
-        return entity->getComponent<PositionComponent>()->getPositions();
-    }
-
-    constexpr float WIDTH = 800.0F;
-    constexpr float HEIGHT = 600.0F;
 
 }
 
@@ -65,60 +58,4 @@ TEST(EntityManager, CreateFindDestroy) {
     manager.destroyEntity(ship);
     EXPECT_EQ(manager.getEntities().size(), 1U);
     EXPECT_EQ(manager.getEntity("player 1"), nullptr);
-}
-
-// Each direction must move along one axis only.
-TEST(EntityMovement, EachDirectionMovesOneAxis) {
-    EntityManager manager;
-    EntityPtr ship = makeShip(manager, "player 1", 100, 100);
-
-    ship->move(Direction::LEFT, {}, WIDTH, HEIGHT);
-    EXPECT_EQ(position(ship), std::make_pair(95, 100));
-    ship->move(Direction::RIGHT, {}, WIDTH, HEIGHT);
-    EXPECT_EQ(position(ship), std::make_pair(100, 100));
-    ship->move(Direction::DOWN, {}, WIDTH, HEIGHT);
-    EXPECT_EQ(position(ship), std::make_pair(100, 105));
-    ship->move(Direction::UP, {}, WIDTH, HEIGHT);
-    EXPECT_EQ(position(ship), std::make_pair(100, 100));
-    EXPECT_FALSE(ship->getDeathStatus());
-}
-
-TEST(EntityMovement, LeavingTheScreenKills) {
-    EntityManager manager;
-    EntityPtr ship = makeShip(manager, "player 1", 2, 100);
-    ship->move(Direction::LEFT, {}, WIDTH, HEIGHT);
-    EXPECT_TRUE(ship->getDeathStatus());
-}
-
-TEST(EntityCollision, ProjectileDamagesShipAndIsDestroyed) {
-    EntityManager manager;
-    EntityPtr ship = makeShip(manager, "player 1", 100, 100, 100);
-    EntityPtr bullet = makeShip(manager, "bullet 9", 100, 95);
-    bullet->addComponent<DamageComponent>(30);
-
-    ship->move(Direction::UP, manager.getEntities(), WIDTH, HEIGHT);
-
-    EXPECT_TRUE(bullet->getDeathStatus());
-    EXPECT_FALSE(ship->getDeathStatus());
-    EXPECT_EQ(ship->getComponent<HealthComponent>()->getHealth(), 70);
-}
-
-TEST(EntityCollision, LethalDamageKills) {
-    EntityManager manager;
-    EntityPtr ship = makeShip(manager, "player 1", 100, 100, 20);
-    EntityPtr bullet = makeShip(manager, "bullet 9", 100, 95);
-    bullet->addComponent<DamageComponent>(30);
-
-    ship->move(Direction::UP, manager.getEntities(), WIDTH, HEIGHT);
-    EXPECT_TRUE(ship->getDeathStatus());
-}
-
-TEST(EntityCollision, DistantEntitiesDoNotCollide) {
-    EntityManager manager;
-    EntityPtr ship = makeShip(manager, "player 1", 100, 100);
-    makeShip(manager, "enemy 2", 400, 400);
-
-    ship->move(Direction::UP, manager.getEntities(), WIDTH, HEIGHT);
-    EXPECT_FALSE(ship->getDeathStatus());
-    EXPECT_EQ(ship->getComponent<HealthComponent>()->getHealth(), 100);
 }

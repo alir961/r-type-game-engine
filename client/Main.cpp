@@ -1,10 +1,18 @@
 #include "include/ClientViewport.hpp"
-#include <engine/Logger.hpp>
-#include <engine/network/UDPAdapter.hpp>
 
-int main() {
+static void printProgramHeader() {
+    std::cout << "\n\e[1;33;107m██████████████████████████████████████████████████████\e[0m\n";
+    std::cout << "\e[1;33;107m█                       R-Type                       █\e[0m\n";
+    std::cout << "\e[1;33;107m██████████████████████████████████████████████████████\e[0m\n\n";
+}
+
+static void startApplication() {
     RType::ClientViewport view;
 
-    logInformation("Hello, World for client!");
     view.start();
+}
+
+int main() {
+    printProgramHeader();
+    startApplication();
 }

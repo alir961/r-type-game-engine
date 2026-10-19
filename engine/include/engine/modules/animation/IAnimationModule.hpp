@@ -8,10 +8,9 @@
 #pragma once
 
 #include "engine/modules/IModule.hpp"
-#include <SFML/Graphics.hpp>
-#include <memory>
 #include "engine/ecs/Entity.hpp"
 #include "IAnimation.hpp"
+#include <memory>
 
 namespace RType {
 
@@ -21,6 +20,6 @@ namespace RType {
         void unload() override = 0;
 
         virtual void addAnimation(const std::string &entityName) = 0;
-        virtual sf::FloatRect update(const std::string &entityName) = 0;
+        virtual RectFloat update(const std::string &entityName) = 0;
     };
 }

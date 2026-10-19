@@ -35,9 +35,8 @@ namespace RType {
         template<typename T>
         std::shared_ptr<T> getComponent() const {
             auto component = _components.find(getComponentType<T>());
-            if (component != _components.end()) {
+            if (component != _components.end())
                 return std::dynamic_pointer_cast<T>(component->second);
-            }
             return nullptr;
         }
 
@@ -123,55 +122,14 @@ namespace RType {
         */
         ~Entity() = default;
 
-        bool move(Direction direction, const std::vector<std::shared_ptr<Entity>> &entities,  float windowsWidth, float windowsHeight) {
-            switch (direction) {
-                case Direction::LEFT:
-                    moveLeft(entities);
-                    break;
-                case Direction::RIGHT:
-                    moveRight(entities, windowsWidth);
-                    break;
-                case Direction::DOWN:
-                    moveDown(entities, windowsHeight);
-                    break;
-                case Direction::UP:
-                    moveUp(entities);
-                    break;
-            }
-            return false;
-        };
-
-        bool canShoot(const std::vector<std::shared_ptr<Entity>> &entities, const std::string &name) {
-            if (getEntity(entities, name) == nullptr)
-                return true;
-            return false;
-        }
 
         void setEntityName(const std::string &name) {_entityName = name;};
 
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> getComponents() {return _components;};
 
-        void putDamage(const std::shared_ptr<Entity> &entity) {
-            auto healthComponent = getComponent<HealthComponent>();
-            int health = healthComponent->getHealth();
-            int damage = entity->getComponent<DamageComponent>().get()->getDamage();
-
-            if (health - damage <= 0)
-                setDeathStatus();
-            else
-                healthComponent->setHealth(health - damage);
-        }
-
-        void setDamageEntity(const std::shared_ptr<Entity> &entity) {
-            if (hasHealthComponent(entity))
-                putDamage(entity);
-            else
-                setDeathStatus();
-        }
-
-        bool hasHealthComponent(const std::shared_ptr<Entity> &entity) {
+        bool hasHealthComponent() {
             bool hasComponent = false;
-            for (const auto &pair : entity->getComponents()) {
+            for (const auto &pair : getComponents()) {
                 const std::type_info &currentType = typeid(*(pair.second));
                 if (currentType == typeid(HealthComponent)) {
                     hasComponent = true;
@@ -181,9 +139,21 @@ namespace RType {
             return hasComponent;
         }
 
-        bool hasDamageComponent(const std::shared_ptr<Entity> &entity) {
+        bool hasPlayerComponent() {
             bool hasComponent = false;
-            for (const auto &pair : entity->getComponents()) {
+            for (const auto &pair : getComponents()) {
+                const std::type_info &currentType = typeid(*(pair.second));
+                if (currentType == typeid(PlayerComponent)) {
+                    hasComponent = true;
+                    break;
+                }
+            }
+            return hasComponent;
+        }
+
+        bool hasDamageComponent() {
+            bool hasComponent = false;
+            for (const auto &pair : getComponents()) {
                 const std::type_info &currentType = typeid(*(pair.second));
                 if (currentType == typeid(DamageComponent)) {
                     hasComponent = true;
@@ -197,7 +167,11 @@ namespace RType {
 
         bool getDeathStatus() {return _death;};
 
-        void setDeathStatus() {_death = true;};
+        void setDeathStatus() {
+            _death = true;
+            if (!hasDamageComponent() && !hasHealthComponent())
+                _death = false;
+        };
 
     private:
         std::unordered_map<ComponentType, std::shared_ptr<AComponent>> _components; /**< Map to store component associated with the _entity. */
@@ -226,88 +200,6 @@ namespace RType {
                 return ComponentType::Speed;
             }
         }
-
-        bool hit(const std::shared_ptr<Entity> &entity) {
-            const auto& [thisX, thisY] = getComponent<PositionComponent>()->getPositions();
-            const auto& [thisWidth, thisHeight] = getComponent<SizeComponent>()->getSize();
-            const auto& [thisRectWidth, thisRectHeight] = getComponent<SizeRectComponent>()->getSize();
-            float thisActualWidth = thisWidth * thisRectWidth;
-            float thisActualHeight = thisHeight * thisRectHeight;
-            const auto& [entityX, entityY] = entity->getComponent<PositionComponent>()->getPositions();
-            const auto& [entityWidth, entityHeight] = entity->getComponent<SizeComponent>()->getSize();
-            const auto& [entityRectWidth, entityRectHeight] = entity->getComponent<SizeRectComponent>()->getSize();
-            float entityActualWidth = entityWidth * entityRectWidth;
-            float entityActualHeight = entityHeight * entityRectHeight;
-
-            if (this == entity.get()) {
-                return false;
-            }
-            return (thisX < entityX + entityActualWidth &&
-                    thisX + thisActualWidth > entityX &&
-                    thisY < entityY + entityActualHeight &&
-                    thisY + thisActualHeight > entityY);
-        }
-
-
-        void checkHits(const std::vector<std::shared_ptr<Entity>>& entities) {
-            for (const auto& entity : entities) {
-                if (hit(entity)) {
-                    if (hasDamageComponent(entity)) {
-                        entity->setDeathStatus();
-                        setDamageEntity(entity);
-                    } else
-                        setDeathStatus();
-                }
-            }
-        }
-
-        void moveLeft(const std::vector<std::shared_ptr<Entity>> &entities) {
-            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
-
-            if (x - speed < 0)
-                setDeathStatus();
-            checkHits(entities);
-            getComponent<PositionComponent>()->setPositions(std::make_pair(x - speed, y));
-        };
-
-        void moveRight(const std::vector<std::shared_ptr<Entity>> &entities, float windowsWidth) {
-            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
-            float size = getComponent<SizeComponent>()->getSize().second;
-            float rect = getComponent<SizeRectComponent>()->getSize().second;
-            float entitySize = size * rect;
-            float entityX = x + entitySize;
-
-            if (entityX + speed > windowsWidth)
-                setDeathStatus();
-            checkHits(entities);
-            getComponent<PositionComponent>()->setPositions(std::make_pair(x + speed, y));
-        };
-
-        void moveDown(const std::vector<std::shared_ptr<Entity>> &entities, float windowsHeight) {
-            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
-            float size = getComponent<SizeComponent>()->getSize().second;
-            float rect = getComponent<SizeRectComponent>()->getSize().second;
-            float entitySize = size * rect;
-            float entityY = y + entitySize;
-
-            if (entityY + speed > windowsHeight)
-                setDeathStatus();
-            checkHits(entities);
-            getComponent<PositionComponent>()->setPositions(std::make_pair(x, y + speed));
-        };
-
-        void moveUp(const std::vector<std::shared_ptr<Entity>> &entities) {
-            auto speed = static_cast<float>(getComponent<SpeedComponent>()->getSpeed());
-            const auto &[x, y] = getComponent<PositionComponent>()->getPositions();
-
-            if (y - speed < 0)
-                setDeathStatus();
-            checkHits(entities);
-            getComponent<PositionComponent>()->setPositions(std::make_pair(x, y - speed));
-        };
 
         std::shared_ptr<Entity> getEntity(const std::vector<std::shared_ptr<Entity>> &entities, const std::string &name) {
             std::string id = Split::split(_entityName, " ")[1];

@@ -60,7 +60,7 @@ namespace RType {
         /**
         * @brief Get the username.
         */
-        [[nodiscard]] std::string getUserName() const {
+        [[nodiscard]] std::string getUsername() const {
             if (_isPlayer)
                 return _username;
             return "";

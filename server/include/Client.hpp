@@ -9,17 +9,22 @@
 
 
 #include <iostream>
+#include <mutex>
 #include <engine/ecs/Entity.hpp>
+#include <engine/network/NetworkMessage.hpp>
 
 namespace RType {
 
     class Client {
     private:
         std::string _playerName;
-        EntityPtr  _playerEntity;
+        EntityPtr  _playerEntity = nullptr;
         float _windowWidth;
         float _windowHeight;
         std::string _color = "turquoise";
+        std::vector<Message> _messageQueue;
+        std::mutex _queueMutex;
+        int _lastBulletID = 0;
 
     public:
         Client() = default;
@@ -31,6 +36,10 @@ namespace RType {
         void setWindowHeight(const float &windowHeight) {_windowHeight = windowHeight;};
 
         void setPlayerEntity(const EntityPtr &playerEntity) {_playerEntity = playerEntity;};
+
+        void addMessage(const Message &message);
+
+        Message getLastMessage();
 
         void setNextColor() {
             if (_color == "turquoise")
@@ -53,7 +62,9 @@ namespace RType {
 
         [[nodiscard]] float getWindowHeight() const {return _windowHeight;};
 
-        [[nodiscard]] EntityPtr getEntity() const {return _playerEntity;};
+        [[nodiscard]] EntityPtr getEntity() const {return _playerEntity;}
+
+        [[nodiscard]] int getNextBulletID();
     };
 
     using Session = std::shared_ptr<Client>;

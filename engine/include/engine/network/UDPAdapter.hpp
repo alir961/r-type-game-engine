@@ -41,8 +41,9 @@ namespace RType {
      */
     class UDPAdapter {
     private:
-        UDP::socket &_socket;
-        UDP::endpoint &_remoteEndpoint;
+        asio::io_context _ioContext;
+        UDP::socket _socket;
+        UDP::endpoint _remoteEndpoint;
         DataBuffer _dataBuffer{};
         MessageBuffer _messageBuffer{};
 
@@ -55,13 +56,22 @@ namespace RType {
         static void errorFunction(const asio::error_code &error, std::size_t);
 
     public:
+
+        void closeSocket() {
+            _socket.close();
+        }
+
+        void runContext() {
+            _ioContext.run();
+        }
+
         /**
          * @brief Constructor for UDPAdapter.
          * @param socket Reference to the UDP socket.
          * @param endpoint Reference to the remote endpoint.
          */
-        explicit UDPAdapter(UDP::socket &socket, UDP::endpoint &endpoint) :
-                _socket(socket), _remoteEndpoint(endpoint) {}
+        explicit UDPAdapter(const std::string &address, uint16_t port) : _socket(_ioContext, UDP::endpoint(asio::ip::make_address(address), port)) {
+        }
 
         /**
         * @brief Sends string data over the UDP connection.
@@ -104,6 +114,10 @@ namespace RType {
          * @return The message buffer.
          */
         [[nodiscard]] const MessageBuffer &getMessageBuffer() const;
+
+        void setServerEndpoint(const std::string &serverAddress, uint16_t serverPort) {
+            _remoteEndpoint = UDP::endpoint(asio::ip::make_address(serverAddress), serverPort);
+        }
     };
 
     using UDPAdapterPtr = std::shared_ptr<UDPAdapter>;

@@ -6,6 +6,7 @@
 */
 
 #include "AnimationModule.hpp"
+#include "AnimationFactory.hpp"
 
 extern "C" {
 RType::IModule *initializeAnimationModule() {
@@ -18,7 +19,6 @@ void destroy(RType::AnimationModule *library) {
 }
 
 void RType::AnimationModule::load() {
-    std::cout << "Load Animation Module\n";
     addAnimation("turquoisePlayer");
     addAnimation("playerStarship");
     addAnimation("purplePlayer");
@@ -26,22 +26,25 @@ void RType::AnimationModule::load() {
     addAnimation("redPlayer");
     addAnimation("bluePlayer");
     addAnimation("bulletPlayer");
+    addAnimation("monster");
+    addAnimation("static");
+    addAnimation("bulletStarship");
+    addAnimation("starship");
 }
 
 void RType::AnimationModule::unload() {
-    std::cout << "Unload AnimationModule...\n";
 }
 
 void RType::AnimationModule::addAnimation(const std::string &entityName) {
-    std::shared_ptr<IAnimation> animation = IAnimationFactory::createAnimation(entityName);
+    AnimationPtr animation = AnimationFactory::createAnimation(entityName);
 
     _animations.try_emplace(entityName, animation);
 }
 
-sf::FloatRect RType::AnimationModule::update(const std::string &entityName) {
-    auto animIter = _animations.find(entityName);
-    if (animIter != _animations.end())
-        return animIter->second->update();
+RType::RectFloat RType::AnimationModule::update(const std::string &entityName) {
+    if (const auto &iterator = _animations.find(entityName); iterator != _animations.end())
+        return iterator->second->update();
+    _logger->warn("Unable to find animation for " + entityName);
     return {};
 }
 

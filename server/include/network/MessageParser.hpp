@@ -33,17 +33,13 @@ namespace RType {
 
         void handleMove(const Message &receiveMessage);
 
+        void handlePlayerShoot(const RType::Message &receiveMessage);
+
+        void handleTick(const RType::Message &receiveMessage);
+
+        void handleDisconnect(const RType::Message &receiveMessage);
+
         void sendMessage(MessageType type, const std::string_view &data);
-
-        void handleShoot(const RType::Message &receiveMessage);
-
-        EntityPtr createPlayerEntity(int sessionID);
-
-        bool createBulletPlayerEntity(int sessionID);
-
-        static Direction getDirection(MessageType type);
-
-        void checkEntitiesStatus();
 
     public:
         /**
@@ -61,8 +57,6 @@ namespace RType {
          * @param bytesReceived The number of bytes received in the buffer
          */
         void parseMessage(const MessageBuffer &buffer, std::size_t bytesReceived);
-
-        SessionManager *getSessionManager();
     };
 
 }

@@ -7,8 +7,7 @@
 
 #pragma once
 
-#include "../components/RectBox.hpp"
-#include "../components/TextBox.hpp"
+#include "../components/ClickableText.hpp"
 #include "IView.hpp"
 #include <iostream>
 #include <string>
@@ -21,20 +20,14 @@ namespace RType {
      * @class DeadView
      * @brief Represents a state where entities are not drawn.
      */
-    class DeadView : public IView {
+    class WinDeadView : public IView {
     public:
         /**
          * @brief Constructor for DeadView.
          * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        DeadView(sf::RenderWindow &window, ClientViewport &gameView, IGraphicalModule *graphicalModule, ModuleProvider &provider, int heath, int score)
-            : _viewport(gameView), _graphicalModule(graphicalModule), _provider(provider), _health(heath), _score(score),
-              _backgroundRect(window, sf::Vector2f(((((window.getSize().x - 450) / 2))), ((window.getSize().y - 400) / 2)), sf::Vector2f(450.0f, 400.0f), sf::Color::Black, sf::Color::Magenta, 5.0f),
-              _loseText(window, sf::Color::Magenta, 30, ((((window.getSize().x - 450) / 2))) + 150, ((window.getSize().y - 400) / 2) + 15, "You Lose!"),
-              _hpText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 115, ""),
-              _scoreText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 215, ""),
-              _exitText(window, sf::Color::Magenta, 20, ((((window.getSize().x - 450) / 2))) + 200, ((window.getSize().y - 400) / 2) + 315, "Exit") {}
+        WinDeadView(ClientViewport &gameView) : _viewport(gameView) {}
 
         /**
          * @brief Handles user input for the menu.
@@ -42,9 +35,9 @@ namespace RType {
         void handleInput() {
             _exitText.handleInput();
 
-            if (!isMouseClicked())
+            if (!(_module->isMouseClicked()))
                 return;
-            if (_exitText.getActive()) {
+            if (_exitText.isClicked()) {
                 std::cout << "Exit To Main Menu!\n";
                 _viewport.setView(ViewState::MENU);
             }
@@ -54,6 +47,13 @@ namespace RType {
          * @brief Updates the menu state.
          */
         void update() override {
+            const GraphicEntityPtr player = getPlayerEntity();
+            const EntityPtr &playerEntity = (player == nullptr) ? nullptr : player->getEntity();
+
+            if (player != nullptr && playerEntity->getComponent<PlayerComponent>()) {
+                const int score = playerEntity->getComponent<PlayerComponent>()->getScore();
+                _scoreText.setText("Score " + std::to_string(score));
+            }
             _exitText.update();
         }
 
@@ -62,33 +62,21 @@ namespace RType {
          * @param window The SFML RenderWindow on which to draw entities.
          * @param entities A vector of shared pointers to AGraphicEntity objects.
          */
-        void draw(sf::RenderWindow &, std::vector<GraphicEntityPtr> ) override {
-            _backgroundRect.draw(_graphicalModule);
-            _loseText.draw(_graphicalModule);
-            _hpText.draw(_graphicalModule);
-            _scoreText.draw(_graphicalModule);
-            _exitText.draw(_graphicalModule);
+        void draw(std::vector<GraphicEntityPtr> entities) override {
+            _loseWinText.draw();
+            _hpText.draw();
+            _scoreText.draw();
+            _exitText.draw();
             handleInput();
-
-
-            _hpText.setText("Health " + std::to_string(_health));
-            _scoreText.setText("Score " + std::to_string(_score));
         }
 
     private:
         ClientViewport &_viewport; /**< The associated ClientViewport. */
-        RectBox _backgroundRect; /**< Rectangle of background. */
-        TextBox _loseText; /**< Text "You Lose!". */
-        TextBox _hpText; /**< Text "hp". */
-        TextBox _scoreText; /**< Text "pts". */
-        TextBox _exitText; /**< Exit Text. */
-        IGraphicalModule *_graphicalModule;
-        ModuleProvider &_provider;
-        int _health;
-        int _score;
-
-        static bool isMouseClicked() {
-            return sf::Mouse::isButtonPressed(sf::Mouse::Left);
-        }
+        ClickableText _loseWinText = ClickableText(Color::Magenta, 30, ((WINDOW_WIDTH - 450) / 2) + 150, ((WINDOW_HEIGHT - 400) / 2) + 15, "You are Dead !");
+        ClickableText _hpText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 115, "Health 0");
+        ClickableText _scoreText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 215, "");
+        ClickableText _exitText = ClickableText(Color::Magenta, 20, ((WINDOW_WIDTH - 450) / 2) + 200, ((WINDOW_HEIGHT - 400) / 2) + 315, "Exit");
+        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        std::string _winOrLose;
     };
 }

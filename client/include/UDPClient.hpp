@@ -11,6 +11,8 @@
 #include <engine/tools/Split.hpp>
 #include <iostream>
 #include "engine/tools/Thread.hpp"
+#include "engine/modules/logger/ILoggerModule.hpp"
+#include "engine/modules/ModuleProvider.hpp"
 
 namespace RType {
 
@@ -77,14 +79,12 @@ namespace RType {
         void handleReceive(std::size_t bytesReceived);
 
         std::string _username; ///< The username associated with the client.
-        asio::io_context _context; ///< The IO context for asynchronous operations.
-        UDP::endpoint _endpoint; ///< The endpoint for communication.
-        UDP::socket _socket; ///< The UDP socket for communication.
-        UDPAdapterPtr _adapter; ///< The UDP adapter for handling send/receive operations.
+        UDPAdapter _adapter;
         RType::Thread _thread = RType::Thread(); ///< Thread for asynchronous operations.
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         std::vector<std::string> _messageQueue;
         std::mutex _queueMutex;
+        ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
         int _clientID = -1;
         bool _connected = false;
         bool _stop = false;
@@ -104,6 +104,8 @@ namespace RType {
          * @param receiveMessage The received message.
          */
         void addMessageQueue(const Message& receiveMessage);
+
+        void handleDeconnection(const Message& receiveMessage);
     };
 
     /**

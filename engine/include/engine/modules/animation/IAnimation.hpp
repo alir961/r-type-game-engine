@@ -8,10 +8,14 @@
 #pragma once
 
 namespace RType {
+
     class IAnimation {
     public:
         virtual ~IAnimation() = default;
 
-        virtual sf::FloatRect update() = 0;
-    };;
+        virtual RectFloat update() = 0;
+    };
+
+    using AnimationPtr = std::shared_ptr<IAnimation>;
+
 }

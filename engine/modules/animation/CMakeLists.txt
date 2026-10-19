@@ -9,12 +9,31 @@ set_target_properties(animation_module PROPERTIES
 
 install(
         FILES
+        AAnimation.hpp
         AnimationModule.hpp
+        AnimationFactory.hpp
+        entity/PlayerAnimation.hpp
+        entity/BulletAnimation.hpp
+        entity/MonsterAnimation.hpp
+        entity/BulletStarshipAnimation.hpp
         DESTINATION
         include/animation_module
 )
 
-find_package(SFML COMPONENTS window graphics CONFIG REQUIRED)
-target_link_libraries(animation_module LINK_PRIVATE sfml-graphics sfml-window)
+if (WIN32)
+        set(SFML_STATIC_LIBRARIES TRUE)
+        set(SFML_DIR C:/SFML/lib/cmake/SFML)
+        find_package(SFML COMPONENTS window graphics REQUIRED)
 
-target_link_libraries(animation_module PRIVATE engine)
+        include_directories(C:/SFML/include)
+        target_link_libraries(animation_module
+                sfml-graphics
+                sfml-window
+                engine
+        )
+endif ()
+
+if (NOT WIN32)
+        find_package(SFML COMPONENTS window graphics CONFIG REQUIRED)
+        target_link_libraries(animation_module LINK_PRIVATE sfml-graphics sfml-window engine)
+endif()
