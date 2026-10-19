@@ -1,54 +1,56 @@
-# R-Type
+# R-Type — Networked Multiplayer Game Engine
 
-## Dependencies
+A from-scratch C++20 game engine and multiplayer shoot'em up inspired by the classic *R-Type*: an authoritative UDP server, a modular client engine with an Entity-Component-System, and runtime-loadable modules (graphics, sound, particles, animation, console).
 
-- C++20 or later
-- GNU Make
-- CMake
+> Team project (5 developers) — 3rd year at Epitech. See [My contribution](#my-contribution).
 
-## Installation
+## Highlights
 
-1. Clone repository
+- **Client / server architecture** over a custom binary **UDP protocol** (Asio), with a session manager and thread-safe message queues
+- **Entity-Component-System** with an entity manager and component abstraction, plus an abstract factory for game entities
+- **Pluggable engine modules** loaded and unloaded at runtime (`IModule`, `ModuleLoader`, `ModuleProvider`) — graphics, sound, particles, animation, console
+- **Network payload compression** behind a common interface: Huffman, RLE and LZ4 implementations
+- **State-driven client UI**: login, menu, options, game, pause, win/lose views with reusable widgets (buttons, text/number inputs, checkboxes)
+- Tooling: CMake + vcpkg, clang-format / clang-tidy, Doxygen documentation
 
-```shell
-git clone git@github.com:EpitechPromo2026/B-CPP-500-LYN-5-2-rtype-timothe.medico.git
+## Architecture
+
+```
+engine/   Shared core: ECS, networking (UDPAdapter, NetworkMessage), module system, thread-safe tools
+server/   Authoritative game server: UDPServer, SessionManager, GameLogic, EntityFactory, compression
+client/   Game client: UDPClient, view states, graphical entities, UI components, resource manager
+docs/     Protocol, packet format and ECS documentation
 ```
 
-2. Install vcpkg (for Archlinux)
+Design docs: [UDP protocol](docs/udpProtocol.md) · [Packet format](docs/packet.md) · [ECS](docs/ecs.md)
 
-```shell
-paru -S vcpkg
-```
+## Build
 
-```shell
-sudo gpasswd -a $USER vcpkg
-```
+Requirements: C++20 compiler, CMake, [vcpkg](https://vcpkg.io) (SFML, Asio).
 
-3. Install dependencies
-
-```shell
+```bash
 vcpkg install
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+cmake --build build
 ```
 
-> In case of permission issues: `sudo chown -R $USER:vcpkg /opt/vcpkg`
+Run:
 
-4. Prepare project compilation with cmake
-
-```shell
-cmake -S . -B build/out -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake
+```bash
+./build/server/r-type_server
+./build/client/r-type_client
 ```
 
-5. Compile project with make
+## My contribution
 
-```shell
-make -C build/out
-```
+Main contributor by commit count (100+ commits). I designed and built:
 
-> Binary paths:    
-> `build/out/client/r-type_client`  
-> `build/out/server/r-type_server`  
+- The **ECS** core (entity, component abstraction, entity manager) and the **entity abstract factory**
+- The **graphical module** (sprite / text / shape rendering API) and the graphical-entity system with a resource manager for textures and audio
+- The whole **client view-state system** (login, menu, options, game, pause, win/dead) and the UI component library
+- Runtime **module loading / unloading from the options screen**
+- Player / enemy concepts, health and score display, connection error handling, and the Doxygen documentation
 
-## Auteurs
+## Team
 
-| [<img src="https://github.com/alir961.png?size=85" width=85><br><sub>Ali RAAD</sub>](https://github.com/alir961) | [<img src="https://github.com/ArthurPcd.png?size=85" width=85><br><sub>Arthur PACAUD</sub>](https://github.com/ArthurPcd) | [<img src="https://github.com/Stickoman.png?size=85" width=85><br><sub>JumanJi Thomas</sub>](https://github.com/Stickoman) | [<img src="https://github.com/theoda74.png?size=85" width=85><br><sub>Théo D'AMORE</sub>](https://github.com/theoda74) | [<img src="https://github.com/Baragouin.png?size=85" width=85><br><sub>Timothé MEDICO</sub>](https://github.com/Baragouin) |   
-|:------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------:|
+Ali Raad · Arthur Pacaud · Joan Thomas · Théo D'Amore · Timothé Medico
