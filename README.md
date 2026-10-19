@@ -2,7 +2,7 @@
 
 A from-scratch C++20 game engine and multiplayer shoot'em up inspired by the classic *R-Type*: an authoritative UDP server, an Entity-Component-System shared by client and server, and runtime-loadable modules (graphics, sound, particles, animation, console).
 
-> Team project (5 developers) — 3rd year at Epitech. See [My contribution](#my-contribution).
+> Team project (3 developers) — 3rd year at Epitech. See [My contribution](#my-contribution).
 
 ## Highlights
 
@@ -67,4 +67,4 @@ Main contributor by commit count (100+ commits). I designed and built:
 
 ## Team
 
-Ali Raad · Arthur Pacaud · Joan Thomas · Théo D'Amore · Timothé Medico
+Ali Raad · Joan Thomas · Timothé Medico

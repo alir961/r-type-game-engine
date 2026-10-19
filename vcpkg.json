@@ -2,5 +2,6 @@
   "dependencies": [
     "sfml",
     "asio"
-  ]
+  ],
+  "builtin-baseline": "b2cb0da531c2f1f740045bfe7c4dac59f0b2b69c"
 }
