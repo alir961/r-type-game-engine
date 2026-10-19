@@ -1,9 +1,0 @@
-<map id="RType::GraphicEntity" name="RType::GraphicEntity">
-<area shape="rect" id="Node000001" title="Graphic Entity class from the abstract AGraphicEntity." alt="" coords="102,169,243,195"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1AGraphicEntity.html" title="Graphic Entity abstraction from the interface IGraphicEntity." alt="" coords="5,80,156,106"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,115,162,167,158,171,103,119"/>
-<area shape="rect" id="Node000003" href="$classRType_1_1IGraphicEntity.html" title="Graphic Entity interface." alt="" coords="8,5,153,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,46,83,80,78,80,78,46"/>
-<area shape="rect" id="Node000004" href="$classRType_1_1ResourceManager.html" title="Classe pour gérer les resources comme les textures et les sons." alt="" coords="180,80,349,106"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="242,119,187,171,183,167,239,115"/>
-</map>

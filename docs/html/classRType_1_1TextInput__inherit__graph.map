@@ -1,5 +1,0 @@
-<map id="RType::TextInput" name="RType::TextInput">
-<area shape="rect" id="Node000001" title="Represents an input box for entering text." alt="" coords="8,79,127,105"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1AInputBox.html" title="Abstract base class for input boxes in the RType game. This class provides a base for implementing in..." alt="" coords="5,5,130,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,46,70,79,65,79,65,46"/>
-</map>

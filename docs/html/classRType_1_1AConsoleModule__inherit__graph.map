@@ -1,5 +1,0 @@
-<map id="RType::AConsoleModule" name="RType::AConsoleModule">
-<area shape="rect" id="Node000001" title="Abstract class representing a console module for the game." alt="" coords="5,79,168,105"/>
-<area shape="rect" id="Node000002" href="$classRType_1_1IGameModule.html" title="Interface class for game module." alt="" coords="14,5,159,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,46,89,79,84,79,84,46"/>
-</map>

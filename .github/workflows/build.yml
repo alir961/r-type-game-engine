@@ -26,5 +26,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -D CMAKE_C_COMPILER="/bin/gcc" -D CMAKE_CXX_COMPILER="/bin/g++" -D CMAKE_CXX_COMPILER="/bin/make" -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake ..
+          cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake ..
           cmake --build .
