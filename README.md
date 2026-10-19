@@ -6,7 +6,7 @@ A from-scratch C++20 game engine and multiplayer shoot'em up inspired by the cla
 
 ## Highlights
 
-- **Client / server architecture** over a custom binary **UDP protocol** (Asio), with a session manager and thread-safe message queues
+- **Client / server architecture** over a custom binary **UDP protocol** (Asio): server session manager, client network thread feeding a message queue to the game loop
 - **Entity-Component-System** with an entity manager and component abstraction, plus an abstract factory for game entities
 - **Pluggable engine modules** loaded and unloaded at runtime (`IModule`, `ModuleLoader`, `ModuleProvider`) — graphics, sound, particles, animation, console
 - **Server-side collision and damage** resolved in the ECS (movement, screen bounds, projectile hits)
