@@ -28,3 +28,15 @@ jobs:
           cd build
           cmake -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake ..
           cmake --build .
+
+  unit-tests:
+    name: Engine unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build tests
+        run: |
+          cmake -S tests -B build/tests
+          cmake --build build/tests -j4
+      - name: Run tests
+        run: ctest --test-dir build/tests --output-on-failure

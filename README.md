@@ -1,6 +1,6 @@
 # R-Type — Networked Multiplayer Game Engine
 
-A from-scratch C++20 game engine and multiplayer shoot'em up inspired by the classic *R-Type*: an authoritative UDP server, a modular client engine with an Entity-Component-System, and runtime-loadable modules (graphics, sound, particles, animation, console).
+A from-scratch C++20 game engine and multiplayer shoot'em up inspired by the classic *R-Type*: an authoritative UDP server, an Entity-Component-System shared by client and server, and runtime-loadable modules (graphics, sound, particles, animation, console).
 
 > Team project (5 developers) — 3rd year at Epitech. See [My contribution](#my-contribution).
 
@@ -9,7 +9,7 @@ A from-scratch C++20 game engine and multiplayer shoot'em up inspired by the cla
 - **Client / server architecture** over a custom binary **UDP protocol** (Asio), with a session manager and thread-safe message queues
 - **Entity-Component-System** with an entity manager and component abstraction, plus an abstract factory for game entities
 - **Pluggable engine modules** loaded and unloaded at runtime (`IModule`, `ModuleLoader`, `ModuleProvider`) — graphics, sound, particles, animation, console
-- **Network payload compression** behind a common interface: Huffman, RLE and LZ4 implementations
+- **Server-side collision and damage** resolved in the ECS (movement, screen bounds, projectile hits)
 - **State-driven client UI**: login, menu, options, game, pause, win/lose views with reusable widgets (buttons, text/number inputs, checkboxes)
 - Tooling: CMake + vcpkg, clang-format / clang-tidy, Doxygen documentation
 
@@ -17,8 +17,9 @@ A from-scratch C++20 game engine and multiplayer shoot'em up inspired by the cla
 
 ```
 engine/   Shared core: ECS, networking (UDPAdapter, NetworkMessage), module system, thread-safe tools
-server/   Authoritative game server: UDPServer, SessionManager, GameLogic, EntityFactory, compression
+server/   Authoritative game server: UDPServer, SessionManager, GameLogic, EntityFactory
 client/   Game client: UDPClient, view states, graphical entities, UI components, resource manager
+tests/    GoogleTest unit tests for the ECS and engine tools (no SFML needed)
 docs/     Protocol, packet format and ECS documentation
 ```
 
@@ -41,6 +42,18 @@ Run:
 ./build/client/r-type_client
 ```
 
+## Tests
+
+The engine core has unit tests (ECS components, entity manager, movement, collisions and damage, thread-safe queue, string and number utilities). They build on their own, without SFML or vcpkg:
+
+```bash
+cmake -S tests -B build/tests
+cmake --build build/tests
+ctest --test-dir build/tests --output-on-failure
+```
+
+CI builds the game and runs these tests on every push.
+
 ## My contribution
 
 Main contributor by commit count (100+ commits). I designed and built:
@@ -50,6 +63,7 @@ Main contributor by commit count (100+ commits). I designed and built:
 - The whole **client view-state system** (login, menu, options, game, pause, win/dead) and the UI component library
 - Runtime **module loading / unloading from the options screen**
 - Player / enemy concepts, health and score display, connection error handling, and the Doxygen documentation
+- The engine unit tests (written later), which caught and fixed a movement bug: a missing `break` made every direction also apply the other three
 
 ## Team
 
