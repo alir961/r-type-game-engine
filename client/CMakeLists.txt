@@ -19,4 +19,8 @@ target_link_libraries(${PROJECT_NAME}_client PRIVATE
         sfml-audio
         engine
 )
+if (WIN32)
+    # The static OpenAL behind sfml-audio needs the Windows multimedia thread API
+    target_link_libraries(${PROJECT_NAME}_client PRIVATE avrt)
+endif()
 rtype_executable(${PROJECT_NAME}_client)
