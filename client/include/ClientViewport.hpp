@@ -162,6 +162,11 @@ namespace RType {
         void setupConsole();
 
         /**
+         * @return Music volume for the current screen (louder in game than in the menus)
+         */
+        [[nodiscard]] float musicVolume() const;
+
+        /**
          * @return "hostname:port" of the last connection attempt
          */
         [[nodiscard]] const std::string &getServerAddress() const { return _serverAddress; }

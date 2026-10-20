@@ -58,8 +58,16 @@ namespace RType {
         void loadModule(const std::string &moduleName) {
             const ModuleProviderPtr provider = ModuleProvider::getInstance();
 
-            if (stringToModuleType(moduleName) == ModuleType::SOUND) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::SOUND);
-            if (stringToModuleType(moduleName) == ModuleType::PARTICLE) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::PARTICLE);
+            // Each switch has a visible or audible effect right away, so the player knows it worked.
+            if (stringToModuleType(moduleName) == ModuleType::SOUND) {
+                provider->loadAndGetModule<RType::IModule>(RType::ModuleType::SOUND);
+                Audio::playMusic("music", _viewport.musicVolume());
+                Audio::play("ui_select", 60.0F);
+            }
+            if (stringToModuleType(moduleName) == ModuleType::PARTICLE) {
+                provider->loadAndGetModule<RType::IModule>(RType::ModuleType::PARTICLE);
+                Particles::explosion({ROW_X + CheckBox::WIDTH - 60.0F, 468.0F}, 1.2F);
+            }
             if (stringToModuleType(moduleName) == ModuleType::CONSOLE) {
                 provider->loadAndGetModule<RType::IModule>(RType::ModuleType::CONSOLE);
                 _viewport.setupConsole();
@@ -121,6 +129,9 @@ namespace RType {
             _particleModuleBox.draw();
             _soundModuleBox.draw();
             _back.draw();
+            // In game, drawDimmedGame already drew them.
+            if (!_inGame)
+                Particles::draw();
         }
 
     private:
@@ -132,9 +143,9 @@ namespace RType {
                                 24, Theme::TextDim, Theme::CENTER_X, 220.0F, Align::CENTER);
         CheckBox _consoleModuleBox = CheckBox(ROW_X, 300.0F, "Console", "Developer console: press F2 (libconsole_module.so)",
                                               _provider->get<IModule>(ModuleType::CONSOLE) != nullptr);
-        CheckBox _particleModuleBox = CheckBox(ROW_X, 420.0F, "Particle", "Explosions, sparks and engine trails (libparticle_module.so)",
+        CheckBox _particleModuleBox = CheckBox(ROW_X, 420.0F, "Particle", "Explosions, sparks and engine trails in game (libparticle_module.so)",
                                                _provider->get<IModule>(ModuleType::PARTICLE) != nullptr);
-        CheckBox _soundModuleBox = CheckBox(ROW_X, 540.0F, "Sound", "Sound effects and music (libsound_module.so)",
+        CheckBox _soundModuleBox = CheckBox(ROW_X, 540.0F, "Sound", "Music and sound effects (libsound_module.so)",
                                             _provider->get<IModule>(ModuleType::SOUND) != nullptr);
         Button _back; /**< Returns to the main menu or to the pause menu. */
         IGraphicalModule *_module = _provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);

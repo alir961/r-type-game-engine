@@ -19,6 +19,7 @@ RType::ClientViewport::ClientViewport() {
     _selectedView = std::make_shared<LoginView>(*this);
     setHandlers();
     loadOptionalModules();
+    Audio::playMusic("music", musicVolume());
 }
 
 void RType::ClientViewport::loadOptionalModules() {
@@ -240,13 +241,17 @@ void RType::ClientViewport::applyPendingView() {
     }
     _selectedView->setPlayerEntity(_playerEntity);
     _viewState = state;
-    // Music while a game runs (pause menus included), a jingle on game over, silence in the menus.
-    if (isInGame())
-        Audio::playMusic("music");
-    else
+    // Music everywhere (quieter in the menus), a jingle instead on game over.
+    if (state == ViewState::DEAD) {
         Audio::stopMusic();
-    if (state == ViewState::DEAD)
         Audio::play("game_over", 80.0F);
+    } else {
+        Audio::playMusic("music", musicVolume());
+    }
+}
+
+float RType::ClientViewport::musicVolume() const {
+    return isInGame() ? 45.0F : 25.0F;
 }
 
 void RType::ClientViewport::addGraphicEntity(const GraphicEntityPtr &entity) {
