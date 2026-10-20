@@ -163,10 +163,10 @@ Top contributor of the 3-person team: 120 of the 282 commits made during the pro
 
 **Later, for this portfolio version (2026)**
 
-- Engine **unit tests** (GoogleTest, no SFML needed) and CI fixes
+- **Tests and CI**: engine unit tests (GoogleTest, no SFML needed) and a headless **multiplayer integration test** that plays two clients over the real UDP protocol; CI builds the game and runs both on every push
 - **Visual and UX overhaul**: original procedurally generated pixel art (`tools/generate_assets.py`), per-entity animations (they used to share state), a redesigned keyboard- and mouse-friendly UI, an in-game HUD, a **How to play** guide and explosions
 - **Multiplayer networking fix**: the server sent every update to whichever client spoke last, so with two players each one lost most of its own ship's updates. It now keeps one address per player, flushes each player's queue once per tick from a fixed-rate loop, and locks the game state shared by the network and game threads. Every player now gets its own ship at 60 updates/s, with 4 players, using under 20% of one CPU core.
-- **Working sound, particle and console modules** (they were stubs), three **difficulty levels**, and gameplay fixes: ships no longer die at the screen edges, co-op players no longer kill each other, shots leave from the nose, and mouse coordinates, port input and connection-cancel bugs are fixed
+- **Working sound, particle and console modules** (they were stubs): generated music and sound effects, explosions, sparks and engine trails, and a developer console (hitboxes, FPS, live settings). Plus three **difficulty levels**, and gameplay fixes: ships no longer die at the screen edges, co-op players no longer kill each other, shots leave from the nose, and mouse coordinates, port input and connection-cancel bugs are fixed
 - **One-command install and launch** (`install.sh`, `play.sh`), with the dependency pins fixed so it builds on current compilers
 
 The networking layer, the authoritative server (session manager, game logic, compression) and the module loader were mainly written by Joan Thomas and Timothé Medico.
