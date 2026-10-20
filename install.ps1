@@ -51,10 +51,12 @@ if ($cmake) {
 
 Info 'Configuring (the first run builds SFML and its dependencies: several minutes)'
 $env:VCPKG_ROOT = $Vcpkg
-# Static SFML like on Linux, with the shared C runtime so the game and its module DLLs share one heap.
+# Static SFML like on Linux, with the shared C runtime so the game and its module DLLs share one heap
+# (triplets\x64-windows-static-md-release.cmake: release packages only, the game is built in Release).
 & $Cmake -S $Root -B $BuildDir `
     -DCMAKE_TOOLCHAIN_FILE="$Vcpkg\scripts\buildsystems\vcpkg.cmake" `
-    -DVCPKG_TARGET_TRIPLET=x64-windows-static-md
+    -DVCPKG_OVERLAY_TRIPLETS="$Root\triplets" `
+    -DVCPKG_TARGET_TRIPLET=x64-windows-static-md-release
 if ($LASTEXITCODE -ne 0) { Fail 'CMake configuration failed' }
 
 Info 'Building'

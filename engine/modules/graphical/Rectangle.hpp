@@ -40,7 +40,7 @@ namespace RType {
             shape.setOutlineThickness(_outlineThickness);
             sf::FloatRect rect = shape.getGlobalBounds();
 
-            return (RectFloat) {
+            return RectFloat{
                 .left = rect.left,
                 .top = rect.top,
                 .width = rect.width,

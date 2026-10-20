@@ -57,7 +57,7 @@ namespace RType {
         RectFloat getGlobalBounds() override {
             const sf::FloatRect bounds = buildText().getGlobalBounds();
 
-            return (RectFloat) {
+            return RectFloat{
                     .left = bounds.left,
                     .top = bounds.top,
                     .width = bounds.width,

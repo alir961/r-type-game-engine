@@ -55,7 +55,7 @@ namespace RType {
             applyTransform();
             const sf::FloatRect bounds = _sprite.getGlobalBounds();
 
-            return (RectFloat) {
+            return RectFloat{
                     .left = bounds.left,
                     .top = bounds.top,
                     .width = bounds.width,

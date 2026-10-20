@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: vcpkg-cache
-          key: vcpkg-windows-${{ hashFiles('vcpkg.json') }}
+          key: vcpkg-windows-${{ hashFiles('vcpkg.json', 'triplets/*') }}
       - name: Install dependencies and build
         shell: pwsh
         run: |
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: vcpkg-cache
-          key: vcpkg-windows-${{ hashFiles('vcpkg.json') }}
+          key: vcpkg-windows-${{ hashFiles('vcpkg.json', 'triplets/*') }}
       - name: Multiplayer integration test
         run: python tests/integration/multiplayer_test.py build/out/server/r-type_server.exe
       - name: Client starts and loads its modules
