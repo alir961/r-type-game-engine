@@ -106,7 +106,15 @@ Menus work with the mouse or with ↑/↓ and Enter. The **How to play** screen 
 
 ### Modules and developer console
 
-Sound, particles and the console are engine modules (`.so` files) that **Options** switches on and off while you play; the game keeps running without them. Press **F2** (or `` ` ``) on any screen to open the console:
+Sound, particles and the console are engine modules (`.so` files) that **Options** switches on and off while you play; the game keeps running without them, and each switch takes effect immediately:
+
+| Module | What it adds |
+| --- | --- |
+| Sound | Background music (quieter in the menus) and effects for shots, hits, explosions, menus and game over |
+| Particle | Explosions, hit sparks and engine trails behind every ship |
+| Console | The developer console below |
+
+The console is a debugging tool rather than part of the gameplay: it shows what the server sees (`hitbox` draws the real collision boxes), measures performance (`fps`, `status`) and changes settings without leaving the game. Press **F2** (or `` ` ``) on any screen to open it:
 
 | Command | Effect |
 | --- | --- |
