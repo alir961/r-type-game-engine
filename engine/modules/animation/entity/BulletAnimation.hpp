@@ -7,32 +7,20 @@
 
 #pragma once
 
-#include <array>
 #include "../AAnimation.hpp"
 
 namespace RType {
 
-    const float BULLET_WIDTH = 14.0F;
-    const float BULLET_HEIGHT = 14.0F;
+    constexpr float BULLET_WIDTH = 14.0F;
+    constexpr float BULLET_HEIGHT = 14.0F;
+    constexpr int BULLET_FRAMES = 4;
+    constexpr float BULLET_FRAME_DURATION = 0.06F;
 
-    constexpr std::array<float, 4> FRAMES = {101.0F, 118.0F, 135.0F, 152.0F};
-
+    /**
+     * @brief Pulsing plasma shot fired by players.
+     */
     class BulletAnimation : public AAnimation {
     public:
-        BulletAnimation(float startX, float startY) : AAnimation(startX, startY, BULLET_WIDTH, BULLET_HEIGHT) {}
-
-        RectFloat update() override {
-            RectFloat frame = getCurrentFrame();
-
-            if (_frameIndex == FRAMES.size() - 1)
-                _frameIndex = 0;
-            frame.left = FRAMES[_frameIndex];
-            _frameIndex++;
-            setCurrentFrame(frame);
-            return getCurrentFrame();
-        }
-
-    private:
-        int _frameIndex = 0;
+        BulletAnimation() : AAnimation(0.0F, BULLET_WIDTH, BULLET_HEIGHT, BULLET_FRAMES, BULLET_FRAME_DURATION) {}
     };
 }

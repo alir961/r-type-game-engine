@@ -24,7 +24,7 @@ namespace RType {
          * @param x X-coordinate of the input box.
          * @param y Y-coordinate of the input box.
          */
-        TextInput(int x, int y) : AInputBox(x, y, 15) {}
+        TextInput(int x, int y, size_t maxChars = 15, float width = 560.0F) : AInputBox(x, y, maxChars, width) {}
 
         /**
          * @brief Constructor for TextInput.
@@ -57,7 +57,8 @@ namespace RType {
          * @return True if the character is an alphabet letter, false otherwise.
          */
         [[nodiscard]] bool isValidInput(char inputChar) override {
-            return (std::isprint(inputChar) != 0);
+            // No spaces: the network protocol separates fields with spaces.
+            return (std::isgraph(static_cast<unsigned char>(inputChar)) != 0);
         }
     };
 }

@@ -2,78 +2,47 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** No file there , just an epitech header example
+** SoundModule.hpp
 */
 
 #pragma once
 
-#include <engine/modules/IModule.hpp>
-#include <SFML/Audio.hpp>
+#include <array>
 #include <map>
+#include <memory>
 #include <string>
-
+#include <SFML/Audio.hpp>
+#include "engine/modules/sound/ISoundModule.hpp"
 
 namespace RType {
 
-    struct SoundDetails {
-        std::string path;
-        float volume;
-    };
-
-    using SoundMap = std::map<int, SoundDetails>;
-
-    class SoundModule : public IModule {
+    /**
+     * @brief Sound module backed by SFML audio.
+     *
+     * Short sounds play on a fixed pool of voices so they can overlap; the music streams from disk.
+     */
+    class SoundModule : public ISoundModule {
     public:
+        static constexpr std::size_t VOICES = 32;
+
         void load() override;
         void unload() override;
 
-        /**
-         * @brief Loads a sound with the specified ID, file path, and volume.
-         * @param soundId The ID of the sound.
-         * @param soundPath The file path to the sound.
-         * @param volume The volume of the sound.
-         */
-        void loadSound(int soundId, const std::string &soundPath, float volume);
+        void playSound(const std::string &path, float volume) override;
+        void playMusic(const std::string &path, float volume) override;
+        void stopMusic() override;
+        void setVolume(float volume) override;
+        [[nodiscard]] float getVolume() const override;
 
-        /**
-         * @brief Plays the sound with the specified ID.
-         * @param soundId The ID of the sound to play.
-         */
-        void playSound(int soundId);
+    private:
+        std::map<std::string, sf::SoundBuffer> _buffers;
+        std::array<sf::Sound, VOICES> _voices;
+        sf::Music _music;
+        std::string _musicPath;
+        float _musicVolume = 100.0F;
+        float _volume = 70.0F;
 
-        /**
-         * @brief Plays all loaded sounds.
-         */
-        void playAllSounds();
-
-        /**
-         * @brief Plays the sound with the specified ID in a loop.
-         * @param soundId The ID of the sound to play in a loop.
-         */
-        void playLoopSound(int soundId);
-
-        /**
-         * @brief Stops the sound with the specified ID.
-         * @param soundId The ID of the sound to stop.
-         */
-        void stopSound(int soundId);
-
-        /**
-         * @brief Stops all playing sounds and returns their IDs.
-         * @return A vector containing the IDs of stopped sounds.
-         */
-        std::vector<int> stopAllSounds();
-
-        /**
-         * @brief Toggles the mute state of the sound module.
-         */
-        void toggleMute();
-
-        private:
-            bool _muted;
-            SoundMap _sounds;
-            std::map<int, sf::SoundBuffer> _soundBuffers;
-            std::vector<int> _failedStopIds;
+        const sf::SoundBuffer *getBuffer(const std::string &path);
     };
 
 }

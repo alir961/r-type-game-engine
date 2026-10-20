@@ -8,6 +8,8 @@
 #pragma once
 
 #include "AGraphicEntity.hpp"
+#include "../components/Ui.hpp"
+#include "../components/Effects.hpp"
 #include "engine/modules/ModuleProvider.hpp"
 #include <memory>
 
@@ -21,14 +23,32 @@ namespace RType {
         EntityPtr _entity; /**< Reference to the ECS _entity. */
         ModuleProviderPtr _provider = ModuleProvider::getInstance();
         IGraphicalModule *_module = _provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);
-        IAnimationModule *_animation = _provider->loadAndGetModule<IAnimationModule>(ModuleType::ANIMATION);
-        TextComponent _entityNameText = _module->createText("");
+        IAnimationModule *_animationModule = _provider->loadAndGetModule<IAnimationModule>(ModuleType::ANIMATION);
+        AnimationPtr _animation; /**< Animation owned by this entity only. */
+        std::string _animationName; /**< Entity type the animation was built for (e.g. "redPlayer"). */
+        Label _entityNameText = Label("", 22, Theme::Text, 0.0F, 0.0F, Align::CENTER);
+        RectShape _healthBackground = _module->createRectShape();
+        RectShape _healthFill = _module->createRectShape();
+        RectShape _hitbox = _module->createRectShape();
         SpriteComponent _entitySprite; /**< Sprite of the graphical _entity. */
         float _animationTime = 0.0F; /**< Animation time accumulator. */
-        float _animationSpeed = 0.1F; /**< Speed of the animation. */
+        float _hitFlashTime = 0.0F; /**< Remaining time of the red flash shown when hit. */
         int _initialHealth = 0;
+        int _lastHealth = 0;
+
+        /**
+         * @brief Rebuild the animation when the entity type changes (a player switching color).
+         */
+        void refreshAnimation();
+
+        /**
+         * @brief Engine exhaust for ships, sparks when hit.
+         */
+        void emitParticles(bool wasHit);
 
     public:
+        static inline bool showHitboxes = false; /**< Outline the server hitboxes (console command "hitbox"). */
+
         /**
          * @brief Construct a new Graphic Entity object.
          * @param entity Reference to the ECS _entity associated with this graphic _entity.
@@ -58,6 +78,11 @@ namespace RType {
         void moveDown() override;
 
         void drawHealthBar();
+
+        /**
+         * @brief Center of the entity on screen, used to place effects.
+         */
+        [[nodiscard]] Vector2f getCenter() const;
 
         /**
          * @brief get Entity.

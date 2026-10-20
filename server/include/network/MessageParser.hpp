@@ -22,6 +22,14 @@ namespace RType {
         GameLogic *_game;
         UDPAdapter *_adapter;
         SessionManager *_sessions;
+        UDP::endpoint _sender; /**< Address of the packet being handled. */
+
+        /**
+         * Find the session named in a message ("<type> <sessionID> ...") and record where it came from
+         *
+         * @return The session, or nullptr for an unknown or disconnected one
+         */
+        Session getSenderSession(const std::vector<std::string> &splitMessage);
 
         void handleConnectMessage(const Message &receiveMessage);
 
@@ -37,9 +45,10 @@ namespace RType {
 
         void handleTick(const RType::Message &receiveMessage);
 
+        void handleDifficulty(const RType::Message &receiveMessage);
+
         void handleDisconnect(const RType::Message &receiveMessage);
 
-        void sendMessage(MessageType type, const std::string_view &data);
 
     public:
         /**

@@ -2,48 +2,47 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** No file there , just an epitech header example
+** ConsoleModule.hpp
 */
 
 #pragma once
-#include <engine/modules/IModule.hpp>
-#include <vector>
+
+#include <map>
 #include <string>
+#include <vector>
+#include "engine/modules/console/IConsoleModule.hpp"
 
 namespace RType {
 
     using History = std::vector<std::string>;
 
-    class ConsoleModule : public IModule {
+    /**
+     * @brief Command registry with built-in "help" and "clear".
+     */
+    class ConsoleModule : public IConsoleModule {
     public:
+        static constexpr std::size_t MAX_HISTORY = 200;
+
         void load() override;
         void unload() override;
 
-        /**
-         * @brief Adds a message to the console history.
-         * @param message The message to add to the history.
-         */
-        void addToHistory(const std::string& message);
+        void registerCommand(const std::string &name, const std::string &help, ConsoleCommand command) override;
+        void execute(const std::string &line) override;
+        void print(const std::string &line) override;
+        [[nodiscard]] const History &getHistory() const override;
+        [[nodiscard]] const History &getTypedLines() const override;
+        [[nodiscard]] bool isOpen() const override;
+        void setOpen(bool open) override;
 
-        /**
-         * @brief Sets the current input for the console.
-         * @param input The input to set for the console.
-         */
-        void setInput(const std::string& input);
-
-        /**
-         * @brief Gets the console history.
-         * @return A const reference to the console history.
-         */
-        [[nodiscard]] const History& getHistory() const;
-
-        /**
-         * @brief Gets the current input for the console.
-         * @return A const reference to the current input.
-         */
-        [[nodiscard]] const std::string& getInput() const;
     private:
+        struct Command {
+            std::string help;
+            ConsoleCommand run;
+        };
+
+        std::map<std::string, Command> _commands;
         History _history;
-        std::string _input;
+        History _typedLines;
+        bool _open = false;
     };
 }

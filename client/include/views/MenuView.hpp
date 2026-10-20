@@ -8,7 +8,8 @@
 #pragma once
 
 #include "engine/modules/graphical/IGraphicalModule.hpp"
-#include "../components/ClickableText.hpp"
+#include "../components/Button.hpp"
+#include "../components/TitleBanner.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -21,63 +22,61 @@ namespace RType {
     public:
         /**
          * @brief Constructor for MenuView.
-         * @param window The SFML RenderWindow.
          * @param gameView The ClientViewport associated with the state.
          */
-        explicit MenuView(ClientViewport &gameView) : _viewport(gameView) {}
+        explicit MenuView(ClientViewport &gameView)
+                : _viewport(gameView),
+                  _signedIn("Signed in as " + gameView.getUsername() + "  •  " + gameView.getServerAddress(), 24,
+                            Theme::TextDim, Theme::CENTER_X, WINDOW_HEIGHT - 110.0F, Align::CENTER),
+                  _buttons(Theme::CENTER_X, 470.0F, {
+                          {"Play", [this] {
+                              _logger->debug("Choose the difficulty from menu");
+                              _viewport.setView(ViewState::DIFFICULTY);
+                          }},
+                          {"How to play", [this] {
+                              _logger->debug("Open the controls guide from menu");
+                              _viewport.setView(ViewState::HOWTOPLAY);
+                          }},
+                          {"Options", [this] {
+                              _logger->debug("Go to options from menu");
+                              _viewport.setView(ViewState::OPTIONS);
+                          }},
+                          {"Quit", [this] {
+                              _logger->debug("Quit game from menu");
+                              _viewport.closeConnectionToServer();
+                              _module->close();
+                          }},
+                  }) {}
 
-        /**
-         * @brief Handles user input for the menu.
-         */
-        void handleInput() {
-            _titleBox.handleInput();
-            _startBox.handleInput();
-            _optionsBox.handleInput();
-            _quitBox.handleInput();
-
-            if (_module->isMouseClicked()) {
-                if (_startBox.isClicked()) {
-                    _logger->debug("Start game from menu");
-                    _viewport.setView(ViewState::GAME);
-                } else if (_optionsBox.isClicked()) {
-                    _logger->debug("Go to options from menu");
-                    _viewport.setView(ViewState::OPTIONS);
-                } else if (_quitBox.isClicked()) {
-                    _logger->debug("Quit game from menu");
-                    _viewport.closeConnectionToServer();
-                    _module->close();
-                }
-            }
+        void handleEvent(const sf::Event &event) override {
+            _buttons.handleEvent(event);
         }
 
         /**
          * @brief Updates the menu state.
          */
         void update() override {
-            _startBox.update();
-            _optionsBox.update();
-            _quitBox.update();
+            _buttons.update();
         }
 
         /**
-         * @brief Draws the menu on the SFML RenderWindow.
-         * @param window The SFML RenderWindow on which to draw the menu.
+         * @brief Draws the menu.
          * @param graphicEntities A vector of shared pointers to AGraphicEntity objects.
          */
         void draw(std::vector<GraphicEntityPtr>) override {
-            _titleBox.draw();
-            _startBox.draw();
-            _optionsBox.draw();
-            _quitBox.draw();
-            handleInput();
+            _banner.draw();
+            _buttons.draw();
+            _signedIn.draw();
+            _hint.draw();
         }
 
     private:
-        ClickableText _titleBox = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "R Type"); /**< ClickableText for the game title. */
-        ClickableText _startBox = ClickableText(Color::Cyan, 20, 100.0f, 200.0f, "Start"); /**< ClickableText for starting the game. */
-        ClickableText _optionsBox = ClickableText(Color::Cyan, 20, 100.0f, 250.0f, "Options"); /**< ClickableText for accessing options. */
-        ClickableText _quitBox = ClickableText(Color::Cyan, 20, 100.0f, 300.0f, "Quit"); /**< ClickableText for quitting the game. */
         ClientViewport &_viewport; /**< The associated ClientViewport. */
         IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        TitleBanner _banner = TitleBanner("Networked multiplayer shoot'em up");
+        Label _signedIn;
+        Label _hint = Label("First time? Open \"How to play\" to learn the controls.   ↑ ↓ + Enter or mouse to navigate",
+                            22, Theme::TextDim, Theme::CENTER_X, WINDOW_HEIGHT - 70.0F, Align::CENTER);
+        ButtonList _buttons;
     };
 }

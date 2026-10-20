@@ -24,7 +24,7 @@ namespace RType {
          * @param x X-coordinate of the input box.
          * @param y Y-coordinate of the input box.
          */
-        NumberInput(int x, int y) : AInputBox(x, y, 15) {}
+        NumberInput(int x, int y, float width = 560.0F) : AInputBox(x, y, 5, width) {}
 
         /**
          * @brief Constructor for NumberInput.
@@ -33,7 +33,7 @@ namespace RType {
          * @param y Y-coordinate of the input box.
          * @param defaultValue Default value for the input box (optional, defaults to 0).
          */
-        NumberInput(int x, int y, int defaultValue) : AInputBox(x, y, 15) {
+        NumberInput(int x, int y, int defaultValue) : AInputBox(x, y, 5) {
             _text = std::to_string(defaultValue);
         }
 
@@ -57,7 +57,7 @@ namespace RType {
          * @return True if the character is a digit or '.', false otherwise.
          */
         [[nodiscard]] bool isValidInput(char inputChar) override {
-            return (std::isdigit(inputChar) == 1) || inputChar == '.';
+            return std::isdigit(static_cast<unsigned char>(inputChar)) != 0;
         }
     };
 

@@ -2,41 +2,45 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** No file there , just an epitech header example
+** ParticleModule.hpp
 */
 
 #pragma once
 
-#include <engine/modules/IModule.hpp>
+#include <random>
 #include <vector>
-#include <SFML/Graphics.hpp>
+#include "engine/modules/particle/IParticleModule.hpp"
 
 namespace RType {
 
     struct Particle {
-        sf::Vector2f position;
-        sf::Vector2f velocity;
-        sf::Color color;
-        float lifespan;
+        Vector2f position;
+        Vector2f velocity;
+        Color::RGB color;
+        float size;
+        float lifetime;  /**< Remaining time, in seconds. */
+        float duration;  /**< Total lifetime, to fade out and shrink. */
     };
 
-    class ParticleModule : public IModule {
+    /**
+     * @brief Simple particle system: particles fly, slow down, shrink and fade.
+     */
+    class ParticleModule : public IParticleModule {
     public:
+        static constexpr std::size_t MAX_PARTICLES = 4000;
+
         void load() override;
         void unload() override;
 
-        /**
-         * @brief Adds a particle to the particle module.
-         * @param particle The particle to add.
-         */
-        void addParticle(const Particle& particle);
-
-        /**
-         * @brief Updates all particles in the module.
-         */
-        void update();
+        void emit(const ParticleBurst &burst) override;
+        void update(float deltaTime) override;
+        [[nodiscard]] const std::vector<ColoredSquare> &getSquares() override;
+        void clear() override;
+        [[nodiscard]] std::size_t getCount() const override;
 
     private:
         std::vector<Particle> _particles;
+        std::vector<ColoredSquare> _squares; /**< Reused every frame, drawn in one call. */
+        std::mt19937 _random{std::random_device{}()};
     };
 }

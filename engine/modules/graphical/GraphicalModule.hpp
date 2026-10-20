@@ -19,6 +19,8 @@ namespace RType {
     class GraphicalModule : public IGraphicalModule {
     private:
         WindowPtr _window = nullptr;
+        bool _mousePressed = false;     /**< Left button state sampled this frame. */
+        bool _mouseWasPressed = false;  /**< Left button state of the previous frame. */
 
     public:
         void load() override;
@@ -39,6 +41,8 @@ namespace RType {
         Vector2f getMousePosition() override;
 
         bool isMouseClicked() override;
+
+        bool hasFocus() override;
 
         /**
          * @brief Draw a text in SFML.
@@ -89,5 +93,7 @@ namespace RType {
          * @param colorName The color we want to get into SFML.
          */
         sf::Color getColorFromString(const std::string &colorName) override;
+
+        void drawSquares(const std::vector<ColoredSquare> &squares) override;
     };
 }

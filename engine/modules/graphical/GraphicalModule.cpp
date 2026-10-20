@@ -5,6 +5,7 @@
 ** No file there , just an epitech header example
 */
 
+#include <algorithm>
 #include "GraphicalModule.hpp"
 #include "Text.hpp"
 #include "Rectangle.hpp"
@@ -23,8 +24,16 @@ void destroy(RType::GraphicalModule *library) {
 void RType::GraphicalModule::openWindow(uint32_t width, uint32_t height, std::string title) {
     if (_window != nullptr && _window->isOpen())
         _window->close();
-    _window = std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height), title);
+    // Keep the game in a fixed width x height world, but size the window to fit the screen.
+    const sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    const float fit = std::min({1.0F, desktop.width * 0.9F / width, desktop.height * 0.9F / height});
+    const sf::VideoMode mode(static_cast<unsigned>(width * fit), static_cast<unsigned>(height * fit));
+
+    _window = std::make_shared<sf::RenderWindow>(mode, title, sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
+    _window->setView(sf::View(sf::FloatRect(0.0F, 0.0F, static_cast<float>(width), static_cast<float>(height))));
+    _window->setPosition(sf::Vector2i(static_cast<int>(desktop.width - mode.width) / 2, static_cast<int>(desktop.height - mode.height) / 2));
     _window->setFramerateLimit(WINDOW_FPS);
+    _window->setKeyRepeatEnabled(false);
 }
 
 RType::TextComponent RType::GraphicalModule::createText(const std::string &text) {
@@ -111,6 +120,22 @@ sf::Color RType::GraphicalModule::getColorFromString(const std::string &colorNam
     return (it != colorMap.end()) ? it->second : sf::Color::White;
 }
 
+void RType::GraphicalModule::drawSquares(const std::vector<ColoredSquare> &squares) {
+    sf::VertexArray vertices(sf::Quads, squares.size() * 4);
+
+    for (std::size_t i = 0; i < squares.size(); i++) {
+        const auto &[center, size, color] = squares[i];
+        const float half = size / 2.0F;
+        const sf::Color sfColor(color.r, color.g, color.b, color.a);
+
+        vertices[i * 4] = sf::Vertex(sf::Vector2f(center.first - half, center.second - half), sfColor);
+        vertices[i * 4 + 1] = sf::Vertex(sf::Vector2f(center.first + half, center.second - half), sfColor);
+        vertices[i * 4 + 2] = sf::Vertex(sf::Vector2f(center.first + half, center.second + half), sfColor);
+        vertices[i * 4 + 3] = sf::Vertex(sf::Vector2f(center.first - half, center.second + half), sfColor);
+    }
+    _window->draw(vertices, sf::RenderStates(sf::BlendAdd));
+}
+
 void RType::GraphicalModule::close() {
     _window->close();
 }
@@ -120,7 +145,9 @@ bool RType::GraphicalModule::isOpen() {
 }
 
 void RType::GraphicalModule::clear() {
-    _window->clear();
+    _mouseWasPressed = _mousePressed;
+    _mousePressed = _window->hasFocus() && sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    _window->clear(sf::Color(6, 8, 22));
 }
 
 void RType::GraphicalModule::display() {
@@ -128,18 +155,37 @@ void RType::GraphicalModule::display() {
 }
 
 bool RType::GraphicalModule::pollEvent(sf::Event &event) {
-    //return _window->pollEvent(reinterpret_cast<sf::Event &>(event));
-    return _window->pollEvent(event);
+    if (!_window->pollEvent(event))
+        return false;
+    if (event.type == sf::Event::Resized) {
+        // Letterbox: keep the world's aspect ratio whatever the window shape.
+        sf::View view = _window->getView();
+        const float windowRatio = static_cast<float>(event.size.width) / static_cast<float>(event.size.height);
+        const float worldRatio = view.getSize().x / view.getSize().y;
+
+        if (windowRatio > worldRatio)
+            view.setViewport(sf::FloatRect((1.0F - worldRatio / windowRatio) / 2.0F, 0.0F, worldRatio / windowRatio, 1.0F));
+        else
+            view.setViewport(sf::FloatRect(0.0F, (1.0F - windowRatio / worldRatio) / 2.0F, 1.0F, windowRatio / worldRatio));
+        _window->setView(view);
+    }
+    return true;
 }
 
 RType::Vector2f RType::GraphicalModule::getMousePosition() {
-    const sf::Vector2i position = sf::Mouse::getPosition();
+    const sf::Vector2f position = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
 
-    return {position.x % WINDOW_WIDTH, position.y % WINDOW_HEIGHT};
+    return {position.x, position.y};
 }
 
 bool RType::GraphicalModule::isMouseClicked() {
-    return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    // Only the frame where the button goes down counts as a click, so a click
+    // that switches view doesn't also press whatever sits under the cursor next.
+    return _mousePressed && !_mouseWasPressed;
+}
+
+bool RType::GraphicalModule::hasFocus() {
+    return _window->hasFocus();
 }
 
 RType::RectShape RType::GraphicalModule::createRectShape() {

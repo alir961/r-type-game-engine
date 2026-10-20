@@ -10,60 +10,142 @@
 
 RType::ClientViewport::ClientViewport() {
     _graphicalModule->openWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "R-Type");
+    _menuBackground = std::make_unique<Background>(std::vector<std::string>{"client/assets/background/1.png",
+                                                                            "client/assets/background/2.png",
+                                                                            "client/assets/background/3.png",
+                                                                            "client/assets/background/4.png"},
+                                                   std::vector<float>{0.2F, 0.5F, 1.0F, 2.0F});
+    _console = std::make_unique<ConsoleOverlay>();
     _selectedView = std::make_shared<LoginView>(*this);
     setHandlers();
+    loadOptionalModules();
 }
 
-void RType::ClientViewport::handleGameInput() const {
+void RType::ClientViewport::loadOptionalModules() {
+    for (const ModuleType type: {ModuleType::SOUND, ModuleType::PARTICLE, ModuleType::CONSOLE}) {
+        try {
+            _provider->loadModule(type);
+        } catch (const std::exception &exception) {
+            _logger->warn(std::string("Optional module not loaded: ") + exception.what());
+        }
+    }
+    setupConsole();
+}
+
+void RType::ClientViewport::setupConsole() {
+    IConsoleModule *console = ConsoleOverlay::getConsole();
+    const auto onOff = [](bool value) { return std::string(value ? "on" : "off"); };
+
+    if (console == nullptr)
+        return;
+    console->registerCommand("fps", "show or hide the frame rate", [this, onOff](const std::vector<std::string> &) {
+        _showFps = !_showFps;
+        return "FPS counter " + onOff(_showFps);
+    });
+    console->registerCommand("hitbox", "outline the collision boxes used by the server", [onOff](const std::vector<std::string> &) {
+        GraphicEntity::showHitboxes = !GraphicEntity::showHitboxes;
+        return "Hitboxes " + onOff(GraphicEntity::showHitboxes);
+    });
+    console->registerCommand("volume", "volume [0-100]: show or set the master volume", [](const std::vector<std::string> &args) {
+        ISoundModule *sound = Audio::getModule();
+
+        if (sound == nullptr)
+            return std::string("The sound module is not loaded (Options)");
+        if (!args.empty())
+            sound->setVolume(std::stof(args[0]));
+        return "Volume " + std::to_string(static_cast<int>(sound->getVolume()));
+    });
+    console->registerCommand("difficulty", "difficulty easy|normal|hard: change it for everyone on the server", [this](const std::vector<std::string> &args) {
+        if (_client == nullptr)
+            return std::string("Not connected to a server");
+        if (args.empty())
+            return "Difficulty: " + _difficulty;
+        if (args[0] != "easy" && args[0] != "normal" && args[0] != "hard")
+            return std::string("Usage: difficulty easy|normal|hard");
+        requestDifficulty(args[0]);
+        return "Difficulty set to " + args[0];
+    });
+    console->registerCommand("particles", "number of live particles", [](const std::vector<std::string> &) {
+        IParticleModule *particles = Particles::getModule();
+
+        return particles == nullptr ? std::string("The particle module is not loaded (Options)")
+                                    : std::to_string(particles->getCount()) + " particles";
+    });
+    console->registerCommand("status", "connection and game state", [this](const std::vector<std::string> &) {
+        if (_client == nullptr)
+            return std::string("Not connected");
+        return "Server " + _serverAddress + ", player #" + std::to_string(_client->getClientID()) + ", " +
+               std::to_string(_graphicEntities.size()) + " entities on screen, difficulty " + _difficulty;
+    });
+    console->registerCommand("quit", "close the game", [this](const std::vector<std::string> &) {
+        _graphicalModule->close();
+        return std::string("Bye");
+    });
+}
+
+void RType::ClientViewport::drawFps() {
+    const float frameTime = _frameClock.restart().asSeconds();
+
+    _fps = _fps == 0.0F ? 1.0F / std::max(frameTime, 0.001F) : _fps * 0.95F + 0.05F / std::max(frameTime, 0.001F);
+    if (!_showFps)
+        return;
+    Label fps(std::to_string(static_cast<int>(_fps + 0.5F)) + " FPS", 24, Theme::Success, Theme::CENTER_X, 14.0F, Align::CENTER);
+    fps.draw();
+}
+
+void RType::ClientViewport::handleGameInput() {
+    using Key = sf::Keyboard;
+    constexpr float SHOOT_COOLDOWN = 0.12F;
     char buffer[100];
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    if (!_graphicalModule->hasFocus() || ConsoleOverlay::isOpen())
+        return;
+    if (Key::isKeyPressed(Key::Right) || Key::isKeyPressed(Key::D)) {
         sprintf(buffer, "move_right %d\n", _client->getClientID());
         _client->sendMessage(MessageType::MOVE_RIGHT, buffer);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    if (Key::isKeyPressed(Key::Left) || Key::isKeyPressed(Key::A) || Key::isKeyPressed(Key::Q)) {
         sprintf(buffer, "move_left %d\n", _client->getClientID());
         _client->sendMessage(MessageType::MOVE_LEFT, buffer);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    if (Key::isKeyPressed(Key::Up) || Key::isKeyPressed(Key::W) || Key::isKeyPressed(Key::Z)) {
         sprintf(buffer, "move_up %d\n", _client->getClientID());
         _client->sendMessage(MessageType::MOVE_UP, buffer);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    if (Key::isKeyPressed(Key::Down) || Key::isKeyPressed(Key::S)) {
         sprintf(buffer, "move_down %d\n", _client->getClientID());
         _client->sendMessage(MessageType::MOVE_DOWN, buffer);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-        sprintf(buffer, "color %d\n", _client->getClientID());
-        _client->sendMessage(MessageType::PLAYER_COLOR, buffer);
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (Key::isKeyPressed(Key::Space) && _shootClock.getElapsedTime().asSeconds() >= SHOOT_COOLDOWN) {
         sprintf(buffer, "bulletPlayer %d\n", _client->getClientID());
         _client->sendMessage(MessageType::SHOOT, buffer);
+        _shootClock.restart();
     }
 }
 
-void RType::ClientViewport::basicInput() {
-    if (_viewState == ViewState::OPTIONS) {
-        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::BackSpace) {
-            _logger->debug("Return key pressed in OPTIONS state");
-            setView(ViewState::MENU);
-        }
-    } else if (_viewState == ViewState::GAME) {
-        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
-            _logger->debug("Return key pressed in GAME state");
-            setView(ViewState::PAUSE);
-        }
-    } else if (_viewState == ViewState::PAUSE) {
-        if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape) {
-            _logger->debug("Return key pressed in PAUSE state");
-            setView(ViewState::GAME);
-        }
+void RType::ClientViewport::handleGameEvent(const sf::Event &event) {
+    char buffer[100];
+
+    // One color change per key press, not one per frame while the key is held.
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::C) {
+        sprintf(buffer, "color %d\n", _client->getClientID());
+        _client->sendMessage(MessageType::PLAYER_COLOR, buffer);
+    }
+}
+
+bool RType::ClientViewport::isInGame() const {
+    switch (_viewState) {
+        case ViewState::GAME:
+        case ViewState::PAUSE:
+        case ViewState::OPTIONSGAME:
+        case ViewState::HOWTOPLAYGAME:
+            return _client != nullptr;
+        default:
+            return false;
     }
 }
 
@@ -77,23 +159,43 @@ void RType::ClientViewport::launchWindow() {
                 closeConnectionToServer();
                 return;
             }
-            basicInput();
+            // An open console takes the keyboard.
+            if (_console->handleEvent(_event))
+                continue;
+            if (_viewState == ViewState::GAME)
+                handleGameEvent(_event);
+            _selectedView->handleEvent(_event);
+            applyPendingView();
         }
-        if (_viewState == ViewState::GAME) {
+        // The server keeps simulating while the pause menu is open, so stay in sync.
+        if (isInGame()) {
             char buffer[100];
             handleMessageFromServer();
-            handleGameInput();
+            if (_viewState == ViewState::GAME)
+                handleGameInput();
             sprintf(buffer, "tick %d\n", _client->getClientID());
             _client->sendMessage(MessageType::TICK, buffer);
         }
         updateEntities(fixedTimeStep);
         _selectedView->update();
         draw();
+        applyPendingView();
     }
     _logger->info("Exit game");
 }
 
 void RType::ClientViewport::setView(ViewState state) {
+    // Views call this from their own methods: switching right away would destroy
+    // the view while it is still running, so the switch happens at the next safe point.
+    _pendingView = state;
+}
+
+void RType::ClientViewport::applyPendingView() {
+    if (!_pendingView.has_value())
+        return;
+    const ViewState state = *_pendingView;
+
+    _pendingView.reset();
     switch (state) {
         case ViewState::MENU:
             _selectedView = std::make_shared<MenuView>(*this);
@@ -105,11 +207,14 @@ void RType::ClientViewport::setView(ViewState state) {
             _selectedView = std::make_shared<OptionsView>(*this, true);
             break;
         case ViewState::GAME:
-            char buffer[50];
+            _selectedView = std::make_shared<GameView>(*this, _explosions);
+            // Coming back from the pause menu must not respawn the player.
+            if (!isInGame()) {
+                char buffer[50];
 
-            _selectedView = std::make_shared<GameView>(_client->getUsername());
-            sprintf(buffer, "player %d %s\n", _client->getClientID(), _client->getUsername().c_str());
-            _client->sendMessage(MessageType::PLAYER_NAME, buffer);
+                sprintf(buffer, "player %d %s\n", _client->getClientID(), _client->getUsername().c_str());
+                _client->sendMessage(MessageType::PLAYER_NAME, buffer);
+            }
             break;
         case ViewState::PAUSE:
             _selectedView = std::make_shared<PauseView>(*this);
@@ -123,9 +228,25 @@ void RType::ClientViewport::setView(ViewState state) {
         case ViewState::DEAD:
             _selectedView = std::make_shared<WinDeadView>(*this);
             break;
+        case ViewState::HOWTOPLAY:
+            _selectedView = std::make_shared<HowToPlayView>(*this);
+            break;
+        case ViewState::HOWTOPLAYGAME:
+            _selectedView = std::make_shared<HowToPlayView>(*this, true);
+            break;
+        case ViewState::DIFFICULTY:
+            _selectedView = std::make_shared<DifficultyView>(*this);
+            break;
     }
     _selectedView->setPlayerEntity(_playerEntity);
     _viewState = state;
+    // Music while a game runs (pause menus included), a jingle on game over, silence in the menus.
+    if (isInGame())
+        Audio::playMusic("music");
+    else
+        Audio::stopMusic();
+    if (state == ViewState::DEAD)
+        Audio::play("game_over", 80.0F);
 }
 
 void RType::ClientViewport::addGraphicEntity(const GraphicEntityPtr &entity) {
@@ -146,22 +267,48 @@ sf::Event RType::ClientViewport::getEvent() const {
 }
 
 void RType::ClientViewport::connectToServer(const std::string &hostname, int port, std::string username) {
-    _logger->warn("Connection attempt to server " + hostname + ":" + std::to_string(port));
+    _serverAddress = hostname + ":" + std::to_string(port);
+    _logger->warn("Connection attempt to server " + _serverAddress);
     _client = std::make_shared<RType::UDPClient>(hostname, port, username, WINDOW_WIDTH, WINDOW_HEIGHT);
+}
+
+void RType::ClientViewport::requestDifficulty(const std::string &difficulty) {
+    char buffer[100];
+
+    if (_client == nullptr)
+        return;
+    sprintf(buffer, "difficulty %d %s\n", _client->getClientID(), difficulty.c_str());
+    _client->sendMessage(MessageType::DIFFICULTY, buffer);
+    _difficulty = difficulty;
 }
 
 void RType::ClientViewport::closeConnectionToServer() {
     _client = nullptr;
+    _playerEntity = nullptr;
+    _graphicEntities.clear();
+    _explosions.clear();
 }
 
 void RType::ClientViewport::updateEntities(float deltaTime) {
     for (const auto &entity: _graphicEntities)
         entity->update(deltaTime);
+    for (const auto &explosion: _explosions)
+        explosion->update(deltaTime);
+    std::erase_if(_explosions, [](const ExplosionPtr &explosion) { return explosion->isFinished(); });
+    if (IParticleModule *particles = Particles::getModule())
+        particles->update(deltaTime);
 }
 
 void RType::ClientViewport::draw() {
     _graphicalModule->clear();
+    // The game view draws its own background; every menu shares the starfield.
+    if (_viewState != ViewState::GAME) {
+        _menuBackground->update(1.F / WINDOW_FPS);
+        _menuBackground->draw();
+    }
     _selectedView->draw(_graphicEntities);
+    drawFps();
+    _console->draw();
     _graphicalModule->display();
 }
 
@@ -201,15 +348,26 @@ void RType::ClientViewport::setHandlers() {
     _handlers["static"] = [this](const std::vector<std::string> &splitMessage) { staticEntity(splitMessage); };
     _handlers["starship"] = [this](const std::vector<std::string> &splitMessage) { starship(splitMessage); };
     _handlers["bulletStarship"] = [this](const std::vector<std::string> &splitMessage) { bulletStarship(splitMessage); };
+    _handlers["difficulty"] = [this](const std::vector<std::string> &splitMessage) {
+        if (splitMessage.size() >= 2)
+            _difficulty = splitMessage[1];
+    };
 }
 
 void RType::ClientViewport::changePlayerColor(const std::vector<std::string> &splitMessage) {
-    int sessionID = std::stoi(splitMessage[1]);
-    std::string color = splitMessage[2];
+    const std::string sessionID = splitMessage[1];
+    const std::string &color = splitMessage[2];
 
-    char buffer[100];
-    sprintf(buffer, "%sPlayer %d", color.c_str(), sessionID);
-    _playerEntity->getEntity()->setEntityName(buffer);
+    // Rename the ship of whoever changed color (not always ours); its sprite follows the name.
+    for (const auto &graphicEntity: _graphicEntities) {
+        const EntityPtr &entity = graphicEntity->getEntity();
+        const std::vector<std::string> name = Split::split(entity->getEntityName(), " \n");
+
+        if (name.size() == 2 && name[0].ends_with("Player") && name[1] == sessionID) {
+            entity->setEntityName(color + "Player " + sessionID);
+            return;
+        }
+    }
 }
 
 void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) {
@@ -226,13 +384,22 @@ void RType::ClientViewport::death(const std::vector<std::string> &splitMessage) 
     graphicEntity = getGraphicEntityByName(entityName);
     if (graphicEntity == nullptr) return;
     entity = graphicEntity->getEntity();
-    if (_playerEntity == nullptr) {
-        setView(ViewState::DEAD);
-        return;
+    // Ships and monsters blow up; shots leave a few sparks where they hit.
+    const auto center = std::dynamic_pointer_cast<GraphicEntity>(graphicEntity)->getCenter();
+    if (!entityName.starts_with("bullet")) {
+        const auto &[sizeX, sizeY] = entity->getComponent<SizeComponent>()->getSize();
+        const float width = sizeX * entity->getComponent<SizeRectComponent>()->getSize().first;
+
+        _explosions.push_back(std::make_shared<Explosion>(center, std::max(1.5F, width / 30.0F)));
+        Particles::explosion(center, std::max(1.0F, width / 70.0F));
+        Audio::play("explosion", graphicEntity == _playerEntity ? 100.0F : 55.0F);
+    } else if (center.first > 20.0F && center.first < static_cast<float>(WINDOW_WIDTH) - 60.0F) {
+        Particles::sparks(center, entityName.starts_with("bulletPlayer") ? Color::RGB{120, 220, 255, 255} : Color::RGB{255, 140, 60, 255}, 6);
     }
-    if (entityName == _playerEntity->getEntity()->getEntityName()) {
+    if (_playerEntity != nullptr && graphicEntity == _playerEntity) {
         _client->setHealth(_playerEntity->getEntity()->getComponent<HealthComponent>()->getHealth());
         _client->setScore(_playerEntity->getEntity()->getComponent<PlayerComponent>()->getScore());
+        _playerEntity = nullptr;
         setView(ViewState::DEAD);
     }
     destroyGraphicEntity(graphicEntity);
@@ -335,6 +502,7 @@ void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMe
     std::string name = splitMessage[18];
     int score = std::stoi(splitMessage[20]);
     EntityPtr starshipEntity = getGraphicEntityByName(color + " " + std::to_string(sessionID))->getEntity();
+    const int previousHealth = starshipEntity->getComponent<RType::HealthComponent>()->getHealth();
 
     starshipEntity->getComponent<RType::SpeedComponent>()->setSpeed(speed);
     starshipEntity->getComponent<RType::HealthComponent>()->setHealth(health);
@@ -346,6 +514,8 @@ void RType::ClientViewport::updatePlayer(const std::vector<std::string> &splitMe
     if (sessionID == _client->getClientID()) {
         _client->setScore(score);
         _client->setHealth(health);
+        if (health < previousHealth)
+            Audio::play("hit", 80.0F);
     }
 }
 
@@ -398,6 +568,7 @@ void RType::ClientViewport::createNewBulletPlayer(const std::vector<std::string>
     bulletEntity->setEntityName(entityName);
     graphicBullet = GraphicEntityFactory::createBullet(bulletEntity, "bulletPlayer");
     addGraphicEntity(graphicBullet);
+    Audio::play("shoot", sessionID == _client->getClientID() ? 30.0F : 10.0F);
 }
 
 void RType::ClientViewport::disconnect(const std::vector<std::string> &splitMessage) {
@@ -574,6 +745,7 @@ void RType::ClientViewport::createNewStarshipBullet(const std::vector<std::strin
     bulletEntity->setEntityName(entityName);
     graphicBullet = GraphicEntityFactory::createBulletStarship(bulletEntity, "bulletStarship");
     addGraphicEntity(graphicBullet);
+    Audio::play("enemy_shoot", 25.0F);
 }
 
 void RType::ClientViewport::updateStarshipBullet(const std::vector<std::string> &splitMessage) {

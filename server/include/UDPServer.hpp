@@ -26,7 +26,7 @@ namespace RType {
          * @param ioContext The context of the server
          * @param endpoint The connection endpoint to the server
          */
-        UDPServer(uint16_t port);
+        UDPServer(uint16_t port, Difficulty difficulty = Difficulty::NORMAL);
 
         /**
          * Stop the server and close the socket

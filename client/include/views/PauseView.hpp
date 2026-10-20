@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../components/ClickableText.hpp"
+#include "../components/Button.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -15,73 +15,73 @@ namespace RType {
     /**
      * @brief Represents the pause menu state in the game.
      *
-     * This class provides functionality for handling user input, updating the state,
-     * and drawing elements related to the pause menu.
+     * The server keeps simulating while this menu is open (other players may still be playing).
      */
     class PauseView : public IView {
     public:
         /**
          * @brief Constructs the PauseView.
          *
-         * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
          */
-        explicit PauseView(ClientViewport &gameView) : _viewport(gameView) {}
+        explicit PauseView(ClientViewport &gameView)
+                : _viewport(gameView),
+                  _buttons(Theme::CENTER_X, 400.0F, {
+                          {"Resume", [this] {
+                              _logger->debug("Return to game from pause");
+                              _viewport.setView(ViewState::GAME);
+                          }},
+                          {"How to play", [this] {
+                              _logger->debug("Open the controls guide from pause");
+                              _viewport.setView(ViewState::HOWTOPLAYGAME);
+                          }},
+                          {"Options", [this] {
+                              _logger->debug("Open options from pause");
+                              _viewport.setView(ViewState::OPTIONSGAME);
+                          }},
+                          {"Main menu", [this] {
+                              _logger->debug("Return to menu from pause");
+                              _viewport.setView(ViewState::MENU);
+                          }},
+                  }) {}
 
         /**
-         * @brief Handles user input for the pause menu.
+         * @brief Esc resumes, arrows + Enter pick an entry.
          */
-        void handleInput() {
-            _title.handleInput();
-            _mainMenu.handleInput();
-            _resume.handleInput();
-            _options.handleInput();
-
-            if (_module->isMouseClicked()) {
-                if (_mainMenu.isClicked()) {
-                    _logger->debug("Return to menu from pause");
-                    _viewport.setView(ViewState::MENU);
-                }
-                if (_resume.isClicked()) {
-                    _logger->debug("Return to game from pause");
-                    _viewport.setView(ViewState::GAME);
-                }
-                if (_options.isClicked()) {
-                    _logger->debug("Open options from pause");
-                    _viewport.setView(ViewState::OPTIONSGAME);
-                }
+        void handleEvent(const sf::Event &event) override {
+            if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Escape || event.key.code == sf::Keyboard::P)) {
+                _viewport.setView(ViewState::GAME);
+                return;
             }
+            _buttons.handleEvent(event);
         }
 
         /**
          * @brief Updates the pause menu state.
          */
         void update() override {
-            _mainMenu.update();
-            _resume.update();
-            _options.update();
+            _buttons.update();
         }
 
         /**
-         * @brief Draws elements of the pause menu on the screen.
+         * @brief Draws the pause menu over the dimmed game.
          *
-         * @param window Reference to the SFML render window.
          * @param entities A vector of shared pointers to graphic entities.
          */
-        void draw(std::vector<GraphicEntityPtr>) override {
+        void draw(std::vector<GraphicEntityPtr> entities) override {
+            drawDimmedGame(entities);
+            _panel.draw();
             _title.draw();
-            _mainMenu.draw();
-            _resume.draw();
-            _options.draw();
-            handleInput();
+            _buttons.draw();
+            _note.draw();
         }
 
     private:
-        ClickableText _title = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0F, 50.0F, "Pause"); /**< ClickableText for the title. */
-        ClickableText _resume = ClickableText(Color::Cyan, 20, 500.0F, 195.0F, "Resume"); /**< ClickableText for resume. */
-        ClickableText _options = ClickableText(Color::Cyan, 20, 500.0F, 245.0F, "Options"); /**< ClickableText to go options. */
-        ClickableText _mainMenu = ClickableText(Color::Cyan, 20, 500.0F, 295.0F, "Exit To Main Menu"); /**< ClickableText for the menu. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
-        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+        Panel _panel = Panel(Theme::CENTER_X - 320.0F, 230.0F, 640.0F, 590.0F);
+        Label _title = Label("PAUSED", 64, Theme::Accent, Theme::CENTER_X, 262.0F, Align::CENTER);
+        Label _note = Label("Online game: enemies and other players keep moving.   Esc to resume", 22, Theme::TextDim,
+                            Theme::CENTER_X, 890.0F, Align::CENTER);
+        ButtonList _buttons;
     };
 }

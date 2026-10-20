@@ -43,6 +43,8 @@ namespace RType {
 
         virtual bool isMouseClicked() = 0;
 
+        virtual bool hasFocus() = 0;
+
         /**
          * @brief Draw a text in SFML.
          * @param window, text The window where to draw, the text we want to display.
@@ -92,5 +94,10 @@ namespace RType {
          * @param colorName The color we want to get into SFML.
          */
         virtual sf::Color getColorFromString(const std::string &colorName) = 0;
+
+        /**
+         * @brief Draw many squares in a single call (particles), blended additively so they glow.
+         */
+        virtual void drawSquares(const std::vector<ColoredSquare> &squares) = 0;
     };
 }

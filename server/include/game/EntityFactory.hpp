@@ -34,8 +34,8 @@ namespace RType {
 
             playerEntity->addComponent<SpeedComponent>(10);
             playerEntity->addComponent<HealthComponent>(4200);
-            playerEntity->addComponent<PositionComponent>(std::make_pair(300, 30));
-            playerEntity->addComponent<SizeComponent>(2.0f, 2.0f);
+            playerEntity->addComponent<PositionComponent>(std::make_pair(150, 650));
+            playerEntity->addComponent<SizeComponent>(3.0f, 3.0f);
             playerEntity->addComponent<PlayerComponent>(true);
             playerEntity->addComponent<SizeRectComponent>(33.0f, 15.0f);
             playerEntity->getComponent<PlayerComponent>()->setUserName(playerName);
@@ -54,7 +54,7 @@ namespace RType {
             bulletEntity->addComponent<RType::SpeedComponent>(10);
             bulletEntity->addComponent<RType::DamageComponent>(150);
             bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
-            bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+            bulletEntity->addComponent<RType::SizeComponent>(2.0f, 2.0f);
             bulletEntity->addComponent<SizeRectComponent>(14.0f, 14.0f);
             return bulletEntity;
         }
@@ -70,7 +70,7 @@ namespace RType {
             monsterEntity->addComponent<RType::SpeedComponent>(2);
             monsterEntity->addComponent<RType::HealthComponent>(500);
             monsterEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
-            monsterEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+            monsterEntity->addComponent<RType::SizeComponent>(2.0f, 2.0f);
             monsterEntity->addComponent<SizeRectComponent>(33.0f, 33.0f);
             return monsterEntity;
         }
@@ -94,7 +94,7 @@ namespace RType {
             starshipEntity->addComponent<SpeedComponent>(5);
             starshipEntity->addComponent<HealthComponent>(3000);
             starshipEntity->addComponent<PositionComponent>(std::make_pair(startX, startY));
-            starshipEntity->addComponent<SizeComponent>(2.0f, 2.0f);
+            starshipEntity->addComponent<SizeComponent>(3.0f, 3.0f);
             starshipEntity->addComponent<SizeRectComponent>(32.0f, 22.0f);
             return starshipEntity;
         }
@@ -105,7 +105,7 @@ namespace RType {
             bulletEntity->addComponent<RType::SpeedComponent>(7);
             bulletEntity->addComponent<RType::DamageComponent>(300);
             bulletEntity->addComponent<RType::PositionComponent>(std::make_pair(startX, startY));
-            bulletEntity->addComponent<RType::SizeComponent>(1.0f, 1.0f);
+            bulletEntity->addComponent<RType::SizeComponent>(1.5f, 1.5f);
             bulletEntity->addComponent<SizeRectComponent>(32.0f, 28.0f);
             return bulletEntity;
         }

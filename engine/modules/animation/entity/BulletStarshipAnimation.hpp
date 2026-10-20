@@ -7,32 +7,20 @@
 
 #pragma once
 
-#include <array>
 #include "../AAnimation.hpp"
 
 namespace RType {
 
-    const float BULLET_STARSHIP_WIDTH = 32.0F;
-    const float BULLET_STARSHIP_HEIGHT = 28.0F;
+    constexpr float BULLET_STARSHIP_WIDTH = 32.0F;
+    constexpr float BULLET_STARSHIP_HEIGHT = 28.0F;
+    constexpr int BULLET_STARSHIP_FRAMES = 4;
+    constexpr float BULLET_STARSHIP_FRAME_DURATION = 0.08F;
 
-    constexpr std::array<float, 3> BULLET_STARSHIP_FRAMES = {1.0F, 35.0F, 69.0F};
-
+    /**
+     * @brief Fireball shot fired by enemy starships.
+     */
     class BulletStarshipAnimation : public AAnimation {
     public:
-        BulletStarshipAnimation(float startX, float startY) : AAnimation(startX, startY, BULLET_STARSHIP_WIDTH, BULLET_STARSHIP_HEIGHT) {}
-
-        RectFloat update() override {
-            RectFloat frame = getCurrentFrame();
-
-            if (_frameIndex == BULLET_STARSHIP_FRAMES.size() - 1)
-                _frameIndex = 0;
-            frame.left = BULLET_STARSHIP_FRAMES[_frameIndex];
-            _frameIndex++;
-            setCurrentFrame(frame);
-            return getCurrentFrame();
-        }
-
-    private:
-        int _frameIndex = 0;
+        BulletStarshipAnimation() : AAnimation(0.0F, BULLET_STARSHIP_WIDTH, BULLET_STARSHIP_HEIGHT, BULLET_STARSHIP_FRAMES, BULLET_STARSHIP_FRAME_DURATION) {}
     };
 }

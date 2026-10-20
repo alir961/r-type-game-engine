@@ -8,10 +8,13 @@
 #pragma once
 
 
+#include <deque>
 #include <iostream>
 #include <mutex>
+#include <vector>
 #include <engine/ecs/Entity.hpp>
 #include <engine/network/NetworkMessage.hpp>
+#include <engine/network/UDPAdapter.hpp>
 
 namespace RType {
 
@@ -22,7 +25,8 @@ namespace RType {
         float _windowWidth;
         float _windowHeight;
         std::string _color = "turquoise";
-        std::vector<Message> _messageQueue;
+        std::deque<Message> _messageQueue;
+        UDP::endpoint _endpoint; /**< Where this player's packets come from, and where its updates go. */
         std::mutex _queueMutex;
         int _lastBulletID = 0;
 
@@ -40,6 +44,15 @@ namespace RType {
         void addMessage(const Message &message);
 
         Message getLastMessage();
+
+        /**
+         * @brief Take every queued message at once (used to flush them at the end of a tick).
+         */
+        std::deque<Message> takeMessages();
+
+        void setEndpoint(const UDP::endpoint &endpoint) {_endpoint = endpoint;};
+
+        [[nodiscard]] const UDP::endpoint &getEndpoint() const {return _endpoint;};
 
         void setNextColor() {
             if (_color == "turquoise")

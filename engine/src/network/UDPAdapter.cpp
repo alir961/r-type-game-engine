@@ -23,9 +23,19 @@ void RType::UDPAdapter::sendData(const asio::const_buffer &data) {
 }
 
 void RType::UDPAdapter::sendData(const RType::Message &message) {
-    std::vector<std::byte> data = message.serialize();
+    sendTo(message, _remoteEndpoint);
+}
 
-    _socket.async_send_to(asio::buffer(data), _remoteEndpoint, errorFunction);
+void RType::UDPAdapter::sendTo(const RType::Message &message, const UDP::endpoint &endpoint) {
+    // The buffer must outlive the asynchronous send, and the socket is only touched
+    // from the thread running the io_context (sends can come from the game thread).
+    auto data = std::make_shared<std::vector<std::byte>>(message.serialize());
+
+    asio::post(_ioContext, [this, data, endpoint] {
+        _socket.async_send_to(asio::buffer(*data), endpoint, [data](const asio::error_code &error, std::size_t bytes) {
+            errorFunction(error, bytes);
+        });
+    });
 }
 
 void RType::UDPAdapter::receiveData(ReceiveCallback callback) {

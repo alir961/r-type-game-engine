@@ -9,6 +9,10 @@
 
 #include "views/IView.hpp"
 #include "UDPClient.hpp"
+#include "components/Background.hpp"
+#include "entities/Explosion.hpp"
+#include "components/Effects.hpp"
+#include "components/ConsoleOverlay.hpp"
 #include "engine/modules/logger/ILoggerModule.hpp"
 #include <engine/modules/animation/IAnimationModule.hpp>
 #include <engine/modules/ModuleProvider.hpp>
@@ -16,6 +20,7 @@
 #include <engine/Logger.hpp>
 #include <engine/ecs/EntityManager.hpp>
 #include <memory>
+#include <optional>
 #include <vector>
 #include <algorithm>
 
@@ -44,6 +49,9 @@ namespace RType {
         OPTIONSGAME = 5,
         LOADSCREEN = 6,
         DEAD = 7,
+        HOWTOPLAY = 8,     /**< Controls and enemies guide, opened from the main menu. */
+        HOWTOPLAYGAME = 9, /**< Same guide, opened from the pause menu. */
+        DIFFICULTY = 10,   /**< Difficulty choice, before starting a game. */
     };
 
     /**
@@ -67,8 +75,35 @@ namespace RType {
         std::unordered_map<std::string, MessageHandlerFunction> _handlers; ///< Map of message handlers.
         EntityManager _entityManager;
         GraphicEntityPtr _playerEntity = nullptr;
+        std::optional<ViewState> _pendingView;                            /**< View to switch to at the next safe point. */
+        std::vector<ExplosionPtr> _explosions;                            /**< Explosions currently playing. */
+        std::unique_ptr<Background> _menuBackground;                       /**< Starfield behind the menus (built once the window exists). */
+        std::string _serverAddress;                                        /**< "hostname:port" of the last connection attempt. */
+        sf::Clock _shootClock;                                             /**< Limits the fire rate. */
+        std::string _difficulty = "normal";                                /**< Difficulty announced by the server. */
+        std::unique_ptr<ConsoleOverlay> _console;                          /**< Developer console (F2), when its module is loaded. */
+        sf::Clock _frameClock;                                             /**< Measures the frame rate for the "fps" command. */
+        float _fps = 0.0F;
+        bool _showFps = false;
+
+        /**
+         * @brief Load the optional modules (sound, particles, console); the game runs without them.
+         */
+        void loadOptionalModules();
+
+        void drawFps();
 
         void destroyGraphicEntity(GraphicEntityPtr entity);
+
+        /**
+         * @brief Replace the current view if setView was called since the last check.
+         */
+        void applyPendingView();
+
+        /**
+         * @brief True in every view where the game keeps running behind (game, pause, in-game menus).
+         */
+        [[nodiscard]] bool isInGame() const;
 
         /**
          * @brief Private method to handle drawing operations.
@@ -85,12 +120,12 @@ namespace RType {
          * @brief Private method to handle input for a specific graphic _entity.
          * @param entity The graphic entity to handle input for.
          */
-        void handleGameInput() const;
+        void handleGameInput();
 
         /**
-         * @brief Private method to handle basic input.
+         * @brief Handle one-shot game keys (color change) from window events.
          */
-        void basicInput();
+        void handleGameEvent(const sf::Event &event);
 
         /**
          * @brief Private method to launch the SFML window and test keyboard input for a specific _entity.
@@ -120,6 +155,37 @@ namespace RType {
          * @param state The new view state to set.
          */
         void setView(ViewState state);
+
+        /**
+         * @brief Register the game commands in the console module (call again after reloading it).
+         */
+        void setupConsole();
+
+        /**
+         * @return "hostname:port" of the last connection attempt
+         */
+        [[nodiscard]] const std::string &getServerAddress() const { return _serverAddress; }
+
+        /**
+         * @return The username of the connected player, empty when not connected
+         */
+        [[nodiscard]] std::string getUsername() const { return _client ? _client->getUsername() : ""; }
+
+        /**
+         * @return The last score received for the local player
+         */
+        [[nodiscard]] int getScore() const { return _client ? _client->getScore() : 0; }
+
+        /**
+         * @brief Ask the server to switch difficulty (it applies to every player on it).
+         * @param difficulty "easy", "normal" or "hard"
+         */
+        void requestDifficulty(const std::string &difficulty);
+
+        /**
+         * @return The difficulty the server is running ("easy", "normal" or "hard")
+         */
+        [[nodiscard]] const std::string &getDifficulty() const { return _difficulty; }
 
         /**
          * @brief Method to add a graphic _entity to the game.
@@ -193,4 +259,6 @@ namespace RType {
 #include "views/LoginView.hpp"
 #include "views/LoadView.hpp"
 #include "views/DeadView.hpp"
+#include "views/HowToPlayView.hpp"
+#include "views/DifficultyView.hpp"
 #include "entities/GraphicEntityFactory.hpp"

@@ -7,8 +7,8 @@
 
 #pragma once
 
+#include "../components/Button.hpp"
 #include "../components/CheckBox.hpp"
-#include "../components/ClickableText.hpp"
 #include "IView.hpp"
 
 namespace RType {
@@ -16,47 +16,43 @@ namespace RType {
     /**
      * @brief Represents the options menu state in the game.
      *
-     * This class provides functionality for handling user input, updating the state,
-     * and drawing elements related to the options menu.
+     * Lets the player load or unload engine modules (shared libraries) while the game runs.
      */
     class OptionsView : public IView {
+    private:
+        static constexpr float ROW_X = Theme::CENTER_X - CheckBox::WIDTH / 2.0F;
+
     public:
         /**
          * @brief Constructs the OptionsView.
          *
-         * @param window Reference to the SFML render window.
          * @param gameView Reference to the ClientViewport.
+         * @param inGame True when opened from the pause menu (Back returns there).
          */
         OptionsView(ClientViewport &gameView, bool inGame = false)
             : _viewport(gameView), _inGame(inGame),
-              _back(Color::Cyan, 20, 700.0f, 350.0f, "Go Back") {}
+              _back(Theme::CENTER_X - 230.0F, 720.0F, 460.0F, 72.0F, inGame ? "Back to pause menu" : "Back to main menu") {}
 
         /**
-         * @brief Handles user input for the options menu.
+         * @brief Esc or Backspace goes back.
+         */
+        void handleEvent(const sf::Event &event) override {
+            if (event.type == sf::Event::KeyPressed &&
+                (event.key.code == sf::Keyboard::Escape || event.key.code == sf::Keyboard::BackSpace))
+                goBack();
+        }
+
+        /**
+         * @brief Handles clicks on the module switches and on the back button.
          */
         void handleInput() {
-            _title.handleInput();
-            _sound.handleInput();
-            _soundVolume.handleInput();
-            _mainMenu.handleInput();
-            if (_inGame) _back.handleInput();
             _soundModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
                                     [this](std::string moduleName) { unloadModule(moduleName);});
             _particleModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
                                        [this](std::string moduleName) { unloadModule(moduleName);});
             _consoleModuleBox.handleInput([this](std::string moduleName) { loadModule(moduleName); },
                                     [this](std::string moduleName) { unloadModule(moduleName);});
-
-            if (_module->isMouseClicked()) {
-                if (_mainMenu.isClicked()) {
-                    _logger->debug("Go to main menu from options");
-                    _viewport.setView(ViewState::MENU);
-                }
-                if (_inGame && _back.isClicked()) {
-                    _logger->debug("Go to pause menu from options");
-                    _viewport.setView(ViewState::PAUSE);
-                }
-            }
+            _back.executeIfClicked([this] { goBack(); });
         }
 
         void loadModule(const std::string &moduleName) {
@@ -64,7 +60,10 @@ namespace RType {
 
             if (stringToModuleType(moduleName) == ModuleType::SOUND) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::SOUND);
             if (stringToModuleType(moduleName) == ModuleType::PARTICLE) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::PARTICLE);
-            if (stringToModuleType(moduleName) == ModuleType::CONSOLE) provider->loadAndGetModule<RType::IModule>(RType::ModuleType::CONSOLE);
+            if (stringToModuleType(moduleName) == ModuleType::CONSOLE) {
+                provider->loadAndGetModule<RType::IModule>(RType::ModuleType::CONSOLE);
+                _viewport.setupConsole();
+            }
         }
 
         /**
@@ -105,39 +104,44 @@ namespace RType {
          * @brief Updates the options menu state.
          */
         void update() override {
-            _mainMenu.update();
-            if (_inGame) _back.update();
+            handleInput();
         }
 
         /**
          * @brief Draws elements of the options menu on the screen.
          *
-         * @param window Reference to the SFML render window.
          * @param entities A vector of shared pointers to graphic entities.
          */
-        void draw(std::vector<GraphicEntityPtr>) override {
+        void draw(std::vector<GraphicEntityPtr> entities) override {
+            if (_inGame)
+                drawDimmedGame(entities);
             _title.draw();
-            _sound.draw();
-            _soundVolume.draw();
-            _mainMenu.draw();
-            _consoleModuleBox.draw(_module);
-            _particleModuleBox.draw(_module);
-            _soundModuleBox.draw(_module);
-            if (_inGame) _back.draw();
-            handleInput();
+            _subtitle.draw();
+            _consoleModuleBox.draw();
+            _particleModuleBox.draw();
+            _soundModuleBox.draw();
+            _back.draw();
         }
 
     private:
-        ClickableText _title = ClickableText(Color::Cyan, 30, WINDOW_WIDTH / 2.0f, 50.0f, "Options"); /**< ClickableText for the title. */
-        ClickableText _sound = ClickableText(Color::Cyan, 20, 700.0f, 250.0f, "Sound"); /**< Sound of the ClientViewport. */
-        ClickableText _soundVolume = ClickableText(Color::Cyan, 20, 850.0f, 250.0f, "100"); /**< Game sound volume of the ClientViewport. */
-        ClickableText _mainMenu = ClickableText(Color::Cyan, 20, 700.0f, 300.0f, "Exit To Main Menu"); /**< ClickableText for the menu. */
-        ClickableText _back; /**< ClickableText to go back. */
         ClientViewport &_viewport; /**< Reference to the ClientViewport. */
-        CheckBox _consoleModuleBox = CheckBox(WINDOW_WIDTH / 3.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Console");
-        CheckBox _particleModuleBox = CheckBox(WINDOW_WIDTH / 3.0f + 200.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Particle");
-        CheckBox _soundModuleBox = CheckBox(WINDOW_WIDTH / 3.0f + 400.0f, WINDOW_HEIGHT / 3.0f + 50.0f, 50.0f, 50.0f, "Sound");
-        IGraphicalModule *_module = ModuleProvider::getInstance()->get<IGraphicalModule>(ModuleType::GRAPHICAL);
         bool _inGame;
+        ModuleProviderPtr _provider = ModuleProvider::getInstance();
+        Label _title = Label("OPTIONS", 64, Theme::Accent, Theme::CENTER_X, 120.0F, Align::CENTER);
+        Label _subtitle = Label("Engine modules are shared libraries loaded at runtime: switch them on or off while you play.",
+                                24, Theme::TextDim, Theme::CENTER_X, 220.0F, Align::CENTER);
+        CheckBox _consoleModuleBox = CheckBox(ROW_X, 300.0F, "Console", "Developer console: press F2 (libconsole_module.so)",
+                                              _provider->get<IModule>(ModuleType::CONSOLE) != nullptr);
+        CheckBox _particleModuleBox = CheckBox(ROW_X, 420.0F, "Particle", "Explosions, sparks and engine trails (libparticle_module.so)",
+                                               _provider->get<IModule>(ModuleType::PARTICLE) != nullptr);
+        CheckBox _soundModuleBox = CheckBox(ROW_X, 540.0F, "Sound", "Sound effects and music (libsound_module.so)",
+                                            _provider->get<IModule>(ModuleType::SOUND) != nullptr);
+        Button _back; /**< Returns to the main menu or to the pause menu. */
+        IGraphicalModule *_module = _provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);
+
+        void goBack() {
+            _logger->debug(_inGame ? "Go to pause menu from options" : "Go to main menu from options");
+            _viewport.setView(_inGame ? ViewState::PAUSE : ViewState::MENU);
+        }
     };
 }

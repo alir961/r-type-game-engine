@@ -7,13 +7,9 @@
 
 #pragma once
 
-#include <map>
-#include <vector>
 #include "engine/modules/animation/IAnimationModule.hpp"
 #include "engine/modules/animation/IAnimation.hpp"
 #include "AnimationFactory.hpp"
-#include "engine/modules/logger/ILoggerModule.hpp"
-#include "engine/modules/ModuleProvider.hpp"
 
 namespace RType {
 
@@ -24,12 +20,7 @@ namespace RType {
 
         AnimationModule() = default;
 
-        void addAnimation(const std::string &entityName) override;
-        RectFloat update(const std::string &entityName) override;
-
-    private:
-        std::map<std::string, AnimationPtr> _animations;
-        ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
+        AnimationPtr createAnimation(const std::string &entityName) override;
     };
 
 }

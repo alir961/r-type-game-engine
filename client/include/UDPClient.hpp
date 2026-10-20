@@ -9,6 +9,7 @@
 
 #include <engine/network/UDPAdapter.hpp>
 #include <engine/tools/Split.hpp>
+#include <deque>
 #include <iostream>
 #include "engine/tools/Thread.hpp"
 #include "engine/modules/logger/ILoggerModule.hpp"
@@ -82,7 +83,7 @@ namespace RType {
         UDPAdapter _adapter;
         RType::Thread _thread = RType::Thread(); ///< Thread for asynchronous operations.
         std::unordered_map<MessageType, MessageHandlerFunction> _handlers; ///< Map of message handlers.
-        std::vector<std::string> _messageQueue;
+        std::deque<std::string> _messageQueue;
         std::mutex _queueMutex;
         ILoggerModule *_logger = ModuleProvider::getInstance()->get<ILoggerModule>(ModuleType::LOGGER);
         int _clientID = -1;

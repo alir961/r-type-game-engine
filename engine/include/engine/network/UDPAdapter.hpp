@@ -66,6 +66,20 @@ namespace RType {
         }
 
         /**
+         * @brief Make runContext return even if a receive is still pending (thread-safe).
+         */
+        void stopContext() {
+            _ioContext.stop();
+        }
+
+        /**
+         * @brief Stop runContext once the work already posted (like a last send) has run.
+         */
+        void stopContextAfterPendingWork() {
+            asio::post(_ioContext, [this] { _ioContext.stop(); });
+        }
+
+        /**
          * @brief Constructor for UDPAdapter.
          * @param socket Reference to the UDP socket.
          * @param endpoint Reference to the remote endpoint.
@@ -90,6 +104,20 @@ namespace RType {
          * @param message The message to send.
          */
         void sendData(const Message &message);
+
+        /**
+         * @brief Send a message to a given endpoint. Safe to call from any thread.
+         * @param message The message to send.
+         * @param endpoint Where to send it.
+         */
+        void sendTo(const Message &message, const UDP::endpoint &endpoint);
+
+        /**
+         * @return The sender of the last received packet (valid inside a receive callback).
+         */
+        [[nodiscard]] const UDP::endpoint &getRemoteEndpoint() const {
+            return _remoteEndpoint;
+        }
 
         /**
          * @brief Receives data asynchronously and invokes the callback upon completion.

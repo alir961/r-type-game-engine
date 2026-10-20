@@ -57,6 +57,9 @@ RType::UDPClient::~UDPClient() {
     try {
         _stop = true;
         sendMessage(MessageType::DISCONNECT, buffer);
+        // Sends are posted to the network thread: stop it once the disconnect is out
+        // (a pending receive would otherwise keep it running without a server).
+        _adapter.stopContextAfterPendingWork();
         _thread.wait();
         _adapter.closeSocket();
     } catch (const std::exception &e) {
@@ -85,6 +88,7 @@ void RType::UDPClient::setupHandlers() {
     _handlers[MessageType::STATIC] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::STARSHIP] = [this](const Message &msg) { addMessageQueue(msg); };
     _handlers[MessageType::BULLET_STARSHIP] = [this](const Message &msg) { addMessageQueue(msg); };
+    _handlers[MessageType::DIFFICULTY] = [this](const Message &msg) { addMessageQueue(msg); };
 }
 
 std::string RType::UDPClient::getLastMessage() {
@@ -92,21 +96,20 @@ std::string RType::UDPClient::getLastMessage() {
 
     if (!_messageQueue.empty()) {
         std::string message = _messageQueue.front();
-        _messageQueue.erase(_messageQueue.begin());
+        _messageQueue.pop_front();
         return message;
     }
     return "";
 }
 
 std::vector<std::string> RType::UDPClient::pullQueue() {
-    std::vector<std::string> messages;
-    std::string message = getLastMessage();
+    std::deque<std::string> pending;
 
-    do {
-        messages.push_back(message);
-        message = getLastMessage();
-    } while (!message.empty());
-    return messages;
+    {
+        const std::lock_guard lock(_queueMutex);
+        pending.swap(_messageQueue);
+    }
+    return {std::make_move_iterator(pending.begin()), std::make_move_iterator(pending.end())};
 }
 
 void RType::UDPClient::sendMessage(RType::MessageType type, const std::string_view &data) {

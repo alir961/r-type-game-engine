@@ -11,20 +11,16 @@
 
 namespace RType {
 
-    const float MONSTER_WIDTH = 33.0F;
-    const float MONSTER_HEIGHT = 33.0F;
+    constexpr float MONSTER_WIDTH = 33.0F;
+    constexpr float MONSTER_HEIGHT = 33.0F;
+    constexpr int MONSTER_FRAMES = 4;
+    constexpr float MONSTER_FRAME_DURATION = 0.14F;
 
+    /**
+     * @brief Alien with waving tentacles and a blinking eye.
+     */
     class MonsterAnimation : public AAnimation {
     public:
-        MonsterAnimation(float startX, float startY) : AAnimation(startX - MONSTER_WIDTH, startY, MONSTER_WIDTH, MONSTER_HEIGHT) {}
-
-        RectFloat update() override {
-            RectFloat frame = getCurrentFrame();
-            if (frame.left >= MONSTER_WIDTH * 3)
-                frame.left = 0;
-            else frame.left += MONSTER_WIDTH;
-            setCurrentFrame(frame);
-            return frame;
-        }
+        MonsterAnimation() : AAnimation(0.0F, MONSTER_WIDTH, MONSTER_HEIGHT, MONSTER_FRAMES, MONSTER_FRAME_DURATION) {}
     };
 }

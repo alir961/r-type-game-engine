@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2023
 ** r-type
 ** File description:
-** No file there , just an epitech header example
+** SoundModule.cpp
 */
 
+#include <algorithm>
 #include <iostream>
 #include "SoundModule.hpp"
-#include "engine/exception/ModuleException.hpp"
 
 extern "C" {
 RType::IModule *initializeSoundModule() {
@@ -21,82 +21,71 @@ void destroy(RType::SoundModule *library) {
 
 void RType::SoundModule::load() {}
 
-void RType::SoundModule::unload() {}
-
-void RType::SoundModule::loadSound(int soundId, const std::string &soundPath, float volume) {
-    if (!_soundBuffers.contains(soundId))
-        throw ModuleException("Sound already loaded");
-    _soundBuffers[soundId].loadFromFile(soundPath);
-    _sounds[soundId] = {soundPath, volume};
+void RType::SoundModule::unload() {
+    // Stop everything before the buffers go away with the module.
+    for (auto &voice: _voices)
+        voice.stop();
+    _music.stop();
 }
 
-void RType::SoundModule::playSound(int soundId) {
-    sf::Sound sound;
+const sf::SoundBuffer *RType::SoundModule::getBuffer(const std::string &path) {
+    auto iterator = _buffers.find(path);
 
-    if (!_soundBuffers.contains(soundId))
-        throw ModuleException("Sound not loaded");
-    sound.setBuffer(_soundBuffers[soundId]);
-    sound.setVolume(_sounds[soundId].volume);
-    sound.play();
-}
+    if (iterator == _buffers.end()) {
+        sf::SoundBuffer buffer;
 
-void RType::SoundModule::playAllSounds() {
-    for (const auto &[id, sound] : _soundBuffers) {
-        sf::Sound soundToPlay;
-
-        soundToPlay.setBuffer(sound);
-        soundToPlay.setVolume(_sounds[id].volume);
-        soundToPlay.play();
-    }
-}
-
-void RType::SoundModule::playLoopSound(int soundId) {
-    sf::Sound sound;
-
-    if (!_soundBuffers.contains(soundId))
-        throw ModuleException("Sound not loaded");
-    sound.setBuffer(_soundBuffers[soundId]);
-    sound.setVolume(_sounds[soundId].volume);
-    sound.setLoop(true);
-    sound.play();
-}
-
-void RType::SoundModule::stopSound(int soundId) {
-    sf::Sound sound;
-
-    if (!_soundBuffers.contains(soundId))
-        throw ModuleException("Sound not loaded");
-    sound.setBuffer(_soundBuffers[soundId]);
-    sound.setVolume(_sounds[soundId].volume);
-    sound.stop();
-}
-
-std::vector<int> RType::SoundModule::stopAllSounds() {
-    std::vector<int> failedStopIds;
-
-    for (const auto &[id, sound] : _soundBuffers) {
-        sf::Sound soundToStop;
-
-        soundToStop.setBuffer(sound);
-        soundToStop.setVolume(_sounds[id].volume);
-        if (soundToStop.getStatus() == sf::SoundSource::Status::Playing) {
-            failedStopIds.push_back(id);
-            soundToStop.stop();
+        if (!buffer.loadFromFile(path)) {
+            std::cerr << "Unable to load sound '" << path << "'\n";
+            return nullptr;
         }
+        iterator = _buffers.emplace(path, std::move(buffer)).first;
     }
-    return failedStopIds;
+    return &iterator->second;
 }
 
-void RType::SoundModule::toggleMute() {
-    _muted = !_muted;
+void RType::SoundModule::playSound(const std::string &path, float volume) {
+    const sf::SoundBuffer *buffer = getBuffer(path);
 
-    for (const auto &[id, sound] : _soundBuffers) {
-        sf::Sound soundToMute;
-
-        soundToMute.setBuffer(sound);
-        if (_muted)
-            soundToMute.setVolume(0);
-        else
-            soundToMute.setVolume(_sounds[id].volume);
+    if (buffer == nullptr || _volume <= 0.0F)
+        return;
+    // A free voice, or else the one closest to the end of its sound.
+    auto voice = std::find_if(_voices.begin(), _voices.end(), [](const sf::Sound &sound) {
+        return sound.getStatus() != sf::Sound::Playing;
+    });
+    if (voice == _voices.end()) {
+        voice = std::max_element(_voices.begin(), _voices.end(), [](const sf::Sound &a, const sf::Sound &b) {
+            return a.getPlayingOffset() < b.getPlayingOffset();
+        });
     }
+    voice->setBuffer(*buffer);
+    voice->setVolume(std::clamp(volume, 0.0F, 100.0F) * _volume / 100.0F);
+    voice->play();
+}
+
+void RType::SoundModule::playMusic(const std::string &path, float volume) {
+    _musicVolume = volume;
+    _music.setVolume(_musicVolume * _volume / 100.0F);
+    if (path == _musicPath && _music.getStatus() == sf::Music::Playing)
+        return;
+    if (!_music.openFromFile(path)) {
+        std::cerr << "Unable to open music '" << path << "'\n";
+        return;
+    }
+    _musicPath = path;
+    _music.setLoop(true);
+    _music.play();
+}
+
+void RType::SoundModule::stopMusic() {
+    _music.stop();
+    _musicPath.clear();
+}
+
+void RType::SoundModule::setVolume(float volume) {
+    _volume = std::clamp(volume, 0.0F, 100.0F);
+    _music.setVolume(_musicVolume * _volume / 100.0F);
+}
+
+float RType::SoundModule::getVolume() const {
+    return _volume;
 }

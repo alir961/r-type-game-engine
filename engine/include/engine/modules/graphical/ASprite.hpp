@@ -21,6 +21,7 @@ namespace RType {
         Vector2f _origin = Vector2f(0.0F, 0.0F);
         RectFloat _rectangle = RectFloat{0.0F, 0.0F, -1.0F, -1.0F};
         float _rotation = 0.0F;
+        Color::RGB _color = Color::White;
 
     public:
         explicit ASprite(std::string texturePath) : _texturePath(std::move(texturePath)) {};
@@ -54,6 +55,13 @@ namespace RType {
 
         void setRectangle(const RectFloat &rectangle) {
             _rectangle = rectangle;
+        }
+
+        /**
+         * @brief Multiply the texture by a color (white keeps it unchanged).
+         */
+        void setColor(const Color::RGB &color) {
+            _color = color;
         }
 
         virtual void draw() = 0;

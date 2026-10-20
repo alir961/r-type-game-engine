@@ -52,4 +52,13 @@ namespace RType {
 
     }
 
+    /**
+     * @brief A filled square, used to draw many particles in one call.
+     */
+    struct ColoredSquare {
+        Vector2f center;
+        float size;
+        Color::RGB color;
+    };
+
 }

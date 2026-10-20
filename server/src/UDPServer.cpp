@@ -8,9 +8,10 @@
 #include "../include/UDPServer.hpp"
 #include <engine/network/NetworkMessage.hpp>
 
-RType::UDPServer::UDPServer(uint16_t port) :
+RType::UDPServer::UDPServer(uint16_t port, Difficulty difficulty) :
         _adapter("0.0.0.0", port),
         _game(&_adapter) {
+    _game.setDifficulty(difficulty);
     startReceive();
     std::cout << "Starting server on " << "0.0.0.0" << ":" << port << "\n";
     _adapter.runContext();

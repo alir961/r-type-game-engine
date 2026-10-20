@@ -47,6 +47,7 @@ namespace RType {
         STATIC,
         STARSHIP,
         BULLET_STARSHIP,
+        DIFFICULTY,
     };
 
 #ifdef __linux__

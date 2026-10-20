@@ -13,75 +13,52 @@
 #include "entity/StaticAnimation.hpp"
 #include "entity/BulletStarshipAnimation.hpp"
 #include "entity/StarshipAnimation.hpp"
-#include <iostream>
+#include "entity/ExplosionAnimation.hpp"
 #include <memory>
+#include <string>
 
 namespace RType {
 
-    constexpr int TURQUOISE_Y = 0;
-    constexpr int PURPLE_Y = 19;
-    constexpr int GREEN_Y = 36;
-    constexpr int RED_Y = 53;
-    constexpr int BLUE_Y = 70;
-    constexpr int BULLET_X = 101;
-    constexpr int BULLET_Y = 118;
-    constexpr int BULLET_STARSHIP_X = 1;
-    constexpr int BULLET_STARSHIP_Y = 6;
-    constexpr int STARSHIP_X = 1;
-    constexpr int STARSHIP_Y = 3;
-    constexpr int MONSTER_Y = 67;
-    constexpr int STATIC_X = 14;
-    constexpr int STATIC_Y = 66;
+    /**
+     * Row of each player color in client/assets/sprites/player.png.
+     */
+    constexpr int TURQUOISE_ROW = 0;
+    constexpr int PURPLE_ROW = 1;
+    constexpr int GREEN_ROW = 2;
+    constexpr int RED_ROW = 3;
+    constexpr int BLUE_ROW = 4;
 
     class AnimationFactory {
     public:
         static AnimationPtr createAnimation(const std::string &entityName) {
             if (entityName == "turquoisePlayer")
-                return createPlayer(TURQUOISE_Y);
+                return createPlayer(TURQUOISE_ROW);
             if (entityName == "purplePlayer")
-                return createPlayer(PURPLE_Y);
+                return createPlayer(PURPLE_ROW);
             if (entityName == "greenPlayer")
-                return createPlayer(GREEN_Y);
+                return createPlayer(GREEN_ROW);
             if (entityName == "redPlayer")
-                return createPlayer(RED_Y);
+                return createPlayer(RED_ROW);
             if (entityName == "bluePlayer")
-                return createPlayer(BLUE_Y);
+                return createPlayer(BLUE_ROW);
             if (entityName == "bulletPlayer")
-                return createBullet();
+                return std::make_shared<BulletAnimation>();
             if (entityName == "monster")
-                return createMonster();
+                return std::make_shared<MonsterAnimation>();
             if (entityName == "static")
-                return createStatic();
+                return std::make_shared<StaticAnimation>();
             if (entityName == "bulletStarship")
-                return createBulletStarship();
+                return std::make_shared<BulletStarshipAnimation>();
             if (entityName == "starship")
-                return createStarship();
-            return createPlayer(TURQUOISE_Y);
+                return std::make_shared<StarshipAnimation>();
+            if (entityName == "explosion")
+                return std::make_shared<ExplosionAnimation>();
+            return createPlayer(TURQUOISE_ROW);
         }
 
     private:
-        static AnimationPtr createPlayer(int color) {
-            return std::make_shared<PlayerAnimation>(0, color);
-        }
-
-        static AnimationPtr createBullet() {
-            return std::make_shared<BulletAnimation>(BULLET_X, BULLET_Y);
-        }
-
-        static AnimationPtr createMonster() {
-            return std::make_shared<MonsterAnimation>(0, MONSTER_Y);
-        }
-
-        static AnimationPtr createStatic() {
-            return std::make_shared<StaticAnimation>(STATIC_X, STATIC_Y);
-        }
-
-        static AnimationPtr createBulletStarship() {
-            return std::make_shared<BulletStarshipAnimation>(BULLET_STARSHIP_X, BULLET_STARSHIP_Y);
-        }
-
-        static AnimationPtr createStarship() {
-            return std::make_shared<StarshipAnimation>(STARSHIP_X, STARSHIP_Y);
+        static AnimationPtr createPlayer(int row) {
+            return std::make_shared<PlayerAnimation>(static_cast<float>(row));
         }
     };
 

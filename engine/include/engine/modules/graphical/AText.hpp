@@ -20,6 +20,8 @@ namespace RType {
         unsigned _size = 10;
         Color::RGB _color = Color::White;
         std::string _fontPath = "";
+        float _outlineThickness = 0.0F;
+        Color::RGB _outlineColor = Color::Black;
 
     public:
         AText() = default;
@@ -46,6 +48,15 @@ namespace RType {
 
         void setFontPath(const std::string_view &fontPath) {
             _fontPath = fontPath;
+        }
+
+        void setOutline(float thickness, const Color::RGB &color = Color::Black) {
+            _outlineThickness = thickness;
+            _outlineColor = color;
+        }
+
+        [[nodiscard]] const Vector2f &getPosition() const {
+            return _position;
         }
 
         virtual void draw() = 0;
