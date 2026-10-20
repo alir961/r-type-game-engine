@@ -32,9 +32,48 @@ docs/     Protocol, packet format and ECS documentation
 
 Design docs: [UDP protocol](docs/udpProtocol.md) · [Packet format](docs/packet.md) · [ECS](docs/ecs.md)
 
+## Supported platforms
+
+| OS | Status |
+| --- | --- |
+| Linux: Ubuntu / Debian, Arch, Fedora (x86-64) | Supported: `install.sh` and `play.sh`. CI builds and tests on Ubuntu 24.04 |
+| Windows 10 / 11 (x64) | Supported: `install.ps1` and `play.ps1`, built with Visual Studio 2022. CI builds and tests on Windows Server 2022 |
+| macOS | Not supported (never built or tested) |
+
+Players on Linux and Windows can play together: the client and the server speak the same UDP protocol.
+
+## Requirements
+
+**Linux**
+
+- A C++20 compiler: GCC 10+ or Clang 12+ (Ubuntu 22.04 and later are fine)
+- CMake 3.16+ (if it is missing, `install.sh` uses the one vcpkg downloads)
+- `git`, `curl`, `zip`, `unzip`, `tar`, `pkg-config`, and the X11, OpenGL and udev development packages that SFML needs: `./install.sh --deps` installs them all (list below)
+- `sudo` rights, only for `--deps`
+
+**Windows**
+
+- Visual Studio 2022 or its free [Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022), with the **Desktop development with C++** workload (it includes CMake)
+- [Git for Windows](https://git-scm.com/download/win)
+- PowerShell 5.1 (built into Windows) or PowerShell 7
+
+```powershell
+winget install Git.Git
+winget install Microsoft.VisualStudio.2022.BuildTools --override "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --passive"
+```
+
+**Both**
+
+- An internet connection for the first build: [vcpkg](https://vcpkg.io) downloads and compiles SFML 2.6 and Asio 1.32 (about 2 GB of disk with the build)
+- A graphics card or driver with OpenGL, a screen and a keyboard; speakers for the sound module (optional)
+- To play over a network: UDP port **4242** (or the one you choose) reachable on the server machine; allow it in the firewall (Windows asks the first time the server starts)
+- Optional: Python 3 to run the multiplayer integration test, and Pillow (`pip install Pillow`) to regenerate the assets
+
 ## Install
 
-Linux only. One command checks the system packages, sets up [vcpkg](https://vcpkg.io) (it reuses `$VCPKG_ROOT` or `~/vcpkg` if you have one, otherwise clones it into `./vcpkg`), then builds the server, the client and the engine modules into `build/out`:
+The install script checks the tools, sets up vcpkg (it reuses `$VCPKG_ROOT` or `~/vcpkg` if you have one, otherwise clones it into `./vcpkg`), then builds the server, the client and the engine modules into `build/out`.
+
+**Linux**
 
 ```bash
 git clone https://github.com/alir961/r-type-game-engine.git
@@ -42,7 +81,7 @@ cd r-type-game-engine
 ./install.sh --deps     # installs the system packages with sudo (apt, pacman or dnf), then builds
 ```
 
-Already have the packages? Just run `./install.sh`. If something is missing, it lists it and prints the command for your distribution. The first build compiles SFML and its dependencies, so it takes a few minutes; later builds are incremental.
+Already have the packages? Just run `./install.sh`. If something is missing, it lists it and prints the command for your distribution.
 
 <details>
 <summary>System packages installed by <code>--deps</code></summary>
@@ -55,18 +94,30 @@ Already have the packages? Just run `./install.sh`. If something is missing, it 
 
 </details>
 
+**Windows** (PowerShell)
+
+```powershell
+git clone https://github.com/alir961/r-type-game-engine.git
+cd r-type-game-engine
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+`-ExecutionPolicy Bypass` lets this one script run on a machine that blocks downloaded scripts; with scripts already allowed, `.\install.ps1` is enough. It builds in Release with the vcpkg triplet in `triplets/x64-windows-static-md-release.cmake` (SFML linked statically, as on Linux), so the game needs no extra DLLs.
+
+The first build compiles SFML and its dependencies, so it takes a few minutes (10 to 20 on Windows); later builds are incremental. Re-run the install script after pulling changes.
+
 ## Launch
 
-`play.sh` starts the server and the client for you, from any directory:
+`play.sh` (Linux) and `play.ps1` (Windows) start the server and the client for you, from any directory:
 
-| Command | What it starts |
-| --- | --- |
-| `./play.sh` | A local server and one client: solo game |
-| `./play.sh 2` | A local server and two clients: multiplayer on one screen (up to 4) |
-| `./play.sh server [port] [easy\|normal\|hard]` | Only the server, so others can join (default `4242`, `normal`; Ctrl+C to stop) |
-| `./play.sh client` | Only a client, to join a server running elsewhere |
+| Linux | Windows | What it starts |
+| --- | --- | --- |
+| `./play.sh` | `.\play.ps1` | A local server and one client: solo game |
+| `./play.sh 2` | `.\play.ps1 2` | A local server and two clients: multiplayer on one screen (up to 4) |
+| `./play.sh server [port] [easy\|normal\|hard]` | `.\play.ps1 server [port] [easy\|normal\|hard]` | Only the server, so others can join (default `4242`, `normal`; Ctrl+C to stop) |
+| `./play.sh client` | `.\play.ps1 client` | Only a client, to join a server running elsewhere |
 
-On the login screen, type a username and press **Enter**. The server address defaults to `127.0.0.1:4242`, which is right for a local game. To join a friend, enter the IP of the machine running `./play.sh server` and its port. With `./play.sh` and `./play.sh 2`, the server stops when you close the last game window; its log is in `build/server.log`.
+On the login screen, type a username and press **Enter**. The server address defaults to `127.0.0.1:4242`, which is right for a local game. To join a friend, enter the IP of the machine running the server and its port. In a local game the server stops when you close the last game window; its log is in `build/server.log`.
 
 <details>
 <summary>Running the binaries by hand</summary>
@@ -74,9 +125,11 @@ On the login screen, type a username and press **Enter**. The server address def
 Run them from the repository root: the client loads its engine modules from `build/out/engine/modules/` and its sprites from `client/assets/`.
 
 ```bash
-./build/out/server/r-type_server 4242    # UDP port to listen on
-./build/out/client/r-type_client         # in another terminal, once per player
+./build/out/server/r-type_server 4242 [easy|normal|hard]   # UDP port to listen on (Windows: r-type_server.exe)
+./build/out/client/r-type_client                           # in another terminal, once per player
 ```
+
+To build without the scripts, configure with the vcpkg toolchain: `cmake -S . -B build/out -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=<vcpkg>/scripts/buildsystems/vcpkg.cmake` (on Windows add `-DVCPKG_OVERLAY_TRIPLETS=triplets -DVCPKG_TARGET_TRIPLET=x64-windows-static-md-release`), then `cmake --build build/out --config Release`.
 
 </details>
 
@@ -106,7 +159,7 @@ Menus work with the mouse or with ↑/↓ and Enter. The **How to play** screen 
 
 ### Modules and developer console
 
-Sound, particles and the console are engine modules (`.so` files) that **Options** switches on and off while you play; the game keeps running without them, and each switch takes effect immediately:
+Sound, particles and the console are engine modules (`.so` files on Linux, `.dll` on Windows) that **Options** switches on and off while you play; the game keeps running without them, and each switch takes effect immediately:
 
 | Module | What it adds |
 | --- | --- |
@@ -138,15 +191,23 @@ python3 tools/generate_assets.py
 
 ## Tests
 
-The engine core has unit tests (ECS components, entity manager, thread-safe queue, string and number utilities). They build on their own, without SFML or vcpkg:
+The engine core has unit tests (ECS components, entity manager, thread-safe queue, string and number utilities). They build on their own, without SFML or vcpkg, but need CMake 3.20+ and an internet connection (CMake downloads GoogleTest):
 
 ```bash
 cmake -S tests -B build/tests
 cmake --build build/tests
-ctest --test-dir build/tests --output-on-failure
+ctest --test-dir build/tests --output-on-failure     # Windows (Visual Studio): add -C Debug
 ```
 
-CI builds the game and runs these tests on every push.
+No CMake on your PATH? `install.sh` uses vcpkg's: `CMAKE=$(~/vcpkg/vcpkg fetch cmake | tail -n 1)`, then `"$CMAKE"` and `"$(dirname "$CMAKE")/ctest"` in place of `cmake` and `ctest`.
+
+The multiplayer integration test starts a server and plays two headless clients over the real UDP protocol (Python 3, standard library only):
+
+```bash
+python3 tests/integration/multiplayer_test.py build/out/server/r-type_server
+```
+
+CI builds the game on Linux and Windows and runs both test suites on every push.
 
 ## My contribution
 
@@ -168,6 +229,7 @@ Top contributor of the 3-person team: 120 of the 282 commits made during the pro
 - **Multiplayer networking fix**: the server sent every update to whichever client spoke last, so with two players each one lost most of its own ship's updates. It now keeps one address per player, flushes each player's queue once per tick from a fixed-rate loop, and locks the game state shared by the network and game threads. Every player now gets its own ship at 60 updates/s, with 4 players, using under 20% of one CPU core.
 - **Working sound, particle and console modules** (they were stubs): generated music and sound effects, explosions, sparks and engine trails, and a developer console (hitboxes, FPS, live settings). Plus three **difficulty levels**, and gameplay fixes: ships no longer die at the screen edges, co-op players no longer kill each other, shots leave from the nose, and mouse coordinates, port input and connection-cancel bugs are fixed
 - **One-command install and launch** (`install.sh`, `play.sh`), with the dependency pins fixed so it builds on current compilers
+- **Native Windows build** (MSVC, vcpkg, `install.ps1` and `play.ps1`): one module loader for `dlopen` and `LoadLibrary`, portable alignment and escapes, and a Windows CI job
 
 The networking layer, the authoritative server (session manager, game logic, compression) and the module loader were mainly written by Joan Thomas and Timothé Medico.
 
