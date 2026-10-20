@@ -24,7 +24,12 @@ fail() { printf '\033[1;31merror:\033[0m %s\n' "$*" >&2; exit 1; }
 
 start_server() {
     # A server from an earlier run is still up on this port: play on it instead of failing.
-    if pgrep -f "$SERVER $1\$" >/dev/null; then
+    local running
+    if running=$(pgrep -f "$SERVER $1\$"); then
+        # A suspended server (Ctrl+Z) holds the port but never answers: clients would wait forever.
+        if ps -o stat= -p "$running" | grep -q '^T'; then
+            fail "the server from an earlier run is suspended (Ctrl+Z) on port $1: resume it with fg, or stop it with kill -CONT $running && kill $running"
+        fi
         echo "Using the server already running on port $1"
         return
     fi
