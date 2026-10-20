@@ -29,9 +29,8 @@ set(SOURCE_FILES
 
 add_executable(${PROJECT_NAME}_server ${SOURCE_FILES})
 
-if (NOT WIN32)
-    find_package(asio CONFIG REQUIRED)
-    target_link_libraries(${PROJECT_NAME}_server PRIVATE asio::asio)
-endif()
+find_package(asio CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME}_server PRIVATE asio::asio)
 
 target_link_libraries(${PROJECT_NAME}_server LINK_PUBLIC engine)
+rtype_executable(${PROJECT_NAME}_server)

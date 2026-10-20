@@ -50,16 +50,10 @@ namespace RType {
         DIFFICULTY,
     };
 
-#ifdef __linux__
-#define ALIGN_ATTRIBUTE __attribute__((aligned(ALIGN_SIZE)))
-#elif _WIN32
-#define ALIGN_ATTRIBUTE __declspec(align(ALIGN_SIZE))
-#endif
-
     /**
      * @brief Represents a network message with a specified type and data.
      */
-    struct ALIGN_ATTRIBUTE Message {
+    struct alignas(ALIGN_SIZE) Message {
         MessageType type = MessageType::UNKNOWN;
         std::array<char, DATA_SIZE> data = std::array<char, DATA_SIZE>();
 
@@ -83,7 +77,6 @@ namespace RType {
         static Message deserialize(const std::vector<std::byte> &data);
     };
 
-#undef ALIGN_ATTRIBUTE
 
     /**
      * @brief Builder class for constructing network messages.

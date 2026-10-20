@@ -19,15 +19,21 @@ namespace RType {
     template<typename T>
     using ModuleLoaderPtr = std::shared_ptr<ModuleLoader<T>>;
 
+#ifdef _WIN32
+#define RTYPE_MODULE_SUFFIX ".dll"
+#else
+#define RTYPE_MODULE_SUFFIX ".so"
+#endif
+
     /**
-     * @brief Enum representing the different types of modules.
+     * @brief Paths of the engine modules, relative to the repository root (see rtype_module in CMakeLists.txt).
      */
-    constexpr std::string_view MODULE_ANIMATION_PATH = "build/out/engine/modules/animation/libanimation_module.so";
-    constexpr std::string_view MODULE_GRAPHICAL_PATH = "build/out/engine/modules/graphical/libgraphical_module.so";
-    constexpr std::string_view MODULE_SOUND_PATH = "build/out/engine/modules/sound/libsound_module.so";
-    constexpr std::string_view MODULE_PARTICLE_PATH = "build/out/engine/modules/particle/libparticle_module.so";
-    constexpr std::string_view MODULE_CONSOLE_PATH = "build/out/engine/modules/console/libconsole_module.so";
-    constexpr std::string_view MODULE_LOGGER_PATH = "build/out/engine/modules/logger/liblogger_module.so";
+    constexpr std::string_view MODULE_ANIMATION_PATH = "build/out/engine/modules/animation/libanimation_module" RTYPE_MODULE_SUFFIX;
+    constexpr std::string_view MODULE_GRAPHICAL_PATH = "build/out/engine/modules/graphical/libgraphical_module" RTYPE_MODULE_SUFFIX;
+    constexpr std::string_view MODULE_SOUND_PATH = "build/out/engine/modules/sound/libsound_module" RTYPE_MODULE_SUFFIX;
+    constexpr std::string_view MODULE_PARTICLE_PATH = "build/out/engine/modules/particle/libparticle_module" RTYPE_MODULE_SUFFIX;
+    constexpr std::string_view MODULE_CONSOLE_PATH = "build/out/engine/modules/console/libconsole_module" RTYPE_MODULE_SUFFIX;
+    constexpr std::string_view MODULE_LOGGER_PATH = "build/out/engine/modules/logger/liblogger_module" RTYPE_MODULE_SUFFIX;
 
     class ModuleProvider;
 

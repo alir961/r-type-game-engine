@@ -66,10 +66,10 @@ std::string RType::LoggerModule::getTimeString() {
 
 std::string RType::LoggerModule::formatMessage(RType::LogLevel level, const std::string &message) {
     std::string prefix;
-    if (level == DEBUG) prefix = "\e[1;37m[DEBUG]\e[0m";
-    if (level == INFO) prefix = "\e[1;0m[INFO]\e[0m";
-    if (level == WARN) prefix = "\e[1;33m[WARN]\e[0m";
-    if (level == ERROR) prefix = "\e[1;31m[ERROR]\e[0m";
+    if (level == DEBUG) prefix = "\033[1;37m[DEBUG]\033[0m";
+    if (level == INFO) prefix = "\033[1;0m[INFO]\033[0m";
+    if (level == WARN) prefix = "\033[1;33m[WARN]\033[0m";
+    if (level == ERROR) prefix = "\033[1;31m[ERROR]\033[0m";
 
     return ("(" + getTimeString() + ") " + prefix + ": " + message);
 }

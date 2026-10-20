@@ -141,11 +141,11 @@ namespace RType {
         Label _title = Label("OPTIONS", 64, Theme::Accent, Theme::CENTER_X, 120.0F, Align::CENTER);
         Label _subtitle = Label("Engine modules are shared libraries loaded at runtime: switch them on or off while you play.",
                                 24, Theme::TextDim, Theme::CENTER_X, 220.0F, Align::CENTER);
-        CheckBox _consoleModuleBox = CheckBox(ROW_X, 300.0F, "Console", "Developer console: press F2 (libconsole_module.so)",
+        CheckBox _consoleModuleBox = CheckBox(ROW_X, 300.0F, "Console", "Developer console: press F2 (libconsole_module" RTYPE_MODULE_SUFFIX ")",
                                               _provider->get<IModule>(ModuleType::CONSOLE) != nullptr);
-        CheckBox _particleModuleBox = CheckBox(ROW_X, 420.0F, "Particle", "Explosions, sparks and engine trails in game (libparticle_module.so)",
+        CheckBox _particleModuleBox = CheckBox(ROW_X, 420.0F, "Particle", "Explosions, sparks and engine trails in game (libparticle_module" RTYPE_MODULE_SUFFIX ")",
                                                _provider->get<IModule>(ModuleType::PARTICLE) != nullptr);
-        CheckBox _soundModuleBox = CheckBox(ROW_X, 540.0F, "Sound", "Music and sound effects (libsound_module.so)",
+        CheckBox _soundModuleBox = CheckBox(ROW_X, 540.0F, "Sound", "Music and sound effects (libsound_module" RTYPE_MODULE_SUFFIX ")",
                                             _provider->get<IModule>(ModuleType::SOUND) != nullptr);
         Button _back; /**< Returns to the main menu or to the pause menu. */
         IGraphicalModule *_module = _provider->get<IGraphicalModule>(ModuleType::GRAPHICAL);

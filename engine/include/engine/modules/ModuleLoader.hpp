@@ -11,142 +11,43 @@
 #include <string>
 
 #ifdef _WIN32
-#include <Windows.h>
-
-namespace RType {
-
-    enum class ModuleType {
-        SOUND, CONSOLE, PARTICLE, GRAPHICAL, UNKNOWN, ANIMATION
-    };
-
-    template<typename T>
-    class ModuleLoader {
-    public:
-        explicit ModuleLoader(const std::string &path);
-        ModuleLoader(ModuleLoader &&_instance) noexcept = delete;
-        ModuleLoader(ModuleLoader &_instance) = delete;
-        ~ModuleLoader();
-
-        T *load();
-        void unload();
-
-        static ModuleType getModuleType(const std::string &path, void *existingHandle = nullptr);
-
-    private:
-        T *callConstructor(const std::string &functionName) const;
-
-        HMODULE _handle = nullptr;
-        T *_module = nullptr;
-        ModuleType _type = ModuleType::UNKNOWN;
-    };
-
-    template<typename T>
-    T *ModuleLoader<T>::callConstructor(const std::string &functionName) const {
-        T *(*initializeModule)() = nullptr;
-
-        if (_handle == nullptr)
-            throw ModuleException("No module loaded");
-        if (_type == ModuleType::UNKNOWN)
-            throw ModuleException("Invalid module provided");
-
-        initializeModule = reinterpret_cast<T *(*)()>(GetProcAddress(_handle, functionName.c_str()));
-
-        if (initializeModule != nullptr)
-            return initializeModule();
-        throw ModuleException("Invalid library provided");
-    }
-
-    template<typename T>
-    ModuleLoader<T>::ModuleLoader(const std::string &path) {
-        _handle = LoadLibrary(path.c_str());
-
-        if (_handle == nullptr) {
-            DWORD errorMessageID = GetLastError();
-            LPVOID errorMessageBuffer;
-            FormatMessageW(
-                    FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-                    nullptr,
-                    errorMessageID,
-                    0,
-                    reinterpret_cast<LPWSTR>(&errorMessageBuffer),
-                    0,
-                    nullptr
-            );
-
-            wchar_t* wideErrorMessage = reinterpret_cast<wchar_t*>(errorMessageBuffer);
-            int bufferSize = WideCharToMultiByte(CP_UTF8, 0, wideErrorMessage, -1, nullptr, 0, nullptr, nullptr);
-            std::string errorMessage(bufferSize, 0);
-            WideCharToMultiByte(CP_UTF8, 0, wideErrorMessage, -1, errorMessage.data(), bufferSize, nullptr, nullptr);
-
-            LocalFree(errorMessageBuffer);
-
-            throw ModuleException("Module '" + path + "' cannot be loaded: " + errorMessage);
-        }
-        _type = getModuleType(path, _handle);
-    }
-
-    template<typename T>
-    T *ModuleLoader<T>::load() {
-        T *loadedModule = nullptr;
-        if (_module != nullptr) return _module;
-
-        if (_type == ModuleType::SOUND)
-            loadedModule = callConstructor("initializeSoundModule");
-        if (_type == ModuleType::CONSOLE)
-            loadedModule = callConstructor("initializeConsoleModule");
-        if (_type == ModuleType::PARTICLE)
-            loadedModule = callConstructor("initializeParticleModule");
-        if (_type == ModuleType::GRAPHICAL)
-            loadedModule = callConstructor("initializeGraphicalModule");
-        if (loadedModule == nullptr)
-            throw ModuleException("Invalid loadedModule provided");
-        _module = loadedModule;
-        return loadedModule;
-    }
-
-    template<typename T>
-    void ModuleLoader<T>::unload() {
-        void (*destroyLibrary)(T *) = nullptr;
-
-        if (_module == nullptr) return;
-        if (_handle == nullptr) throw ModuleException("No library loaded");
-        destroyLibrary = reinterpret_cast<void (*)(T *)>(GetProcAddress(_handle, "destroy"));
-        if (destroyLibrary != nullptr)
-            destroyLibrary(_module);
-        _module = nullptr;
-    }
-
-    template<typename T>
-    ModuleLoader<T>::~ModuleLoader() {
-        if (_handle != nullptr)
-            FreeLibrary(_handle);
-    }
-
-    template<typename T>
-    ModuleType ModuleLoader<T>::getModuleType(const std::string &path, void *existingHandle) {
-        HMODULE handle = (existingHandle == nullptr ? LoadLibrary(path.c_str()) : reinterpret_cast<HMODULE>(existingHandle));
-
-        if (handle == nullptr)
-            return ModuleType::UNKNOWN;
-
-        if (GetProcAddress(handle, "initializeSoundModule") != nullptr)
-            return ModuleType::SOUND;
-
-        if (GetProcAddress(handle, "initializeConsoleModule") != nullptr)
-            return ModuleType::CONSOLE;
-
-        if (GetProcAddress(handle, "initializeParticleModule") != nullptr)
-            return ModuleType::PARTICLE;
-
-        if (GetProcAddress(handle, "initializeGraphicalModule") != nullptr)
-            return ModuleType::GRAPHICAL;
-
-        return ModuleType::UNKNOWN;
-    }
-
-}
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
 #else
 #include <dlfcn.h>
+#endif
+
+namespace RType::detail {
+
+    // Thin wrappers over the platform's shared-library API, so ModuleLoader has a single implementation.
+#ifdef _WIN32
+    inline void *openLibrary(const std::string &path) { return reinterpret_cast<void *>(LoadLibraryA(path.c_str())); }
+    inline void *findSymbol(void *handle, const char *name) {
+        return reinterpret_cast<void *>(GetProcAddress(static_cast<HMODULE>(handle), name));
+    }
+    inline void closeLibrary(void *handle) { FreeLibrary(static_cast<HMODULE>(handle)); }
+    inline std::string lastLibraryError() {
+        char *buffer = nullptr;
+        const DWORD size = FormatMessageA(
+            FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
+            GetLastError(), 0, reinterpret_cast<LPSTR>(&buffer), 0, nullptr);
+        std::string message = size ? std::string(buffer, size) : "unknown error";
+        LocalFree(buffer);
+        return message;
+    }
+#else
+    inline void *openLibrary(const std::string &path) { return dlopen(path.c_str(), RTLD_LAZY); }
+    inline void *findSymbol(void *handle, const char *name) { return dlsym(handle, name); }
+    inline void closeLibrary(void *handle) { dlclose(handle); }
+    inline std::string lastLibraryError() {
+        const char *error = dlerror();
+        return error ? error : "unknown error";
+    }
+#endif
+
+}
 
 namespace RType {
 
@@ -215,7 +116,7 @@ namespace RType {
         if (_type == ModuleType::UNKNOWN)
             throw ModuleException("Invalid module provided");
 
-        *(void **) (&initializeModule) = dlsym(_handle, functionName.c_str());
+        initializeModule = reinterpret_cast<T *(*)()>(detail::findSymbol(_handle, functionName.c_str()));
 
         if (initializeModule != nullptr)
             return initializeModule();
@@ -224,12 +125,10 @@ namespace RType {
 
     template<typename T>
     ModuleLoader<T>::ModuleLoader(const std::string &path) {
-        if (_handle != nullptr)
-            dlclose(_handle);
-        _handle = dlopen(path.c_str(), RTLD_LAZY);
+        _handle = detail::openLibrary(path);
 
         if (_handle == nullptr) {
-            const std::string errorMessage = dlerror();
+            const std::string errorMessage = detail::lastLibraryError();
 
             throw ModuleException("Module '" + path + "' cannot be load: " + errorMessage);
         }
@@ -264,37 +163,37 @@ namespace RType {
 
         if (_module == nullptr) return;
         if (_handle == nullptr) throw ModuleException("No library loaded");
-        *(void **) (&destroyLibrary) = dlsym(_handle, "destroy");
-        destroyLibrary(_module);
+        destroyLibrary = reinterpret_cast<void (*)(T *)>(detail::findSymbol(_handle, "destroy"));
+        if (destroyLibrary != nullptr)
+            destroyLibrary(_module);
         _module = nullptr;
     }
 
     template<typename T>
     ModuleLoader<T>::~ModuleLoader() {
         if (_handle != nullptr)
-            dlclose(_handle);
+            detail::closeLibrary(_handle);
     }
 
     template<typename T>
     ModuleType ModuleLoader<T>::getModuleType(const std::string &path, void *existingHandle) {
-        void *handle = (existingHandle == nullptr ? dlopen(path.c_str(), RTLD_LAZY) : existingHandle);
+        void *handle = (existingHandle == nullptr ? detail::openLibrary(path) : existingHandle);
 
         if (handle == nullptr)
             return ModuleType::UNKNOWN;
-        if (dlsym(handle, "initializeSoundModule") != nullptr)
+        if (detail::findSymbol(handle, "initializeSoundModule") != nullptr)
             return ModuleType::SOUND;
-        if (dlsym(handle, "initializeConsoleModule") != nullptr)
+        if (detail::findSymbol(handle, "initializeConsoleModule") != nullptr)
             return ModuleType::CONSOLE;
-        if (dlsym(handle, "initializeParticleModule") != nullptr)
+        if (detail::findSymbol(handle, "initializeParticleModule") != nullptr)
             return ModuleType::PARTICLE;
-        if (dlsym(handle, "initializeGraphicalModule") != nullptr)
+        if (detail::findSymbol(handle, "initializeGraphicalModule") != nullptr)
             return ModuleType::GRAPHICAL;
-        if (dlsym(handle, "initializeAnimationModule") != nullptr)
+        if (detail::findSymbol(handle, "initializeAnimationModule") != nullptr)
             return ModuleType::ANIMATION;
-        if (dlsym(handle, "initializeLoggerModule") != nullptr)
+        if (detail::findSymbol(handle, "initializeLoggerModule") != nullptr)
             return ModuleType::LOGGER;
         return ModuleType::UNKNOWN;
     }
 
 }
-#endif

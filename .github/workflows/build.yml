@@ -18,6 +18,34 @@ jobs:
       - name: Multiplayer integration test
         run: python3 tests/integration/multiplayer_test.py build/out/server/r-type_server
 
+  build-windows:
+    name: Build Project (Windows)
+    runs-on: windows-2022
+    env:
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}\vcpkg-cache
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache vcpkg packages
+        uses: actions/cache@v4
+        with:
+          path: vcpkg-cache
+          key: vcpkg-windows-${{ hashFiles('vcpkg.json') }}
+      - name: Install dependencies and build
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force vcpkg-cache | Out-Null
+          .\install.ps1
+      - name: Multiplayer integration test
+        run: python tests/integration/multiplayer_test.py build/out/server/r-type_server.exe
+      - name: Client starts and loads its modules
+        shell: pwsh
+        run: |
+          $client = Start-Process build\out\client\r-type_client.exe -PassThru -RedirectStandardOutput client.log -RedirectStandardError client.err
+          Start-Sleep -Seconds 8
+          Get-Content client.log, client.err
+          if ($client.HasExited) { throw "client exited early with code $($client.ExitCode)" }
+          Stop-Process -Id $client.Id
+
   unit-tests:
     name: Engine unit tests
     runs-on: ubuntu-24.04
