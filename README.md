@@ -28,20 +28,23 @@ Design docs: [UDP protocol](docs/udpProtocol.md) · [Packet format](docs/packet.
 
 ## Build
 
-Requirements: C++20 compiler, CMake, [vcpkg](https://vcpkg.io) (SFML, Asio).
+Requirements: Linux, a C++20 compiler, CMake 3.16+, [vcpkg](https://vcpkg.io) with `VCPKG_ROOT` set. CMake installs SFML and Asio from `vcpkg.json` during the first configure.
+
+Build into `build/out`: the client loads its engine modules from `build/out/engine/modules/` at runtime.
 
 ```bash
-vcpkg install
-cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
-cmake --build build
+cmake -S . -B build/out -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+cmake --build build/out -j
 ```
 
-Run:
+Run both from the repository root (the client also loads its sprites from `client/assets/`):
 
 ```bash
-./build/server/r-type_server
-./build/client/r-type_client
+./build/out/server/r-type_server 4242    # UDP port to listen on
+./build/out/client/r-type_client         # in another terminal, once per player
 ```
+
+On the client's login screen, enter a username, the server's hostname (`127.0.0.1` locally) and its port.
 
 ## Tests
 
