@@ -67,8 +67,8 @@ add_subdirectory(modules/logger)
 find_package(asio CONFIG REQUIRED)
 target_link_libraries(engine PRIVATE asio::asio)
 if (WIN32)
-    # Windows 10 API level for Asio, no min/max macros from windows.h, and M_PI from <cmath>
-    target_compile_definitions(engine PUBLIC _WIN32_WINNT=0x0A00 NOMINMAX WIN32_LEAN_AND_MEAN _USE_MATH_DEFINES)
+    # Windows 10 API level for Asio, no min/max or GDI macros (ERROR) from windows.h, and M_PI from <cmath>
+    target_compile_definitions(engine PUBLIC _WIN32_WINNT=0x0A00 NOMINMAX NOGDI WIN32_LEAN_AND_MEAN _USE_MATH_DEFINES)
 endif()
 target_include_directories(engine PRIVATE include/engine)
 target_include_directories(engine PUBLIC include)

@@ -25,8 +25,9 @@ jobs:
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}\vcpkg-cache
     steps:
       - uses: actions/checkout@v4
-      - name: Cache vcpkg packages
-        uses: actions/cache@v4
+      - name: Restore vcpkg packages
+        id: vcpkg-cache
+        uses: actions/cache/restore@v4
         with:
           path: vcpkg-cache
           key: vcpkg-windows-${{ hashFiles('vcpkg.json') }}
@@ -35,6 +36,13 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force vcpkg-cache | Out-Null
           .\install.ps1
+      # Saved even when the game fails to build, so the next run doesn't recompile SFML.
+      - name: Save vcpkg packages
+        if: always() && steps.vcpkg-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: vcpkg-cache
+          key: vcpkg-windows-${{ hashFiles('vcpkg.json') }}
       - name: Multiplayer integration test
         run: python tests/integration/multiplayer_test.py build/out/server/r-type_server.exe
       - name: Client starts and loads its modules
