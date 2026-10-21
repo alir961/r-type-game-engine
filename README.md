@@ -236,3 +236,7 @@ The networking layer, the authoritative server (session manager, game logic, com
 ## Team
 
 Ali Raad · Joan Thomas · Timothé Medico
+
+## License
+
+[MIT](LICENSE)
