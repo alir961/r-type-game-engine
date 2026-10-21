@@ -1,4 +1,4 @@
-# Unit tests for the engine core (ECS, tools). Standalone: no SFML / vcpkg needed.
+# Unit tests for the engine core (ECS, tools, network messages). Standalone: no SFML / vcpkg needed.
 #   cmake -S tests -B build/tests && cmake --build build/tests && ctest --test-dir build/tests
 cmake_minimum_required(VERSION 3.20)
 project(rtype_engine_tests CXX)
@@ -20,6 +20,8 @@ set(ENGINE ${CMAKE_CURRENT_SOURCE_DIR}/../engine)
 add_executable(engine_tests
     test_ecs.cpp
     test_tools.cpp
+    test_network.cpp
+    ${ENGINE}/src/network/NetworkMessage.cpp
     ${ENGINE}/src/tools/Split.cpp
     ${ENGINE}/src/tools/NumberUtilities.cpp
 )

@@ -23,11 +23,17 @@ void RType::UDPClient::startReceive() {
 void RType::UDPClient::handleReceive(std::size_t bytesReceived) {
     const MessageBuffer &buffer = _adapter.getMessageBuffer();
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
-    const Message receiveMessage = Message::deserialize(receivedData);
 
-    if (_handlers.contains(receiveMessage.type))
-        _handlers[receiveMessage.type](receiveMessage);
-    else _logger->warn("Unknown message: '" + receiveMessage.toString() + "'");
+    try {
+        const Message receiveMessage = Message::deserialize(receivedData);
+
+        if (_handlers.contains(receiveMessage.type))
+            _handlers[receiveMessage.type](receiveMessage);
+        else _logger->warn("Unknown message: '" + receiveMessage.toString() + "'");
+    } catch (const std::exception &exception) {
+        // A malformed datagram must not stop the network thread.
+        _logger->warn("Ignoring malformed message: " + std::string(exception.what()));
+    }
     if (_stop) return;
     startReceive();
 }

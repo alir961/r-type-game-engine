@@ -89,7 +89,14 @@ void RType::MessageParser::handleMove(const RType::Message &receiveMessage) {
 
 void RType::MessageParser::parseMessage(const RType::MessageBuffer &buffer, std::size_t bytesReceived) {
     const std::vector<std::byte> receivedData(buffer.begin(), buffer.begin() + bytesReceived);
-    const Message receiveMessage = Message::deserialize(receivedData);
+    Message receiveMessage{};
+
+    try {
+        receiveMessage = Message::deserialize(receivedData);
+    } catch (const std::exception &exception) {
+        std::cerr << "Ignoring malformed message: " << exception.what() << "\n";
+        return;
+    }
     auto handlerIt = _handlers.find(receiveMessage.type);
     // The game loop runs on its own thread: never touch the world at the same time.
     const auto guard = _game->lock();

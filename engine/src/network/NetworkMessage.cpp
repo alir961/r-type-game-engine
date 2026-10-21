@@ -19,6 +19,10 @@ namespace RType {
     Message Message::deserialize(const std::vector<std::byte> &data) {
         Message msg{};
 
+        // Datagrams come from anyone: never copy more bytes than were received.
+        if (data.size() != sizeof(Message))
+            throw NetworkException("NetworkMessage must be " + std::to_string(sizeof(Message)) + " bytes, got "
+                                   + std::to_string(data.size()));
         std::memcpy(&msg, data.data(), sizeof(Message));
         return msg;
     }

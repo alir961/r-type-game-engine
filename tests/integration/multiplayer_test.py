@@ -134,6 +134,8 @@ def main():
         alice.send(TICK, "tick not-a-number\n")
         alice.send(TICK, "tick\n")
         alice.sock.send(struct.pack("<i", TICK) + b"tick")
+        alice.sock.send(b"")
+        alice.sock.send(b"\x01")
         bob.send(DISCONNECT, f"disconnect {bob.id}\n")
         bob.send(DISCONNECT, f"disconnect {bob.id}\n")
         bob.send(TICK, f"tick {bob.id}\n")

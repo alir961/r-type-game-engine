@@ -73,6 +73,7 @@ namespace RType {
         * @brief Deserializes a vector of bytes into a Message structure.
         * @param data The vector of bytes to deserialize.
         * @return The deserialized Message structure.
+        * @throw NetworkException if data is not exactly sizeof(Message) bytes long.
         */
         static Message deserialize(const std::vector<std::byte> &data);
     };
